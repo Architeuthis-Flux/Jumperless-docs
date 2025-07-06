@@ -1,0 +1,114 @@
+# Basic Controls
+
+![guide-42](https://github.com/user-attachments/assets/e35c42e0-b23a-4203-a836-44f0991db7fc)
+
+----
+
+## The Probe
+First, keep the switch on the probe set to `Select`
+![ProbeSelect](https://github.com/user-attachments/assets/1155f75a-f800-4bc0-ba6d-49e603ad39e2)
+
+**Why Select mode?** `Measure` mode allows the probe tip to be ±9V tolerant and routable like any other node, but as of yet, the code to actually do anything with it is unwritten so it just connects to DAC 0 and outputs 3.3V just like it was in `Select` mode. But the DAC is much worse at matching the RP2350B's idea of what 3.3V is *exactly*, so probing will be flaky and may be off from the rows you're tapping in `Measure`.
+
+## Connecting Rows
+
+Click the `Connect` button on the probe
+![connectButton](https://github.com/user-attachments/assets/faedd0af-8ea6-4454-8f33-01ff478bb9e7)
+
+The logo should turn blue and the LEDs on the probe should also change
+![connect](https://github.com/user-attachments/assets/2040417f-64c3-41dd-a3d6-8c900e15445b)
+
+Now any pair of nodes you tap should get connected as you make them. In connect mode, you're creating `bridges` (see the [glossary](99-glossary.md)), so connections are made in pairs. When you've tapped the first `node` in a pair, the `logo` and `Connect` text on the probe will brighten to show that you're "`holding`" a connection, and the next thing you tap will connect to that first `node`. 
+
+If you make a mistake while `holding` a connection, click the `Connect` button and it will clear it and take you back to the first `node`. 
+If you click the `Connect` button while you're not `holding` a `node`, it will leave `probe mode` and bring you back into `idle mode` (rainbowy `logo`, all 3 `probe LED`s on.)
+
+## Special Functions
+
+To connect to `special functions`, tap the corresponding `pad` near the logo, it will show you a menu on the breadboard and terminal to choose them.
+![gpioTapped](https://github.com/user-attachments/assets/0b0c45ff-b98e-4a45-87b3-d3cc5c7a4544)
+
+(This is an ASCII version of what will show on the breadboard LEDs)
+
+![Screenshot 2025-05-30 at 10 55 13 AM](https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99)
+
+You can think of `special functions` just like any other `node`, the only difference is they're in a sort of "folder" so I didn't need to put a dedicated pad for each of them. 
+
+The other 4 `user pads` will be more remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`. The building pads are for overriding colors in `idle mode` (you'll see more about that in [Idle Mode Interactions](#idle-mode-net-highlighting).)
+
+![userPads](https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78)
+
+To get out of `Connect` mode, press the button again.
+
+## Removing Rows
+
+Click the `Remove` button
+![removeButton](https://github.com/user-attachments/assets/7fc020b7-f5ce-48f6-99eb-4e9a753a0329)
+
+and the logo should turn reddish
+![remove](https://github.com/user-attachments/assets/297e169f-f9f5-4151-8fa2-de41ab14492f)
+
+Now you can swipe along the `pad`s or tap them one at a time. Remember it only disconnects that `node` and anything connected to it directly, not *everything* on the `net`. So tapping say, `row 25` that's connected to `GND` won't clear everything connected to `GND`, but tapping the `-` on the rails (for `GND`) would.
+
+The special functions work the same way, tap the pad, pick one, and it will remove it. Click the button again to get out.
+
+## Probe Notes
+
+**Remember the probe is read by a resistive voltage divider**, so putting your fingers on the pads (or the back sides of the 4 risers that connect those `probe sense` boards to the main board), or anything causing the probe tip not to be at a steady 3.3V will give you weird readings. 
+
+If you can't seem to stop playing with the switch on the probe, run DAC calibration with `$` and the 3.3V `measure` mode puts out should be fairly accurate enough for probing.
+
+## The Click Wheel
+
+![wheel copy](https://github.com/user-attachments/assets/d69a5425-7131-46e3-8c17-a38819edfc16)
+
+There are two kinds of presses, `click` (short press) and `hold` (long press). In general, a `click` (short) is a `yes`, and a `hold` (long) is a `no`/`back`/`exit`/`whatever`. 
+
+When I say `click`, it's more of a diagonal slide toward the center of the board ([these encoders](https://lcsc.com/product-detail/Rotary-Encoders_Mitsumi-Electric-SIQ-02FVS3_C2925423.html) were meant to poke out just a little bit from the side of a tablet or whatever.)
+
+To get to the menu, `click` the button and scroll through the menus, `click` will bring you into that menu, `hold` will take you back one level. If you have trouble reading stuff on the breadboard LEDs, everything is copied to the Serial terminal and the OLED (talked about in [OLED Section](04-oled.md)), and adjusting the brightness may help; in the menus, it's `Display Options` > `Bright` > `Menu` and then scroll around until you find a level you like, then `click` to confirm. 
+
+
+
+
+
+
+## Idle Mode Net Highlighting
+
+The main thing is that there's a lot more interaction that can be done outside of any particular mode (like not probing and the logo is rainbowy, I'm gonna call this idle mode here until I think of a good name)
+![idle](https://github.com/user-attachments/assets/304d787a-c5f5-4da0-bd95-1a82bcdf83c1)
+
+Here's what's new (all of this is in idle mode):
+
+### Basic Interactions
+
+- **Tapping nets highlights them** as before, but there's a slightly different animation on the `row` you have selected from the whole `net`
+- **The click wheel scrolls through highlighting `rows`** as if you tapped each one
+
+### Row Selection Actions
+
+With a `row` selected, here's what you can do:
+
+#### Connect Button
+- `connect` button will bring you into probing mode with the highlighted row already selected and then spit you back out to `idle` mode once you've made a connection to another row, or click `connect` again to exit
+
+#### Remove Button
+- `remove` will briefly turn the `row` reddish `warn` (I need to settle on a good time for this, if it feels too short or long lmk), another `remove` press will remove that `row` (just like in `probe` mode, it removes the `bridge` it's in, so just things that have a direct connection to that `row`, not the whole `net`), if you let it time out without pressing anything, the row will be unhighlighted. TL;DR, double click `remove` to remove, single click to unhighlight.
+
+#### Color Picker
+- tapping the `building top` pad with something highlighted will open the `color picker`, (note: the color now follows the `row` instead of the net, so it can keep the colors even if you remove nets below it and they shift, this was soooo difficult until I realized I should do it by `node`). 
+  - Also the color assignments are saved to a file for each slot, so they should work after a reboot and when changing `slots`
+  - In the `color picker`, short clicking the probe buttons will zoom in and out, long press will confirm. The click wheel is similar, except you toggle `zoom` and `scroll` modes with short presses and long press to confirm
+  - Here's a demo on YouTube
+  [![Here's a demo on YouTube](https://img.youtube.com/vi/shE6NSFrH5w/3.jpg)](https://www.youtube.com/watch?v=shE6NSFrH5w)
+
+### Measurement Display
+- if the highlighted row is a `measurement` (`gpio input` or `adc`) it will print the state to serial and the oled
+
+### Output Toggle
+- if the highlighted row is an `output` (`gpio output`, I'll eventually do `dacs` too) clicking the `connect` button will toggle it `high` / `low`. The `remove` button will *just* unhighlight the net (there were some choices here, like make each button assigned to high / low or allow removing them, but this felt like the best way after trying them all). I will eventually add a setting for the toggle repeat rate (set to 500ms now) and a way to set it freewheeling as a clock.
+  - this *one* feature is the reason I did this whole update. And it's worth it because it's sick af.
+
+<!-- ## GPIO Selection Shortcuts
+
+- when selecting `gpio` in `probing` mode (tap the bottom of the 3 pads by the `logo`), there are shortcuts for `input` and `output`, the blue line on the left is `input`, red square on the right is `output`. Tapping right in the middle of a number will take you to the written out `input` / `output` on the top and bottom selector.  -->

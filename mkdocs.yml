@@ -1,7 +1,26 @@
 site_name: Jumperless Docs
 
+# 
+# theme_dir: 'custom_theme'
 
 theme:
   name: readthedocs
+  logo: assets/JNameLogo.png
+
+
+# plugins:
+#   - mkdocs-video
+      # is_video: True
+      # video_muted: True
+      # video_controls: True
+      # css_style:
+      #   width: "100%"
+extra_css: [extra.css]
+
+extra:
+  meta:
+    - name: color-scheme
+      content: dark
+    - name: darkreader-lock
 
 site_url: !ENV READTHEDOCS_CANONICAL_URL
