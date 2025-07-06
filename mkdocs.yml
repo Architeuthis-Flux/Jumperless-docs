@@ -2,6 +2,6 @@ site_name: Jumperless Docs
 
 
 theme:
-  name: material
+  name: readthedocs
 
 site_url: !ENV READTHEDOCS_CANONICAL_URL
