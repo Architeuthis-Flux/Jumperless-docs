@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="File Manager - Jumperless Documentation - Complete User Guide" />
+    <meta property="og:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta property="og:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta property="og:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/" />
+    <meta property="og:site_name" content="Jumperless Documentation - Complete User Guide" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="File Manager - Jumperless Documentation - Complete User Guide" />
+    <meta name="twitter:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="twitter:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta name="twitter:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    
+    <!-- Standard meta tags -->
+    <meta name="description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="keywords" content="Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix" />
+    <meta name="author" content="Kevin Sant Cappuccio" />
+    
+
+    <title>File Manager - Jumperless Documentation - Complete User Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File Manager";
+        var mkdocs_page_input_path = "08-file-manager.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">File Manager</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#directory-structure">Directory Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#navigation">Navigation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-movement">Basic Movement</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#file-manager-commands">File Manager Commands</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#file-type-icons-and-colors">File Type Icons and Colors</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#jumperless-kilo-text-editor">Jumperless Kilo Text Editor</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#editor-controls">Editor Controls</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#character-selection-with-the-click-wheel-and-oled">Character Selection With the Click Wheel and OLED</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#micropython-examples">MicroPython Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usb-mass-storage">USB Mass Storage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#oled-display-support">OLED Display Support</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#navigation-reference">Navigation Reference</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#file-operations">File Operations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#system">System</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Documentation - Complete User Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File Manager</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-manager">File Manager</h1>
+<p>The Jumperless has a built in File Manager which you can access in the menu with <code>/</code>, or enter <code>U</code> in the menu and Jumperless will mount as a USB Mass Storage drive called <code>JUMPERLESS</code> where you can edit files on the filesystem.</p>
+<h2 id="directory-structure">Directory Structure</h2>
+<p><img width="901" alt="FileManager" src="https://github.com/user-attachments/assets/de4a251a-9727-422d-ade0-53984cf67fba" /></p>
+<!-- 
+<img width="898" alt="Screenshot 2025-07-06 at 11 25 26 AM" src="https://github.com/user-attachments/assets/aa5db6a7-f9e1-4ea8-902c-050626712c07" /> -->
+
+<h2 id="navigation">Navigation</h2>
+<h3 id="basic-movement">Basic Movement</h3>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>↑/↓ Arrow Keys</strong> or <strong>Rotary Encoder</strong></td>
+<td>Move selection up/down</td>
+</tr>
+<tr>
+<td><strong>Enter</strong> or <strong>Click Encoder</strong></td>
+<td>Open directory or edit file</td>
+</tr>
+<tr>
+<td><strong>/</strong></td>
+<td>Go to root directory</td>
+</tr>
+<tr>
+<td><strong>.</strong></td>
+<td>Go up one directory</td>
+</tr>
+<tr>
+<td><strong>CTRL + q</strong></td>
+<td>Quit File Manager or Text Editor</td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-manager-commands">File Manager Commands</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[enter]</td>
+<td>Open</td>
+<td>Open file or enter directory</td>
+</tr>
+<tr>
+<td><strong>h</strong></td>
+<td>Help</td>
+<td>Show help</td>
+</tr>
+<tr>
+<td><strong>v</strong></td>
+<td>Quick view</td>
+<td>View file contents</td>
+</tr>
+<tr>
+<td><strong>.</strong></td>
+<td>Up dir</td>
+<td>Go up one directory</td>
+</tr>
+<tr>
+<td><strong>n</strong></td>
+<td>New file</td>
+<td>Create new file (prompts for filename)</td>
+</tr>
+<tr>
+<td><strong>d</strong></td>
+<td>New directory</td>
+<td>Create new directory</td>
+</tr>
+<tr>
+<td><strong>x</strong></td>
+<td>Delete</td>
+<td>Delete file or directory (confirm with <code>y</code>/<code>N</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-type-icons-and-colors">File Type Icons and Colors</h3>
+<table>
+<thead>
+<tr>
+<th>Icon</th>
+<th>File Type</th>
+<th>Extensions</th>
+<th>Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>⌘</strong></td>
+<td>Directories</td>
+<td>-</td>
+<td>Blue</td>
+</tr>
+<tr>
+<td><strong>𓆚</strong></td>
+<td>Python files</td>
+<td>.py, .pyw, .pyi</td>
+<td>Green</td>
+</tr>
+<tr>
+<td><strong>⍺</strong></td>
+<td>Text files</td>
+<td>.txt, .md</td>
+<td>White</td>
+</tr>
+<tr>
+<td><strong>⚙</strong></td>
+<td>Config files</td>
+<td>.cfg, .conf, config.txt</td>
+<td>Yellow</td>
+</tr>
+<tr>
+<td><strong>⟐</strong></td>
+<td>JSON files</td>
+<td>.json</td>
+<td>Cyan</td>
+</tr>
+<tr>
+<td><strong>☊</strong></td>
+<td>Node files</td>
+<td>nodeFileSlot*.txt</td>
+<td>Magenta</td>
+</tr>
+<tr>
+<td><strong>⎃</strong></td>
+<td>Color files</td>
+<td>netColorsSlot*.txt</td>
+<td>Orange</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jumperless-kilo-text-editor">Jumperless Kilo Text Editor</h2>
+<p>The File Manager also has text editor based off <a href="https://github.com/antonio-foti/ekilo"><strong>eKilo</strong></a></p>
+<p><img width="928" alt="Screenshot 2025-07-06 at 11 25 50 AM" src="https://github.com/user-attachments/assets/1b4c74bc-19fa-4e74-8799-b778e8a56825" /></p>
+<h3 id="editor-controls">Editor Controls</h3>
+<ul>
+<li><strong>Ctrl+S</strong>: Save file</li>
+<li><strong>Ctrl+Q</strong>: Quit editor</li>
+<li><strong>Ctrl+P</strong>: Save and launch MicroPython REPL</li>
+<li><strong>Arrow keys</strong>: Navigate cursor</li>
+<li><strong>Rotary encoder</strong>: Move cursor horizontally</li>
+<li><strong>Click encoder</strong>: Enter character selection mode (you can scroll through the letters on the OLED and click again to insert it)</li>
+</ul>
+<h3 id="character-selection-with-the-click-wheel-and-oled">Character Selection With the Click Wheel and OLED</h3>
+<p>When using the rotary encoder in the editor:</p>
+<ul>
+<li><strong>Click encoder</strong>: Enter character selection mode</li>
+<li><strong>Rotate encoder</strong>: Cycle through available characters</li>
+<li><strong>Click encoder</strong>: Confirm character selection</li>
+<li><strong>Wait 3 seconds</strong>: Exit character selection mode</li>
+</ul>
+<p>Yes, you could write code with just the click wheel and the OLED if you really wanted to.</p>
+<h3 id="micropython-examples">MicroPython Examples</h3>
+<p>The File Manager automatically creates example Python scripts in <code>/python_scripts/examples/</code>:</p>
+<ul>
+<li><strong>01_dac_basics.py</strong>: DAC (Digital-to-Analog Converter) examples</li>
+<li><strong>02_adc_basics.py</strong>: ADC (Analog-to-Digital Converter) examples  </li>
+<li><strong>03_gpio_basics.py</strong>: GPIO (General Purpose Input/Output) examples</li>
+<li><strong>04_node_connections.py</strong>: Node connection and routing examples</li>
+<li><strong>led_brightness_control.py</strong>: LED brightness control</li>
+</ul>
+<!-- - **voltage_monitor.py**: Voltage monitoring utilities
+- **stylophone.py**: Musical instrument example -->
+
+<p>You can trigger them to regenerate if you messed them up by deleting it with <code>x</code>, and then entering <code>m</code> to create new copies of any examples it doesn't see.</p>
+<h2 id="usb-mass-storage">USB Mass Storage</h2>
+<p>Enter <code>U</code> in the menu and Jumperless will mount as a USB Mass Storage drive called <code>JUMPERLESS</code> where you can edit files on the filesystem.</p>
+<p>Keep in mind that file operations are pretty slow, so make sure to give it time to fully save files when you drop them onto the filesystem.</p>
+<p>When you're finished <code>u</code> (or just eject the drive) will unmount the Mass Storage device.</p>
+<p>You can also enter <code>Z</code> for a little debug menu</p>
+<h2 id="oled-display-support">OLED Display Support</h2>
+<p>If you have an OLED connected, the File Manager shows:
+- <strong>Current path</strong> and <strong>selected file</strong>
+- <strong>File navigation</strong> with scrolling support
+- <strong>Real-time updates</strong> as you navigate</p>
+<h2 id="navigation-reference">Navigation Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>↑/↓</td>
+<td>Move selection</td>
+</tr>
+<tr>
+<td>Enter</td>
+<td>Open/Edit</td>
+</tr>
+<tr>
+<td>/</td>
+<td>Go to root</td>
+</tr>
+<tr>
+<td>.</td>
+<td>Go up directory</td>
+</tr>
+<tr>
+<td>h</td>
+<td>Show help</td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-operations">File Operations</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v</td>
+<td>View file</td>
+</tr>
+<tr>
+<td>e</td>
+<td>Edit file</td>
+</tr>
+<tr>
+<td>i</td>
+<td>File info</td>
+</tr>
+<tr>
+<td>n</td>
+<td>New file</td>
+</tr>
+<tr>
+<td>d</td>
+<td>New directory</td>
+</tr>
+<tr>
+<td>x</td>
+<td>Delete</td>
+</tr>
+<tr>
+<td>r</td>
+<td>Refresh</td>
+</tr>
+</tbody>
+</table>
+<h3 id="system">System</h3>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>u</td>
+<td>Memory status</td>
+</tr>
+<tr>
+<td>m</td>
+<td>Initialize examples</td>
+</tr>
+<tr>
+<td>Ctrl+Q</td>
+<td>Quit</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../07-debugging/" class="btn btn-neutral float-left" title="Debug Views"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../08-micropython/" class="btn btn-neutral float-right" title="MicroPython">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../07-debugging/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../08-micropython/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

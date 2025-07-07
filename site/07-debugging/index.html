@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Debug Views - Jumperless Documentation - Complete User Guide" />
+    <meta property="og:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta property="og:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta property="og:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/" />
+    <meta property="og:site_name" content="Jumperless Documentation - Complete User Guide" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Debug Views - Jumperless Documentation - Complete User Guide" />
+    <meta name="twitter:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="twitter:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta name="twitter:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    
+    <!-- Standard meta tags -->
+    <meta name="description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="keywords" content="Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix" />
+    <meta name="author" content="Kevin Sant Cappuccio" />
+    
+
+    <title>Debug Views - Jumperless Documentation - Complete User Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Debug Views";
+        var mkdocs_page_input_path = "07-debugging.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Debug Views</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#crossbar-array">Crossbar Array</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bridge-array">Bridge Array</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#net-list">Net List</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Documentation - Complete User Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Debug Views</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="debug-views">Debug Views</h1>
+<p>Look <em>Inside</em> your Jumperless</p>
+<h2 id="crossbar-array">Crossbar Array</h2>
+<p>There's a new way to see what the 12 analog crossbar switches are up to, just enter <code>c</code> in the menu</p>
+<pre><code class="language-none"> Analog Crossbar Array
+
+             chip A                            chip B                            chip C                            chip D 
+     0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            
+  0 ─█───────────┼────────┼─ AI     0 ────█──┼──────────────┼─ AB0    0 ─┼──┼────────█─────█──── AC0    0 ────█────────█─────┼──── AD0  
+  1 ─█───────────┼────────┼─ AJ     1 ────┼──█──────────────┼─ AB1    1 ─┼──█────────┼─────█──── AC1    1  .  │  .  .  │  .  │  .  AD1  
+  2 ─┼───────────█────────┼─ AB0    2 ────┼──┼──────────────█─ BI     2  │  │  .  .  │  .  │  .  BC0    2  .  │  .  .  │  .  │  .  BD0  
+  3 ─┼───────────┼────────█─ AB1    3  .  │  │  .  .  .  .  │  BJ     3  │  │  .  .  │  .  │  .  BC1    3  .  │  .  .  │  .  │  .  BD1  
+  4  │  .  .  .  │  .  .  │  AC0    4  .  │  │  .  .  .  .  │  BC0    4 ─█──┼────────┼─────┼──── CI     4 ────█────────┼─────┼──── CD0  
+  5  │  .  .  .  │  .  .  │  AC1    5  .  │  │  .  .  .  .  │  BC1    5 ─█──┼────────┼─────┼──── CJ     5  .  │  .  .  │  .  │  .  CD1  
+  6  │  .  .  .  │  .  .  │  AD0    6  .  │  │  .  .  .  .  │  BD0    6 ─┼──┼────────█─────┼──── CD0    6  .  │  .  .  │  .  │  .  DI   
+  7  │  .  .  .  │  .  .  │  AD1    7  .  │  │  .  .  .  .  │  BD1    7  │  │  .  .  │  .  │  .  CD1    7  .  │  .  .  │  .  │  .  DJ   
+  8  │  .  .  .  │  .  .  │  AE0    8  .  │  │  .  .  .  .  │  BE0    8  │  │  .  .  │  .  │  .  CE0    8  .  │  .  .  │  .  │  .  DE0  
+  9  │  .  .  .  │  .  .  │  AK     9  .  │  │  .  .  .  .  │  BE1    9  │  │  .  .  │  .  │  .  CL     9  .  │  .  .  │  .  │  .  DE1  
+ 10  │  .  .  .  │  .  .  │  AF0   10  .  │  │  .  .  .  .  │  BF0   10  │  │  .  .  │  .  │  .  CF0   10 ────┼────────┼─────█──── DF0  
+ 11  │  .  .  .  │  .  .  │  AF1   11  .  │  │  .  .  .  .  │  BK    11  │  │  .  .  │  .  │  .  CF1   11  .  │  .  .  │  .  │  .  DL   
+ 12  │  .  .  .  │  .  .  │  AG0   12  .  │  │  .  .  .  .  │  BG0   12  │  │  .  .  │  .  │  .  CG0   12  .  │  .  .  │  .  │  .  DG0  
+ 13  │  .  .  .  │  .  .  │  AL    13  .  │  │  .  .  .  .  │  BG1   13  │  │  .  .  │  .  │  .  CK    13  .  │  .  .  │  .  │  .  DK   
+ 14  │  .  .  .  │  .  .  │  AH0   14  .  │  │  .  .  .  .  │  BH0   14  │  │  .  .  │  .  │  .  CH0   14 ────┼────────█─────┼──── DH0  
+ 15  │  .  .  .  │  .  .  │  AH1   15  .  │  │  .  .  .  .  │  BL    15  │  │  .  .  │  .  │  .  CH1   15  .  │  .  .  │  .  │  .  DH1  
+     u  1  2  3  4  5  6  7            u  8  9  10 11 12 13 14           u  15 16 17 18 19 20 21           u  22 23 24 25 26 27 28      
+
+
+             chip E                            chip F                            chip G                            chip H 
+     0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            
+  0 ─────────────█─────█──── AE0    0  .  .  .  │  .  │  .  .  AF0    0 ────█───────────█─────── AG0    0 ────█─────█───────────┼─ AH0  
+  1  .  .  .  .  │  .  │  .  EK     1  .  .  .  │  .  │  .  .  AF1    1  .  │  .  .  .  │  .  .  GL     1  .  │  .  │  .  .  .  │  AH1  
+  2  .  .  .  .  │  .  │  .  BE0    2  .  .  .  │  .  │  .  .  BF0    2  .  │  .  .  .  │  .  .  BG0    2  .  │  .  │  .  .  .  │  BH0  
+  3  .  .  .  .  │  .  │  .  BE1    3  .  .  .  │  .  │  .  .  FK     3  .  │  .  .  .  │  .  .  BG1    3  .  │  .  │  .  .  .  │  HL   
+  4  .  .  .  .  │  .  │  .  CE0    4  .  .  .  │  .  │  .  .  CF0    4  .  │  .  .  .  │  .  .  CG0    4  .  │  .  │  .  .  .  │  CH0  
+  5  .  .  .  .  │  .  │  .  EL     5  .  .  .  │  .  │  .  .  CF1    5  .  │  .  .  .  │  .  .  GK     5  .  │  .  │  .  .  .  │  CH1  
+  6  .  .  .  .  │  .  │  .  DE0    6 ──────────┼─────█─────── DF0    6  .  │  .  .  .  │  .  .  DG0    6 ────┼─────┼───────────█─ DH0  
+  7  .  .  .  .  │  .  │  .  DE1    7  .  .  .  │  .  │  .  .  FL     7  .  │  .  .  .  │  .  .  DG1    7  .  │  .  │  .  .  .  │  HK   
+  8  .  .  .  .  │  .  │  .  EI     8  .  .  .  │  .  │  .  .  EF0    8  .  │  .  .  .  │  .  .  EG0    8  .  │  .  │  .  .  .  │  EH0  
+  9  .  .  .  .  │  .  │  .  EJ     9  .  .  .  │  .  │  .  .  EF1    9  .  │  .  .  .  │  .  .  EG1    9  .  │  .  │  .  .  .  │  EH1  
+ 10  .  .  .  .  │  .  │  .  EF0   10  .  .  .  │  .  │  .  .  FI    10 ────┼───────────█─────── FG0   10  .  │  .  │  .  .  .  │  FH0  
+ 11  .  .  .  .  │  .  │  .  EF1   11  .  .  .  │  .  │  .  .  FJ    11  .  │  .  .  .  │  .  .  FG1   11  .  │  .  │  .  .  .  │  FH1  
+ 12  .  .  .  .  │  .  │  .  EG0   12 ──────────█─────┼─────── FG0   12  .  │  .  .  .  │  .  .  GI    12  .  │  .  │  .  .  .  │  GH0  
+ 13  .  .  .  .  │  .  │  .  EG1   13  .  .  .  │  .  │  .  .  FG1   13  .  │  .  .  .  │  .  .  GJ    13  .  │  .  │  .  .  .  │  GH1  
+ 14  .  .  .  .  │  .  │  .  EH0   14  .  .  .  │  .  │  .  .  FH0   14  .  │  .  .  .  │  .  .  GH0   14  .  │  .  │  .  .  .  │  HI   
+ 15  .  .  .  .  │  .  │  .  EH1   15  .  .  .  │  .  │  .  .  FH1   15  .  │  .  .  .  │  .  .  GH1   15  .  │  .  │  .  .  .  │  HJ   
+     u  31 32 33 34 35 36 37           u  38 39 40 41 42 43 44           u  45 46 47 48 49 50 51           u  52 53 54 55 56 57 58      
+
+
+             chip I                            chip J                            chip K                            chip L 
+     0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            0  1  2  3  4  5  6  7            
+  0 ─┼──┼──┼──█──┼────────── nA0    0  │  │  │  .  .  .  .  .  nD0    0  │  .  .  .  .  .  .  .  29     0  .  .  .  .  .  .  .  .  30   
+  1  │  │  │  │  │  .  .  .  nD1    1 ─┼──█──┼──────────────── nA1    1  │  .  .  .  .  .  .  .  59     1  .  .  .  .  .  .  .  .  60   
+  2  │  │  │  │  │  .  .  .  nA2    2 ─┼──┼──█──────────────── nD2    2 ─█────────────────────── BFi    2  .  .  .  .  .  .  .  .  BFo  
+  3  │  │  │  │  │  .  .  .  nD3    3  │  │  │  .  .  .  .  .  nA3    3  │  .  .  .  .  .  .  .  ARF    3  .  .  .  .  .  .  .  .  5V   
+  4 ─█──┼──┼──┼──┼────────── nA4    4  │  │  │  .  .  .  .  .  nD4    4  │  .  .  .  .  .  .  .  TRl    4  .  .  .  .  .  .  .  .  GP1  
+  5 ─┼──┼──█──┼──┼────────── nD5    5 ─█──┼──┼──────────────── nA5    5  │  .  .  .  .  .  .  .  BRl    5  .  .  .  .  .  .  .  .  GP2  
+  6 ─┼──█──┼──┼──┼────────── nA6    6  │  │  │  .  .  .  .  .  nD6    6  │  .  .  .  .  .  .  .  Da1    6  .  .  .  .  .  .  .  .  GP3  
+  7 ─┼──┼──┼──┼──█────────── nD7    7  │  │  │  .  .  .  .  .  nA7    7 ─█────────────────────── Da0    7  .  .  .  .  .  .  .  .  GP4  
+  8  │  │  │  │  │  .  .  .  nD1    8  │  │  │  .  .  .  .  .  nD8    8  │  .  .  .  .  .  .  .  Ad0    8  .  .  .  .  .  .  .  .  GP5  
+  9 ─┼──┼──┼──┼──█────────── nD9    9  │  │  │  .  .  .  .  .  nD1    9  │  .  .  .  .  .  .  .  Ad1    9  .  .  .  .  .  .  .  .  GP6  
+ 10  │  │  │  │  │  .  .  .  nD1   10  │  │  │  .  .  .  .  .  nD1   10  │  .  .  .  .  .  .  .  Ad2   10  .  .  .  .  .  .  .  .  GP7  
+ 11  │  │  │  │  │  .  .  .  I+    11  │  │  │  .  .  .  .  .  I-    11  │  .  .  .  .  .  .  .  Ad3   11  .  .  .  .  .  .  .  .  GP8  
+ 12  │  │  │  │  │  .  .  .  IL    12  │  │  │  .  .  .  .  .  JL    12  │  .  .  .  .  .  .  .  KL    12  .  .  .  .  .  .  .  .  LI   
+ 13 ─┼──┼──┼──█──┼────────── IJ    13 ─┼──█──┼──────────────── IJ    13  │  .  .  .  .  .  .  .  KI    13  .  .  .  .  .  .  .  .  LJ   
+ 14  │  │  │  │  │  .  .  .  IK    14  │  │  │  .  .  .  .  .  JK    14  │  .  .  .  .  .  .  .  KJ    14  .  .  .  .  .  .  .  .  LK   
+ 15  │  │  │  │  │  .  .  .  uRX   15  │  │  │  .  .  .  .  .  uTX   15  │  .  .  .  .  .  .  .  GND   15  .  .  .  .  .  .  .  .  GND  
+     AI BI CI DI EI FI GI HI           AJ BJ CJ DJ EJ FJ GJ HJ           AK BK CK DK EK FK GK HK           AL BL CL DL EL FL GL HL      
+
+
+
+</code></pre>
+<h2 id="bridge-array">Bridge Array</h2>
+<p>Enter <code>b</code> in the menu. This is generally the most helpful one for <em>me</em> to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.</p>
+<p><img alt="Screenshot 2025-05-30 at 7 04 54 AM" src="https://github.com/user-attachments/assets/05e55021-b1f1-49af-8e7b-230d47522aed" /></p>
+<h2 id="net-list">Net List</h2>
+<p>Enter <code>n</code> in the menu to show this one. If you have anything that's doing any measurement (<code>gpio</code> input or <code>ADC</code>s), it'll stay up and live update if any of them change. (And just like basically any menu not asking for input, entering anything will bring you back to the main menu.)</p>
+<p><img alt="Screenshot 2025-05-30 at 7 10 04 AM" src="https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804" /> </p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../06-config/" class="btn btn-neutral float-left" title="Config File"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../08-file-manager/" class="btn btn-neutral float-right" title="File Manager">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../06-config/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../08-file-manager/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

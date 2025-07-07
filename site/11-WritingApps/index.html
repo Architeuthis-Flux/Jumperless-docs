@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Writing Apps - Jumperless Documentation - Complete User Guide" />
+    <meta property="og:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta property="og:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta property="og:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/" />
+    <meta property="og:site_name" content="Jumperless Documentation - Complete User Guide" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Writing Apps - Jumperless Documentation - Complete User Guide" />
+    <meta name="twitter:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="twitter:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta name="twitter:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    
+    <!-- Standard meta tags -->
+    <meta name="description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="keywords" content="Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix" />
+    <meta name="author" content="Kevin Sant Cappuccio" />
+    
+
+    <title>Writing Apps - Jumperless Documentation - Complete User Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Writing Apps";
+        var mkdocs_page_input_path = "11-WritingApps.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Writing Apps</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#heres-a-the-example-app-that-should-show-the-calls-for-most-of-the-things-you-might-want-to-do">Here's a the example app that should show the calls for most of the things you might want to do</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#first-get-it-platformio-set-up-to-flash-code">First get it PlatformIO set up to flash code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#to-write-an-app">To write an App</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#to-actually-write-the-app">To actually write the app</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Documentation - Complete User Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Writing Apps</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="writing-apps">Writing Apps</h1>
+<h3 id="heres-a-the-example-app-that-should-show-the-calls-for-most-of-the-things-you-might-want-to-do">Here's a the example app that should show the calls for most of the things you might want to do</h3>
+<p>You can do literally anything the Jumperless can in an app, so if there's a specific thing, lmk and I'll write an example. Until I make this into a proper operating system, what you're doing when you write an App is just writing a function in the main firmware. There's really no guard rails, and the API is just any function in the firmware. </p>
+<h2 id="first-get-it-platformio-set-up-to-flash-code">First get it PlatformIO set up to flash code</h2>
+<p>So fork the firmware here: https://github.com/Architeuthis-Flux/JumperlessV5</p>
+<p>I'm using PlatformIO in VSCode. And it <em>should</em> just work to open the RP23V50firmware folder in that (you'll probably need to comment out <code>upload_port = /dev/cu.usbmodem101</code> in <code>Platformio.ini</code> so it'll just automatically find it)</p>
+<p>You should just open the <code>RP23V50firmware</code> folder, not the entire <code>JumperlessV5</code> repo, in VSCode.</p>
+<p>You should probably try to just load the firmware just to make sure everything works.</p>
+<h2 id="to-write-an-app">To write an App</h2>
+<p>Before you go writing your app, follow these steps to make it so it's listed in the App library and you can run it from the menus.</p>
+<ul>
+<li>
+<p>Go to <a href="https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/RP23V50firmware/src/menuTree.h"><code>menuTree.h</code></a> and add the name of your app under <code>Apps\n\</code> (shown as <code>-Custom App\n\</code> here, it needs to fit in 7x2 chars to show on the breadboard)
+<img width="349" alt="menutree" src="https://github.com/user-attachments/assets/c619f655-de53-4a8c-8bde-24c536956546" /></p>
+</li>
+<li>
+<p>Go to <code>Apps.h</code> and declare your function where you'll write your app
+<img width="758" alt="Appdoth" src="https://github.com/user-attachments/assets/63f7fbab-a63c-4f7c-b454-b4166875d6af" /></p>
+</li>
+<li>
+<p>Go to <code>Apps.cpp</code> and add a struct in the <code>struct app apps[30]</code> for your app 
+<code>{"Name", index, ??idk, name of the function (unused)}</code>
+<img width="510" alt="appStruct" src="https://github.com/user-attachments/assets/f2b02ab6-0a49-46be-bf38-264bc8022417" /></p>
+</li>
+<li>
+<p>Go to <code>Apps.cpp &gt; runApp()</code> and add a <code>case</code> for your app's index (this is so you can also find it by index rather than exact matching the name <code>"Custom App"</code>
+<img width="587" alt="runApp" src="https://github.com/user-attachments/assets/3285c3d4-3efd-4685-9683-da4cd44cac51" /></p>
+</li>
+<li>
+<p>Make a function that's the entirety of your app, I just pushed a demo function called <code>customApp(void)</code> with some (non exhaustive) examples of things you can do from an app.
+<img width="907" alt="customApp" src="https://github.com/user-attachments/assets/57787127-ac7f-4923-9073-c2eb0611bd6a" /></p>
+</li>
+<li>
+<p>Run your app with the clickwheel, <code>Apps &gt; Custom App</code>.</p>
+</li>
+</ul>
+<p>The quick way run <code>"Custom App"</code> is to just enter <code>2</code> in the main menu, or just use the clickwheel and go Apps &gt; Custom App.</p>
+<p><img width="418" alt="mainSwitch" src="https://github.com/user-attachments/assets/8fbc2583-0f4f-4cc1-a245-b6fbad5ac785" /></p>
+<p>If you want to add your own shortcut, find an unused menu character and add a </p>
+<pre><code>case'3':
+{
+runApp(3); //the app index you set above
+break;
+}
+</code></pre>
+<p>in the big main menu <code>switch</code> statement in <code>main.cpp</code>.</p>
+<h2 id="to-actually-write-the-app">To actually write the app</h2>
+<p><a href="https://github.com/Architeuthis-Flux/JumperlessV5/blob/6fd4fcba572c4b524435ec36c8901adcedbf52c6/RP23V50firmware/src/Apps.cpp#L141">The code</a> for <code>Custom App</code> is an example of the calls available with comments telling you what's going on. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../10-3d-stand/" class="btn btn-neutral float-left" title="3D Printable Stand"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../99-glossary/" class="btn btn-neutral float-right" title="Glossary of Terms">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../10-3d-stand/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../99-glossary/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

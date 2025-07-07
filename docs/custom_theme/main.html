@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block site_meta %}
+    {{ super() }}
+    {% if page %}
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% if not page.is_homepage %}{{ page.meta.get('title', page.title) }} - {{ config.site_name }}{% else %}{{ page.meta.get('title', page.title) }}{% endif %}" />
+    <meta property="og:description" content="{{ page.meta.get('description', config.site_description) or '' }}" />
+    <meta property="og:image" content="{% if config.site_url %}{{ config.site_url }}{% endif %}assets/ColorJumpLogoNameUnhuged.png" />
+    <meta property="og:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    <meta property="og:url" content="{% if page.canonical_url %}{{ page.canonical_url }}{% else %}{{ config.site_url or 'https://jumperless-docs.readthedocs.io/en/latest/' }}{% endif %}" />
+    <meta property="og:site_name" content="{{ config.site_name }}" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% if not page.is_homepage %}{{ page.meta.get('title', page.title) }} - {{ config.site_name }}{% else %}{{ page.meta.get('title', page.title) }}{% endif %}" />
+    <meta name="twitter:description" content="{{ page.meta.get('description', config.site_description) or '' }}" />
+    <meta name="twitter:image" content="{% if config.site_url %}{{ config.site_url }}{% endif %}assets/ColorJumpLogoNameUnhuged.png" />
+    <meta name="twitter:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    
+    <!-- Standard meta tags -->
+    <meta name="description" content="{{ page.meta.get('description', config.site_description) or '' }}" />
+    <meta name="keywords" content="Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix" />
+    <meta name="author" content="Kevin Sant Cappuccio" />
+    {% endif %}
+{% endblock %} 

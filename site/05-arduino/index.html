@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Arduino Stuff - Jumperless Documentation - Complete User Guide" />
+    <meta property="og:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta property="og:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta property="og:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/" />
+    <meta property="og:site_name" content="Jumperless Documentation - Complete User Guide" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Arduino Stuff - Jumperless Documentation - Complete User Guide" />
+    <meta name="twitter:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="twitter:image" content="assets/ColorJumpLogoNameUnhuged.png" />
+    <meta name="twitter:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    
+    <!-- Standard meta tags -->
+    <meta name="description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="keywords" content="Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix" />
+    <meta name="author" content="Kevin Sant Cappuccio" />
+    
+
+    <title>Arduino Stuff - Jumperless Documentation - Complete User Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Arduino Stuff";
+        var mkdocs_page_input_path = "05-arduino.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Arduino Stuff</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#uart-passthrough">UART Passthrough</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-connection-shortcuts">Quick Connection Shortcuts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#automatic-flashing">Automatic Flashing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#commands-from-routable-uart">Commands from Routable UART</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Documentation - Complete User Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Arduino Stuff</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="arduino-stuff">Arduino Stuff</h1>
+<h2 id="uart-passthrough">UART Passthrough</h2>
+<p>With an Arduino Nano in the header and the UART lines connected, anything on those lines should be passed through to the second serial port that shows up when you plug in your Jumperless. </p>
+<p>(You can also set the config option <code>`[serial_1] print_passthrough = true;</code> and have it print on both. Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.</p>
+<p><img width="360" alt="Screenshot 2025-05-19 at 11 07 55 AM" src="https://github.com/user-attachments/assets/2b255e34-0d0a-4e86-b577-d59c9561fa42" /></p>
+<h2 id="quick-connection-shortcuts">Quick Connection Shortcuts</h2>
+<p>The shortcuts to connect <code>D0</code> and <code>D1</code> to the Jumperless's UART <code>Tx</code> and <code>Rx</code> is <code>A</code> to connect, and <code>a</code> to disconnect.</p>
+<h2 id="automatic-flashing">Automatic Flashing</h2>
+<p>It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.
+<img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" /> </p>
+<h2 id="commands-from-routable-uart">Commands from Routable UART</h2>
+<ul>
+<li>Starting a UART message (that would normally just be passed through to the second serial port) with <code>0x02</code> (<a href="https://www.ascii-code.com/">non-printable ASCII code for Start of Text / STX</a>) and ending with <code>0x03</code> (<a href="https://www.ascii-code.com/">End of Text / ETX</a>) will cause the Jumperless to interpret that as something that was sent though the menu on the main serial port. So you can send commands to make connections and such while also using serial passthrough.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../04-oled/" class="btn btn-neutral float-left" title="OLED Support"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../06-config/" class="btn btn-neutral float-right" title="Config File">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../04-oled/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../06-config/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
