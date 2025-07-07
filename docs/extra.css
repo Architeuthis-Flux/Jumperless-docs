@@ -8604,7 +8604,8 @@ input[type=search]:focus {
     display: flex;
     gap: 20px;
     align-items: center;
-    margin: 20px 0;
+    justify-content: center;
+    margin: 0px 20px 0px 0px;
     flex-wrap: wrap;
 }
 
