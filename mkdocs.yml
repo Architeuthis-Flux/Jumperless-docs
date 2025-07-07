@@ -1,4 +1,7 @@
+site_url: !ENV READTHEDOCS_CANONICAL_URL
+
 site_name: Jumperless Docs
+site_description: Complete documentation for Jumperless - the breadboard connection matrix that revolutionizes prototyping with automatic wire connections, Arduino compatibility, and advanced debugging features.
 
 # 
 # theme_dir: 'custom_theme'
@@ -7,8 +10,11 @@ theme:
   name: readthedocs
   logo: assets/JNameLogo.png
 
-
 # plugins:
+#   - social:
+#       cards_layout_options:
+#         logo: assets/ColorJumpLogoNameUnhuged.png
+# # plugins:
 #   - mkdocs-video
       # is_video: True
       # video_muted: True
@@ -22,5 +28,35 @@ extra:
     - name: color-scheme
       content: dark
     - name: darkreader-lock
+    # Open Graph meta tags for social sharing
+    - property: og:type
+      content: website
+    - property: og:title
+      content: Jumperless Docs
+    - property: og:description
+      content: Learn how to use your Jumperless
+    - property: og:image
+      content: assets/ColorJumpLogoNameUnhuged.png
+    - property: og:image:alt
+      content: Jumperless Logo
+    - property: og:site_name
+      content: Jumperless Docs
+    # Twitter Card meta tags
+    - name: twitter:card
+      content: summary_large_image
+    - name: twitter:title
+      content: Jumperless Docs
+    # - name: twitter:description
+    #   content: Complete documentation for Jumperless - the breadboard connection matrix that revolutionizes prototyping with automatic wire connections, Arduino compatibility, and advanced debugging features.
+    - name: twitter:image
+      content: assets/ColorJumpLogoNameUnhuged.png
+    - name: twitter:image:alt
+      content: Jumperless Logo
+    # Additional meta tags
+    # - name: description
+    #   content: Complete documentation for Jumperless - the breadboard connection matrix that revolutionizes prototyping with automatic wire connections, Arduino compatibility, and advanced debugging features.
+    - name: keywords
+      content: Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix
+    - name: author
+      content: Kevin Sant Cappuccio
 
-site_url: !ENV READTHEDOCS_CANONICAL_URL
