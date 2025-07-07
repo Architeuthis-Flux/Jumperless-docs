@@ -43,7 +43,7 @@ If you don't already have one,
 
 (You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors)
 
-
+---
 
 ## Find Me On The Internet
 
