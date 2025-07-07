@@ -7,8 +7,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ config.site_url }}{% if page %}{{ page.url }}{% endif %}">
     <meta property="og:title" content="{% if page and page.title %}{{ page.title }} - {{ config.site_name }}{% else %}{{ config.site_name }}{% endif %}">
-    <meta property="og:description" content="{% if page and page.meta and page.meta.description %}{{ page.meta.description }}{% elif config.site_description %}{{ config.site_description }}{% else %}Comprehensive documentation for Jumperless - the revolutionary breadboard companion{% endif %}">
-    <meta property="og:image" content="{{ config.site_url }}assets/ColorJumpLogoNameUnhuged.png">
+    <meta property="og:description" content="{% if page and page.meta and page.meta.description %}{{ page.meta.description }}{% elif config.site_description %}{{ config.site_description }}{% else %}Learn how to use your Jumperless{% endif %}">
+    <meta property="og:image" content="{{ config.site_url }}assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="{{ config.site_name }}">
     
@@ -16,20 +16,20 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ config.site_url }}{% if page %}{{ page.url }}{% endif %}">
     <meta name="twitter:title" content="{% if page and page.title %}{{ page.title }} - {{ config.site_name }}{% else %}{{ config.site_name }}{% endif %}">
-    <meta name="twitter:description" content="{% if page and page.meta and page.meta.description %}{{ page.meta.description }}{% elif config.site_description %}{{ config.site_description }}{% else %}Comprehensive documentation for Jumperless - the revolutionary breadboard companion{% endif %}">
-    <meta name="twitter:image" content="{{ config.site_url }}assets/ColorJumpLogoNameUnhuged.png">
+    <meta name="twitter:description" content="{% if page and page.meta and page.meta.description %}{{ page.meta.description }}{% elif config.site_description %}{{ config.site_description }}{% else %}Learn how to use your Jumperless{% endif %}">
+    <meta name="twitter:image" content="{{ config.site_url }}assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
-    <meta name="description" content="{% if page and page.meta and page.meta.description %}{{ page.meta.description }}{% elif config.site_description %}{{ config.site_description }}{% else %}Comprehensive documentation for Jumperless - the revolutionary breadboard companion{% endif %}">
+    <meta name="description" content="{% if page and page.meta and page.meta.description %}{{ page.meta.description }}{% elif config.site_description %}{{ config.site_description }}{% else %}Learn how to use your Jumperless{% endif %}">
     <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation{% if page and page.meta and page.meta.keywords %}, {{ page.meta.keywords }}{% endif %}">
-    <meta name="author" content="Jumperless Team">
+    <meta name="author" content="Kevin Santo Cappuccio">
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ config.site_url }}{% if page %}{{ page.url }}{% endif %}">
     
     <!-- Theme Color -->
-    <meta name="theme-color" content="#343131">
-    <meta name="msapplication-TileColor" content="#343131">
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
 {% endblock %} 

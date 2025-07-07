@@ -14,6 +14,8 @@ You can connect any point to any other using software-defined jumpers, so the fo
 
 **These are the docs where you will learn how to use all this stuff**
 
+![](assets/Explodraft.png)
+
 ---
 
 If you don't already have one,

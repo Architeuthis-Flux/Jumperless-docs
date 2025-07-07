@@ -5546,6 +5546,7 @@ body {
 
 .wy-text-large {
   font-size: 120%
+  
 }
 
 .wy-text-normal {
@@ -5609,6 +5610,7 @@ h4,
 h5,
 h6,
 legend {
+
   margin-top: 0;
   font-weight: 700;
   font-family: Roboto Slab, ff-tisa-web-pro, Georgia, Arial, sans-serif
@@ -5620,29 +5622,35 @@ p {
   margin: 0 0 24px
 }
 
+.rst-content h1,
 h1 {
-  font-size: 175%
+  font-size: 175%;
 }
 
 .rst-content .toctree-wrapper>p.caption,
+.rst-content h2,
 h2 {
-  font-size: 150%
+  font-size: 150%;
 }
 
+.rst-content h3,
 h3 {
-  font-size: 125%
+  font-size: 125%;
 }
 
+.rst-content h4,
 h4 {
-  font-size: 115%
+  font-size: 115%;
 }
 
+.rst-content h5,
 h5 {
-  font-size: 110%
+  font-size: 110%;
 }
 
+.rst-content h6,
 h6 {
-  font-size: 100%
+  font-size: 100%;
 }
 
 hr {
@@ -7277,13 +7285,11 @@ html.writer-html5 .rst-content div.citation>p {
 }
 
 html.writer-html5 .rst-content dl.citation,
-html.writer-html5 .rst-content dl.field-list,
 html.writer-html5 .rst-content dl.footnote {
   margin-bottom: 24px
 }
 
 html.writer-html5 .rst-content dl.citation>dt,
-html.writer-html5 .rst-content dl.field-list>dt,
 html.writer-html5 .rst-content dl.footnote>dt {
   padding-left: 1rem
 }
@@ -7703,7 +7709,7 @@ html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(
 
 .rst-content .guilabel {
   border: 1px solid #7fbbe3;
-  background: #e7f2fa;
+  background: rgb(255, 71, 117);
   font-size: 80%;
   font-weight: 700;
   border-radius: 4px;
@@ -7984,10 +7990,6 @@ span[id*=MathJax-Span] {
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(7) li.toctree-l1.current {
     --parent-hue: var(--nav-7-hue);
-}
-
-.wy-nav-side .wy-menu-vertical ul:nth-child(8) li.toctree-l1.current {
-    --parent-hue: var(--nav-8-hue);
 }
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(9) li.toctree-l1.current {
@@ -8432,7 +8434,7 @@ span[id*=MathJax-Span] {
 
 /* Body text color */
 body {
-    color: #ffffff !important;
+    color: #fbfbfb !important;
     background: #2d2d2d !important;
 }
 
@@ -8444,25 +8446,25 @@ body {
 .rst-content h5,
 .rst-content h6,
 h1, h2, h3, h4, h5, h6 {
-    color: #ffffff !important;
+    color: #f3f3f3 !important;
 }
 
 /* Paragraph text */
 p {
-    color: #ffffff !important;
+    color: #f4f4f4 !important;
 }
 
 /* Links - keep them visible but adjust for dark background */
 a {
-    color: #a8f1ff !important; /* Light blue for better contrast */
+    color: #72e8ff !important; /* Light blue for better contrast */
 }
 
 a:hover {
-    color: #b9adfe !important; /* Lighter blue on hover */
+    color: #8d79ff !important; /* Lighter blue on hover */
 }
 
 a:visited {
-    color: #ffb1f6 !important; /* Light purple for visited links */
+    color: #fc77ec !important; /* Light purple for visited links */
 }
 
 /* Code blocks and inline code */
@@ -8639,4 +8641,42 @@ input[type=search]:focus {
     .social-icon:hover {
         filter: invert(1) brightness(1.3);
     }
+}
+
+/* Custom heading colors - placed at end to override dark mode styles */
+.rst-content h1,
+h1 {
+  font-size: 175%;
+  color: #fea3cc !important;
+}
+
+.rst-content .toctree-wrapper>p.caption,
+.rst-content h2,
+h2 {
+  font-size: 150%;
+  color: #a6fff2 !important;
+}
+
+.rst-content h3,
+h3 {
+  font-size: 125%;
+  color: #fff2a8 !important;
+}
+
+.rst-content h4,
+h4 {
+  font-size: 115%;
+  color: #8abaf8 !important;
+}
+
+.rst-content h5,
+h5 {
+  font-size: 110%;
+  color: #b3f3f9 !important;
+}
+
+.rst-content h6,
+h6 {
+  font-size: 100%;
+  color: #beffca !important;
 }
