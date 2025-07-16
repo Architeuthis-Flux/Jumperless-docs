@@ -33,4 +33,10 @@
     <meta name="msapplication-TileColor" content="#ff47A5">
 
     {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <!-- Custom syntax highlighting for Jumperless-specific keywords -->
+    <script src="{{ 'custom-syntax-highlighter.js' | url }}"></script>
 {% endblock %} 

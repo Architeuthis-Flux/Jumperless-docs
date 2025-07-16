@@ -8680,3 +8680,352 @@ h6 {
   font-size: 100%;
   color: #beffca !important;
 }
+
+/* Pygments Syntax Highlighting Overrides */
+/* Keywords (def, class, if, for, etc.) */
+.highlight .k,    /* Keyword */
+.highlight .kc,   /* Keyword.Constant */
+.highlight .kd,   /* Keyword.Declaration */
+.highlight .kn,   /* Keyword.Namespace */
+.highlight .kp,   /* Keyword.Pseudo */
+.highlight .kr,   /* Keyword.Reserved */
+.highlight .kt {  /* Keyword.Type */
+    color: #ff79c6 !important; /* Bright pink for keywords */
+    font-weight: bold !important;
+}
+
+/* Strings */
+.highlight .s,    /* String */
+.highlight .s1,   /* String.Single */
+.highlight .s2,   /* String.Double */
+.highlight .sb,   /* String.Backtick */
+.highlight .sc,   /* String.Char */
+.highlight .sd,   /* String.Doc */
+.highlight .se,   /* String.Escape */
+.highlight .sh,   /* String.Heredoc */
+.highlight .si,   /* String.Interpol */
+.highlight .sr,   /* String.Regex */
+.highlight .ss,   /* String.Symbol */
+.highlight .sx {  /* String.Other */
+    color: #f1fa8c !important; /* Light yellow for strings */
+}
+
+/* Comments */
+.highlight .c,    /* Comment */
+.highlight .c1,   /* Comment.Single */
+.highlight .cm,   /* Comment.Multiline */
+.highlight .cp,   /* Comment.Preproc */
+.highlight .cs {  /* Comment.Special */
+    color: #6272a4 !important; /* Muted blue-gray for comments */
+    font-style: italic !important;
+}
+
+/* Numbers */
+.highlight .m,    /* Number */
+.highlight .mf,   /* Number.Float */
+.highlight .mh,   /* Number.Hex */
+.highlight .mi,   /* Number.Integer */
+.highlight .mo {  /* Number.Oct */
+    color: #bd93f9 !important; /* Light purple for numbers */
+}
+
+/* Functions and methods */
+.highlight .nf,   /* Name.Function */
+.highlight .fm,   /* Name.Function.Magic */
+.highlight .nt {  /* Name.Tag (HTML tags) */
+    color: #50fa7b !important; /* Bright green for functions */
+}
+
+/* Classes */
+.highlight .nc,   /* Name.Class */
+.highlight .nn {  /* Name.Namespace */
+    color: #8be9fd !important; /* Cyan for classes */
+}
+
+/* Variables and names */
+.highlight .n,    /* Name */
+.highlight .na,   /* Name.Attribute */
+.highlight .nb,   /* Name.Builtin */
+.highlight .nd,   /* Name.Decorator */
+.highlight .ne,   /* Name.Exception */
+.highlight .ni,   /* Name.Entity */
+.highlight .nl,   /* Name.Label */
+.highlight .no,   /* Name.Constant */
+.highlight .nv,   /* Name.Variable */
+.highlight .nx,   /* Name.Other */
+.highlight .py,   /* Name.Property */
+.highlight .vc,   /* Name.Variable.Class */
+.highlight .vg,   /* Name.Variable.Global */
+.highlight .vi {  /* Name.Variable.Instance */
+    color: #f8f8f2 !important; /* Light gray for general names/variables */
+}
+
+/* Operators */
+.highlight .o,    /* Operator */
+.highlight .ow {  /* Operator.Word */
+    color: #ff79c6 !important; /* Pink for operators */
+}
+
+/* Punctuation */
+.highlight .p {   /* Punctuation */
+    color: #f8f8f2 !important; /* Light gray for punctuation */
+}
+
+/* Built-ins and special names */
+.highlight .nb {  /* Name.Builtin */
+    color: #8be9fd !important; /* Cyan for built-ins */
+}
+
+/* Decorators */
+.highlight .nd {  /* Name.Decorator */
+    color: #ff79c6 !important; /* Pink for decorators */
+}
+
+/* Error highlighting */
+.highlight .err { /* Error */
+    color: #ff8e55 !important; /* Red for errors */
+    background-color: #272933 !important;
+}
+
+/* Generic highlighting */
+.highlight .g,    /* Generic */
+.highlight .gd,   /* Generic.Deleted */
+.highlight .ge,   /* Generic.Emph */
+.highlight .gi,   /* Generic.Inserted */
+.highlight .go,   /* Generic.Output */
+.highlight .gp,   /* Generic.Prompt */
+.highlight .gr,   /* Generic.Error */
+.highlight .gs,   /* Generic.Strong */
+.highlight .gt,   /* Generic.Traceback */
+.highlight .gu {  /* Generic.Subheading */
+    color: #f8f8f2 !important;
+}
+
+/* Line numbers in code blocks */
+.highlight .linenos {
+    color: #6272a4 !important;
+    background-color: #44475a !important;
+    padding-right: 10px !important;
+    border-right: 1px solid #6272a4 !important;
+}
+
+/* Highlighted lines */
+.highlight .hll {
+    background-color: #44475a !important;
+}
+
+/* Language-specific overrides */
+
+/* Python-specific */
+.highlight .kn { /* import, from */
+    color: #ff79c6 !important;
+}
+
+/* JavaScript-specific */
+.highlight .nx { /* JavaScript identifiers */
+    color: #f8f8f2 !important;
+}
+
+/* HTML/XML-specific */
+.highlight .nt { /* HTML tags */
+    color: #ff79c6 !important;
+}
+
+.highlight .na { /* HTML attributes */
+    color: #50fa7b !important;
+}
+
+/* CSS-specific */
+.highlight .k { /* CSS properties */
+    color: #8be9fd !important;
+}
+
+/* JSON-specific */
+.highlight .nd + .s2,  /* JSON keys */
+.highlight .nt + .s2 { /* JSON keys alternative */
+    color: #8be9fd !important;
+}
+
+/* Shell/Bash-specific */
+.highlight .nv { /* Shell variables */
+    color: #50fa7b !important;
+}
+
+/* Special case for code block containers to ensure proper background */
+.rst-content div[class^=highlight] {
+    background: #282a36 !important; /* Darker background for better contrast */
+    border: 1px solid #44475a !important;
+    border-radius: 4px !important;
+}
+
+/* Ensure line numbers are properly styled */
+.rst-content .linenodiv pre {
+    background: #44475a !important;
+    color: #6272a4 !important;
+    border-right: 1px solid #6272a4 !important;
+}
+
+/* Glossary Term Highlighting Styles */
+.glossary-term {
+    color: #8be9fd !important;
+    text-decoration: underline !important;
+    text-decoration-style: dotted !important;
+    cursor: help !important;
+    transition: color 0.2s ease !important;
+    border-radius: 2px !important;
+    padding: 1px 2px !important;
+    background: rgba(139, 233, 253, 0.1) !important;
+}
+
+.glossary-term:hover {
+    color: #50fa7b !important;
+    background: rgba(80, 250, 123, 0.15) !important;
+    text-decoration-color: #50fa7b !important;
+}
+
+/* Glossary tooltip styles */
+.glossary-tooltip {
+    position: absolute !important;
+    background: #2d2d2d !important;
+    color: #f8f8f2 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    border: 1px solid #44475a !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    max-width: 300px !important;
+    z-index: 10000 !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+}
+
+.glossary-tooltip em {
+    color: #f1fa8c !important;
+    font-style: italic !important;
+}
+
+.glossary-tooltip strong {
+    color: #ff79c6 !important;
+    font-weight: bold !important;
+}
+
+/* Ensure glossary terms work well in different contexts */
+h1 .glossary-term,
+h2 .glossary-term,
+h3 .glossary-term,
+h4 .glossary-term,
+h5 .glossary-term,
+h6 .glossary-term {
+    text-decoration-thickness: 2px !important;
+}
+
+/* Light mode adjustments for glossary terms */
+@media (prefers-color-scheme: light) {
+    .glossary-term {
+        color: #0066cc !important;
+        background: rgba(0, 102, 204, 0.1) !important;
+    }
+    
+    .glossary-term:hover {
+        color: #004499 !important;
+        background: rgba(0, 68, 153, 0.15) !important;
+        text-decoration-color: #004499 !important;
+    }
+    
+    .glossary-tooltip {
+        background: #ffffff !important;
+        color: #333333 !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .glossary-tooltip em {
+        color: #b8860b !important;
+    }
+    
+    .glossary-tooltip strong {
+        color: #800080 !important;
+    }
+}
+
+/* Custom Keywords - CSS-based approach */
+/* You can add specific keywords by targeting text content */
+
+/* Example: Highlight specific function names or custom keywords */
+.highlight code {
+    /* This will style any occurrence of these words in code blocks */
+}
+
+/* Custom keyword highlighting using pseudo-selectors and content matching */
+.highlight .n:not(.nf):not(.nc):not(.nn) {
+    /* Target general names but exclude functions, classes, namespaces */
+}
+
+/* Specific custom keywords - add your own here */
+.highlight pre code,
+.highlight pre {
+    /* Custom Jumperless-specific keywords */
+}
+
+/* Method to highlight specific words - you'll need to add specific rules */
+/* Example patterns you can use: */
+
+/* For MicroPython specific keywords */
+.highlight .n[data-custom="micropython"] {
+    color: #ffb86c !important;
+    font-weight: bold !important;
+}
+
+/* For hardware-specific terms */
+.highlight .n[data-custom="hardware"] {
+    color: #ff9580 !important;
+    font-weight: bold !important;
+}
+
+/* For Jumperless-specific API terms */
+.highlight .n[data-custom="jumperless-api"] {
+    color: #8aff80 !important;
+    font-weight: bold !important;
+}
+
+/* JavaScript-enhanced custom keyword classes */
+.custom-keyword-micropython {
+    color: #ffb86c !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(255, 184, 108, 0.3);
+}
+
+.custom-keyword-hardware {
+    color: #ff9580 !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(255, 149, 128, 0.3);
+}
+
+.custom-keyword-jumperless {
+    color: #8aff80 !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(138, 255, 128, 0.3);
+}
+
+.custom-keyword-gpio {
+    color: #ff79c6 !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(255, 121, 198, 0.3);
+}
+
+.custom-keyword-i2c {
+    color: #8be9fd !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(139, 233, 253, 0.3);
+}
+
+.custom-keyword-breadboard {
+    color: #f1fa8c !important;
+    font-weight: bold !important;
+    text-shadow: 0 0 2px rgba(241, 250, 140, 0.3);
+}

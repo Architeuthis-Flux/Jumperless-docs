@@ -5,7 +5,7 @@ Look *Inside* your Jumperless
 ## Crossbar Array
 There's a new way to see what the 12 analog crossbar switches are up to, just enter `c` in the menu
  
-```none
+```jython
  Analog Crossbar Array
 
              chip A                            chip B                            chip C                            chip D 

@@ -4,7 +4,7 @@ To change any persistent settings, there's a `config` file. You can read it with
 
 ## Viewing Configuration
 
-```c++
+```jython
 ~
 
 copy / edit / paste any of these lines 

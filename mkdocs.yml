@@ -23,6 +23,7 @@ theme:
       # css_style:
       #   width: "100%"
 extra_css: [extra.css]
+extra_javascript: [custom-syntax-highlighter.js]
 
 extra:
   meta:

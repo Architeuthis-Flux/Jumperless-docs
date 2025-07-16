@@ -32,7 +32,7 @@ All Jumperless hardware functions are automatically imported into the global nam
 
 
 ## Basic Hardware Control
-```python
+```jython
 # Connect nodes 1 and 5
 connect(1, 5)
 
@@ -49,7 +49,7 @@ dac_set(0, 3.3)
 
 
 ## Node Connections
-```python
+```jython
 # Connect two nodes
 connect(1, 5)                    # Connect using numbers
 connect("d13", "tOp_rAiL")       # Connect using node names (case insensitive when in quotes)
@@ -72,7 +72,7 @@ nodes_clear()
 
 
 ## DAC (Output Voltage)
-```python
+```jython
 # Set DAC voltage (-8.0V to 8.0V)
 dac_set(0, 2.5)    # Set DAC channel 0 to 2.5V
 dac_set(1, 1.65)   # Set DAC channel 1 to 1.65V
@@ -88,7 +88,7 @@ print("DAC 0: " + str(voltage) + "V")
 ![Screenshot 2025-07-04 at 7 17 36 PM](https://github.com/user-attachments/assets/f68b3bf2-3420-4d51-800a-1e8e9e804261)
 
 ## ADC (Measure Voltage)
-```python
+```jython
 # Read analog voltage (0-8V range for channels 0-3, 0-5V for channel 4)
 voltage = adc_get(0)    # Read ADC channel 0
 voltage = adc_get(1)    # Read ADC channel 1
@@ -98,7 +98,7 @@ voltage = adc_get(1)    # Read ADC channel 1
 ![Screenshot 2025-07-04 at 7 22 01 PM](https://github.com/user-attachments/assets/79cf16e8-8a79-4f11-9cf4-52456735b0dc)
 
 ## GPIO (General Purpose I/O)
-```python
+```jython
 # Set GPIO direction
 gpio_set_dir(1, True)   # Set GPIO 1 as OUTPUT
 gpio_set_dir(2, False)  # Set GPIO 2 as INPUT
@@ -125,7 +125,7 @@ pull = gpio_get_pull(2)        # Returns "PULLUP", "PULLDOWN", or "NONE"
 ![Screenshot 2025-07-04 at 7 31 19 PM](https://github.com/user-attachments/assets/c7bdb245-59a4-46db-9c52-fcc43c1f359e)
 
 ## Current Sensing (INA219)
-```python
+```jython
 # Read current sensor data
 current = ina_get_current(0)          # Current in A
 current = ina_get_current(0) * 1000   # Current in mA
@@ -137,7 +137,7 @@ power = ina_get_power(0)              # Power in W
 ```
 
 ## OLED Display
-```python
+```jython
 # Initialize OLED
 oled_connect()                 # Connect to OLED
 oled_print("Hello World!")     # Display text
@@ -150,7 +150,7 @@ oled_disconnect()
 ```
 
 ## Probe Functions
-```python
+```jython
 # Read probe pad (blocking)
 pad = probe_read_blocking()       # Returns ProbePad object only when a pad is touched
 
@@ -173,7 +173,7 @@ button = probe_button(False)      # Non-blocking
 
 
 ## System Functions
-```python
+```jython
 # Reset Arduino
 arduino_reset()
 
@@ -191,7 +191,7 @@ The [help()](#the-entire-output-of-help) and [nodes_help()](#the-entire-output-o
 
 
 ## Basic Script Structure
-```python
+```jython
 """
 My Jumperless Script
 Description of what this script does
@@ -290,7 +290,7 @@ Ctrl+Q             - Force quit REPL or interrupt running script
 ### Multiline Auto-Indent Mode
 The REPL automatically detects when you need multiple lines after a `:`
 
-```python
+```jython
 >>> def blink_led():
 ...     for i in range(5):
 ...         gpio_set(1, True)
@@ -337,7 +337,7 @@ Example scripts include:
 ## Formatted Output and Custom Types
 The Jumperless module provides formatted output for better readability:
 
-```python
+```jython
 # GPIO state returns formatted strings
 state = gpio_get(1)           # Returns "HIGH" or "LOW"
 direction = gpio_get_dir(1)   # Returns "INPUT" or "OUTPUT"
@@ -362,7 +362,7 @@ connect("TOP_RAIL", "GPIO_1") # Same as connect(101, 131)
 ## Node Names and Constants
 The Jumperless module provides extensive node name support with multiple aliases for each node:
 
-```python
+```jython
 # Power rails (multiple aliases supported)
 TOP_RAIL = 101        # Also: TOPRAIL, T_R, TOP_R
 BOTTOM_RAIL = 102     # Also: BOT_RAIL, BOTTOMRAIL, BOTRAIL, B_R, BOT_R
@@ -456,7 +456,7 @@ NANO_3V3 = 98         # Unconnected (without bridging the solder jumper on the b
 
 ## The entire output of help()
 
-```python
+```jython
 >>> help()
 Jumperless Native MicroPython Module
 Hardware Control Functions with Formatted Output:
@@ -601,7 +601,7 @@ No need for 'jumperless.' prefix in REPL or single commands.
 
 ## The entire output of nodes_help()
 
-```python
+```jython
 >>> nodes_help()
 Jumperless Node Reference
 ========================

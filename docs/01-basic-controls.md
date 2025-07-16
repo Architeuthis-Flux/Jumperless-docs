@@ -37,14 +37,14 @@ And here's what the LEDs will show
 
 You can think of `special functions` just like any other `node`, the only difference is they're in a sort of "folder" so I didn't need to put a dedicated pad for each of them. 
 
-```
+```jython
 DAC Pad
  └─ 0 1 [Tap pads below selection]
   └─ -8V  !:.:!  +8V [Tap bottom pads or use clickwheel to select a voltage] > [click probe Connect button to confirm]
    └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
 ```
 
-```
+```jython
 GPIO Pad
  └─ ⁱ1⁰ ⁱ2⁰ ⁱ3⁰ ⁱ4⁰ 
     ₁5₀ ₁6₀ ₁7₀ ₁8₀ [Tap pads to choose which `GPIO` (left side for input, right side for output)]
