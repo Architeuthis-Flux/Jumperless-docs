@@ -21,6 +21,16 @@ From the main Jumperless menu, press `p` to enter the MicroPython REPL:
 ![Screenshot 2025-07-04 at 7 03 24 PM](https://github.com/user-attachments/assets/e7ce0688-5ddf-48da-8560-4a8f6b747c4f)
 
 
+## REPL Navigation
+
+Up / Down arrow keys on a blank prompt will scroll through history, any other key will break out of history mode and enter multiline editing. So you can use arrow keys to navigate and edit the script. 
+
+
+## Hardware Control Functions
+
+All Jumperless hardware functions are automatically imported into the global namespace - no prefix needed
+
+
 ## Basic Hardware Control
 ```python
 # Connect nodes 1 and 5
@@ -37,10 +47,6 @@ print("Voltage: " + str(voltage) + "V")
 dac_set(0, 3.3)
 ```
 
-
-## Hardware Control Functions
-
-All Jumperless hardware functions are automatically imported into the global namespace - no prefix needed
 
 ## Node Connections
 ```python

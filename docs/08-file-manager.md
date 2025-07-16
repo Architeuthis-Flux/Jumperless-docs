@@ -93,7 +93,6 @@ The File Manager automatically creates example Python scripts in `/python_script
 You can trigger them to regenerate if you messed them up by deleting it with `x`, and then entering `m` to create new copies of any examples it doesn't see.
 
 
-
 ## USB Mass Storage
 
 Enter `U` in the menu and Jumperless will mount as a USB Mass Storage drive called `JUMPERLESS` where you can edit files on the filesystem.

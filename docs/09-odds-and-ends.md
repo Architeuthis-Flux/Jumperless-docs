@@ -60,3 +60,5 @@ Use `help` or `[command]?` for onboard documentation
 
 ![Screenshot 2025-07-04 at 5 52 32 PM](https://github.com/user-attachments/assets/522bfcb4-f836-464c-bcdf-1b302d05005b)
 
+
+## 

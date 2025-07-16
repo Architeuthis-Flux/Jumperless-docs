@@ -30,9 +30,27 @@ To connect to `special functions`, tap the corresponding `pad` near the logo, it
 
 (This is an ASCII version of what will show on the breadboard LEDs)
 
-![Screenshot 2025-05-30 at 10 55 13 AM](https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99)
+![This is what prints in the terminal](https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99)
+
+And here's what the LEDs will show
+![You can press `R` in the main menu to toggle this view](assets/gpioSelection.png)
 
 You can think of `special functions` just like any other `node`, the only difference is they're in a sort of "folder" so I didn't need to put a dedicated pad for each of them. 
+
+```
+DAC Pad
+ └─ 0 1 [Tap pads below selection]
+  └─ -8V  !:.:!  +8V [Tap bottom pads or use clickwheel to select a voltage] > [click probe Connect button to confirm]
+   └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
+```
+
+```
+GPIO Pad
+ └─ ⁱ1⁰ ⁱ2⁰ ⁱ3⁰ ⁱ4⁰ 
+    ₁5₀ ₁6₀ ₁7₀ ₁8₀ [Tap pads to choose which `GPIO` (left side for input, right side for output)]
+     └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
+```
+
 
 The other 4 `user pads` will be more remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`. The building pads are for overriding colors in `idle mode` (you'll see more about that in [Idle Mode Interactions](#idle-mode-net-highlighting).)
 
