@@ -32,4 +32,17 @@
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">
+{% endblock %}
+
+{# Override the libs block to prevent highlight.js from loading #}
+{% block libs %}{% endblock %}
+
+{# Override any highlight.js scripts #}
+{% block scripts %}
+    <!-- Load everything except highlight.js -->
+    <script src="{{ 'js/jquery-3.6.0.min.js'|url }}"></script>
+    <script src="{{ 'js/theme.js'|url }}"></script>
+    {%- for script in config.extra_javascript %}
+        {{ script|script_tag }}
+    {%- endfor %}
 {% endblock %} 

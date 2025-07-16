@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/">
+    <meta property="og:title" content="JFS (Jumperless FileSystem) Module - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/">
+    <meta name="twitter:title" content="JFS (Jumperless FileSystem) Module - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>JFS (Jumperless FileSystem) Module - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" /> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">JFS (Jumperless FileSystem) Module</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick Reference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-api">File API</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-modes">File Modes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-a-file-for-writing">Open a file for writing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#directory-operations">Directory Operations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#jfslistdirpath">jfs.listdir(path)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsmkdirpath">jfs.mkdir(path)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsrmdirpath">jfs.rmdir(path)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsremovepath">jfs.remove(path)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsrenameold_path-new_path">jfs.rename(old_path, new_path)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsexistspath">jfs.exists(path)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsstatpath">jfs.stat(path)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#filesystem-information">Filesystem Information</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsinfo">jfs.info()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-io">File I/O</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsopenpath-moder">jfs.open(path, mode=&#39;r&#39;)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-object-methods">File Object Methods</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#filereadsize">file.read([size])</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filewritedata">file.write(data)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fileclose">file.close()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fileseekoffset-whence">file.seek(offset, [whence])</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filetell">file.tell()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filesize">file.size()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fileavailable">file.available()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#filename">file.name</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#module-level-file-operations">Module-Level File Operations</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">Jumperless MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../custom-syntax-highlighting/">Custom Jumperless Python Syntax Highlighting</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../test-lexer/">Test Jumperless Python Lexer</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">JFS (Jumperless FileSystem) Module</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="jfs-jumperless-filesystem-module">JFS (Jumperless FileSystem) Module</h1>
+<p>The <code class="language-jython highlight"><span class="no no-JFS">jfs</span></code> module is basically like MicroPython's <code class="language-jython highlight"><span class="no no-JFS">vfs</span></code> and parts of <code class="language-jython highlight"><span class="n">os</span></code>, but kinda written in a style that's probably more familiar to Arduino-style C++ people (me). It uses the <em>almost</em> standardized API shared by <a href="https://arduino-pico.readthedocs.io/en/latest/fs.html#file-system-object-littlefs-sd-sdfs-fatfs"><code class="language-jython highlight"><span class="no no-JFS">FatFS</span></code> (the one Jumperless actually uses), <code class="language-jython highlight"><span class="no no-JFS">LittleFS</span></code>, and <code class="language-jython highlight"><span class="no no-JFS">SDFS</span></code></a>, but still has been <em>Pythonified</em> to use types that are easier to work with in MicroPython.</p>
+<h2 id="quick-reference">Quick Reference</h2>
+<p>File Operations:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></code> - Opens file, returns file handle</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span></code> - Read from file </li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code> - Write to file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Close file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get current position</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get file size</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available</li>
+</ul>
+<p>Directory Operations: </p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Check if path exists (returns True/False)</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - List directory contents (returns list)</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Create directory </li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove directory</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span></code> - Rename/move file</li>
+</ul>
+<p>Filesystem Info:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code> - Returns (total, used, free) tuple</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jfs</span>  <span class="c1">#you don&#39;t actually need this, jfs is imported globally by default</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="c1"># List files in the root directory</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">files</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>   <span class="c1"># returns a python list</span>
+<span class="linenos" data-linenos="5 "></span><span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+</code></pre></div>
+Output:
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">[</span><span class="s1">&#39;config.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot0.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;python_scripts/&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot1.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot2.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot3.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot4.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot5.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot6.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;nodeFileSlot7.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;net_colors/&#39;</span><span class="p">]</span>
+</code></pre></div></p>
+<details>
+
+<summary>If you want to make this print with subdirectories</summary>
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">files</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">)):</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">file</span><span class="p">])</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="k">if</span> <span class="n">files</span><span class="p">[</span><span class="n">file</span><span class="p">]</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="n">subdir</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">files</span><span class="p">[</span><span class="n">file</span><span class="p">])</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subdir</span><span class="p">)):</span>
+<span class="linenos" data-linenos="11 "></span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     - &quot;</span> <span class="o">+</span> <span class="n">subdir</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div>
+
+Output: 
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">nodeFileSlot0</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">python_scripts</span><span class="o">/</span>
+<span class="linenos" data-linenos=" 3 "></span>     <span class="o">-</span> <span class="n">history</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos=" 4 "></span>     <span class="o">-</span> <span class="n">examples</span><span class="o">/</span>
+<span class="linenos" data-linenos=" 5 "></span>     <span class="o">-</span> <span class="n">fake_gpio</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 6 "></span>     <span class="o">-</span> <span class="n">_temp_repl_edit</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 7 "></span>     <span class="o">-</span> <span class="n">Hey</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos=" 8 "></span>     <span class="o">-</span> <span class="n">script_1</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 9 "></span>     <span class="o">-</span> <span class="n">script_2</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="10 "></span>     <span class="o">-</span> <span class="n">script_3</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="11 "></span>     <span class="o">-</span> <span class="n">log</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="12 "></span>     <span class="o">-</span> <span class="n">lib</span><span class="o">/</span>
+<span class="linenos" data-linenos="13 "></span>     <span class="o">-</span> <span class="n">script_4</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="14 "></span>     <span class="o">-</span> <span class="n">pathtest</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="15 "></span><span class="n">nodeFileSlot1</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="16 "></span><span class="n">nodeFileSlot2</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="17 "></span><span class="n">nodeFileSlot3</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="18 "></span><span class="n">nodeFileSlot4</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="19 "></span><span class="n">nodeFileSlot5</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="20 "></span><span class="n">nodeFileSlot6</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="21 "></span><span class="n">nodeFileSlot7</span><span class="o">.</span><span class="n">txt</span>
+<span class="linenos" data-linenos="22 "></span><span class="n">net_colors</span><span class="o">/</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="o">-</span> <span class="n">netColorsSlot0</span><span class="o">.</span><span class="n">txt</span>
+</code></pre></div>
+
+</details>
+
+<hr />
+<h2 id="file-api">File API</h2>
+<p>File objects returned by <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code> support method calls directly on the object:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Object-oriented file operations</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Write-only mode</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="s1">&#39;Hello, Jumperless!&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Read from the file (need to reopen or use w+/r+ mode)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">()</span>             <span class="c1"># Read from file object</span>
+<span class="linenos" data-linenos="11 "></span><span class="nf nf-JFS">size</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">()</span>                <span class="c1"># Get file size</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="c1"># Read-write mode (truncates file)</span>
+<span class="linenos" data-linenos="15 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="s1">&#39;Hello, Jumperless!&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="17 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                      <span class="c1"># Seek to beginning to read what we wrote</span>
+<span class="linenos" data-linenos="18 "></span><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">()</span>             <span class="c1"># Now this works!</span>
+<span class="linenos" data-linenos="19 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span><span class="c1"># Context manager support (automatically closes file)</span>
+<span class="linenos" data-linenos="22 "></span><span class="k">with</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="s1">&#39;This file will be automatically closed&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                  <span class="c1"># Reset to beginning</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">()</span>         <span class="c1"># Read back what we wrote</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span>             <span class="c1"># Get current position</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>            <span class="c1"># Get file name</span>
+</code></pre></div>
+<details>
+
+<summary>Other ways to do the same thing</summary>
+
+### 2. Module-Level Functions
+
+You can also use module-level functions with file handles:
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;Hello, Jumperless!&#39;</span><span class="p">)</span>  <span class="c1"># Module-level function</span>
+<span class="linenos" data-linenos="3 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>                      <span class="c1"># Module-level function  </span>
+<span class="linenos" data-linenos="4 "></span><span class="n">content</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>               <span class="c1"># Module-level function</span>
+<span class="linenos" data-linenos="5 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>                        <span class="c1"># Module-level function</span>
+</code></pre></div>
+
+### 3. Direct String Operations (For simple cases)
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Write/read entire files at once (no file handles needed)</span>
+<span class="linenos" data-linenos="2 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="s1">&#39;config.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;key=value</span><span class="se">\n</span><span class="s1">other=setting&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">content</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="s1">&#39;config.txt&#39;</span><span class="p">)</span>
+</code></pre></div>
+</summary>
+</details>
+
+<h2 id="file-modes">File Modes</h2>
+<p>When using <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></code>, the following modes are supported:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Description</th>
+<th>Read</th>
+<th>Write</th>
+<th>Create</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="s1">&#39;r&#39;</span></code></td>
+<td>Read only</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="s1">&#39;w&#39;</span></code></td>
+<td>Write only</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="s1">&#39;a&#39;</span></code></td>
+<td>Append only</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="s1">&#39;r+&#39;</span></code></td>
+<td>Read + Write</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="s1">&#39;w+&#39;</span></code></td>
+<td>Read + Write</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="s1">&#39;a+&#39;</span></code></td>
+<td>Read + Append</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important:</strong> You cannot read from a file opened in write-only mode (<code class="language-jython highlight"><span class="s1">&#39;w&#39;</span></code> or <code class="language-jython highlight"><span class="s1">&#39;a&#39;</span></code>). Use <code class="language-jython highlight"><span class="s1">&#39;w+&#39;</span></code>, <code class="language-jython highlight"><span class="s1">&#39;r+&#39;</span></code>, or <code class="language-jython highlight"><span class="s1">&#39;a+&#39;</span></code> if you need both read and write access.</p>
+<h2 id="open-a-file-for-writing">Open a file for writing</h2>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;hello.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="s1">&#39;Hello, Jumperless!&#39;</span><span class="p">)</span>  <span class="c1"># Now works with object-oriented API!</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="directory-operations">Directory Operations</h2>
+<h3 id="jfslistdirpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<p>Returns a list containing the names of the entries in the directory given by <code class="language-jython highlight"><span class="n">path</span></code>.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path to the directory.</li>
+</ul>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># List contents of the root directory</span>
+<span class="linenos" data-linenos="2 "></span><span class="nb">print</span><span class="p">(</span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># List contents of a subdirectory</span>
+<span class="linenos" data-linenos="5 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="s1">&#39;/my_dir&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span><span class="nb">print</span><span class="p">(</span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/my_dir&#39;</span><span class="p">))</span>
+</code></pre></div></p>
+<h3 id="jfsmkdirpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<p>Create a new directory.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the new directory.</li>
+</ul>
+<h3 id="jfsrmdirpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<p>Remove an empty directory.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the directory to remove.</li>
+</ul>
+<h3 id="jfsremovepath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<p>Remove a file.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the file to remove.</li>
+</ul>
+<h3 id="jfsrenameold_path-new_path"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">old_path</span><span class="p">,</span> <span class="n">new_path</span><span class="p">)</span></code></h3>
+<p>Rename a file or directory.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">old_path</span></code> (str): The current path.</li>
+<li><code class="language-jython highlight"><span class="n">new_path</span></code> (str): The new path.</li>
+</ul>
+<h3 id="jfsexistspath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<p>Check if a file or directory exists.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path to check.</li>
+<li>Returns <code class="language-jython highlight"><span class="kc">True</span></code> if it exists, <code class="language-jython highlight"><span class="kc">False</span></code> otherwise.</li>
+</ul>
+<h3 id="jfsstatpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<p>Get status of a file or directory.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the file or directory.</li>
+<li>Returns a tuple with file information (mode, size, etc.), similar to <code class="language-jython highlight"><span class="n">os</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">()</span></code>.</li>
+</ul>
+<h2 id="filesystem-information">Filesystem Information</h2>
+<h3 id="jfsinfo"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code></h3>
+<p>Get information about the filesystem.</p>
+<ul>
+<li>Returns a tuple <code class="language-jython highlight"><span class="p">(</span><span class="n">total_bytes</span><span class="p">,</span> <span class="n">used_bytes</span><span class="p">,</span> <span class="n">free_bytes</span><span class="p">)</span></code>.</li>
+</ul>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">total</span><span class="p">,</span> <span class="n">used</span><span class="p">,</span> <span class="n">free</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span>
+<span class="linenos" data-linenos="2 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Filesystem Size: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; KB&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Used: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">used</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; KB&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">free</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; KB&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="file-io">File I/O</h2>
+<p>The <code class="language-jython highlight"><span class="no no-JFS">jfs</span></code> module supports standard file opening and handling using <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code> and file objects, including support for the <code class="language-jython highlight"><span class="k">with</span></code> statement for automatic resource management.</p>
+<h3 id="jfsopenpath-moder"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span></code></h3>
+<p>Open a file and return a corresponding file object.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path to the file.</li>
+<li><code class="language-jython highlight"><span class="n">mode</span></code> (str, optional): The mode in which the file is opened. Defaults to <code class="language-jython highlight"><span class="s1">&#39;r&#39;</span></code>.<ul>
+<li><code class="language-jython highlight"><span class="s1">&#39;r&#39;</span></code>: Read (default).</li>
+<li><code class="language-jython highlight"><span class="s1">&#39;w&#39;</span></code>: Write (creates a new file or truncates an existing one).</li>
+<li><code class="language-jython highlight"><span class="s1">&#39;a&#39;</span></code>: Append.</li>
+<li><code class="language-jython highlight"><span class="s1">&#39;r+&#39;</span></code>: Read and write.</li>
+<li><code class="language-jython highlight"><span class="s1">&#39;w+&#39;</span></code>: Write and read (creates/truncates).</li>
+<li><code class="language-jython highlight"><span class="s1">&#39;a+&#39;</span></code>: Append and read.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Open a file for reading</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;config.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">()</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
+<span class="linenos" data-linenos="5 "></span>
+<span class="linenos" data-linenos="6 "></span><span class="c1"># Use &#39;with&#39; for automatic closing</span>
+<span class="linenos" data-linenos="7 "></span><span class="k">with</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;data.log&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">log_file</span><span class="p">:</span>
+<span class="linenos" data-linenos="8 "></span>    <span class="n">log_file</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="s1">&#39;New log entry.</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">)</span>
+</code></pre></div></p>
+<h2 id="file-object-methods">File Object Methods</h2>
+<p>The file object returned by <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code> has the following methods:</p>
+<h3 id="filereadsize"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">([</span><span class="nf nf-JFS">size</span><span class="p">])</span></code></h3>
+<p>Read <code class="language-jython highlight"><span class="nf nf-JFS">size</span></code> bytes from the file. If <code class="language-jython highlight"><span class="nf nf-JFS">size</span></code> is omitted or negative, the entire file is read.</p>
+<h3 id="filewritedata"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></h3>
+<p>Write the given string or bytes <code class="language-jython highlight"><span class="n">data</span></code> to the file. Returns the number of bytes written.</p>
+<h3 id="fileclose"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span></code></h3>
+<p>Close the file. A closed file cannot be read or written to.</p>
+<h3 id="fileseekoffset-whence"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="p">[</span><span class="n">whence</span><span class="p">])</span></code></h3>
+<p>Change the stream position.
+*   <code class="language-jython highlight"><span class="n">offset</span></code>: The byte offset.
+*   <code class="language-jython highlight"><span class="n">whence</span></code> (optional):
+    *   <code class="language-jython highlight"><span class="mi">0</span></code>: Seek from the start of the stream (default). Use <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="no no-JFS">SEEK_SET</span></code>.
+    *   <code class="language-jython highlight"><span class="mi">1</span></code>: Seek from the current position. Use <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="no no-JFS">SEEK_CUR</span></code>.
+    *   <code class="language-jython highlight"><span class="mi">2</span></code>: Seek from the end of the stream. Use <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="no no-JFS">SEEK_END</span></code>.</p>
+<h3 id="filetell"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span></code></h3>
+<p>Return the current stream position.
+*   <strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="n">position</span><span class="p">()</span></code></p>
+<h3 id="filesize"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">()</span></code></h3>
+<p>Return the total size of the file in bytes.</p>
+<h3 id="fileavailable"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">()</span></code></h3>
+<p>Return the number of bytes available to be read from the current position to the end of the file.</p>
+<h3 id="filename"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="n">name</span></code></h3>
+<p>Returns the name of the file.</p>
+<hr />
+<h2 id="module-level-file-operations">Module-Level File Operations</h2>
+<p>For convenience, the <code class="language-jython highlight"><span class="no no-JFS">jfs</span></code> module also provides functions that operate directly on file handles returned by <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code>. This can be useful in some scripting scenarios but using file object methods is generally preferred for clarity.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="p">[</span><span class="nf nf-JFS">size</span><span class="p">])</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="p">[</span><span class="n">whence</span><span class="p">])</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span></code></li>
+</ul>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">file_handle</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="s1">&#39;some data&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+</code></pre></div></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../08-micropython/" class="btn btn-neutral float-left" title="MicroPython"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../09-odds-and-ends/" class="btn btn-neutral float-right" title="Odds and Ends">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../08-micropython/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../09-odds-and-ends/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="../search/main.js"></script>
+
+
+</body>
+</html>

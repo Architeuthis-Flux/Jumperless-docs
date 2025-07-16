@@ -150,7 +150,7 @@ oled_disconnect()
 ```
 
 ## Probe Functions
-```jython
+```jumperless
 # Read probe pad (blocking)
 pad = probe_read_blocking()       # Returns ProbePad object only when a pad is touched
 

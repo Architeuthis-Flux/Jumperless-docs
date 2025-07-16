@@ -1,0 +1,8 @@
+[pygments.lexers]
+jumperless = docs.lexers.jumperless_lexer:JumperlessPythonLexer
+jumperless-python = docs.lexers.jumperless_lexer:JumperlessPythonLexer
+jython = docs.lexers.jumperless_lexer:JumperlessPythonLexer
+
+[pygments.styles]
+jumperless = docs.lexers.jumperless_style:JumperlessStyle
+jumperless-light = docs.lexers.jumperless_style:JumperlessLightStyle

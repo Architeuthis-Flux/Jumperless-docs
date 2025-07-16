@@ -23,7 +23,26 @@ theme:
       # css_style:
       #   width: "100%"
 extra_css: [extra.css]
-extra_javascript: [custom-syntax-highlighter.js]
+
+# Markdown extensions for custom syntax highlighting
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+      pygments_lang_class: true
+      pygments_style: jumperless
+      auto_title: false
+      linenums: true
+      linenums_style: pymdownx-inline
+      guess_lang: false
+      default_lang: jython
+      # css_class: "codehilite"
+  - pymdownx.superfences
+  - pymdownx.inlinehilite:
+      style_plain_text: jython
+
+# Hooks to register custom lexers
+hooks:
+  - docs/hooks.py
 
 extra:
   meta:

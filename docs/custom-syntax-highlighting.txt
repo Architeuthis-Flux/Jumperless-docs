@@ -1,0 +1,84 @@
+<!-- # Custom Jumperless Python Syntax Highlighting
+
+This document demonstrates the custom syntax highlighting for Jumperless Python (Jython) code blocks and inline code.
+
+## Code Blocks
+
+Use standard fenced code blocks with the language identifier `jython`, `jumperless`, or `jumperless-python`:
+
+```jython
+# This is a Jumperless Python code block
+connect(D2, A0)  # Connects digital pin 2 to analog pin 0
+dac_set(DAC0, 2.5)  # Sets DAC0 to 2.5 volts
+value = adc_get(ADC0)  # Reads voltage from ADC0
+```
+
+## Inline Code Highlighting
+
+For inline code highlighting, use one of these special syntaxes:
+
+### Using `#!` syntax (recommended)
+
+The `#!jython` syntax provides highlighting for inline code:
+
+- Functions: `#!jython connect(D2, A0)` and `#!jython dac_set(DAC0, 2.5)`
+- Constants: `#!jython TOP_RAIL`, `#!jython BOTTOM_RAIL`, `#!jython GPIO_1`
+- JFS functions: `#!jython jfs.open("file.txt", "r")`
+
+### Using `:::` syntax (alternative)
+
+You can also use the `:::jython` syntax:
+
+- `:::jython gpio_set(GPIO_1, 1)`
+- `:::jython probe_read()`
+
+### Examples
+
+Here are some practical examples:
+
+To read the current flowing through the circuit, use `#!jython ina_get_current()`. You can also check the voltage with `#!jython ina_get_voltage()`.
+
+Connect two nodes with `#!jython connect(A0, D13)` and disconnect them using `#!jython disconnect(A0, D13)`.
+
+File operations are handled through JFS: `#!jython jfs.write("data.txt", content)` writes data to a file.
+
+## Highlighted Elements
+
+### Jumperless Functions (Pink)
+- `#!jython connect()`, `#!jython disconnect()`
+- `#!jython dac_set()`, `#!jython dac_get()`
+- `#!jython adc_get()`, `#!jython gpio_set()`
+- `#!jython probe_read()`, `#!jython oled_print()`
+
+### Jumperless Constants (Purple)
+- Rails: `#!jython TOP_RAIL`, `#!jython BOTTOM_RAIL`, `#!jython GND`
+- Digital pins: `#!jython D0` through `#!jython D13`
+- Analog pins: `#!jython A0` through `#!jython A7`
+- GPIO: `#!jython GPIO_1` through `#!jython GPIO_8`
+- DAC/ADC: `#!jython DAC0`, `#!jython DAC1`, `#!jython ADC0`, etc.
+
+### JFS Functions (Reddish Pink)
+- `#!jython jfs.open()`, `#!jython jfs.read()`, `#!jython jfs.write()`
+- `#!jython jfs.close()`, `#!jython jfs.exists()`, `#!jython jfs.listdir()`
+
+### JFS Constants (Orange)
+- `#!jython SEEK_SET`, `#!jython SEEK_CUR`, `#!jython SEEK_END`
+- `#!jython jfs`, `#!jython FatFS`, `#!jython vfs`, `#!jython LittleFS`, `#!jython SDFS`
+
+### Hardware Constants (Purple)
+- Special hardware identifiers and constants
+
+## Tips
+
+1. **Always specify the language**: Use `jython`, `jumperless`, or `jumperless-python`
+2. **Use the shebang syntax**: For inline code, always start with `#!jython` or `:::jython`
+3. **No spaces**: Don't put spaces between the backtick and the language identifier
+4. **Case sensitive**: Function and constant names are case-sensitive
+
+## Regular Python vs Jumperless Python
+
+Compare regular Python: `#!python print("hello")` 
+
+With Jumperless Python: `#!jython oled_print("hello")`
+
+The custom lexer provides specialized highlighting for Jumperless-specific functions and constants while maintaining compatibility with standard Python syntax.  -->

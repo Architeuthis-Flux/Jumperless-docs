@@ -4,49 +4,44 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="Learn how to use your Jumperless" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/" />
       <link rel="shortcut icon" href="img/favicon.ico" />
     
-    <!-- Open Graph meta tags for social sharing -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Home" />
-    <meta property="og:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
-    <meta property="og:image" content="assets/ColorJumpLogoNameUnhuged.png" />
-    <meta property="og:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/" />
-    <meta property="og:site_name" content="Jumperless Documentation - Complete User Guide" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/">
+    <meta property="og:title" content="Home - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
     
-    <!-- Twitter Card meta tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Home" />
-    <meta name="twitter:description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
-    <meta name="twitter:image" content="assets/ColorJumpLogoNameUnhuged.png" />
-    <meta name="twitter:image:alt" content="Jumperless Logo - Breadboard Connection Matrix" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/">
+    <meta name="twitter:title" content="Home - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
     
-    <!-- Standard meta tags -->
-    <meta name="description" content="Complete documentation for Jumperless - the revolutionary breadboard connection matrix that automates wire connections, supports Arduino programming, and includes advanced debugging features for electronics prototyping." />
-    <meta name="keywords" content="Jumperless, breadboard, prototyping, Arduino, electronics, debugging, connection matrix" />
-    <meta name="author" content="Kevin Sant Cappuccio" />
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
 
-    <title>Jumperless Documentation - Complete User Guide</title>
+    <title>Jumperless Docs</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="extra.css" rel="stylesheet" />
-    
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Home";
-        var mkdocs_page_input_path = "index.md";
-        var mkdocs_page_url = null;
-      </script>
-    
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
+        <link href="extra.css" rel="stylesheet" /> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -75,6 +70,12 @@
     <li class="toctree-l2"><a class="reference internal" href="#documentation-sections">Documentation Sections</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#find-me-on-the-internet">Find Me On The Internet</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#probe_readblockingtrue">probe_read([blocking=True])</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#probe_buttonblockingtrue">probe_button([blocking=True])</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -112,7 +113,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="09.5-micropythonAPIreference/">Jumperless MicroPython API Reference</a>
                 </li>
               </ul>
               <ul>
@@ -127,6 +136,14 @@
                 <li class="toctree-l1"><a class="reference internal" href="99-glossary/">Glossary of Terms</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="custom-syntax-highlighting/">Custom Jumperless Python Syntax Highlighting</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="test-lexer/">Test Jumperless Python Lexer</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -134,7 +151,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href=".">Jumperless Documentation - Complete User Guide</a>
+          <a href=".">Jumperless Docs</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -158,6 +175,7 @@
 <p>Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B-based dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, a function generator, and a logic analyzer) all crammed inside a breadboard.</p>
 <p>You can connect any point to any other using software-defined jumpers, so the four individually programmable ±8 V power supplies; ten GPIOs; and seven management channels for voltage, current, and resistance can all be connected anywhere on the breadboard or the Arduino Nano header. RGB LEDs under each hole turn the breadboard itself into a display that provides real-time information about whatever’s happening in your circuit.</p>
 <p><strong>These are the docs where you will learn how to use all this stuff</strong></p>
+<p><img alt="" src="assets/Explodraft.png" /></p>
 <hr />
 <p>If you don't already have one,</p>
 <h2 id="get-a-jumperless-v5-on-crowd-supply"><a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5">Get a Jumperless V5 on Crowd Supply</a></h2>
@@ -209,6 +227,38 @@
 
 <p><img alt="dymo-6s" src="https://github.com/user-attachments/assets/d59e3ebc-591c-4c2c-bce3-1f65f9555c61" /></p>
 <hr />
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">file_handle</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file_handle</span><span class="p">,</span> <span class="s1">&#39;some data&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file_handle</span><span class="p">)</span>
+</code></pre></div>
+<p>Functions for interacting with the physical probe.</p>
+<h3 id="probe_readblockingtrue"><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code></h3>
+<p>Reads the pad currently being touched by the probe.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">blocking</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code> (default), the function will wait until a pad is touched. If <code class="language-jython highlight"><span class="kc">False</span></code>, it returns immediately.</li>
+<li>Returns a <code class="language-jython highlight"><span class="n">ProbePad</span></code> object (e.g., <code class="language-jython highlight"><span class="mi">25</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D13_PAD</span></code>, <code class="language-jython highlight"><span class="n">NO_PAD</span></code>).</li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">read_probe</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_wait</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wait_probe</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_touch</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wait_touch</span><span class="p">()</span></code></li>
+</ul>
+<h3 id="probe_buttonblockingtrue"><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code></h3>
+<p>Reads the state of the buttons on the probe.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">blocking</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code> (default), waits for a button press. If <code class="language-jython highlight"><span class="kc">False</span></code>, returns the current state immediately.</li>
+<li>Returns a <code class="language-jython highlight"><span class="n">ProbeButton</span></code> object (<code class="language-jython highlight"><span class="no no-Jumperless">CONNECT_BUTTON</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">REMOVE_BUTTON</span></code>, or <code class="language-jython highlight"><span class="no no-Jumperless">BUTTON_NONE</span></code>).</li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">get_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">button_read</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">read_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_nonblocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">check_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">button_check</span><span class="p">()</span></code></li>
+</ul>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Touch a pad...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">pad</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_read</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You touched: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pad</span><span class="p">))</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="no no-Jumperless">D13_PAD</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s the Arduino LED pin!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press a probe button...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_button</span><span class="p">()</span>
+<span class="linenos" data-linenos="10 "></span><span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="no no-Jumperless">CONNECT_BUTTON</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connect button pressed.&quot;</span><span class="p">)</span>
+</code></pre></div></p>
               
             </div>
           </div><footer>
@@ -241,21 +291,16 @@
     
   </span>
 </div>
+    <!-- Load everything except highlight.js -->
     <script src="js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = ".";</script>
-    <script src="js/theme_extra.js"></script>
     <script src="js/theme.js"></script>
-      <script src="search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
+        <script src="search/main.js"></script>
+
 
 </body>
 </html>
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-07 01:18:13.835575+00:00
+Build Date UTC : 2025-07-16 21:22:53.099863+00:00
 -->

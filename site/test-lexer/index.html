@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/test-lexer/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/test-lexer/">
+    <meta property="og:title" content="Test Jumperless Python Lexer - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/test-lexer/">
+    <meta name="twitter:title" content="Test Jumperless Python Lexer - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/test-lexer/">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Test Jumperless Python Lexer - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" /> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">Jumperless MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../custom-syntax-highlighting/">Custom Jumperless Python Syntax Highlighting</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Test Jumperless Python Lexer</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#standard-python-code">Standard Python Code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#jumperless-python-code">Jumperless Python Code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#inline-code-highlighting-tests">Inline Code Highlighting Tests</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mixed-python-with-jumperless-functions">Mixed Python with Jumperless Functions</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Test Jumperless Python Lexer</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="test-jumperless-python-lexer">Test Jumperless Python Lexer</h1>
+<p>This page tests the custom Jumperless Python syntax highlighting.</p>
+<h2 id="standard-python-code">Standard Python Code</h2>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">():</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="k">return</span> <span class="mi">42</span>
+</code></pre></div>
+<h2 id="jumperless-python-code">Jumperless Python Code</h2>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Connect two points on the breadboard</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">A0</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">D13</span><span class="p">,</span> <span class="no no-Jumperless">BOTTOM_RAIL</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># Set a DAC value</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Read an ADC value</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="c1"># Control GPIO</span>
+<span class="linenos" data-linenos="12 "></span><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">state</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="no no-Jumperless">GPIO_2</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span><span class="c1"># OLED display</span>
+<span class="linenos" data-linenos="16 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="17 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Voltage:&quot;</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span><span class="c1"># Probe functions</span>
+<span class="linenos" data-linenos="20 "></span><span class="k">if</span> <span class="nf nf-Jumperless">probe_button</span><span class="p">()</span> <span class="o">==</span> <span class="no no-Jumperless">CONNECT_BUTTON</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span>
+<span class="linenos" data-linenos="22 "></span>    <span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s2">&quot;blink&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="inline-code-highlighting-tests">Inline Code Highlighting Tests</h2>
+<p>Regular inline code (no highlighting): <code class="language-jython highlight"><span class="no no-Jumperless">CONNECT_BUTTON</span></code> and <code class="language-jython highlight"><span class="nf nf-Jumperless">get_adc</span><span class="p">()</span></code></p>
+<p><strong>To get inline highlighting, use the pymdownx.inlinehilite syntax:</strong></p>
+<ul>
+<li>Jumperless function: <code class="language-jython highlight"><span class="nf nf-Jumperless">get_adc</span><span class="p">()</span></code></li>
+<li>Jumperless constant: <code class="language-jython highlight"><span class="no no-Jumperless">CONNECT_BUTTON</span></code></li>
+<li>JFS function: <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span></code></li>
+<li>Hardware constant: <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code></li>
+</ul>
+<p>You can also use the syntax: {++<code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">A0</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span></code>++}</p>
+<p><strong>Testing improved analyse_text method:</strong></p>
+<p>These should now be automatically detected and highlighted:</p>
+<ul>
+<li>Function without parentheses: <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span></code></li>
+<li>Function with parentheses: <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code></li>
+<li>JFS function: <code class="language-jython highlight"><span class="nf nf-JFS">read</span></code> (from JFS)</li>
+<li>Constants: <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">CONNECT_BUTTON</span></code></li>
+<li>Arduino pins: <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code></li>
+<li>Special functions: <code class="language-jython highlight"><span class="no no-Jumperless">PROBE</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code></li>
+</ul>
+<p><strong>Mixed inline references:</strong></p>
+<p>The <code class="language-jython highlight"><span class="nf nf-Jumperless">get_voltage</span></code> function reads from <code class="language-jython highlight"><span class="no no-Jumperless">ADC2</span></code> and the <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code> constant.
+Use <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> to link <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code> to <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>.
+Check if <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span></code> returns <code class="language-jython highlight"><span class="no no-Jumperless">CONNECT_BUTTON</span></code> state.</p>
+<p><strong>Testing all constants mentioned by user:</strong></p>
+<p>Explicit jython syntax tests:
+- Power Rails: <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>
+- DAC/ADC: <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC2</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC4</span></code>
+- Special: <code class="language-jython highlight"><span class="no no-Jumperless">PROBE</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code>
+- GPIO: <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_2</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_4</span></code>
+- Arduino: <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code></p>
+<p>Regular inline code (should not highlight):
+- Power Rails: <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>
+- DAC/ADC: <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC2</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC4</span></code>
+- Special: <code class="language-jython highlight"><span class="no no-Jumperless">PROBE</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code>
+- GPIO: <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_2</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_4</span></code>
+- Arduino: <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code></p>
+<h2 id="mixed-python-with-jumperless-functions">Mixed Python with Jumperless Functions</h2>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">def</span><span class="w"> </span><span class="nf">monitor_voltage</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor voltage on ADC0 and display on OLED&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="c1"># Read voltage using Jumperless function</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="n">voltage</span> <span class="o">=</span> <span class="n">adc_get</span><span class="p">(</span><span class="n">ADC0</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span>        <span class="c1"># Display on OLED</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="n">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;V: </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>        <span class="c1"># Check if voltage is too high</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="k">if</span> <span class="n">voltage</span> <span class="o">&gt;</span> <span class="mf">3.3</span><span class="p">:</span>
+<span class="linenos" data-linenos="15 "></span>            <span class="n">gpio_set</span><span class="p">(</span><span class="n">GPIO_1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Turn on warning LED</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>            <span class="n">gpio_set</span><span class="p">(</span><span class="n">GPIO_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Turn off warning LED</span>
+<span class="linenos" data-linenos="18 "></span>
+<span class="linenos" data-linenos="19 "></span>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../custom-syntax-highlighting/" class="btn btn-neutral float-left" title="Custom Jumperless Python Syntax Highlighting"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../custom-syntax-highlighting/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="../search/main.js"></script>
+
+
+</body>
+</html>

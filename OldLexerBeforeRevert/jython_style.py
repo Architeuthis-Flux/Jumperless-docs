@@ -5,8 +5,16 @@ Defines a dark theme with specific colors for Jumperless-specific tokens.
 
 from pygments.style import Style
 from pygments.token import (Keyword, Name, Comment, String, Error, Text, Number, 
-                          Operator, Generic, Whitespace, Punctuation, Other, Literal)
-from jython_lexer import JythonTokens
+                          Operator, Generic, Whitespace, Punctuation, Other, Literal, Token)
+
+# Define custom token types for Jumperless-specific elements (same as in lexer)
+class JythonTokens:
+    # Jumperless-specific token types
+    JumperlessFunction = Token.Name.Function.Jumperless
+    JumperlessConstant = Token.Name.Constant.Jumperless
+    JumperlessType = Token.Name.Type.Jumperless
+    JFSFunction = Token.Name.Function.JFS
+    HardwareConstant = Token.Name.Constant.Hardware
 
 class JythonStyle(Style):
     """

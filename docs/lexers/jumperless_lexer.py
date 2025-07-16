@@ -8,23 +8,24 @@ from pygments.lexers.python import PythonLexer
 from pygments.token import Token, Keyword, Name, Comment, String, Number
 
 # Define custom token types for Jumperless-specific elements
-class JythonTokens:
+class JumperlessTokens:
     # Jumperless-specific token types
     JumperlessFunction = Token.Name.Function.Jumperless
     JumperlessConstant = Token.Name.Constant.Jumperless
     JumperlessType = Token.Name.Type.Jumperless
     JFSFunction = Token.Name.Function.JFS
+    JFSConstant = Token.Name.Constant.JFS
     HardwareConstant = Token.Name.Constant.Hardware
 
-class JythonLexer(PythonLexer):
+class JumperlessPythonLexer(PythonLexer):
     """
     Custom lexer for Jython (Jumperless Python) that extends Python 
     with Jumperless-specific keywords and functions.
     """
     
     name = 'Jython'
-    aliases = ['jython', 'jumperless-python', 'jpython']
-    filenames = ['*.jy', '*.jython', '*.jumperless.py']
+    aliases = ['jython', 'jumperless-python', 'jumperless', 'j']
+    filenames = ['*.py', '*.python', '*.jumperless.py']
     mimetypes = ['text/x-jython', 'application/x-jython']
 
     # Define Jumperless-specific keywords and functions
@@ -60,7 +61,8 @@ class JythonLexer(PythonLexer):
         'get_button', 'probe_button', 'probe_button_blocking', 'probe_button_nonblocking',
         'probe_wait', 'wait_probe', 'probe_touch', 'wait_touch', 'button_read', 'read_button',
         'check_button', 'button_check', 'arduino_reset', 'probe_tap', 'run_app', 'format_output',
-        'help_nodes',
+        'nodes_help', 'help',
+        
     }
 
     JUMPERLESS_CONSTANTS = {
@@ -99,9 +101,13 @@ class JythonLexer(PythonLexer):
         # Filesystem functions
         'fs_exists', 'fs_listdir', 'fs_read', 'fs_write', 'fs_cwd',
     }
-
+#keep jfs in here, we'll use it for random stuff too
     JFS_CONSTANTS = {
-        'SEEK_SET', 'SEEK_CUR', 'SEEK_END',
+        'SEEK_SET', 'SEEK_CUR', 'SEEK_END', 'jfs', 'FatFS', 'vfs', 'LittleFS', 'SDFS', 
+    }
+    
+    HARDWARE_CONSTANTS = {
+        'Select', 'Measure', 'select', 'measure', 'Connect', 'Remove', 
     }
 
     def get_tokens_unprocessed(self, text):
@@ -112,49 +118,82 @@ class JythonLexer(PythonLexer):
             # Check if this is a name token that might be a Jumperless keyword
             if token is Name:
                 if value in self.JUMPERLESS_FUNCTIONS:
-                    token = JythonTokens.JumperlessFunction
+                    token = JumperlessTokens.JumperlessFunction
                 elif value in self.JUMPERLESS_CONSTANTS:
-                    token = JythonTokens.JumperlessConstant
+                    token = JumperlessTokens.JumperlessConstant
                 elif value in self.JFS_FUNCTIONS:
-                    token = JythonTokens.JFSFunction
+                    token = JumperlessTokens.JFSFunction
                 elif value in self.JFS_CONSTANTS:
-                    token = JythonTokens.JFSFunction
-            
+                    token = JumperlessTokens.JFSConstant
+                elif value in self.HARDWARE_CONSTANTS:
+                    token = JumperlessTokens.HardwareConstant
+            elif token is Name.Attribute:
+                # Handle jfs.function() calls specifically
+                if value in self.JFS_FUNCTIONS:
+                    token = JumperlessTokens.JFSFunction
+                elif value in self.JFS_CONSTANTS:
+                    token = JumperlessTokens.JFSConstant
+                elif value in self.HARDWARE_CONSTANTS:
+                    token = JumperlessTokens.HardwareConstant
             yield index, token, value
 
-    @staticmethod
-    def analyse_text(text):
+    def analyse_text(self, text):
         """
         Analyze text to determine if it's likely Jython code.
         Returns a float between 0.0 and 1.0 indicating confidence.
         """
+        import re
         score = 0.0
         
         # Check for Jumperless-specific imports
         if 'import jumperless' in text or 'from jumperless' in text:
-            score += 0.3
+            score += 0.8
             
-        # Check for Jumperless function calls
-        jumperless_functions = ['connect(', 'disconnect(', 'gpio_set(', 'dac_set(', 'adc_get(']
-        for func in jumperless_functions:
-            if func in text:
-                score += 0.1
+        # Check for Jumperless functions using defined function set
+        # Match function names with or without parentheses, using word boundaries
+        for func in self.JUMPERLESS_FUNCTIONS:
+            # Look for the function name as a whole word, optionally followed by parentheses
+            pattern = r'\b' + re.escape(func) + r'(\s*\()?'
+            if re.search(pattern, text):
+                score = 0.99  # Almost maximum confidence
+                break  # Only count once per text
                 
-        # Check for Jumperless constants
-        jumperless_constants = ['TOP_RAIL', 'BOTTOM_RAIL', 'GPIO_', 'DAC0', 'ADC0']
-        for const in jumperless_constants:
-            if const in text:
-                score += 0.05
+        # Check for JFS function calls using defined function set
+        # Match both jfs.function and standalone function names
+        for func in self.JFS_FUNCTIONS:
+            # Look for jfs.function or just the function name as a word
+            if f'jfs.{func}' in text or re.search(r'\b' + re.escape(func) + r'\b', text):
+                score = 0.99  # Almost maximum confidence
+                break  # Only count once per text
                 
-        # Cap the score at 1.0
+        # Check for Jumperless constants using defined constant set
+        for const in self.JUMPERLESS_CONSTANTS:
+            # Use word boundaries to match constants exactly
+            if re.search(r'\b' + re.escape(const) + r'\b', text):
+                score = 0.99  # Almost maximum confidence
+                break  # Only count once per text
+                
+        # Check for JFS constants using defined constant set
+        for const in self.JFS_CONSTANTS:
+            if re.search(r'\b' + re.escape(const) + r'\b', text):
+                score = 0.99  # High confidence
+                break  # Only count once per text
+            
+        # Check for hardware constants using defined constant set
+        for const in self.HARDWARE_CONSTANTS:
+            if re.search(r'\b' + re.escape(const) + r'\b', text):
+                score = 0.99  # High confidence
+                break  # Only count once per text
+            
+        # Return the score (no need to cap since we're using reasonable values)
         return min(score, 1.0)
 
 
 # Register the lexer (this would typically be done via entry points in a package)
-def get_jython_lexer(**options):
-    """Factory function to create a Jython lexer instance."""
-    return JythonLexer(**options)
+def get_jumperless_lexer(**options):
+    """Factory function to create a Jumperless lexer instance."""
+    return JumperlessPythonLexer(**options)
 
 
 # Export for use
-__all__ = ['JythonLexer', 'JythonTokens', 'get_jython_lexer'] 
+__all__ = ['JumperlessPythonLexer', 'JumperlessTokens', 'get_jumperless_lexer'] 

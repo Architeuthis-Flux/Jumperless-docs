@@ -82,5 +82,34 @@ Join the [Discord](https://discord.gg/bvacV7r3FP) for pretty much instant answer
 ---
 
 
+Functions for interacting with the physical probe.
 
+### `probe_read([blocking=True])`
+Reads the pad currently being touched by the probe.
+
+*   `blocking` (optional): If `True` (default), the function will wait until a pad is touched. If `False`, it returns immediately.
+*   Returns a `ProbePad` object (e.g., `25`, `D13_PAD`, `NO_PAD`).
+*   **Aliases**: `read_probe()`, `probe_read_blocking()`, `probe_read_nonblocking()`, `probe_wait()`, `wait_probe()`, `probe_touch()`, `wait_touch()`
+
+### `probe_button([blocking=True])`
+Reads the state of the buttons on the probe.
+
+*   `blocking` (optional): If `True` (default), waits for a button press. If `False`, returns the current state immediately.
+*   Returns a `ProbeButton` object (`CONNECT_BUTTON`, `REMOVE_BUTTON`, or `BUTTON_NONE`).
+*   **Aliases**: `get_button()`, `button_read()`, `read_button()`, `probe_button_blocking()`, `probe_button_nonblocking()`, `check_button()`, `button_check()`
+
+**Example:**
+```jython
+print("Touch a pad...")
+pad = probe_read()
+print("You touched: " + str(pad))
+
+if pad == D13_PAD:
+    print("That's the Arduino LED pin!")
+
+print("Press a probe button...")
+button = get_button()
+if button == CONNECT_BUTTON:
+    print("Connect button pressed.")
+```
 
