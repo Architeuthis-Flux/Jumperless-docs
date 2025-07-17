@@ -13,6 +13,24 @@ exclude_docs: |
   .DS_Store
   _*
 
+# Navigation structure - explicitly define what appears in the sidebar
+nav:
+  - Home: index.md
+  - Basic Controls: 01-basic-controls.md
+  - The App: 03-app.md
+  - OLED Support: 04-oled.md
+  - Arduino Stuff: 05-arduino.md
+  - Config File: 06-config.md
+  - Debug Views: 07-debugging.md
+  - File Manager: 08-file-manager.md
+  - MicroPython: 08-micropython.md
+  - JFS (Jumperless FileSystem) Module: 08.5-jfs.md
+  - Odds and Ends: 09-odds-and-ends.md
+  - MicroPython API Reference: 09.5-micropythonAPIreference.md
+  - 3D Printable Stand: 10-3d-stand.md
+  - Writing Apps: 11-WritingApps.md
+  - Glossary of Terms: 99-glossary.md
+
 # 
 # theme_dir: 'custom_theme'
 
