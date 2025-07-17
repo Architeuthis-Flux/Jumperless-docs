@@ -1,0 +1,24 @@
+# MkDocs ignore file
+# Ignore specific files
+drafts.md
+temp.md
+notes.txt
+assets/README*
+
+# Ignore directories
+drafts/
+temp/
+private/
+
+# Ignore file patterns
+*.tmp
+*.bak
+*~
+.DS_Store
+
+# Ignore files starting with underscore
+_*
+
+# Ignore specific file types
+*.log
+*.cache 

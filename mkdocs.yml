@@ -3,6 +3,16 @@ site_url: "https://jumperless-docs.readthedocs.io/en/latest/"
 site_name: Jumperless Docs
 site_description: "Learn how to use your Jumperless"
 
+# Files and directories to exclude from documentation
+exclude_docs: |
+  drafts/
+  temp/
+  *.tmp
+  *.bak
+  *~
+  .DS_Store
+  _*
+
 # 
 # theme_dir: 'custom_theme'
 

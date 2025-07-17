@@ -10,7 +10,7 @@ The Jumperless has a built in File Manager which you can access in the menu with
 <!-- 
 <img width="898" alt="Screenshot 2025-07-06 at 11 25 26 AM" src="https://github.com/user-attachments/assets/aa5db6a7-f9e1-4ea8-902c-050626712c07" /> -->
 
-
+<img width="657" height="486" alt="Screenshot 2025-07-15 at 1 50 47 PM" src="https://github.com/user-attachments/assets/b4cc86db-7330-4bac-b160-c25eef27a8fa" />
 
 
 ## Navigation
@@ -103,6 +103,11 @@ When you're finished `u` (or just eject the drive) will unmount the Mass Storage
 
 You can also enter `Z` for a little debug menu
 
+<img width="757" height="380" alt="Screenshot 2025-07-15 at 8 55 44 AM" src="https://github.com/user-attachments/assets/124d2f5a-a320-453f-8598-7604f37a57d7" />
+
+<img width="179" height="189" alt="Screenshot 2025-07-15 at 8 55 54 AM" src="https://github.com/user-attachments/assets/4531cae9-56d9-42da-9279-952f7b23d405" />
+
+<img width="1014" height="463" alt="Screenshot 2025-07-15 at 8 56 13 AM" src="https://github.com/user-attachments/assets/a9e79a69-a7da-4365-a457-44b2c5d2fc24" />
 
 
 

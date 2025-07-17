@@ -23,38 +23,6 @@ Now any pair of nodes you tap should get connected as you make them. In connect 
 If you make a mistake while `holding` a connection, click the `Connect` button and it will clear it and take you back to the first `node`. 
 If you click the `Connect` button while you're not `holding` a `node`, it will leave `probe mode` and bring you back into `idle mode` (rainbowy `logo`, all 3 `probe LED`s on.)
 
-## Special Functions
-
-To connect to `special functions`, tap the corresponding `pad` near the logo, it will show you a menu on the breadboard and terminal to choose them.
-![gpioTapped](https://github.com/user-attachments/assets/0b0c45ff-b98e-4a45-87b3-d3cc5c7a4544)
-
-(This is an ASCII version of what will show on the breadboard LEDs)
-
-![This is what prints in the terminal](https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99)
-
-And here's what the LEDs will show
-![You can press `R` in the main menu to toggle this view](assets/gpioSelection.png)
-
-You can think of `special functions` just like any other `node`, the only difference is they're in a sort of "folder" so I didn't need to put a dedicated pad for each of them. 
-
-```jython
-DAC Pad
- └─ 0 1 [Tap pads below selection]
-  └─ -8V  !:.:!  +8V [Tap bottom pads or use clickwheel to select a voltage] > [click probe Connect button to confirm]
-   └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
-```
-
-```jython
-GPIO Pad
- └─ ⁱ1⁰ ⁱ2⁰ ⁱ3⁰ ⁱ4⁰ 
-    ₁5₀ ₁6₀ ₁7₀ ₁8₀ [Tap pads to choose which `GPIO` (left side for input, right side for output)]
-     └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
-```
-
-
-The other 4 `user pads` will be more remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`. The building pads are for overriding colors in `idle mode` (you'll see more about that in [Idle Mode Interactions](#idle-mode-net-highlighting).)
-
-![userPads](https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78)
 
 To get out of `Connect` mode, press the button again.
 
@@ -88,6 +56,48 @@ To get to the menu, `click` the button and scroll through the menus, `click` wil
 
 
 
+## Special Functions
+
+To connect to `special functions`, tap the corresponding `pad` near the logo, it will show you a menu on the breadboard and terminal to choose them.
+
+![gpioTapped](https://github.com/user-attachments/assets/0b0c45ff-b98e-4a45-87b3-d3cc5c7a4544)
+
+
+You can think of `special functions` just like any other `node`, the only difference is they're in a sort of "folder" so I didn't need to put a dedicated pad for each of them. 
+
+```jython
+DAC Pad
+ └─ 0 1 [Tap pads below selection]¹
+  └─ -8V  !:.:!  +8V [Tap bottom pads or use clickwheel to select a voltage] > [click probe Connect button to confirm]²
+   └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)³
+```
+
+![This is what prints in the terminal](https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99)
+
+(This is an ASCII version of what will show on the breadboard LEDs)
+¹![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/856525f4-425e-4442-9597-8e5b4f72a2c8)
+
+²![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/06804d5e-2b10-45ef-ae55-4a49c2f14033)
+
+
+³![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/32c3b184-45d6-476e-b0e9-19a294b2ae3f)
+
+
+
+
+```jython
+GPIO Pad
+ └─ ⁱ1⁰ ⁱ2⁰ ⁱ3⁰ ⁱ4⁰ 
+    ₁5₀ ₁6₀ ₁7₀ ₁8₀ [Tap pads to choose which `GPIO` (left side for input, right side for output)]
+     └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
+```
+
+¹![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/33018aec-be8a-4bc0-b309-baeddad4db66)
+
+
+The other 4 `user pads` will be more remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`. The building pads are for overriding colors in `idle mode` (you'll see more about that in [Idle Mode Interactions](#idle-mode-net-highlighting).)
+
+![userPads](https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78)
 
 
 
