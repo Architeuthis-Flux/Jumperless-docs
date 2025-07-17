@@ -1,0 +1,109 @@
+<!-- # Test Jumperless Python Lexer
+
+This page tests the custom Jumperless Python syntax highlighting.
+
+## Standard Python Code
+
+```python
+def hello_world():
+    print("Hello, World!")
+    return 42
+```
+
+## Jumperless Python Code
+
+```jython
+# Connect two points on the breadboard
+connect(A0, TOP_RAIL)
+connect(D13, BOTTOM_RAIL)
+
+# Set a DAC value
+dac_set(DAC0, 2.5)
+
+# Read an ADC value
+voltage = adc_get(ADC0)
+
+# Control GPIO
+gpio_set(GPIO_1, 1)
+state = gpio_get(GPIO_2)
+
+# OLED display
+oled_clear()
+oled_print("Voltage:", voltage)
+
+# Probe functions
+if probe_button() == CONNECT_BUTTON:
+    arduino_reset()
+    run_app("blink")
+    
+```
+
+## Inline Code Highlighting Tests
+
+Regular inline code (no highlighting): `CONNECT_BUTTON` and `get_adc()`
+
+**To get inline highlighting, use the pymdownx.inlinehilite syntax:**
+
+- Jumperless function: `:::jython get_adc()`
+- Jumperless constant: `:::jython CONNECT_BUTTON`
+- JFS function: `:::jython jfs.read`
+- Hardware constant: `:::jython DAC0`
+
+You can also use the syntax: {++`:::jython connect(A0, TOP_RAIL)`++}
+
+**Testing improved analyse_text method:**
+
+These should now be automatically detected and highlighted:
+
+- Function without parentheses: `adc_get`
+- Function with parentheses: `adc_get()`
+- JFS function: `read` (from JFS)
+- Constants: `TOP_RAIL`, `DAC0`, `CONNECT_BUTTON`
+- Arduino pins: `A0`, `D13`
+- Special functions: `PROBE`, `ISENSE_PLUS`
+
+**Mixed inline references:**
+
+The `get_voltage` function reads from `ADC2` and the `BOTTOM_RAIL` constant.
+Use `connect` to link `A0` to `TOP_RAIL`.
+Check if `probe_button` returns `CONNECT_BUTTON` state.
+
+**Testing all constants mentioned by user:**
+
+Explicit jython syntax tests:
+- Power Rails: `:::jython TOP_RAIL`, `:::jython BOTTOM_RAIL`, `:::jython GND`
+- DAC/ADC: `:::jython DAC0`, `:::jython DAC1`, `:::jython ADC0`, `:::jython ADC1`, `:::jython ADC2`, `:::jython ADC3`, `:::jython ADC4`
+- Special: `:::jython PROBE`, `:::jython UART_TX`, `:::jython UART_RX`
+- GPIO: `:::jython GPIO_1`, `:::jython GPIO_2`, `:::jython GPIO_3`, `:::jython GPIO_4`
+- Arduino: `:::jython D0`, `:::jython D1`, `:::jython D13`, `:::jython A0`, `:::jython A1`, `:::jython A7`
+
+Regular inline code (should not highlight):
+- Power Rails: `TOP_RAIL`, `BOTTOM_RAIL`, `GND`
+- DAC/ADC: `DAC0`, `DAC1`, `ADC0`, `ADC1`, `ADC2`, `ADC3`, `ADC4`
+- Special: `PROBE`, `UART_TX`, `UART_RX`
+- GPIO: `GPIO_1`, `GPIO_2`, `GPIO_3`, `GPIO_4`
+- Arduino: `D0`, `D1`, `D13`, `A0`, `A1`, `A7`
+
+## Mixed Python with Jumperless Functions
+
+```python
+import time
+
+def monitor_voltage():
+    """Monitor voltage on ADC0 and display on OLED"""
+    while True:
+        # Read voltage using Jumperless function
+        voltage = adc_get(ADC0)
+        
+        # Display on OLED
+        oled_clear()
+        oled_print(f"V: {voltage:.2f}")
+        
+        # Check if voltage is too high
+        if voltage > 3.3:
+            gpio_set(GPIO_1, 1)  # Turn on warning LED
+        else:
+            gpio_set(GPIO_1, 0)  # Turn off warning LED
+            
+        time.sleep(0.1)
+```  -->

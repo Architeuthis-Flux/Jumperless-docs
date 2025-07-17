@@ -10,7 +10,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/09.5-micropythonAPIreference/">
-    <meta property="og:title" content="Jumperless MicroPython API Reference - Jumperless Docs">
+    <meta property="og:title" content="MicroPython API Reference - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
     <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
@@ -19,7 +19,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/09.5-micropythonAPIreference/">
-    <meta name="twitter:title" content="Jumperless MicroPython API Reference - Jumperless Docs">
+    <meta name="twitter:title" content="MicroPython API Reference - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
     <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
@@ -37,7 +37,7 @@
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">
 
-    <title>Jumperless MicroPython API Reference - Jumperless Docs</title>
+    <title>MicroPython API Reference - Jumperless Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -105,13 +105,13 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Jumperless MicroPython API Reference</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">MicroPython API Reference</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#a-note-on-usage">A Note on Usage</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#node-connections">Node Connections</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#connectnode1-node2-savetrue">connect(node1, node2, [save=True])</a>
+    <li class="toctree-l3"><a class="reference internal" href="#connectnode1-node2">connect(node1, node2)</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#disconnectnode1-node2">disconnect(node1, node2)</a>
     </li>
@@ -232,14 +232,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../custom-syntax-highlighting/">Custom Jumperless Python Syntax Highlighting</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../test-lexer/">Test Jumperless Python Lexer</a>
-                </li>
-              </ul>
       </div>
     </div>
     </nav>
@@ -254,7 +246,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Jumperless MicroPython API Reference</li>
+      <li class="breadcrumb-item active">MicroPython API Reference</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -272,39 +264,47 @@
 2.  <strong>By String Name</strong>: Use a case-insensitive string for any named node (e.g., <code class="language-jython highlight"><span class="s2">&quot;d13&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;TOP_RAIL&quot;</span></code>).
 3.  <strong>By Constant</strong>: Use the predefined, case-sensitive constant for a node (e.g., <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>).</p>
 <hr />
-<p><a href="#dac-digital-to-analog-converter">DAC</a> (Digital-to-Analog Converter) - <em><a href="../08-micropython/#dacs">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span></code>         - Set DAC output voltage
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                  - Get DAC output voltage
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">set_dac</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span></code>        - Alias for dac_set
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">get_dac</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                  - Alias for dac_get</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>      <span class="n">channel</span><span class="p">:</span> <span class="mi">0</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">BOTTOM_RAIL</span>
-<span class="linenos" data-linenos="2 "></span>      <span class="n">channel</span> <span class="mi">0</span><span class="o">/</span><span class="no no-Jumperless">DAC0</span><span class="p">:</span> <span class="n">DAC</span> <span class="mi">0</span>
-<span class="linenos" data-linenos="3 "></span>      <span class="n">channel</span> <span class="mi">1</span><span class="o">/</span><span class="no no-Jumperless">DAC1</span><span class="p">:</span> <span class="n">DAC</span> <span class="mi">1</span>
-<span class="linenos" data-linenos="4 "></span>      <span class="n">channel</span> <span class="mi">2</span><span class="o">/</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">:</span> <span class="n">top</span> <span class="n">rail</span>
-<span class="linenos" data-linenos="5 "></span>      <span class="n">channel</span> <span class="mi">3</span><span class="o">/</span><span class="no no-Jumperless">BOTTOM_RAIL</span><span class="p">:</span> <span class="n">bottom</span> <span class="n">rail</span>
-<span class="linenos" data-linenos="6 "></span>      <span class="n">voltage</span><span class="p">:</span> <span class="o">-</span><span class="mf">8.0</span> <span class="n">to</span> <span class="mf">8.0</span><span class="n">V</span>
+<p><a href="#dac-digital-to-analog-converter">DAC</a> (Digital-to-Analog Converter) - <em><a href="../08-micropython/#dacs">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span></code>         - Set DAC output voltage</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                  - Get DAC output voltage</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">set_dac</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span></code>        - Alias for dac_set</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_dac</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                  - Alias for dac_get<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>  <span class="n">channel</span><span class="p">:</span> <span class="mi">0</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">BOTTOM_RAIL</span>
+<span class="linenos" data-linenos="2 "></span>  <span class="n">channel</span> <span class="mi">0</span><span class="o">/</span><span class="no no-Jumperless">DAC0</span><span class="p">:</span> <span class="n">DAC</span> <span class="mi">0</span>
+<span class="linenos" data-linenos="3 "></span>  <span class="n">channel</span> <span class="mi">1</span><span class="o">/</span><span class="no no-Jumperless">DAC1</span><span class="p">:</span> <span class="n">DAC</span> <span class="mi">1</span>
+<span class="linenos" data-linenos="4 "></span>  <span class="n">channel</span> <span class="mi">2</span><span class="o">/</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">:</span> <span class="n">top</span> <span class="n">rail</span>
+<span class="linenos" data-linenos="5 "></span>  <span class="n">channel</span> <span class="mi">3</span><span class="o">/</span><span class="no no-Jumperless">BOTTOM_RAIL</span><span class="p">:</span> <span class="n">bottom</span> <span class="n">rail</span>
+<span class="linenos" data-linenos="6 "></span>  <span class="n">voltage</span><span class="p">:</span> <span class="o">-</span><span class="mf">8.0</span> <span class="n">to</span> <span class="mf">8.0</span><span class="n">V</span>
 </code></pre></div>
-<p><a href="#adc-analog-to-digital-converter">ADC</a> (Analog-to-Digital Converter) - <em><a href="../08-micropython/#adcs">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                  - Read ADC input voltage
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">get_adc</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                 - Alias for adc_get</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>      <span class="n">channel</span><span class="p">:</span> <span class="mi">0</span><span class="o">-</span><span class="mi">4</span>
+</li>
+</ul>
+<p><a href="#adc-analog-to-digital-converter">ADC</a> (Analog-to-Digital Converter) - <em><a href="../08-micropython/#adcs">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                  - Read ADC input voltage</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_adc</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span></code>                 - Alias for adc_get<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>  <span class="n">channel</span><span class="p">:</span> <span class="mi">0</span><span class="o">-</span><span class="mi">4</span> <span class="p">(</span><span class="ow">and</span> <span class="mi">7</span> <span class="k">for</span> <span class="n">the</span> <span class="n">probe</span> <span class="n">tip</span> <span class="ow">in</span> <span class="no no-Hardware">Measure</span> <span class="n">mode</span><span class="p">)</span>
 </code></pre></div>
-<p><a href="#ina-currentpower-monitor">INA</a> (Current/Power Monitor) - <em><a href="../08-micropython/#ina219-current-sensor">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>          - Read current in amps
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>          - Read shunt voltage
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_bus_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>      - Read bus voltage
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>            - Read power in watts
-  Aliases: get_current, get_voltage, get_bus_voltage, get_power</p>
+</li>
+</ul>
+<p><a href="#ina-currentpower-monitor">INA</a> (Current/Power Monitor) - <em><a href="../08-micropython/#ina219-current-sensor">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>          - Read current in amps</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>          - Read shunt voltage</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_bus_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>      - Read bus voltage</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>            - Read power in watts</li>
+</ul>
+<p>Aliases: <code class="language-jython highlight"><span class="nf nf-Jumperless">get_current</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_voltage</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_bus_voltage</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_power</span></code></p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>      <span class="n">sensor</span><span class="p">:</span> <span class="mi">0</span> <span class="ow">or</span> <span class="mi">1</span>
 </code></pre></div>
-<p><a href="#gpio-general-purpose-inputoutput">GPIO</a> - <em><a href="../08-micropython/#gpio">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>             - Set GPIO pin state
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>                    - Read GPIO pin state
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span></code>     - Set GPIO pin direction
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>                - Get GPIO pin direction
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">pull</span><span class="p">)</span></code>         - Set GPIO pull-up/down
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>               - Get GPIO pull-up/down
-  Aliases: set_gpio, get_gpio, set_gpio_dir, get_gpio_dir, etc.</p>
+<p><a href="#gpio-general-purpose-inputoutput">GPIO</a> - <em><a href="../08-micropython/#gpio">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span></code>             - Set GPIO pin state</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>                    - Read GPIO pin state</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span></code>     - Set GPIO pin direction</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>                - Get GPIO pin direction</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">pull</span><span class="p">)</span></code>         - Set GPIO pull-up/down</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>               - Get GPIO pull-up/down</li>
+</ul>
+<p>Aliases: <code class="language-jython highlight"><span class="nf nf-Jumperless">set_gpio</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_gpio</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_gpio_dir</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_gpio_dir</span></code>, etc.</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>      <span class="n">pin</span> <span class="mi">1</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span> <span class="n">GPIO</span> <span class="mi">1</span><span class="o">-</span><span class="mi">8</span>
 <span class="linenos" data-linenos="2 "></span>      <span class="n">pin</span>   <span class="mi">9</span><span class="p">:</span> <span class="n">UART</span> <span class="n">Tx</span>
 <span class="linenos" data-linenos="3 "></span>      <span class="n">pin</span>  <span class="mi">10</span><span class="p">:</span> <span class="n">UART</span> <span class="n">Rx</span>
@@ -312,78 +312,97 @@
 <span class="linenos" data-linenos="5 "></span>    <span class="n">direction</span><span class="p">:</span> <span class="kc">True</span><span class="o">/</span><span class="kc">False</span>   <span class="k">for</span> <span class="n">OUTPUT</span><span class="o">/</span><span class="n">INPUT</span>
 <span class="linenos" data-linenos="6 "></span>         <span class="n">pull</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">1</span>       <span class="k">for</span> <span class="n">PULL_DOWN</span><span class="o">/</span><span class="no no-Jumperless">NONE</span><span class="o">/</span><span class="n">PULL_UP</span>
 </code></pre></div>
-<p><a href="#pwm-pulse-width-modulation">PWM</a> (Pulse Width Modulation) - <em><a href="../08-micropython/#gpio">Examples</a></em>:
-  <code class="language-jython highlight"><span class="n">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="p">[</span><span class="n">frequency</span><span class="p">],</span> <span class="p">[</span><span class="n">duty</span><span class="p">])</span></code>    - Setup PWM on GPIO pin
-  <code class="language-jython highlight"><span class="n">pwm_set_duty_cycle</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">duty</span><span class="p">)</span></code>    - Set PWM duty cycle
-  <code class="language-jython highlight"><span class="n">pwm_set_frequency</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span></code>     - Set PWM frequency
-  <code class="language-jython highlight"><span class="n">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>                    - Stop PWM on pin
-  Pin: 1-8 (numeric) or GPIO_1-GPIO_8 (constants)
-  Frequency: 10Hz to 62.5MHz, Duty: 0.0 to 1.0
-  Aliases: set_pwm, set_pwm_duty_cycle, set_pwm_frequency, stop_pwm</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>         <span class="n">pin</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="mi">8</span>       <span class="n">GPIO</span> <span class="n">pins</span> <span class="n">only</span>
-<span class="linenos" data-linenos="2 "></span>   <span class="n">frequency</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="mf">62.5</span><span class="n">MHz</span> <span class="n">default</span> <span class="mi">1000</span><span class="n">Hz</span>
-<span class="linenos" data-linenos="3 "></span>  <span class="n">duty_cycle</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">-</span><span class="mf">1.0</span>   <span class="n">default</span> <span class="mf">0.5</span> <span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span>
+<p><a href="#pwm-pulse-width-modulation">PWM</a> (Pulse Width Modulation) - <em><a href="../08-micropython/#gpio">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="p">[</span><span class="n">frequency</span><span class="p">],</span> <span class="p">[</span><span class="n">duty</span><span class="p">])</span></code>    - Setup PWM on GPIO pin</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_set_duty_cycle</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">duty</span><span class="p">)</span></code>    - Set PWM duty cycle</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_set_frequency</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span></code>     - Set PWM frequency</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code>                    - Stop PWM on pin</li>
+</ul>
+<p>Aliases: <code class="language-jython highlight"><span class="nf nf-Jumperless">set_pwm</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_pwm_duty_cycle</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_pwm_frequency</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">stop_pwm</span></code></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>         <span class="n">pin</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="mi">10</span>        <span class="n">GPIO</span> <span class="n">pins</span> <span class="n">only</span>
+<span class="linenos" data-linenos="2 "></span>   <span class="n">frequency</span><span class="p">:</span> <span class="mi">10</span><span class="o">-</span><span class="mi">62000000</span> <span class="n">default</span> <span class="mi">1000</span><span class="n">Hz</span>
+<span class="linenos" data-linenos="3 "></span>  <span class="n">duty_cycle</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">-</span><span class="mf">1.0</span>     <span class="n">default</span> <span class="mf">0.5</span> <span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span>
 </code></pre></div>
-<p><a href="#node-connections">Node Connections</a> - <em><a href="../08-micropython/#connecting-nodes">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>            - Connect two nodes
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>         - Disconnect nodes
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>       - Check if nodes are connected</p>
-<p><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>                    - Clear all connections
-         set node2 to -1 to disconnect everything connected to node1</p>
-<p><a href="#oled-display">OLED Display</a> - <em><a href="../08-micropython/#oled">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span></code>               - Display text
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span></code>                     - Clear display
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_connect</span><span class="p">()</span></code>                   - Connect OLED
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_disconnect</span><span class="p">()</span></code>                - Disconnect OLED</p>
+<p><a href="#node-connections">Node Connections</a> - <em><a href="../08-micropython/#connecting-nodes">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>            - Connect two nodes</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>         - Disconnect nodes</li>
+<li>
+<p><code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>       - Check if nodes are connected</p>
+</li>
+<li>
+<p><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>                    - Clear all connections </p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span> <span class="nb">set</span> <span class="n">node2</span> <span class="n">to</span> <span class="o">-</span><span class="mi">1</span> <span class="n">to</span> <span class="nf nf-Jumperless">disconnect</span> <span class="n">everything</span> <span class="n">connected</span> <span class="n">to</span> <span class="n">node1</span>
+</code></pre></div>
+</li>
+</ul>
+<p><a href="#oled-display">OLED Display</a> - <em><a href="../08-micropython/#oled">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span></code>               - Display text</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span></code>                     - Clear display</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_connect</span><span class="p">()</span></code>                   - Connect OLED</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_disconnect</span><span class="p">()</span></code>                - Disconnect OLED</li>
+</ul>
 <!-- Clickwheel:
   `clickwheel_up([clicks])          - Scroll up
   `clickwheel_down([clicks])        - Scroll down
   `clickwheel_press()               - Press button
            clicks: number of steps -->
 
-<p><a href="#status-functions">Status</a> - <em><a href="../08-micropython/#the-entire-output-of-help">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code>                  - Print all bridges
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">print_paths</span><span class="p">()</span></code>                    - Print path between nodes
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">print_crossbars</span><span class="p">()</span></code>                - Print crossbar array
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code>                     - Print nets
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">print_chip_status</span><span class="p">()</span></code>              - Print chip status</p>
-<p><a href="#probe">Probe Functions</a> - <em><a href="../08-micropython/#probe">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>            - Wait for probe touch (don't return until a pad is touched)
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span></code>         - Check probe immediately (return -1 if no pad is touched)
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">get_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code>      - Get button state (default: blocking)
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code>    - Get button state (default: blocking)
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_blocking</span><span class="p">()</span></code>          - Wait for button press
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_nonblocking</span><span class="p">()</span></code>       - Check buttons immediately </p>
-<p>Non-blocking only: check_button, button_check
-  Touch returns: ProbePad object (1-60, D13_PAD, TOP_RAIL_PAD, LOGO_PAD_TOP, etc.)
-  Button returns: CONNECT, REMOVE, or NONE (front=connect, rear=remove)</p>
-<p><a href="../08.5-jfs/">JFS</a> (Jumperless File System):
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></code> - Opens file, returns file handle
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span></code> - Read from file
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code> - Write to file
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Close file
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get current position
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get file size
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Check if path exists (returns True/False)
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - List directory contents (returns list)
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Create directory 
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove directory
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove file
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span></code> - Rename/move file
-<code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code> - Returns (total, used, free) tuple</p>
-<p><a href="#system-functions">Misc</a> - <em><a href="../08-micropython/#apps">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span></code>                  - Reset Arduino
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_tap</span><span class="p">(</span><span class="nf nf-Jumperless">node</span><span class="p">)</span></code>                  - Tap probe on node (unimplemented)
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s1">&#39;appName&#39;</span><span class="p">)</span></code>               - Run app</p>
-<p><a href="#help-functions">Help</a> - <em><a href="../08-micropython/#help-and-nodes_help">Examples</a></em>:
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">help</span><span class="p">()</span></code>                           - Display this help
-  <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_help</span><span class="p">()</span></code>                     - Show available nodes and how to address them</p>
+<p><a href="#status-functions">Status</a> - <em><a href="../08-micropython/#the-entire-output-of-help">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code>                  - Print all bridges</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_paths</span><span class="p">()</span></code>                    - Print path between nodes</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_crossbars</span><span class="p">()</span></code>                - Print crossbar array</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code>                     - Print nets</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_chip_status</span><span class="p">()</span></code>              - Print chip status</li>
+</ul>
+<p><a href="#probe">Probe Functions</a> - <em><a href="../08-micropython/#probe">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>            - Wait for probe touch (don't return until a pad is touched)</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span></code>         - Check probe immediately (return -1 if no pad is touched)</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code>      - Get button state (default: blocking)</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code>    - Get button state (default: blocking)</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_blocking</span><span class="p">()</span></code>          - Wait for button press</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_nonblocking</span><span class="p">()</span></code>       - Check buttons immediately </li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">check_button</span><span class="p">()</span></code>                   - Check for probe button presses</li>
+</ul>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>  <span class="n">Touch</span> <span class="n">returns</span><span class="p">:</span> <span class="n">ProbePad</span> <span class="nb">object</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="no no-Jumperless">D13_PAD</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL_PAD</span><span class="p">,</span> <span class="no no-Jumperless">LOGO_PAD_TOP</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span>  <span class="n">Button</span> <span class="n">returns</span><span class="p">:</span> <span class="no no-Jumperless">CONNECT</span><span class="p">,</span> <span class="no no-Jumperless">REMOVE</span><span class="p">,</span> <span class="ow">or</span> <span class="no no-Jumperless">NONE</span> <span class="p">(</span><span class="n">front</span><span class="o">=</span><span class="nf nf-Jumperless">connect</span><span class="p">,</span> <span class="n">rear</span><span class="o">=</span><span class="nf nf-JFS">remove</span><span class="p">)</span>
+</code></pre></div>
+<p><a href="../08.5-jfs/">JFS</a> (Jumperless File System):</p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></code> - Opens file, returns file handle</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span></code> - Read from file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code> - Write to file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Close file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get current position</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get file size</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Check if path exists (returns True/False)</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - List directory contents (returns list)</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Create directory </li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove directory</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span></code> - Rename/move file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code> - Returns (total, used, free) tuple</li>
+</ul>
+<p><a href="#system-functions">Misc</a> - <em><a href="../08-micropython/#apps">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span></code>                  - Reset Arduino</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s1">&#39;appName&#39;</span><span class="p">)</span></code>               - Run app</li>
+</ul>
+<p><a href="#help-functions">Help</a> - <em><a href="../08-micropython/#help-and-nodes_help">Examples</a></em>:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">help</span><span class="p">()</span></code>                           - Display help</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_help</span><span class="p">()</span></code>                     - Show available nodes and how to address them</li>
+</ul>
 <hr />
 <h2 id="node-connections">Node Connections</h2>
 <p>These functions manage the connections between nodes on the breadboard and special function pins.</p>
-<h3 id="connectnode1-node2-savetrue"><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="p">[</span><span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code></h3>
+<h3 id="connectnode1-node2"><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code></h3>
 <p>Creates a bridge between two nodes.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">node1</span></code>, <code class="language-jython highlight"><span class="n">node2</span></code>: The nodes to connect. Can be integers, strings, or constants.</li>
@@ -556,43 +575,43 @@
 <hr />
 <h2 id="pwm-pulse-width-modulation">PWM (Pulse-Width Modulation)</h2>
 <p>Functions for generating PWM signals on GPIO pins.</p>
-<h3 id="pwmpin-frequency-duty_cycle"><code class="language-jython highlight"><span class="n">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="p">[</span><span class="n">frequency</span><span class="p">],</span> <span class="p">[</span><span class="n">duty_cycle</span><span class="p">])</span></code></h3>
+<h3 id="pwmpin-frequency-duty_cycle"><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="p">[</span><span class="n">frequency</span><span class="p">],</span> <span class="p">[</span><span class="n">duty_cycle</span><span class="p">])</span></code></h3>
 <p>Sets up and starts a PWM signal on a GPIO pin.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">pin</span></code>: The GPIO pin to use (1-8).</li>
 <li><code class="language-jython highlight"><span class="n">frequency</span></code> (optional): The PWM frequency in Hz (10.0 to 62,500,000.0). Defaults to 1000.</li>
 <li><code class="language-jython highlight"><span class="n">duty_cycle</span></code> (optional): The duty cycle from 0.0 to 1.0. Defaults to 0.5.</li>
-<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">set_pwm</span><span class="p">()</span></code></li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">set_pwm</span><span class="p">()</span></code></li>
 </ul>
-<h3 id="pwm_set_duty_cyclepin-duty_cycle"><code class="language-jython highlight"><span class="n">pwm_set_duty_cycle</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="p">)</span></code></h3>
+<h3 id="pwm_set_duty_cyclepin-duty_cycle"><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_set_duty_cycle</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">duty_cycle</span><span class="p">)</span></code></h3>
 <p>Changes the duty cycle of an existing PWM signal.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">pin</span></code>: The GPIO pin number (1-8).</li>
 <li><code class="language-jython highlight"><span class="n">duty_cycle</span></code>: The new duty cycle (0.0 to 1.0).</li>
-<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">set_pwm_duty_cycle</span><span class="p">()</span></code></li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">set_pwm_duty_cycle</span><span class="p">()</span></code></li>
 </ul>
-<h3 id="pwm_set_frequencypin-frequency"><code class="language-jython highlight"><span class="n">pwm_set_frequency</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span></code></h3>
+<h3 id="pwm_set_frequencypin-frequency"><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_set_frequency</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">frequency</span><span class="p">)</span></code></h3>
 <p>Changes the frequency of an existing PWM signal.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">pin</span></code>: The GPIO pin number (1-8).</li>
 <li><code class="language-jython highlight"><span class="n">frequency</span></code>: The new frequency in Hz.</li>
-<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">set_pwm_frequency</span><span class="p">()</span></code></li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">set_pwm_frequency</span><span class="p">()</span></code></li>
 </ul>
-<h3 id="pwm_stoppin"><code class="language-jython highlight"><span class="n">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code></h3>
+<h3 id="pwm_stoppin"><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code></h3>
 <p>Stops the PWM signal on a GPIO pin.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">pin</span></code>: The GPIO pin number (1-8).</li>
-<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">stop_pwm</span><span class="p">()</span></code></li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">stop_pwm</span><span class="p">()</span></code></li>
 </ul>
 <p><strong>Example:</strong>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Start a 1kHz, 25% duty cycle PWM on GPIO_1</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">pwm</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
 <span class="linenos" data-linenos="3 "></span>
 <span class="linenos" data-linenos="4 "></span><span class="c1"># Change the duty cycle to 75%</span>
-<span class="linenos" data-linenos="5 "></span><span class="n">pwm_set_duty_cycle</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="nf nf-Jumperless">pwm_set_duty_cycle</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
 <span class="linenos" data-linenos="6 "></span>
 <span class="linenos" data-linenos="7 "></span><span class="c1"># Stop the PWM signal</span>
-<span class="linenos" data-linenos="8 "></span><span class="n">pwm_stop</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">)</span>
+<span class="linenos" data-linenos="8 "></span><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">)</span>
 </code></pre></div></p>
 <hr />
 <h2 id="ina-currentpower-monitor">INA (Current/Power Monitor)</h2>

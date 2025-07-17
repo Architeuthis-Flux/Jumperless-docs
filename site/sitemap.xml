@@ -2,70 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/01-basic-controls/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/03-app/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/04-oled/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/05-arduino/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/06-config/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/07-debugging/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/08-file-manager/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/08-micropython/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/09-odds-and-ends/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/09.5-micropythonAPIreference/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/10-3d-stand/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/11-WritingApps/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
          <loc>https://jumperless-docs.readthedocs.io/en/latest/99-glossary/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <lastmod>2025-07-17</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/custom-syntax-highlighting/</loc>
-         <lastmod>2025-07-16</lastmod>
-    </url>
-    <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/test-lexer/</loc>
-         <lastmod>2025-07-16</lastmod>
+         <loc>https://jumperless-docs.readthedocs.io/en/latest/assets/</loc>
+         <lastmod>2025-07-17</lastmod>
     </url>
 </urlset>

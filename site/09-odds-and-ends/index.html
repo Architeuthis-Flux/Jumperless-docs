@@ -133,7 +133,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">Jumperless MicroPython API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
                 </li>
               </ul>
               <ul>
@@ -146,14 +146,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../custom-syntax-highlighting/">Custom Jumperless Python Syntax Highlighting</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../test-lexer/">Test Jumperless Python Lexer</a>
                 </li>
               </ul>
       </div>
@@ -194,11 +186,11 @@
 <p><code class="language-jython highlight"><span class="n">GPIO</span></code> outputs will be either green or red depending on their state </p>
 <h2 id="whats-that-buffer_in-dac_0-bridge-thats-always-there">What's that <code class="language-jython highlight"><span class="no no-Jumperless">BUFFER_IN</span> <span class="o">-</span> <span class="n">DAC_0</span></code> bridge that's always there?</h2>
 <p>That gets added to power the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code>, it's kinda weird, but to multiplex 3.3V, GND, LED data, 2 buttons, and a +-9V tolerant analog line over the 4 wires on a TRRS cable, the line powering those LEDs is shared.</p>
-<p>The <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code>/<code class="language-jython highlight"><span class="n">measure</span></code> switch is a Dual Pole Dual Throw (DPDT) switch. The probe tip needs to be at a steady 3.3V to be read by the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">sense</span> <span class="n">pads</span></code> which is a big resistive divider sensed by a single <code class="language-jython highlight"><span class="n">ADC</span></code>.</p>
-<p>When you have it in <code class="language-jython highlight"><span class="n">select</span></code> mode, the probe tip is getting 3.3V from a <code class="language-jython highlight"><span class="n">GPIO</span></code> on the RP2350B driven <code class="language-jython highlight"><span class="n">high</span></code>, and the LEDs get their power from the analog line, which is <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code> connected to <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> set to 3.3V.</p>
-<p>When you switch to <code class="language-jython highlight"><span class="n">measure</span></code> mode, those roles get swapped, the LEDs are powered by that <code class="language-jython highlight"><span class="n">GPIO</span></code>, and the probe tip is now <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code>. In the current firmware, that just stays at 3.3V so you can <em>kinda</em> sense pads in either mode (you may notice the sensing is a lot wonkier, that's because the <code class="language-jython highlight"><span class="n">DAC</span></code> isn't perfectly calibrated to output <em>exactly</em> 3.3V.) But in the future, there will be some other stuff you can do in that mode treating it as an analog line (and of course, I'll forget to update this, if it's after like June 2025, double check this is still true.)</p>
+<p>The <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code>/<code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> switch is a Dual Pole Dual Throw (DPDT) switch. The probe tip needs to be at a steady 3.3V to be read by the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">sense</span> <span class="n">pads</span></code> which is a big resistive divider sensed by a single <code class="language-jython highlight"><span class="n">ADC</span></code>.</p>
+<p>When you have it in <code class="language-jython highlight"><span class="no no-Hardware">select</span></code> mode, the probe tip is getting 3.3V from a <code class="language-jython highlight"><span class="n">GPIO</span></code> on the RP2350B driven <code class="language-jython highlight"><span class="n">high</span></code>, and the LEDs get their power from the analog line, which is <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code> connected to <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> set to 3.3V.</p>
+<p>When you switch to <code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> mode, those roles get swapped, the LEDs are powered by that <code class="language-jython highlight"><span class="n">GPIO</span></code>, and the probe tip is now <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code>. In the current firmware, that just stays at 3.3V so you can <em>kinda</em> sense pads in either mode (you may notice the sensing is a lot wonkier, that's because the <code class="language-jython highlight"><span class="n">DAC</span></code> isn't perfectly calibrated to output <em>exactly</em> 3.3V.) But in the future, there will be some other stuff you can do in that mode treating it as an analog line (and of course, I'll forget to update this, if it's after like June 2025, double check this is still true.)</p>
 <h3 id="why-am-i-using-one-of-the-precious-two-dacs-and-not-another-gpio">Why am I using one of the precious two DACs and not another GPIO?</h3>
-<p>The answer is switch position sensing. You may notice there's no obvious way for the Jumperless to know where the switch is set, so I had to get creative on this one. <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code>'s output is hardwired to go through a <code class="language-jython highlight"><span class="n">current</span> <span class="n">sense</span></code> shunt resistor, so when <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> is powering the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code>, they'll be drawing some current I can measure with one of the <code class="language-jython highlight"><span class="n">INA219</span></code>s, and therefore I can be reasonably confident that the switch is in the <code class="language-jython highlight"><span class="n">select</span></code> position.</p>
+<p>The answer is switch position sensing. You may notice there's no obvious way for the Jumperless to know where the switch is set, so I had to get creative on this one. <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code>'s output is hardwired to go through a <code class="language-jython highlight"><span class="n">current</span> <span class="n">sense</span></code> shunt resistor, so when <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> is powering the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code>, they'll be drawing some current I can measure with one of the <code class="language-jython highlight"><span class="n">INA219</span></code>s, and therefore I can be reasonably confident that the switch is in the <code class="language-jython highlight"><span class="no no-Hardware">select</span></code> position.</p>
 <p>If you need both <code class="language-jython highlight"><span class="n">DAC</span></code>s, you can just get rid of this connection and the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code> won't light up, but other than aesthetics, it really has no effect on functionality. Or you connect <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code> to a <code class="language-jython highlight"><span class="n">GPIO</span></code> and set it <code class="language-jython highlight"><span class="n">high</span></code> and just lose the ability to sense where the switch is. </p>
 <h2 id="ai-generated-wiki">AI Generated Wiki</h2>
 <p>If you want to read a wiki generated by AI and ask it questions about how this thing works and how to use it, <a href="https://deepwiki.com/Architeuthis-Flux/JumperlessV5/1-overview"><strong>DeepWiki</strong></a> was surprisingly accurate (enough.) </p>
@@ -212,7 +204,7 @@
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../08.5-jfs/" class="btn btn-neutral float-left" title="JFS (Jumperless FileSystem) Module"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../09.5-micropythonAPIreference/" class="btn btn-neutral float-right" title="Jumperless MicroPython API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../09.5-micropythonAPIreference/" class="btn btn-neutral float-right" title="MicroPython API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>

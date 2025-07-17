@@ -63,6 +63,9 @@ class JumperlessPythonLexer(PythonLexer):
         'check_button', 'button_check', 'arduino_reset', 'probe_tap', 'run_app', 'format_output',
         'nodes_help', 'help',
         
+        # PWM Functions
+        'pwm', 'pwm_set_duty_cycle', 'pwm_set_frequency', 'pwm_stop', 'set_pwm', 'set_pwm_duty_cycle', 'set_pwm_frequency', 'stop_pwm',
+        
     }
 
     JUMPERLESS_CONSTANTS = {
@@ -125,13 +128,16 @@ class JumperlessPythonLexer(PythonLexer):
                     token = JumperlessTokens.JFSFunction
                 elif value in self.JFS_CONSTANTS:
                     token = JumperlessTokens.JFSConstant
+                elif value in self.HARDWARE_CONSTANTS:
+                    token = JumperlessTokens.HardwareConstant
             elif token is Name.Attribute:
                 # Handle jfs.function() calls specifically
                 if value in self.JFS_FUNCTIONS:
                     token = JumperlessTokens.JFSFunction
                 elif value in self.JFS_CONSTANTS:
                     token = JumperlessTokens.JFSConstant
-            
+                elif value in self.HARDWARE_CONSTANTS:
+                    token = JumperlessTokens.HardwareConstant
             yield index, token, value
 
     def analyse_text(self, text):

@@ -9,9 +9,25 @@ def on_config(config):
     """
     try:
         from pygments.lexers import get_lexer_by_name
-        get_lexer_by_name('jython')
-        print("✓ Jumperless Python lexer is available")
+        from pygments.styles import get_style_by_name
+        
+        # Test all lexer aliases
+        lexer_aliases = ['jython', 'jumperless-python', 'jumperless']
+        for alias in lexer_aliases:
+            try:
+                get_lexer_by_name(alias)
+                print(f"✓ Jumperless lexer '{alias}' is available")
+            except Exception as e:
+                print(f"⚠ Jumperless lexer '{alias}' not available: {e}")
+        
+        # Test custom styles
+        try:
+            get_style_by_name('jumperless')
+            print("✓ Jumperless style is available")
+        except Exception as e:
+            print(f"⚠ Jumperless style not available: {e}")
+            
     except Exception as e:
-        print(f"⚠ Jumperless Python lexer not available: {e}")
+        print(f"⚠ Error checking Jumperless lexer/style: {e}")
     
     return config 

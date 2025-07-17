@@ -8861,16 +8861,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 .highlight span.no.no-Hardware,
 .highlight .no.no-Hardware { 
-    color: #ad83ff !important; 
+    color: #fff06b !important; 
     font-weight: bold !important; 
 }
-
-.highlight span.no.no-Hardware,
-.highlight .no.no-Hardware { 
-    color: #ad83ff !important; 
-    font-weight: bold !important; 
-}
-
 .highlight .fm { color: #50fabc } /* Name.Function.Magic */
 .highlight .vc { color: #f8f8f2 } /* Name.Variable.Class */
 .highlight .vg { color: #aafde4 } /* Name.Variable.Global */
