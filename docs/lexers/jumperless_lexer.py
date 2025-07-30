@@ -66,6 +66,9 @@ class JumperlessPythonLexer(PythonLexer):
         # PWM Functions
         'pwm', 'pwm_set_duty_cycle', 'pwm_set_frequency', 'pwm_stop', 'set_pwm', 'set_pwm_duty_cycle', 'set_pwm_frequency', 'stop_pwm',
         
+        # System Functions
+        'pause_core2', 'send_raw',
+        
     }
 
     JUMPERLESS_CONSTANTS = {

@@ -121,6 +121,27 @@ pull = gpio_get_pull(2)        # Returns "PULLUP", "PULLDOWN", or "NONE"
 
 # Available GPIO pins: 1-8 (GPIO 1-8), 9 (UART Tx), 10 (UART Rx)
 ```
+
+## PWM (Pulse Width Modulation)
+```jython
+# Hardware PWM: High frequency (10Hz to 62.5MHz)
+pwm(1, 1000, 0.5)       # 1kHz, 50% duty cycle on GPIO_1
+pwm(2, 50000, 0.25)     # 50kHz, 25% duty cycle on GPIO_2
+
+# Slow PWM: Low frequency (0.001Hz to 10Hz)
+pwm(3, 0.1, 0.75)       # 0.1Hz (10 second period), 75% duty cycle
+pwm(4, 0.001, 0.5)      # 0.001Hz (1000 second period), 50% duty cycle
+
+# Change PWM parameters
+pwm_set_frequency(1, 2000)     # Change to 2kHz
+pwm_set_duty_cycle(1, 0.25)    # Change to 25% duty cycle
+
+# Stop PWM
+pwm_stop(1)             # Stop PWM on GPIO_1
+
+# Available GPIO pins: 1-8 (GPIO 1-8 only)
+# Automatic mode selection: Hardware PWM for 10Hz+, Slow PWM for <10Hz
+```
 ![Screenshot 2025-07-04 at 7 22 35 PM](https://github.com/user-attachments/assets/5b5f884f-f459-4a31-9f21-89d084594f97)
 ![Screenshot 2025-07-04 at 7 31 19 PM](https://github.com/user-attachments/assets/c7bdb245-59a4-46db-9c52-fcc43c1f359e)
 
@@ -180,6 +201,11 @@ arduino_reset()
 # Run built-in apps
 run_app("I2C Scan")        # Run I2C scanner
 run_app("Bounce Startup")  # Loop the startup animation
+
+# Advanced system control
+pause_core2(True)          # Pause core2 processing
+pause_core2(False)         # Resume core2 processing
+send_raw("A", 1, 2, 1)     # Send raw data to core2 (chip A, pos 1,2, set)
 
 # Show help
 help()                # Display all available functions
@@ -506,6 +532,21 @@ GPIO:
           direction: True/False   for OUTPUT/INPUT
                pull: -1/0/1       for PULL_DOWN/NONE/PULL_UP
 
+PWM (Pulse Width Modulation):
+  jumperless.pwm(pin, [frequency], [duty])    - Setup PWM on GPIO pin
+  jumperless.pwm_set_duty_cycle(pin, duty)    - Set PWM duty cycle
+  jumperless.pwm_set_frequency(pin, freq)     - Set PWM frequency
+  jumperless.pwm_stop(pin)                    - Stop PWM on pin
+  Aliases: set_pwm, set_pwm_duty_cycle, set_pwm_frequency, stop_pwm
+
+             pin: 1-8       GPIO pins only
+       frequency: 0.001-62500000 default 1000Hz
+      duty_cycle: 0.0-1.0   default 0.5 (50%)
+  **Frequency Ranges:**
+  - Hardware PWM: 10Hz to 62.5MHz (high precision)
+  - Slow PWM: 0.001Hz to 10Hz (hardware timer based)
+  - Automatic mode selection based on frequency
+
 Node Connections:
   jumperless.connect(node1, node2)            - Connect two nodes
   jumperless.disconnect(node1, node2)         - Disconnect nodes
@@ -552,6 +593,8 @@ Misc:
   jumperless.arduino_reset()                  - Reset Arduino
   jumperless.probe_tap(node)                  - Tap probe on node (unimplemented)
   jumperless.run_app(appName)                 - Run app
+  jumperless.pause_core2(pause)               - Pause/resume core2 processing
+  jumperless.send_raw(chip, x, y, setOrClear) - Send raw data to core2
   jumperless.format_output(True/False)        - Enable/disable formatted output
 
 Help:
@@ -577,6 +620,9 @@ Examples (all functions available globally):
   oled_print("Fuck you!")                    # Display text
   current = get_current(0)                   # Read current using alias
   set_gpio(1, True)                          # Set GPIO pin high using alias
+  pwm(1, 1000, 0.5)                         # Hardware PWM: 1kHz, 50% duty
+  pwm(2, 0.1, 0.25)                         # Slow PWM: 0.1Hz, 25% duty
+  pwm(3, 0.001, 0.5)                        # Ultra-slow PWM: 0.001Hz, 50% duty
   pad = probe_read()                         # Wait for probe touch
   if pad == 25: print('Touched pad 25!')    # Check specific pad
   if pad == D13_PAD: connect(D13, TOP_RAIL)  # Auto-connect Arduino pin
@@ -590,6 +636,8 @@ Examples (all functions available globally):
   pad = wait_touch()                        # Wait for touch
   btn = check_button()                      # Check button immediately
   if pad == D13_PAD and btn == CONNECT_BUTTON: connect(D13, TOP_RAIL)
+  pause_core2(True)                         # Pause core2 processing
+  send_raw("A", 1, 2, 1)                    # Send raw data to core2
 
 Note: All functions and constants are available globally!
 No need for 'jumperless.' prefix in REPL or single commands.
