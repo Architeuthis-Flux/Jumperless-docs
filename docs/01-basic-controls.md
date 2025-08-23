@@ -75,12 +75,12 @@ DAC Pad
 ![This is what prints in the terminal](https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99)
 
 (This is an ASCII version of what will show on the breadboard LEDs)
-¹![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/856525f4-425e-4442-9597-8e5b4f72a2c8)
+¹![You can press R in the main menu to toggle this view](https://github.com/user-attachments/assets/856525f4-425e-4442-9597-8e5b4f72a2c8)
 
-²![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/06804d5e-2b10-45ef-ae55-4a49c2f14033)
+²![You can press R in the main menu to toggle this view](https://github.com/user-attachments/assets/06804d5e-2b10-45ef-ae55-4a49c2f14033)
 
 
-³![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/32c3b184-45d6-476e-b0e9-19a294b2ae3f)
+³![You can press R in the main menu to toggle this view](https://github.com/user-attachments/assets/32c3b184-45d6-476e-b0e9-19a294b2ae3f)
 
 
 
@@ -92,7 +92,7 @@ GPIO Pad
      └─ [Tap a row to connect it to] (or if you were already "holding" a node, it'll connect there)
 ```
 
-¹![You can press `R` in the main menu to toggle this view](https://github.com/user-attachments/assets/33018aec-be8a-4bc0-b309-baeddad4db66)
+¹![You can press R in the main menu to toggle this view](https://github.com/user-attachments/assets/33018aec-be8a-4bc0-b309-baeddad4db66)
 
 
 The other 4 `user pads` will be more remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`. The building pads are for overriding colors in `idle mode` (you'll see more about that in [Idle Mode Interactions](#idle-mode-net-highlighting).)

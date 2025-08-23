@@ -70,12 +70,6 @@
     <li class="toctree-l2"><a class="reference internal" href="#documentation-sections">Documentation Sections</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#find-me-on-the-internet">Find Me On The Internet</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#probe_readblockingtrue">probe_read([blocking=True])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#probe_buttonblockingtrue">probe_button([blocking=True])</a>
-    </li>
-        </ul>
     </li>
     </ul>
                 </li>
@@ -219,34 +213,6 @@
 
 <p><img alt="dymo-6s" src="https://github.com/user-attachments/assets/d59e3ebc-591c-4c2c-bce3-1f65f9555c61" /></p>
 <hr />
-<p>Functions for interacting with the physical probe.</p>
-<h3 id="probe_readblockingtrue"><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code></h3>
-<p>Reads the pad currently being touched by the probe.</p>
-<ul>
-<li><code class="language-jython highlight"><span class="n">blocking</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code> (default), the function will wait until a pad is touched. If <code class="language-jython highlight"><span class="kc">False</span></code>, it returns immediately.</li>
-<li>Returns a <code class="language-jython highlight"><span class="n">ProbePad</span></code> object (e.g., <code class="language-jython highlight"><span class="mi">25</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">D13_PAD</span></code>, <code class="language-jython highlight"><span class="n">NO_PAD</span></code>).</li>
-<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">read_probe</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_wait</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wait_probe</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_touch</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wait_touch</span><span class="p">()</span></code></li>
-</ul>
-<h3 id="probe_buttonblockingtrue"><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code></h3>
-<p>Reads the state of the buttons on the probe.</p>
-<ul>
-<li><code class="language-jython highlight"><span class="n">blocking</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code> (default), waits for a button press. If <code class="language-jython highlight"><span class="kc">False</span></code>, returns the current state immediately.</li>
-<li>Returns a <code class="language-jython highlight"><span class="n">ProbeButton</span></code> object (<code class="language-jython highlight"><span class="no no-Jumperless">CONNECT_BUTTON</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">REMOVE_BUTTON</span></code>, or <code class="language-jython highlight"><span class="no no-Jumperless">BUTTON_NONE</span></code>).</li>
-<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">get_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">button_read</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">read_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button_nonblocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">check_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">button_check</span><span class="p">()</span></code></li>
-</ul>
-<p><strong>Example:</strong>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Touch a pad...&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="n">pad</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_read</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You touched: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pad</span><span class="p">))</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="no no-Jumperless">D13_PAD</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 6 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s the Arduino LED pin!&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 7 "></span>
-<span class="linenos" data-linenos=" 8 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press a probe button...&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_button</span><span class="p">()</span>
-<span class="linenos" data-linenos="10 "></span><span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="no no-Jumperless">CONNECT_BUTTON</span><span class="p">:</span>
-<span class="linenos" data-linenos="11 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connect button pressed.&quot;</span><span class="p">)</span>
-</code></pre></div></p>
               
             </div>
           </div><footer>
@@ -290,5 +256,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-07-17 16:15:16.064652+00:00
+Build Date UTC : 2025-08-23 16:45:50.258972+00:00
 -->

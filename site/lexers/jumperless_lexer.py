@@ -48,7 +48,7 @@ class JumperlessPythonLexer(PythonLexer):
         'connect', 'disconnect', 'is_connected', 'nodes_clear', 'node',
         
         # OLED Functions
-        'oled_print', 'oled_clear', 'oled_connect', 'oled_disconnect',
+        'oled_print', 'oled_clear', 'oled_connect', 'oled_disconnect', 'oled_show',
         
         # Clickwheel Functions
         'clickwheel_up', 'clickwheel_down', 'clickwheel_press',
@@ -65,6 +65,9 @@ class JumperlessPythonLexer(PythonLexer):
         
         # PWM Functions
         'pwm', 'pwm_set_duty_cycle', 'pwm_set_frequency', 'pwm_stop', 'set_pwm', 'set_pwm_duty_cycle', 'set_pwm_frequency', 'stop_pwm',
+        
+        # System Functions
+        'pause_core2', 'send_raw',
         
     }
 
