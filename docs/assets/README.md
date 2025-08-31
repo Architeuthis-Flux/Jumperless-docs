@@ -69,3 +69,13 @@ https://github.com/user-attachments/assets/f77f6fd5-d005-45db-9c4c-b256390b91fc
 <img width="1401" height="1401" alt="Icon-full" src="https://github.com/user-attachments/assets/d64aecbe-6d2c-4fa3-b6de-5b555d8e8b38" />
 30
 <img width="7280" height="5831" alt="V5Schematic" src="https://github.com/user-attachments/assets/adba4d1c-e9fa-4133-aea7-0b2e2b778816" />
+31
+![Safety infoEnglishSingle](https://github.com/user-attachments/assets/d7f13c5b-da36-488d-81e4-cf43be6adb30)
+32
+<img width="6535" height="1030" alt="Artboard 21" src="https://github.com/user-attachments/assets/e3b4c4a7-47de-4571-8b44-b7829961199a" />
+
+33
+<img width="3460" height="950" alt="Artboard 22" src="https://github.com/user-attachments/assets/c8934b2a-1e05-43cf-8401-24ae83da9f0f" />
+34
+<img width="7098" height="5367" alt="Artboard 13" src="https://github.com/user-attachments/assets/1c91a76d-cacf-40f0-a87b-c952787abb6f" />
+
