@@ -13,6 +13,9 @@ This guide covers how to write, load, and run Python scripts that control Jumper
 7. [Examples and Demos](#examples-and-demos)
 8. [Troubleshooting](#troubleshooting) -->
 
+####If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
+
+
 ## Quick Start
 
 <!-- ### Starting MicroPython REPL -->

@@ -1,9 +1,71 @@
 # Odds and Ends
 
 
+## Safety Info
+
+Here's an image of the little card that should have been inside your box
+
+![Safety info Never put voltages above +9V or below -9V anywhere on this board. Don't use unpowered, the crossbars need power to block voltage too. Don't power externally, use the internal power supplies (rails / DACs). It can be powered from the 5V and GND pins on the Nano header or the FPC adapter instead of USB. External signals are okay, as long as the board remains powered.This board gets fairly warm in normal operation from the LEDs, if it ever gets hot, unplug it immediately and let me know. When the switch on the probe is set to Select Mode,
+it should only be used on the gold probe sense pads.The probe tip in Select Mode is always at 3.3V. Don't stab yourself or others with the probe, unless it's in self-defense. Do not eat your Jumperless V5. When in doubt, don't hesitate to ask!](https://github.com/user-attachments/assets/d7f13c5b-da36-488d-81e4-cf43be6adb30)
+
+
+
+
+- Never put voltages above +9V or below -9V anywhere on this board.
+
+- Don't use unpowered, the crossbars need power to block voltage too.
+
+- Don't power externally, use the internal power supplies (rails / DACs).
+
+- It can be powered from the 5V and GND pins on the Nano header or the FPC adapter instead of USB.
+
+- External signals are okay, as long as the board remains powered.
+
+- This board gets fairly warm in normal operation from the LEDs, if it ever gets hot, unplug it immediately and let me know.
+
+- When the switch on the probe is set to Select Mode, it should only be used on the gold probe sense pads.
+
+- The probe tip in Select Mode is always at 3.3V.  
+
+- Don't stab yourself or others with the probe, unless it's in self-defense.
+
+- Do not eat your Jumperless V5.
+
+- When in doubt, don't hesitate to [ask!](https://discord.gg/TcjM5uEgb4)
+
+
+
+There are a lot of exceptions to these if you know what you're doing. It's pretty hard to permanently damage this board.
+
+Some things (usually external power with the Jumperless off) can cause lockup on the [analog CMOS switches](https://tinyurl.com/24xrspea), but the current limiting resistors on their power supply pins generally keep them from drawing so much current that they permanently break. In situations where one chip is getting crazy hot, the first thing to try is to unplug the Jumperless, let it cool down, and try it again (obviously, change whatever you think was causing it). Most of the time they go back to normal after some rest.
+
+
+Don't let any of this scare you, I'd rather you just pretend it's indestructable and use it with reckless abandon. So if you manage to break anything, just let me know and I'll send out a fresh one and a return label, no questions asked*.
+
+*Actually, a ton of questions asked, so we can figure out how it happened and maybe prevent it from happening to someone else. But the point is I don't care if it's clearly your fault and not some manufacturing defect, I will make sure you have a working Jumperless.
+
+<img width="6535" height="1030" alt="Artboard 21" src="https://github.com/user-attachments/assets/e3b4c4a7-47de-4571-8b44-b7829961199a" />
+It's even printed on the box
+
+
+
+
+
+
+
+
+## Bandwidth
+
+Michael has done some [awesome work characterizing the bandwidth of the Jumperless](https://codeberg.org/multiplex/jumperless-wigglyvolts).
+
+![](https://codeberg.org/multiplex/jumperless-wigglyvolts/media/branch/main/screenshots/IMG_2886.jpeg)
+
+The TL;DR is just the physical breadboard puts the 3dB rolloff t ~13MHz, and a signal passing through the crossbar matrix brings it down to around ~8MHz. 
+
+It makes sense these are pretty high, these CH446Qs were originally made for switching video signals so bandwidth was pretty important when they were designing them. Keep in mind this isn't a hard limit, it's just where the signal gets attenuated by the (arbitrarilyish) defined 3dB, so your signal's amplitude is reduced by √2.
+
+
 ![HeroNew](https://github.com/user-attachments/assets/8eb56a45-aa24-4dd0-8528-8c3656c0b4ae)
-
-
 ## Animations
 
 The Jumperless uses LED animations to show the state of different components on the breadboard.
@@ -25,12 +87,6 @@ If it's a rail, those are animated and should be a continuous slow pulsing towar
 `GPIO` outputs will be either green or red depending on their state 
 
 
-
-
-
-
-
-
 ## What's that `BUFFER_IN - DAC_0` bridge that's always there?
 
 That gets added to power the `probe LEDs`, it's kinda weird, but to multiplex 3.3V, GND, LED data, 2 buttons, and a +-9V tolerant analog line over the 4 wires on a TRRS cable, the line powering those LEDs is shared.
@@ -40,6 +96,8 @@ The `connect`/`measure` switch is a Dual Pole Dual Throw (DPDT) switch. The prob
 When you have it in `select` mode, the probe tip is getting 3.3V from a `GPIO` on the RP2350B driven `high`, and the LEDs get their power from the analog line, which is `ROUTABLE_BUFFER_IN` connected to `DAC 0` set to 3.3V.
 
 When you switch to `measure` mode, those roles get swapped, the LEDs are powered by that `GPIO`, and the probe tip is now `ROUTABLE_BUFFER_IN`. In the current firmware, that just stays at 3.3V so you can *kinda* sense pads in either mode (you may notice the sensing is a lot wonkier, that's because the `DAC` isn't perfectly calibrated to output *exactly* 3.3V.) But in the future, there will be some other stuff you can do in that mode treating it as an analog line (and of course, I'll forget to update this, if it's after like June 2025, double check this is still true.)
+
+##### A side effect of needing a crossbar connection to light the probe is that the LEDs in `Select` Mode act as a test of whether the Jumperless is properly making connections.
 
 ### Why am I using one of the precious two DACs and not another GPIO?
 
@@ -61,4 +119,10 @@ Use `help` or `[command]?` for onboard documentation
 ![Screenshot 2025-07-04 at 5 52 32 PM](https://github.com/user-attachments/assets/522bfcb4-f836-464c-bcdf-1b302d05005b)
 
 
-## 
+## Schematic
+
+Here's the schematic that's printed on the inner flap of the box
+![](https://github.com/user-attachments/assets/1c91a76d-cacf-40f0-a87b-c952787abb6f)
+
+If you want look at the schematic and PCB together and don't feel like downloading the whole thing and opening it in KiCad, [you can open it in the browser with KiCanvas here](https://kicanvas.org/?github=https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/Jumperless23V50/MainBoard/JumperlessV5r6/JumperlessV5r6.kicad_pro)
+
