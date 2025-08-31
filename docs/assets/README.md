@@ -69,3 +69,7 @@ https://github.com/user-attachments/assets/f77f6fd5-d005-45db-9c4c-b256390b91fc
 <img width="1401" height="1401" alt="Icon-full" src="https://github.com/user-attachments/assets/d64aecbe-6d2c-4fa3-b6de-5b555d8e8b38" />
 30
 <img width="7280" height="5831" alt="V5Schematic" src="https://github.com/user-attachments/assets/adba4d1c-e9fa-4133-aea7-0b2e2b778816" />
+31
+![Safety infoEnglishSingle](https://github.com/user-attachments/assets/d7f13c5b-da36-488d-81e4-cf43be6adb30)
+32
+
