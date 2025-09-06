@@ -68,6 +68,22 @@ class JumperlessPythonLexer(PythonLexer):
         
         # System Functions
         'pause_core2', 'send_raw',
+
+        # Wavegen Functions
+        'wavegen_set_output', 'set_wavegen_output',
+        'wavegen_set_freq', 'set_wavegen_freq',
+        'wavegen_set_wave', 'set_wavegen_wave',
+        'wavegen_set_sweep', 'set_wavegen_sweep',
+        'wavegen_set_amplitude', 'set_wavegen_amplitude',
+        'wavegen_set_offset', 'set_wavegen_offset',
+        'wavegen_start', 'start_wavegen',
+        'wavegen_stop', 'stop_wavegen',
+        'wavegen_get_output', 'get_wavegen_output',
+        'wavegen_get_freq', 'get_wavegen_freq',
+        'wavegen_get_wave', 'get_wavegen_wave',
+        'wavegen_get_amplitude', 'get_wavegen_amplitude',
+        'wavegen_get_offset', 'get_wavegen_offset',
+        'wavegen_is_running',
         
     }
 
@@ -95,6 +111,9 @@ class JumperlessPythonLexer(PythonLexer):
         
         # Button States
         'CONNECT_BUTTON', 'REMOVE_BUTTON', 'BUTTON_NONE', 'CONNECT', 'REMOVE', 'NONE',
+
+        # Wavegen constants
+        'SINE', 'TRIANGLE', 'SAWTOOTH', 'SQUARE', 'RAMP', 'ARBITRARY',
     }
 
     JFS_FUNCTIONS = {
