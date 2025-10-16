@@ -44,6 +44,7 @@ The special functions work the same way, tap the pad, pick one, and it will remo
 
 If you can't seem to stop playing with the switch on the probe, run DAC calibration with `$` and the 3.3V `measure` mode puts out should be fairly accurate enough for probing.
 
+
 ## The Click Wheel
 
 ![wheel copy](https://github.com/user-attachments/assets/d69a5425-7131-46e3-8c17-a38819edfc16)
@@ -113,15 +114,25 @@ Here's what's new (all of this is in idle mode):
 - **Tapping nets highlights them** as before, but there's a slightly different animation on the `row` you have selected from the whole `net`
 - **The click wheel scrolls through highlighting `rows`** as if you tapped each one
 
+
+
 ### Row Selection Actions
 
 With a `row` selected, here's what you can do:
+
+### Rail Voltage Adjustment
+
+If the highlighted `row` is a  `rail` (top or bottom), `click` the clickwheel and then scroll the wheel (or use the probe on the bottom row) to adjust the voltage. 
+
+`Click` the wheel to confirm, `hold` to cancel the adjustment.
 
 #### Connect Button
 - `connect` button will bring you into probing mode with the highlighted row already selected and then spit you back out to `idle` mode once you've made a connection to another row, or click `connect` again to exit
 
 #### Remove Button
-- `remove` will briefly turn the `row` reddish `warn` (I need to settle on a good time for this, if it feels too short or long lmk), another `remove` press will remove that `row` (just like in `probe` mode, it removes the `bridge` it's in, so just things that have a direct connection to that `row`, not the whole `net`), if you let it time out without pressing anything, the row will be unhighlighted. TL;DR, double click `remove` to remove, single click to unhighlight.
+- `remove` will briefly turn the `row` reddish `warn` (I need to settle on a good time for this, if it feels too short or long lmk), another `remove` press will remove that `row` (just like in `probe` mode, it removes the `bridge` it's in, so just things that have a direct connection to that `row`, not the whole `net`), if you let it time out without pressing anything, the row will be unhighlighted. 
+
+TL;DR, double click `remove` to remove, single click to unhighlight.
 
 #### Color Picker
 - tapping the `building top` pad with something highlighted will open the `color picker`, (note: the color now follows the `row` instead of the net, so it can keep the colors even if you remove nets below it and they shift, this was soooo difficult until I realized I should do it by `node`). 
@@ -135,7 +146,9 @@ With a `row` selected, here's what you can do:
 
 ### Output Toggle
 - if the highlighted row is an `output` (`gpio output`, I'll eventually do `dacs` too) clicking the `connect` button will toggle it `high` / `low`. The `remove` button will *just* unhighlight the net (there were some choices here, like make each button assigned to high / low or allow removing them, but this felt like the best way after trying them all). I will eventually add a setting for the toggle repeat rate (set to 500ms now) and a way to set it freewheeling as a clock.
-  - this *one* feature is the reason I did this whole update. And it's worth it because it's sick af.
+
+
+
 
 <!-- ## GPIO Selection Shortcuts
 

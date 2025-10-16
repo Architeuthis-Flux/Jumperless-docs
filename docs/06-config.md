@@ -1,6 +1,6 @@
 # Config File
 
-To change any persistent settings, there's a `config` file. You can read it with `~` and edit settings by copying any of those lines, pasting it back, and changing the value to whatever you want it to be.
+To change any persistent settings that apply to the Jumperless as a whole, there's a `config` file. You can read it with `~` and edit settings by copying any of those lines, pasting it back, and changing the value to whatever you want it to be. 
 
 ## Viewing Configuration
 
@@ -13,16 +13,12 @@ into the main menu to change a setting
 Jumperless Config:
 
 
-`[config] firmware_version = 5.2.2.0;
+`[config] firmware_version = 5.4.0.5;
 
 `[hardware] generation = 5;
 `[hardware] revision = 5;
 `[hardware] probe_revision = 5;
 
-`[dacs] top_rail = 3.50;
-`[dacs] bottom_rail = 3.50;
-`[dacs] dac_0 = 3.33;
-`[dacs] dac_1 = 0.00;
 `[dacs] set_dacs_on_boot = false;
 `[dacs] set_rails_on_boot = true;
 `[dacs] probe_power_dac = 0;
@@ -84,6 +80,7 @@ Jumperless Config:
 
 `[serial_1] function = passthrough;
 `[serial_1] baud_rate = 115200;
+`[serial_1] async_passthrough = true;
 `[serial_1] print_passthrough = false;
 `[serial_1] connect_on_boot = false;
 `[serial_1] lock_connection = false;
@@ -114,6 +111,8 @@ Jumperless Config:
 END
 
 ```
+
+
 
 ## Configuration Help
 
@@ -151,3 +150,86 @@ Help for command: ~
 
 
 ``` 
+
+
+# State File
+
+
+For things specific to the current `state` of the Jumperless, there's a YAML file that contains all the connections, colors (optional), `rail` / `DAC` voltages, `GPIO` directions and pulls, stuff like that. The idea is this defines a complete setup of a particular circuit that can be switched between in different `slots`. The Jumperless always boots at `Slot 0`, and you can switch to other `slots` with `<` (cycle through them) or selecting one with the `click menu` with `Slots` > `Load` > `0-7` (it will show a preview of each one.) To save a copy of the currently `active slot`; `Slots` > `Save` > `0-7` will save a copy of the `active slot` to another `slot` and also make that target slot the `active`.
+
+
+```yaml
+
+╭────────────────────────────────────╮
+│      Current YAML State (RAM)     │
+╰────────────────────────────────────╯
+
+Active Slot: 0
+Dirty Flag: NO (saved)
+
+─── YAML Output ───
+
+version: 2
+sourceOfTruth: bridges
+
+bridges:
+  - {n1: 38, n2: 44, dup: 2}
+  - {n1: 21, n2: 28, dup: 2}
+  - {n1: 48, n2: 55, dup: 2}
+  - {n1: 4, n2: 2, dup: 2}
+  - {n1: BUFFER_IN, n2: DAC0, dup: 1}
+
+nets:
+  - {num: 4, nodes: [DAC_0, BUF_IN], name: "DAC 0", anim: true}
+  - {num: 6, nodes: [38, 44], color: pink}
+  - {num: 7, nodes: [21, 28], color: blue}
+  - {num: 8, nodes: [48, 55], color: green}
+  - {num: 9, nodes: [4, 2], color: amber}
+
+power:
+  topRail: 3.30
+  bottomRail: 2.50
+  dac0: 3.30
+  dac1: 0.00
+
+config:
+  routing: {stackPaths: 2, stackRails: 3, stackDacs: 0, railPriority: 1}
+  gpio:
+    direction:    [1,1,1,1,1,1,1,1,1,1]
+    pulls:        [0,0,0,0,0,0,0,0,0,0]
+    pwmFrequency: [1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00]
+    pwmDutyCycle: [0.50,0.50,0.50,0.50,0.50,0.50,0.50,0.50,0.50,0.50]
+    pwmEnabled:   [0,0,0,0,0,0,0,0,0,0]
+  uart: {txFunction: 0, rxFunction: 1}
+  oled: {connected: false, lockConnection: false}
+
+
+─── Memory Usage ───
+Connections: 5
+State RAM: ~58048 bytes
+
+
+```
+
+### Source of Truth
+
+Because the information in here is *sort of* redundant (the connections could be computed from just the `bridges` or the `nets` section on their own), there's a field called `sourceOfTruth` which is the section that actually gets parsed and then the other section is written with the computed values. (I haven't done much testing on changing this to `nets` so I'd probably just leave it on `bridges` for now.)
+
+There's some weirdness with how colors are applied, since the `source of truth` is the bridges, and the things that actually get colored are the `nets`, it'll take the colors from the `bridges` (if specified) and try to apply them to the `nets`. But since nets always have a single color (to show that they're connected), if you have `bridges` with different colors in the same `net`, it'll just pick one (don't ask me exactly how the logic chooses, idk.) 
+
+If you specify a color to a `net` even with `sourceOfTruth: bridges` it should respect the `net` assignment over the `bridge` assignment.
+
+## Switching Between Saved Circuits (Slots)
+
+The Jumperless has **8 slots** (0-7) where you can save different circuit configurations. Think of them like presets or save files.
+
+**Quick slot cycling:**
+- Type `<` in the terminal to cycle to the next slot
+- The circuit will instantly change to match the new slot!
+
+**Other slot commands:**
+- `l 5` - Load slot 5 specifically
+- `Q` - Query which slot is currently active
+- `s` - Show a list of all saved slots
+
+When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the [Glossary](99-glossary.md) for more details about slots.

@@ -33,18 +33,18 @@ If you don't already have one,
 
 ## Documentation Sections
 
-- **[Basic Controls](01-basic-controls.md)** - Learn how to use the probe and click wheel
-- **[The App](03-app.md)** - For talking to your Jumperless
+- **[Basic Controls](01-basic-controls.md)** - Learn how to use the probe, click wheel, and slot system
+- **[The App](03-app.md)** - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches
 - **[OLED](04-oled.md)** - Add a better display
-- **[Arduino](05-arduino.md)** - The reason for those headers at the top
+- **[Arduino](05-arduino.md)** - UART passthrough and automatic flashing
 - **[Configuration](06-config.md)** - Persistent settings
 - **[Debugging](07-debugging.md)** - Crossbar, bridge, and net list views
-- **[File Manager](08-file-manager.md)** - Do stuff with the onboard file system
+- **[File Manager](08-file-manager.md)** - Filesystem access, YAML slot file editing, and text editor
 - **[MicroPython](08-micropython.md)** - Use the onboard MicroPython interpreter
 - **[Odds and Ends](09-odds-and-ends.md)** - Stuff I couldn't think of a good category for
 - **[3D Printable Stand](10-3d-stand.md)** - Print your own stand
 - **[Writing Native Apps](11-WritingApps.md)** - Dig into the actual firmware and write your own apps
-- **[Glossary](99-glossary.md)** - Key terms and definitions
+- **[Glossary](99-glossary.md)** - Key terms including slots, nodes, bridges, and the W command
 
 (You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors)
 

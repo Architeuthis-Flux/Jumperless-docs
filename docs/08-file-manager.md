@@ -46,9 +46,9 @@ The Jumperless has a built in File Manager which you can access in the menu with
 | **𓆚** | Python files | .py, .pyw, .pyi | Green |
 | **⍺** | Text files | .txt, .md | White |
 | **⚙** | Config files | .cfg, .conf, config.txt | Yellow |
-| **⟐** | JSON files | .json | Cyan |
-| **☊** | Node files | nodeFileSlot*.txt | Magenta |
-| **⎃** | Color files | netColorsSlot*.txt | Orange |
+| **⟐** | JSON/YAML files | .json, .yaml | Cyan |
+| **☊** | Slot files | /slots/slot*.yaml | Magenta |
+| **⎃** | Legacy slot files | nodeFileSlot*.txt | Orange |
 
 
 
@@ -92,6 +92,36 @@ The File Manager automatically creates example Python scripts in `/python_script
 
 You can trigger them to regenerate if you messed them up by deleting it with `x`, and then entering `m` to create new copies of any examples it doesn't see.
 
+
+## Editing Slot Files
+
+Slot files (located in `/slots/`) use **YAML format** and can be edited directly! They're human-readable files containing:
+
+- **bridges** - Your circuit connections
+- **power** - Rail and DAC voltages
+- **colors** - Wire colors from Wokwi or custom colors
+- **config** - Routing preferences and GPIO settings
+
+**Example slot file:**
+```yaml
+version: 2
+sourceOfTruth: bridges
+
+bridges:
+  - {n1: 1, n2: 10, dup: 2, color: red}
+  - {n1: NANO_D5, n2: GPIO_1, dup: 2}
+  - {n1: TOP_RAIL, n2: 5, dup: 2}
+
+power:
+  topRail: 3.30
+  bottomRail: 2.50
+  dac0: 3.33
+  dac1: 0.00
+```
+
+**Named nodes** you can use: `NANO_D0-D13`, `NANO_A0-A7`, `GPIO_1-8`, `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0_5V`, `DAC1_5V`, and more (see [glossary](99-glossary.md))
+
+When you edit and save a slot file, the Jumperless will automatically reload it if it's the active slot. This works whether you're using the onboard eKilo editor or have the Jumperless mouned as a USB Mass Storage drive and are editing the files on your computer in you favorite editor.
 
 ## USB Mass Storage
 
