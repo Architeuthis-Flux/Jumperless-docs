@@ -1,5 +1,16 @@
 # Odds and Ends
 
+## What's New in JumperlOS 5.4.0.4
+
+JumperlOS is now a proper operating system with a priority-based task scheduler! This is a huge refactor from the original firmware:
+
+- **Priority-based task scheduler** - Each component has a `service()` routine that checks whether it should do anything, replacing the old busy-wait loop
+- **Live updating** - Edits to the YAML state files will live update with new connections (whether you're editing them in the onboard editor or as a mounted USB MSC device on your computer)
+- **Better fonts** - New fonts available: `Berkeley`, `Iosevka`, `Pragmat[ism]`
+- **YAML connection files** - More permissive of malformed syntax
+- **Unified syntax highlighting** - Works consistently in `eKilo`, `python`, and normal input after `>`
+
+The JumperlOS firmware repo is at [https://github.com/Architeuthis-Flux/JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS)
 
 ## Safety Info
 
@@ -46,10 +57,6 @@ Don't let any of this scare you, I'd rather you just pretend it's indestructable
 
 <img width="6535" height="1030" alt="Artboard 21" src="https://github.com/user-attachments/assets/e3b4c4a7-47de-4571-8b44-b7829961199a" />
 It's even printed on the box
-
-
-
-
 
 
 
@@ -118,6 +125,9 @@ Use `help` or `[command]?` for onboard documentation
 
 ![Screenshot 2025-07-04 at 5 52 32 PM](https://github.com/user-attachments/assets/522bfcb4-f836-464c-bcdf-1b302d05005b)
 
+## [GitHub Releases](https://github.com/Architeuthis-Flux/JumperlessV5/releases)
+
+If you want more info about each feature when I was particularly excited about it, I usually write about the new features in the [Release notes on Github](https://github.com/Architeuthis-Flux/JumperlessV5/releases).
 
 ## Schematic
 
@@ -125,4 +135,5 @@ Here's the schematic that's printed on the inner flap of the box
 ![](https://github.com/user-attachments/assets/1c91a76d-cacf-40f0-a87b-c952787abb6f)
 
 If you want look at the schematic and PCB together and don't feel like downloading the whole thing and opening it in KiCad, [you can open it in the browser with KiCanvas here](https://kicanvas.org/?github=https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/Jumperless23V50/MainBoard/JumperlessV5r6/JumperlessV5r6.kicad_pro)
+
 

@@ -2,7 +2,33 @@
 
 ## Installation guide
 
-### Find the latest release
+### The Jumperless App is now on PyPi!
+
+The easiest way to get started is with pip:
+
+```bash
+pip install jumperless
+```
+
+Then run it with:
+
+```bash
+jumperless
+```
+
+**Note:** If the app version shows less than the latest release, `pip` defaults to a local version if it's available. In that case, run:
+
+```bash
+pip install --no-cache-dir --upgrade jumperless
+```
+
+to make sure it grabs the latest version.
+
+The app repo is at [https://github.com/Architeuthis-Flux/Jumperless-App](https://github.com/Architeuthis-Flux/Jumperless-App)
+
+### Alternative: Download Pre-built Binaries
+
+#### Find the latest release
 [https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest](https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest)
 
 The link above will magically lead you to the latest version, and will look something like `https://github.com/Architeuthis-Flux/JumperlessV5/releases/tag/5.2.0.0`
@@ -72,7 +98,29 @@ But that's like the *least* cool thing the new app can do, here's a list of what
 
 You can design circuits in the [Wokwi online simulator](https://wokwi.com) and import them directly to your Jumperless with the `W` command, or use the Jumperless App and it'll pull it from your project automatically and live update.
 
-### How to Import from Wokwi
+### Direct Link Import
+
+You can now just dump a Wokwi link into the app at any time and it'll work:
+
+```
+		Menu
+~~~~~
+	x = clear all connections
+	+ = add connections
+	- = remove connections
+
+https://wokwi.com/projects/424432011346848769
+
+
+Enter a name for this new project: cool project zone
+✓ Saved 'cool project zone' to project library
+
+✓ 'cool project zone' assigned to active slot 0
+  URL: https://wokwi.com/projects/424432011346848769
+  The project will start updating automatically
+```
+
+### How to manually Import from Wokwi
 
 1. **Design your circuit** on [wokwi.com](https://wokwi.com)
 2. **Click on the `diagram.json` tab** in the Wokwi editor
@@ -84,30 +132,44 @@ You can design circuits in the [Wokwi online simulator](https://wokwi.com) and i
 ### Supported Wokwi Components
 
 - **Half breadboard** - Wokwi's breadboard maps directly to Jumperless rows
-- **Arduino Nano** - All pins (D0-D13, A0-A7, GND, 5V, 3.3V)
-- **Logic Analyzer** - D0-7 map to Jumperless GPIO 1-8
+- **Arduino Nano** - All pins (D0-D13, A0-A7) (GND, 5V, 3.3V, and RST pins are hardwired and don't do anything)
+- **Logic Analyzer** - Channels map to GPIO: D0-7 → GPIO 1-8
 - **Wire colors** - Wokwi wire colors preserved
 - **Rail voltages** - Detected from text labels in Wokwi
 - **VCC and GND Nodes** - VCC maps to the `TOP_RAIL`
 
+![LogicAnalyzerMappingV5](https://github.com/user-attachments/assets/3b7bd360-9703-4b0b-925a-aea8ed7e0526)
+
+**Note:** The app still works with the OG Jumperless and those original mappings remain the same.
+
 ### Wire Color Mapping
 
-All Wokwi wire colors are preserved and displayed on the breadboard LEDs:
-- `red`, `orange`, `yellow`, `green`, `blue`, `violet`, `purple`, `magenta`, `cyan`
-- `white`, `gray`, `black` (shown as gray on LEDs), `brown`, `limegreen`, `gold` (shown as orange)
+**Wire colors will match the ones you set in Wokwi!** The new Wokwi parser sends the entire `diagram.json` from Wokwi and parses it on the Jumperless, which means color information gets preserved.
 
-**Note:** Black wires display as gray on LEDs (LEDs can't show true black), and gold displays as orange (for better distinction from yellow), but the original color names are preserved in the slot files
+![wokwiColor-2](https://github.com/user-attachments/assets/e5607cf9-3a95-42f7-b67c-875ba23e2ee9)
+
+![wokwiColor-1](https://github.com/user-attachments/assets/8a148940-60f8-4741-8905-6b9911ac1f21)
+
+All Wokwi wire colors are preserved and displayed on the breadboard LEDs:
+
+`red`, `orange`, `yellow`, `green`, `blue`, `violet`, `purple`, `magenta`, `cyan`, `white`, `gray`, `black`, `brown`, `limegreen`, `gold`
+
+**Note:** Black wires let the Jumperless auto-assign a color.
+
+If you leave all the wires green (the default in Wokwi) or make a wire black, it'll just auto assign colors.
+
+**About color assignment:** There is some weirdness because colors in Wokwi are applied to `bridges` (a pair of `nodes`) while color in the Jumperless gets assigned to `nets` (a collection of connected `nodes`). So if you have a bunch of things electrically connected together with different wire colors, it'll just pick one. It tries to pick unique colors first (no other nets with that same color), but if it can't, it'll shift the hue a bit so it's still that color but you can hopefully tell them apart.
 
 ### Rail Voltage Detection
 
 Add a text label in your Wokwi diagram to specify rail voltages:
 
 ```
-top rail 3.3V
-bottom rail 2.5V
+top rail 5.5V
+bottom rail 3.5V
 ```
 
-The parser will automatically set the correct voltages on your Jumperless
+The Jumperless parser will automatically detect these values and set the rails accordingly
 
 ### Command Variants
 

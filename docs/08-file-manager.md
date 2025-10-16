@@ -3,14 +3,36 @@
 
 The Jumperless has a built in File Manager which you can access in the menu with `/`, or enter `U` in the menu and Jumperless will mount as a USB Mass Storage drive called `JUMPERLESS` where you can edit files on the filesystem.
 
-## Directory Structure
+## File System Structure
 
+```
+├── config.txt
+│
+├── slots/
+│   ├── slot0.yaml
+│   ├── slot1.yaml
+│   ├── slot2.yaml
+│   └── ... (up to slot7.yaml)
+│
+└── python_scripts/
+    ├── history.txt
+    ├── cool_micropython_script.py
+    ├── ... (your python scripts go here)
+    │
+    └── examples/
+        ├── adc_basics.py
+        ├── dac_basics.py
+        ├── gpio_basics.py
+        ├── led_brightness_control.py
+        ├── node_connections.py
+        ├── stylophone.py
+        ├── uart_basics.py
+        ├── uart_loopback.py
+        └── voltage_monitor.py
+```
 
-<img width="901" alt="FileManager" src="https://github.com/user-attachments/assets/de4a251a-9727-422d-ade0-53984cf67fba" />
-<!-- 
-<img width="898" alt="Screenshot 2025-07-06 at 11 25 26 AM" src="https://github.com/user-attachments/assets/aa5db6a7-f9e1-4ea8-902c-050626712c07" /> -->
+Each slot's configuration is stored as a YAML file in the `/slots/` directory, and the global hardware configuration is in `/config.txt`.
 
-<img width="657" height="486" alt="Screenshot 2025-07-15 at 1 50 47 PM" src="https://github.com/user-attachments/assets/b4cc86db-7330-4bac-b160-c25eef27a8fa" />
 
 
 ## Navigation

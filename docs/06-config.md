@@ -154,6 +154,18 @@ Help for command: ~
 
 # State File
 
+## States vs Config
+
+States are now saved as YAML and we did away with the old text file format. `globalState` holds all connections, paths, and other circuit configuration in a single object that most of the code uses now. 
+
+**State vs Config - What's the Difference?**
+
+- **State** stores things relevant to the currently loaded slot - connections, wire colors, rail voltages, GPIO settings. These change when you switch slots.
+- **Config** (config.txt) contains hardware-wide settings that apply to the entire Jumperless regardless of which slot is active.
+
+Rail voltages, GPIO settings, and other circuit-specific parameters now go with the state (in the YAML file) rather than config, so each slot can have its own power supply and GPIO configuration.
+
+## State File Structure
 
 For things specific to the current `state` of the Jumperless, there's a YAML file that contains all the connections, colors (optional), `rail` / `DAC` voltages, `GPIO` directions and pulls, stuff like that. The idea is this defines a complete setup of a particular circuit that can be switched between in different `slots`. The Jumperless always boots at `Slot 0`, and you can switch to other `slots` with `<` (cycle through them) or selecting one with the `click menu` with `Slots` > `Load` > `0-7` (it will show a preview of each one.) To save a copy of the currently `active slot`; `Slots` > `Save` > `0-7` will save a copy of the `active slot` to another `slot` and also make that target slot the `active`.
 
@@ -233,3 +245,7 @@ The Jumperless has **8 slots** (0-7) where you can save different circuit config
 - `s` - Show a list of all saved slots
 
 When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the [Glossary](99-glossary.md) for more details about slots.
+
+## Live Editing State Files
+
+You can edit the YAML slot files and they will live update to the board! Whether you're editing them in the onboard `eKilo` editor or as a mounted USB MSC device on your computer, changes will be reflected immediately on your Jumperless.

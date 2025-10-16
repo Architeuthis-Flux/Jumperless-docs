@@ -122,9 +122,13 @@ With a `row` selected, here's what you can do:
 
 ### Rail Voltage Adjustment
 
-If the highlighted `row` is a  `rail` (top or bottom), `click` the clickwheel and then scroll the wheel (or use the probe on the bottom row) to adjust the voltage. 
+**Rail / DAC voltages change with `slots`** - each slot can have its own power supply configuration!
+
+If the highlighted `row` is a `rail` (top or bottom) or `DAC`, `click` the clickwheel and then scroll the wheel (or use the probe on the bottom row) to adjust the voltage. 
 
 `Click` the wheel to confirm, `hold` to cancel the adjustment.
+
+**Tip:** You can also tap the `DAC` or `rail` pads to highlight them, then click the encoder to adjust the output directly without connecting anything. Short `hold` the clickwheel button to confirm.
 
 #### Connect Button
 - `connect` button will bring you into probing mode with the highlighted row already selected and then spit you back out to `idle` mode once you've made a connection to another row, or click `connect` again to exit
