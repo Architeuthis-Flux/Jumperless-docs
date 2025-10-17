@@ -27,3 +27,22 @@ If you want to use this all the time, there's a config option to connect the OLE
 ```
 `[top_oled] connect_on_boot = true;
 ``` 
+
+## Lock Connection
+
+Locking the connection to the OLED ensures that it stays connected even when you enter a complete `node` list. So if you're using Wokwi or manually adding connections in a file, you don't need to add `GPIO_7 - D2` and `GPIO_8 - D3` to keep the I2C connected to the OLED.
+
+```
+`[top_oled] lock_connection = true;
+```
+ 
+  
+**_NOTE:_**  You can change both the GPIO used for the display or the rows it connects to with the config options:
+```jython
+`[top_oled] sda_pin = 26;
+`[top_oled] scl_pin = 27;
+`[top_oled] gpio_sda = GP_7;
+`[top_oled] gpio_scl = GP_8;
+`[top_oled] sda_row = D2;
+`[top_oled] scl_row = D3;
+```

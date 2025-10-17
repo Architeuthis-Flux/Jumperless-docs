@@ -59,6 +59,8 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | **d** | New directory | Create new directory |
 | **x** | Delete | Delete file or directory (confirm with `y`/`N`) |
  
+
+---
    
    
 ### File Type Icons and Colors
@@ -73,6 +75,7 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | **⎃** | Legacy slot files | nodeFileSlot*.txt | Orange |
 
 
+---
 
 
 ## Jumperless Kilo Text Editor
@@ -101,6 +104,19 @@ When using the rotary encoder in the editor:
 Yes, you could write code with just the click wheel and the OLED if you really wanted to.
 
 ![1760676653009](https://github.com/user-attachments/assets/31541e79-bde0-4219-9542-ee060933ed8a)
+
+--- 
+
+## OLED Display Support
+
+If you have an OLED connected, the File Manager shows:
+- **Current path** and **selected file**
+- **File navigation** with scrolling support
+- **Real-time updates** as you navigate
+
+
+
+---
 
 ### MicroPython Examples
 The File Manager automatically creates example Python scripts in `/python_scripts/examples/`:
@@ -146,6 +162,8 @@ power:
 
 When you edit and save a slot file, the Jumperless will automatically reload it if it's the active slot. This works whether you're using the onboard eKilo editor or have the Jumperless mouned as a USB Mass Storage drive and are editing the files on your computer in you favorite editor.
 
+---
+
 ## USB Mass Storage
 
 Enter `U` in the menu and Jumperless will mount as a USB Mass Storage drive called `JUMPERLESS` where you can edit files on the filesystem.
@@ -164,16 +182,6 @@ You can also enter `Z` for a little debug menu
   
 
 <img width="1014" height="463" alt="Screenshot 2025-07-15 at 8 56 13 AM" src="https://github.com/user-attachments/assets/a9e79a69-a7da-4365-a457-44b2c5d2fc24" />
-
-
-
-## OLED Display Support
-
-If you have an OLED connected, the File Manager shows:
-- **Current path** and **selected file**
-- **File navigation** with scrolling support
-- **Real-time updates** as you navigate
-
 
 
 

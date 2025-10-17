@@ -94,6 +94,8 @@ But that's like the *least* cool thing the new app can do, here's a list of what
 - The launcher *should* kill other instances (and close their windows) that happen to be open because it's such a common issue for me at least
 - Linux people are no longer red-headed stepchildren, there are proper tar.gz packages now for you nerds
 
+---
+
 ## Importing Circuits from Wokwi
 
 You can design circuits in the [Wokwi online simulator](https://wokwi.com) and import them directly to your Jumperless with the `W` command, or use the Jumperless App and it'll pull it from your project automatically and live update.

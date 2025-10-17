@@ -74,10 +74,15 @@ There's a new way to see what the 12 analog crossbar switches are up to, just en
 
 ```
 
+---
+
 ## Bridge Array
 Enter `b` in the menu. This is generally the most helpful one for *me* to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.
 
 ![Screenshot 2025-05-30 at 7 04 54 AM](https://github.com/user-attachments/assets/05e55021-b1f1-49af-8e7b-230d47522aed)
+
+
+---
 
 ## Net List
 Enter `n` in the menu to show this one. If you have anything that's doing any measurement (`gpio` input or `ADC`s), it'll stay up and live update if any of them change. (And just like basically any menu not asking for input, entering anything will bring you back to the main menu.)

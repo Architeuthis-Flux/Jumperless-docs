@@ -100,7 +100,7 @@ The other 4 `user pads` will be more remappable in the future, but for now, `top
 
 ![userPads](https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78)
 
-
+---
 
 ## Idle Mode Net Highlighting
 
@@ -137,6 +137,7 @@ If the highlighted `row` is a `rail` (top or bottom) or `DAC`, `click` the click
 - `remove` will briefly turn the `row` reddish `warn` (I need to settle on a good time for this, if it feels too short or long lmk), another `remove` press will remove that `row` (just like in `probe` mode, it removes the `bridge` it's in, so just things that have a direct connection to that `row`, not the whole `net`), if you let it time out without pressing anything, the row will be unhighlighted. 
 
 TL;DR, double click `remove` to remove, single click to unhighlight.
+
 
 #### Color Picker
 - tapping the `building top` pad with something highlighted will open the `color picker`, (note: the color now follows the `row` instead of the net, so it can keep the colors even if you remove nets below it and they shift, this was soooo difficult until I realized I should do it by `node`). 
