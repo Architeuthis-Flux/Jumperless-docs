@@ -33,12 +33,11 @@ The Jumperless has a built in File Manager which you can access in the menu with
 
 Each slot's configuration is stored as a YAML file in the `/slots/` directory, and the global hardware configuration is in `/config.txt`.
 
-
+---
 
 ## Navigation
 
 ### Basic Movement
-
 | Control | Action |
 |---------|--------|
 | **↑/↓ Arrow Keys** or **Rotary Encoder** | Move selection up/down |
@@ -47,7 +46,7 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | **.** | Go up one directory|
 | **CTRL + q** | Quit File Manager or Text Editor
  
-  
+---
  
 ### File Manager Commands
 | Key | Action | Description |
@@ -100,6 +99,7 @@ When using the rotary encoder in the editor:
 - **Wait 3 seconds**: Exit character selection mode
 
 Yes, you could write code with just the click wheel and the OLED if you really wanted to.
+
 
 
 ### MicroPython Examples
@@ -174,11 +174,11 @@ If you have an OLED connected, the File Manager shows:
 - **File navigation** with scrolling support
 - **Real-time updates** as you navigate
 
-You can even *technically* write code purely on the Jumperless with the clickwheel and the OLED. Just click through to a file and then `click` > scroll through characters with the wheel > `click` to enter text one letter at a time. 
 
 
 
 
+---
 
 ## Navigation Reference
 | Key | Action |
@@ -189,7 +189,7 @@ You can even *technically* write code purely on the Jumperless with the clickwhe
 | . | Go up directory |
 | h | Show help |
   
-  
+---
   
 ### File Operations
 | Key | Action |
@@ -202,6 +202,8 @@ You can even *technically* write code purely on the Jumperless with the clickwhe
 | x | Delete |
 | r | Refresh |
  
+---
+
 ### System
 | Key | Action |
 |-----|--------|
