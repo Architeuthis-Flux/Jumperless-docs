@@ -46,8 +46,9 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | **/** | Go to root directory |
 | **.** | Go up one directory|
 | **CTRL + q** | Quit File Manager or Text Editor
-
-
+ 
+  
+ 
 ### File Manager Commands
 | Key | Action | Description |
 |-----|--------|-------------|
@@ -58,9 +59,9 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | **n** | New file | Create new file (prompts for filename) |
 | **d** | New directory | Create new directory |
 | **x** | Delete | Delete file or directory (confirm with `y`/`N`) |
-
-
-
+ 
+   
+   
 ### File Type Icons and Colors
 | Icon | File Type | Extensions | Color |
 |------|-----------|------------|-------|
@@ -156,8 +157,11 @@ When you're finished `u` (or just eject the drive) will unmount the Mass Storage
 You can also enter `Z` for a little debug menu
 
 <img width="757" height="380" alt="Screenshot 2025-07-15 at 8 55 44 AM" src="https://github.com/user-attachments/assets/124d2f5a-a320-453f-8598-7604f37a57d7" />
-
+  
+   
 <img width="179" height="189" alt="Screenshot 2025-07-15 at 8 55 54 AM" src="https://github.com/user-attachments/assets/4531cae9-56d9-42da-9279-952f7b23d405" />
+ 
+  
 
 <img width="1014" height="463" alt="Screenshot 2025-07-15 at 8 56 13 AM" src="https://github.com/user-attachments/assets/a9e79a69-a7da-4365-a457-44b2c5d2fc24" />
 
@@ -169,6 +173,8 @@ If you have an OLED connected, the File Manager shows:
 - **Current path** and **selected file**
 - **File navigation** with scrolling support
 - **Real-time updates** as you navigate
+
+You can even *technically* write code purely on the Jumperless with the clickwheel and the OLED. Just click through to a file and then `click` > scroll through characters with the wheel > `click` to enter text one letter at a time. 
 
 
 
@@ -182,7 +188,9 @@ If you have an OLED connected, the File Manager shows:
 | / | Go to root |
 | . | Go up directory |
 | h | Show help |
-
+  
+  
+  
 ### File Operations
 | Key | Action |
 |-----|--------|
@@ -193,7 +201,7 @@ If you have an OLED connected, the File Manager shows:
 | d | New directory |
 | x | Delete |
 | r | Refresh |
-
+ 
 ### System
 | Key | Action |
 |-----|--------|
