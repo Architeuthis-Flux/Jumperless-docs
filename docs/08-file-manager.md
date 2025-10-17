@@ -175,6 +175,7 @@ If you have an OLED connected, the File Manager shows:
 - **Real-time updates** as you navigate
 
 
+![1760676653009](https://github.com/user-attachments/assets/31541e79-bde0-4219-9542-ee060933ed8a)
 
 
 
