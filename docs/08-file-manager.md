@@ -100,7 +100,7 @@ When using the rotary encoder in the editor:
 
 Yes, you could write code with just the click wheel and the OLED if you really wanted to.
 
-
+![1760676653009](https://github.com/user-attachments/assets/31541e79-bde0-4219-9542-ee060933ed8a)
 
 ### MicroPython Examples
 The File Manager automatically creates example Python scripts in `/python_scripts/examples/`:
@@ -175,7 +175,7 @@ If you have an OLED connected, the File Manager shows:
 - **Real-time updates** as you navigate
 
 
-![1760676653009](https://github.com/user-attachments/assets/31541e79-bde0-4219-9542-ee060933ed8a)
+
 
 
 
