@@ -37,7 +37,29 @@ Locking the connection to the OLED ensures that it stays connected even when you
 ```
  
   
-**_NOTE:_**  You can change both the GPIO used for the display or the rows it connects to with the config options:
+## Custom Startup Message
+
+You can set a custom message to display on the OLED at startup (max 32 characters):
+
+```jython
+`[top_oled] startup_message = Your Message Here;
+```
+
+This message will appear after the Jumperless logo on boot.
+
+## Display Dimensions
+
+If you have a different sized OLED (like 128x64), you can set the dimensions:
+
+```jython
+`[top_oled] width = 128;
+`[top_oled] height = 64;
+```
+
+## Advanced GPIO Configuration
+
+You can change both the GPIO used for the display or the rows it connects to with the config options:
+
 ```jython
 `[top_oled] sda_pin = 26;
 `[top_oled] scl_pin = 27;

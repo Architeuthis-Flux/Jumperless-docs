@@ -19,4 +19,39 @@ It will even sense when Arduino IDE is trying to upload code and twiddle the res
 
 
 ## Commands from Routable UART
-- Starting a UART message (that would normally just be passed through to the second serial port) with `0x02` ([non-printable ASCII code for Start of Text / STX](https://www.ascii-code.com/)) and ending with `0x03` ([End of Text / ETX](https://www.ascii-code.com/)) will cause the Jumperless to interpret that as something that was sent though the menu on the main serial port. So you can send commands to make connections and such while also using serial passthrough.
+
+You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The tags are stripped out and the command is executed as if you typed it in the main menu.
+
+### Supported Tags
+
+Any of these tags will work (use the same tag for opening and closing):
+
+- `<j>command</j>` - Short and sweet
+- `<jumperless>command</jumperless>` - Verbose but clear  
+- `<jumperlessCommand>command</jumperlessCommand>` - Maximum clarity
+
+### Examples
+
+**Make connections from Arduino:**
+```cpp
+Serial1.println("<j>+ 1-2</j>");           // Connect nodes 1 and 2
+Serial1.println("<j>+ A0-D13</j>");        // Connect A0 to D13
+```
+
+**Clear all connections:**
+```cpp
+Serial1.println("<jumperless>x</jumperless>");
+```
+
+**Enter MicroPython REPL:**
+```cpp
+Serial1.println("<jumperlessCommand>p</jumperlessCommand>");
+```
+
+**Load a netlist file:**
+```cpp
+Serial1.println("<j>f</j>");
+Serial1.println("<j>myfile.net</j>");      // Then send the filename
+```
+
+The command executes silently - the tags and command content don't appear in the UART passthrough, so your Arduino sketch won't see them. Perfect for controlling the Jumperless while maintaining normal serial communication.
