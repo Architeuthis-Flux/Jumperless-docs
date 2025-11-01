@@ -79,3 +79,12 @@ https://github.com/user-attachments/assets/f77f6fd5-d005-45db-9c4c-b256390b91fc
 34
 <img width="7098" height="5367" alt="Artboard 13" src="https://github.com/user-attachments/assets/1c91a76d-cacf-40f0-a87b-c952787abb6f" />
 
+35
+<img width="7262" height="3803" alt="Explodraft" src="https://github.com/user-attachments/assets/3f0584fd-2cc1-4036-bf2b-6a18eb98a6d5" />
+
+36
+<img width="1533" height="1533" alt="icon128" src="https://github.com/user-attachments/assets/421de772-4cfe-4b80-b572-a9594132f54e" />
+
+
+
+
