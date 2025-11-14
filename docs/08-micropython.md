@@ -338,7 +338,19 @@ If you want to use *real* multiline mode, use the Kilo file editor.
 - Type `history` to see all saved scripts
 
 
+## Connection Context Switching
 
+The MicroPython REPL now supports **connection contexts** that determine how connections persist:
+
+- **`global` context**: Changes persist to global state - connections remain after exiting Python
+- **`python` context**: Connections are restored to how they were when exiting REPL (saved to `slots/slotPython.yaml`)
+
+**To toggle contexts:** Type `context` in the REPL
+
+**How it works:**
+- In `global` mode: Any connections you make become permanent, just like using the normal command interface
+- In `python` mode: The connection state when you entered the REPL is saved, and restored when you exit
+- The current context is displayed in the REPL prompt
 
 
 ## Built-in Examples

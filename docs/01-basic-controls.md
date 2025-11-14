@@ -26,6 +26,30 @@ If you click the `Connect` button while you're not `holding` a `node`, it will l
 
 To get out of `Connect` mode, press the button again.
 
+### Encoder Connections
+
+You can also make connections using just the clickwheel, without needing to touch the probe to the breadboard:
+
+**To activate:**
+- Navigate to: `Click` > `Connect` > `Add` (or `Remove`)  
+- OR just turn the clickwheel while already in probe mode
+
+**How it works:**
+1. Turn the clickwheel to scroll through all available nodes:
+   - Breadboard rows (1-60)
+   - Nano header pins (D0-A7)
+   - Rails (Top, Bottom, GND)
+   - DAC (0, 1) 
+   - ADC (0-4, Probe)
+   - GPIO (1-8)
+   - UART (TX, RX)
+   - Current sense (I+, I-)
+
+2. Click the encoder button to select the highlighted node
+3. Hold the encoder button to exit
+
+The cursor will automatically hide after 5 seconds of inactivity. This is especially useful when you need precise control or want to access special functions without tapping pads.
+
 ## Removing Rows
 
 Click the `Remove` button
@@ -42,7 +66,7 @@ The special functions work the same way, tap the pad, pick one, and it will remo
 
 **Remember the probe is read by a resistive voltage divider**, so putting your fingers on the pads (or the back sides of the 4 risers that connect those `probe sense` boards to the main board), or anything causing the probe tip not to be at a steady 3.3V will give you weird readings. 
 
-If you can't seem to stop playing with the switch on the probe, run DAC calibration with `$` and the 3.3V `measure` mode puts out should be fairly accurate enough for probing.
+If you can't seem to stop playing with the switch on the probe, run the app `probe calib` and tap around on the board while turning the clickweel until the place you tapped is always spot on (do this with the switch in both modes), and hold the clickwheel button to save. This adjusts the nominal 3.3V `measure` mode puts out should be fairly accurate enough for probing.
 
 
 ## The Click Wheel
@@ -96,9 +120,25 @@ GPIO Pad
 ¹![You can press R in the main menu to toggle this view](https://github.com/user-attachments/assets/33018aec-be8a-4bc0-b309-baeddad4db66)
 
 
-The other 4 `user pads` will be more remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`. The building pads are for overriding colors in `idle mode` (you'll see more about that in [Idle Mode Interactions](#idle-mode-net-highlighting).)
+The 4 `user pads` will be remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`, and `buiding` pads are `Current sense` + and -.
+
+The **building pads** have multiple functions:
+- In `idle mode`: Override colors for net highlighting (see [Idle Mode Interactions](#idle-mode-net-highlighting))
+- In `connect`/`remove` mode: Access **Current Sense (I+/I-)** with marching ants visualization!
 
 ![userPads](https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78)
+
+### Current Sensing with Marching Ants
+
+When you tap either building pad in connect or remove mode, you'll get access to the current sense inputs (I+ and I-). When both I+ and I- are connected to different nets in your circuit:
+
+1. A virtual wire appears between the closest breadboard nodes on each net
+2. Animated "marching ants" flow along this wire showing current direction
+3. The animation automatically picks the optimal breadboard positions for visualization
+
+This gives you real-time visual feedback of where current is flowing in your circuit!
+
+**Important:** I+ and I- are shorted together internally through a 2Ω shunt resistor. Connect them in series with your circuit, not across it!
 
 ---
 
@@ -120,6 +160,7 @@ Here's what's new (all of this is in idle mode):
 
 With a `row` selected, here's what you can do:
 
+<!---
 ### Rail Voltage Adjustment
 
 **Rail / DAC voltages change with `slots`** - each slot can have its own power supply configuration!
@@ -130,22 +171,22 @@ If the highlighted `row` is a `rail` (top or bottom) or `DAC`, `click` the click
 
 **Tip:** You can also tap the `DAC` or `rail` pads to highlight them, then click the encoder to adjust the output directly without connecting anything. Short `hold` the clickwheel button to confirm.
 
+--->
 #### Connect Button
 - `connect` button will bring you into probing mode with the highlighted row already selected and then spit you back out to `idle` mode once you've made a connection to another row, or click `connect` again to exit
 
 #### Remove Button
-- `remove` will briefly turn the `row` reddish `warn` (I need to settle on a good time for this, if it feels too short or long lmk), another `remove` press will remove that `row` (just like in `probe` mode, it removes the `bridge` it's in, so just things that have a direct connection to that `row`, not the whole `net`), if you let it time out without pressing anything, the row will be unhighlighted. 
 
-TL;DR, double click `remove` to remove, single click to unhighlight.
+- `remove` will remove the highlighted `node`
 
-
+<!---
 #### Color Picker
 - tapping the `building top` pad with something highlighted will open the `color picker`, (note: the color now follows the `row` instead of the net, so it can keep the colors even if you remove nets below it and they shift, this was soooo difficult until I realized I should do it by `node`). 
   - Also the color assignments are saved to a file for each slot, so they should work after a reboot and when changing `slots`
   - In the `color picker`, short clicking the probe buttons will zoom in and out, long press will confirm. The click wheel is similar, except you toggle `zoom` and `scroll` modes with short presses and long press to confirm
   - Here's a demo on YouTube
   [![Here's a demo on YouTube](https://img.youtube.com/vi/shE6NSFrH5w/3.jpg)](https://www.youtube.com/watch?v=shE6NSFrH5w)
-
+--->
 ### Measurement Display
 - if the highlighted row is a `measurement` (`gpio input` or `adc`) it will print the state to serial and the oled
 

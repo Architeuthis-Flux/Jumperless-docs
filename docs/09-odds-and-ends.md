@@ -9,6 +9,9 @@ JumperlOS is now a proper operating system with a priority-based task scheduler!
 - **Better fonts** - New fonts available: `Berkeley`, `Iosevka`, `Pragmat[ism]`
 - **YAML connection files** - More permissive of malformed syntax
 - **Unified syntax highlighting** - Works consistently in `eKilo`, `python`, and normal input after `>`
+- **Encoder-based connections** - Use the clickwheel to scroll through and select nodes without touching the probe
+- **Current sensing marching ants** - Animated visual feedback showing current flow direction between I+ and I- connections
+- **Python context switching** - Toggle between `global` and `python` connection contexts in the MicroPython REPL
 
 The JumperlOS firmware repo is at [https://github.com/Architeuthis-Flux/JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS)
 
