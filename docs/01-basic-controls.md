@@ -132,13 +132,25 @@ The **building pads** have multiple functions:
 
 When you tap either building pad in connect or remove mode, you'll get access to the current sense inputs (I+ and I-). When both I+ and I- are connected to different nets in your circuit:
 
-1. A virtual wire appears between the closest breadboard nodes on each net
+1. A virtual wire appears between the two nets containing the `I Sense` nodes
 2. Animated "marching ants" flow along this wire showing current direction
-3. The animation automatically picks the optimal breadboard positions for visualization
 
-This gives you real-time visual feedback of where current is flowing in your circuit!
+ The animation automatically picks the where to put the virtual "wire". It will search other nodes on the same nets that `I sense +` and `I sense -` are on it prefers places where they're on the same level so it can actually draw a connecting wire and not just be vertical lines.
 
-**Important:** I+ and I- are shorted together internally through a 2Ω shunt resistor. Connect them in series with your circuit, not across it!
+
+
+
+<!-- ![](https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0) -->
+
+<video autoplay loop muted playsinline width="60%">
+  <source src="https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+ 
+!!! warning `I Sense +` and `I Sense -` go on different nets but they're shorted internally
+    They're two ends of a 2Ω shunt resistor, so remember that these will be shorted together. You measure current in series so this is expected, but it's super easy to forget. Take this warning as the equivalent of your multimeter yelling at you when you have the probes in the current holes and have it set to voltage.
+
 
 ---
 
