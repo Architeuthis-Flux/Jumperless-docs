@@ -91,7 +91,14 @@ You can change both the GPIO used for the display or the rows it connects to wit
 
 # Bitmap Editor
 
-The built-in bitmap editor lets you create and edit OLED images directly on your Jumperless using your terminal and the clickwheel encoder. Perfect for creating custom startup images, icons, or pixel art!
+The built-in bitmap editor lets you create and edit OLED images directly on your Jumperless using your terminal and the clickwheel.
+
+
+<video autoplay loop muted playsinline controls width="70%">
+  <source src="https://github.com/user-attachments/assets/9c716bdf-33bc-4af8-b618-852852049017" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 ## Accessing the Bitmap Editor
 
@@ -386,6 +393,7 @@ python image_to_oled_bitmap.py input.png output.bin --width 128 --height 32
 ```
 
 The script will:
+
 1. Resize your image to fit the OLED dimensions
 2. Convert to 1-bit (black/white) format
 3. Save with proper header format
