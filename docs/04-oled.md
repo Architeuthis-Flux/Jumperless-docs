@@ -361,6 +361,7 @@ File:
 Cursor Colors:
   Green background - Pixel is OFF
   Red background   - Pixel is ON
+  
   ```
 
 
