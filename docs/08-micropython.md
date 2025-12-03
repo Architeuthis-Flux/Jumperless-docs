@@ -110,17 +110,20 @@ gpio_set_dir(2, False)  # Set GPIO 2 as INPUT
 gpio_set(1, True)       # Set GPIO 1 HIGH
 gpio_set(1, False)      # Set GPIO 1 LOW
 
-# Read GPIO state (returns "HIGH" or "LOW")
-state = gpio_get(2)     # Returns formatted string
+# Read GPIO state - returns GPIOState object (prints as "HIGH", "LOW", or "FLOATING")
+state = gpio_get(2)
+print(state)            # Prints "HIGH", "LOW", or "FLOATING"
+if state:               # GPIOState is truthy when HIGH, falsy when LOW/FLOATING
+    print("It's HIGH!")
 
 # Configure pull resistors
 gpio_set_pull(3, 1)     # Enable pull-up
 gpio_set_pull(3, -1)    # Enable pull-down
 gpio_set_pull(3, 0)     # No pull resistor
 
-# Read GPIO configuration (returns formatted strings)
-direction = gpio_get_dir(1)    # Returns "INPUT" or "OUTPUT"
-pull = gpio_get_pull(2)        # Returns "PULLUP", "PULLDOWN", or "NONE"
+# Read GPIO configuration - returns custom types that print nicely
+direction = gpio_get_dir(1)    # Prints "INPUT" or "OUTPUT"
+pull = gpio_get_pull(2)        # Prints "PULLUP", "PULLDOWN", or "NONE"
 
 # Available GPIO pins: 1-8 (GPIO 1-8), 9 (UART Tx), 10 (UART Rx)
 ```
@@ -147,6 +150,34 @@ pwm_stop(1)             # Stop PWM on GPIO_1
 ```
 ![Screenshot 2025-07-04 at 7 22 35 PM](https://github.com/user-attachments/assets/5b5f884f-f459-4a31-9f21-89d084594f97)
 ![Screenshot 2025-07-04 at 7 31 19 PM](https://github.com/user-attachments/assets/c7bdb245-59a4-46db-9c52-fcc43c1f359e)
+
+## WaveGen (Waveform Generator)
+```jython
+# Basic sine wave generation
+wavegen_set_output(DAC1)      # Output on DAC1
+wavegen_set_wave(SINE)        # Sine wave
+wavegen_set_freq(100)         # 100 Hz
+wavegen_set_amplitude(3.3)    # 3.3V peak-to-peak
+wavegen_set_offset(1.65)      # Center at 1.65V (0 to 3.3V range)
+wavegen_start()               # Start generating
+
+# Available waveforms: SINE, TRIANGLE, SAWTOOTH (or RAMP), SQUARE
+
+# Change parameters while running
+wavegen_set_wave(TRIANGLE)
+wavegen_set_freq(50)
+
+# Check status
+if wavegen_is_running():
+    freq = wavegen_get_freq()
+    print("Running at " + str(freq) + " Hz")
+
+# Stop generation
+wavegen_stop()
+
+# Sweep configuration (for scripts that use it)
+wavegen_set_sweep(20, 2000, 5)  # Sweep from 20Hz to 2000Hz over 5 seconds
+```
 
 ## Current Sensing (INA219)
 ```jython
@@ -210,12 +241,74 @@ pause_core2(True)          # Pause core2 processing
 pause_core2(False)         # Resume core2 processing
 send_raw("A", 1, 2, 1)     # Send raw data to core2 (chip A, pos 1,2, set)
 
+# Connection context - controls whether changes persist after exiting Python
+context_toggle()           # Toggle between 'global' and 'python' modes
+print(context_get())       # Shows current mode: "global" or "python"
+
 # Show help
 help()                # Display all available functions
 nodes_help()          # Show all available node names and aliases
 ```
 
 The [help()](#the-entire-output-of-help) and [nodes_help()](#the-entire-output-of-nodes_help) functions will list all the available commands (except for the new ones I forget to update)
+
+## Slot Management
+```jython
+# Save current connections to current slot
+nodes_save()
+
+# Save to a specific slot (0-7)
+nodes_save(3)
+
+# Switch to a different slot
+old = switch_slot(2)
+print("Switched from slot " + str(old) + " to slot 2")
+
+# Check for unsaved changes
+if nodes_has_changes():
+    print("You have unsaved changes!")
+    nodes_save()  # Save them
+
+# Discard changes and restore last saved state
+nodes_discard()
+```
+
+## Net Information
+```jython
+# Get info about nets (groups of connected nodes)
+num_nets = get_num_nets()
+print("Active nets: " + str(num_nets))
+
+# Get and set net names
+name = get_net_name(6)
+set_net_name(7, "VCC")
+set_net_name(6, "Signal_In")
+
+# Get and set net colors
+color_name = get_net_color_name(6)
+print("Net 6 is " + color_name)
+
+# Set colors by name
+set_net_color(6, "red")
+set_net_color(7, "cyan")
+set_net_color(8, "pink")
+
+# Set colors by hex
+set_net_color(6, "#FF00FF")  # Magenta
+set_net_color(7, "0x00FF00")  # Green
+
+# Get full net info as a dictionary
+info = get_net_info(6)
+print("Name: " + info['name'])
+print("Color: " + info['color_name'])
+print("Nodes: " + info['nodes'])
+
+# List all bridges
+num_bridges = get_num_bridges()
+for i in range(num_bridges):
+    bridge = get_bridge(i)
+    print("Bridge " + str(i) + ": " + str(bridge))
+```
 
 
 
@@ -243,8 +336,8 @@ for i in range(10):
     gpio_set(1, False)
     time.sleep(0.5)
     
-    # Read input
-    if gpio_get(2) == "HIGH":
+    # Read input (gpio_get returns truthy for HIGH, falsy for LOW)
+    if gpio_get(2):
         print("Button pressed!")
 
 # Cleanup
@@ -376,18 +469,26 @@ Example scripts include:
 
 
 ## Formatted Output and Custom Types
-The Jumperless module provides formatted output for better readability:
+The Jumperless module returns custom types that print nicely but also work in conditionals:
 
 ```jython
-# GPIO state returns formatted strings
-state = gpio_get(1)           # Returns "HIGH" or "LOW"
-direction = gpio_get_dir(1)   # Returns "INPUT" or "OUTPUT"
-pull = gpio_get_pull(1)       # Returns "PULLUP", "PULLDOWN", or "NONE"
+# GPIO functions return custom types that print as readable strings
+state = gpio_get(1)           # Prints "HIGH", "LOW", or "FLOATING"
+direction = gpio_get_dir(1)   # Prints "INPUT" or "OUTPUT"
+pull = gpio_get_pull(1)       # Prints "PULLUP", "PULLDOWN", or "NONE"
 
-# Connection status returns formatted strings
-connected = is_connected(1, 5) # Returns "CONNECTED" (truthy) or "DISCONNECTED" (falsey)
+# These types are also truthy/falsy for use in conditionals:
+if gpio_get(1):               # True if HIGH, False if LOW or FLOATING
+    print("Pin is HIGH")
+if gpio_get_dir(1):           # True if OUTPUT, False if INPUT
+    print("Pin is output")
 
-# Voltage and current readings are automatically formatted
+# Connection status works the same way
+connected = is_connected(1, 5) # Prints "CONNECTED" or "DISCONNECTED"
+if connected:                  # True if connected, False if not
+    print("Nodes are connected")
+
+# Voltage and current readings are floats
 voltage = adc_get(0)          # Returns float (e.g., 3.300)
 current = ina_get_current(0)  # Returns float in A (e.g., 0.0123)
 power = ina_get_power(0)      # Returns float in W (e.g., 0.4567)
@@ -499,45 +600,57 @@ NANO_3V3 = 98         # Unconnected (without bridging the solder jumper on the b
 
 ```jython
 >>> help()
+help()
 Jumperless Native MicroPython Module
-Hardware Control Functions with Formatted Output:
-(GPIO functions return formatted strings like HIGH/LOW, INPUT/OUTPUT, PULLUP/NONE, CONNECTED/DISCONNECTED)
+Available help sections:
+
+  help() or help("all")     - Show all functions
+  help("DAC")              - DAC functions
+  help("ADC")              - ADC functions
+  help("GPIO")             - GPIO functions
+  help("PWM")              - PWM functions
+  help("WAVEGEN")          - Waveform generator
+  help("INA")              - INA current/power monitor
+  help("NODES")            - Node connections
+  help("NETS")             - Net info (names, colors)
+  help("SLOTS")            - Slot management
+  help("OLED")             - OLED display
+  help("PROBE")            - Probe and button functions
+  help("STATUS")           - Status and debug functions
+  help("FILESYSTEM")       - Filesystem functions
+  help("MISC")             - Miscellaneous functions
+  help("EXAMPLES")         - Usage examples
 
 DAC (Digital-to-Analog Converter):
-  jumperless.dac_set(channel, voltage)         - Set DAC output voltage
-  jumperless.dac_get(channel)                  - Get DAC output voltage
-  jumperless.set_dac(channel, voltage)         - Alias for dac_set
-  jumperless.get_dac(channel)                  - Alias for dac_get
+
+   dac_set(channel, voltage)         - Set DAC output voltage
+   dac_get(channel)                  - Get DAC output voltage
+   set_dac(channel, voltage)         - Alias for dac_set
+   get_dac(channel)                  - Alias for dac_get
 
           channel: 0-3, DAC0, DAC1, TOP_RAIL, BOTTOM_RAIL
           channel 0/DAC0: DAC 0
           channel 1/DAC1: DAC 1
           channel 2/TOP_RAIL: top rail
           channel 3/BOTTOM_RAIL: bottom rail
-            voltage: -8.0 to 8.0V
+          voltage: -8.0 to 8.0V
 
 ADC (Analog-to-Digital Converter):
-  jumperless.adc_get(channel)                  - Read ADC input voltage
-  jumperless.get_adc(channel)                  - Alias for adc_get
+
+   adc_get(channel)                  - Read ADC input voltage
+   get_adc(channel)                  - Alias for adc_get
 
                                               channel: 0-4
 
-INA (Current/Power Monitor):
-  jumperless.ina_get_current(sensor)          - Read current in amps
-  jumperless.ina_get_voltage(sensor)          - Read shunt voltage
-  jumperless.ina_get_bus_voltage(sensor)      - Read bus voltage
-  jumperless.ina_get_power(sensor)            - Read power in watts
-  Aliases: get_current, get_voltage, get_bus_voltage, get_power
-
-             sensor: 0 or 1
-
 GPIO:
-  jumperless.gpio_set(pin, value)             - Set GPIO pin state
-  jumperless.gpio_get(pin)                    - Read GPIO pin state
-  jumperless.gpio_set_dir(pin, direction)     - Set GPIO pin direction
-  jumperless.gpio_get_dir(pin)                - Get GPIO pin direction
-  jumperless.gpio_set_pull(pin, pull)         - Set GPIO pull-up/down
-  jumperless.gpio_get_pull(pin)               - Get GPIO pull-up/down
+
+   gpio_set(pin, value)             - Set GPIO pin state
+   gpio_get(pin)                    - Read GPIO pin state
+   gpio_set_dir(pin, direction)     - Set GPIO pin direction
+   gpio_get_dir(pin)                - Get GPIO pin direction
+   gpio_set_pull(pin, pull)         - Set GPIO pull-up/down
+   gpio_get_pull(pin)               - Get GPIO pull-up/down
+
   Aliases: set_gpio, get_gpio, set_gpio_dir, get_gpio_dir, etc.
 
             pin 1-8: GPIO 1-8
@@ -548,114 +661,148 @@ GPIO:
                pull: -1/0/1       for PULL_DOWN/NONE/PULL_UP
 
 PWM (Pulse Width Modulation):
-  jumperless.pwm(pin, [frequency], [duty])    - Setup PWM on GPIO pin
-  jumperless.pwm_set_duty_cycle(pin, duty)    - Set PWM duty cycle
-  jumperless.pwm_set_frequency(pin, freq)     - Set PWM frequency
-  jumperless.pwm_stop(pin)                    - Stop PWM on pin
+
+   pwm(pin, [frequency], [duty])    - Setup PWM on GPIO pin
+   pwm_set_duty_cycle(pin, duty)    - Set PWM duty cycle
+   pwm_set_frequency(pin, freq)     - Set PWM frequency
+   pwm_stop(pin)                    - Stop PWM on pin
+
   Aliases: set_pwm, set_pwm_duty_cycle, set_pwm_frequency, stop_pwm
 
              pin: 1-8       GPIO pins only
-       frequency: 0.001-62500000 default 1000Hz
+       frequency: 0.001Hz-62.5MHz default 1000Hz
       duty_cycle: 0.0-1.0   default 0.5 (50%)
-  **Frequency Ranges:**
-  - Hardware PWM: 10Hz to 62.5MHz (high precision)
-  - Slow PWM: 0.001Hz to 10Hz (hardware timer based)
-  - Automatic mode selection based on frequency
+
+WaveGen (Waveform Generator):
+
+   wavegen_set_output(channel)      - Set output: DAC0, DAC1, TOP_RAIL, BOTTOM_RAIL
+   wavegen_set_freq(hz)             - Set frequency (0.0001-10000 Hz)
+   wavegen_set_wave(shape)          - Set waveform shape
+   wavegen_set_amplitude(vpp)       - Set amplitude (0-16 Vpp)
+   wavegen_set_offset(v)            - Set DC offset (-8 to +8 V)
+   wavegen_start()                  - Start waveform generation
+   wavegen_stop()                   - Stop waveform generation
+
+  Getters: wavegen_get_output(), wavegen_get_freq(), wavegen_get_wave(),
+           wavegen_get_amplitude(), wavegen_get_offset(), wavegen_is_running()
+
+  Waveform constants: SINE, TRIANGLE, SAWTOOTH (RAMP), SQUARE
+
+INA (Current/Power Monitor):
+
+   ina_get_current(sensor)          - Read current in amps
+   ina_get_voltage(sensor)          - Read shunt voltage
+   ina_get_bus_voltage(sensor)      - Read bus voltage
+   ina_get_power(sensor)            - Read power in watts
+
+  Aliases: get_current, get_voltage, get_bus_voltage, get_power
+
+             sensor: 0 or 1
 
 Node Connections:
-  jumperless.connect(node1, node2)            - Connect two nodes
-  jumperless.disconnect(node1, node2)         - Disconnect nodes
-  jumperless.is_connected(node1, node2)       - Check if nodes are connected
 
-  jumperless.nodes_clear()                    - Clear all connections
+   connect(node1, node2)            - Connect two nodes
+   disconnect(node1, node2)         - Disconnect nodes
+   is_connected(node1, node2)       - Check if nodes are connected
+   nodes_clear()                    - Clear all connections
+
          set node2 to -1 to disconnect everything connected to node1
 
+Net Information:
+
+   get_net_name(netNum)             - Get net name
+   set_net_name(netNum, name)       - Set custom net name
+   get_net_color(netNum)            - Get net color as 0xRRGGBB
+   get_net_color_name(netNum)       - Get net color name
+   set_net_color(netNum, color)     - Set net color by name or hex
+   get_num_nets()                   - Get number of active nets
+   get_num_bridges()                - Get number of bridges
+   get_net_nodes(netNum)            - Get comma-separated node list
+   get_bridge(bridgeIdx)            - Get bridge info tuple
+   get_net_info(netNum)             - Get full net info as dict
+
+  Colors: red, orange, yellow, green, cyan, blue, purple, pink, etc.
+
+Slot Management:
+
+   nodes_save([slot])               - Save connections to slot
+   nodes_discard()                  - Discard unsaved changes
+   nodes_has_changes()              - Check for unsaved changes
+   switch_slot(slot)                - Switch to different slot (0-7)
+   CURRENT_SLOT                     - Get current slot number
+
+  Context (controls persistence):
+   context_toggle()                 - Toggle global/python mode
+   context_get()                    - Get current mode name
+
 OLED Display:
-  jumperless.oled_print("text")               - Display text
-  jumperless.oled_clear()                     - Clear display
-  jumperless.oled_connect()                   - Connect OLED
-  jumperless.oled_disconnect()                - Disconnect OLED
 
-Clickwheel:
-  jumperless.clickwheel_up([clicks])          - Scroll up
-  jumperless.clickwheel_down([clicks])        - Scroll down
-  jumperless.clickwheel_press()               - Press button
-           clicks: number of steps
-
-Status:
-  jumperless.print_bridges()                  - Print all bridges
-  jumperless.print_paths()                    - Print path between nodes
-  jumperless.print_crossbars()                - Print crossbar array
-  jumperless.print_nets()                     - Print nets
-  jumperless.print_chip_status()              - Print chip status
+   oled_print("text")               - Display text
+   oled_clear()                     - Clear display
+   oled_connect()                   - Connect OLED
+   oled_disconnect()                - Disconnect OLED
 
 Probe Functions:
-  jumperless.probe_read([blocking=True])      - Read probe (default: blocking)
-  jumperless.read_probe([blocking=True])      - Read probe (default: blocking)
-  jumperless.probe_read_blocking()            - Wait for probe touch (explicit)
-  jumperless.probe_read_nonblocking()         - Check probe immediately (explicit)
-  jumperless.get_button([blocking=True])      - Get button state (default: blocking)
-  jumperless.probe_button([blocking=True])    - Get button state (default: blocking)
-  jumperless.probe_button_blocking()          - Wait for button press (explicit)
-  jumperless.probe_button_nonblocking()       - Check buttons immediately (explicit)
-  Touch aliases: probe_wait, wait_probe, probe_touch, wait_touch (always blocking)
-  Button aliases: button_read, read_button (parameterized)
-  Non-blocking only: check_button, button_check
-  Touch returns: ProbePad object (1-60, D13_PAD, TOP_RAIL_PAD, LOGO_PAD_TOP, etc.)
-  Button returns: CONNECT, REMOVE, or NONE (front=connect, rear=remove)
+
+   probe_read([blocking=True])      - Read probe (default: blocking)
+   read_probe([blocking=True])      - Read probe (default: blocking)
+   probe_read_blocking()            - Wait for probe touch (explicit)
+   probe_read_nonblocking()         - Check probe immediately (explicit)
+   get_button([blocking=True])      - Get button state (default: blocking)
+   probe_button([blocking=True])    - Get button state (default: blocking)
+   probe_button_blocking()          - Wait for button press (explicit)
+   probe_button_nonblocking()       - Check buttons immediately (explicit)
+
+       Touch returns: ProbePad object (1-60, D13_PAD, TOP_RAIL_PAD, LOGO_PAD_TOP, etc.)
+       Button returns: CONNECT, REMOVE, or NONE (front=connect, rear=remove)
+
+Status:
+
+   print_bridges()                  - Print all bridges
+   print_paths()                    - Print path between nodes
+   print_crossbars()                - Print crossbar array
+   print_nets()                     - Print nets
+   print_chip_status()              - Print chip status
+
+Filesystem:
+
+  jfs.open(path, mode)              - Open file
+  jfs.read(file, size)              - Read from file
+  jfs.write(file, data)             - Write to file
+  jfs.close(file)                   - Close file
+  jfs.exists(path)                  - Check if file exists
+  jfs.listdir(path)                 - List directory
+  jfs.mkdir(path)                   - Create directory
+  jfs.remove(path)                  - Remove file
+  jfs.rename(from, to)              - Rename file
+  jfs.info()                        - Get filesystem info
 
 Misc:
-  jumperless.arduino_reset()                  - Reset Arduino
-  jumperless.probe_tap(node)                  - Tap probe on node (unimplemented)
-  jumperless.run_app(appName)                 - Run app
-  jumperless.pause_core2(pause)               - Pause/resume core2 processing
-  jumperless.send_raw(chip, x, y, setOrClear) - Send raw data to core2
-  jumperless.format_output(True/False)        - Enable/disable formatted output
 
-Help:
-  jumperless.help()                           - Display this help
-
-Node Names:
-  jumperless.node("TOP_RAIL")                  - Create node from string name
-  jumperless.TOP_RAIL                        - Pre-defined node constant
-  jumperless.D2, jumperless.A0, etc.         - Arduino pin constants
-  For global access: from jumperless_nodes import *
-  Node names: All standard names like "D13", "A0", "GPIO_1", etc.
+   arduino_reset()                  - Reset Arduino
+   run_app(appName)                 - Run built-in app
+   pause_core2(pause)               - Pause/unpause Core2 (True/False)
+   send_raw(chip, x, y, set)        - Send raw data to crossbar chip
 
 Examples (all functions available globally):
-  dac_set(TOP_RAIL, 3.3)                     # Set Top Rail to 3.3V using node
-  set_dac(3, 3.3)                            # Same as above using alias
+
   dac_set(DAC0, 5.0)                         # Set DAC0 using node constant
   voltage = get_adc(1)                       # Read ADC1 using alias
   connect(TOP_RAIL, D13)                     # Connect using constants
-  connect("TOP_RAIL", 5)                      # Connect using strings
   connect(4, 20)                             # Connect using numbers
-  top_rail = node("TOP_RAIL")                 # Create node object
-  connect(top_rail, D13)                     # Mix objects and constants
-  oled_print("Fuck you!")                    # Display text
+  top_rail = node("TOP_RAIL")                # Create node object
+  oled_print("Hello!")                       # Display text on OLED
   current = get_current(0)                   # Read current using alias
-  set_gpio(1, True)                          # Set GPIO pin high using alias
-  pwm(1, 1000, 0.5)                         # Hardware PWM: 1kHz, 50% duty
-  pwm(2, 0.1, 0.25)                         # Slow PWM: 0.1Hz, 25% duty
-  pwm(3, 0.001, 0.5)                        # Ultra-slow PWM: 0.001Hz, 50% duty
+  set_gpio(1, True)                          # Set GPIO pin high
+  pwm(1, 1000, 0.5)                          # 1kHz PWM, 50% duty
+  wavegen_set_wave(SINE); wavegen_start()    # Start sine wave
+  set_net_color(0, "red")                    # Color net 0 red
+  nodes_save()                               # Save current connections
   pad = probe_read()                         # Wait for probe touch
-  if pad == 25: print('Touched pad 25!')    # Check specific pad
-  if pad == D13_PAD: connect(D13, TOP_RAIL)  # Auto-connect Arduino pin
-  if pad == TOP_RAIL_PAD: show_voltage()     # Show rail voltage
-  if pad == LOGO_PAD_TOP: print('Logo!')    # Check logo pad
-  button = get_button()                      # Wait for button press (blocking)
-  if button == CONNECT_BUTTON: ...          # Front button pressed
-  if button == REMOVE_BUTTON: ...           # Rear button pressed
-  button = check_button()                   # Check buttons immediately
-  if button == BUTTON_NONE: print('None')   # No button pressed
-  pad = wait_touch()                        # Wait for touch
-  btn = check_button()                      # Check button immediately
-  if pad == D13_PAD and btn == CONNECT_BUTTON: connect(D13, TOP_RAIL)
-  pause_core2(True)                         # Pause core2 processing
-  send_raw("A", 1, 2, 1)                    # Send raw data to core2
+  button = get_button()                      # Wait for button press
 
-Note: All functions and constants are available globally!
-No need for 'jumperless.' prefix in REPL or single commands.
+
+
 
 >>> 
 ```

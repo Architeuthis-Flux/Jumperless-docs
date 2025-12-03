@@ -60,7 +60,8 @@ class JumperlessPythonLexer(PythonLexer):
         'probe_read', 'read_probe', 'probe_read_blocking', 'probe_read_nonblocking',
         'get_button', 'probe_button', 'probe_button_blocking', 'probe_button_nonblocking',
         'probe_wait', 'wait_probe', 'probe_touch', 'wait_touch', 'button_read', 'read_button',
-        'check_button', 'button_check', 'arduino_reset', 'probe_tap', 'run_app', 'format_output',
+        'check_button', 'button_check', 'arduino_reset', 'probe_tap', 'run_app',
+        'pause_core2', 'send_raw', 'context_toggle', 'context_get',
         'nodes_help', 'help',
         
         # PWM Functions
