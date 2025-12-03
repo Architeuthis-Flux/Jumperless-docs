@@ -38,6 +38,7 @@ class JumperlessPythonLexer(PythonLexer):
         
         # INA (Current/Voltage Sensor) Functions
         'ina_get_current', 'ina_get_voltage', 'ina_get_bus_voltage', 'ina_get_power',
+        'get_ina_current', 'get_ina_voltage', 'get_ina_bus_voltage', 'get_ina_power',
         'get_current', 'get_voltage', 'get_bus_voltage', 'get_power',
         
         # GPIO Functions
@@ -46,6 +47,12 @@ class JumperlessPythonLexer(PythonLexer):
         
         # Connection Functions
         'connect', 'disconnect', 'is_connected', 'nodes_clear', 'node',
+        'nodes_save', 'nodes_discard', 'nodes_has_changes', 'switch_slot',
+        
+        # Net Information API
+        'get_net_name', 'set_net_name', 'get_net_color', 'get_net_color_name', 'set_net_color',
+        'get_num_nets', 'get_num_bridges', 'get_net_nodes', 'get_bridge', 'get_net_info',
+        'net_name', 'net_color', 'net_info',
         
         # OLED Functions
         'oled_print', 'oled_clear', 'oled_connect', 'oled_disconnect', 'oled_show',
@@ -60,15 +67,19 @@ class JumperlessPythonLexer(PythonLexer):
         'probe_read', 'read_probe', 'probe_read_blocking', 'probe_read_nonblocking',
         'get_button', 'probe_button', 'probe_button_blocking', 'probe_button_nonblocking',
         'probe_wait', 'wait_probe', 'probe_touch', 'wait_touch', 'button_read', 'read_button',
-        'check_button', 'button_check', 'arduino_reset', 'probe_tap', 'run_app',
-        'pause_core2', 'send_raw', 'context_toggle', 'context_get',
+        'check_button', 'button_check', 'probe_tap',
+        
+        # System/Misc Functions
+        'arduino_reset', 'run_app', 'pause_core2', 'send_raw',
+        'context_toggle', 'context_get',
+        'change_terminal_color', 'cycle_term_color',
+        
+        # Help Functions
         'nodes_help', 'help',
         
         # PWM Functions
-        'pwm', 'pwm_set_duty_cycle', 'pwm_set_frequency', 'pwm_stop', 'set_pwm', 'set_pwm_duty_cycle', 'set_pwm_frequency', 'stop_pwm',
-        
-        # System Functions
-        'pause_core2', 'send_raw',
+        'pwm', 'pwm_set_duty_cycle', 'pwm_set_frequency', 'pwm_stop',
+        'set_pwm', 'set_pwm_duty_cycle', 'set_pwm_frequency', 'stop_pwm',
 
         # Wavegen Functions
         'wavegen_set_output', 'set_wavegen_output',
@@ -86,45 +97,94 @@ class JumperlessPythonLexer(PythonLexer):
         'wavegen_get_offset', 'get_wavegen_offset',
         'wavegen_is_running',
         
+        # Logic Analyzer Functions
+        'la_set_trigger', 'la_capture_single_sample', 'la_start_continuous_capture',
+        'la_stop_capture', 'la_is_capturing', 'la_set_sample_rate', 'la_set_num_samples',
+        'la_enable_channel', 'la_set_control_analog', 'la_set_control_digital',
+        'la_get_control_analog', 'la_get_control_digital',
+        
+        # Legacy Filesystem Functions
+        'fs_exists', 'fs_listdir', 'fs_read', 'fs_write', 'fs_cwd',
     }
 
     JUMPERLESS_CONSTANTS = {
-        # Rails and Power
-        'TOP_RAIL', 'BOTTOM_RAIL', 'GND',
+        # Rails and Power (with aliases)
+        'TOP_RAIL', 'T_RAIL', 'BOTTOM_RAIL', 'BOT_RAIL', 'B_RAIL', 'GND',
         
-        # DAC/ADC
-        'DAC0', 'DAC1', 'ADC0', 'ADC1', 'ADC2', 'ADC3', 'ADC4',
+        # DAC/ADC (with aliases)
+        'DAC0', 'DAC_0', 'DAC1', 'DAC_1',
+        'ADC0', 'ADC1', 'ADC2', 'ADC3', 'ADC4', 'ADC7',
         
-        # Special Functions
-        'PROBE', 'ISENSE_PLUS', 'ISENSE_MINUS', 'UART_TX', 'UART_RX', 'BUFFER_IN', 'BUFFER_OUT',
+        # Special Functions (with aliases)
+        'PROBE', 'UART_TX', 'TX', 'UART_RX', 'RX',
+        'ISENSE_PLUS', 'ISENSE_P', 'I_P', 'CURRENT_SENSE_PLUS', 'CURRENT_SENSE_P',
+        'ISENSE_MINUS', 'ISENSE_N', 'I_N', 'CURRENT_SENSE_MINUS', 'CURRENT_SENSE_N',
+        'BUFFER_IN', 'BUF_IN', 'BUFFER_OUT', 'BUF_OUT',
         
-        # GPIO
+        # GPIO (with aliases)
         'GPIO_1', 'GPIO_2', 'GPIO_3', 'GPIO_4', 'GPIO_5', 'GPIO_6', 'GPIO_7', 'GPIO_8',
+        'GP1', 'GP2', 'GP3', 'GP4', 'GP5', 'GP6', 'GP7', 'GP8',
+        'GPIO_20', 'GPIO_21', 'GPIO_22', 'GPIO_23', 'GPIO_24', 'GPIO_25', 'GPIO_26', 'GPIO_27',
         
-        # Arduino Digital Pins
+        # GPIO States
+        'HIGH', 'LOW', 'FLOATING',
+        
+        # GPIO Directions
+        'INPUT', 'OUTPUT',
+        
+        # Arduino Digital Pins (with NANO_ aliases)
         'D0', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12', 'D13',
+        'NANO_D0', 'NANO_D1', 'NANO_D2', 'NANO_D3', 'NANO_D4', 'NANO_D5', 'NANO_D6', 'NANO_D7',
+        'NANO_D8', 'NANO_D9', 'NANO_D10', 'NANO_D11', 'NANO_D12', 'NANO_D13',
         
-        # Arduino Analog Pins
+        # Arduino Analog Pins (with NANO_ aliases)
         'A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7',
+        'NANO_A0', 'NANO_A1', 'NANO_A2', 'NANO_A3', 'NANO_A4', 'NANO_A5', 'NANO_A6', 'NANO_A7',
         
-        # Pads
-        'D13_PAD', 'TOP_RAIL_PAD', 'BOTTOM_RAIL_PAD', 'LOGO_PAD_TOP', 'LOGO_PAD_BOTTOM',
+        # Probe Pad Constants
+        'NO_PAD', 'LOGO_PAD_TOP', 'LOGO_PAD_BOTTOM',
+        'GPIO_PAD', 'DAC_PAD', 'ADC_PAD',
+        'BUILDING_PAD_TOP', 'BUILDING_PAD_BOTTOM',
+        
+        # Arduino Digital Pin Pads
+        'D0_PAD', 'D1_PAD', 'D2_PAD', 'D3_PAD', 'D4_PAD', 'D5_PAD', 'D6_PAD', 'D7_PAD',
+        'D8_PAD', 'D9_PAD', 'D10_PAD', 'D11_PAD', 'D12_PAD', 'D13_PAD',
+        'RESET_PAD', 'AREF_PAD',
+        
+        # Arduino Analog Pin Pads
+        'A0_PAD', 'A1_PAD', 'A2_PAD', 'A3_PAD', 'A4_PAD', 'A5_PAD', 'A6_PAD', 'A7_PAD',
+        
+        # Rail Pads
+        'TOP_RAIL_PAD', 'BOTTOM_RAIL_PAD', 'BOT_RAIL_PAD',
+        'TOP_RAIL_GND', 'TOP_GND_PAD', 'BOTTOM_RAIL_GND', 'BOT_RAIL_GND', 'BOTTOM_GND_PAD', 'BOT_GND_PAD',
+        
+        # Nano Power/Control Pads
+        'NANO_VIN', 'VIN_PAD', 'NANO_RESET_0', 'RESET_0_PAD', 'NANO_RESET_1', 'RESET_1_PAD',
+        'NANO_GND_0', 'GND_0_PAD', 'NANO_GND_1', 'GND_1_PAD',
+        'NANO_3V3', '3V3_PAD', 'NANO_5V', '5V_PAD',
         
         # Button States
-        'CONNECT_BUTTON', 'REMOVE_BUTTON', 'BUTTON_NONE', 'CONNECT', 'REMOVE', 'NONE',
+        'BUTTON_NONE', 'BUTTON_CONNECT', 'BUTTON_REMOVE',
+        'CONNECT_BUTTON', 'REMOVE_BUTTON',
 
         # Wavegen constants
         'SINE', 'TRIANGLE', 'SAWTOOTH', 'SQUARE', 'RAMP', 'ARBITRARY',
+        
+        # Slot Management
+        'CURRENT_SLOT',
     }
 
     JFS_FUNCTIONS = {
-        # File operations
+        # Module-level file operations
         'open', 'read', 'write', 'close', 'seek', 'tell', 'size', 'available',
+        
+        # File object methods (used as f.method())
+        'print', 'flush', 'position', 'name',
         
         # Directory operations
         'exists', 'listdir', 'mkdir', 'rmdir', 'remove', 'rename', 'stat', 'info',
         
-        # Filesystem functions
+        # Legacy filesystem functions (jumperless.fs_*)
         'fs_exists', 'fs_listdir', 'fs_read', 'fs_write', 'fs_cwd',
     }
 #keep jfs in here, we'll use it for random stuff too
