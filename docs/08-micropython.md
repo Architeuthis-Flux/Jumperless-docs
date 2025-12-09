@@ -13,7 +13,7 @@ This guide covers how to write, load, and run Python scripts that control Jumper
 7. [Examples and Demos](#examples-and-demos)
 8. [Troubleshooting](#troubleshooting) -->
 
-#### If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
+If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
 
 
 ## Now you can live code with [Viper IDE](https://viper-ide.org/)!
@@ -41,10 +41,15 @@ Press it again to Stop. If you make changes, hit the green Save button next to i
 ### If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)
 
 
+This is using [MicroPython's built-in Raw REPL](https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode), so anything that can interact with that will work here. I've only tested with Viper IDE but I'm pretty sure just about anything else would work.
+
+
 There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in ViperIDE.) You can grab them here:
 
 ### [jumperless.py](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py)
 ### [jumperless.pyi](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi)
+
+
 
 
 
@@ -283,7 +288,7 @@ help()                # Display all available functions
 nodes_help()          # Show all available node names and aliases
 ```
 
-The [help()](#the-entire-output-of-help) and [nodes_help()](#the-entire-output-of-nodes_help) functions will list all the available commands (except for the new ones I forget to update)
+The [help()](09.5-micropythonAPIreference.md#the-entire-output-of-help) and [nodes_help()](09.5-micropythonAPIreference.md#the-entire-output-of-nodes_help) functions will list all the available commands (except for the new ones I forget to update)
 
 ## Slot Management
 ```jython

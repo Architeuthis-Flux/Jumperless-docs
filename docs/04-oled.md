@@ -13,9 +13,10 @@ Ignore the really cool LEDs.
 They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.
 ![SBCBP-4 copy](https://github.com/user-attachments/assets/43232b06-380d-4e18-9aab-924e45790740)
 
-## Functionality
+Yo
 
-This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. (if I missed something, let me know, it's a fairly new thing so I've probably forgot to add code for it to print in a bunch of places.)
+
+This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. 
 
 ## Connection
 
@@ -89,7 +90,13 @@ You can change both the GPIO used for the display or the rows it connects to wit
 `[top_oled] scl_row = D3;
 ```
 
-# Bitmap Editor
+## Connection type
+
+```jython
+`[top_oled] connection_type = rp6_rp7;
+```
+
+## Bitmap Editor
 
 The built-in bitmap editor lets you create and edit OLED images directly on your Jumperless using your terminal and the clickwheel.
 
@@ -310,6 +317,7 @@ Quarter Block view (2×2 compression - each character is 4 pixels):
 ```
 
 The output of `?`
+
 ```jython
 === Bitmap Editor Help ===
 
@@ -361,8 +369,9 @@ File:
 Cursor Colors:
   Green background - Pixel is OFF
   Red background   - Pixel is ON
+
   
-  ```
+```
 
 
 
@@ -384,7 +393,7 @@ The editor automatically adds headers when saving, making files ready to use as 
 
 ## Converting External Images
 
-Want to use your own images? The Jumperless repository includes Python scripts to convert PNG/JPG images to OLED bitmaps:
+Want to use your own images? The JumperlOS repository includes Python scripts to convert PNG/JPG images to OLED bitmaps:
 
 **Location:** `JumperlOS/scripts/image_to_oled_bitmap.py`
 
@@ -401,3 +410,5 @@ The script will:
 4. Output is ready to use as a startup image or edit in the bitmap editor
 
 Then you can mount your Jumperless's filesystem as a mass storage device with `U` and drop it into the `/images/` folder. 
+
+### Check out the [`/scripts` folder](https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts) in the [JumperlOS repo](https://github.com/Architeuthis-Flux/JumperlOS/tree/main), there are a few other scripts related to dealing with bitmaps.

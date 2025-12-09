@@ -41,9 +41,8 @@ If you don't already have one,
 - **[Debugging](07-debugging.md)** - Crossbar, bridge, and net list views
 - **[File Manager](08-file-manager.md)** - Filesystem access, YAML slot file editing, and text editor
 - **[MicroPython](08-micropython.md)** - Use the onboard MicroPython interpreter
-- **[Odds and Ends](09-odds-and-ends.md)** - Stuff I couldn't think of a good category for
+- **[Odds and Ends](09.8-odds-and-ends.md)** - Stuff I couldn't think of a good category for
 - **[3D Printable Stand](10-3d-stand.md)** - Print your own stand
-- **[Writing Native Apps](11-WritingApps.md)** - Dig into the actual firmware and write your own apps
 - **[Glossary](99-glossary.md)** - Key terms including slots, nodes, bridges, and the W command
 
 (You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors)

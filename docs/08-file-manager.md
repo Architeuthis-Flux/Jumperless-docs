@@ -78,7 +78,7 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 ---
 
 
-## Jumperless Kilo Text Editor
+## Jumperless eKilo Text Editor
 
 The File Manager also has text editor based off [**eKilo**](https://github.com/antonio-foti/ekilo)
 
@@ -121,15 +121,46 @@ If you have an OLED connected, the File Manager shows:
 ### MicroPython Examples
 The File Manager automatically creates example Python scripts in `/python_scripts/examples/`:
 
-- **01_dac_basics.py**: DAC (Digital-to-Analog Converter) examples
-- **02_adc_basics.py**: ADC (Analog-to-Digital Converter) examples  
-- **03_gpio_basics.py**: GPIO (General Purpose Input/Output) examples
-- **04_node_connections.py**: Node connection and routing examples
-- **led_brightness_control.py**: LED brightness control
-<!-- - **voltage_monitor.py**: Voltage monitoring utilities
-- **stylophone.py**: Musical instrument example -->
+#### Basic Hardware Examples
 
-You can trigger them to regenerate if you messed them up by deleting it with `x`, and then entering `m` to create new copies of any examples it doesn't see.
+- [**adc_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/adc_basics.py): Basic ADC (Analog-to-Digital Converter) operations.
+    - This example shows how to read analog voltages from all ADC channels (0-3). Connect voltage sources to ADC inputs and monitor readings in real-time.
+
+- [**dac_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/dac_basics.py): Basic DAC (Digital-to-Analog Converter) operations.
+    - Shows how to set DAC voltages on all channels (DAC_A, DAC_B, TOP_RAIL, BOTTOM_RAIL).
+    - Hardware setup: Connect voltmeter or LED to DAC output pins.
+
+- [**gpio_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/gpio_basics.py): Basic GPIO (General Purpose Input/Output) operations.
+    - This example demonstrates digital I/O, direction control, and pull resistors.
+    - Tests input mode with pull-up, pull-down, and floating configurations.
+
+- [**node_connections.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/node_connections.py): Node connection and routing operations.
+    - This example shows how to connect/disconnect nodes, check connections, and clear all connections.
+    - Demonstrates working with breadboard nodes, DAC outputs, and GPIO pins.
+    - 
+- [**uart_loopback.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/uart_loopback.py): UART Loopback Demo.
+    - Demonstrates UART communication by looping back data from UART_TX to UART_RX.
+    - Open a serial monitor on the Jumperless's second port at 115200 baud to see the looped messages.
+
+#### Interactive Examples
+
+- [**interaction_demo.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/interaction_demo.py): Interactive Demo - Control connections with probe, encoder, and buttons.
+    - This example shows how to use all the interactive controls together.
+    - No special hardware needed - use the probe to tap nodes, the encoder to adjust bridge spread, and buttons to change colors.
+
+- [**led_brightness_control.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/led_brightness_control.py): LED Brightness Control Demo.
+    - Tap breadboard pads 1-60 to control the voltage on an LED and display the current draw.
+    - Hardware setup: Connect LED anode to breadboard row 15, connect LED cathode to GND.
+    - Displays voltage and current on OLED.
+
+- [**stylophone.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/stylophone.py): Jumperless Stylophone.
+    - Musical instrument using probe and GPIO to generate audio tones.
+    - Hardware setup: Connect speaker between rows 25 (positive) and 55 (negative).
+    - Touch breadboard pads to play different frequencies, use probe buttons to adjust sustain.
+
+
+
+You can trigger them to regenerate if you messed them up by deleting it with `x` (when you're in the File Manager), and then entering `m` to create new copies of any examples it doesn't see.
 
 
 ## Editing Slot Files

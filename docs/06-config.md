@@ -2,7 +2,9 @@
 
 To change any persistent settings that apply to the Jumperless as a whole, there's a `config` file. You can read it with `~` and edit settings by copying any of those lines, pasting it back, and changing the value to whatever you want it to be. 
 
-## Viewing Configuration
+## Viewing Config.txt
+
+You can enter `~` to print the config. 
 
 ```jython
 ~
@@ -12,8 +14,7 @@ into the main menu to change a setting
 
 Jumperless Config:
 
-
-`[config] firmware_version = 5.4.0.5;
+`[config] firmware_version = 5.6.0.0;
 
 `[hardware] generation = 5;
 `[hardware] revision = 5;
@@ -30,39 +31,46 @@ Jumperless Config:
 `[debug] nets_to_chips = false;
 `[debug] nets_to_chips_alt = false;
 `[debug] leds = false;
+`[debug] logic_analyzer = true;
+`[debug] arduino = 0;
 
 `[routing] stack_paths = 2;
 `[routing] stack_rails = 3;
 `[routing] stack_dacs = 0;
 `[routing] rail_priority = 1;
 
-`[calibration] top_rail_zero = 1650;
-`[calibration] top_rail_spread = 21.50;
-`[calibration] bottom_rail_zero = 1650;
-`[calibration] bottom_rail_spread = 21.50;
-`[calibration] dac_0_zero = 1650;
-`[calibration] dac_0_spread = 21.50;
-`[calibration] dac_1_zero = 1650;
-`[calibration] dac_1_spread = 21.50;
-`[calibration] adc_0_zero = 9.00;
-`[calibration] adc_0_spread = 18.28;
-`[calibration] adc_1_zero = 9.00;
-`[calibration] adc_1_spread = 18.28;
-`[calibration] adc_2_zero = 9.00;
-`[calibration] adc_2_spread = 18.28;
-`[calibration] adc_3_zero = 9.00;
-`[calibration] adc_3_spread = 18.28;
+`[calibration] top_rail_zero = 1626;
+`[calibration] top_rail_spread = 19.83;
+`[calibration] bottom_rail_zero = 1638;
+`[calibration] bottom_rail_spread = 19.64;
+`[calibration] dac_0_zero = 1629;
+`[calibration] dac_0_spread = 19.90;
+`[calibration] dac_1_zero = 1629;
+`[calibration] dac_1_spread = 19.53;
+`[calibration] adc_0_zero = 8.98;
+`[calibration] adc_0_spread = 18.08;
+`[calibration] adc_1_zero = 9.01;
+`[calibration] adc_1_spread = 18.15;
+`[calibration] adc_2_zero = 8.98;
+`[calibration] adc_2_spread = 18.06;
+`[calibration] adc_3_zero = 8.96;
+`[calibration] adc_3_spread = 18.05;
 `[calibration] adc_4_zero = 0.00;
-`[calibration] adc_4_spread = 5.00;
-`[calibration] adc_7_zero = 9.00;
-`[calibration] adc_7_spread = 18.28;
-`[calibration] probe_max = 4060;
-`[calibration] probe_min = 12;
+`[calibration] adc_4_spread = 4.92;
+`[calibration] adc_7_zero = 10.52;
+`[calibration] adc_7_spread = 20.66;
+`[calibration] probe_max = 4040;
+`[calibration] probe_min = 11;
+`[calibration] probe_switch_threshold_high = 0.35;
+`[calibration] probe_switch_threshold_low = 0.10;
+`[calibration] probe_switch_threshold = 0.40;
+`[calibration] measure_mode_output_voltage = 3.30;
+`[calibration] probe_current_zero = 2.72;
 
 `[logo_pads] top_guy = uart_tx;
 `[logo_pads] bottom_guy = uart_rx;
-`[logo_pads] building_pad_top = off;
-`[logo_pads] building_pad_bottom = off;
+`[logo_pads] building_pad_top = isense_pos;
+`[logo_pads] building_pad_bottom = isense-;
 
 `[display] lines_wires = wires;
 `[display] menu_brightness = -10;
@@ -72,49 +80,42 @@ Jumperless Config:
 `[display] net_color_mode = rainbow;
 `[display] dump_leds = ;
 `[display] dump_format = image;
-
-`[gpio] direction = 1,1,1,1,1,1,1,1,0,1;
-`[gpio] pulls = 0,0,0,0,0,0,0,0,2,2;
-`[gpio] uart_tx_function = uart_tx;
-`[gpio] uart_rx_function = uart_rx;
+`[display] terminal_line_buffering = 0;
 
 `[serial_1] function = passthrough;
 `[serial_1] baud_rate = 115200;
-`[serial_1] async_passthrough = true;
 `[serial_1] print_passthrough = false;
 `[serial_1] connect_on_boot = false;
 `[serial_1] lock_connection = false;
 `[serial_1] autoconnect_flashing = true;
+`[serial_1] async_passthrough = true;
 
-`[serial_2] function = off;
-`[serial_2] baud_rate = 115200;
-`[serial_2] print_passthrough = false;
-`[serial_2] connect_on_boot = false;
-`[serial_2] lock_connection = false;
-`[serial_2] autoconnect_flashing = false;
-
-`[top_oled] enabled = false;
+`[top_oled] enabled = true;
 `[top_oled] i2c_address = 0x3C;
 `[top_oled] width = 128;
 `[top_oled] height = 32;
-`[top_oled] sda_pin = 26;
-`[top_oled] scl_pin = 27;
-`[top_oled] gpio_sda = GP_7;
-`[top_oled] gpio_scl = GP_8;
-`[top_oled] sda_row = D2;
-`[top_oled] scl_row = D3;
+`[top_oled] connection_type = rp6_rp7;
+`[top_oled] sda_pin = 6;
+`[top_oled] scl_pin = 7;
+`[top_oled] gpio_sda = GP_6;
+`[top_oled] gpio_scl = GP_7;
+`[top_oled] sda_row = -1;
+`[top_oled] scl_row = -1;
 `[top_oled] connect_on_boot = false;
 `[top_oled] lock_connection = false;
 `[top_oled] show_in_terminal = false;
-`[top_oled] font = jokerman;
+`[top_oled] font = Eurostl;
+`[top_oled] startup_message = images/bubbleJumpThin.bin
 
-END
 
 ```
 
 
+This is just a file on your filesystem called `config.txt` and just editing that file directly works too.
 
-## Configuration Help
+<img width="1470" height="1007" alt="Screenshot 2025-12-08 at 8 42 59 PM" src="https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754" />
+
+## Config Help
 
 There's also a `help` you can get to by entering `~?`
 
@@ -152,7 +153,7 @@ Help for command: ~
 ``` 
 
 
-# State File
+## State File
 
 ## States vs Config
 
@@ -167,7 +168,10 @@ Rail voltages, GPIO settings, and other circuit-specific parameters now go with 
 
 ## State File Structure
 
-For things specific to the current `state` of the Jumperless, there's a YAML file that contains all the connections, colors (optional), `rail` / `DAC` voltages, `GPIO` directions and pulls, stuff like that. The idea is this defines a complete setup of a particular circuit that can be switched between in different `slots`. The Jumperless always boots at `Slot 0`, and you can switch to other `slots` with `<` (cycle through them) or selecting one with the `click menu` with `Slots` > `Load` > `0-7` (it will show a preview of each one.) To save a copy of the currently `active slot`; `Slots` > `Save` > `0-7` will save a copy of the `active slot` to another `slot` and also make that target slot the `active`.
+For things specific to the current `state` of the Jumperless, there's a YAML file that contains all the connections, colors (optional), `rail` / `DAC` voltages, `GPIO` directions and pulls, stuff like that. The idea is this defines a complete setup of a particular circuit that can be switched between in different `slots`. 
+
+The Jumperless always boots at `Slot 0`, and you can switch to other `slots` with `<` (cycle through them) or selecting one with the `click menu` with `Slots` > `Load` > `0-7` (it will show a preview of each one.) To save a copy of the currently `active slot`; 
+`Slots` > `Save` > `0-7` will save a copy of the `active slot` to another `slot` and also make that target slot the `active`.
 
 
 ```jython
@@ -223,7 +227,7 @@ State RAM: ~58048 bytes
 
 ```
 
-### Source of Truth
+## Source of Truth
 
 Because the information in here is *sort of* redundant (the connections could be computed from just the `bridges` or the `nets` section on their own), there's a field called `sourceOfTruth` which is the section that actually gets parsed and then the other section is written with the computed values. (I haven't done much testing on changing this to `nets` so I'd probably just leave it on `bridges` for now.)
 
@@ -237,7 +241,6 @@ The Jumperless has **8 slots** (0-7) where you can save different circuit config
 
 **Quick slot cycling:**
 - Type `<` in the terminal to cycle to the next slot
-- The circuit will instantly change to match the new slot!
 
 **Other slot commands:**
 - `l 5` - Load slot 5 specifically

@@ -78,7 +78,16 @@ void loop() {
 }
 ```
 
+
+
+
+
 ### Full Example - ADC Scanning
+
+<video autoplay loop muted playsinline controls width="100%">
+  <source src="https://github.com/user-attachments/assets/fcdae6a6-ef4c-4fe7-9d5c-74cee5946c08" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 This sketch connects ADC0 to different breadboard rows and reads the voltage at each one:
 
