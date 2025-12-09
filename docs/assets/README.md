@@ -94,3 +94,31 @@ https://github.com/user-attachments/assets/f77f6fd5-d005-45db-9c4c-b256390b91fc
 
 https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0
 
+39
+
+![oledStand-02](https://github.com/user-attachments/assets/183f29ec-25e2-4c13-b31e-d60839d0afcb)
+
+40
+![oledStand-10](https://github.com/user-attachments/assets/9261cfe2-5bbc-46c9-ba4c-2374ff934792)
+
+41
+![oledStand-06](https://github.com/user-attachments/assets/e5c5174d-b256-47f3-b073-f911a37ef088)
+
+42
+![oledStand-08](https://github.com/user-attachments/assets/5b491e4d-ac26-412d-97fa-72de6ea21acd)
+
+43
+![oledStand-07](https://github.com/user-attachments/assets/66d4c842-dd29-4543-bc31-c3bbbb3fa35b)
+
+44
+![oledStand-12](https://github.com/user-attachments/assets/d1378e15-2133-4f8d-810d-104b3b95e163)
+
+
+45
+
+https://github.com/user-attachments/assets/fcdae6a6-ef4c-4fe7-9d5c-74cee5946c08
+
+46
+
+<img width="1470" height="1007" alt="Screenshot 2025-12-08 at 8 42 59 PM" src="https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754" />
+
