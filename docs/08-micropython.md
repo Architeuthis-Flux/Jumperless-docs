@@ -13,10 +13,43 @@ This guide covers how to write, load, and run Python scripts that control Jumper
 7. [Examples and Demos](#examples-and-demos)
 8. [Troubleshooting](#troubleshooting) -->
 
-####If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
+#### If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
 
 
-## Quick Start
+# Now you can live code with [Viper IDE](https://viper-ide.org/)!
+Holy shit I should have done this years ago
+
+Seriously, this is *such* a better experience than using the onboard text editor and REPL, you should play with it right now
+
+Go to [https://viper-ide.org/](https://viper-ide.org/) and press the connect button.
+
+<img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" />
+
+
+Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect
+
+<img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" />
+
+Then open some examples (this update should overwrite the examples with the new ones) and hit the Run / Stop button
+
+<img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 14 23 PM" src="https://github.com/user-attachments/assets/0190af73-cd5f-49e9-b378-bb6d1c8a7bb4" />
+
+Press it again to Stop. If you make changes, hit the green Save button next to it (it takes a second and the script should be stopped.)
+
+<img width="1306" height="1249" alt="Screenshot 2025-12-08 at 6 15 54 PM" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" />
+
+### If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)
+
+
+There's also a `jumperless.py` and `jumperless.pyi` module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in ViperIDE.) You can grab them here:
+
+### [`umperless.py](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py)
+### [jumperless.pyi](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi)
+
+
+
+
+## Quick Start (to do it from the built-in REPL)
 
 <!-- ### Starting MicroPython REPL -->
 From the main Jumperless menu, press `p` to enter the MicroPython REPL:
@@ -500,365 +533,4 @@ connect("TOP_RAIL", "GPIO_1") # Same as connect(101, 131)
 ![Screenshot 2025-07-04 at 8 16 04 PM](https://github.com/user-attachments/assets/4ae5e7e2-845a-4e6e-bbd9-5c328624cfe9)
 
 
-
-## Node Names and Constants
-The Jumperless module provides extensive node name support with multiple aliases for each node:
-
-```jython
-# Power rails (multiple aliases supported)
-TOP_RAIL = 101        # Also: TOPRAIL, T_R, TOP_R
-BOTTOM_RAIL = 102     # Also: BOT_RAIL, BOTTOMRAIL, BOTRAIL, B_R, BOT_R
-SUPPLY_3V3 = 103      # Also: 3V3, 3.3V
-SUPPLY_5V = 105       # Also: 5V, +5V
-SUPPLY_8V_P = 120     # Also: 8V_P, 8V_POS
-SUPPLY_8V_N = 121     # Also: 8V_N, 8V_NEG
-
-# Ground connections
-GND = 100             # Also: GROUND
-TOP_RAIL_GND = 104    # Also: TOP_GND (not actually routable but included for PADs)
-BOTTOM_RAIL_GND = 126 # Also: BOT_GND, BOTTOM_GND (not actually routable but included for PADs)
-
-# DAC outputs
-DAC0 = 106            # Also: DAC_0, DAC0_5V
-DAC1 = 107            # Also: DAC_1, DAC1_8V
-
-# ADC inputs
-ADC0 = 110            # Also: ADC_0, ADC0_8V
-ADC1 = 111            # Also: ADC_1, ADC1_8V
-ADC2 = 112            # Also: ADC_2, ADC2_8V
-ADC3 = 113            # Also: ADC_3, ADC3_8V
-ADC4 = 114            # Also: ADC_4, ADC4_5V
-ADC7 = 115            # Also: ADC_7, ADC7_PROBE, PROBE
-
-# Current sensing
-ISENSE_PLUS = 108     # Also: ISENSE_POS, ISENSE_P, INA_P, I_P, CURRENT_SENSE_PLUS, ISENSE_POSITIVE, I_POS
-ISENSE_MINUS = 109    # Also: ISENSE_NEG, ISENSE_N, INA_N, I_N, CURRENT_SENSE_MINUS, ISENSE_NEGATIVE, I_NEG
-
-# GPIO pins (multiple naming conventions)
-GPIO_1 = 131          # Also: RP_GPIO_1, GPIO1, GP_1, GP1
-GPIO_2 = 132          # Also: RP_GPIO_2, GPIO2, GP_2, GP2
-GPIO_3 = 133          # Also: RP_GPIO_3, GPIO3, GP_3, GP3
-GPIO_4 = 134          # Also: RP_GPIO_4, GPIO4, GP_4, GP4
-GPIO_5 = 135          # Also: RP_GPIO_5, GPIO5, GP_5, GP5
-GPIO_6 = 136          # Also: RP_GPIO_6, GPIO6, GP_6, GP6
-GPIO_7 = 137          # Also: RP_GPIO_7, GPIO7, GP_7, GP7
-GPIO_8 = 138          # Also: RP_GPIO_8, GPIO8, GP_8, GP8
-
-# UART pins
-UART_TX = 116         # Also: RP_UART_TX, TX, RP_GPIO_16
-UART_RX = 117         # Also: RP_UART_RX, RX, RP_GPIO_17
-
-# Additional RP GPIOs
-RP_GPIO_18 = 118      # Also: GP_18
-RP_GPIO_19 = 119      # Also: GP_19
-
-# Buffer connections
-BUFFER_IN = 139       # Also: ROUTABLE_BUFFER_IN, BUF_IN, BUFF_IN, BUFFIN
-BUFFER_OUT = 140      # Also: ROUTABLE_BUFFER_OUT, BUF_OUT, BUFF_OUT, BUFFOUT
-
-# Arduino Nano pins (extensive support)
-D13 = 83              # Also: NANO_D13
-D12 = 82              # Also: NANO_D12
-D11 = 81              # Also: NANO_D11
-D10 = 80              # Also: NANO_D10
-D9 = 79               # Also: NANO_D9
-D8 = 78               # Also: NANO_D8
-D7 = 77               # Also: NANO_D7
-D6 = 76               # Also: NANO_D6
-D5 = 75               # Also: NANO_D5
-D4 = 74               # Also: NANO_D4
-D3 = 73               # Also: NANO_D3
-D2 = 72               # Also: NANO_D2
-D1 = 71               # Also: NANO_D1
-D0 = 70               # Also: NANO_D0
-
-# Arduino Nano analog pins
-A0 = 86               # Also: NANO_A0
-A1 = 87               # Also: NANO_A1
-A2 = 88               # Also: NANO_A2
-A3 = 89               # Also: NANO_A3
-A4 = 90               # Also: NANO_A4
-A5 = 91               # Also: NANO_A5
-A6 = 92               # Also: NANO_A6
-A7 = 93               # Also: NANO_A7
-
-# Arduino Nano non-routable hardwired connections
-VIN = 69              # Unconnected to anything
-RST0 = 94             # Hardwired to GPIO 18 on the RP2350
-RST1 = 95             # Hardwired to GPIO 19 on the RP2350
-N_GND0 = 97           # GND
-N_GND1 = 96           # GND
-NANO_5V = 99          # Hardwired to USB 5V bus (can also be used to power the Jumperless)
-NANO_3V3 = 98         # Unconnected (without bridging the solder jumper on the back)
-
-```
-
-
-
-
-## The entire output of help()
-
-```jython
->>> help()
-help()
-Jumperless Native MicroPython Module
-Available help sections:
-
-  help() or help("all")     - Show all functions
-  help("DAC")              - DAC functions
-  help("ADC")              - ADC functions
-  help("GPIO")             - GPIO functions
-  help("PWM")              - PWM functions
-  help("WAVEGEN")          - Waveform generator
-  help("INA")              - INA current/power monitor
-  help("NODES")            - Node connections
-  help("NETS")             - Net info (names, colors)
-  help("SLOTS")            - Slot management
-  help("OLED")             - OLED display
-  help("PROBE")            - Probe and button functions
-  help("STATUS")           - Status and debug functions
-  help("FILESYSTEM")       - Filesystem functions
-  help("MISC")             - Miscellaneous functions
-  help("EXAMPLES")         - Usage examples
-
-DAC (Digital-to-Analog Converter):
-
-   dac_set(channel, voltage)         - Set DAC output voltage
-   dac_get(channel)                  - Get DAC output voltage
-   set_dac(channel, voltage)         - Alias for dac_set
-   get_dac(channel)                  - Alias for dac_get
-
-          channel: 0-3, DAC0, DAC1, TOP_RAIL, BOTTOM_RAIL
-          channel 0/DAC0: DAC 0
-          channel 1/DAC1: DAC 1
-          channel 2/TOP_RAIL: top rail
-          channel 3/BOTTOM_RAIL: bottom rail
-          voltage: -8.0 to 8.0V
-
-ADC (Analog-to-Digital Converter):
-
-   adc_get(channel)                  - Read ADC input voltage
-   get_adc(channel)                  - Alias for adc_get
-
-                                              channel: 0-4
-
-GPIO:
-
-   gpio_set(pin, value)             - Set GPIO pin state
-   gpio_get(pin)                    - Read GPIO pin state
-   gpio_set_dir(pin, direction)     - Set GPIO pin direction
-   gpio_get_dir(pin)                - Get GPIO pin direction
-   gpio_set_pull(pin, pull)         - Set GPIO pull-up/down
-   gpio_get_pull(pin)               - Get GPIO pull-up/down
-
-  Aliases: set_gpio, get_gpio, set_gpio_dir, get_gpio_dir, etc.
-
-            pin 1-8: GPIO 1-8
-            pin   9: UART Tx
-            pin  10: UART Rx
-              value: True/False   for HIGH/LOW
-          direction: True/False   for OUTPUT/INPUT
-               pull: -1/0/1       for PULL_DOWN/NONE/PULL_UP
-
-PWM (Pulse Width Modulation):
-
-   pwm(pin, [frequency], [duty])    - Setup PWM on GPIO pin
-   pwm_set_duty_cycle(pin, duty)    - Set PWM duty cycle
-   pwm_set_frequency(pin, freq)     - Set PWM frequency
-   pwm_stop(pin)                    - Stop PWM on pin
-
-  Aliases: set_pwm, set_pwm_duty_cycle, set_pwm_frequency, stop_pwm
-
-             pin: 1-8       GPIO pins only
-       frequency: 0.001Hz-62.5MHz default 1000Hz
-      duty_cycle: 0.0-1.0   default 0.5 (50%)
-
-WaveGen (Waveform Generator):
-
-   wavegen_set_output(channel)      - Set output: DAC0, DAC1, TOP_RAIL, BOTTOM_RAIL
-   wavegen_set_freq(hz)             - Set frequency (0.0001-10000 Hz)
-   wavegen_set_wave(shape)          - Set waveform shape
-   wavegen_set_amplitude(vpp)       - Set amplitude (0-16 Vpp)
-   wavegen_set_offset(v)            - Set DC offset (-8 to +8 V)
-   wavegen_start()                  - Start waveform generation
-   wavegen_stop()                   - Stop waveform generation
-
-  Getters: wavegen_get_output(), wavegen_get_freq(), wavegen_get_wave(),
-           wavegen_get_amplitude(), wavegen_get_offset(), wavegen_is_running()
-
-  Waveform constants: SINE, TRIANGLE, SAWTOOTH (RAMP), SQUARE
-
-INA (Current/Power Monitor):
-
-   ina_get_current(sensor)          - Read current in amps
-   ina_get_voltage(sensor)          - Read shunt voltage
-   ina_get_bus_voltage(sensor)      - Read bus voltage
-   ina_get_power(sensor)            - Read power in watts
-
-  Aliases: get_current, get_voltage, get_bus_voltage, get_power
-
-             sensor: 0 or 1
-
-Node Connections:
-
-   connect(node1, node2)            - Connect two nodes
-   disconnect(node1, node2)         - Disconnect nodes
-   is_connected(node1, node2)       - Check if nodes are connected
-   nodes_clear()                    - Clear all connections
-
-         set node2 to -1 to disconnect everything connected to node1
-
-Net Information:
-
-   get_net_name(netNum)             - Get net name
-   set_net_name(netNum, name)       - Set custom net name
-   get_net_color(netNum)            - Get net color as 0xRRGGBB
-   get_net_color_name(netNum)       - Get net color name
-   set_net_color(netNum, color)     - Set net color by name or hex
-   get_num_nets()                   - Get number of active nets
-   get_num_bridges()                - Get number of bridges
-   get_net_nodes(netNum)            - Get comma-separated node list
-   get_bridge(bridgeIdx)            - Get bridge info tuple
-   get_net_info(netNum)             - Get full net info as dict
-
-  Colors: red, orange, yellow, green, cyan, blue, purple, pink, etc.
-
-Slot Management:
-
-   nodes_save([slot])               - Save connections to slot
-   nodes_discard()                  - Discard unsaved changes
-   nodes_has_changes()              - Check for unsaved changes
-   switch_slot(slot)                - Switch to different slot (0-7)
-   CURRENT_SLOT                     - Get current slot number
-
-  Context (controls persistence):
-   context_toggle()                 - Toggle global/python mode
-   context_get()                    - Get current mode name
-
-OLED Display:
-
-   oled_print("text")               - Display text
-   oled_clear()                     - Clear display
-   oled_connect()                   - Connect OLED
-   oled_disconnect()                - Disconnect OLED
-
-Probe Functions:
-
-   probe_read([blocking=True])      - Read probe (default: blocking)
-   read_probe([blocking=True])      - Read probe (default: blocking)
-   probe_read_blocking()            - Wait for probe touch (explicit)
-   probe_read_nonblocking()         - Check probe immediately (explicit)
-   get_button([blocking=True])      - Get button state (default: blocking)
-   probe_button([blocking=True])    - Get button state (default: blocking)
-   probe_button_blocking()          - Wait for button press (explicit)
-   probe_button_nonblocking()       - Check buttons immediately (explicit)
-
-       Touch returns: ProbePad object (1-60, D13_PAD, TOP_RAIL_PAD, LOGO_PAD_TOP, etc.)
-       Button returns: CONNECT, REMOVE, or NONE (front=connect, rear=remove)
-
-Status:
-
-   print_bridges()                  - Print all bridges
-   print_paths()                    - Print path between nodes
-   print_crossbars()                - Print crossbar array
-   print_nets()                     - Print nets
-   print_chip_status()              - Print chip status
-
-Filesystem:
-
-  jfs.open(path, mode)              - Open file
-  jfs.read(file, size)              - Read from file
-  jfs.write(file, data)             - Write to file
-  jfs.close(file)                   - Close file
-  jfs.exists(path)                  - Check if file exists
-  jfs.listdir(path)                 - List directory
-  jfs.mkdir(path)                   - Create directory
-  jfs.remove(path)                  - Remove file
-  jfs.rename(from, to)              - Rename file
-  jfs.info()                        - Get filesystem info
-
-Misc:
-
-   arduino_reset()                  - Reset Arduino
-   run_app(appName)                 - Run built-in app
-   pause_core2(pause)               - Pause/unpause Core2 (True/False)
-   send_raw(chip, x, y, set)        - Send raw data to crossbar chip
-
-Examples (all functions available globally):
-
-  dac_set(DAC0, 5.0)                         # Set DAC0 using node constant
-  voltage = get_adc(1)                       # Read ADC1 using alias
-  connect(TOP_RAIL, D13)                     # Connect using constants
-  connect(4, 20)                             # Connect using numbers
-  top_rail = node("TOP_RAIL")                # Create node object
-  oled_print("Hello!")                       # Display text on OLED
-  current = get_current(0)                   # Read current using alias
-  set_gpio(1, True)                          # Set GPIO pin high
-  pwm(1, 1000, 0.5)                          # 1kHz PWM, 50% duty
-  wavegen_set_wave(SINE); wavegen_start()    # Start sine wave
-  set_net_color(0, "red")                    # Color net 0 red
-  nodes_save()                               # Save current connections
-  pad = probe_read()                         # Wait for probe touch
-  button = get_button()                      # Wait for button press
-
-
-
-
->>> 
-```
-
-
-
-## The entire output of nodes_help()
-
-```jython
->>> nodes_help()
-Jumperless Node Reference
-========================
-
-NODE TYPES:
-  Numbered:     1-60 (breadboard)
-  Arduino:      D0-D13, A0-A7 (nano header)
-  GPIO:         GPIO_1-GPIO_8 (routable GPIO)
-  Power:        TOP_RAIL, BOTTOM_RAIL, GND
-  DAC:          DAC0, DAC1 (analog outputs)
-  ADC:          ADC0-ADC4, PROBE (analog inputs)
-  Current:      ISENSE_PLUS, ISENSE_MINUS
-  UART:         UART_TX, UART_RX
-  Buffer:       BUFFER_IN, BUFFER_OUT
-
-THREE WAYS TO USE NODES:
-
-1. NUMBERS (direct breadboard holes):
-   connect(1, 30)                     # Connect holes 1 and 30
-   connect(15, 42)                    # Any number 1-60
-
-2. STRINGS (case-insensitive names):
-   connect("D13", "TOP_RAIL")         # Arduino pin to power rail
-   connect("gpio_1", "adc0")          # GPIO to ADC (case-insensitive)
-   connect("15", "dac1")              # Mix numbers and names
-
-3. CONSTANTS (pre-defined objects):
-   connect(TOP_RAIL, D13)            # Using imported constants
-   connect(GPIO_1, A0)               # No quotes needed
-   connect(DAC0, 25)                 # Mix constants and numbers
-
-MIXED USAGE:
-   my_pin = "D13"                    # Create node object from string
-   connect(my_pin, TOP_RAIL)         # Use node object with constant
-   oled_print(my_pin)                # Display shows 'D13'
-
-COMMON ALIASES (many names work for same node):
-   "TOP_RAIL" = "T_R"
-   "GPIO_1" = "GPIO1" = "GP1"
-   "DAC0" = "DAC_0"
-   "UART_TX" = "TX"
-
-NOTES:
-  - String names are case-insensitive: "d13" = "D13" = "nAnO_d13"
-  - Constants are case-sensitive: use D13, not d13
-  - All three methods work in any function
-```
-
-![Screenshot 2025-07-04 at 8 27 39 PM](https://github.com/user-attachments/assets/8d8dfc16-0dca-4ab8-9bcf-c511415bffc7)
 
