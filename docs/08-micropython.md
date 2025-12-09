@@ -16,7 +16,7 @@ This guide covers how to write, load, and run Python scripts that control Jumper
 #### If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
 
 
-# Now you can live code with [Viper IDE](https://viper-ide.org/)!
+## Now you can live code with [Viper IDE](https://viper-ide.org/)!
 Holy shit I should have done this years ago
 
 Seriously, this is *such* a better experience than using the onboard text editor and REPL, you should play with it right now
