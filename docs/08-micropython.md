@@ -96,6 +96,16 @@ connect(1, 5)                    # Connect using numbers
 connect("d13", "tOp_rAiL")       # Connect using node names (case insensitive when in quotes)
 connect(TOP_RAIL, BOTTOM_RAIL)   # Connect using DEFINEs (all caps) Note: This will actually just be ignored by the Jumperless due to Do Not Intersect rules
 
+# Manage duplicate connections
+connect(1, 5)                    # Add connection (default: no duplicate management)
+connect(1, 5, duplicates=-1)     # Same - just add the connection
+connect(1, 5, duplicates=0)      # Force 0 duplicates (remove any existing)
+connect(1, 5, duplicates=2)      # Force exactly 2 parallel paths
+
+for i in range(10):
+    connect(i, i+10)        # Make 10 connections
+
+
 # Disconnect bridges
 disconnect(1, 5)
 
@@ -265,6 +275,50 @@ button = probe_button(False)      # Non-blocking
 ![Screenshot 2025-07-04 at 7 37 54 PM](https://github.com/user-attachments/assets/4d0b2e29-e33d-4e1c-b339-336d1d686319)
 
 
+## Fake GPIO (Virtual GPIO Pins)
+
+Turn any routable node into a digital output with custom voltage levels. Perfect when you need more than 10 GPIO pins or voltages beyond the RP2350's 3.3V logic. **This is still kinda experimental**
+
+**Why use Fake GPIO?**
+- **More pins**: Use any routable node as GPIO (breadboard holes, special nodes, etc.)
+- **Any voltage**: -8V to +8V output levels (not limited to 3.3V)
+- **Industrial protocols**: RS-485 (±8V), 5V TTL, custom logic levels
+- **Fast switching**: Quick enough for serial communication and signaling
+
+```jython
+# Simple 5V/0V digital output
+led = FakeGpioPin(25)
+led.on()    # HIGH (5V)
+led.off()   # LOW (0V)
+
+# RS-485 differential signaling (±8V)
+rs485_a = FakeGpioPin(20, OUTPUT, 8.0, -8.0)
+rs485_b = FakeGpioPin(21, OUTPUT, -8.0, 8.0)
+
+rs485_a.on()   # A: +8V, B: -8V (differential +16V)
+rs485_a.off()  # A: -8V, B: +8V (differential -16V)
+
+# 5V TTL for industrial/legacy devices
+sensor_enable = FakeGpioPin(30, OUTPUT, 5.0, 0.0)
+sensor_enable.on()  # 5V output
+
+# Multiple outputs on any routable nodes
+pin1 = FakeGpioPin(15)      # Breadboard hole
+pin2 = FakeGpioPin(16)      # Breadboard hole
+pin3 = FakeGpioPin(D7)      # Arduino pin
+pin4 = FakeGpioPin(A0)      # Arduino analog pin
+# Use any routable node as GPIO!
+```
+
+**Common Use Cases:**
+- Serial buses: RS-485, MODBUS
+- Industrial sensors requiring 5V or 8V logic
+- LED matrices needing more pins
+- Multi-voltage level shifting
+- Use Arduino pins, ADC pins, any routable node as digital outputs
+
+See the [Fake GPIO API Reference](09.5-micropythonAPIreference.md#fake-gpio-virtual-gpio-pins) for complete details.
+
 ## System Functions
 ```jython
 # Reset Arduino
@@ -282,6 +336,24 @@ send_raw("A", 1, 2, 1)     # Send raw data to core2 (chip A, pos 1,2, set)
 # Connection context - controls whether changes persist after exiting Python
 context_toggle()           # Toggle between 'global' and 'python' modes
 print(context_get())       # Shows current mode: "global" or "python"
+
+# Terminal colors for visual feedback
+change_terminal_color(196) # Bright red
+print("Error message")
+change_terminal_color(-1)  # Reset to default
+
+cycle_term_color(reset=True)  # Start color cycling
+for i in range(10):
+    cycle_term_color()         # Next color
+    print(f"Line {i}")
+
+# Service management - force service execution in tight loops
+btn_idx = get_service_index("ProbeButton")  # Cache index
+while True:
+    force_service_by_index(btn_idx)  # Ensure button updates
+    button = check_button()
+    if button != BUTTON_NONE:
+        break
 
 # Show help
 help()                # Display all available functions
@@ -348,7 +420,31 @@ for i in range(num_bridges):
     print("Bridge " + str(i) + ": " + str(bridge))
 ```
 
+## Path Query API
+Query the internal routing paths through the crossbar chips.
+```jython
+# Get number of paths
+total_paths = get_num_paths()              # All paths including duplicates
+primary_paths = get_num_paths(False)       # Only primary paths
+print(f"Paths: {total_paths} total, {primary_paths} primary")
 
+# Query specific path details
+path = get_path_info(0)
+if path:
+    print(f"Path 0: {path['node1']} -> {path['node2']}")
+    print(f"Uses chips: {path['chips']}")
+
+# Find path between specific nodes
+path = get_path_between(1, 5)
+if path:
+    print(f"Route from 1 to 5 uses chips: {path['chips']}")
+else:
+    print("No direct path found")
+
+# Iterate all paths
+for path in get_all_paths():
+    print(f"{path['node1']} -> {path['node2']} (net {path['net']})")
+```
 
 ## Basic Script Structure
 ```jython
