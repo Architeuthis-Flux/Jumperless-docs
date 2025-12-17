@@ -13,8 +13,9 @@ This guide covers how to write, load, and run Python scripts that control Jumper
 7. [Examples and Demos](#examples-and-demos)
 8. [Troubleshooting](#troubleshooting) -->
 
-If you just want an overview of all the available calls, check out the [MicroPython API Reference](09.5-micropythonAPIreference.md)
+If you just want an overview of all the available calls, check out the [**MicroPython API Reference**](09.5-micropythonAPIreference.md)
 
+For stuff that's not Jumperless-specific, check out the [MicroPython Docs](https://docs.micropython.org/en/latest/index.html)
 
 ## Now you can live code with [Viper IDE](https://viper-ide.org/)!
 Holy shit I should have done this years ago
@@ -52,7 +53,7 @@ There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the 
 
 
 
-
+---
 
 ## Quick Start (to do it from the built-in REPL)
 
@@ -66,385 +67,16 @@ From the main Jumperless menu, press `p` to enter the MicroPython REPL:
 
 Up / Down arrow keys on a blank prompt will scroll through history, any other key will break out of history mode and enter multiline editing. So you can use arrow keys to navigate and edit the script. 
 
+In history mode, the `>>>` prompts will be pink, when you're editing, they'll be blue.
+
 
 ## Hardware Control Functions
 
-All Jumperless hardware functions are automatically imported into the global namespace - no prefix needed
+All Jumperless hardware functions are automatically imported into the global namespace - no prefix is actually necessary, but it's probably good to use `import jumperless as j` when using Viper IDE or something so it doesn't complain about not undefined names.
 
+---
 
-## Basic Hardware Control
-```jython
-# Connect nodes 1 and 5
-connect(1, 5)
 
-# Set GPIO pin 1 to HIGH
-gpio_set(1, True)
-
-# Read ADC channel 0
-voltage = adc_get(0)
-print("Voltage: " + str(voltage) + "V")
-
-# Set DAC channel 0 to 3.3V
-dac_set(0, 3.3)
-```
-
-
-## Node Connections
-```jython
-# Connect two nodes
-connect(1, 5)                    # Connect using numbers
-connect("d13", "tOp_rAiL")       # Connect using node names (case insensitive when in quotes)
-connect(TOP_RAIL, BOTTOM_RAIL)   # Connect using DEFINEs (all caps) Note: This will actually just be ignored by the Jumperless due to Do Not Intersect rules
-
-# Manage duplicate connections
-connect(1, 5)                    # Add connection (default: no duplicate management)
-connect(1, 5, duplicates=-1)     # Same - just add the connection
-connect(1, 5, duplicates=0)      # Force 0 duplicates (remove any existing)
-connect(1, 5, duplicates=2)      # Force exactly 2 parallel paths
-
-for i in range(10):
-    connect(i, i+10)        # Make 10 connections
-
-
-# Disconnect bridges
-disconnect(1, 5)
-
-# Disconnect everything connected to a node
-disconnect(5, -1)
-
-# Check if nodes are connected
-if is_connected(1, 5):
-    print("Nodes 1 and 5 are connected")
-
-# Clear all connections
-nodes_clear()
-```
-![Screenshot 2025-07-04 at 7 22 35 PM](https://github.com/user-attachments/assets/e08d9b83-aa4d-4e1a-873c-7f6c46ddb5bc)
-
-
-## DAC (Output Voltage)
-```jython
-# Set DAC voltage (-8.0V to 8.0V)
-dac_set(0, 2.5)    # Set DAC channel 0 to 2.5V
-dac_set(1, 1.65)   # Set DAC channel 1 to 1.65V
-
-# Read current DAC voltage
-voltage = dac_get(0)
-print("DAC 0: " + str(voltage) + "V")
-
-# Available channels:
-# 0 = DAC0, 1 = DAC1, 2 = TOP_RAIL, 3 = BOTTOM_RAIL
-# Can also use node names: DAC0, DAC1, TOP_RAIL, BOTTOM_RAIL
-```
-![Screenshot 2025-07-04 at 7 17 36 PM](https://github.com/user-attachments/assets/f68b3bf2-3420-4d51-800a-1e8e9e804261)
-
-## ADC (Measure Voltage)
-```jython
-# Read analog voltage (0-8V range for channels 0-3, 0-5V for channel 4)
-voltage = adc_get(0)    # Read ADC channel 0
-voltage = adc_get(1)    # Read ADC channel 1
-
-# Available channels: 0, 1, 2, 3, 4
-```
-![Screenshot 2025-07-04 at 7 22 01 PM](https://github.com/user-attachments/assets/79cf16e8-8a79-4f11-9cf4-52456735b0dc)
-
-## GPIO (General Purpose I/O)
-```jython
-# Set GPIO direction
-gpio_set_dir(1, True)   # Set GPIO 1 as OUTPUT
-gpio_set_dir(2, False)  # Set GPIO 2 as INPUT
-
-# Set GPIO state
-gpio_set(1, True)       # Set GPIO 1 HIGH
-gpio_set(1, False)      # Set GPIO 1 LOW
-
-# Read GPIO state - returns GPIOState object (prints as "HIGH", "LOW", or "FLOATING")
-state = gpio_get(2)
-print(state)            # Prints "HIGH", "LOW", or "FLOATING"
-if state:               # GPIOState is truthy when HIGH, falsy when LOW/FLOATING
-    print("It's HIGH!")
-
-# Configure pull resistors
-gpio_set_pull(3, 1)     # Enable pull-up
-gpio_set_pull(3, -1)    # Enable pull-down
-gpio_set_pull(3, 0)     # No pull resistor
-
-# Read GPIO configuration - returns custom types that print nicely
-direction = gpio_get_dir(1)    # Prints "INPUT" or "OUTPUT"
-pull = gpio_get_pull(2)        # Prints "PULLUP", "PULLDOWN", or "NONE"
-
-# Available GPIO pins: 1-8 (GPIO 1-8), 9 (UART Tx), 10 (UART Rx)
-```
-
-## PWM (Pulse Width Modulation)
-```jython
-# Hardware PWM: High frequency (10Hz to 62.5MHz)
-pwm(1, 1000, 0.5)       # 1kHz, 50% duty cycle on GPIO_1
-pwm(2, 50000, 0.25)     # 50kHz, 25% duty cycle on GPIO_2
-
-# Slow PWM: Low frequency (0.001Hz to 10Hz)
-pwm(3, 0.1, 0.75)       # 0.1Hz (10 second period), 75% duty cycle
-pwm(4, 0.001, 0.5)      # 0.001Hz (1000 second period), 50% duty cycle
-
-# Change PWM parameters
-pwm_set_frequency(1, 2000)     # Change to 2kHz
-pwm_set_duty_cycle(1, 0.25)    # Change to 25% duty cycle
-
-# Stop PWM
-pwm_stop(1)             # Stop PWM on GPIO_1
-
-# Available GPIO pins: 1-8 (GPIO 1-8 only)
-# Automatic mode selection: Hardware PWM for 10Hz+, Slow PWM for <10Hz
-```
-![Screenshot 2025-07-04 at 7 22 35 PM](https://github.com/user-attachments/assets/5b5f884f-f459-4a31-9f21-89d084594f97)
-![Screenshot 2025-07-04 at 7 31 19 PM](https://github.com/user-attachments/assets/c7bdb245-59a4-46db-9c52-fcc43c1f359e)
-
-## WaveGen (Waveform Generator)
-```jython
-# Basic sine wave generation
-wavegen_set_output(DAC1)      # Output on DAC1
-wavegen_set_wave(SINE)        # Sine wave
-wavegen_set_freq(100)         # 100 Hz
-wavegen_set_amplitude(3.3)    # 3.3V peak-to-peak
-wavegen_set_offset(1.65)      # Center at 1.65V (0 to 3.3V range)
-wavegen_start()               # Start generating
-
-# Available waveforms: SINE, TRIANGLE, SAWTOOTH (or RAMP), SQUARE
-
-# Change parameters while running
-wavegen_set_wave(TRIANGLE)
-wavegen_set_freq(50)
-
-# Check status
-if wavegen_is_running():
-    freq = wavegen_get_freq()
-    print("Running at " + str(freq) + " Hz")
-
-# Stop generation
-wavegen_stop()
-
-# Sweep configuration (for scripts that use it)
-wavegen_set_sweep(20, 2000, 5)  # Sweep from 20Hz to 2000Hz over 5 seconds
-```
-
-## Current Sensing (INA219)
-```jython
-# Read current sensor data
-current = ina_get_current(0)          # Current in A
-current = ina_get_current(0) * 1000   # Current in mA
-voltage = ina_get_voltage(0)          # Shunt voltage in V
-bus_voltage = ina_get_bus_voltage(0)  # Bus voltage in V
-power = ina_get_power(0)              # Power in W
-
-# Available sensors: 0, 1    # INA 1 is hardwired to the output of DAC 0 because it's meant for measuring resistance
-```
-
-## OLED Display
-```jython
-# Initialize OLED
-oled_connect()                 # Connect to OLED
-oled_print("Hello World!")     # Display text
-
-# Clear display
-oled_clear()
-
-# Disconnect
-oled_disconnect()
-```
-
-## Probe Functions
-```jumperless
-# Read probe pad (blocking)
-pad = probe_read_blocking()       # Returns ProbePad object only when a pad is touched
-
-# Read probe pad (non-blocking)
-pad = probe_read_nonblocking()    # Returns ProbePad object (which can be NO_PAD)
-
-# Button functions (probe button)
-button = probe_button()           # Read probe button state (blocking)
-button = get_button()             # Alias
-button = button_read()            # Another alias
-button = read_button()            # Another alias
-button = check_button()           # Non-blocking check
-button = button_check()           # Alias
-
-# Button with parameters
-button = probe_button(True)       # Blocking
-button = probe_button(False)      # Non-blocking
-```
-![Screenshot 2025-07-04 at 7 37 54 PM](https://github.com/user-attachments/assets/4d0b2e29-e33d-4e1c-b339-336d1d686319)
-
-
-## Fake GPIO (Virtual GPIO Pins)
-
-Turn any routable node into a digital output with custom voltage levels. Perfect when you need more than 10 GPIO pins or voltages beyond the RP2350's 3.3V logic. **This is still kinda experimental**
-
-**Why use Fake GPIO?**
-- **More pins**: Use any routable node as GPIO (breadboard holes, special nodes, etc.)
-- **Any voltage**: -8V to +8V output levels (not limited to 3.3V)
-- **Industrial protocols**: RS-485 (±8V), 5V TTL, custom logic levels
-- **Fast switching**: Quick enough for serial communication and signaling
-
-```jython
-# Simple 5V/0V digital output
-led = FakeGpioPin(25)
-led.on()    # HIGH (5V)
-led.off()   # LOW (0V)
-
-# RS-485 differential signaling (±8V)
-rs485_a = FakeGpioPin(20, OUTPUT, 8.0, -8.0)
-rs485_b = FakeGpioPin(21, OUTPUT, -8.0, 8.0)
-
-rs485_a.on()   # A: +8V, B: -8V (differential +16V)
-rs485_a.off()  # A: -8V, B: +8V (differential -16V)
-
-# 5V TTL for industrial/legacy devices
-sensor_enable = FakeGpioPin(30, OUTPUT, 5.0, 0.0)
-sensor_enable.on()  # 5V output
-
-# Multiple outputs on any routable nodes
-pin1 = FakeGpioPin(15)      # Breadboard hole
-pin2 = FakeGpioPin(16)      # Breadboard hole
-pin3 = FakeGpioPin(D7)      # Arduino pin
-pin4 = FakeGpioPin(A0)      # Arduino analog pin
-# Use any routable node as GPIO!
-```
-
-**Common Use Cases:**
-- Serial buses: RS-485, MODBUS
-- Industrial sensors requiring 5V or 8V logic
-- LED matrices needing more pins
-- Multi-voltage level shifting
-- Use Arduino pins, ADC pins, any routable node as digital outputs
-
-See the [Fake GPIO API Reference](09.5-micropythonAPIreference.md#fake-gpio-virtual-gpio-pins) for complete details.
-
-## System Functions
-```jython
-# Reset Arduino
-arduino_reset()
-
-# Run built-in apps
-run_app("I2C Scan")        # Run I2C scanner
-run_app("Bounce Startup")  # Loop the startup animation
-
-# Advanced system control
-pause_core2(True)          # Pause core2 processing
-pause_core2(False)         # Resume core2 processing
-send_raw("A", 1, 2, 1)     # Send raw data to core2 (chip A, pos 1,2, set)
-
-# Connection context - controls whether changes persist after exiting Python
-context_toggle()           # Toggle between 'global' and 'python' modes
-print(context_get())       # Shows current mode: "global" or "python"
-
-# Terminal colors for visual feedback
-change_terminal_color(196) # Bright red
-print("Error message")
-change_terminal_color(-1)  # Reset to default
-
-cycle_term_color(reset=True)  # Start color cycling
-for i in range(10):
-    cycle_term_color()         # Next color
-    print(f"Line {i}")
-
-# Service management - force service execution in tight loops
-btn_idx = get_service_index("ProbeButton")  # Cache index
-while True:
-    force_service_by_index(btn_idx)  # Ensure button updates
-    button = check_button()
-    if button != BUTTON_NONE:
-        break
-
-# Show help
-help()                # Display all available functions
-nodes_help()          # Show all available node names and aliases
-```
-
-The [help()](09.5-micropythonAPIreference.md#the-entire-output-of-help) and [nodes_help()](09.5-micropythonAPIreference.md#the-entire-output-of-nodes_help) functions will list all the available commands (except for the new ones I forget to update)
-
-## Slot Management
-```jython
-# Save current connections to current slot
-nodes_save()
-
-# Save to a specific slot (0-7)
-nodes_save(3)
-
-# Switch to a different slot
-old = switch_slot(2)
-print("Switched from slot " + str(old) + " to slot 2")
-
-# Check for unsaved changes
-if nodes_has_changes():
-    print("You have unsaved changes!")
-    nodes_save()  # Save them
-
-# Discard changes and restore last saved state
-nodes_discard()
-```
-
-## Net Information
-```jython
-# Get info about nets (groups of connected nodes)
-num_nets = get_num_nets()
-print("Active nets: " + str(num_nets))
-
-# Get and set net names
-name = get_net_name(6)
-set_net_name(7, "VCC")
-set_net_name(6, "Signal_In")
-
-# Get and set net colors
-color_name = get_net_color_name(6)
-print("Net 6 is " + color_name)
-
-# Set colors by name
-set_net_color(6, "red")
-set_net_color(7, "cyan")
-set_net_color(8, "pink")
-
-# Set colors by hex
-set_net_color(6, "#FF00FF")  # Magenta
-set_net_color(7, "0x00FF00")  # Green
-
-# Get full net info as a dictionary
-info = get_net_info(6)
-print("Name: " + info['name'])
-print("Color: " + info['color_name'])
-print("Nodes: " + info['nodes'])
-
-# List all bridges
-num_bridges = get_num_bridges()
-for i in range(num_bridges):
-    bridge = get_bridge(i)
-    print("Bridge " + str(i) + ": " + str(bridge))
-```
-
-## Path Query API
-Query the internal routing paths through the crossbar chips.
-```jython
-# Get number of paths
-total_paths = get_num_paths()              # All paths including duplicates
-primary_paths = get_num_paths(False)       # Only primary paths
-print(f"Paths: {total_paths} total, {primary_paths} primary")
-
-# Query specific path details
-path = get_path_info(0)
-if path:
-    print(f"Path 0: {path['node1']} -> {path['node2']}")
-    print(f"Uses chips: {path['chips']}")
-
-# Find path between specific nodes
-path = get_path_between(1, 5)
-if path:
-    print(f"Route from 1 to 5 uses chips: {path['chips']}")
-else:
-    print("No direct path found")
-
-# Iterate all paths
-for path in get_all_paths():
-    print(f"{path['node1']} -> {path['node2']} (net {path['net']})")
-```
 
 ## Basic Script Structure
 ```jython
@@ -480,16 +112,19 @@ print("Script complete!")
 
 ```
    
- 
+
 
 
 ## Loading and Running Scripts
 
 
-### Method 1: File Manager
-From the REPL, type `files` to open the file manager:
+### Method 1 (Recommended): [Viper IDE](https://viper-ide.blackhart.dev/)
+See [above](#now-you-can-live-code-with-viper-ide) for instructions. It's at the top of the page for a reason, it's awesome.
 
-```
+### Method 2: File Manager
+From the REPL (enter `p` in the main menu), then type `files` to open the file manager:
+
+```jython
 >>> files
 ```
 
@@ -497,10 +132,10 @@ Navigate to your script and press Enter to load it for editing, then press `Ctrl
 
 **Note:** The standard Python `exec(open(...).read())` method is not supported in the Jumperless MicroPython environment. Always use the file manager and `Ctrl+P` to run scripts.
 
-### Method 2: REPL Commands
+### Method 3: REPL Commands
 From the MicroPython REPL, you can use the following commands to manage scripts:
 
-```
+```jython
 # Load script into editor for modification
 load my_script.py
 
@@ -511,7 +146,7 @@ save my_new_script.py
 ### Method 4: Direct Execution
 From the main Jumperless menu, you can execute single commands:
 
-```
+```jython
 > gpio_set(1, True)
 > adc_get(0)
 > connect(1, 5)
@@ -523,7 +158,7 @@ From the main Jumperless menu, you can execute single commands:
 From main menu: Press `p`
 
 ### REPL Commands
-```
+```jython
 CTRL + q           - Exit REPL
 history            - Show command history and saved scripts
 save [name]        - Save last executed script
@@ -589,10 +224,19 @@ The system includes several example scripts. To run an example:
 4. Press `Ctrl+P` to load it into the REPL for execution.
 
 Example scripts include:
-- 01_dac_basics.py (DAC basics - voltage control)
-- 02_adc_basics.py (ADC basics - voltage reading)
-- 03_gpio_basics.py (GPIO basics - digital I/O)
-- 04_node_connections.py (Node connections)
+
+- `dac_basics.py`
+- `adc_basics.py`
+- `gpio_basics.py`
+- `node_connections.py`
+- `led_brightness_control.py`
+- `stylophone.py`
+- `uart_basics.py`
+- `uart_loopback.py`
+- `interaction_demo.py`
+- `test_neopixel.py`
+- `fake_gpio.py`
+
 
 
 
@@ -631,7 +275,5 @@ power = ina_get_power(0)      # Returns float in W (e.g., 0.4567)
 gpio_set_dir("GPIO_1", True)  # Same as gpio_set_dir(1, True)
 connect("TOP_RAIL", "GPIO_1") # Same as connect(101, 131)
 ```
-![Screenshot 2025-07-04 at 8 16 04 PM](https://github.com/user-attachments/assets/4ae5e7e2-845a-4e6e-bbd9-5c328624cfe9)
-
 
 
