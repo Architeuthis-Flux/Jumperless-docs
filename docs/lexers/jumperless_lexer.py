@@ -59,6 +59,11 @@ class JumperlessPythonLexer(PythonLexer):
         
         # OLED Functions
         'oled_print', 'oled_clear', 'oled_connect', 'oled_disconnect', 'oled_show',
+        'oled_set_text_size', 'oled_get_text_size', 'oled_copy_print',
+        'oled_get_fonts', 'oled_set_font', 'oled_get_current_font',
+        'oled_load_bitmap', 'oled_display_bitmap', 'oled_show_bitmap_file',
+        'oled_get_framebuffer', 'oled_set_framebuffer', 'oled_get_framebuffer_size',
+        'oled_set_pixel', 'oled_get_pixel',
         
         # Clickwheel Functions
         'clickwheel_up', 'clickwheel_down', 'clickwheel_press',

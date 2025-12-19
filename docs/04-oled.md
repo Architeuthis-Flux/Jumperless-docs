@@ -412,3 +412,197 @@ The script will:
 Then you can mount your Jumperless's filesystem as a mass storage device with `U` and drop it into the `/images/` folder. 
 
 ### Check out the [`/scripts` folder](https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts) in the [JumperlOS repo](https://github.com/Architeuthis-Flux/JumperlOS/tree/main), there are a few other scripts related to dealing with bitmaps.
+
+---
+
+## Using the OLED from MicroPython
+
+The OLED display has a comprehensive MicroPython API for programmatic control. You can display text with multiple fonts and sizes, show bitmaps, manipulate pixels directly, and even redirect Python's `print()` output to the OLED.
+
+### Quick Start
+
+```jython
+import jumperless as j
+import time
+
+# Basic text display
+j.oled_connect()
+j.oled_print("Hello!", 2)
+time.sleep(2)
+j.oled_clear()
+```
+
+### Text Sizes and Scrolling
+
+The OLED supports three text size modes:
+
+- **Size 0**: Small scrolling text - perfect for terminal-like output with multiple lines
+- **Size 1**: Normal centered text
+- **Size 2**: Large centered text (default)
+
+```jython
+import jumperless as j
+import time
+
+# Set default text size
+j.oled_set_text_size(0)  # Small scrolling text
+
+# Display multiple lines
+for i in range(10):
+    j.oled_print(f"Line {i+1}")
+    time.sleep(0.3)
+
+# Switch to large text
+j.oled_set_text_size(2)
+j.oled_print("BIG TEXT")
+```
+
+### Print Redirection for Debugging
+
+One of the most useful features is print redirection - all `print()` statements can automatically appear on both the serial console **and** the OLED:
+
+```jython
+import jumperless as j
+
+# Enable print copying
+j.oled_copy_print(True)
+
+# These appear on both serial AND OLED
+print("Starting test...")
+voltage = j.adc_get(0)
+print(f"Voltage: {voltage:.2f}V")
+print("Test complete!")
+
+# Disable when done
+j.oled_copy_print(False)
+```
+
+This is perfect for debugging projects where you don't have easy access to the serial console.
+
+### Multiple Fonts
+
+Choose from 11 different font families:
+
+```jython
+import jumperless as j
+
+# List all available fonts
+fonts = j.oled_get_fonts()
+print(fonts)
+
+# Set a fun font
+j.oled_set_font("Jokerman")
+j.oled_print("Fun!", 2)
+
+# Switch to monospace for code
+j.oled_set_font("Courier New")
+j.oled_print("Monospace", 2)
+```
+
+### Display Bitmaps
+
+Show bitmap images stored on the filesystem:
+
+```jython
+import jumperless as j
+
+# One-liner to display a bitmap
+j.oled_show_bitmap_file("/images/jogo32h.bin", 0, 0)
+
+# Or load and display separately
+j.oled_load_bitmap("/images/logo.bin")
+j.oled_display_bitmap(0, 0, 0, 0)
+```
+
+### Graphics and Pixel Control
+
+For custom graphics, you can manipulate individual pixels:
+
+```jython
+import jumperless as j
+
+# Draw a box
+j.oled_clear()
+for x in range(20, 108):
+    j.oled_set_pixel(x, 10, 1)  # Top
+    j.oled_set_pixel(x, 22, 1)  # Bottom
+for y in range(10, 23):
+    j.oled_set_pixel(20, y, 1)  # Left
+    j.oled_set_pixel(107, y, 1) # Right
+j.oled_show()
+```
+
+### Advanced: Direct Framebuffer Access
+
+For maximum control, you can read and write the entire framebuffer:
+
+```jython
+import jumperless as j
+
+# Get display dimensions
+width, height, size = j.oled_get_framebuffer_size()
+print(f"Display: {width}x{height}, {size} bytes")
+
+# Capture the screen
+fb = j.oled_get_framebuffer()
+
+# Save to file
+with open("/screen_capture.bin", "wb") as f:
+    f.write(fb)
+
+# Restore later
+with open("/screen_capture.bin", "rb") as f:
+    fb_data = f.read()
+j.oled_set_framebuffer(fb_data)
+```
+
+### Complete API Reference
+
+For the full API documentation with all functions, parameters, and examples, see:
+
+**[MicroPython API Reference - OLED Display Section](09.5-micropythonAPIreference.md#oled-display)**
+
+The API includes:
+- Text size control (`oled_set_text_size`, `oled_get_text_size`)
+- Print redirection (`oled_copy_print`)
+- Font system (`oled_get_fonts`, `oled_set_font`, `oled_get_current_font`)
+- Bitmap functions (`oled_load_bitmap`, `oled_display_bitmap`, `oled_show_bitmap_file`)
+- Framebuffer access (`oled_get_framebuffer`, `oled_set_framebuffer`, `oled_get_framebuffer_size`)
+- Pixel manipulation (`oled_set_pixel`, `oled_get_pixel`)
+
+### Example Projects
+
+**Animated Sine Wave:**
+```jython
+import jumperless as j
+import math
+import time
+
+width, height, _ = j.oled_get_framebuffer_size()
+
+for offset in range(100):
+    j.oled_clear(False)  # Don't show() after clear to avoid flashing
+    for x in range(width):
+        y = int(height//2 + 10 * math.sin((x + offset) / 10))
+        if 0 <= y < height:
+            j.oled_set_pixel(x, y, 1)
+    j.oled_show()
+    time.sleep(0.05)
+```
+
+**Sensor Monitor:**
+```jython
+import jumperless as j
+import time
+
+# Monitor voltage with print redirection
+j.oled_copy_print(True)
+j.oled_clear()
+
+while True:
+    voltage = j.adc_get(0)
+    current = j.ina_get_current(0)
+    print(f"V: {voltage:.2f}V")
+    print(f"I: {current*1000:.1f}mA")
+    time.sleep(1)
+```
