@@ -24,6 +24,8 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 If you don't already have one,
 ## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
 
+Or if you want to save some money and get a refurbished one from me directly,
+## [Jumperless V5 offcuts](https://jumperless.myshopify.com/products/jumperless-v5)
 
 ---
 
