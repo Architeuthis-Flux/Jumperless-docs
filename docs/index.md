@@ -22,10 +22,12 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 
 
 If you don't already have one,
-## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+## [Get the latest hardware revision, Jumperless V5 rev 7](https://jumperless.myshopify.com/products/jumperless-v5-rev-7)
 
-Or if you want to save some money and get a refurbished one from me directly,
+Or if you want to save some money and get a refurbished one,
 ## [Jumperless V5 offcuts](https://jumperless.myshopify.com/products/jumperless-v5)
+
+## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
 
 ---
 
@@ -81,8 +83,58 @@ Join the [Discord](https://discord.gg/bvacV7r3FP) for pretty much instant answer
 </div>
 
 
+---
+
+
+
+See what Zack Freedman had to say about it:
+
+<iframe width="700" height="400" src="https://www.youtube.com/embed/DNlc44nA8Ms?si=l2-Neen_bIlJzXT3&amp;start=1238" title="Zack" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Apparently he didn't find this site, which makes sense, he was an early backer and at the time, the QR code on the box didn't take you here.
+
+---
+
+Watch [Alex Glow](https://alexglow.com/) and [David Groom](https://exposed.ishotjr.com/) screw around with their Jumperlesses for a few hours:
+
+<iframe width="700" height="400" src="https://www.youtube.com/embed/rdyEu2erOtA?si=TSrljZap7f1c5Otr&amp;start=1238" title="Day//Glo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+This also serves as a cautionary tale for what happens if you don't skim these docs first (which is a completely valid approach, you do you.)
+
+---
+
+
+Me talking to [Ian Buckley](https://www.linkedin.com/in/ianmbuckley/) about Jumperless V5:
+
+<iframe width="700" height="400" src="https://www.youtube.com/embed/3fBaQISUsXE?si=swtbu7diG0W7qPCH&amp;start=338" title="Electromaker" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+The hardware was so rudimentary at this point that I would barely even call the thing I was showing there a "V5", it was revision 1 and a *lot* has been done since then.
+
+---
+
+
+Chillin' with [Alex Lynd](https://alexlynd.com/) 
+
+<iframe width="700" height="400" src="https://www.youtube.com/embed/ECoV4VeyLQs?si=c5hHgsb83PSDeGwz&amp;start=338" title="Alex Lynd" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+We're talking about an even earlier set of prototypes, this was shot at both Teardown 2024 and Hackaday Supercon 2024 so it's rev 1 and 2 shown here.
+
+---
+
+
+The OG Jumperless video:
+
+<iframe width="700" height="400" src="https://www.youtube.com/embed/_k0aKM68Xl4?si=40r0wjM1PLCJcpvj&amp;start=338" title="OG Jumperless" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Most of the stuff here is relevant as a subset of what Jumperless V5 does.
+
+---
+
 
 ![dymo-6s](https://github.com/user-attachments/assets/d59e3ebc-591c-4c2c-bce3-1f65f9555c61)
+
+
+
 
 
 ---

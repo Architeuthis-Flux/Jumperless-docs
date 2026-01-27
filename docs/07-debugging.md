@@ -3,9 +3,12 @@
 Look *Inside* your Jumperless
 
 ## Crossbar Array
-There's a new way to see what the 12 analog crossbar switches are up to, just enter `c` in the menu
- 
-```jython
+There's a new way to see what the 12 analog crossbar switches are up to, just enter `C` in the menu
+
+
+![Crossbar View](assets/CrossbarView.png)
+
+<!-- ```jython
  Analog Crossbar Array
 
              chip A                            chip B                            chip C                            chip D 
@@ -72,7 +75,19 @@ There's a new way to see what the 12 analog crossbar switches are up to, just en
 
 
 
-```
+``` -->
+
+Lowercase `c` will show a compact version
+
+![Crossbar Compact](assets/CrossbarCompact.png)
+
+You can also set it to live updating mode with `c!` 
+
+
+<video autoplay loop muted playsinline controls width="100%">
+  <source src="https://github.com/user-attachments/assets/3eba601b-30f8-4d68-b6ca-6a61eeae47a9" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 
