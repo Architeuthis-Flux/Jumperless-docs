@@ -28,6 +28,7 @@ class JumperlessPythonLexer(PythonLexer):
     filenames = ['*.py', '*.python', '*.jumperless.py']
     mimetypes = ['text/x-jython', 'application/x-jython']
 
+
     # Define Jumperless-specific keywords and functions
     JUMPERLESS_FUNCTIONS = {
         # DAC Functions
