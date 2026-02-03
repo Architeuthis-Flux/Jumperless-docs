@@ -21,13 +21,13 @@ setup(
     },
     entry_points={
         'pygments.lexers': [
-            'jumperless = docs.lexers.jumperless_lexer:JumperlessPythonLexer',
-            'jumperless-python = docs.lexers.jumperless_lexer:JumperlessPythonLexer',
-            'jython = docs.lexers.jumperless_lexer:JumperlessPythonLexer',
+            'jumperless = jumperless_lexers.jumperless_lexer:JumperlessPythonLexer',
+            'jumperless-python = jumperless_lexers.jumperless_lexer:JumperlessPythonLexer',
+            'jython = jumperless_lexers.jumperless_lexer:JumperlessPythonLexer',
         ],
         'pygments.styles': [
-            'jumperless = docs.lexers.jumperless_style:JumperlessStyle',
-            'jumperless-light = docs.lexers.jumperless_style:JumperlessLightStyle',
+            'jumperless = jumperless_lexers.jumperless_style:JumperlessStyle',
+            'jumperless-light = jumperless_lexers.jumperless_style:JumperlessLightStyle',
         ],
     },
 ) 
