@@ -58,6 +58,9 @@ class JumperlessPythonLexer(PythonLexer):
         # Path Query Functions
         'get_num_paths', 'get_path_info', 'get_all_paths', 'get_path_between',
         
+        # State Functions
+        'get_state', 'set_state',
+        
         # OLED Functions
         'oled_print', 'oled_clear', 'oled_connect', 'oled_disconnect', 'oled_show',
         'oled_set_text_size', 'oled_get_text_size', 'oled_copy_print',

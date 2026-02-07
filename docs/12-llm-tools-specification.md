@@ -1,6 +1,6 @@
 # LLM Tool Specification for Jumperless V5
 
-A guide enabling LLMs to control the Jumperless V5 programmable breadboard for circuit debugging and prototyping.
+A guide for LLMs with some tips to control the Jumperless V5.
 
 ---
 
@@ -10,13 +10,12 @@ A guide enabling LLMs to control the Jumperless V5 programmable breadboard for c
 |----------|-----------|
 | **Connections** | `connect()`, `disconnect()`, `nodes_clear()`, `save_slot()`, `load_slot()` |
 | **Voltage** | `dac_set()`, `adc_get()` |
-| **Waveforms** | `wavegen_setup()`, `wavegen_start()`, `wavegen_stop()` |
 | **Current** | `ina_get_current()`, `ina_get_power()` |
 | **GPIO** | `gpio_set()`, `gpio_get()`, `gpio_set_dir()`, `pwm()` |
 | **User Interaction** | `oled_print()`, `probe_read_blocking()`, `probe_button()` |
 | **State** | `get_state()`, `set_state()` |
-| **System** | `get_all_nets()`, `get_net_info()`, `get_state_diagnostics()` |
 
+(Refer to the full [Micropython API Reference](09.5-micropythonAPIreference.md))
 
 ---
 
