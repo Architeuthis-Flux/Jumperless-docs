@@ -13,6 +13,7 @@ A guide for LLMs with some tips to control the Jumperless V5.
 | **Current** | `ina_get_current()`, `ina_get_power()` |
 | **GPIO** | `gpio_set()`, `gpio_get()`, `gpio_set_dir()`, `pwm()` |
 | **User Interaction** | `oled_print()`, `probe_read_blocking()`, `probe_button()` |
+| **Graphic Overlays** | `overlay_set()`, `overlay_clear()`, `overlay_set_pixel()` |
 | **State** | `get_state()`, `set_state()` |
 
 (Refer to the full [Micropython API Reference](09.5-micropythonAPIreference.md))
@@ -204,6 +205,20 @@ probe_read_nonblocking()       # Check without waiting (-1 if none)
 probe_button()                 # Returns CONNECT, REMOVE, or NONE
 clickwheel_get_direction()     # Returns UP, DOWN, or NONE
 clickwheel_get_button()        # Returns PRESSED, HELD, RELEASED
+```
+
+### Graphic Overlays (Breadboard LEDs)
+
+The breadboard LEDs are addressed as a 10x30 grid (Row 1-10, Col 1-30). Rows 1-5 are top half (E-A), Rows 6-10 are bottom half (F-J).
+
+```jython
+# overlay_set(name, x, y, height, width, colors)
+# Colors can be flat list or 2D list of 0xRRGGBB integers
+overlay_set("box", 1, 1, 5, 5, [0x550000]*25)
+
+overlay_clear("box")           # Remove overlay
+overlay_clear_all()            # Remove all
+overlay_set_pixel(x, y, color) # Set single pixel (1-30, 1-10)
 ```
 
 ### System & Filesystem

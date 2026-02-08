@@ -122,6 +122,10 @@ class JumperlessPythonLexer(PythonLexer):
         'la_enable_channel', 'la_set_control_analog', 'la_set_control_digital',
         'la_get_control_analog', 'la_get_control_digital',
         
+        # Graphic Overlays
+        'overlay_set', 'overlay_clear', 'overlay_clear_all', 'overlay_set_pixel',
+        'overlay_count', 'overlay_shift', 'overlay_place', 'overlay_serialize',
+        
         # Legacy Filesystem Functions
         'fs_exists', 'fs_listdir', 'fs_read', 'fs_write', 'fs_cwd',
     }
