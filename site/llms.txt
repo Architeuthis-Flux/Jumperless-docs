@@ -1,0 +1,32 @@
+# Jumperless V5 Documentation
+
+> Jumperless V5 is a software-defined breadboard and integrated hardware IDE with an RP2350B, programmable power supplies, multimeter, oscilloscope, function generator, logic analyzer, and RGB LEDs under every hole. Connect any point to any other using software-defined jumpers. Circuits are scriptable via MicroPython or controllable from the companion app.
+
+- The full documentation text is available in a single file: [llms-full.txt](llms-full.txt)
+- Source and hardware: https://github.com/Architeuthis-Flux
+- Community Discord: https://discord.gg/bvacV7r3FP
+- Buy one: https://www.crowdsupply.com/architeuthis-flux/jumperless-v5
+
+## Core Documentation
+
+- [Home](https://docs.jumperless.org/): Overview of Jumperless V5 features and getting started links
+- [Basic Controls](https://docs.jumperless.org/01-basic-controls/): Probe, click wheel, slot system, and connecting/disconnecting nodes
+- [The App](https://docs.jumperless.org/03-app/): Companion desktop app for serial control, Wokwi import, and Arduino flashing
+- [OLED Support](https://docs.jumperless.org/04-oled/): Adding and using an external OLED display
+- [Config File](https://docs.jumperless.org/06-config/): Persistent settings stored on the device
+- [Debug Views](https://docs.jumperless.org/07-debugging/): Crossbar view, bridge list, net list, and diagnostic tools
+
+## Programming & APIs
+
+- [Arduino Stuff](https://docs.jumperless.org/05-arduino/): UART passthrough, automatic flashing, and Arduino integration
+- [File Manager](https://docs.jumperless.org/08-file-manager/): Filesystem access, YAML slot editing, and built-in text editor
+- [MicroPython](https://docs.jumperless.org/08-micropython/): Using the onboard MicroPython interpreter to script circuits
+- [MicroPython API Reference](https://docs.jumperless.org/09.5-micropythonAPIreference/): Complete API reference for all Jumperless MicroPython hardware calls
+- [JFS (Jumperless FileSystem) Module](https://docs.jumperless.org/09.6-jfs/): Jumperless FileSystem module for reading/writing files from MicroPython
+- [LLM Tools Specification](https://docs.jumperless.org/12-llm-tools-specification/): Specification for LLM tool-use with Jumperless serial commands
+
+## Optional
+
+- [Odds and Ends](https://docs.jumperless.org/09.8-odds-and-ends/): Miscellaneous features, tips, and edge cases
+- [3D Printable Stand](https://docs.jumperless.org/10-3d-stand/): 3D printable stand models and printing tips
+- [Glossary of Terms](https://docs.jumperless.org/99-glossary/): Key terms: slots, nodes, bridges, nets, W command, and more

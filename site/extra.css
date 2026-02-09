@@ -8142,6 +8142,60 @@ span[id*=MathJax-Span] {
     color: var(--submenu-text-color) !important;
 }
 
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(21) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 240deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(22) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 252deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(23) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 264deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(24) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 276deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(25) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 288deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(26) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 300deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(27) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 312deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(28) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 324deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(29) > a {
+    --local-hue: calc(var(--parent-hue, 0deg) + 336deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
 /* Set l2 hue for inheritance to l3 - explicit values for reliable wrapping */
 .wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(1).current {
     --l2-hue: calc(var(--parent-hue, 0deg) + 0deg);
@@ -8223,6 +8277,46 @@ span[id*=MathJax-Span] {
     --l2-hue: calc(var(--parent-hue, 0deg) + 228deg);
 }
 
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(21).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 240deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(22).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 252deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(23).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 264deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(24).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 276deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(25).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 288deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(26).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 300deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(27).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 312deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(28).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 324deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(29).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 336deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l2:nth-child(30).current {
+    --l2-hue: calc(var(--parent-hue, 0deg) + 348deg);
+}
+
 /* Level 3 submenu items (toctree-l3) - progressive coloring with explicit wrapping */
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(1) > a {
     --local-hue: calc(var(--l2-hue, 0deg) + 0deg);
@@ -8296,25 +8390,93 @@ span[id*=MathJax-Span] {
     color: var(--submenu-text-color) !important;
 }
 
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(13) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 144deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(14) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 156deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(15) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 168deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(16) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 180deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+
+
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(17) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 192deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(18) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 204deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(19) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 216deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(20) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 228deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}   
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(21) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 240deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(22) > a {
+    --local-hue: calc(var(--l2-hue, 0deg) + 252deg);
+    background-color: hsl(var(--local-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
 /* Set l3 hue for inheritance to l4 - explicit values for reliable wrapping */
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(1).current {
-    --l3-hue: calc(var(--l2-hue, 0deg) + 0deg);
+    --l3-hue: calc((var(--l2-hue, 0deg) + 0deg) % 360deg);
 }
 
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(2).current {
-    --l3-hue: calc(var(--l2-hue, 0deg) + 12deg);
+    --l3-hue: calc((var(--l2-hue, 0deg) + 12deg) % 360deg);
 }
 
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(3).current {
-    --l3-hue: calc(var(--l2-hue, 0deg) + 24deg);
+    --l3-hue: calc((var(--l2-hue, 0deg) + 24deg) % 360deg);
 }
 
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(4).current {
-    --l3-hue: calc(var(--l2-hue, 0deg) + 36deg);
+    --l3-hue: calc((var(--l2-hue, 0deg) + 36deg) % 360deg);
 }
 
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(5).current {
-    --l3-hue: calc(var(--l2-hue, 0deg) + 48deg);
+    --l3-hue: calc((var(--l2-hue, 0deg) + 48deg) % 360deg);
 }
 
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(6).current {
@@ -8343,6 +8505,50 @@ span[id*=MathJax-Span] {
 
 .wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(12).current {
     --l3-hue: calc(var(--l2-hue, 0deg) + 132deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(13).current {
+    --l3-hue: calc(var(--l2-hue, 0deg) + 144deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(14).current {
+    --l3-hue: calc(var(--l2-hue, 0deg) + 156deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(15).current {
+    --l3-hue: calc(var(--l2-hue, 0deg) + 168deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(16).current {
+    --l3-hue: calc(var(--l2-hue, 0deg) + 180deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(17).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 192deg) % 360deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(18).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 204deg) % 360deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(19).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 216deg) % 360deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(20).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 228deg) % 360deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(21).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 240deg) % 360deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(22).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 252deg) % 360deg);
+}
+
+.wy-nav-side .wy-menu-vertical li.toctree-l3:nth-child(23).current {
+    --l3-hue: calc((var(--l2-hue, 0deg) + 264deg) % 360deg);
 }
 
 /* Level 4 submenu items (toctree-l4) - progressive coloring with explicit wrapping */

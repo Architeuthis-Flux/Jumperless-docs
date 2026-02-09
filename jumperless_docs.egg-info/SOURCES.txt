@@ -7,3 +7,6 @@ jumperless_docs.egg-info/dependency_links.txt
 jumperless_docs.egg-info/entry_points.txt
 jumperless_docs.egg-info/requires.txt
 jumperless_docs.egg-info/top_level.txt
+jumperless_lexers/__init__.py
+jumperless_lexers/jumperless_lexer.py
+jumperless_lexers/jumperless_style.py

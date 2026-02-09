@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/01-basic-controls/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/01-basic-controls/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/03-app/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/03-app/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/04-oled/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/04-oled/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/05-arduino/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/05-arduino/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/06-config/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/06-config/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/07-debugging/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/07-debugging/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/08-file-manager/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/08-file-manager/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/08-micropython/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/08-micropython/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/09.5-micropythonAPIreference/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/09-odds-and-ends/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/09.6-jfs/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/09.5-micropythonAPIreference/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/09.8-odds-and-ends/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/10-3d-stand/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/10-3d-stand/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/11-WritingApps/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/11-WritingApps/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/99-glossary/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/12-llm-tools-specification/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
     <url>
-         <loc>https://jumperless-docs.readthedocs.io/en/latest/assets/</loc>
-         <lastmod>2025-08-23</lastmod>
+         <loc>https://docs.jumperless.org/99-glossary/</loc>
+         <lastmod>2026-02-09</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.jumperless.org/assets/</loc>
+         <lastmod>2026-02-09</lastmod>
     </url>
 </urlset>

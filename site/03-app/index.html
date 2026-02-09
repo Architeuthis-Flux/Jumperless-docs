@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/03-app/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/03-app/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/03-app/">
+    <meta property="og:url" content="https://docs.jumperless.org/03-app/">
     <meta property="og:title" content="The App - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/03-app/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/03-app/">
     <meta name="twitter:title" content="The App - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/03-app/">
+    <link rel="canonical" href="https://docs.jumperless.org/03-app/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -73,7 +73,13 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#installation-guide">Installation guide</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#find-the-latest-release">Find the latest release</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-jumperless-app-is-now-on-pypi">The Jumperless App is now on PyPi!</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#alternative-download-pre-built-binaries">Alternative: Download Pre-built Binaries</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#find-the-latest-release">Find the latest release</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a>
     </li>
@@ -90,6 +96,24 @@
     <li class="toctree-l2"><a class="reference internal" href="#local-arduino-sketch-support">Local Arduino Sketch Support</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#launch-scripts">Launch Scripts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#importing-circuits-from-wokwi">Importing Circuits from Wokwi</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#direct-link-import">Direct Link Import</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-to-manually-import-from-wokwi">How to manually Import from Wokwi</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-wokwi-components">Supported Wokwi Components</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wire-color-mapping">Wire Color Mapping</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rail-voltage-detection">Rail Voltage Detection</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#command-variants">Command Variants</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#after-import">After Import</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#terminal-compatibility">Terminal Compatibility</a>
     </li>
@@ -121,15 +145,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -137,7 +161,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -169,7 +193,20 @@
               
                 <h1 id="the-app">The App</h1>
 <h2 id="installation-guide">Installation guide</h2>
-<h3 id="find-the-latest-release">Find the latest release</h3>
+<h3 id="the-jumperless-app-is-now-on-pypi">The Jumperless App is now on PyPi!</h3>
+<p>The easiest way to get started is with pip:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>pip<span class="w"> </span>install<span class="w"> </span>jumperless
+</code></pre></div>
+<p>Then run it with:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>jumperless
+</code></pre></div>
+<p><strong>Note:</strong> If the app version shows less than the latest release, <code class="language-jython highlight"><span class="n">pip</span></code> defaults to a local version if it's available. In that case, run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--upgrade<span class="w"> </span>jumperless
+</code></pre></div>
+<p>to make sure it grabs the latest version.</p>
+<p>The app repo is at <a href="https://github.com/Architeuthis-Flux/Jumperless-App">https://github.com/Architeuthis-Flux/Jumperless-App</a></p>
+<h3 id="alternative-download-pre-built-binaries">Alternative: Download Pre-built Binaries</h3>
+<h4 id="find-the-latest-release">Find the latest release</h4>
 <p><a href="https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest">https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest</a></p>
 <p>The link above will magically lead you to the latest version, and will look something like <code class="language-jython highlight"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Architeuthis</span><span class="o">-</span><span class="n">Flux</span><span class="o">/</span><span class="n">JumperlessV5</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">tag</span><span class="o">/</span><span class="mf">5.2.0.0</span></code></p>
 <p><strong>At the bottom under Assets, download the Jumperless App for your OS</strong></p>
@@ -208,6 +245,7 @@
 <li>It installs <a href="https://github.com/arduino/arduino-cli">arduino-cli</a> on first startup and uses it pull in libraries, compile, and flash an arduino Nano in the header</li>
 <li>If the routable UART lines aren't connected when the app detects a change in the sketch file, it will connect them to flash the new code and then return them to how they were</li>
 <li><a href="https://github.com/avrdudes/avrdude">avrdude</a> output is shown in real time (you'd be amazed how difficult this was)</li>
+<li><strong>Direct Wokwi circuit import</strong> - Copy diagram.json from Wokwi and import it with the <code class="language-jython highlight"><span class="n">W</span></code> command (see below)</li>
 <li><strong>No longer a janky pile of garbage</strong></li>
 </ul>
 <h2 id="local-arduino-sketch-support">Local Arduino Sketch Support</h2>
@@ -224,6 +262,69 @@
 <li>The launcher <em>should</em> kill other instances (and close their windows) that happen to be open because it's such a common issue for me at least</li>
 <li>Linux people are no longer red-headed stepchildren, there are proper tar.gz packages now for you nerds</li>
 </ul>
+<hr />
+<h2 id="importing-circuits-from-wokwi">Importing Circuits from Wokwi</h2>
+<p>You can design circuits in the <a href="https://wokwi.com">Wokwi online simulator</a> and import them directly to your Jumperless with the <code class="language-jython highlight"><span class="n">W</span></code> command, or use the Jumperless App and it'll pull it from your project automatically and live update.</p>
+<h3 id="direct-link-import">Direct Link Import</h3>
+<p>You can now just dump a Wokwi link into the app at any time and it'll work:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>        <span class="n">Menu</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="o">~~~~~</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">x</span> <span class="o">=</span> <span class="n">clear</span> <span class="nb">all</span> <span class="n">connections</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="o">+</span> <span class="o">=</span> <span class="n">add</span> <span class="n">connections</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="o">-</span> <span class="o">=</span> <span class="nf nf-JFS">remove</span> <span class="n">connections</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">wokwi</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="mi">424432011346848769</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="n">Enter</span> <span class="n">a</span> <span class="nf nf-JFS">name</span> <span class="k">for</span> <span class="n">this</span> <span class="n">new</span> <span class="n">project</span><span class="p">:</span> <span class="n">cool</span> <span class="n">project</span> <span class="n">zone</span>
+<span class="linenos" data-linenos="11 "></span><span class="err">✓</span> <span class="n">Saved</span> <span class="s1">&#39;cool project zone&#39;</span> <span class="n">to</span> <span class="n">project</span> <span class="n">library</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span><span class="err">✓</span> <span class="s1">&#39;cool project zone&#39;</span> <span class="n">assigned</span> <span class="n">to</span> <span class="n">active</span> <span class="n">slot</span> <span class="mi">0</span>
+<span class="linenos" data-linenos="14 "></span>  <span class="n">URL</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">wokwi</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="mi">424432011346848769</span>
+<span class="linenos" data-linenos="15 "></span>  <span class="n">The</span> <span class="n">project</span> <span class="n">will</span> <span class="n">start</span> <span class="n">updating</span> <span class="n">automatically</span>
+</code></pre></div>
+<h3 id="how-to-manually-import-from-wokwi">How to manually Import from Wokwi</h3>
+<ol>
+<li><strong>Design your circuit</strong> on <a href="https://wokwi.com">wokwi.com</a></li>
+<li><strong>Click on the <code class="language-jython highlight"><span class="n">diagram</span><span class="o">.</span><span class="n">json</span></code> tab</strong> in the Wokwi editor</li>
+<li><strong>Copy all the JSON content</strong> (Ctrl+A, Ctrl+C or Cmd+A, Cmd+C)</li>
+<li><strong>In Jumperless, type <code class="language-jython highlight"><span class="n">W</span></code></strong> and press Enter</li>
+<li><strong>Paste the JSON</strong> (Ctrl+V or right-click → Paste)</li>
+<li>The parser automatically detects when the JSON is complete and imports it!</li>
+</ol>
+<h3 id="supported-wokwi-components">Supported Wokwi Components</h3>
+<ul>
+<li><strong>Half breadboard</strong> - Wokwi's breadboard maps directly to Jumperless rows</li>
+<li><strong>Arduino Nano</strong> - All pins (D0-D13, A0-A7) (GND, 5V, 3.3V, and RST pins are hardwired and don't do anything)</li>
+<li><strong>Logic Analyzer</strong> - Channels map to GPIO: D0-7 → GPIO 1-8</li>
+<li><strong>Wire colors</strong> - Wokwi wire colors preserved</li>
+<li><strong>Rail voltages</strong> - Detected from text labels in Wokwi</li>
+<li><strong>VCC and GND Nodes</strong> - VCC maps to the <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></li>
+</ul>
+<p><img alt="LogicAnalyzerMappingV5" src="https://github.com/user-attachments/assets/3b7bd360-9703-4b0b-925a-aea8ed7e0526" /></p>
+<p><strong>Note:</strong> The app still works with the OG Jumperless and those original mappings remain the same.</p>
+<h3 id="wire-color-mapping">Wire Color Mapping</h3>
+<p><strong>Wire colors will match the ones you set in Wokwi!</strong> The new Wokwi parser sends the entire <code class="language-jython highlight"><span class="n">diagram</span><span class="o">.</span><span class="n">json</span></code> from Wokwi and parses it on the Jumperless, which means color information gets preserved.</p>
+<p><img alt="wokwiColor-2" src="https://github.com/user-attachments/assets/e5607cf9-3a95-42f7-b67c-875ba23e2ee9" /></p>
+<p><img alt="wokwiColor-1" src="https://github.com/user-attachments/assets/8a148940-60f8-4741-8905-6b9911ac1f21" /></p>
+<p>All Wokwi wire colors are preserved and displayed on the breadboard LEDs:</p>
+<p><code class="language-jython highlight"><span class="n">red</span></code>, <code class="language-jython highlight"><span class="n">orange</span></code>, <code class="language-jython highlight"><span class="n">yellow</span></code>, <code class="language-jython highlight"><span class="n">green</span></code>, <code class="language-jython highlight"><span class="n">blue</span></code>, <code class="language-jython highlight"><span class="n">violet</span></code>, <code class="language-jython highlight"><span class="n">purple</span></code>, <code class="language-jython highlight"><span class="n">magenta</span></code>, <code class="language-jython highlight"><span class="n">cyan</span></code>, <code class="language-jython highlight"><span class="n">white</span></code>, <code class="language-jython highlight"><span class="n">gray</span></code>, <code class="language-jython highlight"><span class="n">black</span></code>, <code class="language-jython highlight"><span class="n">brown</span></code>, <code class="language-jython highlight"><span class="n">limegreen</span></code>, <code class="language-jython highlight"><span class="n">gold</span></code></p>
+<p><strong>Note:</strong> Black wires let the Jumperless auto-assign a color.</p>
+<p>If you leave all the wires green (the default in Wokwi) or make a wire black, it'll just auto assign colors.</p>
+<p><strong>About color assignment:</strong> There is some weirdness because colors in Wokwi are applied to <code class="language-jython highlight"><span class="n">bridges</span></code> (a pair of <code class="language-jython highlight"><span class="n">nodes</span></code>) while color in the Jumperless gets assigned to <code class="language-jython highlight"><span class="n">nets</span></code> (a collection of connected <code class="language-jython highlight"><span class="n">nodes</span></code>). So if you have a bunch of things electrically connected together with different wire colors, it'll just pick one. It tries to pick unique colors first (no other nets with that same color), but if it can't, it'll shift the hue a bit so it's still that color but you can hopefully tell them apart.</p>
+<h3 id="rail-voltage-detection">Rail Voltage Detection</h3>
+<p>Add a text label in your Wokwi diagram to specify rail voltages:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">top</span> <span class="n">rail</span> <span class="mf">5.5</span><span class="n">V</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">bottom</span> <span class="n">rail</span> <span class="mf">3.5</span><span class="n">V</span>
+</code></pre></div>
+<p>The Jumperless parser will automatically detect these values and set the rails accordingly</p>
+<h3 id="command-variants">Command Variants</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">W</span>              <span class="c1"># Paste JSON, save to active slot</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">W</span> <span class="mi">5</span>            <span class="c1"># Paste JSON, save to slot 5</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">W</span> <span class="o">/</span><span class="n">file</span><span class="o">.</span><span class="n">json</span>   <span class="c1"># Load from file, save to active slot</span>
+</code></pre></div>
+<h3 id="after-import">After Import</h3>
+<p>Use <code class="language-jython highlight"><span class="o">&lt;</span></code> to cycle through slots to activate your imported circuit, or it will be active immediately if imported to the current slot.</p>
 <h2 id="terminal-compatibility">Terminal Compatibility</h2>
 <p>Or you can use any terminal emulator you like, <a href="https://iterm2.com/">iTerm2</a>, <a href="https://invisible-island.net/xterm/">xTerm</a>, <a href="https://github.com/Eugeny/tabby">Tabby</a>, <a href="https://www.arduino.cc/en/software/">Arduino IDE</a>'s Serial Monitor, whatever. The TUI is all handled from the Jumperless itself so it just needs something to print text. </p>
               

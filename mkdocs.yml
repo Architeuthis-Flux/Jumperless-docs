@@ -1,4 +1,4 @@
-site_url: "https://jumperless-docs.readthedocs.io/en/latest/"
+site_url: "https://docs.jumperless.org"
 
 site_name: Jumperless Docs
 site_description: "Learn how to use your Jumperless"
@@ -68,9 +68,10 @@ markdown_extensions:
   - pymdownx.inlinehilite:
       style_plain_text: jython
 
-# Hooks to register custom lexers
+# Hooks to register custom lexers and generate llms.txt
 hooks:
   - docs/hooks.py
+  - docs/generate_llms_txt.py
 
 extra:
   meta:

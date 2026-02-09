@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/09.8-odds-and-ends/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/09.8-odds-and-ends/">
+    <meta property="og:title" content="Odds and Ends - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/09.8-odds-and-ends/">
+    <meta name="twitter:title" content="Odds and Ends - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/09.8-odds-and-ends/">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Odds and Ends - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" /> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Odds and Ends</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#whats-new-in-jumperlos">What's New in JumperlOS</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#safety-info">Safety Info</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#joom">Joom</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bandwidth">Bandwidth</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#animations">Animations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#rail-animations">Rail Animations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adc-animations">ADC Animations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gpio-animations">GPIO Animations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#input-mode">Input Mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#output-mode">Output Mode</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#whats-that-buffer_in-dac_0-bridge-thats-always-there">What's that BUFFER_IN - DAC_0 bridge that's always there?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-side-effect-of-needing-a-crossbar-connection-to-light-the-probe-is-that-the-leds-in-select-mode-act-as-a-test-of-whether-the-jumperless-is-properly-making-connections">A side effect of needing a crossbar connection to light the probe is that the LEDs in Select Mode act as a test of whether the Jumperless is properly making connections.</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-am-i-using-one-of-the-precious-two-dacs-and-not-another-gpio">Why am I using one of the precious two DACs and not another GPIO?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ai-generated-wiki">AI Generated Wiki</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#onboard-help">Onboard Help</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#github-releases">GitHub Releases</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#schematic">Schematic</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#writing-native-apps">Writing Native apps</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#heres-a-the-example-app-that-should-show-the-calls-for-most-of-the-things-you-might-want-to-do">Here's a the example app that should show the calls for most of the things you might want to do</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#first-get-it-platformio-set-up-to-flash-code">First get it PlatformIO set up to flash code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#to-write-an-app">To write an App</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#to-actually-write-the-app">To actually write the app</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Odds and Ends</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="odds-and-ends">Odds and Ends</h1>
+<h2 id="whats-new-in-jumperlos">What's New in JumperlOS</h2>
+<p>JumperlOS is now a proper operating system with a priority-based task scheduler! This is a huge refactor from the original firmware:</p>
+<ul>
+<li><strong>Viper IDE and Micropython raw REPL</strong> - Live code on the Jumperless' file system in your browser</li>
+<li><strong>Priority-based task scheduler</strong> - Each component has a <code class="language-jython highlight"><span class="n">service</span><span class="p">()</span></code> routine that checks whether it should do anything, replacing the old busy-wait loop</li>
+<li><strong>Live updating</strong> - Edits to the YAML state files will live update with new connections (whether you're editing them in the onboard editor or as a mounted USB MSC device on your computer)</li>
+<li><strong>Better fonts</strong> - New fonts available: <code class="language-jython highlight"><span class="n">Berkeley</span></code>, <code class="language-jython highlight"><span class="n">Iosevka</span></code>, <code class="language-jython highlight"><span class="n">Pragmat</span><span class="p">[</span><span class="n">ism</span><span class="p">]</span></code></li>
+<li><strong>YAML connection files</strong> - More permissive of malformed syntax</li>
+<li><strong>Unified syntax highlighting</strong> - Works consistently in <code class="language-jython highlight"><span class="n">eKilo</span></code>, <code class="language-jython highlight"><span class="n">python</span></code>, and normal input after <code class="language-jython highlight"><span class="o">&gt;</span></code></li>
+<li><strong>Encoder-based connections</strong> - Use the clickwheel to scroll through and select nodes without touching the probe</li>
+<li><strong>Current sensing marching ants</strong> - Animated visual feedback showing current flow direction between I+ and I- connections</li>
+<li><strong>Python context switching</strong> - Toggle between <code class="language-jython highlight"><span class="k">global</span></code> and <code class="language-jython highlight"><span class="n">python</span></code> connection contexts in the MicroPython REPL</li>
+</ul>
+<p>The JumperlOS firmware repo is at <a href="https://github.com/Architeuthis-Flux/JumperlOS">https://github.com/Architeuthis-Flux/JumperlOS</a></p>
+<hr />
+<h2 id="safety-info">Safety Info</h2>
+<p>Here's an image of the little card that should have been inside your box</p>
+<p><img alt="Safety info Never put voltages above +9V or below -9V anywhere on this board. Don't use unpowered, the crossbars need power to block voltage too. Don't power externally, use the internal power supplies (rails / DACs). It can be powered from the 5V and GND pins on the Nano header or the FPC adapter instead of USB. External signals are okay, as long as the board remains powered.This board gets fairly warm in normal operation from the LEDs, if it ever gets hot, unplug it immediately and let me know. When the switch on the probe is set to Select Mode,
+it should only be used on the gold probe sense pads.The probe tip in Select Mode is always at 3.3V. Don't stab yourself or others with the probe, unless it's in self-defense. Do not eat your Jumperless V5. When in doubt, don't hesitate to ask!" src="https://github.com/user-attachments/assets/d7f13c5b-da36-488d-81e4-cf43be6adb30" /></p>
+<ul>
+<li>
+<p>Never put voltages above +9V or below -9V anywhere on this board.</p>
+</li>
+<li>
+<p>Don't use unpowered, the crossbars need power to block voltage too.</p>
+</li>
+<li>
+<p>Don't power externally, use the internal power supplies (rails / DACs).</p>
+</li>
+<li>
+<p>It can be powered from the 5V and GND pins on the Nano header or the FPC adapter instead of USB.</p>
+</li>
+<li>
+<p>External signals are okay, as long as the board remains powered.</p>
+</li>
+<li>
+<p>This board gets fairly warm in normal operation from the LEDs, if it ever gets hot, unplug it immediately and let me know.</p>
+</li>
+<li>
+<p>When the switch on the probe is set to Select Mode, it should only be used on the gold probe sense pads.</p>
+</li>
+<li>
+<p>The probe tip in Select Mode is always at 3.3V.  </p>
+</li>
+<li>
+<p>Don't stab yourself or others with the probe, unless it's in self-defense.</p>
+</li>
+<li>
+<p>Do not eat your Jumperless V5.</p>
+</li>
+<li>
+<p>When in doubt, don't hesitate to <a href="https://discord.gg/TcjM5uEgb4">ask!</a></p>
+</li>
+</ul>
+<p>There are a lot of exceptions to these if you know what you're doing. It's pretty hard to permanently damage this board.</p>
+<p>Some things (usually external power with the Jumperless off) can cause lockup on the <a href="https://tinyurl.com/24xrspea">analog CMOS switches</a>, but the current limiting resistors on their power supply pins generally keep them from drawing so much current that they permanently break. In situations where one chip is getting crazy hot, the first thing to try is to unplug the Jumperless, let it cool down, and try it again (obviously, change whatever you think was causing it). Most of the time they go back to normal after some rest.</p>
+<p>Don't let any of this scare you, I'd rather you just pretend it's indestructable and use it with reckless abandon. So if you manage to break anything, just let me know and I'll send out a fresh one and a return label, no questions asked*.</p>
+<p>*Actually, a ton of questions asked, so we can figure out how it happened and maybe prevent it from happening to someone else. But the point is I don't care if it's clearly your fault and not some manufacturing defect, I will make sure you have a working Jumperless.</p>
+<p><img width="6535" height="1030" alt="Artboard 21" src="https://github.com/user-attachments/assets/e3b4c4a7-47de-4571-8b44-b7829961199a" />
+It's even printed on the box</p>
+<hr />
+<h2 id="joom">Joom</h2>
+<p>You can get the .uf2 file here:</p>
+<p><a href="https://github.com/Architeuthis-Flux/joom/releases/download/0.0.1/joom_full.uf2">https://github.com/Architeuthis-Flux/joom/releases/download/0.0.1/joom_full.uf2</a></p>
+<p>You'll need to put the Jumperless in bootloader mode (unplug it, press the button on the back side of the USB port, plug it back in, then drag this UF2 file onto the drive called <code class="language-jython highlight"><span class="n">RP2350</span></code> that pops up)</p>
+<p>Connect a speaker between the lower <code class="language-jython highlight"><span class="n">RST</span></code> pin (the one closer to the breadboard) on the Nano header and <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> for sound.</p>
+<iframe width="700" height="400" src="https://www.youtube.com/embed/xWYWruUO0F4?si=5NP4FGQRS_ZFxBnC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p>When you're done playing Doom in a blindness simulator, just reload the regular firmware the same way as above.</p>
+<p><a href="https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest">https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest</a></p>
+<hr />
+<h2 id="bandwidth">Bandwidth</h2>
+<p>Michael has done some <a href="https://codeberg.org/multiplex/jumperless-wigglyvolts">awesome work characterizing the bandwidth of the Jumperless</a>.</p>
+<p><img alt="" src="https://codeberg.org/multiplex/jumperless-wigglyvolts/media/branch/main/screenshots/IMG_2886.jpeg" /></p>
+<p>The TL;DR is just the physical breadboard puts the 3dB rolloff t ~13MHz, and a signal passing through the crossbar matrix brings it down to around ~8MHz. </p>
+<p>It makes sense these are pretty high, these CH446Qs were originally made for switching video signals so bandwidth was pretty important when they were designing them. Keep in mind this isn't a hard limit, it's just where the signal gets attenuated by the (arbitrarilyish) defined 3dB, so your signal's amplitude is reduced by √2.</p>
+<hr />
+<p><img alt="HeroNew" src="https://github.com/user-attachments/assets/8eb56a45-aa24-4dd0-8528-8c3656c0b4ae" /></p>
+<h2 id="animations">Animations</h2>
+<p>The Jumperless uses LED animations to show the state of different components on the breadboard.</p>
+<h3 id="rail-animations">Rail Animations</h3>
+<p>If it's a rail, those are animated and should be a continuous slow pulsing toward the top or bottom depending on the rail.</p>
+<h3 id="adc-animations">ADC Animations</h3>
+<p><code class="language-jython highlight"><span class="n">ADCs</span></code> are green at 0V, and go through the spectrum to red at +5V, and get whiter hot pink toward +8V. Negative voltages are kinda blue/icy and do that same thing with the "cold" colors towards -8V.</p>
+<h3 id="gpio-animations">GPIO Animations</h3>
+<h3 id="input-mode">Input Mode</h3>
+<p><code class="language-jython highlight"><span class="n">GPIO</span></code> as inputs are animated with a white pulsing (this might be broken in that FW release, I'm fixing that right now actually, and will just be purple/white) when floating, red for high, green for low</p>
+<h3 id="output-mode">Output Mode</h3>
+<p><code class="language-jython highlight"><span class="n">GPIO</span></code> outputs will be either green or red depending on their state </p>
+<hr />
+<h2 id="whats-that-buffer_in-dac_0-bridge-thats-always-there">What's that <code class="language-jython highlight"><span class="no no-Jumperless">BUFFER_IN</span> <span class="o">-</span> <span class="no no-Jumperless">DAC_0</span></code> bridge that's always there?</h2>
+<p>That gets added to power the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code>, it's kinda weird, but to multiplex 3.3V, GND, LED data, 2 buttons, and a +-9V tolerant analog line over the 4 wires on a TRRS cable, the line powering those LEDs is shared.</p>
+<p>The <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code>/<code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> switch is a Dual Pole Dual Throw (DPDT) switch. The probe tip needs to be at a steady 3.3V to be read by the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">sense</span> <span class="n">pads</span></code> which is a big resistive divider sensed by a single <code class="language-jython highlight"><span class="n">ADC</span></code>.</p>
+<p>When you have it in <code class="language-jython highlight"><span class="no no-Hardware">select</span></code> mode, the probe tip is getting 3.3V from a <code class="language-jython highlight"><span class="n">GPIO</span></code> on the RP2350B driven <code class="language-jython highlight"><span class="n">high</span></code>, and the LEDs get their power from the analog line, which is <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code> connected to <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> set to 3.3V.</p>
+<p>When you switch to <code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> mode, those roles get swapped, the LEDs are powered by that <code class="language-jython highlight"><span class="n">GPIO</span></code>, and the probe tip is now <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code>. In the current firmware, that just stays at 3.3V so you can <em>kinda</em> sense pads in either mode (you may notice the sensing is a lot wonkier, that's because the <code class="language-jython highlight"><span class="n">DAC</span></code> isn't perfectly calibrated to output <em>exactly</em> 3.3V.) But in the future, there will be some other stuff you can do in that mode treating it as an analog line (and of course, I'll forget to update this, if it's after like June 2025, double check this is still true.)</p>
+<h5 id="a-side-effect-of-needing-a-crossbar-connection-to-light-the-probe-is-that-the-leds-in-select-mode-act-as-a-test-of-whether-the-jumperless-is-properly-making-connections">A side effect of needing a crossbar connection to light the probe is that the LEDs in <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code> Mode act as a test of whether the Jumperless is properly making connections.</h5>
+<h3 id="why-am-i-using-one-of-the-precious-two-dacs-and-not-another-gpio">Why am I using one of the precious two DACs and not another GPIO?</h3>
+<p>The answer is switch position sensing. You may notice there's no obvious way for the Jumperless to know where the switch is set, so I had to get creative on this one. <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code>'s output is hardwired to go through a <code class="language-jython highlight"><span class="n">current</span> <span class="n">sense</span></code> shunt resistor, so when <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> is powering the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code>, they'll be drawing some current I can measure with one of the <code class="language-jython highlight"><span class="n">INA219</span></code>s, and therefore I can be reasonably confident that the switch is in the <code class="language-jython highlight"><span class="no no-Hardware">select</span></code> position.</p>
+<p>If you need both <code class="language-jython highlight"><span class="n">DAC</span></code>s, you can just get rid of this connection and the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LEDs</span></code> won't light up, but other than aesthetics, it really has no effect on functionality. Or you connect <code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code> to a <code class="language-jython highlight"><span class="n">GPIO</span></code> and set it <code class="language-jython highlight"><span class="n">high</span></code> and just lose the ability to sense where the switch is. </p>
+<hr />
+<h2 id="ai-generated-wiki">AI Generated Wiki</h2>
+<p>If you want to read a wiki generated by AI and ask it questions about how this thing works and how to use it, <a href="https://deepwiki.com/Architeuthis-Flux/JumperlessV5/1-overview"><strong>DeepWiki</strong></a> was surprisingly accurate (enough.) </p>
+<p>The docs on this site are more about how to <em>use</em> your Jumperless, this is more geared toward helping understand the circuitry and code.</p>
+<hr />
+<h2 id="onboard-help">Onboard Help</h2>
+<p>Use <code class="language-jython highlight"><span class="nf nf-Jumperless">help</span></code> or <code class="language-jython highlight"><span class="p">[</span><span class="n">command</span><span class="p">]</span><span class="err">?</span></code> for onboard documentation</p>
+<p><img alt="Screenshot 2025-07-04 at 5 52 32 PM" src="https://github.com/user-attachments/assets/522bfcb4-f836-464c-bcdf-1b302d05005b" /></p>
+<hr />
+<h2 id="github-releases"><a href="https://github.com/Architeuthis-Flux/JumperlessV5/releases">GitHub Releases</a></h2>
+<p>If you want more info about each feature when I was particularly excited about it, I usually write about the new features in the <a href="https://github.com/Architeuthis-Flux/JumperlessV5/releases">Release notes on Github</a>.</p>
+<hr />
+<h2 id="schematic">Schematic</h2>
+<p>Here's the schematic that's printed on the inner flap of the box
+<img alt="" src="https://github.com/user-attachments/assets/1c91a76d-cacf-40f0-a87b-c952787abb6f" /></p>
+<p>If you want look at the schematic and PCB together and don't feel like downloading the whole thing and opening it in KiCad, <a href="https://kicanvas.org/?github=https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/Jumperless23V50/MainBoard/JumperlessV5r6/JumperlessV5r6.kicad_pro">you can open it in the browser with KiCanvas here</a></p>
+<h2 id="writing-native-apps">Writing Native apps</h2>
+<p>Writing Apps</p>
+<h3 id="heres-a-the-example-app-that-should-show-the-calls-for-most-of-the-things-you-might-want-to-do">Here's a the example app that should show the calls for most of the things you might want to do</h3>
+<p>You can do literally anything the Jumperless can in an app, so if there's a specific thing, lmk and I'll write an example. Until I make this into a proper operating system, what you're doing when you write an App is just writing a function in the main firmware. There's really no guard rails, and the API is just any function in the firmware. </p>
+<h2 id="first-get-it-platformio-set-up-to-flash-code">First get it PlatformIO set up to flash code</h2>
+<p>So fork the firmware here: https://github.com/Architeuthis-Flux/JumperlOS</p>
+<p>I'm using PlatformIO in VSCode. And it <em>should</em> just work to open the RP23V50firmware folder in that (you'll probably need to comment out <code class="language-jython highlight"><span class="n">upload_port</span> <span class="o">=</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port1</span></code> in <code class="language-jython highlight"><span class="n">Platformio</span><span class="o">.</span><span class="n">ini</span></code> so it'll just automatically find it)</p>
+<p>You should probably try to just load the firmware just to make sure everything works.</p>
+<h2 id="to-write-an-app">To write an App</h2>
+<p>Before you go writing your app, follow these steps to make it so it's listed in the App library and you can run it from the menus.</p>
+<ul>
+<li>
+<p>Go to <a href="https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/RP23V50firmware/src/menuTree.h"><code class="language-jython highlight"><span class="n">menuTree</span><span class="o">.</span><span class="n">h</span></code></a> and add the name of your app under <code class="language-jython highlight"><span class="n">Apps</span>\<span class="n">n</span>\</code> (shown as <code class="language-jython highlight"><span class="o">-</span><span class="n">Custom</span> <span class="n">App</span>\<span class="n">n</span>\</code> here, it needs to fit in 7x2 chars to show on the breadboard)
+<img width="349" alt="menutree" src="https://github.com/user-attachments/assets/c619f655-de53-4a8c-8bde-24c536956546" /></p>
+</li>
+<li>
+<p>Go to <code class="language-jython highlight"><span class="n">Apps</span><span class="o">.</span><span class="n">h</span></code> and declare your function where you'll write your app
+<img width="758" alt="Appdoth" src="https://github.com/user-attachments/assets/63f7fbab-a63c-4f7c-b454-b4166875d6af" /></p>
+</li>
+<li>
+<p>Go to <code class="language-jython highlight"><span class="n">Apps</span><span class="o">.</span><span class="n">cpp</span></code> and add a struct in the <code class="language-jython highlight"><span class="n">struct</span> <span class="n">app</span> <span class="n">apps</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span></code> for your app 
+<code class="language-jython highlight"><span class="p">{</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="err">??</span><span class="n">idk</span><span class="p">,</span> <span class="nf nf-JFS">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">function</span> <span class="p">(</span><span class="n">unused</span><span class="p">)}</span></code>
+<img width="510" alt="appStruct" src="https://github.com/user-attachments/assets/f2b02ab6-0a49-46be-bf38-264bc8022417" /></p>
+</li>
+<li>
+<p>Go to <code class="language-jython highlight"><span class="n">Apps</span><span class="o">.</span><span class="n">cpp</span> <span class="o">&gt;</span> <span class="n">runApp</span><span class="p">()</span></code> and add a <code class="language-jython highlight"><span class="k">case</span></code> for your app's index (this is so you can also find it by index rather than exact matching the name <code class="language-jython highlight"><span class="s2">&quot;Custom App&quot;</span></code>
+<img width="587" alt="runApp" src="https://github.com/user-attachments/assets/3285c3d4-3efd-4685-9683-da4cd44cac51" /></p>
+</li>
+<li>
+<p>Make a function that's the entirety of your app, I just pushed a demo function called <code class="language-jython highlight"><span class="n">customApp</span><span class="p">(</span><span class="n">void</span><span class="p">)</span></code> with some (non exhaustive) examples of things you can do from an app.
+<img width="907" alt="customApp" src="https://github.com/user-attachments/assets/57787127-ac7f-4923-9073-c2eb0611bd6a" /></p>
+</li>
+<li>
+<p>Run your app with the clickwheel, <code class="language-jython highlight"><span class="n">Apps</span> <span class="o">&gt;</span> <span class="n">Custom</span> <span class="n">App</span></code>.</p>
+</li>
+</ul>
+<p>The quick way run <code class="language-jython highlight"><span class="s2">&quot;Custom App&quot;</span></code> is to just enter <code class="language-jython highlight"><span class="mi">2</span></code> in the main menu, or just use the clickwheel and go Apps &gt; Custom App.</p>
+<p><img width="418" alt="mainSwitch" src="https://github.com/user-attachments/assets/8fbc2583-0f4f-4cc1-a245-b6fbad5ac785" /></p>
+<p>If you want to add your own shortcut, find an unused menu character and add a 
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">case</span><span class="s1">&#39;3&#39;</span><span class="p">:</span>
+<span class="linenos" data-linenos="2 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">runApp</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="o">//</span><span class="n">the</span> <span class="n">app</span> <span class="n">index</span> <span class="n">you</span> <span class="nb">set</span> <span class="n">above</span>
+<span class="linenos" data-linenos="4 "></span><span class="k">break</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="p">}</span>
+</code></pre></div>
+in the big main menu <code class="language-jython highlight"><span class="n">switch</span></code> statement in <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">cpp</span></code>.</p>
+<h2 id="to-actually-write-the-app">To actually write the app</h2>
+<p><a href="https://github.com/Architeuthis-Flux/JumperlessV5/blob/6fd4fcba572c4b524435ec36c8901adcedbf52c6/RP23V50firmware/src/Apps.cpp#L141">The code</a> for <code class="language-jython highlight"><span class="n">Custom</span> <span class="n">App</span></code> is an example of the calls available with comments telling you what's going on. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../09.6-jfs/" class="btn btn-neutral float-left" title="JFS (Jumperless FileSystem) Module"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../10-3d-stand/" class="btn btn-neutral float-right" title="3D Printable Stand">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../09.6-jfs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../10-3d-stand/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="../search/main.js"></script>
+
+
+</body>
+</html>

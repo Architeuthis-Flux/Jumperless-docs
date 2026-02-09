@@ -1,8 +1,14 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: jumperless-docs
 Version: 1.0.0
 Summary: Jumperless documentation with custom Python lexer
 License-File: LICENSE
-Requires-Dist: mkdocs>=1.4.0
-Requires-Dist: pymdown-extensions>=9.0
 Requires-Dist: pygments>=2.12.0
+Provides-Extra: docs
+Requires-Dist: mkdocs>=1.4.0; extra == "docs"
+Requires-Dist: pymdown-extensions>=9.0; extra == "docs"
+Requires-Dist: pygments>=2.12.0; extra == "docs"
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: summary

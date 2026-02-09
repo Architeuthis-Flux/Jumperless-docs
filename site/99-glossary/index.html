@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/99-glossary/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/99-glossary/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/99-glossary/">
+    <meta property="og:url" content="https://docs.jumperless.org/99-glossary/">
     <meta property="og:title" content="Glossary of Terms - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/99-glossary/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/99-glossary/">
     <meta name="twitter:title" content="Glossary of Terms - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/99-glossary/">
+    <link rel="canonical" href="https://docs.jumperless.org/99-glossary/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -97,15 +97,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -113,12 +113,24 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Glossary of Terms</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#basic-concepts">Basic Concepts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hardware">Hardware</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slots-and-files">Slots and Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slot-management-commands">Slot Management Commands</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#yaml-format">YAML Format</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wokwi-import">Wokwi Import</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -146,22 +158,53 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="glossary-of-terms">Glossary of Terms</h1>
-<p><code class="language-jython highlight"><span class="n">net</span></code> = a group of all the <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s that are connected together (enter <code class="language-jython highlight"><span class="n">n</span></code> to see the list {there's a colorful update to that I'm working on right now})</p>
+<h2 id="basic-concepts">Basic Concepts</h2>
+<p><code class="language-jython highlight"><span class="n">net</span></code> = a group of all the <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s that are connected together (enter <code class="language-jython highlight"><span class="n">n</span></code> to see the list)</p>
 <p><code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> = anything the crossbar array can connect to, which includes everything on the breadboard and Nano header, as well as the internal <code class="language-jython highlight"><span class="n">special</span> <span class="n">function</span></code> <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s like <code class="language-jython highlight"><span class="n">routable</span> <span class="n">GPIO</span></code>, <code class="language-jython highlight"><span class="n">ADC</span></code>s, <code class="language-jython highlight"><span class="n">DAC</span></code>s</p>
 <p><code class="language-jython highlight"><span class="n">row</span></code> = <em>kinda</em> the same thing as <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> but I generally use it to mean stuff on the breadboard (so special function things like <code class="language-jython highlight"><span class="n">routable</span> <span class="n">GPIO</span></code>, <code class="language-jython highlight"><span class="n">ADC</span></code>s, <code class="language-jython highlight"><span class="n">DAC</span></code>s that don't have a set location are excluded)</p>
 <p><code class="language-jython highlight"><span class="n">rail</span></code> = I use this to refer to the 4 horizontal power rails on the top and bottom (<code class="language-jython highlight"><span class="n">top_rail</span></code>, <code class="language-jython highlight"><span class="n">bottom_rail</span></code>, <code class="language-jython highlight"><span class="n">gnd</span></code>), I will never call a vertical <code class="language-jython highlight"><span class="n">row</span></code> a <code class="language-jython highlight"><span class="n">rail</span></code>. (I know they're columns but it's easier to say a lot)</p>
-<p><code class="language-jython highlight"><span class="n">bridge</span></code> = a pair of exactly two <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s (this is what you're making when you connect stuff with the probe, enter <code class="language-jython highlight"><span class="n">s</span></code> to print the (kinda misnamed) <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span> <span class="n">file</span></code>s to see a list of bridges)</p>
-<p><code class="language-jython highlight"><span class="n">path</span></code> = the set of crossbar connections needed to make a single <code class="language-jython highlight"><span class="n">bridge</span></code>, so it can have multiple <code class="language-jython highlight"><span class="n">hop</span></code>s if it doesn't have a direct connection and needs to make a <code class="language-jython highlight"><span class="n">bounce</span></code> through an intermediate <code class="language-jython highlight"><span class="n">chip</span></code> enter <code class="language-jython highlight"><span class="n">b</span></code> to see them</p>
-<p><code class="language-jython highlight"><span class="nf nf-Jumperless">node</span> <span class="n">file</span></code> / <code class="language-jython highlight"><span class="n">slot</span> <span class="n">file</span></code> = this is an actual text file on the filesystem that stores the list of bridges, there's one of these for each <code class="language-jython highlight"><span class="n">slot</span></code> (enter <code class="language-jython highlight"><span class="n">s</span></code> to see all of them, they start with an <code class="language-jython highlight"><span class="n">f</span> <span class="p">{</span></code> to make it east to just copy paste them from the terminal)</p>
-<p><code class="language-jython highlight"><span class="n">slot</span></code> = one of the 8 node files stored that you can switch between with <code class="language-jython highlight"><span class="o">&lt;</span></code>/<code class="language-jython highlight"><span class="o">&gt;</span></code> or the <code class="language-jython highlight"><span class="n">menu</span></code>s. Named <code class="language-jython highlight"><span class="n">nodeFileSlot</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">txt</span></code> (there's no actual limit, there's <em>so</em> much flash storage on this thing, but by default it's 8)</p>
-<p><code class="language-jython highlight"><span class="n">menu</span></code> = I generally mean the onboard clickwheel <code class="language-jython highlight"><span class="n">menu</span></code> when I say this (<code class="language-jython highlight"><span class="n">click</span></code> the wheel to enter those and <code class="language-jython highlight"><span class="n">scroll</span></code> around)</p>
-<p><code class="language-jython highlight"><span class="n">chip</span></code> = shorthand for the CH446Qs specifically, lettered A-L. The first 8 (A-H) are considered "breadboard <code class="language-jython highlight"><span class="n">chips</span></code>, and the last 4 are considered "special function" chips (enter <code class="language-jython highlight"><span class="n">c</span></code> to see their connections)</p>
-<p>That's probably more than you need to worry about but that gives me a nice start on real docs </p>
+<p><code class="language-jython highlight"><span class="n">bridge</span></code> = a pair of exactly two <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s (this is what you're making when you connect stuff with the probe, enter <code class="language-jython highlight"><span class="n">b</span></code> to see the bridge array)</p>
+<p><code class="language-jython highlight"><span class="n">path</span></code> = the set of crossbar connections needed to make a single <code class="language-jython highlight"><span class="n">bridge</span></code>, so it can have multiple <code class="language-jython highlight"><span class="n">hop</span></code>s if it doesn't have a direct connection and needs to make a <code class="language-jython highlight"><span class="n">bounce</span></code> through an intermediate <code class="language-jython highlight"><span class="n">chip</span></code> (enter <code class="language-jython highlight"><span class="n">c</span></code> to see the crossbar array)</p>
+<h2 id="hardware">Hardware</h2>
+<p><code class="language-jython highlight"><span class="n">chip</span></code> = shorthand for the CH446Qs specifically, lettered A-L. The first 8 (A-H) are considered "breadboard <code class="language-jython highlight"><span class="n">chips</span></code>", and the last 4 (I-L) are considered "special function" chips (enter <code class="language-jython highlight"><span class="n">c</span></code> to see their connections)</p>
+<p><code class="language-jython highlight"><span class="n">menu</span></code> = I generally mean the onboard clickwheel <code class="language-jython highlight"><span class="n">menu</span></code> when I say this (<code class="language-jython highlight"><span class="n">click</span></code> the wheel to enter those and <code class="language-jython highlight"><span class="n">scroll</span></code> around.) Sometimes I mean the <code class="language-jython highlight"><span class="n">main</span> <span class="n">menu</span></code> which is the list of single character command that gets presented over serial.</p>
+<h2 id="slots-and-files">Slots and Files</h2>
+<p><code class="language-jython highlight"><span class="n">slot</span></code> = one of <strong>10</strong> saved circuit configurations (slots 0-9) that you can switch between. Use <code class="language-jython highlight"><span class="o">&lt;</span></code> to cycle forward through slots, or use the menus to jump to a specific slot. The <strong>active slot</strong> is the one currently loaded and affecting the hardware.</p>
+<p><code class="language-jython highlight"><span class="n">slot</span> <span class="n">file</span></code> = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at <code class="language-jython highlight"><span class="o">/</span><span class="n">slots</span><span class="o">/</span><span class="n">slotN</span><span class="o">.</span><span class="n">yaml</span></code> where N is 0-9. These files are human-readable and can be edited directly!</p>
+<p><code class="language-jython highlight"><span class="n">active</span> <span class="n">slot</span></code> = the currently loaded slot. Only the active slot affects the hardware. Use <code class="language-jython highlight"><span class="n">Q</span></code> command to query which slot is active. When you make connections with the probe, they're saved to the active slot automatically.</p>
+<h2 id="slot-management-commands">Slot Management Commands</h2>
+<ul>
+<li><code class="language-jython highlight"><span class="o">&lt;</span></code> = cycle to next slot (0→1→2...→7→0)</li>
+<li><code class="language-jython highlight"><span class="n">Q</span></code> = query which slot is currently active (returns <code class="language-jython highlight"><span class="n">ACTIVE_SLOT</span><span class="p">:</span><span class="n">X</span></code>)</li>
+<li><code class="language-jython highlight"><span class="n">Y</span></code> = print YAML</li>
+</ul>
+<h2 id="yaml-format">YAML Format</h2>
+<p>Slot files use YAML format with named nodes for readability:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nt">bridges</span><span class="p">:</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="nt"> color</span><span class="p">:</span><span class="w"> </span><span class="nv">red</span><span class="p p-Indicator">}</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">NANO_D5</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">GPIO_1</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="nt">power</span><span class="p">:</span>
+<span class="linenos" data-linenos="6 "></span><span class="w">  </span><span class="nt">topRail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.30</span>
+<span class="linenos" data-linenos="7 "></span><span class="w">  </span><span class="nt">bottomRail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.50</span>
+</code></pre></div>
+<p><strong>Named nodes:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">NANO_D0</span><span class="o">-</span><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">NANO_A0</span><span class="o">-</span><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span><span class="o">-</span><span class="mi">8</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="n">DAC0_5V</span></code>, <code class="language-jython highlight"><span class="n">DAC1_5V</span></code>, etc.</p>
+<p>You can view and edit these files in the <a href="../08-file-manager/">File Manager</a> or via USB Mass Storage mode (<code class="language-jython highlight"><span class="n">U</span></code> command).</p>
+<h2 id="wokwi-import">Wokwi Import</h2>
+<p><code class="language-jython highlight"><span class="n">W</span></code> = Import circuit from <a href="https://wokwi.com">Wokwi</a> simulator</p>
+<ol>
+<li>Design circuit on wokwi.com</li>
+<li>Copy <code class="language-jython highlight"><span class="n">diagram</span><span class="o">.</span><span class="n">json</span></code> content</li>
+<li>Type <code class="language-jython highlight"><span class="n">W</span></code> in Jumperless</li>
+<li>Paste JSON content</li>
+<li>Circuit is converted and saved to active slot</li>
+</ol>
+<p>The parser automatically maps Wokwi breadboard pins, Arduino Nano pins, and logic analyzer channels to Jumperless nodes, and preserves your wire colors from Wokwi!</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../11-WritingApps/" class="btn btn-neutral float-left" title="Writing Apps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../12-llm-tools-specification/" class="btn btn-neutral float-left" title="LLM Tools Specification"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -184,7 +227,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../11-WritingApps/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../12-llm-tools-specification/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

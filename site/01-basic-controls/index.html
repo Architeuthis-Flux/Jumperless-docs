@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/01-basic-controls/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/01-basic-controls/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/01-basic-controls/">
+    <meta property="og:url" content="https://docs.jumperless.org/01-basic-controls/">
     <meta property="og:title" content="Basic Controls - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/01-basic-controls/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/01-basic-controls/">
     <meta name="twitter:title" content="Basic Controls - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/01-basic-controls/">
+    <link rel="canonical" href="https://docs.jumperless.org/01-basic-controls/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -70,6 +70,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#the-probe">The Probe</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#connecting-rows">Connecting Rows</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#encoder-connections">Encoder Connections</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#removing-rows">Removing Rows</a>
     </li>
@@ -78,6 +82,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#the-click-wheel">The Click Wheel</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#special-functions">Special Functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#current-sensing-with-marching-ants">Current Sensing with Marching Ants</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#idle-mode-net-highlighting">Idle Mode Net Highlighting</a>
         <ul>
@@ -88,8 +96,6 @@
     <li class="toctree-l4"><a class="reference internal" href="#connect-button">Connect Button</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#remove-button">Remove Button</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#color-picker">Color Picker</a>
     </li>
         </ul>
     </li>
@@ -131,15 +137,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -147,7 +153,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -193,6 +199,26 @@
 <p>If you make a mistake while <code class="language-jython highlight"><span class="n">holding</span></code> a connection, click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button and it will clear it and take you back to the first <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>. 
 If you click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button while you're not <code class="language-jython highlight"><span class="n">holding</span></code> a <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>, it will leave <code class="language-jython highlight"><span class="n">probe</span> <span class="n">mode</span></code> and bring you back into <code class="language-jython highlight"><span class="n">idle</span> <span class="n">mode</span></code> (rainbowy <code class="language-jython highlight"><span class="n">logo</span></code>, all 3 <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LED</span></code>s on.)</p>
 <p>To get out of <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode, press the button again.</p>
+<h3 id="encoder-connections">Encoder Connections</h3>
+<p>You can also make connections using just the clickwheel, without needing to touch the probe to the breadboard:</p>
+<p><strong>To activate:</strong>
+- Navigate to: <code class="language-jython highlight"><span class="n">Click</span></code> &gt; <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> &gt; <code class="language-jython highlight"><span class="n">Add</span></code> (or <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code>)<br />
+- OR just turn the clickwheel while already in probe mode</p>
+<p><strong>How it works:</strong>
+1. Turn the clickwheel to scroll through all available nodes:
+   - Breadboard rows (1-60)
+   - Nano header pins (D0-A7)
+   - Rails (Top, Bottom, GND)
+   - DAC (0, 1) 
+   - ADC (0-4, Probe)
+   - GPIO (1-8)
+   - UART (TX, RX)
+   - Current sense (I+, I-)</p>
+<ol>
+<li>Click the encoder button to select the highlighted node</li>
+<li>Hold the encoder button to exit</li>
+</ol>
+<p>The cursor will automatically hide after 5 seconds of inactivity. This is especially useful when you need precise control or want to access special functions without tapping pads.</p>
 <h2 id="removing-rows">Removing Rows</h2>
 <p>Click the <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> button
 <img alt="removeButton" src="https://github.com/user-attachments/assets/7fc020b7-f5ce-48f6-99eb-4e9a753a0329" /></p>
@@ -202,7 +228,7 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 <p>The special functions work the same way, tap the pad, pick one, and it will remove it. Click the button again to get out.</p>
 <h2 id="probe-notes">Probe Notes</h2>
 <p><strong>Remember the probe is read by a resistive voltage divider</strong>, so putting your fingers on the pads (or the back sides of the 4 risers that connect those <code class="language-jython highlight"><span class="n">probe</span> <span class="n">sense</span></code> boards to the main board), or anything causing the probe tip not to be at a steady 3.3V will give you weird readings. </p>
-<p>If you can't seem to stop playing with the switch on the probe, run DAC calibration with <code class="language-jython highlight"><span class="err">$</span></code> and the 3.3V <code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> mode puts out should be fairly accurate enough for probing.</p>
+<p>If you can't seem to stop playing with the switch on the probe, run the app <code class="language-jython highlight"><span class="n">probe</span> <span class="n">calib</span></code> and tap around on the board while turning the clickweel until the place you tapped is always spot on (do this with the switch in both modes), and hold the clickwheel button to save. This adjusts the nominal 3.3V <code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> mode puts out should be fairly accurate enough for probing.</p>
 <h2 id="the-click-wheel">The Click Wheel</h2>
 <p><img alt="wheel copy" src="https://github.com/user-attachments/assets/d69a5425-7131-46e3-8c17-a38819edfc16" /></p>
 <p>There are two kinds of presses, <code class="language-jython highlight"><span class="n">click</span></code> (short press) and <code class="language-jython highlight"><span class="n">hold</span></code> (long press). In general, a <code class="language-jython highlight"><span class="n">click</span></code> (short) is a <code class="language-jython highlight"><span class="n">yes</span></code>, and a <code class="language-jython highlight"><span class="n">hold</span></code> (long) is a <code class="language-jython highlight"><span class="n">no</span></code>/<code class="language-jython highlight"><span class="n">back</span></code>/<code class="language-jython highlight"><span class="n">exit</span></code>/<code class="language-jython highlight"><span class="n">whatever</span></code>. </p>
@@ -228,8 +254,28 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 <span class="linenos" data-linenos="4 "></span>     <span class="err">└─</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">a</span> <span class="n">row</span> <span class="n">to</span> <span class="nf nf-Jumperless">connect</span> <span class="n">it</span> <span class="n">to</span><span class="p">]</span> <span class="p">(</span><span class="ow">or</span> <span class="k">if</span> <span class="n">you</span> <span class="n">were</span> <span class="n">already</span> <span class="s2">&quot;holding&quot;</span> <span class="n">a</span> <span class="nf nf-Jumperless">node</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;ll connect there)</span>
 </code></pre></div>
 <p>¹<img alt="You can press R in the main menu to toggle this view" src="https://github.com/user-attachments/assets/33018aec-be8a-4bc0-b309-baeddad4db66" /></p>
-<p>The other 4 <code class="language-jython highlight"><span class="n">user</span> <span class="n">pads</span></code> will be more remappable in the future, but for now, <code class="language-jython highlight"><span class="n">top_guy</span></code> is <code class="language-jython highlight"><span class="n">routable</span> <span class="n">UART</span> <span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">bottom_guy</span></code> is <code class="language-jython highlight"><span class="n">routable</span> <span class="n">UART</span> <span class="n">Rx</span></code>. The building pads are for overriding colors in <code class="language-jython highlight"><span class="n">idle</span> <span class="n">mode</span></code> (you'll see more about that in <a href="#idle-mode-net-highlighting">Idle Mode Interactions</a>.)</p>
+<p>The 4 <code class="language-jython highlight"><span class="n">user</span> <span class="n">pads</span></code> will be remappable in the future, but for now, <code class="language-jython highlight"><span class="n">top_guy</span></code> is <code class="language-jython highlight"><span class="n">routable</span> <span class="n">UART</span> <span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">bottom_guy</span></code> is <code class="language-jython highlight"><span class="n">routable</span> <span class="n">UART</span> <span class="n">Rx</span></code>, and <code class="language-jython highlight"><span class="n">buiding</span></code> pads are <code class="language-jython highlight"><span class="n">Current</span> <span class="n">sense</span></code> + and -.</p>
+<p>The <strong>building pads</strong> have multiple functions:
+- In <code class="language-jython highlight"><span class="n">idle</span> <span class="n">mode</span></code>: Override colors for net highlighting (see <a href="#idle-mode-net-highlighting">Idle Mode Interactions</a>)
+- In <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code>/<code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code> mode: Access <strong>Current Sense (I+/I-)</strong> with marching ants visualization!</p>
 <p><img alt="userPads" src="https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78" /></p>
+<h3 id="current-sensing-with-marching-ants">Current Sensing with Marching Ants</h3>
+<p>When you tap either building pad in connect or remove mode, you'll get access to the current sense inputs (I+ and I-). When both I+ and I- are connected to different nets in your circuit:</p>
+<ol>
+<li>A virtual wire appears between the two nets containing the <code class="language-jython highlight"><span class="n">I</span> <span class="n">Sense</span></code> nodes</li>
+<li>Animated "marching ants" flow along this wire showing current direction</li>
+</ol>
+<p>The animation automatically picks the where to put the virtual "wire". It will search other nodes on the same nets that <code class="language-jython highlight"><span class="n">I</span> <span class="n">sense</span> <span class="o">+</span></code> and <code class="language-jython highlight"><span class="n">I</span> <span class="n">sense</span> <span class="o">-</span></code> are on it prefers places where they're on the same level so it can actually draw a connecting wire and not just be vertical lines.</p>
+<!-- ![](https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0) -->
+
+<video autoplay loop muted playsinline width="60%">
+  <source src="https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p>!!! warning <code class="language-jython highlight"><span class="n">I</span> <span class="n">Sense</span> <span class="o">+</span></code> and <code class="language-jython highlight"><span class="n">I</span> <span class="n">Sense</span> <span class="o">-</span></code> go on different nets but they're shorted internally
+    They're two ends of a 2Ω shunt resistor, so remember that these will be shorted together. You measure current in series so this is expected, but it's super easy to forget. Take this warning as the equivalent of your multimeter yelling at you when you have the probes in the current holes and have it set to voltage.</p>
+<hr />
 <h2 id="idle-mode-net-highlighting">Idle Mode Net Highlighting</h2>
 <p>The main thing is that there's a lot more interaction that can be done outside of any particular mode (like not probing and the logo is rainbowy, I'm gonna call this idle mode here until I think of a good name)
 <img alt="idle" src="https://github.com/user-attachments/assets/304d787a-c5f5-4da0-bd95-1a82bcdf83c1" /></p>
@@ -241,22 +287,34 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 </ul>
 <h3 id="row-selection-actions">Row Selection Actions</h3>
 <p>With a <code class="language-jython highlight"><span class="n">row</span></code> selected, here's what you can do:</p>
+<!---
+### Rail Voltage Adjustment
+
+**Rail / DAC voltages change with `slots`** - each slot can have its own power supply configuration!
+
+If the highlighted `row` is a `rail` (top or bottom) or `DAC`, `click` the clickwheel and then scroll the wheel (or use the probe on the bottom row) to adjust the voltage. 
+
+`Click` the wheel to confirm, `hold` to cancel the adjustment.
+
+**Tip:** You can also tap the `DAC` or `rail` pads to highlight them, then click the encoder to adjust the output directly without connecting anything. Short `hold` the clickwheel button to confirm.
+
+--->
 <h4 id="connect-button">Connect Button</h4>
 <ul>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> button will bring you into probing mode with the highlighted row already selected and then spit you back out to <code class="language-jython highlight"><span class="n">idle</span></code> mode once you've made a connection to another row, or click <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> again to exit</li>
 </ul>
 <h4 id="remove-button">Remove Button</h4>
 <ul>
-<li><code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code> will briefly turn the <code class="language-jython highlight"><span class="n">row</span></code> reddish <code class="language-jython highlight"><span class="n">warn</span></code> (I need to settle on a good time for this, if it feels too short or long lmk), another <code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code> press will remove that <code class="language-jython highlight"><span class="n">row</span></code> (just like in <code class="language-jython highlight"><span class="n">probe</span></code> mode, it removes the <code class="language-jython highlight"><span class="n">bridge</span></code> it's in, so just things that have a direct connection to that <code class="language-jython highlight"><span class="n">row</span></code>, not the whole <code class="language-jython highlight"><span class="n">net</span></code>), if you let it time out without pressing anything, the row will be unhighlighted. TL;DR, double click <code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code> to remove, single click to unhighlight.</li>
+<li><code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code> will remove the highlighted <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code></li>
 </ul>
-<h4 id="color-picker">Color Picker</h4>
-<ul>
-<li>tapping the <code class="language-jython highlight"><span class="n">building</span> <span class="n">top</span></code> pad with something highlighted will open the <code class="language-jython highlight"><span class="n">color</span> <span class="n">picker</span></code>, (note: the color now follows the <code class="language-jython highlight"><span class="n">row</span></code> instead of the net, so it can keep the colors even if you remove nets below it and they shift, this was soooo difficult until I realized I should do it by <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>). </li>
-<li>Also the color assignments are saved to a file for each slot, so they should work after a reboot and when changing <code class="language-jython highlight"><span class="n">slots</span></code></li>
-<li>In the <code class="language-jython highlight"><span class="n">color</span> <span class="n">picker</span></code>, short clicking the probe buttons will zoom in and out, long press will confirm. The click wheel is similar, except you toggle <code class="language-jython highlight"><span class="n">zoom</span></code> and <code class="language-jython highlight"><span class="n">scroll</span></code> modes with short presses and long press to confirm</li>
-<li>Here's a demo on YouTube
-  <a href="https://www.youtube.com/watch?v=shE6NSFrH5w"><img alt="Here's a demo on YouTube" src="https://img.youtube.com/vi/shE6NSFrH5w/3.jpg" /></a></li>
-</ul>
+<!---
+#### Color Picker
+- tapping the `building top` pad with something highlighted will open the `color picker`, (note: the color now follows the `row` instead of the net, so it can keep the colors even if you remove nets below it and they shift, this was soooo difficult until I realized I should do it by `node`). 
+  - Also the color assignments are saved to a file for each slot, so they should work after a reboot and when changing `slots`
+  - In the `color picker`, short clicking the probe buttons will zoom in and out, long press will confirm. The click wheel is similar, except you toggle `zoom` and `scroll` modes with short presses and long press to confirm
+  - Here's a demo on YouTube
+  [![Here's a demo on YouTube](https://img.youtube.com/vi/shE6NSFrH5w/3.jpg)](https://www.youtube.com/watch?v=shE6NSFrH5w)
+--->
 <h3 id="measurement-display">Measurement Display</h3>
 <ul>
 <li>if the highlighted row is a <code class="language-jython highlight"><span class="n">measurement</span></code> (<code class="language-jython highlight"><span class="n">gpio</span> <span class="nb">input</span></code> or <code class="language-jython highlight"><span class="n">adc</span></code>) it will print the state to serial and the oled</li>
@@ -264,7 +322,6 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 <h3 id="output-toggle">Output Toggle</h3>
 <ul>
 <li>if the highlighted row is an <code class="language-jython highlight"><span class="n">output</span></code> (<code class="language-jython highlight"><span class="n">gpio</span> <span class="n">output</span></code>, I'll eventually do <code class="language-jython highlight"><span class="n">dacs</span></code> too) clicking the <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> button will toggle it <code class="language-jython highlight"><span class="n">high</span></code> / <code class="language-jython highlight"><span class="n">low</span></code>. The <code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code> button will <em>just</em> unhighlight the net (there were some choices here, like make each button assigned to high / low or allow removing them, but this felt like the best way after trying them all). I will eventually add a setting for the toggle repeat rate (set to 500ms now) and a way to set it freewheeling as a clock.</li>
-<li>this <em>one</em> feature is the reason I did this whole update. And it's worth it because it's sick af.</li>
 </ul>
 <!-- ## GPIO Selection Shortcuts
 

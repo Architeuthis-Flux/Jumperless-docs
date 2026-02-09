@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/09.6-jfs/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/">
+    <meta property="og:url" content="https://docs.jumperless.org/09.6-jfs/">
     <meta property="og:title" content="JFS (Jumperless FileSystem) Module - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/09.6-jfs/">
     <meta name="twitter:title" content="JFS (Jumperless FileSystem) Module - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/08.5-jfs/">
+    <link rel="canonical" href="https://docs.jumperless.org/09.6-jfs/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -96,6 +96,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">JFS (Jumperless FileSystem) Module</a>
     <ul class="current">
@@ -104,6 +108,10 @@
     <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#file-api">File API</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#using-fprint-for-logging">Using f.print() for logging</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#file-modes">File Modes</a>
     </li>
@@ -165,11 +173,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -177,7 +181,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -207,7 +211,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="jfs-jumperless-filesystem-module">JFS (Jumperless FileSystem) Module</h1>
+                <h1 id="jfs-jumperless-filesystem">JFS (Jumperless FileSystem)</h1>
 <p>The <code class="language-jython highlight"><span class="no no-JFS">jfs</span></code> module is basically like MicroPython's <code class="language-jython highlight"><span class="no no-JFS">vfs</span></code> and parts of <code class="language-jython highlight"><span class="n">os</span></code>, but kinda written in a style that's probably more familiar to Arduino-style C++ people (me). It uses the <em>almost</em> standardized API shared by <a href="https://arduino-pico.readthedocs.io/en/latest/fs.html#file-system-object-littlefs-sd-sdfs-fatfs"><code class="language-jython highlight"><span class="no no-JFS">FatFS</span></code> (the one Jumperless actually uses), <code class="language-jython highlight"><span class="no no-JFS">LittleFS</span></code>, and <code class="language-jython highlight"><span class="no no-JFS">SDFS</span></code></a>, but still has been <em>Pythonified</em> to use types that are easier to work with in MicroPython.</p>
 <h2 id="quick-reference">Quick Reference</h2>
 <p>File Operations:</p>
@@ -216,10 +220,17 @@
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span></code> - Read from file </li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code> - Write to file</li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Close file</li>
-<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file</li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get current position</li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get file size</li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available</li>
+</ul>
+<p>File Object Methods (after <code class="language-jython highlight"><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code>):</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code> - Print to the file (like <code class="language-jython highlight"><span class="nf nf-JFS">write</span></code> but auto-flushes)</li>
+<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">flush</span><span class="p">()</span></code> - Flush buffered data to file</li>
+<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">position</span><span class="p">()</span></code> - Alias for <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span></code></li>
+<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">name</span><span class="p">()</span></code> - Get file name</li>
 </ul>
 <p>Directory Operations: </p>
 <ul>
@@ -229,6 +240,7 @@
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove directory</li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove file</li>
 <li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span></code> - Rename/move file</li>
+<li><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Get file/directory status info</li>
 </ul>
 <p>Filesystem Info:</p>
 <ul>
@@ -318,8 +330,25 @@ Output:
 <span class="linenos" data-linenos="24 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                  <span class="c1"># Reset to beginning</span>
 <span class="linenos" data-linenos="25 "></span>    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">()</span>         <span class="c1"># Read back what we wrote</span>
 <span class="linenos" data-linenos="26 "></span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span>             <span class="c1"># Get current position</span>
-<span class="linenos" data-linenos="27 "></span>    <span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>            <span class="c1"># Get file name</span>
+<span class="linenos" data-linenos="27 "></span>    <span class="nf nf-JFS">name</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">name</span><span class="p">()</span>            <span class="c1"># Get file name</span>
 </code></pre></div>
+<h3 id="using-fprint-for-logging">Using <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">()</span></code> for logging</h3>
+<p>The <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">()</span></code> method works like Python's <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code> but writes to the file. It automatically converts arguments to strings and flushes after each call - perfect for logging:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Great for logging - auto-converts types and flushes immediately</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">with</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;log.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="s2">&quot;Starting test...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="s2">&quot;Voltage:&quot;</span><span class="p">,</span> <span class="n">voltage</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">)</span>    <span class="c1"># Multiple args work</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="s2">&quot;Test complete!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Unlike f.write(), f.print() handles non-strings automatically</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">f</span> <span class="o">=</span> <span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="s1">&#39;data.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>           <span class="c1"># OK - converts int to string</span>
+<span class="linenos" data-linenos="11 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>          <span class="c1"># OK - converts float to string</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="s2">&quot;mixed&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>   <span class="c1"># OK - multiple args joined with spaces</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Note:</strong> <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">()</span></code> is a file object method only. There is no <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">()</span></code> module-level function.</p>
 <details>
 
 <summary>Other ways to do the same thing</summary>
@@ -509,12 +538,12 @@ You can also use module-level functions with file handles:
     *   <code class="language-jython highlight"><span class="mi">2</span></code>: Seek from the end of the stream. Use <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="no no-JFS">SEEK_END</span></code>.</p>
 <h3 id="filetell"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span></code></h3>
 <p>Return the current stream position.
-*   <strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="n">position</span><span class="p">()</span></code></p>
+*   <strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">position</span><span class="p">()</span></code></p>
 <h3 id="filesize"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">()</span></code></h3>
 <p>Return the total size of the file in bytes.</p>
 <h3 id="fileavailable"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">()</span></code></h3>
 <p>Return the number of bytes available to be read from the current position to the end of the file.</p>
-<h3 id="filename"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="n">name</span></code></h3>
+<h3 id="filename"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">name</span></code></h3>
 <p>Returns the name of the file.</p>
 <hr />
 <h2 id="module-level-file-operations">Module-Level File Operations</h2>
@@ -537,8 +566,8 @@ You can also use module-level functions with file handles:
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../08-micropython/" class="btn btn-neutral float-left" title="MicroPython"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../09-odds-and-ends/" class="btn btn-neutral float-right" title="Odds and Ends">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../09.5-micropythonAPIreference/" class="btn btn-neutral float-left" title="MicroPython API Reference"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../09.8-odds-and-ends/" class="btn btn-neutral float-right" title="Odds and Ends">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -561,10 +590,10 @@ You can also use module-level functions with file handles:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../08-micropython/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../09.5-micropythonAPIreference/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../09-odds-and-ends/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../09.8-odds-and-ends/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

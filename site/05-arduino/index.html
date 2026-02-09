@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/05-arduino/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/05-arduino/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/05-arduino/">
+    <meta property="og:url" content="https://docs.jumperless.org/05-arduino/">
     <meta property="og:title" content="Arduino Stuff - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/05-arduino/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/05-arduino/">
     <meta name="twitter:title" content="Arduino Stuff - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/05-arduino/">
+    <link rel="canonical" href="https://docs.jumperless.org/05-arduino/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -86,6 +86,52 @@
     <li class="toctree-l2"><a class="reference internal" href="#automatic-flashing">Automatic Flashing</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#commands-from-routable-uart">Commands from Routable UART</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#two-types-of-tags">Two Types of Tags</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#j-tags-raw-commands">&lt;j&gt; Tags - Raw Commands</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#p-tags-python-commands">&lt;p&gt; Tags - Python Commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#supported-tag-names">Supported Tag Names</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#python-commands-with-p-tags">Python Commands with &lt;p&gt; Tags</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#full-example-adc-scanning">Full Example - ADC Scanning</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#available-python-functions">Available Python Functions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#raw-commands-with-j-tags">Raw Commands with &lt;j&gt; Tags</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-making-connections">Example - Making Connections</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#useful-raw-commands">Useful Raw Commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tips-and-gotchas">Tips and Gotchas</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#timing">Timing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#response-reading">Response Reading</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#startup-delay">Startup Delay</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flashing-your-arduino">Flashing Your Arduino</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#which-tag-to-use">Which Tag to Use?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#wokwi-integration">Wokwi Integration</a>
     </li>
     </ul>
                 </li>
@@ -107,15 +153,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -123,7 +169,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -156,17 +202,262 @@
                 <h1 id="arduino-stuff">Arduino Stuff</h1>
 <h2 id="uart-passthrough">UART Passthrough</h2>
 <p>With an Arduino Nano in the header and the UART lines connected, anything on those lines should be passed through to the second serial port that shows up when you plug in your Jumperless. </p>
-<p>(You can also set the config option <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">print_passthrough</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span></code> and have it print on both. Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.</p>
+<p>(You can also set the config option <code class="language-jython highlight"><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">print_passthrough</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span></code> and have it print on both. Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.</p>
 <p><img width="360" alt="Screenshot 2025-05-19 at 11 07 55 AM" src="https://github.com/user-attachments/assets/2b255e34-0d0a-4e86-b577-d59c9561fa42" /></p>
 <h2 id="quick-connection-shortcuts">Quick Connection Shortcuts</h2>
 <p>The shortcuts to connect <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code> to the Jumperless's UART <code class="language-jython highlight"><span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code> is <code class="language-jython highlight"><span class="n">A</span></code> to connect, and <code class="language-jython highlight"><span class="n">a</span></code> to disconnect.</p>
 <h2 id="automatic-flashing">Automatic Flashing</h2>
 <p>It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.
 <img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" /> </p>
+<p><strong>Tip:</strong> You can also use <a href="https://wokwi.com">Wokwi</a> with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open!</p>
+<hr />
 <h2 id="commands-from-routable-uart">Commands from Routable UART</h2>
+<p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The tags are stripped out and the command is executed - the Arduino never sees them come back.</p>
+<h3 id="two-types-of-tags">Two Types of Tags</h3>
+<p>There are two flavors of command tags, depending on what you want to do:</p>
+<h4 id="j-tags-raw-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags - Raw Commands</h4>
+<p>These run exactly like you typed them in the main Jumperless menu. Use these for things like making connections with <code class="language-jython highlight"><span class="n">f</span></code>, loading files, or any single-character menu command.</p>
+<h4 id="p-tags-python-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags - Python Commands</h4>
+<p>These run MicroPython commands directly. Perfect for <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, and all the other Python hardware functions. The <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tag automatically prepends the <code class="language-jython highlight"><span class="o">&gt;</span></code> that normally tells the Jumperless "this is a Python command."</p>
+<h3 id="supported-tag-names">Supported Tag Names</h3>
+<p>Any of these work (use matching opening and closing tags):</p>
+<table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code></td>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span><span class="n">f</span> <span class="mi">1</span><span class="o">-</span><span class="mi">30</span><span class="o">&lt;/</span><span class="n">j</span><span class="o">&gt;</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">jumperless</span><span class="o">&gt;</span></code></td>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">jumperless</span><span class="o">&gt;</span><span class="n">x</span><span class="o">&lt;/</span><span class="n">jumperless</span><span class="o">&gt;</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">jumperlessCommand</span><span class="o">&gt;</span></code></td>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">jumperlessCommand</span><span class="o">&gt;</span><span class="n">n</span><span class="o">&lt;/</span><span class="n">jumperlessCommand</span><span class="o">&gt;</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code></td>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="python-commands-with-p-tags">Python Commands with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags</h2>
+<p>The <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tag is the most powerful way to control your Jumperless from Arduino code. It gives you direct access to all the MicroPython hardware functions.</p>
+<h3 id="basic-example">Basic Example</h3>
+<div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#define OPENJCOMMAND Serial.print(&quot;&lt;p&gt;&quot;);</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="cp">#define CLOSEJCOMMAND Serial.println(&quot;&lt;/p&gt;&quot;);</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1500</span><span class="p">);</span><span class="w">  </span><span class="c1">// Give Jumperless time to boot</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="p">}</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">  </span><span class="c1">// Read voltage on ADC channel 0</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
+<span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;adc_get(0)&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="13 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
+<span class="linenos" data-linenos="14 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="w">  </span><span class="c1">// Read the response</span>
+<span class="linenos" data-linenos="17 "></span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="18 "></span><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+<span class="linenos" data-linenos="19 "></span><span class="w">    </span><span class="c1">// Process the voltage reading...</span>
+<span class="linenos" data-linenos="20 "></span><span class="w">  </span><span class="p">}</span>
+<span class="linenos" data-linenos="21 "></span><span class="p">}</span>
+</code></pre></div>
+<h3 id="full-example-adc-scanning">Full Example - ADC Scanning</h3>
+<video autoplay loop muted playsinline controls width="100%">
+  <source src="https://github.com/user-attachments/assets/fcdae6a6-ef4c-4fe7-9d5c-74cee5946c08" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p>This sketch connects ADC0 to different breadboard rows and reads the voltage at each one:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#define OPENJCOMMAND Serial.print(&quot;&lt;p&gt;&quot;);</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="cp">#define CLOSEJCOMMAND Serial.println(&quot;&lt;/p&gt;&quot;);</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1500</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="p">}</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="kt">int</span><span class="w"> </span><span class="n">lastNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="linenos" data-linenos="11 "></span><span class="kt">int</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="linenos" data-linenos="12 "></span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">delayTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="15 "></span><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="linenos" data-linenos="16 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span><span class="w">  </span><span class="n">node</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos" data-linenos="19 "></span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="20 "></span><span class="w">    </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="21 "></span><span class="w">  </span><span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="w">  </span><span class="c1">// Disconnect from previous node</span>
+<span class="linenos" data-linenos="24 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
+<span class="linenos" data-linenos="25 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;disconnect( ADC0,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">lastNode</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="26 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
+<span class="linenos" data-linenos="27 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="28 "></span>
+<span class="linenos" data-linenos="29 "></span><span class="w">  </span><span class="c1">// Connect to new node</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
+<span class="linenos" data-linenos="31 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;connect(ADC0 ,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="32 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
+<span class="linenos" data-linenos="33 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="34 "></span>
+<span class="linenos" data-linenos="35 "></span><span class="w">  </span><span class="c1">// Read the voltage</span>
+<span class="linenos" data-linenos="36 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
+<span class="linenos" data-linenos="37 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;adc_get(0)&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="38 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
+<span class="linenos" data-linenos="39 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="40 "></span>
+<span class="linenos" data-linenos="41 "></span><span class="w">  </span><span class="c1">// Read response from Jumperless</span>
+<span class="linenos" data-linenos="42 "></span><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">response</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="linenos" data-linenos="43 "></span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos" data-linenos="44 "></span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">29</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="45 "></span><span class="w">    </span><span class="n">response</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+<span class="linenos" data-linenos="46 "></span><span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="linenos" data-linenos="47 "></span><span class="w">  </span><span class="p">}</span>
+<span class="linenos" data-linenos="48 "></span>
+<span class="linenos" data-linenos="49 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+<span class="linenos" data-linenos="50 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;num chars read = &quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="51 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
+<span class="linenos" data-linenos="52 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">flush</span><span class="p">();</span>
+<span class="linenos" data-linenos="53 "></span>
+<span class="linenos" data-linenos="54 "></span><span class="w">  </span><span class="n">lastNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">;</span>
+<span class="linenos" data-linenos="55 "></span><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="linenos" data-linenos="56 "></span><span class="p">}</span>
+</code></pre></div>
+<h3 id="available-python-functions">Available Python Functions</h3>
+<p>Here are the most useful functions you can call with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tags:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1">// Connections</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="s">&quot;connect(1, 30)&quot;</span><span class="w">              </span><span class="c1">// Connect breadboard rows</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="s">&quot;connect(D13, TOP_RAIL)&quot;</span><span class="w">      </span><span class="c1">// Connect Arduino pin to power</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="s">&quot;disconnect(ADC0, 15)&quot;</span><span class="w">        </span><span class="c1">// Remove a connection</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="s">&quot;nodes_clear()&quot;</span><span class="w">               </span><span class="c1">// Clear ALL connections</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1">// Analog I/O</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="s">&quot;adc_get(0)&quot;</span><span class="w">                  </span><span class="c1">// Read voltage (channels 0-4)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="s">&quot;dac_set(0, 3.3)&quot;</span><span class="w">            </span><span class="c1">// Set DAC output voltage</span>
+<span class="linenos" data-linenos="10 "></span><span class="s">&quot;dac_set(TOP_RAIL, 5.0)&quot;</span><span class="w">     </span><span class="c1">// Set rail voltage</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="c1">// Digital I/O</span>
+<span class="linenos" data-linenos="13 "></span><span class="s">&quot;gpio_set(1, True)&quot;</span><span class="w">          </span><span class="c1">// Set GPIO high</span>
+<span class="linenos" data-linenos="14 "></span><span class="s">&quot;gpio_set(1, False)&quot;</span><span class="w">         </span><span class="c1">// Set GPIO low</span>
+<span class="linenos" data-linenos="15 "></span><span class="s">&quot;gpio_get(2)&quot;</span><span class="w">                </span><span class="c1">// Read GPIO state</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span><span class="c1">// Current sensing</span>
+<span class="linenos" data-linenos="18 "></span><span class="s">&quot;ina_get_current(0)&quot;</span><span class="w">         </span><span class="c1">// Read current in amps</span>
+<span class="linenos" data-linenos="19 "></span><span class="s">&quot;ina_get_voltage(0)&quot;</span><span class="w">         </span><span class="c1">// Read shunt voltage</span>
+</code></pre></div>
+<p>See the <a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a> for the complete list.</p>
+<hr />
+<h2 id="raw-commands-with-j-tags">Raw Commands with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags</h2>
+<p>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> tags when you want to send menu commands - the same ones you'd type in the serial terminal.</p>
+<h3 id="example-making-connections">Example - Making Connections</h3>
+<div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#define OPENJCOMMAND Serial.print(&quot;&lt;j&gt;&quot;);</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="cp">#define CLOSEJCOMMAND Serial.println(&quot;&lt;/j&gt;&quot;);</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1500</span><span class="p">);</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="p">}</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="kt">int</span><span class="w"> </span><span class="n">node1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="11 "></span><span class="kt">int</span><span class="w"> </span><span class="n">node2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="linenos" data-linenos="12 "></span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">delayTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="15 "></span><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span>
+<span class="linenos" data-linenos="16 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span><span class="w">  </span><span class="n">node1</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos" data-linenos="19 "></span><span class="w">  </span><span class="n">node2</span><span class="o">++</span><span class="p">;</span>
+<span class="linenos" data-linenos="20 "></span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="n">node1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="21 "></span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="n">node2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="w">  </span><span class="c1">// Use the &#39;f&#39; command to make a connection</span>
+<span class="linenos" data-linenos="24 "></span><span class="w">  </span><span class="c1">// Format: f &lt;node1&gt;-&lt;node2&gt;</span>
+<span class="linenos" data-linenos="25 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
+<span class="linenos" data-linenos="26 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;f &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">node1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">node2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="27 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
+<span class="linenos" data-linenos="28 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
+<span class="linenos" data-linenos="29 "></span>
+<span class="linenos" data-linenos="30 "></span><span class="w">  </span><span class="c1">// Read any response</span>
+<span class="linenos" data-linenos="31 "></span><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">response</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="linenos" data-linenos="32 "></span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="linenos" data-linenos="33 "></span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">29</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="34 "></span><span class="w">    </span><span class="n">response</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
+<span class="linenos" data-linenos="35 "></span><span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="linenos" data-linenos="36 "></span><span class="w">  </span><span class="p">}</span>
+<span class="linenos" data-linenos="37 "></span>
+<span class="linenos" data-linenos="38 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+<span class="linenos" data-linenos="39 "></span><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="linenos" data-linenos="40 "></span><span class="p">}</span>
+</code></pre></div>
+<h3 id="useful-raw-commands">Useful Raw Commands</h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="n">f</span> <span class="mi">1</span><span class="o">-</span><span class="mi">30</span></code></td>
+<td>Connect nodes 1 and 30</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="o">+</span> <span class="no no-Jumperless">D13</span><span class="o">-</span><span class="no no-Jumperless">GND</span></code></td>
+<td>Add connection (alternate syntax)</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="o">-</span> <span class="mi">1</span><span class="o">-</span><span class="mi">30</span></code></td>
+<td>Remove connection</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">x</span></code></td>
+<td>Clear all connections</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">n</span></code></td>
+<td>Show net list</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">s</span></code></td>
+<td>Save current state</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tips-and-gotchas">Tips and Gotchas</h2>
+<h3 id="timing">Timing</h3>
+<p>The Jumperless needs a little time to process each command. A delay of 40-100ms between commands is usually safe. If you're seeing weird behavior, try increasing the delay.</p>
+<h3 id="response-reading">Response Reading</h3>
+<p>Commands often return data (like <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code> returning a voltage). Make sure to read the Serial buffer after sending commands, or it'll fill up and cause issues.</p>
+<h3 id="startup-delay">Startup Delay</h3>
+<p>Add a <code class="language-jython highlight"><span class="n">delay</span><span class="p">(</span><span class="mi">1500</span><span class="p">)</span></code> in your <code class="language-jython highlight"><span class="n">setup</span><span class="p">()</span></code> to give the Jumperless time to fully boot before sending commands.</p>
+<h3 id="flashing-your-arduino">Flashing Your Arduino</h3>
+<p>Just use the Arduino IDE normally - select the second serial port that shows up (the one labeled with "port3" or similar), and upload. The Jumperless automatically handles the reset timing.</p>
+<h3 id="which-tag-to-use">Which Tag to Use?</h3>
 <ul>
-<li>Starting a UART message (that would normally just be passed through to the second serial port) with <code class="language-jython highlight"><span class="mh">0x02</span></code> (<a href="https://www.ascii-code.com/">non-printable ASCII code for Start of Text / STX</a>) and ending with <code class="language-jython highlight"><span class="mh">0x03</span></code> (<a href="https://www.ascii-code.com/">End of Text / ETX</a>) will cause the Jumperless to interpret that as something that was sent though the menu on the main serial port. So you can send commands to make connections and such while also using serial passthrough.</li>
+<li><strong>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code></strong> for anything that's a Python function: <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, etc.</li>
+<li><strong>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code></strong> for menu commands: <code class="language-jython highlight"><span class="n">f</span></code>, <code class="language-jython highlight"><span class="n">x</span></code>, <code class="language-jython highlight"><span class="n">n</span></code>, <code class="language-jython highlight"><span class="n">s</span></code>, etc.</li>
 </ul>
+<hr />
+<h2 id="wokwi-integration">Wokwi Integration</h2>
+<p>If you're using the <a href="https://github.com/Architeuthis-Flux/Jumperless-Wokwi-Bridge">Jumperless Wokwi Bridge</a>, you can flash your Arduino directly from Wokwi simulations - the bridge handles all the communication for you.</p>
               
             </div>
           </div><footer>

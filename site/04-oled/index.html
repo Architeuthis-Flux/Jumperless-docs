@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/04-oled/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/04-oled/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/04-oled/">
+    <meta property="og:url" content="https://docs.jumperless.org/04-oled/">
     <meta property="og:title" content="OLED Support - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/04-oled/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/04-oled/">
     <meta name="twitter:title" content="OLED Support - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/04-oled/">
+    <link rel="canonical" href="https://docs.jumperless.org/04-oled/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -77,11 +77,91 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#functionality">Functionality</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#connection">Connection</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#auto-connect-on-boot">Auto-Connect on Boot</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lock-connection">Lock Connection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#custom-startup-message">Custom Startup Message</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#text-message">Text Message</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bitmap-image">Bitmap Image</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#display-dimensions">Display Dimensions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#advanced-gpio-configuration">Advanced GPIO Configuration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connection-type">Connection type</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bitmap-editor">Bitmap Editor</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#accessing-the-bitmap-editor">Accessing the Bitmap Editor</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#from-file-manager">From File Manager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-new-image">Creating a New Image</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#editor-interface">Editor Interface</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#view-modes">View Modes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#navigation">Navigation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#moving-the-cursor">Moving the Cursor</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#editing-pixels">Editing Pixels</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#editing-methods">Editing Methods</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#menu-bar-navigation">Menu Bar Navigation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#saving-and-quitting">Saving and Quitting</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example-workflow-creating-a-startup-logo">Example Workflow: Creating a Startup Logo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#editor-screenshots">Editor Screenshots</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bitmap-file-format">Bitmap File Format</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#converting-external-images">Converting External Images</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#check-out-the-scripts-folder-in-the-jumperlos-repo-there-are-a-few-other-scripts-related-to-dealing-with-bitmaps">Check out the /scripts folder in the JumperlOS repo, there are a few other scripts related to dealing with bitmaps.</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-the-oled-from-micropython">Using the OLED from MicroPython</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-start">Quick Start</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#text-sizes-and-scrolling">Text Sizes and Scrolling</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#print-redirection-for-debugging">Print Redirection for Debugging</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#multiple-fonts">Multiple Fonts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#display-bitmaps">Display Bitmaps</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#graphics-and-pixel-control">Graphics and Pixel Control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#advanced-direct-framebuffer-access">Advanced: Direct Framebuffer Access</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#complete-api-reference">Complete API Reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-projects">Example Projects</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -107,15 +187,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -123,7 +203,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -162,13 +242,476 @@ Ignore the really cool LEDs.</p>
 <h2 id="installation">Installation</h2>
 <p>They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.
 <img alt="SBCBP-4 copy" src="https://github.com/user-attachments/assets/43232b06-380d-4e18-9aab-924e45790740" /></p>
-<h2 id="functionality">Functionality</h2>
-<p>This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. (if I missed something, let me know, it's a fairly new thing so I've probably forgot to add code for it to print in a bunch of places.)</p>
+<p>Yo</p>
+<p>This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. </p>
 <h2 id="connection">Connection</h2>
 <p>To connect the data lines to the Jumperless' GPIO 7 and 8, just use the menu option <code class="language-jython highlight"><span class="o">.</span></code> (that's a period). It will try to find the OLED on the I2C bus, after a few failed attempts, it'll automatically disconnect to free up GPIO 7 and 8. </p>
 <h2 id="auto-connect-on-boot">Auto-Connect on Boot</h2>
 <p>If you want to use this all the time, there's a config option to connect the OLED on startup. You can just paste this into the main menu:
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+</code></pre></div></p>
+<h2 id="lock-connection">Lock Connection</h2>
+<p>Locking the connection to the OLED ensures that it stays connected even when you enter a complete <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> list. So if you're using Wokwi or manually adding connections in a file, you don't need to add <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_7</span> <span class="o">-</span> <span class="no no-Jumperless">D2</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span> <span class="o">-</span> <span class="no no-Jumperless">D3</span></code> to keep the I2C connected to the OLED.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="custom-startup-message">Custom Startup Message</h2>
+<p>You can customize what appears on the OLED when your Jumperless boots up. There are two options: text messages or custom bitmap images.</p>
+<h3 id="text-message">Text Message</h3>
+<p>Set a custom text message to display on the OLED at startup (max 32 characters):</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_message</span> <span class="o">=</span> <span class="n">Your</span> <span class="n">Message</span> <span class="n">Here</span><span class="p">;</span>
+</code></pre></div>
+<p>This message will appear after the Jumperless logo on boot.</p>
+<h3 id="bitmap-image">Bitmap Image</h3>
+<p>Display a custom bitmap image at startup by just giving it a path on the filesystem.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_message</span> <span class="o">=</span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Requirements:</strong>
+- Image must be a bitmap file (<code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> format) with 4-byte header
+- Recommended size: 128×32 pixels (standard OLED size)
+- Use the built-in <a href="#bitmap-editor">Bitmap Editor</a> to create or edit images
+- Store images in the <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code> directory on the Jumperless filesystem</p>
+<h2 id="display-dimensions">Display Dimensions</h2>
+<p>If you have a different sized OLED (like 128x64), you can set the dimensions:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+<span class="linenos" data-linenos="2 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">64</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="advanced-gpio-configuration">Advanced GPIO Configuration</h2>
+<p>You can change both the GPIO used for the display or the rows it connects to with the config options:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_pin</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
+<span class="linenos" data-linenos="2 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_pin</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_sda</span> <span class="o">=</span> <span class="n">GP_7</span><span class="p">;</span>
+<span class="linenos" data-linenos="4 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_scl</span> <span class="o">=</span> <span class="n">GP_8</span><span class="p">;</span>
+<span class="linenos" data-linenos="5 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_row</span> <span class="o">=</span> <span class="no no-Jumperless">D2</span><span class="p">;</span>
+<span class="linenos" data-linenos="6 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_row</span> <span class="o">=</span> <span class="no no-Jumperless">D3</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="connection-type">Connection type</h2>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connection_type</span> <span class="o">=</span> <span class="n">rp6_rp7</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="bitmap-editor">Bitmap Editor</h2>
+<p>The built-in bitmap editor lets you create and edit OLED images directly on your Jumperless using your terminal and the clickwheel.</p>
+<video autoplay loop muted playsinline controls width="70%">
+  <source src="https://github.com/user-attachments/assets/9c716bdf-33bc-4af8-b618-852852049017" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<h2 id="accessing-the-bitmap-editor">Accessing the Bitmap Editor</h2>
+<h3 id="from-file-manager">From File Manager</h3>
+<ol>
+<li>Open the file manager from the main menu</li>
+<li>Navigate to a <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> bitmap file </li>
+<li>Select the file to open it in the editor</li>
+</ol>
+<h3 id="creating-a-new-image">Creating a New Image</h3>
+<p>You can create a new bitmap file from the file manager:
+1. Navigate to where you want to create the file (e.g., <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code>)
+2. Pess <code class="language-jython highlight"><span class="n">n</span></code> for "new file"
+3. Name it with a <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> extension (e.g., <code class="language-jython highlight"><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span></code>)
+4. The editor will automatically create a blank 128×32 bitmap (or whatever your OLED dimensions are set to in config)</p>
+<h2 id="editor-interface">Editor Interface</h2>
+<p>The bitmap editor displays your image in the terminal and on the OLED (if connected). You'll see:</p>
+<ul>
+<li><strong>Main canvas</strong>: Your bitmap rendered using block characters</li>
+<li><strong>Status bar</strong>: Filename, dimensions, cursor position, and save status</li>
+<li><strong>Menu bar</strong>: Quick access to View, Encoder, Draw modes, Save, and Quit</li>
+<li><strong>Help panel</strong>: Keyboard shortcuts and hardware control reference</li>
+</ul>
+<h3 id="view-modes">View Modes</h3>
+<p>Press <code class="language-jython highlight"><span class="n">m</span></code> to cycle through three display modes:</p>
+<ol>
+<li><strong>Full Block Mode</strong> (1:1 pixel mapping)</li>
+<li>
+<p>Each character = 1 pixel</p>
+</li>
+<li>
+<p><strong>Half Block Mode</strong> (2:1 vertical compression)</p>
+</li>
+<li>Each character = 2 pixels vertically</li>
+<li>
+<p>Fits 128×32 images on smaller terminals</p>
+</li>
+<li>
+<p><strong>Quarter Block Mode</strong> (2×2 compression)</p>
+</li>
+<li>Each character = 2×2 pixels (4 pixels total)</li>
+<li>Fits larger images on screen</li>
+</ol>
+<h2 id="navigation">Navigation</h2>
+<h3 id="moving-the-cursor">Moving the Cursor</h3>
+<p><strong>Keyboard:</strong>
+- Arrow keys or <code class="language-jython highlight"><span class="n">W</span><span class="o">/</span><span class="n">A</span><span class="o">/</span><span class="n">S</span><span class="o">/</span><span class="n">D</span></code> keys
+- Vim keys: <code class="language-jython highlight"><span class="n">j</span></code> (down), <code class="language-jython highlight"><span class="n">k</span></code> (up), <code class="language-jython highlight"><span class="n">l</span></code> (right)</p>
+<p><strong>Hardware:</strong>
+- <strong>Clickwheel encoder</strong>: Rotate to move cursor
+- <strong>Probe switch</strong>: 
+  - <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code> position → Horizontal movement
+  - <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> position → Vertical movement
+- Press <code class="language-jython highlight"><span class="o">/</span></code> to toggle encoder direction (H/V) independently</p>
+<h2 id="editing-pixels">Editing Pixels</h2>
+<h3 id="editing-methods">Editing Methods</h3>
+<p>The editor has three draw modes (cycle with <code class="language-jython highlight"><span class="o">.</span></code> key) to pick what happens when you press <code class="language-jython highlight"><span class="n">enter</span></code>/<code class="language-jython highlight"><span class="n">space</span></code>/<code class="language-jython highlight"><span class="n">encoder</span> <span class="n">click</span></code>:</p>
+<ol>
+<li><strong>Toggle Mode</strong> (default): Flips pixel state (ON↔OFF)</li>
+<li><strong>Set Mode</strong>: Always turns pixels ON (draw)</li>
+<li><strong>Clear Mode</strong>: Always turns pixels OFF (erase)</li>
+</ol>
+<p>Or just use these keys to do it directly and not worry about the mode:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">z</span></code> = Set pixel (turn ON)</li>
+<li><code class="language-jython highlight"><span class="n">x</span></code> = Clear pixel (turn OFF)</li>
+<li><code class="language-jython highlight"><span class="n">c</span></code> = Toggle pixel</li>
+</ul>
+<h2 id="menu-bar-navigation">Menu Bar Navigation</h2>
+<p>When the cursor reaches the bottom edge and you press down, you enter the menu bar:</p>
+<p><strong>Navigation:</strong>
+- Left/Right arrows: Move between menu items
+- Enter/Space: Activate selected item
+- Up: Exit menu bar</p>
+<p><strong>Menu Items:</strong>
+- <strong>View</strong>: Cycle display modes (Full/Half/Quarter)
+- <strong>Enc</strong>: Toggle encoder direction (H/V)
+- <strong>Draw</strong>: Cycle draw modes (Toggle/Set/Clear)
+- <strong>«Save»</strong>: Save file and return to editing
+- <strong>«Quit»</strong>: Exit editor (prompts if modified)</p>
+<h2 id="saving-and-quitting">Saving and Quitting</h2>
+<ul>
+<li><strong>Ctrl+S</strong>: Quick save</li>
+<li><strong>Ctrl+Q</strong>: Quit (prompts to save if modified)</li>
+<li><strong>h or ?</strong>: Show help screen</li>
+</ul>
+<p>The editor automatically adds the 4-byte header (width and height) when saving, making the file compatible as a startup image.</p>
+<h2 id="example-workflow-creating-a-startup-logo">Example Workflow: Creating a Startup Logo</h2>
+<ol>
+<li>Open file manager, navigate to <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code></li>
+<li>Create new file: <code class="language-jython highlight"><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span></code></li>
+<li>Editor opens with blank 128×32 canvas</li>
+<li>Switch to Half Block mode (<code class="language-jython highlight"><span class="n">m</span></code>) for better overview</li>
+<li>Use clickwheel to navigate, Connect button to draw</li>
+<li>Save with Ctrl+S</li>
+<li>Set as startup image: <ul>
+<li>By editing the config file: <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_image</span> <span class="o">=</span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span></code> </li>
+<li>Or use the click menus <code class="language-jython highlight"><span class="n">OLED</span></code> &gt; <code class="language-jython highlight"><span class="n">Startup</span> <span class="n">message</span></code> &gt; <code class="language-jython highlight"><span class="n">image</span></code> &gt; (scroll through all the images and <code class="language-jython highlight"><span class="n">click</span></code> to select)</li>
+</ul>
+</li>
+<li>Reboot or enter/exit the click menu to see your custom logo</li>
+</ol>
+<h2 id="editor-screenshots">Editor Screenshots</h2>
+<p>Full size view (1:1 pixel mapping):
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>                                                                                                                       <span class="err">███████</span>  
+<span class="linenos" data-linenos=" 2 "></span>                                                                                              <span class="err">██████</span>      <span class="err">███████</span>    <span class="err">██</span>      <span class="err">██</span> 
+<span class="linenos" data-linenos=" 3 "></span>                                                                     <span class="err">██████</span>    <span class="err">█████</span>        <span class="err">███</span>    <span class="err">██</span>   <span class="err">██</span>      <span class="err">██</span>  <span class="err">█</span>         <span class="err">█</span> 
+<span class="linenos" data-linenos=" 4 "></span>                                            <span class="err">██████</span>       <span class="err">██████</span>  <span class="err">████</span>     <span class="err">██</span>  <span class="err">██</span>   <span class="err">██</span>      <span class="err">██</span>       <span class="err">█</span>  <span class="err">█</span>         <span class="err">███</span>          <span class="err">██</span>
+<span class="linenos" data-linenos=" 5 "></span>       <span class="err">█████</span>         <span class="err">███</span>          <span class="err">████</span>  <span class="err">████</span>     <span class="err">██</span>  <span class="err">████</span>     <span class="err">█</span> <span class="err">█</span>          <span class="err">██</span> <span class="err">█</span>     <span class="err">█</span>     <span class="err">█</span>          <span class="err">██</span>           <span class="err">██</span>           <span class="err">█</span>
+<span class="linenos" data-linenos=" 6 "></span>      <span class="err">██</span>   <span class="err">█</span> <span class="err">████</span>   <span class="err">█</span>  <span class="err">██</span>  <span class="err">███</span>   <span class="err">██</span>  <span class="err">███</span>          <span class="err">███</span>          <span class="err">█</span>            <span class="err">██</span>      <span class="err">██</span>   <span class="err">█</span>           <span class="err">██</span>           <span class="err">█</span>     <span class="err">██</span>     <span class="err">█</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="err">██</span>      <span class="err">██</span>  <span class="err">██</span> <span class="err">█</span>    <span class="err">███</span>  <span class="err">██</span>  <span class="err">█</span>    <span class="err">█</span>           <span class="err">███</span>          <span class="err">█</span>            <span class="err">██</span>      <span class="err">██</span>  <span class="err">██</span>          <span class="err">██</span>     <span class="err">██</span>     <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>
+<span class="linenos" data-linenos=" 8 "></span>   <span class="err">██</span>       <span class="err">█</span>    <span class="err">██</span>     <span class="err">██</span>    <span class="err">█</span>  <span class="err">█</span>    <span class="err">█</span>            <span class="err">█</span>           <span class="err">█</span>   <span class="err">█████</span>     <span class="err">█</span>      <span class="err">██</span>  <span class="err">█</span>         <span class="err">████</span>    <span class="err">████</span>    <span class="err">█</span>    <span class="err">████</span>   <span class="err">██</span>
+<span class="linenos" data-linenos=" 9 "></span>   <span class="err">██</span>       <span class="err">█</span>    <span class="err">██</span>      <span class="err">█</span>    <span class="err">█</span>  <span class="err">█</span>    <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>          <span class="err">██</span>    <span class="err">█████</span>    <span class="err">█</span>      <span class="err">██</span>  <span class="err">█</span>     <span class="err">█████</span> <span class="err">██</span>    <span class="err">████</span>   <span class="err">██</span>    <span class="err">████████</span> 
+<span class="linenos" data-linenos="10 "></span>   <span class="err">██</span>       <span class="err">█</span>    <span class="err">██</span>      <span class="err">█</span>    <span class="err">█</span> <span class="err">██</span>    <span class="err">█</span>   <span class="err">█████</span>    <span class="err">█</span>     <span class="err">███████</span>    <span class="err">█████</span>    <span class="err">█</span>      <span class="err">██</span>  <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>    <span class="err">█████████</span>     <span class="err">█████</span>   
+<span class="linenos" data-linenos="11 "></span>    <span class="err">██</span>      <span class="err">█</span>    <span class="err">██</span>      <span class="err">█</span>     <span class="err">██</span>     <span class="err">█</span>   <span class="err">██████</span>   <span class="err">█</span>    <span class="err">█████</span>  <span class="err">█</span>    <span class="err">█</span>   <span class="err">██</span>   <span class="err">█</span>     <span class="err">███</span>  <span class="err">█</span>    <span class="err">██</span>      <span class="err">█</span>     <span class="err">████</span> <span class="err">████</span>      <span class="err">███</span>   
+<span class="linenos" data-linenos="12 "></span>    <span class="err">██</span>      <span class="err">█</span>    <span class="err">███</span>     <span class="err">█</span>     <span class="err">██</span>     <span class="err">█</span>   <span class="err">██</span>  <span class="err">██</span>   <span class="err">█</span>    <span class="err">███</span>    <span class="err">██</span>   <span class="err">█</span>    <span class="err">█</span>   <span class="err">█</span>     <span class="err">██</span>   <span class="err">█</span>    <span class="err">███████</span> <span class="err">██</span>     <span class="err">███</span>    <span class="err">█</span>        <span class="err">██</span>  
+<span class="linenos" data-linenos="13 "></span>     <span class="err">██</span>     <span class="err">█</span>    <span class="err">███</span>     <span class="err">█</span>      <span class="err">█</span>     <span class="err">█</span>   <span class="err">█</span>    <span class="err">█</span>   <span class="err">█</span>    <span class="err">██</span>     <span class="err">██</span>    <span class="err">█</span>   <span class="err">█</span>   <span class="err">█</span>     <span class="err">██</span>   <span class="err">██</span>   <span class="err">██</span>    <span class="err">████</span>       <span class="err">███</span>  <span class="err">██</span>        <span class="err">█</span>  
+<span class="linenos" data-linenos="14 "></span>     <span class="err">██</span>     <span class="err">█</span>    <span class="err">███</span>     <span class="err">█</span>            <span class="err">█</span>   <span class="err">█</span>    <span class="err">█</span>   <span class="err">█</span>    <span class="err">██████</span> <span class="err">██</span>    <span class="err">█</span>   <span class="err">█</span>   <span class="err">█</span>     <span class="err">██</span>   <span class="err">██</span>          <span class="err">█</span> <span class="err">██</span>        <span class="err">██</span>  <span class="err">███</span>      <span class="err">██</span> 
+<span class="linenos" data-linenos="15 "></span>     <span class="err">██</span>     <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>            <span class="err">█</span>   <span class="err">█</span>    <span class="err">█</span>   <span class="err">█</span>    <span class="err">██</span>   <span class="err">████</span>    <span class="err">█</span>  <span class="err">██</span>   <span class="err">█</span>     <span class="err">██</span>   <span class="err">██</span>          <span class="err">█</span>  <span class="err">███</span>       <span class="err">█</span>   <span class="err">████</span>     <span class="err">██</span>
+<span class="linenos" data-linenos="16 "></span>      <span class="err">█</span>     <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>            <span class="err">█</span>    <span class="err">█</span>  <span class="err">██</span>   <span class="err">█</span>          <span class="err">█</span> <span class="err">█</span>    <span class="err">████</span>   <span class="err">███</span>    <span class="err">█</span>    <span class="err">██</span>         <span class="err">██</span>    <span class="err">████</span>    <span class="err">██</span>   <span class="err">████</span>     <span class="err">█</span>
+<span class="linenos" data-linenos="17 "></span>      <span class="err">█</span>     <span class="err">██</span>    <span class="err">███</span>    <span class="err">█</span>            <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>          <span class="err">█</span> <span class="err">██</span>   <span class="err">███</span>    <span class="err">███</span>    <span class="err">█</span>     <span class="err">█</span>     <span class="err">█████</span>      <span class="err">████</span>    <span class="err">█</span> <span class="err">███████</span>    <span class="err">█</span>
+<span class="linenos" data-linenos="18 "></span>      <span class="err">██</span>     <span class="err">█</span>    <span class="err">███</span>    <span class="err">█</span>        <span class="err">█</span>   <span class="err">█</span>    <span class="err">███</span>     <span class="err">█</span>         <span class="err">██</span> <span class="err">██</span>         <span class="err">████</span>    <span class="err">█</span>     <span class="err">█</span>    <span class="err">████</span>         <span class="err">███</span>    <span class="err">███</span>  <span class="err">████</span>    <span class="err">█</span>
+<span class="linenos" data-linenos="19 "></span>       <span class="err">█</span>     <span class="err">█</span>    <span class="err">███</span>    <span class="err">██</span>   <span class="err">█</span>   <span class="err">█</span>   <span class="err">██</span>          <span class="err">██</span>      <span class="err">████</span>  <span class="err">██</span>        <span class="err">███</span> <span class="err">█</span>    <span class="err">█</span>     <span class="err">█</span>    <span class="err">███████</span>  <span class="err">███████</span>    <span class="err">██</span>    <span class="err">██</span>     <span class="err">█</span>
+<span class="linenos" data-linenos="20 "></span>       <span class="err">█</span>     <span class="err">█</span>    <span class="err">███</span>    <span class="err">██</span>   <span class="err">█</span>  <span class="err">██</span>   <span class="err">██</span>          <span class="err">██</span>     <span class="err">███</span>     <span class="err">█</span>        <span class="err">██</span>  <span class="err">█</span>    <span class="err">█</span>  <span class="err">████</span>    <span class="err">████</span>  <span class="err">████</span>   <span class="err">██</span>     <span class="err">█</span>            <span class="err">█</span>
+<span class="linenos" data-linenos="21 "></span> <span class="err">████</span>  <span class="err">█</span>     <span class="err">█</span>     <span class="err">█</span>     <span class="err">██</span>   <span class="err">██</span> <span class="err">██</span>    <span class="err">█</span>         <span class="err">████</span>    <span class="err">██</span>      <span class="err">█</span>   <span class="err">██</span>    <span class="err">██</span> <span class="err">█</span>    <span class="err">████</span>  <span class="err">██</span>    <span class="err">██</span>    <span class="err">██</span>           <span class="err">█</span>           <span class="err">██</span>
+<span class="linenos" data-linenos="22 "></span><span class="err">██</span>  <span class="err">██</span> <span class="err">█</span>     <span class="err">██</span>          <span class="err">██</span>   <span class="err">█████</span>    <span class="err">█</span>    <span class="err">██████</span> <span class="err">██</span>    <span class="err">███████</span> <span class="err">█</span>   <span class="err">███</span>    <span class="err">███</span>    <span class="err">██</span>     <span class="err">█</span>          <span class="err">██</span>           <span class="err">█</span>           <span class="err">█</span> 
+<span class="linenos" data-linenos="23 "></span><span class="err">█</span>    <span class="err">███</span>     <span class="err">██</span>         <span class="err">███</span>    <span class="err">████</span>    <span class="err">█</span>    <span class="err">█████</span>  <span class="err">██</span>     <span class="err">██</span>   <span class="err">███</span>    <span class="err">██</span>     <span class="err">██</span>           <span class="err">█</span>          <span class="err">██</span>          <span class="err">███</span>         <span class="err">██</span> 
+<span class="linenos" data-linenos="24 "></span><span class="err">█</span>     <span class="err">█</span>      <span class="err">██</span>         <span class="err">███</span>    <span class="err">█</span> <span class="err">██</span>    <span class="err">█</span>     <span class="err">██</span>    <span class="err">██</span>           <span class="err">██</span>    <span class="err">███</span>     <span class="err">█</span>           <span class="err">█</span>         <span class="err">████</span>         <span class="err">████</span>       <span class="err">██</span>  
+<span class="linenos" data-linenos="25 "></span><span class="err">█</span>           <span class="err">████</span>        <span class="err">█</span> <span class="err">█</span>    <span class="err">█</span>  <span class="err">█</span>    <span class="err">█</span>     <span class="err">█</span>     <span class="err">██</span>           <span class="err">██</span>    <span class="err">███</span>     <span class="err">██</span>         <span class="err">███</span>      <span class="err">███████</span>       <span class="err">██</span> <span class="err">██████████</span>   
+<span class="linenos" data-linenos="26 "></span><span class="err">█</span>           <span class="err">█</span> <span class="err">██</span>       <span class="err">██</span> <span class="err">█</span>    <span class="err">█</span>  <span class="err">█</span>    <span class="err">█</span>     <span class="err">█</span>      <span class="err">██</span>         <span class="err">████</span>   <span class="err">████</span>   <span class="err">████</span>      <span class="err">██████████████</span> <span class="err">███████████</span>   <span class="err">█████████</span>   
+<span class="linenos" data-linenos="27 "></span><span class="err">█</span>          <span class="err">██</span>  <span class="err">██</span>      <span class="err">██</span> <span class="err">█</span>    <span class="err">█</span>  <span class="err">██</span>  <span class="err">███</span>   <span class="err">██</span>      <span class="err">███</span>     <span class="err">███████████</span> <span class="err">██████████████████</span> <span class="err">████████</span>    <span class="err">█████████</span>     <span class="err">███████</span>    
+<span class="linenos" data-linenos="28 "></span><span class="err">██</span>         <span class="err">██</span>  <span class="err">███</span>    <span class="err">██</span>  <span class="err">██</span>  <span class="err">██</span>  <span class="err">████████████</span>       <span class="err">███████████</span>  <span class="err">█████</span>  <span class="err">█████</span>  <span class="err">█████████</span>   <span class="err">██████</span>       <span class="err">██████</span>                 
+<span class="linenos" data-linenos="29 "></span> <span class="err">██</span>       <span class="err">██</span>    <span class="err">████████</span>  <span class="err">██████</span>  <span class="err">█████</span> <span class="err">█████</span>        <span class="err">█████████</span>     <span class="err">███</span>    <span class="err">███</span>    <span class="err">██████</span>                                         
+<span class="linenos" data-linenos="30 "></span> <span class="err">███</span>     <span class="err">███</span>     <span class="err">██████</span>    <span class="err">████</span>    <span class="err">███</span>   <span class="err">███</span>          <span class="err">█████</span>                                                                     
+<span class="linenos" data-linenos="31 "></span>  <span class="err">█████████</span>       <span class="err">████</span>      <span class="err">██</span>                                                                                                  
+<span class="linenos" data-linenos="32 "></span>   <span class="err">███████</span>                                                                                                                      
+<span class="linenos" data-linenos="33 "></span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">bubbleJump</span><span class="o">.</span><span class="n">bin</span>   <span class="o">|</span>   <span class="mi">128</span><span class="n">x32</span>   <span class="o">|</span>   <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>   <span class="o">|</span>   <span class="n">Saved</span>                                                         
+<span class="linenos" data-linenos="34 "></span> <span class="n">View</span><span class="p">:</span><span class="n">Full</span>   <span class="o">|</span>   <span class="n">Enc</span><span class="p">:</span><span class="n">V</span>   <span class="o">|</span>   <span class="n">Draw</span><span class="p">:</span><span class="n">CLR</span>   <span class="o">|</span>   <span class="err">«</span><span class="n">Save</span><span class="err">»</span>   <span class="o">|</span>   <span class="err">«</span><span class="n">Quit</span><span class="err">»</span>                                                        
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span><span class="err">⟨</span><span class="n">Clickwheel</span> <span class="o">&gt;</span> <span class="err">↺</span> <span class="o">/</span> <span class="err">↻</span><span class="p">:</span> <span class="n">move</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="o">|</span> <span class="n">Click</span><span class="p">:</span> <span class="n">toggle</span> <span class="n">pixel</span> <span class="err">⟩</span> <span class="err">⟨</span> <span class="n">Probe</span> <span class="n">Buttons</span> <span class="o">&gt;</span>  <span class="no no-Hardware">Connect</span><span class="p">:</span><span class="nb">set</span> <span class="o">|</span> <span class="no no-Hardware">Remove</span><span class="p">:</span><span class="n">clear</span>  <span class="o">|</span> <span class="n">Switch</span> <span class="o">&gt;</span> <span class="no no-Hardware">Select</span><span class="p">:</span><span class="n">H</span> <span class="o">|</span> <span class="no no-Hardware">Measure</span><span class="p">:</span><span class="n">V</span> <span class="err">⟩</span>
+<span class="linenos" data-linenos="37 "></span><span class="err">⟨</span><span class="n">Terminal</span> <span class="o">&gt;</span>     <span class="p">[</span><span class="n">z</span><span class="p">]:</span><span class="nb">set</span> <span class="p">[</span><span class="n">x</span><span class="p">]:</span><span class="n">clear</span> <span class="p">[</span><span class="n">c</span><span class="p">]:</span><span class="n">toggle</span> <span class="n">pixel</span>   <span class="o">|</span> <span class="p">[</span><span class="n">m</span><span class="p">]:</span><span class="n">Cycle</span> <span class="n">View</span> <span class="o">|</span> <span class="p">[</span><span class="o">/</span><span class="p">]:</span> <span class="n">Enc</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="o">|</span>  <span class="n">ctrl</span><span class="o">+</span><span class="n">S</span><span class="p">:</span><span class="n">Save</span>  <span class="o">|</span>    <span class="n">ctrl</span><span class="o">+</span><span class="n">Q</span><span class="p">:</span><span class="n">Quit</span>    <span class="o">|</span> <span class="p">[</span><span class="err">?</span><span class="p">]:</span><span class="n">Help</span>  <span class="err">⟩</span>
+</code></pre></div></p>
+<p>Half Block view (2:1 vertical compression - each character is 2 pixels tall):
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>                                                                                              <span class="err">▄▄▄▄▄▄</span>      <span class="err">▄▄▄▄▄▄▄</span>    <span class="err">▄▄▀▀▀▀▀▀█▄</span> 
+<span class="linenos" data-linenos=" 2 "></span>                                            <span class="err">▄▄▄▄▄▄</span>       <span class="err">▄▄▄▄▄▄</span>  <span class="err">▄▄▄▄▀▀▀▀▀█▄</span>  <span class="err">▄█▀▀▀█▄</span>      <span class="err">▄█▀▀</span>    <span class="err">▀█</span>  <span class="err">▄▀▀</span>      <span class="err">▀█▄▄▀</span>         <span class="err">█▄</span>
+<span class="linenos" data-linenos=" 3 "></span>      <span class="err">▄█▀▀▀█</span> <span class="err">▄▄▄▄</span>   <span class="err">▄▀▀█▄</span>  <span class="err">▄▄▄</span>   <span class="err">▄█▀▀█▄▄▀▀▀▀</span>     <span class="err">▀█▄▄▀▀▀▀</span>     <span class="err">▀▄▀</span>          <span class="err">▀█▄▀</span>     <span class="err">█▄</span>   <span class="err">▄▀</span>          <span class="err">██</span>           <span class="err">█▀</span>    <span class="err">▄▄</span>     <span class="err">█</span>
+<span class="linenos" data-linenos=" 4 "></span>   <span class="err">▄█▀</span>      <span class="err">█▀</span>  <span class="err">▀█▄▀</span>    <span class="err">██▀</span>  <span class="err">▀█</span>  <span class="err">█</span>    <span class="err">█</span>           <span class="err">▀█▀</span>          <span class="err">█</span>   <span class="err">▄▄▄▄▄</span>    <span class="err">▀█</span>      <span class="err">██</span>  <span class="err">█▀</span>        <span class="err">▄▄██</span>    <span class="err">▄██▄</span>    <span class="err">█</span>    <span class="err">████</span>   <span class="err">▄█</span>
+<span class="linenos" data-linenos=" 5 "></span>   <span class="err">██</span>       <span class="err">█</span>    <span class="err">██</span>      <span class="err">█</span>    <span class="err">█</span> <span class="err">▄█</span>    <span class="err">█</span>   <span class="err">▄████</span>    <span class="err">█</span>     <span class="err">▄▄▄▄▄██</span>    <span class="err">█████</span>    <span class="err">█</span>      <span class="err">██</span>  <span class="err">█</span>    <span class="err">▄███▀▀</span> <span class="err">▀█</span>    <span class="err">████▄▄▄██</span>    <span class="err">▀█████▀▀</span> 
+<span class="linenos" data-linenos=" 6 "></span>    <span class="err">██</span>      <span class="err">█</span>    <span class="err">██▄</span>     <span class="err">█</span>     <span class="err">██</span>     <span class="err">█</span>   <span class="err">██▀▀██</span>   <span class="err">█</span>    <span class="err">███▀▀</span>  <span class="err">█▄</span>   <span class="err">█</span>   <span class="err">▀█</span>   <span class="err">█</span>     <span class="err">██▀</span>  <span class="err">█</span>    <span class="err">██▄▄▄▄▄</span> <span class="err">█▄</span>    <span class="err">▀███</span> <span class="err">▀▀▀█</span>      <span class="err">▀▀█▄</span>  
+<span class="linenos" data-linenos=" 7 "></span>     <span class="err">██</span>     <span class="err">█</span>    <span class="err">███</span>     <span class="err">█</span>      <span class="err">▀</span>     <span class="err">█</span>   <span class="err">█</span>    <span class="err">█</span>   <span class="err">█</span>    <span class="err">██▄▄▄▄</span> <span class="err">██</span>    <span class="err">█</span>   <span class="err">█</span>   <span class="err">█</span>     <span class="err">██</span>   <span class="err">██</span>   <span class="err">▀▀</span>    <span class="err">▀█▀█▄</span>      <span class="err">▀▀█▄</span> <span class="err">▀█▄▄</span>      <span class="err">█▄</span> 
+<span class="linenos" data-linenos=" 8 "></span>     <span class="err">▀█</span>     <span class="err">█</span>    <span class="err">████</span>    <span class="err">█</span>            <span class="err">█</span>   <span class="err">▀▄</span>  <span class="err">▄█</span>   <span class="err">█</span>    <span class="err">▀▀</span>   <span class="err">▀█▀█</span>    <span class="err">█▄▄█▀</span>  <span class="err">▄█▄</span>    <span class="err">█▀</span>   <span class="err">██</span>         <span class="err">▄█</span>  <span class="err">▀▀█▄▄▄</span>    <span class="err">█▄</span>  <span class="err">▀███▄</span>    <span class="err">▀█</span>
+<span class="linenos" data-linenos=" 9 "></span>      <span class="err">█▄</span>    <span class="err">▀█</span>    <span class="err">███</span>    <span class="err">█</span>        <span class="err">▄</span>   <span class="err">█</span>    <span class="err">███▀</span>    <span class="err">█</span>         <span class="err">▄█</span> <span class="err">▄█</span>   <span class="err">▀▀▀</span>   <span class="err">▄███</span>    <span class="err">█</span>     <span class="err">█</span>    <span class="err">▄███▀▀</span>      <span class="err">▀███</span>    <span class="err">█▄█▀▀████</span>    <span class="err">█</span>
+<span class="linenos" data-linenos="10 "></span>       <span class="err">█</span>     <span class="err">█</span>    <span class="err">███</span>    <span class="err">██</span>   <span class="err">█</span>  <span class="err">▄█</span>   <span class="err">██</span>          <span class="err">██</span>     <span class="err">▄██▀▀</span>  <span class="err">▀█</span>        <span class="err">██▀</span> <span class="err">█</span>    <span class="err">█</span>  <span class="err">▄▄▄█</span>    <span class="err">████▀▀█▄▄█▀▀▀██▀</span>    <span class="err">█▀</span>    <span class="err">▀▀</span>     <span class="err">█</span>
+<span class="linenos" data-linenos="11 "></span><span class="err">▄█▀▀█▄</span> <span class="err">█</span>     <span class="err">█▄</span>    <span class="err">▀</span>     <span class="err">██</span>   <span class="err">██▄██</span>    <span class="err">█</span>    <span class="err">▄▄▄▄▄█▀██</span>    <span class="err">██▄▄▄▄▄</span> <span class="err">█</span>   <span class="err">██▄</span>   <span class="err">▀█▄█</span>    <span class="err">██▀▀</span>  <span class="err">▀█</span>    <span class="err">▀▀</span>    <span class="err">██</span>           <span class="err">█</span>           <span class="err">█▀</span>
+<span class="linenos" data-linenos="12 "></span><span class="err">█</span>    <span class="err">▀█▀</span>     <span class="err">██</span>         <span class="err">███</span>    <span class="err">█▀██</span>    <span class="err">█</span>    <span class="err">▀██▀▀</span>  <span class="err">██</span>     <span class="err">▀▀</span>   <span class="err">▀██</span>    <span class="err">██▄</span>    <span class="err">▀█</span>           <span class="err">█</span>         <span class="err">▄██▄</span>         <span class="err">███▄</span>       <span class="err">▄█▀</span> 
+<span class="linenos" data-linenos="13 "></span><span class="err">█</span>           <span class="err">█▀██</span>       <span class="err">▄█</span> <span class="err">█</span>    <span class="err">█</span>  <span class="err">█</span>    <span class="err">█</span>     <span class="err">█</span>     <span class="err">▀█▄</span>         <span class="err">▄██▄</span>   <span class="err">███▄</span>   <span class="err">▄██▄</span>      <span class="err">▄▄███▄▄▄▄▄▄███▀███▄▄▄▄▄▄▄█▀</span> <span class="err">▀█████████</span>   
+<span class="linenos" data-linenos="14 "></span><span class="err">█▄</span>         <span class="err">██</span>  <span class="err">██▄</span>    <span class="err">▄█▀</span> <span class="err">█▄</span>  <span class="err">▄█</span>  <span class="err">██▄▄███▄▄▄██</span>      <span class="err">▀██▄▄▄▄▄████▀▀█████</span> <span class="err">▀█████▀▀█████████▀</span> <span class="err">▀██████▀</span>    <span class="err">▀▀██████▀</span>     <span class="err">▀▀▀▀▀▀▀</span>    
+<span class="linenos" data-linenos="15 "></span> <span class="err">██▄</span>     <span class="err">▄██</span>    <span class="err">▀██████▀</span>  <span class="err">▀████▀</span>  <span class="err">▀███▀</span> <span class="err">▀███▀</span>        <span class="err">▀█████▀▀▀</span>     <span class="err">▀▀▀</span>    <span class="err">▀▀▀</span>    <span class="err">▀▀▀▀▀▀</span>                                         
+<span class="linenos" data-linenos="16 "></span>  <span class="err">▀███████▀</span>       <span class="err">▀▀▀▀</span>      <span class="err">▀▀</span>                                                                                                  
+<span class="linenos" data-linenos="17 "></span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">bubbleJump</span><span class="o">.</span><span class="n">bin</span>   <span class="o">|</span>   <span class="mi">128</span><span class="n">x32</span>   <span class="o">|</span>   <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>   <span class="o">|</span>   <span class="n">Saved</span>                                                         
+<span class="linenos" data-linenos="18 "></span> <span class="n">View</span><span class="p">:</span><span class="n">Half</span>   <span class="o">|</span>   <span class="n">Enc</span><span class="p">:</span><span class="n">V</span>   <span class="o">|</span>   <span class="n">Draw</span><span class="p">:</span><span class="n">CLR</span>   <span class="o">|</span>   <span class="err">«</span><span class="n">Save</span><span class="err">»</span>   <span class="o">|</span>   <span class="err">«</span><span class="n">Quit</span><span class="err">»</span>                                                        
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="err">⟨</span><span class="n">Clickwheel</span> <span class="o">&gt;</span> <span class="err">↺</span> <span class="o">/</span> <span class="err">↻</span><span class="p">:</span> <span class="n">move</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="o">|</span> <span class="n">Click</span><span class="p">:</span> <span class="n">toggle</span> <span class="n">pixel</span> <span class="err">⟩</span> <span class="err">⟨</span> <span class="n">Probe</span> <span class="n">Buttons</span> <span class="o">&gt;</span>  <span class="no no-Hardware">Connect</span><span class="p">:</span><span class="nb">set</span> <span class="o">|</span> <span class="no no-Hardware">Remove</span><span class="p">:</span><span class="n">clear</span>  <span class="o">|</span> <span class="n">Switch</span> <span class="o">&gt;</span> <span class="no no-Hardware">Select</span><span class="p">:</span><span class="n">H</span> <span class="o">|</span> <span class="no no-Hardware">Measure</span><span class="p">:</span><span class="n">V</span> <span class="err">⟩</span>
+<span class="linenos" data-linenos="21 "></span><span class="err">⟨</span><span class="n">Terminal</span> <span class="o">&gt;</span>     <span class="p">[</span><span class="n">z</span><span class="p">]:</span><span class="nb">set</span> <span class="p">[</span><span class="n">x</span><span class="p">]:</span><span class="n">clear</span> <span class="p">[</span><span class="n">c</span><span class="p">]:</span><span class="n">toggle</span> <span class="n">pixel</span>   <span class="o">|</span> <span class="p">[</span><span class="n">m</span><span class="p">]:</span><span class="n">Cycle</span> <span class="n">View</span> <span class="o">|</span> <span class="p">[</span><span class="o">/</span><span class="p">]:</span> <span class="n">Enc</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="o">|</span>  <span class="n">ctrl</span><span class="o">+</span><span class="n">S</span><span class="p">:</span><span class="n">Save</span>  <span class="o">|</span>    <span class="n">ctrl</span><span class="o">+</span><span class="n">Q</span><span class="p">:</span><span class="n">Quit</span>    <span class="o">|</span> <span class="p">[</span><span class="err">?</span><span class="p">]:</span><span class="n">Help</span>  <span class="err">⟩</span>
+</code></pre></div></p>
+<p>Quarter Block view (2×2 compression - each character is 4 pixels):
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>                                               <span class="err">▄▄▄</span>   <span class="err">▄▄▄▖</span> <span class="err">▗▞▀▀▜▖</span>
+<span class="linenos" data-linenos=" 2 "></span>                      <span class="err">▄▄▄</span>   <span class="err">▗▄▄▖▗▄▞▀▀▙</span> <span class="err">▟▀▜▖</span>  <span class="err">▗▛▘</span> <span class="err">▝▌▗▀</span>   <span class="err">▜▄▘</span>    <span class="err">▙</span>
+<span class="linenos" data-linenos=" 3 "></span>   <span class="err">▟▀▜▗▄▖</span> <span class="err">▞▜▖▗▄</span> <span class="err">▗▛▜▄▀▀</span>  <span class="err">▝▙▞▀▘</span>  <span class="err">▚▘</span>    <span class="err">▝▙▘</span>  <span class="err">▙</span> <span class="err">▗▘</span>    <span class="err">▐▌</span>     <span class="err">▛</span>  <span class="err">▄</span>  <span class="err">▐</span>
+<span class="linenos" data-linenos=" 4 "></span> <span class="err">▗▛</span>   <span class="err">▛</span> <span class="err">▜▞</span>  <span class="err">█▘▝▌▐</span>  <span class="err">▌</span>     <span class="err">▜▘</span>    <span class="err">▐</span> <span class="err">▗▄▄</span>  <span class="err">▜</span>   <span class="err">█</span> <span class="err">▛</span>    <span class="err">▄█</span>  <span class="err">▟▙</span>  <span class="err">▌</span> <span class="err">▐█▌</span> <span class="err">▟</span>
+<span class="linenos" data-linenos=" 5 "></span> <span class="err">▐▌</span>   <span class="err">▌</span> <span class="err">▐▌</span>  <span class="err">▐</span>  <span class="err">▌▟</span>  <span class="err">▌</span> <span class="err">▟█▌</span> <span class="err">▐</span>  <span class="err">▗▄▄█</span>  <span class="err">██▌</span> <span class="err">▐</span>   <span class="err">█</span> <span class="err">▌</span> <span class="err">▗█▛▘▜</span>  <span class="err">██▄▟▌</span> <span class="err">▝██▛▘</span>
+<span class="linenos" data-linenos=" 6 "></span>  <span class="err">█</span>   <span class="err">▌</span> <span class="err">▐▙</span>  <span class="err">▐</span>  <span class="err">▐▌</span>  <span class="err">▌</span> <span class="err">█▀█</span> <span class="err">▐</span>  <span class="err">█▛▘▐▖</span> <span class="err">▌</span> <span class="err">▜</span> <span class="err">▐</span>  <span class="err">▐▛</span> <span class="err">▌</span> <span class="err">▐▙▄▄▐▖</span> <span class="err">▝█▌▀▜</span>   <span class="err">▀▙</span> 
+<span class="linenos" data-linenos=" 7 "></span>  <span class="err">▐▌</span>  <span class="err">▌</span> <span class="err">▐█</span>  <span class="err">▐</span>   <span class="err">▘</span>  <span class="err">▌</span> <span class="err">▌</span> <span class="err">▐</span> <span class="err">▐</span>  <span class="err">█▄▄▐▌</span> <span class="err">▐</span> <span class="err">▐</span> <span class="err">▐</span>  <span class="err">▐▌</span> <span class="err">█</span> <span class="err">▝▘</span> <span class="err">▝▛▙</span>   <span class="err">▀▙▝▙▖</span>  <span class="err">▐▖</span>
+<span class="linenos" data-linenos=" 8 "></span>  <span class="err">▝▌</span>  <span class="err">▌</span> <span class="err">▐█▌</span> <span class="err">▐</span>      <span class="err">▌</span> <span class="err">▚</span> <span class="err">▟</span> <span class="err">▐</span>  <span class="err">▀</span> <span class="err">▝▛▌</span> <span class="err">▐▄▛</span> <span class="err">▟▖</span> <span class="err">▐▘</span> <span class="err">█</span>    <span class="err">▗▌▝▜▄▖</span> <span class="err">▐▖▝█▙</span>  <span class="err">▜</span>
+<span class="linenos" data-linenos=" 9 "></span>   <span class="err">▙</span>  <span class="err">▜</span>  <span class="err">█▌</span> <span class="err">▐</span>    <span class="err">▖</span> <span class="err">▌</span> <span class="err">▐█▘</span> <span class="err">▐</span>    <span class="err">▗▌▟</span> <span class="err">▝▀</span> <span class="err">▗█▌</span> <span class="err">▐</span>  <span class="err">▐</span>  <span class="err">▟█▀</span>   <span class="err">▜█</span>  <span class="err">▙▛▜█▌</span> <span class="err">▐</span>
+<span class="linenos" data-linenos="10 "></span>   <span class="err">▐</span>  <span class="err">▐</span>  <span class="err">█▌</span> <span class="err">▐▌</span> <span class="err">▌▗▌</span> <span class="err">█</span>     <span class="err">█</span>  <span class="err">▗█▀</span> <span class="err">▜</span>    <span class="err">█▘▌</span> <span class="err">▐</span> <span class="err">▄▟</span>  <span class="err">██▀▙▟▀▜▛</span>  <span class="err">▛</span>  <span class="err">▀</span>  <span class="err">▐</span>
+<span class="linenos" data-linenos="11 "></span><span class="err">▟▀▙▐</span>  <span class="err">▐▖</span> <span class="err">▝</span>  <span class="err">▐▌</span> <span class="err">█▟▌</span> <span class="err">▐</span>  <span class="err">▄▄▟▜▌</span> <span class="err">▐▙▄▄▐</span> <span class="err">▐▙</span> <span class="err">▝▙▌</span> <span class="err">▐▛▘▝▌</span> <span class="err">▝▘</span> <span class="err">▐▌</span>     <span class="err">▌</span>     <span class="err">▛</span>
+<span class="linenos" data-linenos="12 "></span><span class="err">▌</span> <span class="err">▝▛</span>  <span class="err">▐▌</span>    <span class="err">█▌</span> <span class="err">▐▜▌</span> <span class="err">▐</span>  <span class="err">▜▛▘▐▌</span>  <span class="err">▀</span> <span class="err">▝█</span>  <span class="err">█▖</span> <span class="err">▝▌</span>     <span class="err">▌</span>    <span class="err">▟▙</span>    <span class="err">▐█▖</span>   <span class="err">▟▘</span>
+<span class="linenos" data-linenos="13 "></span><span class="err">▌</span>     <span class="err">▛█</span>   <span class="err">▗▌▌</span> <span class="err">▐</span> <span class="err">▌</span> <span class="err">▐</span>  <span class="err">▐</span>  <span class="err">▝▙</span>    <span class="err">▗█▖</span> <span class="err">█▙</span> <span class="err">▗█▖</span>  <span class="err">▗▟█▄▄▄█▛█▙▄▄▄▛▝████▌</span> 
+<span class="linenos" data-linenos="14 "></span><span class="err">▙</span>    <span class="err">▐▌▐▙</span>  <span class="err">▟▘▙</span> <span class="err">▟</span> <span class="err">█▄█▙▄█</span>   <span class="err">▜▙▄▄██▀██▌▜██▀████▛▝███▘</span> <span class="err">▝▜██▛</span>  <span class="err">▝▀▀▀</span>  
+<span class="linenos" data-linenos="15 "></span><span class="err">▐▙</span>  <span class="err">▗█</span>  <span class="err">▜██▛</span> <span class="err">▜█▛</span> <span class="err">▜█▘▜█▘</span>   <span class="err">▝██▛▀</span>  <span class="err">▝▀</span>  <span class="err">▀▘</span> <span class="err">▝▀▀▘</span>                    
+<span class="linenos" data-linenos="16 "></span> <span class="err">▜███▘</span>   <span class="err">▀▀</span>   <span class="err">▀</span>                                                 
+<span class="linenos" data-linenos="17 "></span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">bubbleJump</span><span class="o">.</span><span class="n">bin</span>   <span class="o">|</span>   <span class="mi">128</span><span class="n">x32</span>   <span class="o">|</span>   <span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>   <span class="o">|</span>   <span class="n">Saved</span>                                                         
+<span class="linenos" data-linenos="18 "></span> <span class="n">View</span><span class="p">:</span><span class="n">Qtr</span>   <span class="o">|</span>   <span class="n">Enc</span><span class="p">:</span><span class="n">V</span>   <span class="o">|</span>   <span class="n">Draw</span><span class="p">:</span><span class="n">CLR</span>   <span class="o">|</span>   <span class="err">«</span><span class="n">Save</span><span class="err">»</span>   <span class="o">|</span>   <span class="err">«</span><span class="n">Quit</span><span class="err">»</span>                                                         
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="err">⟨</span><span class="n">Clickwheel</span> <span class="o">&gt;</span> <span class="err">↺</span> <span class="o">/</span> <span class="err">↻</span><span class="p">:</span> <span class="n">move</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="o">|</span> <span class="n">Click</span><span class="p">:</span> <span class="n">toggle</span> <span class="n">pixel</span> <span class="err">⟩</span> <span class="err">⟨</span> <span class="n">Probe</span> <span class="n">Buttons</span> <span class="o">&gt;</span>  <span class="no no-Hardware">Connect</span><span class="p">:</span><span class="nb">set</span> <span class="o">|</span> <span class="no no-Hardware">Remove</span><span class="p">:</span><span class="n">clear</span>  <span class="o">|</span> <span class="n">Switch</span> <span class="o">&gt;</span> <span class="no no-Hardware">Select</span><span class="p">:</span><span class="n">H</span> <span class="o">|</span> <span class="no no-Hardware">Measure</span><span class="p">:</span><span class="n">V</span> <span class="err">⟩</span>
+<span class="linenos" data-linenos="21 "></span><span class="err">⟨</span><span class="n">Terminal</span> <span class="o">&gt;</span>     <span class="p">[</span><span class="n">z</span><span class="p">]:</span><span class="nb">set</span> <span class="p">[</span><span class="n">x</span><span class="p">]:</span><span class="n">clear</span> <span class="p">[</span><span class="n">c</span><span class="p">]:</span><span class="n">toggle</span> <span class="n">pixel</span>   <span class="o">|</span> <span class="p">[</span><span class="n">m</span><span class="p">]:</span><span class="n">Cycle</span> <span class="n">View</span> <span class="o">|</span> <span class="p">[</span><span class="o">/</span><span class="p">]:</span> <span class="n">Enc</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="o">|</span>  <span class="n">ctrl</span><span class="o">+</span><span class="n">S</span><span class="p">:</span><span class="n">Save</span>  <span class="o">|</span>    <span class="n">ctrl</span><span class="o">+</span><span class="n">Q</span><span class="p">:</span><span class="n">Quit</span>    <span class="o">|</span> <span class="p">[</span><span class="err">?</span><span class="p">]:</span><span class="n">Help</span>  <span class="err">⟩</span>
+</code></pre></div></p>
+<p>The output of <code class="language-jython highlight"><span class="err">?</span></code></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="o">===</span> <span class="n">Bitmap</span> <span class="n">Editor</span> <span class="n">Help</span> <span class="o">===</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">Navigation</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 4 "></span>  <span class="n">Encoder</span> <span class="n">wheel</span>       <span class="o">-</span> <span class="n">Move</span> <span class="n">cursor</span> <span class="p">(</span><span class="n">H</span> <span class="ow">or</span> <span class="n">V</span> <span class="n">mode</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span>  <span class="n">Arrow</span> <span class="n">keys</span> <span class="o">/</span> <span class="n">WASD</span>   <span class="o">-</span> <span class="n">Move</span> <span class="n">cursor</span>
+<span class="linenos" data-linenos=" 6 "></span>  <span class="n">j</span><span class="o">/</span><span class="n">k</span><span class="o">/</span><span class="n">l</span> <span class="p">(</span><span class="n">vim</span><span class="p">)</span>         <span class="o">-</span> <span class="n">Move</span> <span class="n">cursor</span>
+<span class="linenos" data-linenos=" 7 "></span>  <span class="n">Down</span> <span class="n">at</span> <span class="n">bottom</span> <span class="n">edge</span> <span class="o">-</span> <span class="n">Enter</span> <span class="n">menu</span> <span class="n">bar</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">Editing</span><span class="p">:</span>
+<span class="linenos" data-linenos="10 "></span>  <span class="n">Encoder</span> <span class="n">click</span>       <span class="o">-</span> <span class="n">Apply</span> <span class="n">current</span> <span class="n">draw</span> <span class="n">mode</span> <span class="n">at</span> <span class="n">cursor</span>
+<span class="linenos" data-linenos="11 "></span>  <span class="n">Enter</span> <span class="o">/</span> <span class="n">Space</span>       <span class="o">-</span> <span class="n">Apply</span> <span class="n">current</span> <span class="n">draw</span> <span class="n">mode</span> <span class="n">at</span> <span class="n">cursor</span>
+<span class="linenos" data-linenos="12 "></span>  <span class="no no-Hardware">Connect</span> <span class="n">button</span> <span class="n">HOLD</span> <span class="o">-</span> <span class="n">Set</span> <span class="n">pixels</span> <span class="k">while</span> <span class="n">held</span> <span class="p">(</span><span class="n">draw</span> <span class="n">lines</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>  <span class="no no-Hardware">Remove</span> <span class="n">button</span> <span class="n">HOLD</span>  <span class="o">-</span> <span class="n">Clear</span> <span class="n">pixels</span> <span class="k">while</span> <span class="n">held</span> <span class="p">(</span><span class="n">erase</span> <span class="n">lines</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span><span class="n">Direct</span> <span class="n">Pixel</span> <span class="n">Actions</span> <span class="p">(</span><span class="n">keyboard</span><span class="p">):</span>
+<span class="linenos" data-linenos="16 "></span>  <span class="n">z</span>                   <span class="o">-</span> <span class="n">Set</span> <span class="n">pixel</span> <span class="n">at</span> <span class="n">cursor</span> <span class="p">(</span><span class="n">draw</span><span class="p">)</span>
+<span class="linenos" data-linenos="17 "></span>  <span class="n">x</span>                   <span class="o">-</span> <span class="n">Clear</span> <span class="n">pixel</span> <span class="n">at</span> <span class="n">cursor</span> <span class="p">(</span><span class="n">erase</span><span class="p">)</span>
+<span class="linenos" data-linenos="18 "></span>  <span class="n">c</span>                   <span class="o">-</span> <span class="n">Toggle</span> <span class="n">pixel</span> <span class="n">at</span> <span class="n">cursor</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="n">Draw</span> <span class="n">Mode</span> <span class="n">Control</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>  <span class="o">.</span>                   <span class="o">-</span> <span class="n">Cycle</span> <span class="n">draw</span> <span class="n">modes</span> <span class="p">(</span><span class="n">Toggle</span><span class="o">/</span><span class="n">Set</span><span class="o">/</span><span class="n">Clear</span><span class="p">)</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="n">Hardware</span> <span class="n">Controls</span><span class="p">:</span>
+<span class="linenos" data-linenos="24 "></span>  <span class="n">Probe</span> <span class="n">switch</span> <span class="n">SELECT</span> <span class="o">-</span> <span class="n">Encoder</span> <span class="n">horizontal</span> <span class="n">movement</span>
+<span class="linenos" data-linenos="25 "></span>  <span class="n">Probe</span> <span class="n">switch</span> <span class="n">MEASURE</span><span class="o">-</span> <span class="n">Encoder</span> <span class="n">vertical</span> <span class="n">movement</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span><span class="n">Display</span><span class="p">:</span>
+<span class="linenos" data-linenos="28 "></span>  <span class="n">m</span>                   <span class="o">-</span> <span class="n">Cycle</span> <span class="n">view</span> <span class="n">mode</span> <span class="p">(</span><span class="n">Full</span><span class="o">/</span><span class="n">Half</span><span class="o">/</span><span class="n">Quarter</span><span class="p">)</span>
+<span class="linenos" data-linenos="29 "></span>  <span class="o">/</span>                   <span class="o">-</span> <span class="n">Toggle</span> <span class="n">encoder</span> <span class="n">H</span><span class="o">/</span><span class="n">V</span> <span class="n">movement</span>
+<span class="linenos" data-linenos="30 "></span>
+<span class="linenos" data-linenos="31 "></span><span class="n">Menu</span> <span class="n">Bar</span> <span class="p">(</span><span class="n">Down</span> <span class="n">at</span> <span class="n">bottom</span> <span class="n">edge</span><span class="p">):</span>
+<span class="linenos" data-linenos="32 "></span>  <span class="n">Left</span><span class="o">/</span><span class="n">Right</span> <span class="n">arrows</span>   <span class="o">-</span> <span class="n">Navigate</span> <span class="n">menu</span> <span class="n">items</span>
+<span class="linenos" data-linenos="33 "></span>  <span class="n">Enter</span> <span class="o">/</span> <span class="n">Space</span>       <span class="o">-</span> <span class="n">Activate</span> <span class="n">menu</span> <span class="n">item</span> <span class="p">(</span><span class="n">cycle</span><span class="o">/</span><span class="n">Save</span><span class="o">/</span><span class="n">Quit</span><span class="p">)</span>
+<span class="linenos" data-linenos="34 "></span>  <span class="n">Up</span> <span class="o">/</span> <span class="n">Escape</span>         <span class="o">-</span> <span class="n">Exit</span> <span class="n">menu</span> <span class="n">bar</span>
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span><span class="n">Menu</span> <span class="n">Bar</span> <span class="n">Items</span><span class="p">:</span>
+<span class="linenos" data-linenos="37 "></span>  <span class="n">View</span>      <span class="o">-</span> <span class="n">Cycle</span> <span class="n">display</span> <span class="n">mode</span> <span class="p">(</span><span class="n">Full</span><span class="o">/</span><span class="n">Half</span><span class="o">/</span><span class="n">Quarter</span><span class="p">)</span>
+<span class="linenos" data-linenos="38 "></span>  <span class="n">Enc</span>       <span class="o">-</span> <span class="n">Toggle</span> <span class="n">encoder</span> <span class="n">direction</span> <span class="p">(</span><span class="n">H</span><span class="o">/</span><span class="n">V</span><span class="p">)</span>
+<span class="linenos" data-linenos="39 "></span>  <span class="n">Draw</span>      <span class="o">-</span> <span class="n">Cycle</span> <span class="n">draw</span> <span class="n">mode</span> <span class="p">(</span><span class="n">Toggle</span><span class="o">/</span><span class="n">Set</span><span class="o">/</span><span class="n">Clear</span><span class="p">)</span>
+<span class="linenos" data-linenos="40 "></span>  <span class="err">«</span><span class="n">Save</span><span class="err">»</span>    <span class="o">-</span> <span class="p">[</span><span class="n">Button</span><span class="p">]</span> <span class="n">Save</span> <span class="n">file</span> <span class="ow">and</span> <span class="n">exit</span> <span class="n">menu</span>
+<span class="linenos" data-linenos="41 "></span>  <span class="err">«</span><span class="n">Quit</span><span class="err">»</span>    <span class="o">-</span> <span class="p">[</span><span class="n">Button</span><span class="p">]</span> <span class="n">Quit</span> <span class="n">editor</span> <span class="p">(</span><span class="n">prompts</span> <span class="k">if</span> <span class="n">modified</span><span class="p">)</span>
+<span class="linenos" data-linenos="42 "></span>
+<span class="linenos" data-linenos="43 "></span><span class="n">File</span><span class="p">:</span>
+<span class="linenos" data-linenos="44 "></span>  <span class="n">Ctrl</span><span class="o">+</span><span class="n">S</span>              <span class="o">-</span> <span class="n">Save</span> <span class="n">file</span>
+<span class="linenos" data-linenos="45 "></span>  <span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span> <span class="o">/</span> <span class="n">ESC</span>        <span class="o">-</span> <span class="n">Quit</span> <span class="p">(</span><span class="n">prompts</span> <span class="k">if</span> <span class="n">modified</span><span class="p">)</span>
+<span class="linenos" data-linenos="46 "></span>  <span class="n">h</span> <span class="o">/</span> <span class="err">?</span>               <span class="o">-</span> <span class="n">Show</span> <span class="n">this</span> <span class="nf nf-Jumperless">help</span>
+<span class="linenos" data-linenos="47 "></span>
+<span class="linenos" data-linenos="48 "></span><span class="n">Cursor</span> <span class="n">Colors</span><span class="p">:</span>
+<span class="linenos" data-linenos="49 "></span>  <span class="n">Green</span> <span class="n">background</span> <span class="o">-</span> <span class="n">Pixel</span> <span class="ow">is</span> <span class="n">OFF</span>
+<span class="linenos" data-linenos="50 "></span>  <span class="n">Red</span> <span class="n">background</span>   <span class="o">-</span> <span class="n">Pixel</span> <span class="ow">is</span> <span class="n">ON</span>
+</code></pre></div>
+<h2 id="bitmap-file-format">Bitmap File Format</h2>
+<p>The editor works with <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> files in two formats:</p>
+<p><strong>With Header (Recommended):</strong>
+- 4 bytes: Width (16-bit little-endian)
+- 2 bytes: Height (16-bit little-endian)<br />
+- Remaining: Bitmap data (MSB-first, row-major)
+- Example: 128×32 = 4 header + 512 data = 516 bytes total</p>
+<p><strong>Raw Format:</strong>
+- Just bitmap data, dimensions inferred from file size
+- 512 bytes → 128×32, 1024 bytes → 128×64, etc.</p>
+<p>The editor automatically adds headers when saving, making files ready to use as startup images.</p>
+<h2 id="converting-external-images">Converting External Images</h2>
+<p>Want to use your own images? The JumperlOS repository includes Python scripts to convert PNG/JPG images to OLED bitmaps:</p>
+<p><strong>Location:</strong> <code class="language-jython highlight"><span class="n">JumperlOS</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">image_to_oled_bitmap</span><span class="o">.</span><span class="n">py</span></code></p>
+<p><strong>Usage:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>python<span class="w"> </span>image_to_oled_bitmap.py<span class="w"> </span>input.png<span class="w"> </span>output.bin<span class="w"> </span>--width<span class="w"> </span><span class="m">128</span><span class="w"> </span>--height<span class="w"> </span><span class="m">32</span>
+</code></pre></div></p>
+<p>The script will:</p>
+<ol>
+<li>Resize your image to fit the OLED dimensions</li>
+<li>Convert to 1-bit (black/white) format</li>
+<li>Save with proper header format</li>
+<li>Output is ready to use as a startup image or edit in the bitmap editor</li>
+</ol>
+<p>Then you can mount your Jumperless's filesystem as a mass storage device with <code class="language-jython highlight"><span class="n">U</span></code> and drop it into the <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code> folder. </p>
+<h3 id="check-out-the-scripts-folder-in-the-jumperlos-repo-there-are-a-few-other-scripts-related-to-dealing-with-bitmaps">Check out the <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts"><code class="language-jython highlight"><span class="o">/</span><span class="n">scripts</span></code> folder</a> in the <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main">JumperlOS repo</a>, there are a few other scripts related to dealing with bitmaps.</h3>
+<hr />
+<h2 id="using-the-oled-from-micropython">Using the OLED from MicroPython</h2>
+<p>The OLED display has a comprehensive MicroPython API for programmatic control. You can display text with multiple fonts and sizes, show bitmaps, manipulate pixels directly, and even redirect Python's <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code> output to the OLED.</p>
+<h3 id="quick-start">Quick Start</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos="2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># Basic text display</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_connect</span><span class="p">()</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Hello!&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos="8 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="text-sizes-and-scrolling">Text Sizes and Scrolling</h3>
+<p>The OLED supports three text size modes:</p>
+<ul>
+<li><strong>Size 0</strong>: Small scrolling text - perfect for terminal-like output with multiple lines</li>
+<li><strong>Size 1</strong>: Normal centered text</li>
+<li><strong>Size 2</strong>: Large centered text (default)</li>
+</ul>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Set default text size</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_text_size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Small scrolling text</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Display multiple lines</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Line </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="c1"># Switch to large text</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_text_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;BIG TEXT&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="print-redirection-for-debugging">Print Redirection for Debugging</h3>
+<p>One of the most useful features is print redirection - all <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code> statements can automatically appear on both the serial console <strong>and</strong> the OLED:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Enable print copying</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_copy_print</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># These appear on both serial AND OLED</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting test...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Voltage: </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test complete!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="c1"># Disable when done</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_copy_print</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>This is perfect for debugging projects where you don't have easy access to the serial console.</p>
+<h3 id="multiple-fonts">Multiple Fonts</h3>
+<p>Choose from 11 different font families:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># List all available fonts</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">fonts</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_get_fonts</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="nb">print</span><span class="p">(</span><span class="n">fonts</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Set a fun font</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_font</span><span class="p">(</span><span class="s2">&quot;Jokerman&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Fun!&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="c1"># Switch to monospace for code</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_font</span><span class="p">(</span><span class="s2">&quot;Courier New&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Monospace&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="display-bitmaps">Display Bitmaps</h3>
+<p>Show bitmap images stored on the filesystem:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="c1"># One-liner to display a bitmap</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_show_bitmap_file</span><span class="p">(</span><span class="s2">&quot;/images/jogo32h.bin&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span>
+<span class="linenos" data-linenos="6 "></span><span class="c1"># Or load and display separately</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_load_bitmap</span><span class="p">(</span><span class="s2">&quot;/images/logo.bin&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="8 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_display_bitmap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="graphics-and-pixel-control">Graphics and Pixel Control</h3>
+<p>For custom graphics, you can manipulate individual pixels:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Draw a box</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">108</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Top</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Bottom</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">23</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_pixel</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Left</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_pixel</span><span class="p">(</span><span class="mi">107</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># Right</span>
+<span class="linenos" data-linenos="11 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="advanced-direct-framebuffer-access">Advanced: Direct Framebuffer Access</h3>
+<p>For maximum control, you can read and write the entire framebuffer:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Get display dimensions</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="nf nf-JFS">size</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_get_framebuffer_size</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display: </span><span class="si">{</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nf nf-JFS">size</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Capture the screen</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">fb</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_get_framebuffer</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="c1"># Save to file</span>
+<span class="linenos" data-linenos="11 "></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/screen_capture.bin&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="c1"># Restore later</span>
+<span class="linenos" data-linenos="15 "></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/screen_capture.bin&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="n">fb_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">()</span>
+<span class="linenos" data-linenos="17 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_framebuffer</span><span class="p">(</span><span class="n">fb_data</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="complete-api-reference">Complete API Reference</h3>
+<p>For the full API documentation with all functions, parameters, and examples, see:</p>
+<p><strong><a href="../09.5-micropythonAPIreference/#oled-display">MicroPython API Reference - OLED Display Section</a></strong></p>
+<p>The API includes:
+- Text size control (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_text_size</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_text_size</span></code>)
+- Print redirection (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_copy_print</span></code>)
+- Font system (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_fonts</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_font</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_current_font</span></code>)
+- Bitmap functions (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_load_bitmap</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_display_bitmap</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_show_bitmap_file</span></code>)
+- Framebuffer access (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_framebuffer</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_framebuffer</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_framebuffer_size</span></code>)
+- Pixel manipulation (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_pixel</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_pixel</span></code>)</p>
+<h3 id="example-projects">Example Projects</h3>
+<p><strong>Animated Sine Wave:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_get_framebuffer_size</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_clear</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Don&#39;t show() after clear to avoid flashing</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">height</span><span class="o">//</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">))</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">:</span>
+<span class="linenos" data-linenos="12 "></span>            <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Sensor Monitor:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Monitor voltage with print redirection</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_copy_print</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">voltage</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">current</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;V: </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;I: </span><span class="si">{</span><span class="n">current</span><span class="o">*</span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">mA&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></p>
               
             </div>

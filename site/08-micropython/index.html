@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/08-micropython/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/08-micropython/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/08-micropython/">
+    <meta property="og:url" content="https://docs.jumperless.org/08-micropython/">
     <meta property="og:title" content="MicroPython - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/08-micropython/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/08-micropython/">
     <meta name="twitter:title" content="MicroPython - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/08-micropython/">
+    <link rel="canonical" href="https://docs.jumperless.org/08-micropython/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -95,39 +95,31 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">MicroPython</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a>
+    <li class="toctree-l2"><a class="reference internal" href="#now-you-can-live-code-with-viper-ide">Now you can live code with Viper IDE!</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#if-you-write-something-cool-send-it-to-me-and-ill-add-it-to-the-default-examples-ill-put-a-page-on-this-site-soon-where-you-can-share-them">If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jumperlesspy">jumperless.py</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jumperlesspyi">jumperless.pyi</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start-to-do-it-from-the-built-in-repl">Quick Start (to do it from the built-in REPL)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#repl-navigation">REPL Navigation</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#hardware-control-functions">Hardware Control Functions</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#basic-hardware-control">Basic Hardware Control</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#node-connections">Node Connections</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#dac-output-voltage">DAC (Output Voltage)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#adc-measure-voltage">ADC (Measure Voltage)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#gpio-general-purpose-io">GPIO (General Purpose I/O)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#pwm-pulse-width-modulation">PWM (Pulse Width Modulation)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#current-sensing-ina219">Current Sensing (INA219)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#oled-display">OLED Display</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#probe-functions">Probe Functions</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#system-functions">System Functions</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#basic-script-structure">Basic Script Structure</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#loading-and-running-scripts">Loading and Running Scripts</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#method-1-file-manager">Method 1: File Manager</a>
+    <li class="toctree-l3"><a class="reference internal" href="#method-1-recommended-viper-ide">Method 1 (Recommended): Viper IDE</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#method-2-repl-commands">Method 2: REPL Commands</a>
+    <li class="toctree-l3"><a class="reference internal" href="#method-2-file-manager">Method 2: File Manager</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#method-3-repl-commands">Method 3: REPL Commands</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#method-4-direct-execution">Method 4: Direct Execution</a>
     </li>
@@ -147,25 +139,13 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connection-context-switching">Connection Context Switching</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#built-in-examples">Built-in Examples</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#formatted-output-and-custom-types">Formatted Output and Custom Types</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#node-names-and-constants">Node Names and Constants</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#the-entire-output-of-help">The entire output of help()</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#the-entire-output-of-nodes_help">The entire output of nodes_help()</a>
-    </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -173,11 +153,19 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -220,173 +208,35 @@
 7. [Examples and Demos](#examples-and-demos)
 8. [Troubleshooting](#troubleshooting) -->
 
-<h2 id="quick-start">Quick Start</h2>
+<p>If you just want an overview of all the available calls, check out the <a href="../09.5-micropythonAPIreference/"><strong>MicroPython API Reference</strong></a></p>
+<p>For stuff that's not Jumperless-specific, check out the <a href="https://docs.micropython.org/en/latest/index.html">MicroPython Docs</a></p>
+<h2 id="now-you-can-live-code-with-viper-ide">Now you can live code with <a href="https://viper-ide.org/">Viper IDE</a>!</h2>
+<p>Holy shit I should have done this years ago</p>
+<p>Seriously, this is <em>such</em> a better experience than using the onboard text editor and REPL, you should play with it right now</p>
+<p>Go to <a href="https://viper-ide.org/">https://viper-ide.org/</a> and press the connect button.</p>
+<p><img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" /></p>
+<p>Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect</p>
+<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
+<p>Then open some examples (this update should overwrite the examples with the new ones) and hit the Run / Stop button</p>
+<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 14 23 PM" src="https://github.com/user-attachments/assets/0190af73-cd5f-49e9-b378-bb6d1c8a7bb4" /></p>
+<p>Press it again to Stop. If you make changes, hit the green Save button next to it (it takes a second and the script should be stopped.)</p>
+<p><img width="1306" height="1249" alt="Screenshot 2025-12-08 at 6 15 54 PM" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" /></p>
+<h3 id="if-you-write-something-cool-send-it-to-me-and-ill-add-it-to-the-default-examples-ill-put-a-page-on-this-site-soon-where-you-can-share-them">If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)</h3>
+<p>This is using <a href="https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode">MicroPython's built-in Raw REPL</a>, so anything that can interact with that will work here. I've only tested with Viper IDE but I'm pretty sure just about anything else would work.</p>
+<p>There's also <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in ViperIDE.) You can grab them here:</p>
+<h3 id="jumperlesspy"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py">jumperless.py</a></h3>
+<h3 id="jumperlesspyi"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi">jumperless.pyi</a></h3>
+<hr />
+<h2 id="quick-start-to-do-it-from-the-built-in-repl">Quick Start (to do it from the built-in REPL)</h2>
 <!-- ### Starting MicroPython REPL -->
 <p>From the main Jumperless menu, press <code class="language-jython highlight"><span class="n">p</span></code> to enter the MicroPython REPL:</p>
 <p><img alt="Screenshot 2025-07-04 at 7 03 24 PM" src="https://github.com/user-attachments/assets/e7ce0688-5ddf-48da-8560-4a8f6b747c4f" /></p>
 <h2 id="repl-navigation">REPL Navigation</h2>
 <p>Up / Down arrow keys on a blank prompt will scroll through history, any other key will break out of history mode and enter multiline editing. So you can use arrow keys to navigate and edit the script. </p>
+<p>In history mode, the <code class="language-jython highlight"><span class="o">&gt;&gt;&gt;</span></code> prompts will be pink, when you're editing, they'll be blue.</p>
 <h2 id="hardware-control-functions">Hardware Control Functions</h2>
-<p>All Jumperless hardware functions are automatically imported into the global namespace - no prefix needed</p>
-<h2 id="basic-hardware-control">Basic Hardware Control</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Connect nodes 1 and 5</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 3 "></span>
-<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Set GPIO pin 1 to HIGH</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 6 "></span>
-<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Read ADC channel 0</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Voltage: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">voltage</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;V&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos="10 "></span>
-<span class="linenos" data-linenos="11 "></span><span class="c1"># Set DAC channel 0 to 3.3V</span>
-<span class="linenos" data-linenos="12 "></span><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="node-connections">Node Connections</h2>
-<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Connect two nodes</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>                    <span class="c1"># Connect using numbers</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;d13&quot;</span><span class="p">,</span> <span class="s2">&quot;tOp_rAiL&quot;</span><span class="p">)</span>       <span class="c1"># Connect using node names (case insensitive when in quotes)</span>
-<span class="linenos" data-linenos=" 4 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">BOTTOM_RAIL</span><span class="p">)</span>   <span class="c1"># Connect using DEFINEs (all caps) Note: This will actually just be ignored by the Jumperless due to Do Not Intersect rules</span>
-<span class="linenos" data-linenos=" 5 "></span>
-<span class="linenos" data-linenos=" 6 "></span><span class="c1"># Disconnect bridges</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Disconnect everything connected to a node</span>
-<span class="linenos" data-linenos="10 "></span><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos" data-linenos="11 "></span>
-<span class="linenos" data-linenos="12 "></span><span class="c1"># Check if nodes are connected</span>
-<span class="linenos" data-linenos="13 "></span><span class="k">if</span> <span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-<span class="linenos" data-linenos="14 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nodes 1 and 5 are connected&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos="15 "></span>
-<span class="linenos" data-linenos="16 "></span><span class="c1"># Clear all connections</span>
-<span class="linenos" data-linenos="17 "></span><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span>
-</code></pre></div>
-<img alt="Screenshot 2025-07-04 at 7 22 35 PM" src="https://github.com/user-attachments/assets/e08d9b83-aa4d-4e1a-873c-7f6c46ddb5bc" /></p>
-<h2 id="dac-output-voltage">DAC (Output Voltage)</h2>
-<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Set DAC voltage (-8.0V to 8.0V)</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>    <span class="c1"># Set DAC channel 0 to 2.5V</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">)</span>   <span class="c1"># Set DAC channel 1 to 1.65V</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="c1"># Read current DAC voltage</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">dac_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DAC 0: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">voltage</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;V&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Available channels:</span>
-<span class="linenos" data-linenos="10 "></span><span class="c1"># 0 = DAC0, 1 = DAC1, 2 = TOP_RAIL, 3 = BOTTOM_RAIL</span>
-<span class="linenos" data-linenos="11 "></span><span class="c1"># Can also use node names: DAC0, DAC1, TOP_RAIL, BOTTOM_RAIL</span>
-</code></pre></div>
-<img alt="Screenshot 2025-07-04 at 7 17 36 PM" src="https://github.com/user-attachments/assets/f68b3bf2-3420-4d51-800a-1e8e9e804261" /></p>
-<h2 id="adc-measure-voltage">ADC (Measure Voltage)</h2>
-<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Read analog voltage (0-8V range for channels 0-3, 0-5V for channel 4)</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># Read ADC channel 0</span>
-<span class="linenos" data-linenos="3 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># Read ADC channel 1</span>
-<span class="linenos" data-linenos="4 "></span>
-<span class="linenos" data-linenos="5 "></span><span class="c1"># Available channels: 0, 1, 2, 3, 4</span>
-</code></pre></div>
-<img alt="Screenshot 2025-07-04 at 7 22 01 PM" src="https://github.com/user-attachments/assets/79cf16e8-8a79-4f11-9cf4-52456735b0dc" /></p>
-<h2 id="gpio-general-purpose-io">GPIO (General Purpose I/O)</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Set GPIO direction</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>   <span class="c1"># Set GPIO 1 as OUTPUT</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># Set GPIO 2 as INPUT</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="c1"># Set GPIO state</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>       <span class="c1"># Set GPIO 1 HIGH</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>      <span class="c1"># Set GPIO 1 LOW</span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Read GPIO state (returns &quot;HIGH&quot; or &quot;LOW&quot;)</span>
-<span class="linenos" data-linenos="10 "></span><span class="n">state</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>     <span class="c1"># Returns formatted string</span>
-<span class="linenos" data-linenos="11 "></span>
-<span class="linenos" data-linenos="12 "></span><span class="c1"># Configure pull resistors</span>
-<span class="linenos" data-linenos="13 "></span><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># Enable pull-up</span>
-<span class="linenos" data-linenos="14 "></span><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># Enable pull-down</span>
-<span class="linenos" data-linenos="15 "></span><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>     <span class="c1"># No pull resistor</span>
-<span class="linenos" data-linenos="16 "></span>
-<span class="linenos" data-linenos="17 "></span><span class="c1"># Read GPIO configuration (returns formatted strings)</span>
-<span class="linenos" data-linenos="18 "></span><span class="n">direction</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># Returns &quot;INPUT&quot; or &quot;OUTPUT&quot;</span>
-<span class="linenos" data-linenos="19 "></span><span class="n">pull</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get_pull</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>        <span class="c1"># Returns &quot;PULLUP&quot;, &quot;PULLDOWN&quot;, or &quot;NONE&quot;</span>
-<span class="linenos" data-linenos="20 "></span>
-<span class="linenos" data-linenos="21 "></span><span class="c1"># Available GPIO pins: 1-8 (GPIO 1-8), 9 (UART Tx), 10 (UART Rx)</span>
-</code></pre></div>
-<h2 id="pwm-pulse-width-modulation">PWM (Pulse Width Modulation)</h2>
-<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Hardware PWM: High frequency (10Hz to 62.5MHz)</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>       <span class="c1"># 1kHz, 50% duty cycle on GPIO_1</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>     <span class="c1"># 50kHz, 25% duty cycle on GPIO_2</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="c1"># Slow PWM: Low frequency (0.001Hz to 10Hz)</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>       <span class="c1"># 0.1Hz (10 second period), 75% duty cycle</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>      <span class="c1"># 0.001Hz (1000 second period), 50% duty cycle</span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Change PWM parameters</span>
-<span class="linenos" data-linenos="10 "></span><span class="nf nf-Jumperless">pwm_set_frequency</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>     <span class="c1"># Change to 2kHz</span>
-<span class="linenos" data-linenos="11 "></span><span class="nf nf-Jumperless">pwm_set_duty_cycle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>    <span class="c1"># Change to 25% duty cycle</span>
-<span class="linenos" data-linenos="12 "></span>
-<span class="linenos" data-linenos="13 "></span><span class="c1"># Stop PWM</span>
-<span class="linenos" data-linenos="14 "></span><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># Stop PWM on GPIO_1</span>
-<span class="linenos" data-linenos="15 "></span>
-<span class="linenos" data-linenos="16 "></span><span class="c1"># Available GPIO pins: 1-8 (GPIO 1-8 only)</span>
-<span class="linenos" data-linenos="17 "></span><span class="c1"># Automatic mode selection: Hardware PWM for 10Hz+, Slow PWM for &lt;10Hz</span>
-</code></pre></div>
-<img alt="Screenshot 2025-07-04 at 7 22 35 PM" src="https://github.com/user-attachments/assets/5b5f884f-f459-4a31-9f21-89d084594f97" />
-<img alt="Screenshot 2025-07-04 at 7 31 19 PM" src="https://github.com/user-attachments/assets/c7bdb245-59a4-46db-9c52-fcc43c1f359e" /></p>
-<h2 id="current-sensing-ina219">Current Sensing (INA219)</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Read current sensor data</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">current</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># Current in A</span>
-<span class="linenos" data-linenos="3 "></span><span class="n">current</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>   <span class="c1"># Current in mA</span>
-<span class="linenos" data-linenos="4 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_voltage</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># Shunt voltage in V</span>
-<span class="linenos" data-linenos="5 "></span><span class="n">bus_voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_bus_voltage</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Bus voltage in V</span>
-<span class="linenos" data-linenos="6 "></span><span class="n">power</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>              <span class="c1"># Power in W</span>
-<span class="linenos" data-linenos="7 "></span>
-<span class="linenos" data-linenos="8 "></span><span class="c1"># Available sensors: 0, 1    # INA 1 is hardwired to the output of DAC 0 because it&#39;s meant for measuring resistance</span>
-</code></pre></div>
-<h2 id="oled-display">OLED Display</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Initialize OLED</span>
-<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">oled_connect</span><span class="p">()</span>                 <span class="c1"># Connect to OLED</span>
-<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">)</span>     <span class="c1"># Display text</span>
-<span class="linenos" data-linenos="4 "></span>
-<span class="linenos" data-linenos="5 "></span><span class="c1"># Clear display</span>
-<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
-<span class="linenos" data-linenos="7 "></span>
-<span class="linenos" data-linenos="8 "></span><span class="c1"># Disconnect</span>
-<span class="linenos" data-linenos="9 "></span><span class="nf nf-Jumperless">oled_disconnect</span><span class="p">()</span>
-</code></pre></div>
-<h2 id="probe-functions">Probe Functions</h2>
-<p><div class="language-jumperless highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Read probe pad (blocking)</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="n">pad</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span>       <span class="c1"># Returns ProbePad object only when a pad is touched</span>
-<span class="linenos" data-linenos=" 3 "></span>
-<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Read probe pad (non-blocking)</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="n">pad</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span>    <span class="c1"># Returns ProbePad object (which can be NO_PAD)</span>
-<span class="linenos" data-linenos=" 6 "></span>
-<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Button functions (probe button)</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_button</span><span class="p">()</span>           <span class="c1"># Read probe button state (blocking)</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_button</span><span class="p">()</span>             <span class="c1"># Alias</span>
-<span class="linenos" data-linenos="10 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">button_read</span><span class="p">()</span>            <span class="c1"># Another alias</span>
-<span class="linenos" data-linenos="11 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">read_button</span><span class="p">()</span>            <span class="c1"># Another alias</span>
-<span class="linenos" data-linenos="12 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">check_button</span><span class="p">()</span>           <span class="c1"># Non-blocking check</span>
-<span class="linenos" data-linenos="13 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">button_check</span><span class="p">()</span>           <span class="c1"># Alias</span>
-<span class="linenos" data-linenos="14 "></span>
-<span class="linenos" data-linenos="15 "></span><span class="c1"># Button with parameters</span>
-<span class="linenos" data-linenos="16 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_button</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>       <span class="c1"># Blocking</span>
-<span class="linenos" data-linenos="17 "></span><span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_button</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>      <span class="c1"># Non-blocking</span>
-</code></pre></div>
-<img alt="Screenshot 2025-07-04 at 7 37 54 PM" src="https://github.com/user-attachments/assets/4d0b2e29-e33d-4e1c-b339-336d1d686319" /></p>
-<h2 id="system-functions">System Functions</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Reset Arduino</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 3 "></span>
-<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Run built-in apps</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s2">&quot;I2C Scan&quot;</span><span class="p">)</span>        <span class="c1"># Run I2C scanner</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s2">&quot;Bounce Startup&quot;</span><span class="p">)</span>  <span class="c1"># Loop the startup animation</span>
-<span class="linenos" data-linenos=" 7 "></span>
-<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Advanced system control</span>
-<span class="linenos" data-linenos=" 9 "></span><span class="nf nf-Jumperless">pause_core2</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>          <span class="c1"># Pause core2 processing</span>
-<span class="linenos" data-linenos="10 "></span><span class="nf nf-Jumperless">pause_core2</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>         <span class="c1"># Resume core2 processing</span>
-<span class="linenos" data-linenos="11 "></span><span class="nf nf-Jumperless">send_raw</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># Send raw data to core2 (chip A, pos 1,2, set)</span>
-<span class="linenos" data-linenos="12 "></span>
-<span class="linenos" data-linenos="13 "></span><span class="c1"># Show help</span>
-<span class="linenos" data-linenos="14 "></span><span class="nf nf-Jumperless">help</span><span class="p">()</span>                <span class="c1"># Display all available functions</span>
-<span class="linenos" data-linenos="15 "></span><span class="nf nf-Jumperless">nodes_help</span><span class="p">()</span>          <span class="c1"># Show all available node names and aliases</span>
-</code></pre></div>
-<p>The <a href="#the-entire-output-of-help">help()</a> and <a href="#the-entire-output-of-nodes_help">nodes_help()</a> functions will list all the available commands (except for the new ones I forget to update)</p>
+<p>All Jumperless hardware functions are automatically imported into the global namespace - no prefix is actually necessary, but it's probably good to use <code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span></code> when using Viper IDE or something so it doesn't complain about not undefined names.</p>
+<hr />
 <h2 id="basic-script-structure">Basic Script Structure</h2>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos=" 2 "></span><span class="sd">My Jumperless Script</span>
@@ -410,8 +260,8 @@
 <span class="linenos" data-linenos="20 "></span>    <span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 <span class="linenos" data-linenos="21 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="linenos" data-linenos="22 "></span>
-<span class="linenos" data-linenos="23 "></span>    <span class="c1"># Read input</span>
-<span class="linenos" data-linenos="24 "></span>    <span class="k">if</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;HIGH&quot;</span><span class="p">:</span>
+<span class="linenos" data-linenos="23 "></span>    <span class="c1"># Read input (gpio_get returns truthy for HIGH, falsy for LOW)</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="k">if</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
 <span class="linenos" data-linenos="25 "></span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Button pressed!&quot;</span><span class="p">)</span>
 <span class="linenos" data-linenos="26 "></span>
 <span class="linenos" data-linenos="27 "></span><span class="c1"># Cleanup</span>
@@ -419,13 +269,15 @@
 <span class="linenos" data-linenos="29 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Script complete!&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="loading-and-running-scripts">Loading and Running Scripts</h2>
-<h3 id="method-1-file-manager">Method 1: File Manager</h3>
-<p>From the REPL, type <code class="language-jython highlight"><span class="n">files</span></code> to open the file manager:</p>
+<h3 id="method-1-recommended-viper-ide">Method 1 (Recommended): <a href="https://viper-ide.blackhart.dev/">Viper IDE</a></h3>
+<p>See <a href="#now-you-can-live-code-with-viper-ide">above</a> for instructions. It's at the top of the page for a reason, it's awesome.</p>
+<h3 id="method-2-file-manager">Method 2: File Manager</h3>
+<p>From the REPL (enter <code class="language-jython highlight"><span class="n">p</span></code> in the main menu), then type <code class="language-jython highlight"><span class="n">files</span></code> to open the file manager:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="n">files</span>
 </code></pre></div>
 <p>Navigate to your script and press Enter to load it for editing, then press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to load it into the REPL for execution.</p>
 <p><strong>Note:</strong> The standard Python <code class="language-jython highlight"><span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span></code> method is not supported in the Jumperless MicroPython environment. Always use the file manager and <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to run scripts.</p>
-<h3 id="method-2-repl-commands">Method 2: REPL Commands</h3>
+<h3 id="method-3-repl-commands">Method 3: REPL Commands</h3>
 <p>From the MicroPython REPL, you can use the following commands to manage scripts:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Load script into editor for modification</span>
 <span class="linenos" data-linenos="2 "></span><span class="n">load</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span>
@@ -445,8 +297,8 @@
 <h3 id="repl-commands">REPL Commands</h3>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">CTRL</span> <span class="o">+</span> <span class="n">q</span>           <span class="o">-</span> <span class="n">Exit</span> <span class="n">REPL</span>
 <span class="linenos" data-linenos="2 "></span><span class="n">history</span>            <span class="o">-</span> <span class="n">Show</span> <span class="n">command</span> <span class="n">history</span> <span class="ow">and</span> <span class="n">saved</span> <span class="n">scripts</span>
-<span class="linenos" data-linenos="3 "></span><span class="n">save</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span>        <span class="o">-</span> <span class="n">Save</span> <span class="n">last</span> <span class="n">executed</span> <span class="n">script</span>
-<span class="linenos" data-linenos="4 "></span><span class="n">load</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>        <span class="o">-</span> <span class="n">Load</span> <span class="n">script</span> <span class="n">by</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">number</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">save</span> <span class="p">[</span><span class="nf nf-JFS">name</span><span class="p">]</span>        <span class="o">-</span> <span class="n">Save</span> <span class="n">last</span> <span class="n">executed</span> <span class="n">script</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">load</span> <span class="o">&lt;</span><span class="nf nf-JFS">name</span><span class="o">&gt;</span>        <span class="o">-</span> <span class="n">Load</span> <span class="n">script</span> <span class="n">by</span> <span class="nf nf-JFS">name</span> <span class="ow">or</span> <span class="n">number</span>
 <span class="linenos" data-linenos="5 "></span><span class="n">files</span>              <span class="o">-</span> <span class="n">Open</span> <span class="n">file</span> <span class="n">manager</span>
 <span class="linenos" data-linenos="6 "></span><span class="n">new</span>                <span class="o">-</span> <span class="n">Create</span> <span class="n">new</span> <span class="n">script</span> <span class="k">with</span> <span class="n">eKilo</span> <span class="n">editor</span>
 <span class="linenos" data-linenos="7 "></span><span class="n">helpl</span>              <span class="o">-</span> <span class="n">Show</span> <span class="n">REPL</span> <span class="nf nf-Jumperless">help</span>
@@ -477,6 +329,17 @@
 <li>Commands are automatically saved</li>
 <li>Type <code class="language-jython highlight"><span class="n">history</span></code> to see all saved scripts</li>
 </ul>
+<h2 id="connection-context-switching">Connection Context Switching</h2>
+<p>The MicroPython REPL now supports <strong>connection contexts</strong> that determine how connections persist:</p>
+<ul>
+<li><strong><code class="language-jython highlight"><span class="k">global</span></code> context</strong>: Changes persist to global state - connections remain after exiting Python</li>
+<li><strong><code class="language-jython highlight"><span class="n">python</span></code> context</strong>: Connections are restored to how they were when exiting REPL (saved to <code class="language-jython highlight"><span class="n">slots</span><span class="o">/</span><span class="n">slotPython</span><span class="o">.</span><span class="n">yaml</span></code>)</li>
+</ul>
+<p><strong>To toggle contexts:</strong> Type <code class="language-jython highlight"><span class="n">context</span></code> in the REPL</p>
+<p><strong>How it works:</strong>
+- In <code class="language-jython highlight"><span class="k">global</span></code> mode: Any connections you make become permanent, just like using the normal command interface
+- In <code class="language-jython highlight"><span class="n">python</span></code> mode: The connection state when you entered the REPL is saved, and restored when you exit
+- The current context is displayed in the REPL prompt</p>
 <h2 id="built-in-examples">Built-in Examples</h2>
 <p>The system includes several example scripts. To run an example:</p>
 <ol>
@@ -485,339 +348,56 @@
 <li>Select the desired script and press Enter to edit/view it.</li>
 <li>Press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to load it into the REPL for execution.</li>
 </ol>
-<p>Example scripts include:
-- 01_dac_basics.py (DAC basics - voltage control)
-- 02_adc_basics.py (ADC basics - voltage reading)
-- 03_gpio_basics.py (GPIO basics - digital I/O)
-- 04_node_connections.py (Node connections)</p>
+<p>Example scripts include:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">dac_basics</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">node_connections</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">led_brightness_control</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">stylophone</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">uart_basics</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">uart_loopback</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">interaction_demo</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">test_neopixel</span><span class="o">.</span><span class="n">py</span></code></li>
+<li><code class="language-jython highlight"><span class="n">fake_gpio</span><span class="o">.</span><span class="n">py</span></code></li>
+</ul>
 <p><strong>REPL not responding:</strong>
 - Press Ctrl+Q to force quit
 - Unplug / replug your Jumperless (don't worry, almost everything is persistent)</p>
 <h2 id="formatted-output-and-custom-types">Formatted Output and Custom Types</h2>
-<p>The Jumperless module provides formatted output for better readability:</p>
-<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># GPIO state returns formatted strings</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="n">state</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="c1"># Returns &quot;HIGH&quot; or &quot;LOW&quot;</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="n">direction</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># Returns &quot;INPUT&quot; or &quot;OUTPUT&quot;</span>
-<span class="linenos" data-linenos=" 4 "></span><span class="n">pull</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get_pull</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>       <span class="c1"># Returns &quot;PULLUP&quot;, &quot;PULLDOWN&quot;, or &quot;NONE&quot;</span>
+<p>The Jumperless module returns custom types that print nicely but also work in conditionals:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># GPIO functions return custom types that print as readable strings</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">state</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="c1"># Prints &quot;HIGH&quot;, &quot;LOW&quot;, or &quot;FLOATING&quot;</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">direction</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># Prints &quot;INPUT&quot; or &quot;OUTPUT&quot;</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">pull</span> <span class="o">=</span> <span class="nf nf-Jumperless">gpio_get_pull</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>       <span class="c1"># Prints &quot;PULLUP&quot;, &quot;PULLDOWN&quot;, or &quot;NONE&quot;</span>
 <span class="linenos" data-linenos=" 5 "></span>
-<span class="linenos" data-linenos=" 6 "></span><span class="c1"># Connection status returns formatted strings</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="n">connected</span> <span class="o">=</span> <span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># Returns &quot;CONNECTED&quot; (truthy) or &quot;DISCONNECTED&quot; (falsey)</span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Voltage and current readings are automatically formatted</span>
-<span class="linenos" data-linenos="10 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># Returns float (e.g., 3.300)</span>
-<span class="linenos" data-linenos="11 "></span><span class="n">current</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Returns float in A (e.g., 0.0123)</span>
-<span class="linenos" data-linenos="12 "></span><span class="n">power</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># Returns float in W (e.g., 0.4567)</span>
-<span class="linenos" data-linenos="13 "></span>
-<span class="linenos" data-linenos="14 "></span><span class="c1"># All functions work with both numbers and string aliases</span>
-<span class="linenos" data-linenos="15 "></span><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="s2">&quot;GPIO_1&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Same as gpio_set_dir(1, True)</span>
-<span class="linenos" data-linenos="16 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">,</span> <span class="s2">&quot;GPIO_1&quot;</span><span class="p">)</span> <span class="c1"># Same as connect(101, 131)</span>
-</code></pre></div>
-<img alt="Screenshot 2025-07-04 at 8 16 04 PM" src="https://github.com/user-attachments/assets/4ae5e7e2-845a-4e6e-bbd9-5c328624cfe9" /></p>
-<h2 id="node-names-and-constants">Node Names and Constants</h2>
-<p>The Jumperless module provides extensive node name support with multiple aliases for each node:</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Power rails (multiple aliases supported)</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="no no-Jumperless">TOP_RAIL</span> <span class="o">=</span> <span class="mi">101</span>        <span class="c1"># Also: TOPRAIL, T_R, TOP_R</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="no no-Jumperless">BOTTOM_RAIL</span> <span class="o">=</span> <span class="mi">102</span>     <span class="c1"># Also: BOT_RAIL, BOTTOMRAIL, BOTRAIL, B_R, BOT_R</span>
-<span class="linenos" data-linenos=" 4 "></span><span class="n">SUPPLY_3V3</span> <span class="o">=</span> <span class="mi">103</span>      <span class="c1"># Also: 3V3, 3.3V</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="n">SUPPLY_5V</span> <span class="o">=</span> <span class="mi">105</span>       <span class="c1"># Also: 5V, +5V</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="n">SUPPLY_8V_P</span> <span class="o">=</span> <span class="mi">120</span>     <span class="c1"># Also: 8V_P, 8V_POS</span>
-<span class="linenos" data-linenos=" 7 "></span><span class="n">SUPPLY_8V_N</span> <span class="o">=</span> <span class="mi">121</span>     <span class="c1"># Also: 8V_N, 8V_NEG</span>
-<span class="linenos" data-linenos=" 8 "></span>
-<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Ground connections</span>
-<span class="linenos" data-linenos="10 "></span><span class="no no-Jumperless">GND</span> <span class="o">=</span> <span class="mi">100</span>             <span class="c1"># Also: GROUND</span>
-<span class="linenos" data-linenos="11 "></span><span class="n">TOP_RAIL_GND</span> <span class="o">=</span> <span class="mi">104</span>    <span class="c1"># Also: TOP_GND (not actually routable but included for PADs)</span>
-<span class="linenos" data-linenos="12 "></span><span class="n">BOTTOM_RAIL_GND</span> <span class="o">=</span> <span class="mi">126</span> <span class="c1"># Also: BOT_GND, BOTTOM_GND (not actually routable but included for PADs)</span>
-<span class="linenos" data-linenos="13 "></span>
-<span class="linenos" data-linenos="14 "></span><span class="c1"># DAC outputs</span>
-<span class="linenos" data-linenos="15 "></span><span class="no no-Jumperless">DAC0</span> <span class="o">=</span> <span class="mi">106</span>            <span class="c1"># Also: DAC_0, DAC0_5V</span>
-<span class="linenos" data-linenos="16 "></span><span class="no no-Jumperless">DAC1</span> <span class="o">=</span> <span class="mi">107</span>            <span class="c1"># Also: DAC_1, DAC1_8V</span>
-<span class="linenos" data-linenos="17 "></span>
-<span class="linenos" data-linenos="18 "></span><span class="c1"># ADC inputs</span>
-<span class="linenos" data-linenos="19 "></span><span class="no no-Jumperless">ADC0</span> <span class="o">=</span> <span class="mi">110</span>            <span class="c1"># Also: ADC_0, ADC0_8V</span>
-<span class="linenos" data-linenos="20 "></span><span class="no no-Jumperless">ADC1</span> <span class="o">=</span> <span class="mi">111</span>            <span class="c1"># Also: ADC_1, ADC1_8V</span>
-<span class="linenos" data-linenos="21 "></span><span class="no no-Jumperless">ADC2</span> <span class="o">=</span> <span class="mi">112</span>            <span class="c1"># Also: ADC_2, ADC2_8V</span>
-<span class="linenos" data-linenos="22 "></span><span class="no no-Jumperless">ADC3</span> <span class="o">=</span> <span class="mi">113</span>            <span class="c1"># Also: ADC_3, ADC3_8V</span>
-<span class="linenos" data-linenos="23 "></span><span class="no no-Jumperless">ADC4</span> <span class="o">=</span> <span class="mi">114</span>            <span class="c1"># Also: ADC_4, ADC4_5V</span>
-<span class="linenos" data-linenos="24 "></span><span class="n">ADC7</span> <span class="o">=</span> <span class="mi">115</span>            <span class="c1"># Also: ADC_7, ADC7_PROBE, PROBE</span>
-<span class="linenos" data-linenos="25 "></span>
-<span class="linenos" data-linenos="26 "></span><span class="c1"># Current sensing</span>
-<span class="linenos" data-linenos="27 "></span><span class="no no-Jumperless">ISENSE_PLUS</span> <span class="o">=</span> <span class="mi">108</span>     <span class="c1"># Also: ISENSE_POS, ISENSE_P, INA_P, I_P, CURRENT_SENSE_PLUS, ISENSE_POSITIVE, I_POS</span>
-<span class="linenos" data-linenos="28 "></span><span class="no no-Jumperless">ISENSE_MINUS</span> <span class="o">=</span> <span class="mi">109</span>    <span class="c1"># Also: ISENSE_NEG, ISENSE_N, INA_N, I_N, CURRENT_SENSE_MINUS, ISENSE_NEGATIVE, I_NEG</span>
-<span class="linenos" data-linenos="29 "></span>
-<span class="linenos" data-linenos="30 "></span><span class="c1"># GPIO pins (multiple naming conventions)</span>
-<span class="linenos" data-linenos="31 "></span><span class="no no-Jumperless">GPIO_1</span> <span class="o">=</span> <span class="mi">131</span>          <span class="c1"># Also: RP_GPIO_1, GPIO1, GP_1, GP1</span>
-<span class="linenos" data-linenos="32 "></span><span class="no no-Jumperless">GPIO_2</span> <span class="o">=</span> <span class="mi">132</span>          <span class="c1"># Also: RP_GPIO_2, GPIO2, GP_2, GP2</span>
-<span class="linenos" data-linenos="33 "></span><span class="no no-Jumperless">GPIO_3</span> <span class="o">=</span> <span class="mi">133</span>          <span class="c1"># Also: RP_GPIO_3, GPIO3, GP_3, GP3</span>
-<span class="linenos" data-linenos="34 "></span><span class="no no-Jumperless">GPIO_4</span> <span class="o">=</span> <span class="mi">134</span>          <span class="c1"># Also: RP_GPIO_4, GPIO4, GP_4, GP4</span>
-<span class="linenos" data-linenos="35 "></span><span class="no no-Jumperless">GPIO_5</span> <span class="o">=</span> <span class="mi">135</span>          <span class="c1"># Also: RP_GPIO_5, GPIO5, GP_5, GP5</span>
-<span class="linenos" data-linenos="36 "></span><span class="no no-Jumperless">GPIO_6</span> <span class="o">=</span> <span class="mi">136</span>          <span class="c1"># Also: RP_GPIO_6, GPIO6, GP_6, GP6</span>
-<span class="linenos" data-linenos="37 "></span><span class="no no-Jumperless">GPIO_7</span> <span class="o">=</span> <span class="mi">137</span>          <span class="c1"># Also: RP_GPIO_7, GPIO7, GP_7, GP7</span>
-<span class="linenos" data-linenos="38 "></span><span class="no no-Jumperless">GPIO_8</span> <span class="o">=</span> <span class="mi">138</span>          <span class="c1"># Also: RP_GPIO_8, GPIO8, GP_8, GP8</span>
-<span class="linenos" data-linenos="39 "></span>
-<span class="linenos" data-linenos="40 "></span><span class="c1"># UART pins</span>
-<span class="linenos" data-linenos="41 "></span><span class="no no-Jumperless">UART_TX</span> <span class="o">=</span> <span class="mi">116</span>         <span class="c1"># Also: RP_UART_TX, TX, RP_GPIO_16</span>
-<span class="linenos" data-linenos="42 "></span><span class="no no-Jumperless">UART_RX</span> <span class="o">=</span> <span class="mi">117</span>         <span class="c1"># Also: RP_UART_RX, RX, RP_GPIO_17</span>
-<span class="linenos" data-linenos="43 "></span>
-<span class="linenos" data-linenos="44 "></span><span class="c1"># Additional RP GPIOs</span>
-<span class="linenos" data-linenos="45 "></span><span class="n">RP_GPIO_18</span> <span class="o">=</span> <span class="mi">118</span>      <span class="c1"># Also: GP_18</span>
-<span class="linenos" data-linenos="46 "></span><span class="n">RP_GPIO_19</span> <span class="o">=</span> <span class="mi">119</span>      <span class="c1"># Also: GP_19</span>
-<span class="linenos" data-linenos="47 "></span>
-<span class="linenos" data-linenos="48 "></span><span class="c1"># Buffer connections</span>
-<span class="linenos" data-linenos="49 "></span><span class="no no-Jumperless">BUFFER_IN</span> <span class="o">=</span> <span class="mi">139</span>       <span class="c1"># Also: ROUTABLE_BUFFER_IN, BUF_IN, BUFF_IN, BUFFIN</span>
-<span class="linenos" data-linenos="50 "></span><span class="no no-Jumperless">BUFFER_OUT</span> <span class="o">=</span> <span class="mi">140</span>      <span class="c1"># Also: ROUTABLE_BUFFER_OUT, BUF_OUT, BUFF_OUT, BUFFOUT</span>
-<span class="linenos" data-linenos="51 "></span>
-<span class="linenos" data-linenos="52 "></span><span class="c1"># Arduino Nano pins (extensive support)</span>
-<span class="linenos" data-linenos="53 "></span><span class="no no-Jumperless">D13</span> <span class="o">=</span> <span class="mi">83</span>              <span class="c1"># Also: NANO_D13</span>
-<span class="linenos" data-linenos="54 "></span><span class="no no-Jumperless">D12</span> <span class="o">=</span> <span class="mi">82</span>              <span class="c1"># Also: NANO_D12</span>
-<span class="linenos" data-linenos="55 "></span><span class="no no-Jumperless">D11</span> <span class="o">=</span> <span class="mi">81</span>              <span class="c1"># Also: NANO_D11</span>
-<span class="linenos" data-linenos="56 "></span><span class="no no-Jumperless">D10</span> <span class="o">=</span> <span class="mi">80</span>              <span class="c1"># Also: NANO_D10</span>
-<span class="linenos" data-linenos="57 "></span><span class="no no-Jumperless">D9</span> <span class="o">=</span> <span class="mi">79</span>               <span class="c1"># Also: NANO_D9</span>
-<span class="linenos" data-linenos="58 "></span><span class="no no-Jumperless">D8</span> <span class="o">=</span> <span class="mi">78</span>               <span class="c1"># Also: NANO_D8</span>
-<span class="linenos" data-linenos="59 "></span><span class="no no-Jumperless">D7</span> <span class="o">=</span> <span class="mi">77</span>               <span class="c1"># Also: NANO_D7</span>
-<span class="linenos" data-linenos="60 "></span><span class="no no-Jumperless">D6</span> <span class="o">=</span> <span class="mi">76</span>               <span class="c1"># Also: NANO_D6</span>
-<span class="linenos" data-linenos="61 "></span><span class="no no-Jumperless">D5</span> <span class="o">=</span> <span class="mi">75</span>               <span class="c1"># Also: NANO_D5</span>
-<span class="linenos" data-linenos="62 "></span><span class="no no-Jumperless">D4</span> <span class="o">=</span> <span class="mi">74</span>               <span class="c1"># Also: NANO_D4</span>
-<span class="linenos" data-linenos="63 "></span><span class="no no-Jumperless">D3</span> <span class="o">=</span> <span class="mi">73</span>               <span class="c1"># Also: NANO_D3</span>
-<span class="linenos" data-linenos="64 "></span><span class="no no-Jumperless">D2</span> <span class="o">=</span> <span class="mi">72</span>               <span class="c1"># Also: NANO_D2</span>
-<span class="linenos" data-linenos="65 "></span><span class="no no-Jumperless">D1</span> <span class="o">=</span> <span class="mi">71</span>               <span class="c1"># Also: NANO_D1</span>
-<span class="linenos" data-linenos="66 "></span><span class="no no-Jumperless">D0</span> <span class="o">=</span> <span class="mi">70</span>               <span class="c1"># Also: NANO_D0</span>
-<span class="linenos" data-linenos="67 "></span>
-<span class="linenos" data-linenos="68 "></span><span class="c1"># Arduino Nano analog pins</span>
-<span class="linenos" data-linenos="69 "></span><span class="no no-Jumperless">A0</span> <span class="o">=</span> <span class="mi">86</span>               <span class="c1"># Also: NANO_A0</span>
-<span class="linenos" data-linenos="70 "></span><span class="no no-Jumperless">A1</span> <span class="o">=</span> <span class="mi">87</span>               <span class="c1"># Also: NANO_A1</span>
-<span class="linenos" data-linenos="71 "></span><span class="no no-Jumperless">A2</span> <span class="o">=</span> <span class="mi">88</span>               <span class="c1"># Also: NANO_A2</span>
-<span class="linenos" data-linenos="72 "></span><span class="no no-Jumperless">A3</span> <span class="o">=</span> <span class="mi">89</span>               <span class="c1"># Also: NANO_A3</span>
-<span class="linenos" data-linenos="73 "></span><span class="no no-Jumperless">A4</span> <span class="o">=</span> <span class="mi">90</span>               <span class="c1"># Also: NANO_A4</span>
-<span class="linenos" data-linenos="74 "></span><span class="no no-Jumperless">A5</span> <span class="o">=</span> <span class="mi">91</span>               <span class="c1"># Also: NANO_A5</span>
-<span class="linenos" data-linenos="75 "></span><span class="no no-Jumperless">A6</span> <span class="o">=</span> <span class="mi">92</span>               <span class="c1"># Also: NANO_A6</span>
-<span class="linenos" data-linenos="76 "></span><span class="no no-Jumperless">A7</span> <span class="o">=</span> <span class="mi">93</span>               <span class="c1"># Also: NANO_A7</span>
-<span class="linenos" data-linenos="77 "></span>
-<span class="linenos" data-linenos="78 "></span><span class="c1"># Arduino Nano non-routable hardwired connections</span>
-<span class="linenos" data-linenos="79 "></span><span class="n">VIN</span> <span class="o">=</span> <span class="mi">69</span>              <span class="c1"># Unconnected to anything</span>
-<span class="linenos" data-linenos="80 "></span><span class="n">RST0</span> <span class="o">=</span> <span class="mi">94</span>             <span class="c1"># Hardwired to GPIO 18 on the RP2350</span>
-<span class="linenos" data-linenos="81 "></span><span class="n">RST1</span> <span class="o">=</span> <span class="mi">95</span>             <span class="c1"># Hardwired to GPIO 19 on the RP2350</span>
-<span class="linenos" data-linenos="82 "></span><span class="n">N_GND0</span> <span class="o">=</span> <span class="mi">97</span>           <span class="c1"># GND</span>
-<span class="linenos" data-linenos="83 "></span><span class="n">N_GND1</span> <span class="o">=</span> <span class="mi">96</span>           <span class="c1"># GND</span>
-<span class="linenos" data-linenos="84 "></span><span class="n">NANO_5V</span> <span class="o">=</span> <span class="mi">99</span>          <span class="c1"># Hardwired to USB 5V bus (can also be used to power the Jumperless)</span>
-<span class="linenos" data-linenos="85 "></span><span class="n">NANO_3V3</span> <span class="o">=</span> <span class="mi">98</span>         <span class="c1"># Unconnected (without bridging the solder jumper on the back)</span>
-</code></pre></div>
-<h2 id="the-entire-output-of-help">The entire output of help()</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="  1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="nf nf-Jumperless">help</span><span class="p">()</span>
-<span class="linenos" data-linenos="  2 "></span><span class="n">Jumperless</span> <span class="n">Native</span> <span class="n">MicroPython</span> <span class="n">Module</span>
-<span class="linenos" data-linenos="  3 "></span><span class="n">Hardware</span> <span class="n">Control</span> <span class="n">Functions</span> <span class="k">with</span> <span class="n">Formatted</span> <span class="n">Output</span><span class="p">:</span>
-<span class="linenos" data-linenos="  4 "></span><span class="p">(</span><span class="n">GPIO</span> <span class="n">functions</span> <span class="k">return</span> <span class="n">formatted</span> <span class="n">strings</span> <span class="n">like</span> <span class="n">HIGH</span><span class="o">/</span><span class="n">LOW</span><span class="p">,</span> <span class="n">INPUT</span><span class="o">/</span><span class="n">OUTPUT</span><span class="p">,</span> <span class="n">PULLUP</span><span class="o">/</span><span class="no no-Jumperless">NONE</span><span class="p">,</span> <span class="n">CONNECTED</span><span class="o">/</span><span class="n">DISCONNECTED</span><span class="p">)</span>
-<span class="linenos" data-linenos="  5 "></span>
-<span class="linenos" data-linenos="  6 "></span><span class="n">DAC</span> <span class="p">(</span><span class="n">Digital</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">Analog</span> <span class="n">Converter</span><span class="p">):</span>
-<span class="linenos" data-linenos="  7 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span>         <span class="o">-</span> <span class="n">Set</span> <span class="n">DAC</span> <span class="n">output</span> <span class="n">voltage</span>
-<span class="linenos" data-linenos="  8 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">dac_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>                  <span class="o">-</span> <span class="n">Get</span> <span class="n">DAC</span> <span class="n">output</span> <span class="n">voltage</span>
-<span class="linenos" data-linenos="  9 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">set_dac</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span>         <span class="o">-</span> <span class="n">Alias</span> <span class="k">for</span> <span class="nf nf-Jumperless">dac_set</span>
-<span class="linenos" data-linenos=" 10 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">get_dac</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>                  <span class="o">-</span> <span class="n">Alias</span> <span class="k">for</span> <span class="nf nf-Jumperless">dac_get</span>
-<span class="linenos" data-linenos=" 11 "></span>
-<span class="linenos" data-linenos=" 12 "></span>          <span class="n">channel</span><span class="p">:</span> <span class="mi">0</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">BOTTOM_RAIL</span>
-<span class="linenos" data-linenos=" 13 "></span>          <span class="n">channel</span> <span class="mi">0</span><span class="o">/</span><span class="no no-Jumperless">DAC0</span><span class="p">:</span> <span class="n">DAC</span> <span class="mi">0</span>
-<span class="linenos" data-linenos=" 14 "></span>          <span class="n">channel</span> <span class="mi">1</span><span class="o">/</span><span class="no no-Jumperless">DAC1</span><span class="p">:</span> <span class="n">DAC</span> <span class="mi">1</span>
-<span class="linenos" data-linenos=" 15 "></span>          <span class="n">channel</span> <span class="mi">2</span><span class="o">/</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">:</span> <span class="n">top</span> <span class="n">rail</span>
-<span class="linenos" data-linenos=" 16 "></span>          <span class="n">channel</span> <span class="mi">3</span><span class="o">/</span><span class="no no-Jumperless">BOTTOM_RAIL</span><span class="p">:</span> <span class="n">bottom</span> <span class="n">rail</span>
-<span class="linenos" data-linenos=" 17 "></span>            <span class="n">voltage</span><span class="p">:</span> <span class="o">-</span><span class="mf">8.0</span> <span class="n">to</span> <span class="mf">8.0</span><span class="n">V</span>
-<span class="linenos" data-linenos=" 18 "></span>
-<span class="linenos" data-linenos=" 19 "></span><span class="n">ADC</span> <span class="p">(</span><span class="n">Analog</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">Digital</span> <span class="n">Converter</span><span class="p">):</span>
-<span class="linenos" data-linenos=" 20 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>                  <span class="o">-</span> <span class="n">Read</span> <span class="n">ADC</span> <span class="nb">input</span> <span class="n">voltage</span>
-<span class="linenos" data-linenos=" 21 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">get_adc</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>                  <span class="o">-</span> <span class="n">Alias</span> <span class="k">for</span> <span class="nf nf-Jumperless">adc_get</span>
-<span class="linenos" data-linenos=" 22 "></span>
-<span class="linenos" data-linenos=" 23 "></span>                                              <span class="n">channel</span><span class="p">:</span> <span class="mi">0</span><span class="o">-</span><span class="mi">4</span>
-<span class="linenos" data-linenos=" 24 "></span>
-<span class="linenos" data-linenos=" 25 "></span><span class="n">INA</span> <span class="p">(</span><span class="n">Current</span><span class="o">/</span><span class="n">Power</span> <span class="n">Monitor</span><span class="p">):</span>
-<span class="linenos" data-linenos=" 26 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>          <span class="o">-</span> <span class="n">Read</span> <span class="n">current</span> <span class="ow">in</span> <span class="n">amps</span>
-<span class="linenos" data-linenos=" 27 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">ina_get_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>          <span class="o">-</span> <span class="n">Read</span> <span class="n">shunt</span> <span class="n">voltage</span>
-<span class="linenos" data-linenos=" 28 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">ina_get_bus_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>      <span class="o">-</span> <span class="n">Read</span> <span class="n">bus</span> <span class="n">voltage</span>
-<span class="linenos" data-linenos=" 29 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>            <span class="o">-</span> <span class="n">Read</span> <span class="n">power</span> <span class="ow">in</span> <span class="n">watts</span>
-<span class="linenos" data-linenos=" 30 "></span>  <span class="n">Aliases</span><span class="p">:</span> <span class="nf nf-Jumperless">get_current</span><span class="p">,</span> <span class="nf nf-Jumperless">get_voltage</span><span class="p">,</span> <span class="nf nf-Jumperless">get_bus_voltage</span><span class="p">,</span> <span class="nf nf-Jumperless">get_power</span>
-<span class="linenos" data-linenos=" 31 "></span>
-<span class="linenos" data-linenos=" 32 "></span>             <span class="n">sensor</span><span class="p">:</span> <span class="mi">0</span> <span class="ow">or</span> <span class="mi">1</span>
-<span class="linenos" data-linenos=" 33 "></span>
-<span class="linenos" data-linenos=" 34 "></span><span class="n">GPIO</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 35 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>             <span class="o">-</span> <span class="n">Set</span> <span class="n">GPIO</span> <span class="n">pin</span> <span class="n">state</span>
-<span class="linenos" data-linenos=" 36 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>                    <span class="o">-</span> <span class="n">Read</span> <span class="n">GPIO</span> <span class="n">pin</span> <span class="n">state</span>
-<span class="linenos" data-linenos=" 37 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>     <span class="o">-</span> <span class="n">Set</span> <span class="n">GPIO</span> <span class="n">pin</span> <span class="n">direction</span>
-<span class="linenos" data-linenos=" 38 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>                <span class="o">-</span> <span class="n">Get</span> <span class="n">GPIO</span> <span class="n">pin</span> <span class="n">direction</span>
-<span class="linenos" data-linenos=" 39 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">pull</span><span class="p">)</span>         <span class="o">-</span> <span class="n">Set</span> <span class="n">GPIO</span> <span class="n">pull</span><span class="o">-</span><span class="n">up</span><span class="o">/</span><span class="n">down</span>
-<span class="linenos" data-linenos=" 40 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">gpio_get_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>               <span class="o">-</span> <span class="n">Get</span> <span class="n">GPIO</span> <span class="n">pull</span><span class="o">-</span><span class="n">up</span><span class="o">/</span><span class="n">down</span>
-<span class="linenos" data-linenos=" 41 "></span>  <span class="n">Aliases</span><span class="p">:</span> <span class="nf nf-Jumperless">set_gpio</span><span class="p">,</span> <span class="nf nf-Jumperless">get_gpio</span><span class="p">,</span> <span class="nf nf-Jumperless">set_gpio_dir</span><span class="p">,</span> <span class="nf nf-Jumperless">get_gpio_dir</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
-<span class="linenos" data-linenos=" 42 "></span>
-<span class="linenos" data-linenos=" 43 "></span>            <span class="n">pin</span> <span class="mi">1</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span> <span class="n">GPIO</span> <span class="mi">1</span><span class="o">-</span><span class="mi">8</span>
-<span class="linenos" data-linenos=" 44 "></span>            <span class="n">pin</span>   <span class="mi">9</span><span class="p">:</span> <span class="n">UART</span> <span class="n">Tx</span>
-<span class="linenos" data-linenos=" 45 "></span>            <span class="n">pin</span>  <span class="mi">10</span><span class="p">:</span> <span class="n">UART</span> <span class="n">Rx</span>
-<span class="linenos" data-linenos=" 46 "></span>              <span class="n">value</span><span class="p">:</span> <span class="kc">True</span><span class="o">/</span><span class="kc">False</span>   <span class="k">for</span> <span class="n">HIGH</span><span class="o">/</span><span class="n">LOW</span>
-<span class="linenos" data-linenos=" 47 "></span>          <span class="n">direction</span><span class="p">:</span> <span class="kc">True</span><span class="o">/</span><span class="kc">False</span>   <span class="k">for</span> <span class="n">OUTPUT</span><span class="o">/</span><span class="n">INPUT</span>
-<span class="linenos" data-linenos=" 48 "></span>               <span class="n">pull</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">1</span>       <span class="k">for</span> <span class="n">PULL_DOWN</span><span class="o">/</span><span class="no no-Jumperless">NONE</span><span class="o">/</span><span class="n">PULL_UP</span>
-<span class="linenos" data-linenos=" 49 "></span>
-<span class="linenos" data-linenos=" 50 "></span><span class="n">PWM</span> <span class="p">(</span><span class="n">Pulse</span> <span class="n">Width</span> <span class="n">Modulation</span><span class="p">):</span>
-<span class="linenos" data-linenos=" 51 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="p">[</span><span class="n">frequency</span><span class="p">],</span> <span class="p">[</span><span class="n">duty</span><span class="p">])</span>    <span class="o">-</span> <span class="n">Setup</span> <span class="n">PWM</span> <span class="n">on</span> <span class="n">GPIO</span> <span class="n">pin</span>
-<span class="linenos" data-linenos=" 52 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">pwm_set_duty_cycle</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">duty</span><span class="p">)</span>    <span class="o">-</span> <span class="n">Set</span> <span class="n">PWM</span> <span class="n">duty</span> <span class="n">cycle</span>
-<span class="linenos" data-linenos=" 53 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">pwm_set_frequency</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>     <span class="o">-</span> <span class="n">Set</span> <span class="n">PWM</span> <span class="n">frequency</span>
-<span class="linenos" data-linenos=" 54 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>                    <span class="o">-</span> <span class="n">Stop</span> <span class="n">PWM</span> <span class="n">on</span> <span class="n">pin</span>
-<span class="linenos" data-linenos=" 55 "></span>  <span class="n">Aliases</span><span class="p">:</span> <span class="nf nf-Jumperless">set_pwm</span><span class="p">,</span> <span class="nf nf-Jumperless">set_pwm_duty_cycle</span><span class="p">,</span> <span class="nf nf-Jumperless">set_pwm_frequency</span><span class="p">,</span> <span class="nf nf-Jumperless">stop_pwm</span>
-<span class="linenos" data-linenos=" 56 "></span>
-<span class="linenos" data-linenos=" 57 "></span>             <span class="n">pin</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="mi">8</span>       <span class="n">GPIO</span> <span class="n">pins</span> <span class="n">only</span>
-<span class="linenos" data-linenos=" 58 "></span>       <span class="n">frequency</span><span class="p">:</span> <span class="mf">0.001</span><span class="o">-</span><span class="mi">62500000</span> <span class="n">default</span> <span class="mi">1000</span><span class="n">Hz</span>
-<span class="linenos" data-linenos=" 59 "></span>      <span class="n">duty_cycle</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">-</span><span class="mf">1.0</span>   <span class="n">default</span> <span class="mf">0.5</span> <span class="p">(</span><span class="mi">50</span><span class="o">%</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 60 "></span>  <span class="o">**</span><span class="n">Frequency</span> <span class="n">Ranges</span><span class="p">:</span><span class="o">**</span>
-<span class="linenos" data-linenos=" 61 "></span>  <span class="o">-</span> <span class="n">Hardware</span> <span class="n">PWM</span><span class="p">:</span> <span class="mi">10</span><span class="n">Hz</span> <span class="n">to</span> <span class="mf">62.5</span><span class="n">MHz</span> <span class="p">(</span><span class="n">high</span> <span class="n">precision</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 62 "></span>  <span class="o">-</span> <span class="n">Slow</span> <span class="n">PWM</span><span class="p">:</span> <span class="mf">0.001</span><span class="n">Hz</span> <span class="n">to</span> <span class="mi">10</span><span class="n">Hz</span> <span class="p">(</span><span class="n">hardware</span> <span class="n">timer</span> <span class="n">based</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 63 "></span>  <span class="o">-</span> <span class="n">Automatic</span> <span class="n">mode</span> <span class="n">selection</span> <span class="n">based</span> <span class="n">on</span> <span class="n">frequency</span>
-<span class="linenos" data-linenos=" 64 "></span>
-<span class="linenos" data-linenos=" 65 "></span><span class="n">Node</span> <span class="n">Connections</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 66 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>            <span class="o">-</span> <span class="no no-Hardware">Connect</span> <span class="n">two</span> <span class="n">nodes</span>
-<span class="linenos" data-linenos=" 67 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>         <span class="o">-</span> <span class="n">Disconnect</span> <span class="n">nodes</span>
-<span class="linenos" data-linenos=" 68 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>       <span class="o">-</span> <span class="n">Check</span> <span class="k">if</span> <span class="n">nodes</span> <span class="n">are</span> <span class="n">connected</span>
-<span class="linenos" data-linenos=" 69 "></span>
-<span class="linenos" data-linenos=" 70 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span>                    <span class="o">-</span> <span class="n">Clear</span> <span class="nb">all</span> <span class="n">connections</span>
-<span class="linenos" data-linenos=" 71 "></span>         <span class="nb">set</span> <span class="n">node2</span> <span class="n">to</span> <span class="o">-</span><span class="mi">1</span> <span class="n">to</span> <span class="nf nf-Jumperless">disconnect</span> <span class="n">everything</span> <span class="n">connected</span> <span class="n">to</span> <span class="n">node1</span>
-<span class="linenos" data-linenos=" 72 "></span>
-<span class="linenos" data-linenos=" 73 "></span><span class="n">OLED</span> <span class="n">Display</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 74 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>               <span class="o">-</span> <span class="n">Display</span> <span class="n">text</span>
-<span class="linenos" data-linenos=" 75 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>                     <span class="o">-</span> <span class="n">Clear</span> <span class="n">display</span>
-<span class="linenos" data-linenos=" 76 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">oled_connect</span><span class="p">()</span>                   <span class="o">-</span> <span class="no no-Hardware">Connect</span> <span class="n">OLED</span>
-<span class="linenos" data-linenos=" 77 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">oled_disconnect</span><span class="p">()</span>                <span class="o">-</span> <span class="n">Disconnect</span> <span class="n">OLED</span>
-<span class="linenos" data-linenos=" 78 "></span>
-<span class="linenos" data-linenos=" 79 "></span><span class="n">Clickwheel</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 80 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">clickwheel_up</span><span class="p">([</span><span class="n">clicks</span><span class="p">])</span>          <span class="o">-</span> <span class="n">Scroll</span> <span class="n">up</span>
-<span class="linenos" data-linenos=" 81 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">clickwheel_down</span><span class="p">([</span><span class="n">clicks</span><span class="p">])</span>        <span class="o">-</span> <span class="n">Scroll</span> <span class="n">down</span>
-<span class="linenos" data-linenos=" 82 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">clickwheel_press</span><span class="p">()</span>               <span class="o">-</span> <span class="n">Press</span> <span class="n">button</span>
-<span class="linenos" data-linenos=" 83 "></span>           <span class="n">clicks</span><span class="p">:</span> <span class="n">number</span> <span class="n">of</span> <span class="n">steps</span>
-<span class="linenos" data-linenos=" 84 "></span>
-<span class="linenos" data-linenos=" 85 "></span><span class="n">Status</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 86 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span>                  <span class="o">-</span> <span class="n">Print</span> <span class="nb">all</span> <span class="n">bridges</span>
-<span class="linenos" data-linenos=" 87 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">print_paths</span><span class="p">()</span>                    <span class="o">-</span> <span class="n">Print</span> <span class="n">path</span> <span class="n">between</span> <span class="n">nodes</span>
-<span class="linenos" data-linenos=" 88 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">print_crossbars</span><span class="p">()</span>                <span class="o">-</span> <span class="n">Print</span> <span class="n">crossbar</span> <span class="n">array</span>
-<span class="linenos" data-linenos=" 89 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span>                     <span class="o">-</span> <span class="n">Print</span> <span class="n">nets</span>
-<span class="linenos" data-linenos=" 90 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">print_chip_status</span><span class="p">()</span>              <span class="o">-</span> <span class="n">Print</span> <span class="n">chip</span> <span class="n">status</span>
-<span class="linenos" data-linenos=" 91 "></span>
-<span class="linenos" data-linenos=" 92 "></span><span class="n">Probe</span> <span class="n">Functions</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 93 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_read</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span>      <span class="o">-</span> <span class="n">Read</span> <span class="n">probe</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">blocking</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 94 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">read_probe</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span>      <span class="o">-</span> <span class="n">Read</span> <span class="n">probe</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">blocking</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 95 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span>            <span class="o">-</span> <span class="n">Wait</span> <span class="k">for</span> <span class="n">probe</span> <span class="n">touch</span> <span class="p">(</span><span class="n">explicit</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 96 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span>         <span class="o">-</span> <span class="n">Check</span> <span class="n">probe</span> <span class="n">immediately</span> <span class="p">(</span><span class="n">explicit</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 97 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">get_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span>      <span class="o">-</span> <span class="n">Get</span> <span class="n">button</span> <span class="n">state</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">blocking</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 98 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_button</span><span class="p">([</span><span class="n">blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span>    <span class="o">-</span> <span class="n">Get</span> <span class="n">button</span> <span class="n">state</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="n">blocking</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 99 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_button_blocking</span><span class="p">()</span>          <span class="o">-</span> <span class="n">Wait</span> <span class="k">for</span> <span class="n">button</span> <span class="n">press</span> <span class="p">(</span><span class="n">explicit</span><span class="p">)</span>
-<span class="linenos" data-linenos="100 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_button_nonblocking</span><span class="p">()</span>       <span class="o">-</span> <span class="n">Check</span> <span class="n">buttons</span> <span class="n">immediately</span> <span class="p">(</span><span class="n">explicit</span><span class="p">)</span>
-<span class="linenos" data-linenos="101 "></span>  <span class="n">Touch</span> <span class="n">aliases</span><span class="p">:</span> <span class="nf nf-Jumperless">probe_wait</span><span class="p">,</span> <span class="nf nf-Jumperless">wait_probe</span><span class="p">,</span> <span class="nf nf-Jumperless">probe_touch</span><span class="p">,</span> <span class="nf nf-Jumperless">wait_touch</span> <span class="p">(</span><span class="n">always</span> <span class="n">blocking</span><span class="p">)</span>
-<span class="linenos" data-linenos="102 "></span>  <span class="n">Button</span> <span class="n">aliases</span><span class="p">:</span> <span class="nf nf-Jumperless">button_read</span><span class="p">,</span> <span class="nf nf-Jumperless">read_button</span> <span class="p">(</span><span class="n">parameterized</span><span class="p">)</span>
-<span class="linenos" data-linenos="103 "></span>  <span class="n">Non</span><span class="o">-</span><span class="n">blocking</span> <span class="n">only</span><span class="p">:</span> <span class="nf nf-Jumperless">check_button</span><span class="p">,</span> <span class="nf nf-Jumperless">button_check</span>
-<span class="linenos" data-linenos="104 "></span>  <span class="n">Touch</span> <span class="n">returns</span><span class="p">:</span> <span class="n">ProbePad</span> <span class="nb">object</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="no no-Jumperless">D13_PAD</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL_PAD</span><span class="p">,</span> <span class="no no-Jumperless">LOGO_PAD_TOP</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span><span class="p">)</span>
-<span class="linenos" data-linenos="105 "></span>  <span class="n">Button</span> <span class="n">returns</span><span class="p">:</span> <span class="no no-Jumperless">CONNECT</span><span class="p">,</span> <span class="no no-Jumperless">REMOVE</span><span class="p">,</span> <span class="ow">or</span> <span class="no no-Jumperless">NONE</span> <span class="p">(</span><span class="n">front</span><span class="o">=</span><span class="nf nf-Jumperless">connect</span><span class="p">,</span> <span class="n">rear</span><span class="o">=</span><span class="nf nf-JFS">remove</span><span class="p">)</span>
-<span class="linenos" data-linenos="106 "></span>
-<span class="linenos" data-linenos="107 "></span><span class="n">Misc</span><span class="p">:</span>
-<span class="linenos" data-linenos="108 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span>                  <span class="o">-</span> <span class="n">Reset</span> <span class="n">Arduino</span>
-<span class="linenos" data-linenos="109 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">probe_tap</span><span class="p">(</span><span class="nf nf-Jumperless">node</span><span class="p">)</span>                  <span class="o">-</span> <span class="n">Tap</span> <span class="n">probe</span> <span class="n">on</span> <span class="nf nf-Jumperless">node</span> <span class="p">(</span><span class="n">unimplemented</span><span class="p">)</span>
-<span class="linenos" data-linenos="110 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="n">appName</span><span class="p">)</span>                 <span class="o">-</span> <span class="n">Run</span> <span class="n">app</span>
-<span class="linenos" data-linenos="111 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">pause_core2</span><span class="p">(</span><span class="n">pause</span><span class="p">)</span>               <span class="o">-</span> <span class="n">Pause</span><span class="o">/</span><span class="n">resume</span> <span class="n">core2</span> <span class="n">processing</span>
-<span class="linenos" data-linenos="112 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">send_raw</span><span class="p">(</span><span class="n">chip</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">setOrClear</span><span class="p">)</span> <span class="o">-</span> <span class="n">Send</span> <span class="n">raw</span> <span class="n">data</span> <span class="n">to</span> <span class="n">core2</span>
-<span class="linenos" data-linenos="113 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">format_output</span><span class="p">(</span><span class="kc">True</span><span class="o">/</span><span class="kc">False</span><span class="p">)</span>        <span class="o">-</span> <span class="n">Enable</span><span class="o">/</span><span class="n">disable</span> <span class="n">formatted</span> <span class="n">output</span>
-<span class="linenos" data-linenos="114 "></span>
-<span class="linenos" data-linenos="115 "></span><span class="n">Help</span><span class="p">:</span>
-<span class="linenos" data-linenos="116 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">help</span><span class="p">()</span>                           <span class="o">-</span> <span class="n">Display</span> <span class="n">this</span> <span class="nf nf-Jumperless">help</span>
-<span class="linenos" data-linenos="117 "></span>
-<span class="linenos" data-linenos="118 "></span><span class="n">Node</span> <span class="n">Names</span><span class="p">:</span>
-<span class="linenos" data-linenos="119 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">node</span><span class="p">(</span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">)</span>                  <span class="o">-</span> <span class="n">Create</span> <span class="nf nf-Jumperless">node</span> <span class="kn">from</span><span class="w"> </span><span class="nn">string</span> <span class="n">name</span>
-<span class="linenos" data-linenos="120 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="no no-Jumperless">TOP_RAIL</span>                        <span class="o">-</span> <span class="n">Pre</span><span class="o">-</span><span class="n">defined</span> <span class="nf nf-Jumperless">node</span> <span class="n">constant</span>
-<span class="linenos" data-linenos="121 "></span>  <span class="n">jumperless</span><span class="o">.</span><span class="no no-Jumperless">D2</span><span class="p">,</span> <span class="n">jumperless</span><span class="o">.</span><span class="no no-Jumperless">A0</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>         <span class="o">-</span> <span class="n">Arduino</span> <span class="n">pin</span> <span class="n">constants</span>
-<span class="linenos" data-linenos="122 "></span>  <span class="n">For</span> <span class="k">global</span> <span class="n">access</span><span class="p">:</span> <span class="kn">from</span><span class="w"> </span><span class="nn">jumperless_nodes</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="linenos" data-linenos="123 "></span>  <span class="n">Node</span> <span class="n">names</span><span class="p">:</span> <span class="n">All</span> <span class="n">standard</span> <span class="n">names</span> <span class="n">like</span> <span class="s2">&quot;D13&quot;</span><span class="p">,</span> <span class="s2">&quot;A0&quot;</span><span class="p">,</span> <span class="s2">&quot;GPIO_1&quot;</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span>
-<span class="linenos" data-linenos="124 "></span>
-<span class="linenos" data-linenos="125 "></span><span class="n">Examples</span> <span class="p">(</span><span class="nb">all</span> <span class="n">functions</span> <span class="nf nf-JFS">available</span> <span class="n">globally</span><span class="p">):</span>
-<span class="linenos" data-linenos="126 "></span>  <span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">)</span>                     <span class="c1"># Set Top Rail to 3.3V using node</span>
-<span class="linenos" data-linenos="127 "></span>  <span class="nf nf-Jumperless">set_dac</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">)</span>                            <span class="c1"># Same as above using alias</span>
-<span class="linenos" data-linenos="128 "></span>  <span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>                         <span class="c1"># Set DAC0 using node constant</span>
-<span class="linenos" data-linenos="129 "></span>  <span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_adc</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                       <span class="c1"># Read ADC1 using alias</span>
-<span class="linenos" data-linenos="130 "></span>  <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">D13</span><span class="p">)</span>                     <span class="c1"># Connect using constants</span>
-<span class="linenos" data-linenos="131 "></span>  <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>                      <span class="c1"># Connect using strings</span>
-<span class="linenos" data-linenos="132 "></span>  <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>                             <span class="c1"># Connect using numbers</span>
-<span class="linenos" data-linenos="133 "></span>  <span class="n">top_rail</span> <span class="o">=</span> <span class="nf nf-Jumperless">node</span><span class="p">(</span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">)</span>                 <span class="c1"># Create node object</span>
-<span class="linenos" data-linenos="134 "></span>  <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">top_rail</span><span class="p">,</span> <span class="no no-Jumperless">D13</span><span class="p">)</span>                     <span class="c1"># Mix objects and constants</span>
-<span class="linenos" data-linenos="135 "></span>  <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Fuck you!&quot;</span><span class="p">)</span>                    <span class="c1"># Display text</span>
-<span class="linenos" data-linenos="136 "></span>  <span class="n">current</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                   <span class="c1"># Read current using alias</span>
-<span class="linenos" data-linenos="137 "></span>  <span class="nf nf-Jumperless">set_gpio</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>                          <span class="c1"># Set GPIO pin high using alias</span>
-<span class="linenos" data-linenos="138 "></span>  <span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>                         <span class="c1"># Hardware PWM: 1kHz, 50% duty</span>
-<span class="linenos" data-linenos="139 "></span>  <span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>                         <span class="c1"># Slow PWM: 0.1Hz, 25% duty</span>
-<span class="linenos" data-linenos="140 "></span>  <span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>                        <span class="c1"># Ultra-slow PWM: 0.001Hz, 50% duty</span>
-<span class="linenos" data-linenos="141 "></span>  <span class="n">pad</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_read</span><span class="p">()</span>                         <span class="c1"># Wait for probe touch</span>
-<span class="linenos" data-linenos="142 "></span>  <span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="mi">25</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Touched pad 25!&#39;</span><span class="p">)</span>    <span class="c1"># Check specific pad</span>
-<span class="linenos" data-linenos="143 "></span>  <span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="no no-Jumperless">D13_PAD</span><span class="p">:</span> <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">D13</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span>  <span class="c1"># Auto-connect Arduino pin</span>
-<span class="linenos" data-linenos="144 "></span>  <span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="no no-Jumperless">TOP_RAIL_PAD</span><span class="p">:</span> <span class="n">show_voltage</span><span class="p">()</span>     <span class="c1"># Show rail voltage</span>
-<span class="linenos" data-linenos="145 "></span>  <span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="no no-Jumperless">LOGO_PAD_TOP</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logo!&#39;</span><span class="p">)</span>    <span class="c1"># Check logo pad</span>
-<span class="linenos" data-linenos="146 "></span>  <span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_button</span><span class="p">()</span>                      <span class="c1"># Wait for button press (blocking)</span>
-<span class="linenos" data-linenos="147 "></span>  <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="no no-Jumperless">CONNECT_BUTTON</span><span class="p">:</span> <span class="o">...</span>          <span class="c1"># Front button pressed</span>
-<span class="linenos" data-linenos="148 "></span>  <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="no no-Jumperless">REMOVE_BUTTON</span><span class="p">:</span> <span class="o">...</span>           <span class="c1"># Rear button pressed</span>
-<span class="linenos" data-linenos="149 "></span>  <span class="n">button</span> <span class="o">=</span> <span class="nf nf-Jumperless">check_button</span><span class="p">()</span>                   <span class="c1"># Check buttons immediately</span>
-<span class="linenos" data-linenos="150 "></span>  <span class="k">if</span> <span class="n">button</span> <span class="o">==</span> <span class="no no-Jumperless">BUTTON_NONE</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>   <span class="c1"># No button pressed</span>
-<span class="linenos" data-linenos="151 "></span>  <span class="n">pad</span> <span class="o">=</span> <span class="nf nf-Jumperless">wait_touch</span><span class="p">()</span>                        <span class="c1"># Wait for touch</span>
-<span class="linenos" data-linenos="152 "></span>  <span class="n">btn</span> <span class="o">=</span> <span class="nf nf-Jumperless">check_button</span><span class="p">()</span>                      <span class="c1"># Check button immediately</span>
-<span class="linenos" data-linenos="153 "></span>  <span class="k">if</span> <span class="n">pad</span> <span class="o">==</span> <span class="no no-Jumperless">D13_PAD</span> <span class="ow">and</span> <span class="n">btn</span> <span class="o">==</span> <span class="no no-Jumperless">CONNECT_BUTTON</span><span class="p">:</span> <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">D13</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span>
-<span class="linenos" data-linenos="154 "></span>  <span class="nf nf-Jumperless">pause_core2</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>                         <span class="c1"># Pause core2 processing</span>
-<span class="linenos" data-linenos="155 "></span>  <span class="nf nf-Jumperless">send_raw</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                    <span class="c1"># Send raw data to core2</span>
-<span class="linenos" data-linenos="156 "></span>
-<span class="linenos" data-linenos="157 "></span><span class="n">Note</span><span class="p">:</span> <span class="n">All</span> <span class="n">functions</span> <span class="ow">and</span> <span class="n">constants</span> <span class="n">are</span> <span class="nf nf-JFS">available</span> <span class="n">globally</span><span class="err">!</span>
-<span class="linenos" data-linenos="158 "></span><span class="n">No</span> <span class="n">need</span> <span class="k">for</span> <span class="s1">&#39;jumperless.&#39;</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">REPL</span> <span class="ow">or</span> <span class="n">single</span> <span class="n">commands</span><span class="o">.</span>
-<span class="linenos" data-linenos="159 "></span>
-<span class="linenos" data-linenos="160 "></span><span class="o">&gt;&gt;&gt;</span> 
-</code></pre></div>
-<h2 id="the-entire-output-of-nodes_help">The entire output of nodes_help()</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="nf nf-Jumperless">nodes_help</span><span class="p">()</span>
-<span class="linenos" data-linenos=" 2 "></span><span class="n">Jumperless</span> <span class="n">Node</span> <span class="n">Reference</span>
-<span class="linenos" data-linenos=" 3 "></span><span class="o">========================</span>
-<span class="linenos" data-linenos=" 4 "></span>
-<span class="linenos" data-linenos=" 5 "></span><span class="n">NODE</span> <span class="n">TYPES</span><span class="p">:</span>
-<span class="linenos" data-linenos=" 6 "></span>  <span class="n">Numbered</span><span class="p">:</span>     <span class="mi">1</span><span class="o">-</span><span class="mi">60</span> <span class="p">(</span><span class="n">breadboard</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 7 "></span>  <span class="n">Arduino</span><span class="p">:</span>      <span class="no no-Jumperless">D0</span><span class="o">-</span><span class="no no-Jumperless">D13</span><span class="p">,</span> <span class="no no-Jumperless">A0</span><span class="o">-</span><span class="no no-Jumperless">A7</span> <span class="p">(</span><span class="n">nano</span> <span class="n">header</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 8 "></span>  <span class="n">GPIO</span><span class="p">:</span>         <span class="no no-Jumperless">GPIO_1</span><span class="o">-</span><span class="no no-Jumperless">GPIO_8</span> <span class="p">(</span><span class="n">routable</span> <span class="n">GPIO</span><span class="p">)</span>
-<span class="linenos" data-linenos=" 9 "></span>  <span class="n">Power</span><span class="p">:</span>        <span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">BOTTOM_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">GND</span>
-<span class="linenos" data-linenos="10 "></span>  <span class="n">DAC</span><span class="p">:</span>          <span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span> <span class="p">(</span><span class="n">analog</span> <span class="n">outputs</span><span class="p">)</span>
-<span class="linenos" data-linenos="11 "></span>  <span class="n">ADC</span><span class="p">:</span>          <span class="no no-Jumperless">ADC0</span><span class="o">-</span><span class="no no-Jumperless">ADC4</span><span class="p">,</span> <span class="no no-Jumperless">PROBE</span> <span class="p">(</span><span class="n">analog</span> <span class="n">inputs</span><span class="p">)</span>
-<span class="linenos" data-linenos="12 "></span>  <span class="n">Current</span><span class="p">:</span>      <span class="no no-Jumperless">ISENSE_PLUS</span><span class="p">,</span> <span class="no no-Jumperless">ISENSE_MINUS</span>
-<span class="linenos" data-linenos="13 "></span>  <span class="n">UART</span><span class="p">:</span>         <span class="no no-Jumperless">UART_TX</span><span class="p">,</span> <span class="no no-Jumperless">UART_RX</span>
-<span class="linenos" data-linenos="14 "></span>  <span class="n">Buffer</span><span class="p">:</span>       <span class="no no-Jumperless">BUFFER_IN</span><span class="p">,</span> <span class="no no-Jumperless">BUFFER_OUT</span>
-<span class="linenos" data-linenos="15 "></span>
-<span class="linenos" data-linenos="16 "></span><span class="n">THREE</span> <span class="n">WAYS</span> <span class="n">TO</span> <span class="n">USE</span> <span class="n">NODES</span><span class="p">:</span>
-<span class="linenos" data-linenos="17 "></span>
-<span class="linenos" data-linenos="18 "></span><span class="mf">1.</span> <span class="n">NUMBERS</span> <span class="p">(</span><span class="n">direct</span> <span class="n">breadboard</span> <span class="n">holes</span><span class="p">):</span>
-<span class="linenos" data-linenos="19 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>                     <span class="c1"># Connect holes 1 and 30</span>
-<span class="linenos" data-linenos="20 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>                    <span class="c1"># Any number 1-60</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># These types are also truthy/falsy for use in conditionals:</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">if</span> <span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>               <span class="c1"># True if HIGH, False if LOW or FLOATING</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pin is HIGH&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">if</span> <span class="nf nf-Jumperless">gpio_get_dir</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>           <span class="c1"># True if OUTPUT, False if INPUT</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pin is output&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="c1"># Connection status works the same way</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">connected</span> <span class="o">=</span> <span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># Prints &quot;CONNECTED&quot; or &quot;DISCONNECTED&quot;</span>
+<span class="linenos" data-linenos="14 "></span><span class="k">if</span> <span class="n">connected</span><span class="p">:</span>                  <span class="c1"># True if connected, False if not</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nodes are connected&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span><span class="c1"># Voltage and current readings are floats</span>
+<span class="linenos" data-linenos="18 "></span><span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># Returns float (e.g., 3.300)</span>
+<span class="linenos" data-linenos="19 "></span><span class="n">current</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Returns float in A (e.g., 0.0123)</span>
+<span class="linenos" data-linenos="20 "></span><span class="n">power</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># Returns float in W (e.g., 0.4567)</span>
 <span class="linenos" data-linenos="21 "></span>
-<span class="linenos" data-linenos="22 "></span><span class="mf">2.</span> <span class="n">STRINGS</span> <span class="p">(</span><span class="n">case</span><span class="o">-</span><span class="n">insensitive</span> <span class="n">names</span><span class="p">):</span>
-<span class="linenos" data-linenos="23 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;D13&quot;</span><span class="p">,</span> <span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">)</span>         <span class="c1"># Arduino pin to power rail</span>
-<span class="linenos" data-linenos="24 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;gpio_1&quot;</span><span class="p">,</span> <span class="s2">&quot;adc0&quot;</span><span class="p">)</span>          <span class="c1"># GPIO to ADC (case-insensitive)</span>
-<span class="linenos" data-linenos="25 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;15&quot;</span><span class="p">,</span> <span class="s2">&quot;dac1&quot;</span><span class="p">)</span>              <span class="c1"># Mix numbers and names</span>
-<span class="linenos" data-linenos="26 "></span>
-<span class="linenos" data-linenos="27 "></span><span class="mf">3.</span> <span class="n">CONSTANTS</span> <span class="p">(</span><span class="n">pre</span><span class="o">-</span><span class="n">defined</span> <span class="n">objects</span><span class="p">):</span>
-<span class="linenos" data-linenos="28 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="no no-Jumperless">D13</span><span class="p">)</span>            <span class="c1"># Using imported constants</span>
-<span class="linenos" data-linenos="29 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">GPIO_1</span><span class="p">,</span> <span class="no no-Jumperless">A0</span><span class="p">)</span>               <span class="c1"># No quotes needed</span>
-<span class="linenos" data-linenos="30 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>                 <span class="c1"># Mix constants and numbers</span>
-<span class="linenos" data-linenos="31 "></span>
-<span class="linenos" data-linenos="32 "></span><span class="n">MIXED</span> <span class="n">USAGE</span><span class="p">:</span>
-<span class="linenos" data-linenos="33 "></span>   <span class="n">my_pin</span> <span class="o">=</span> <span class="s2">&quot;D13&quot;</span>                    <span class="c1"># Create node object from string</span>
-<span class="linenos" data-linenos="34 "></span>   <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">my_pin</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span>         <span class="c1"># Use node object with constant</span>
-<span class="linenos" data-linenos="35 "></span>   <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="n">my_pin</span><span class="p">)</span>                <span class="c1"># Display shows &#39;D13&#39;</span>
-<span class="linenos" data-linenos="36 "></span>
-<span class="linenos" data-linenos="37 "></span><span class="n">COMMON</span> <span class="n">ALIASES</span> <span class="p">(</span><span class="n">many</span> <span class="n">names</span> <span class="n">work</span> <span class="k">for</span> <span class="n">same</span> <span class="nf nf-Jumperless">node</span><span class="p">):</span>
-<span class="linenos" data-linenos="38 "></span>   <span class="s2">&quot;TOP_RAIL&quot;</span> <span class="o">=</span> <span class="s2">&quot;T_R&quot;</span>
-<span class="linenos" data-linenos="39 "></span>   <span class="s2">&quot;GPIO_1&quot;</span> <span class="o">=</span> <span class="s2">&quot;GPIO1&quot;</span> <span class="o">=</span> <span class="s2">&quot;GP1&quot;</span>
-<span class="linenos" data-linenos="40 "></span>   <span class="s2">&quot;DAC0&quot;</span> <span class="o">=</span> <span class="s2">&quot;DAC_0&quot;</span>
-<span class="linenos" data-linenos="41 "></span>   <span class="s2">&quot;UART_TX&quot;</span> <span class="o">=</span> <span class="s2">&quot;TX&quot;</span>
-<span class="linenos" data-linenos="42 "></span>
-<span class="linenos" data-linenos="43 "></span><span class="n">NOTES</span><span class="p">:</span>
-<span class="linenos" data-linenos="44 "></span>  <span class="o">-</span> <span class="n">String</span> <span class="n">names</span> <span class="n">are</span> <span class="n">case</span><span class="o">-</span><span class="n">insensitive</span><span class="p">:</span> <span class="s2">&quot;d13&quot;</span> <span class="o">=</span> <span class="s2">&quot;D13&quot;</span> <span class="o">=</span> <span class="s2">&quot;nAnO_d13&quot;</span>
-<span class="linenos" data-linenos="45 "></span>  <span class="o">-</span> <span class="n">Constants</span> <span class="n">are</span> <span class="n">case</span><span class="o">-</span><span class="n">sensitive</span><span class="p">:</span> <span class="n">use</span> <span class="no no-Jumperless">D13</span><span class="p">,</span> <span class="ow">not</span> <span class="n">d13</span>
-<span class="linenos" data-linenos="46 "></span>  <span class="o">-</span> <span class="n">All</span> <span class="n">three</span> <span class="n">methods</span> <span class="n">work</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">function</span>
+<span class="linenos" data-linenos="22 "></span><span class="c1"># All functions work with both numbers and string aliases</span>
+<span class="linenos" data-linenos="23 "></span><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="s2">&quot;GPIO_1&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Same as gpio_set_dir(1, True)</span>
+<span class="linenos" data-linenos="24 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">,</span> <span class="s2">&quot;GPIO_1&quot;</span><span class="p">)</span> <span class="c1"># Same as connect(101, 131)</span>
 </code></pre></div>
-<p><img alt="Screenshot 2025-07-04 at 8 27 39 PM" src="https://github.com/user-attachments/assets/8d8dfc16-0dca-4ab8-9bcf-c511415bffc7" /></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../08-file-manager/" class="btn btn-neutral float-left" title="File Manager"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../08.5-jfs/" class="btn btn-neutral float-right" title="JFS (Jumperless FileSystem) Module">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../09.5-micropythonAPIreference/" class="btn btn-neutral float-right" title="MicroPython API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -843,7 +423,7 @@
       <span><a href="../08-file-manager/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../08.5-jfs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../09.5-micropythonAPIreference/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

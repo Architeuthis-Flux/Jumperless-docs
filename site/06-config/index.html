@@ -4,24 +4,24 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/06-config/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/06-config/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jumperless-docs.readthedocs.io/en/latest/06-config/">
+    <meta property="og:url" content="https://docs.jumperless.org/06-config/">
     <meta property="og:title" content="Config File - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
-    <meta property="og:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
     <meta property="og:site_name" content="Jumperless Docs">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://jumperless-docs.readthedocs.io/en/latest/06-config/">
+    <meta name="twitter:url" content="https://docs.jumperless.org/06-config/">
     <meta name="twitter:title" content="Config File - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
-    <meta name="twitter:image" content="https://jumperless-docs.readthedocs.io/en/latest/assets/ExplodraftWords.png">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
     
     <!-- Additional SEO Meta Tags -->
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://jumperless-docs.readthedocs.io/en/latest/06-config/">
+    <link rel="canonical" href="https://docs.jumperless.org/06-config/">
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
@@ -83,9 +83,21 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Config File</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#viewing-configuration">Viewing Configuration</a>
+    <li class="toctree-l2"><a class="reference internal" href="#viewing-configtxt">Viewing Config.txt</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#configuration-help">Configuration Help</a>
+    <li class="toctree-l2"><a class="reference internal" href="#config-help">Config Help</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#state-file">State File</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#states-vs-config">States vs Config</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#state-file-structure">State File Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#source-of-truth">Source of Truth</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#switching-between-saved-circuits-slots">Switching Between Saved Circuits (Slots)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#live-editing-state-files">Live Editing State Files</a>
     </li>
     </ul>
                 </li>
@@ -103,15 +115,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../08.5-jfs/">JFS (Jumperless FileSystem) Module</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09-odds-and-ends/">Odds and Ends</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem) Module</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
@@ -119,7 +131,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -150,117 +162,112 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="config-file">Config File</h1>
-<p>To change any persistent settings, there's a <code class="language-jython highlight"><span class="n">config</span></code> file. You can read it with <code class="language-jython highlight"><span class="o">~</span></code> and edit settings by copying any of those lines, pasting it back, and changing the value to whatever you want it to be.</p>
-<h2 id="viewing-configuration">Viewing Configuration</h2>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="  1 "></span><span class="o">~</span>
-<span class="linenos" data-linenos="  2 "></span>
-<span class="linenos" data-linenos="  3 "></span><span class="n">copy</span> <span class="o">/</span> <span class="n">edit</span> <span class="o">/</span> <span class="n">paste</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">these</span> <span class="n">lines</span> 
-<span class="linenos" data-linenos="  4 "></span><span class="n">into</span> <span class="n">the</span> <span class="n">main</span> <span class="n">menu</span> <span class="n">to</span> <span class="n">change</span> <span class="n">a</span> <span class="n">setting</span>
-<span class="linenos" data-linenos="  5 "></span>
-<span class="linenos" data-linenos="  6 "></span><span class="n">Jumperless</span> <span class="n">Config</span><span class="p">:</span>
-<span class="linenos" data-linenos="  7 "></span>
-<span class="linenos" data-linenos="  8 "></span>
-<span class="linenos" data-linenos="  9 "></span><span class="err">`</span><span class="p">[</span><span class="n">config</span><span class="p">]</span> <span class="n">firmware_version</span> <span class="o">=</span> <span class="mf">5.2.2.0</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 10 "></span>
-<span class="linenos" data-linenos=" 11 "></span><span class="err">`</span><span class="p">[</span><span class="n">hardware</span><span class="p">]</span> <span class="n">generation</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 12 "></span><span class="err">`</span><span class="p">[</span><span class="n">hardware</span><span class="p">]</span> <span class="n">revision</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 13 "></span><span class="err">`</span><span class="p">[</span><span class="n">hardware</span><span class="p">]</span> <span class="n">probe_revision</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 14 "></span>
-<span class="linenos" data-linenos=" 15 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">top_rail</span> <span class="o">=</span> <span class="mf">3.50</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 16 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">bottom_rail</span> <span class="o">=</span> <span class="mf">3.50</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 17 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">dac_0</span> <span class="o">=</span> <span class="mf">3.33</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 18 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">dac_1</span> <span class="o">=</span> <span class="mf">0.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 19 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">set_dacs_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 20 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">set_rails_on_boot</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 21 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">probe_power_dac</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 22 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">limit_max</span> <span class="o">=</span> <span class="mf">8.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 23 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">limit_min</span> <span class="o">=</span> <span class="o">-</span><span class="mf">8.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 24 "></span>
-<span class="linenos" data-linenos=" 25 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">file_parsing</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 26 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">net_manager</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 27 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">nets_to_chips</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 28 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">nets_to_chips_alt</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 29 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">leds</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 30 "></span>
-<span class="linenos" data-linenos=" 31 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">stack_paths</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 32 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">stack_rails</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 33 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">stack_dacs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 34 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">rail_priority</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 35 "></span>
-<span class="linenos" data-linenos=" 36 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">top_rail_zero</span> <span class="o">=</span> <span class="mi">1650</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 37 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">top_rail_spread</span> <span class="o">=</span> <span class="mf">21.50</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 38 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">bottom_rail_zero</span> <span class="o">=</span> <span class="mi">1650</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 39 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">bottom_rail_spread</span> <span class="o">=</span> <span class="mf">21.50</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 40 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_0_zero</span> <span class="o">=</span> <span class="mi">1650</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 41 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_0_spread</span> <span class="o">=</span> <span class="mf">21.50</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 42 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_1_zero</span> <span class="o">=</span> <span class="mi">1650</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 43 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_1_spread</span> <span class="o">=</span> <span class="mf">21.50</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 44 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_0_zero</span> <span class="o">=</span> <span class="mf">9.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 45 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_0_spread</span> <span class="o">=</span> <span class="mf">18.28</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 46 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_1_zero</span> <span class="o">=</span> <span class="mf">9.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 47 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_1_spread</span> <span class="o">=</span> <span class="mf">18.28</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 48 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_2_zero</span> <span class="o">=</span> <span class="mf">9.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 49 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_2_spread</span> <span class="o">=</span> <span class="mf">18.28</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 50 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_3_zero</span> <span class="o">=</span> <span class="mf">9.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 51 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_3_spread</span> <span class="o">=</span> <span class="mf">18.28</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 52 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_4_zero</span> <span class="o">=</span> <span class="mf">0.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 53 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_4_spread</span> <span class="o">=</span> <span class="mf">5.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 54 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_7_zero</span> <span class="o">=</span> <span class="mf">9.00</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 55 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_7_spread</span> <span class="o">=</span> <span class="mf">18.28</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 56 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_max</span> <span class="o">=</span> <span class="mi">4060</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 57 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_min</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 58 "></span>
-<span class="linenos" data-linenos=" 59 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">top_guy</span> <span class="o">=</span> <span class="n">uart_tx</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 60 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">bottom_guy</span> <span class="o">=</span> <span class="n">uart_rx</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 61 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">building_pad_top</span> <span class="o">=</span> <span class="n">off</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 62 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">building_pad_bottom</span> <span class="o">=</span> <span class="n">off</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 63 "></span>
-<span class="linenos" data-linenos=" 64 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">lines_wires</span> <span class="o">=</span> <span class="n">wires</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 65 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">menu_brightness</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 66 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">led_brightness</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 67 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">rail_brightness</span> <span class="o">=</span> <span class="mi">55</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 68 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">special_net_brightness</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 69 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">net_color_mode</span> <span class="o">=</span> <span class="n">rainbow</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 70 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">dump_leds</span> <span class="o">=</span> <span class="p">;</span>
-<span class="linenos" data-linenos=" 71 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">dump_format</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 72 "></span>
-<span class="linenos" data-linenos=" 73 "></span><span class="err">`</span><span class="p">[</span><span class="n">gpio</span><span class="p">]</span> <span class="n">direction</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 74 "></span><span class="err">`</span><span class="p">[</span><span class="n">gpio</span><span class="p">]</span> <span class="n">pulls</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 75 "></span><span class="err">`</span><span class="p">[</span><span class="n">gpio</span><span class="p">]</span> <span class="n">uart_tx_function</span> <span class="o">=</span> <span class="n">uart_tx</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 76 "></span><span class="err">`</span><span class="p">[</span><span class="n">gpio</span><span class="p">]</span> <span class="n">uart_rx_function</span> <span class="o">=</span> <span class="n">uart_rx</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 77 "></span>
-<span class="linenos" data-linenos=" 78 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">function</span> <span class="o">=</span> <span class="n">passthrough</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 79 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">baud_rate</span> <span class="o">=</span> <span class="mi">115200</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 80 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">print_passthrough</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 81 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 82 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 83 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">autoconnect_flashing</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 84 "></span>
-<span class="linenos" data-linenos=" 85 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_2</span><span class="p">]</span> <span class="n">function</span> <span class="o">=</span> <span class="n">off</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 86 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_2</span><span class="p">]</span> <span class="n">baud_rate</span> <span class="o">=</span> <span class="mi">115200</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 87 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_2</span><span class="p">]</span> <span class="n">print_passthrough</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 88 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_2</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 89 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_2</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 90 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_2</span><span class="p">]</span> <span class="n">autoconnect_flashing</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 91 "></span>
-<span class="linenos" data-linenos=" 92 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">enabled</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 93 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">i2c_address</span> <span class="o">=</span> <span class="mh">0x3C</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 94 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 95 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 96 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_pin</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 97 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_pin</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 98 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_sda</span> <span class="o">=</span> <span class="n">GP_7</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 99 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_scl</span> <span class="o">=</span> <span class="n">GP_8</span><span class="p">;</span>
-<span class="linenos" data-linenos="100 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_row</span> <span class="o">=</span> <span class="no no-Jumperless">D2</span><span class="p">;</span>
-<span class="linenos" data-linenos="101 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_row</span> <span class="o">=</span> <span class="no no-Jumperless">D3</span><span class="p">;</span>
-<span class="linenos" data-linenos="102 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos="103 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos="104 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">show_in_terminal</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
-<span class="linenos" data-linenos="105 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">font</span> <span class="o">=</span> <span class="n">jokerman</span><span class="p">;</span>
-<span class="linenos" data-linenos="106 "></span>
-<span class="linenos" data-linenos="107 "></span><span class="n">END</span>
+<p>To change any persistent settings that apply to the Jumperless as a whole, there's a <code class="language-jython highlight"><span class="n">config</span></code> file. You can read it with <code class="language-jython highlight"><span class="o">~</span></code> and edit settings by copying any of those lines, pasting it back, and changing the value to whatever you want it to be. </p>
+<h2 id="viewing-configtxt">Viewing Config.txt</h2>
+<p>You can enter <code class="language-jython highlight"><span class="o">~</span></code> to print the config. </p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="o">~</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">copy</span> <span class="o">/</span> <span class="n">edit</span> <span class="o">/</span> <span class="n">paste</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">these</span> <span class="n">lines</span> 
+<span class="linenos" data-linenos=" 4 "></span><span class="n">into</span> <span class="n">the</span> <span class="n">main</span> <span class="n">menu</span> <span class="n">to</span> <span class="n">change</span> <span class="n">a</span> <span class="n">setting</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">Jumperless</span> <span class="n">Config</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="err">`</span><span class="p">[</span><span class="n">config</span><span class="p">]</span> <span class="n">firmware_version</span> <span class="o">=</span> <span class="mf">5.6.0.0</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="err">`</span><span class="p">[</span><span class="n">hardware</span><span class="p">]</span> <span class="n">generation</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="linenos" data-linenos="11 "></span><span class="err">`</span><span class="p">[</span><span class="n">hardware</span><span class="p">]</span> <span class="n">revision</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="linenos" data-linenos="12 "></span><span class="err">`</span><span class="p">[</span><span class="n">hardware</span><span class="p">]</span> <span class="n">probe_revision</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">set_dacs_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="15 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">set_rails_on_boot</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+<span class="linenos" data-linenos="16 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">probe_power_dac</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos" data-linenos="17 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">limit_max</span> <span class="o">=</span> <span class="mf">8.00</span><span class="p">;</span>
+<span class="linenos" data-linenos="18 "></span><span class="err">`</span><span class="p">[</span><span class="n">dacs</span><span class="p">]</span> <span class="n">limit_min</span> <span class="o">=</span> <span class="o">-</span><span class="mf">8.00</span><span class="p">;</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">file_parsing</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="21 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">net_manager</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="22 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">nets_to_chips</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="23 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">nets_to_chips_alt</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="24 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">leds</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="25 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">logic_analyzer</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+<span class="linenos" data-linenos="26 "></span><span class="err">`</span><span class="p">[</span><span class="n">debug</span><span class="p">]</span> <span class="n">arduino</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos" data-linenos="27 "></span>
+<span class="linenos" data-linenos="28 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">stack_paths</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="linenos" data-linenos="29 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">stack_rails</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="linenos" data-linenos="30 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">stack_dacs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos" data-linenos="31 "></span><span class="err">`</span><span class="p">[</span><span class="n">routing</span><span class="p">]</span> <span class="n">rail_priority</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="32 "></span>
+<span class="linenos" data-linenos="33 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">top_rail_zero</span> <span class="o">=</span> <span class="mi">1626</span><span class="p">;</span>
+<span class="linenos" data-linenos="34 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">top_rail_spread</span> <span class="o">=</span> <span class="mf">19.83</span><span class="p">;</span>
+<span class="linenos" data-linenos="35 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">bottom_rail_zero</span> <span class="o">=</span> <span class="mi">1638</span><span class="p">;</span>
+<span class="linenos" data-linenos="36 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">bottom_rail_spread</span> <span class="o">=</span> <span class="mf">19.64</span><span class="p">;</span>
+<span class="linenos" data-linenos="37 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_0_zero</span> <span class="o">=</span> <span class="mi">1629</span><span class="p">;</span>
+<span class="linenos" data-linenos="38 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_0_spread</span> <span class="o">=</span> <span class="mf">19.90</span><span class="p">;</span>
+<span class="linenos" data-linenos="39 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_1_zero</span> <span class="o">=</span> <span class="mi">1629</span><span class="p">;</span>
+<span class="linenos" data-linenos="40 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">dac_1_spread</span> <span class="o">=</span> <span class="mf">19.53</span><span class="p">;</span>
+<span class="linenos" data-linenos="41 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_0_zero</span> <span class="o">=</span> <span class="mf">8.98</span><span class="p">;</span>
+<span class="linenos" data-linenos="42 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_0_spread</span> <span class="o">=</span> <span class="mf">18.08</span><span class="p">;</span>
+<span class="linenos" data-linenos="43 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_1_zero</span> <span class="o">=</span> <span class="mf">9.01</span><span class="p">;</span>
+<span class="linenos" data-linenos="44 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_1_spread</span> <span class="o">=</span> <span class="mf">18.15</span><span class="p">;</span>
+<span class="linenos" data-linenos="45 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_2_zero</span> <span class="o">=</span> <span class="mf">8.98</span><span class="p">;</span>
+<span class="linenos" data-linenos="46 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_2_spread</span> <span class="o">=</span> <span class="mf">18.06</span><span class="p">;</span>
+<span class="linenos" data-linenos="47 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_3_zero</span> <span class="o">=</span> <span class="mf">8.96</span><span class="p">;</span>
+<span class="linenos" data-linenos="48 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_3_spread</span> <span class="o">=</span> <span class="mf">18.05</span><span class="p">;</span>
+<span class="linenos" data-linenos="49 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_4_zero</span> <span class="o">=</span> <span class="mf">0.00</span><span class="p">;</span>
+<span class="linenos" data-linenos="50 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_4_spread</span> <span class="o">=</span> <span class="mf">4.92</span><span class="p">;</span>
+<span class="linenos" data-linenos="51 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_7_zero</span> <span class="o">=</span> <span class="mf">10.52</span><span class="p">;</span>
+<span class="linenos" data-linenos="52 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">adc_7_spread</span> <span class="o">=</span> <span class="mf">20.66</span><span class="p">;</span>
+<span class="linenos" data-linenos="53 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_max</span> <span class="o">=</span> <span class="mi">4040</span><span class="p">;</span>
+<span class="linenos" data-linenos="54 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_min</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+<span class="linenos" data-linenos="55 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_switch_threshold_high</span> <span class="o">=</span> <span class="mf">0.35</span><span class="p">;</span>
+<span class="linenos" data-linenos="56 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_switch_threshold_low</span> <span class="o">=</span> <span class="mf">0.10</span><span class="p">;</span>
+<span class="linenos" data-linenos="57 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_switch_threshold</span> <span class="o">=</span> <span class="mf">0.40</span><span class="p">;</span>
+<span class="linenos" data-linenos="58 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">measure_mode_output_voltage</span> <span class="o">=</span> <span class="mf">3.30</span><span class="p">;</span>
+<span class="linenos" data-linenos="59 "></span><span class="err">`</span><span class="p">[</span><span class="n">calibration</span><span class="p">]</span> <span class="n">probe_current_zero</span> <span class="o">=</span> <span class="mf">2.72</span><span class="p">;</span>
+<span class="linenos" data-linenos="60 "></span>
+<span class="linenos" data-linenos="61 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">top_guy</span> <span class="o">=</span> <span class="n">uart_tx</span><span class="p">;</span>
+<span class="linenos" data-linenos="62 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">bottom_guy</span> <span class="o">=</span> <span class="n">uart_rx</span><span class="p">;</span>
+<span class="linenos" data-linenos="63 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">building_pad_top</span> <span class="o">=</span> <span class="n">isense_pos</span><span class="p">;</span>
+<span class="linenos" data-linenos="64 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">building_pad_bottom</span> <span class="o">=</span> <span class="n">isense</span><span class="o">-</span><span class="p">;</span>
+<span class="linenos" data-linenos="65 "></span>
+<span class="linenos" data-linenos="66 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">lines_wires</span> <span class="o">=</span> <span class="n">wires</span><span class="p">;</span>
+<span class="linenos" data-linenos="67 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">menu_brightness</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
+<span class="linenos" data-linenos="68 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">led_brightness</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="linenos" data-linenos="69 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">rail_brightness</span> <span class="o">=</span> <span class="mi">55</span><span class="p">;</span>
+<span class="linenos" data-linenos="70 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">special_net_brightness</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="linenos" data-linenos="71 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">net_color_mode</span> <span class="o">=</span> <span class="n">rainbow</span><span class="p">;</span>
+<span class="linenos" data-linenos="72 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">dump_leds</span> <span class="o">=</span> <span class="p">;</span>
+<span class="linenos" data-linenos="73 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">dump_format</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
+<span class="linenos" data-linenos="74 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">terminal_line_buffering</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="linenos" data-linenos="75 "></span>
+<span class="linenos" data-linenos="76 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">function</span> <span class="o">=</span> <span class="n">passthrough</span><span class="p">;</span>
+<span class="linenos" data-linenos="77 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">baud_rate</span> <span class="o">=</span> <span class="mi">115200</span><span class="p">;</span>
+<span class="linenos" data-linenos="78 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">print_passthrough</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="79 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="80 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="81 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">autoconnect_flashing</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+<span class="linenos" data-linenos="82 "></span><span class="err">`</span><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">async_passthrough</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+<span class="linenos" data-linenos="83 "></span>
+<span class="linenos" data-linenos="84 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+<span class="linenos" data-linenos="85 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">i2c_address</span> <span class="o">=</span> <span class="mh">0x3C</span><span class="p">;</span>
+<span class="linenos" data-linenos="86 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+<span class="linenos" data-linenos="87 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+<span class="linenos" data-linenos="88 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connection_type</span> <span class="o">=</span> <span class="n">rp6_rp7</span><span class="p">;</span>
+<span class="linenos" data-linenos="89 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_pin</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="linenos" data-linenos="90 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_pin</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="linenos" data-linenos="91 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_sda</span> <span class="o">=</span> <span class="n">GP_6</span><span class="p">;</span>
+<span class="linenos" data-linenos="92 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_scl</span> <span class="o">=</span> <span class="n">GP_7</span><span class="p">;</span>
+<span class="linenos" data-linenos="93 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_row</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="94 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_row</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="linenos" data-linenos="95 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="96 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="97 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">show_in_terminal</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="linenos" data-linenos="98 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">font</span> <span class="o">=</span> <span class="n">Eurostl</span><span class="p">;</span>
+<span class="linenos" data-linenos="99 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_message</span> <span class="o">=</span> <span class="n">images</span><span class="o">/</span><span class="n">bubbleJumpThin</span><span class="o">.</span><span class="n">bin</span>
 </code></pre></div>
-<h2 id="configuration-help">Configuration Help</h2>
+<p>This is just a file on your filesystem called <code class="language-jython highlight"><span class="n">config</span><span class="o">.</span><span class="n">txt</span></code> and just editing that file directly works too.</p>
+<p><img width="1470" height="1007" alt="Screenshot 2025-12-08 at 8 42 59 PM" src="https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754" /></p>
+<h2 id="config-help">Config Help</h2>
 <p>There's also a <code class="language-jython highlight"><span class="nf nf-Jumperless">help</span></code> you can get to by entering <code class="language-jython highlight"><span class="o">~</span><span class="err">?</span></code></p>
 <div class="language-c++ highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="o">~?</span>
 <span class="linenos" data-linenos=" 2 "></span>
@@ -290,6 +297,82 @@
 <span class="linenos" data-linenos="26 "></span><span class="w">                              </span><span class="n">Help</span>
 <span class="linenos" data-linenos="27 "></span><span class="w">                         </span><span class="o">~?</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">help</span>
 </code></pre></div>
+<h2 id="state-file">State File</h2>
+<h2 id="states-vs-config">States vs Config</h2>
+<p>States are now saved as YAML and we did away with the old text file format. <code class="language-jython highlight"><span class="n">globalState</span></code> holds all connections, paths, and other circuit configuration in a single object that most of the code uses now. </p>
+<p><strong>State vs Config - What's the Difference?</strong></p>
+<ul>
+<li><strong>State</strong> stores things relevant to the currently loaded slot - connections, wire colors, rail voltages, GPIO settings. These change when you switch slots.</li>
+<li><strong>Config</strong> (config.txt) contains hardware-wide settings that apply to the entire Jumperless regardless of which slot is active.</li>
+</ul>
+<p>Rail voltages, GPIO settings, and other circuit-specific parameters now go with the state (in the YAML file) rather than config, so each slot can have its own power supply and GPIO configuration.</p>
+<h2 id="state-file-structure">State File Structure</h2>
+<p>For things specific to the current <code class="language-jython highlight"><span class="n">state</span></code> of the Jumperless, there's a YAML file that contains all the connections, colors (optional), <code class="language-jython highlight"><span class="n">rail</span></code> / <code class="language-jython highlight"><span class="n">DAC</span></code> voltages, <code class="language-jython highlight"><span class="n">GPIO</span></code> directions and pulls, stuff like that. The idea is this defines a complete setup of a particular circuit that can be switched between in different <code class="language-jython highlight"><span class="n">slots</span></code>. </p>
+<p>The Jumperless always boots at <code class="language-jython highlight"><span class="n">Slot</span> <span class="mi">0</span></code>, and you can switch to other <code class="language-jython highlight"><span class="n">slots</span></code> with <code class="language-jython highlight"><span class="o">&lt;</span></code> (cycle through them) or selecting one with the <code class="language-jython highlight"><span class="n">click</span> <span class="n">menu</span></code> with <code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Load</span></code> &gt; <code class="language-jython highlight"><span class="mi">0</span><span class="o">-</span><span class="mi">7</span></code> (it will show a preview of each one.) To save a copy of the currently <code class="language-jython highlight"><span class="n">active</span> <span class="n">slot</span></code>; 
+<code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Save</span></code> &gt; <code class="language-jython highlight"><span class="mi">0</span><span class="o">-</span><span class="mi">7</span></code> will save a copy of the <code class="language-jython highlight"><span class="n">active</span> <span class="n">slot</span></code> to another <code class="language-jython highlight"><span class="n">slot</span></code> and also make that target slot the <code class="language-jython highlight"><span class="n">active</span></code>.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="err">╭────────────────────────────────────╮</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="err">│</span>      <span class="n">Current</span> <span class="n">YAML</span> <span class="n">State</span> <span class="p">(</span><span class="n">RAM</span><span class="p">)</span>     <span class="err">│</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="err">╰────────────────────────────────────╯</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">Active</span> <span class="n">Slot</span><span class="p">:</span> <span class="mi">0</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">Dirty</span> <span class="n">Flag</span><span class="p">:</span> <span class="n">NO</span> <span class="p">(</span><span class="n">saved</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="err">───</span> <span class="n">YAML</span> <span class="n">Output</span> <span class="err">───</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
+<span class="linenos" data-linenos="11 "></span><span class="n">sourceOfTruth</span><span class="p">:</span> <span class="n">bridges</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span><span class="n">bridges</span><span class="p">:</span>
+<span class="linenos" data-linenos="14 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="mi">44</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="linenos" data-linenos="15 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="linenos" data-linenos="16 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="linenos" data-linenos="17 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="linenos" data-linenos="18 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="no no-Jumperless">BUFFER_IN</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="no no-Jumperless">DAC0</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="n">nets</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">num</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="p">[</span><span class="no no-Jumperless">DAC_0</span><span class="p">,</span> <span class="no no-Jumperless">BUF_IN</span><span class="p">],</span> <span class="nf nf-JFS">name</span><span class="p">:</span> <span class="s2">&quot;DAC 0&quot;</span><span class="p">,</span> <span class="n">anim</span><span class="p">:</span> <span class="n">true</span><span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">num</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="p">[</span><span class="mi">38</span><span class="p">,</span> <span class="mi">44</span><span class="p">],</span> <span class="n">color</span><span class="p">:</span> <span class="n">pink</span><span class="p">}</span>
+<span class="linenos" data-linenos="23 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">num</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span> <span class="n">color</span><span class="p">:</span> <span class="n">blue</span><span class="p">}</span>
+<span class="linenos" data-linenos="24 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">num</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="n">color</span><span class="p">:</span> <span class="n">green</span><span class="p">}</span>
+<span class="linenos" data-linenos="25 "></span>  <span class="o">-</span> <span class="p">{</span><span class="n">num</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="n">nodes</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="p">:</span> <span class="n">amber</span><span class="p">}</span>
+<span class="linenos" data-linenos="26 "></span>
+<span class="linenos" data-linenos="27 "></span><span class="n">power</span><span class="p">:</span>
+<span class="linenos" data-linenos="28 "></span>  <span class="n">topRail</span><span class="p">:</span> <span class="mf">3.30</span>
+<span class="linenos" data-linenos="29 "></span>  <span class="n">bottomRail</span><span class="p">:</span> <span class="mf">2.50</span>
+<span class="linenos" data-linenos="30 "></span>  <span class="n">dac0</span><span class="p">:</span> <span class="mf">3.30</span>
+<span class="linenos" data-linenos="31 "></span>  <span class="n">dac1</span><span class="p">:</span> <span class="mf">0.00</span>
+<span class="linenos" data-linenos="32 "></span>
+<span class="linenos" data-linenos="33 "></span><span class="n">config</span><span class="p">:</span>
+<span class="linenos" data-linenos="34 "></span>  <span class="n">routing</span><span class="p">:</span> <span class="p">{</span><span class="n">stackPaths</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">stackRails</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">stackDacs</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">railPriority</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="linenos" data-linenos="35 "></span>  <span class="n">gpio</span><span class="p">:</span>
+<span class="linenos" data-linenos="36 "></span>    <span class="n">direction</span><span class="p">:</span>    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos" data-linenos="37 "></span>    <span class="n">pulls</span><span class="p">:</span>        <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos" data-linenos="38 "></span>    <span class="n">pwmFrequency</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">,</span><span class="mf">1.00</span><span class="p">]</span>
+<span class="linenos" data-linenos="39 "></span>    <span class="n">pwmDutyCycle</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">,</span><span class="mf">0.50</span><span class="p">]</span>
+<span class="linenos" data-linenos="40 "></span>    <span class="n">pwmEnabled</span><span class="p">:</span>   <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos" data-linenos="41 "></span>  <span class="n">uart</span><span class="p">:</span> <span class="p">{</span><span class="n">txFunction</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rxFunction</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="linenos" data-linenos="42 "></span>  <span class="n">oled</span><span class="p">:</span> <span class="p">{</span><span class="n">connected</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span> <span class="n">lockConnection</span><span class="p">:</span> <span class="n">false</span><span class="p">}</span>
+<span class="linenos" data-linenos="43 "></span>
+<span class="linenos" data-linenos="44 "></span>
+<span class="linenos" data-linenos="45 "></span><span class="err">───</span> <span class="n">Memory</span> <span class="n">Usage</span> <span class="err">───</span>
+<span class="linenos" data-linenos="46 "></span><span class="n">Connections</span><span class="p">:</span> <span class="mi">5</span>
+<span class="linenos" data-linenos="47 "></span><span class="n">State</span> <span class="n">RAM</span><span class="p">:</span> <span class="o">~</span><span class="mi">58048</span> <span class="nb">bytes</span>
+</code></pre></div>
+<h2 id="source-of-truth">Source of Truth</h2>
+<p>Because the information in here is <em>sort of</em> redundant (the connections could be computed from just the <code class="language-jython highlight"><span class="n">bridges</span></code> or the <code class="language-jython highlight"><span class="n">nets</span></code> section on their own), there's a field called <code class="language-jython highlight"><span class="n">sourceOfTruth</span></code> which is the section that actually gets parsed and then the other section is written with the computed values. (I haven't done much testing on changing this to <code class="language-jython highlight"><span class="n">nets</span></code> so I'd probably just leave it on <code class="language-jython highlight"><span class="n">bridges</span></code> for now.)</p>
+<p>There's some weirdness with how colors are applied, since the <code class="language-jython highlight"><span class="n">source</span> <span class="n">of</span> <span class="n">truth</span></code> is the bridges, and the things that actually get colored are the <code class="language-jython highlight"><span class="n">nets</span></code>, it'll take the colors from the <code class="language-jython highlight"><span class="n">bridges</span></code> (if specified) and try to apply them to the <code class="language-jython highlight"><span class="n">nets</span></code>. But since nets always have a single color (to show that they're connected), if you have <code class="language-jython highlight"><span class="n">bridges</span></code> with different colors in the same <code class="language-jython highlight"><span class="n">net</span></code>, it'll just pick one (don't ask me exactly how the logic chooses, idk.) </p>
+<p>If you specify a color to a <code class="language-jython highlight"><span class="n">net</span></code> even with <code class="language-jython highlight"><span class="n">sourceOfTruth</span><span class="p">:</span> <span class="n">bridges</span></code> it should respect the <code class="language-jython highlight"><span class="n">net</span></code> assignment over the <code class="language-jython highlight"><span class="n">bridge</span></code> assignment.</p>
+<h2 id="switching-between-saved-circuits-slots">Switching Between Saved Circuits (Slots)</h2>
+<p>The Jumperless has <strong>8 slots</strong> (0-7) where you can save different circuit configurations. Think of them like presets or save files.</p>
+<p><strong>Quick slot cycling:</strong>
+- Type <code class="language-jython highlight"><span class="o">&lt;</span></code> in the terminal to cycle to the next slot</p>
+<p><strong>Other slot commands:</strong>
+- <code class="language-jython highlight"><span class="n">l</span> <span class="mi">5</span></code> - Load slot 5 specifically
+- <code class="language-jython highlight"><span class="n">Q</span></code> - Query which slot is currently active
+- <code class="language-jython highlight"><span class="n">s</span></code> - Show a list of all saved slots</p>
+<p>When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the <a href="../99-glossary/">Glossary</a> for more details about slots.</p>
+<h2 id="live-editing-state-files">Live Editing State Files</h2>
+<p>You can edit the YAML slot files and they will live update to the board! Whether you're editing them in the onboard <code class="language-jython highlight"><span class="n">eKilo</span></code> editor or as a mounted USB MSC device on your computer, changes will be reflected immediately on your Jumperless.</p>
               
             </div>
           </div><footer>
