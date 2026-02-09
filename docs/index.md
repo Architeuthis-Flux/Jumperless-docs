@@ -1,4 +1,4 @@
-![](assets/JNameLogo.png)
+# ![](assets/JNameLogo.png)
  
   
 <iframe width="700" height="394" src="https://www.youtube.com/embed/fJTE7R_CV8w?si=YzBQzDnk0kS_qtsm" title="Jumperless Launch Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -6,7 +6,7 @@
  
   ---
 
-# What is it?
+## <p class="big-pink">What is it?</p>
 
 Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, a function generator, and a logic analyzer) all crammed inside a breadboard.
 
@@ -16,28 +16,37 @@ It's not just about being too lazy to plug in some jumpers. With software contro
 
 But more likely, you'll be using it to get circuits from your brain into hardware with so little friction it feels like you're just thinking them into existence. So yeah, wizard shit.
 
-###**These are the docs where you will learn how to wield your new powers**
+<p class="gold">These are the docs where you will learn how to wield your new powers</p>
 
 ![](assets/Explodraft.png)
 
 
-If you don't already have one,
-## [Get the latest hardware revision, Jumperless V5 rev 7](https://shop.jumperless.org/products/jumperless-v5-rev-7)
 
-Or if you want to save some money and get a refurbished one,
-## [Jumperless V5 offcuts](https://shop.jumperless.org/products/jumperless-v5)
+--- 
 
-## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+## <p class="mint">If you don't already have one</p>
 
-## [Preorder the ALASKAN BULL WORM! PSRAM Mod Kit](https://shop.jumperless.org/products/alaskan-bull-worm-jumperless-v5-psram-mod-kit)
+ 
+### [<p class="big-blue">Get the new Jumperless V5 rev 7</p>](https://shop.jumperless.org/products/jumperless-v5-rev-7)</p>
+
+<p class="tight">Or if you want to save some money and get a refurbished one,</p>
+
+### [<p class="indigo">Jumperless V5 offcuts</p>](https://shop.jumperless.org/products/jumperless-v5)
+
+### [<p class="purple">Get a Jumperless V5 on Crowd Supply</p>](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+
+### [<p class="pink">Preorder the ALASKAN BULL WORM! PSRAM Mod Kit</p>](https://shop.jumperless.org/products/alaskan-bull-worm-jumperless-v5-psram-mod-kit)
+ 
 
 ---
+ 
 
-## Getting Started
+## <p class="big-red">Getting Started</p>
+ 
 
 ![guide-42](https://github.com/user-attachments/assets/e35c42e0-b23a-4203-a836-44f0991db7fc)
 
-## Documentation Sections
+## <p class="orange">Documentation Sections</p>
 
 - **[Basic Controls](01-basic-controls.md)** - Learn how to use the probe, click wheel, and slot system
 - **[The App](03-app.md)** - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches
@@ -56,7 +65,7 @@ Or if you want to save some money and get a refurbished one,
 
 ---
 
-## Find Me On The Internet
+## <p class="yellow">Find Me On The Internet</p>
 
 Join the [Discord](https://discord.gg/bvacV7r3FP) for pretty much instant answers to your questions
 

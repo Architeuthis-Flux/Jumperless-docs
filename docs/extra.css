@@ -8956,6 +8956,82 @@ h3 {
   color: #fff2a8 !important;
 }
 
+/* Heading-style text that doesn't appear in the sidebar TOC */
+/* Use: <p class="big-pink">text</p> etc. */
+
+.big-pink {
+  font-size: 175%;
+  font-weight: 700;
+  color: #fea3cc !important;
+  margin: 1em 0 0.5em;
+}
+
+
+.pink {
+  font-size: 125%;
+  font-weight: 700;
+  color: #fea3cc !important;
+  margin: 1em 0 0.5em;
+}
+
+.cyan {
+  font-size: 120%;
+  font-weight: 700;
+  color: #a6fff2 !important;
+  margin: 1em 0 0.5em;
+}
+
+.gold {
+  font-size: 125%;
+  font-weight: 700;
+  color: #f9ff87 !important;
+  margin: 1em 0 0.5em;
+}
+
+.sky-blue {
+  font-size: 125%;
+  font-weight: 700;
+  color: #8abaf8 !important;
+  margin: 0.8em 0 0.5em;
+}
+
+.ice {
+  font-size: 120%;
+  font-weight: 700;
+  color: #b3f3f9 !important;
+  margin: 0.8em 0 0.5em;
+}
+
+.mint {
+  font-size: 95%;
+  font-weight: 700;
+  color: #beffca !important;
+  margin: 0.5em 0 1.8em;
+}
+.big-blue      { font-size: 160%; font-weight: 700; color: #85d6ff !important; margin: 0.9em 0 0.4em; }
+.big-red       { font-size: 160%; font-weight: 700; color: #ff8787 !important; margin: 0.9em 0 0.9em; }
+/* Small rainbow heading styles (110%, bold, bright but slightly toned) - no sidebar TOC entry */
+.red       { font-size: 110%; font-weight: 700; color: #ff9e9e !important; margin: 0.6em 0 0.3em; }
+.orange    { font-size: 110%; font-weight: 700; color: #ffb872 !important; margin: 0.6em 0 0.3em; }
+.yellow    { font-size: 110%; font-weight: 700; color: #fff47a !important; margin: 0.6em 0 0.3em; }
+.lime      { font-size: 110%; font-weight: 700; color: #c5f08e !important; margin: 0.6em 0 0.3em; }
+.green     { font-size: 110%; font-weight: 700; color: #7af0cc !important; margin: 0.6em 0 0.3em; }
+.teal      { font-size: 110%; font-weight: 700; color: #5ee3e4 !important; margin: 0.6em 0 0.3em; }
+.blue      { font-size: 110%; font-weight: 700; color: #7db8ff !important; margin: 0.6em 0 0.3em; }
+.indigo    { font-size: 110%; font-weight: 700; color: #a2adff !important; margin: 0.6em 0 0.3em; }
+.purple    { font-size: 110%; font-weight: 700; color: #bf96ff !important; margin: 0.6em 0 0.3em; }
+.magenta   { font-size: 110%; font-weight: 700; color: #eb7db8 !important; margin: 0.6em 0 0.3em; }
+.pink      { font-size: 110%; font-weight: 700; color: #ff8eb3 !important; margin: 0.6em 0 0.3em; }
+.coral     { font-size: 110%; font-weight: 700; color: #ff9d9c !important; margin: 0.6em 0 0.3em; }
+
+/* Tight lead-in text - small, no bottom margin, snugs up to the next element */
+.tight {
+  color: #e3e3e3; 
+  font-size: 90%;
+  margin: 0.4em 0 -0.6em;
+  line-height: 1.3;
+}
+
 .rst-content h4,
 h4 {
   font-size: 115%;
