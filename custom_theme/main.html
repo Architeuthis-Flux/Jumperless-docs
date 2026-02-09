@@ -29,6 +29,10 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ config.site_url }}{% if page %}{{ page.url }}{% endif %}">
     
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="{{ config.site_url }}llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="{{ config.site_url }}llms-full.txt" title="Complete documentation for LLMs">
+    
     <!-- Theme Color -->
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">

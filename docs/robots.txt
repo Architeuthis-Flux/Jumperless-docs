@@ -29,5 +29,10 @@ Allow: /
 User-agent: Cohere-ai
 Allow: /
 
+# LLM-friendly documentation (llms.txt spec - https://llmstxt.org/)
+# llms.txt: structured index of all documentation
+# llms-full.txt: complete documentation in a single file for full context
+LLMs-Txt: https://docs.jumperless.org/llms.txt
+
 # Sitemap location
-Sitemap: https://jumperless-docs.readthedocs.io/en/latest/sitemap.xml
+Sitemap: https://docs.jumperless.org/sitemap.xml

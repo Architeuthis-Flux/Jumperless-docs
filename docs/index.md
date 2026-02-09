@@ -139,5 +139,7 @@ Most of the stuff here is relevant as a subset of what Jumperless V5 does.
 
 ---
 
+**For AI/LLM tools:** This documentation is available as [llms.txt](/llms.txt) (index) and [llms-full.txt](/llms-full.txt) (complete text) for easy ingestion.
 
+---
 
