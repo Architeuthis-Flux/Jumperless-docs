@@ -7824,6 +7824,7 @@ span[id*=MathJax-Span] {
     --nav-13-hue: 324.4deg; /* Light Red */
     --nav-14-hue: 343deg; /* Back to Red (wraps around) */
     --nav-15-hue: 357.7deg; /* Orange again */
+    --nav-16-hue: 12deg; /* Warm Orange */
 }
 
 /* Main navigation items with text colors */
@@ -7885,6 +7886,10 @@ span[id*=MathJax-Span] {
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(15) li.toctree-l1 > a {
     color: hsl(var(--nav-15-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(16) li.toctree-l1 > a {
+    color: hsl(var(--nav-16-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
 }
 
 /* Background colors for current/active main navigation items */
@@ -7963,6 +7968,11 @@ span[id*=MathJax-Span] {
     color: var(--submenu-text-color) !important;
 }
 
+.wy-nav-side .wy-menu-vertical ul:nth-child(16) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-16-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
 /* Comprehensive submenu coloring system using HSL variables */
 /* Set parent hue variables for all main navigation items */
 .wy-nav-side .wy-menu-vertical ul:nth-child(1) li.toctree-l1.current {
@@ -8019,6 +8029,10 @@ span[id*=MathJax-Span] {
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(15) li.toctree-l1.current {
     --parent-hue: var(--nav-15-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(16) li.toctree-l1.current {
+    --parent-hue: var(--nav-16-hue);
 }
 
 /* Level 2 submenu items (toctree-l2) - progressive coloring with hue wrapping */

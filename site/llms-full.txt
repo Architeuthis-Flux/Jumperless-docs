@@ -25,12 +25,14 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 ###**These are the docs where you will learn how to wield your new powers**
 
 If you don't already have one,
-## [Get the latest hardware revision, Jumperless V5 rev 7](https://jumperless.myshopify.com/products/jumperless-v5-rev-7)
+## [Get the latest hardware revision, Jumperless V5 rev 7](https://shop.jumperless.org/products/jumperless-v5-rev-7)
 
 Or if you want to save some money and get a refurbished one,
-## [Jumperless V5 offcuts](https://jumperless.myshopify.com/products/jumperless-v5)
+## [Jumperless V5 offcuts](https://shop.jumperless.org/products/jumperless-v5)
 
 ## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+
+## [Preorder the ALASKAN BULL WORM! PSRAM Mod Kit](https://shop.jumperless.org/products/alaskan-bull-worm-jumperless-v5-psram-mod-kit)
 
 ---
 
@@ -94,6 +96,10 @@ Most of the stuff here is relevant as a subset of what Jumperless V5 does.
 ---
 
 [Image: dymo-6s]
+
+---
+
+**For AI/LLM tools:** This documentation is available as [llms.txt](/llms.txt) (index) and [llms-full.txt](/llms-full.txt) (complete text) for easy ingestion.
 
 ---
 
@@ -4981,6 +4987,7 @@ LLMs should maintain a persistent JSON model of what they believe is physically 
 | 0.3 | `assumed` | Default assumption |
 
 ---
+
  0.001:  # > 1mA flows
         resistance = v_drop / current
         if resistance  0.1:  # Conducting

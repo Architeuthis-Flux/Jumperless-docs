@@ -3,9 +3,13 @@
 > Jumperless V5 is a software-defined breadboard and integrated hardware IDE with an RP2350B, programmable power supplies, multimeter, oscilloscope, function generator, logic analyzer, and RGB LEDs under every hole. Connect any point to any other using software-defined jumpers. Circuits are scriptable via MicroPython or controllable from the companion app.
 
 - The full documentation text is available in a single file: [llms-full.txt](llms-full.txt)
-- Source and hardware: https://github.com/Architeuthis-Flux
+- Source and hardware: https://github.com/Architeuthis-Flux/JumperlessV5
+- Firmware: https://github.com/Architeuthis-Flux/JumperlOS
+- App: https://github.com/Architeuthis-Flux/Jumperless-App
 - Community Discord: https://discord.gg/bvacV7r3FP
-- Buy one: https://www.crowdsupply.com/architeuthis-flux/jumperless-v5
+- Buy the new Jumperless V5 rev 7: https://shop.jumperless.org
+- Buy a refurbished one: https://shop.jumperless.org/products/jumperless-v5-offcuts
+- Buy a Jumperless V5 on Crowd Supply: https://www.crowdsupply.com/architeuthis-flux/jumperless-v5
 
 ## Core Documentation
 

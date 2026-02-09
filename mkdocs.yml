@@ -28,8 +28,9 @@ nav:
   - JFS (Jumperless FileSystem) Module: 09.6-jfs.md
   - Odds and Ends: 09.8-odds-and-ends.md
   - 3D Printable Stand: 10-3d-stand.md
-  - LLM Tools Specification: 12-llm-tools-specification.md
+  # - LLM Tools Specification: 12-llm-tools-specification.md
   - Glossary of Terms: 99-glossary.md
+  - Shop: https://shop.jumperless.org
 
 # 
 # theme_dir: 'custom_theme'

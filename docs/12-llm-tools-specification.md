@@ -351,7 +351,9 @@ LLMs should maintain a persistent JSON model of what they believe is physically 
 | 0.3 | `assumed` | Default assumption |
 
 ---
+
 <!-- 
+
 ## Automated Component Detection
 
 The Jumperless can perform automated testing to identify unknown components, similar to transistor testers.
@@ -497,7 +499,9 @@ def scan_all_rows():
                 oled_print(f"{row_a}-{row_b}: {result['type']}")
     
     return connections
-``` -->
+``` 
+
+-->
 
 ### Increasing Confidence
 

@@ -106,8 +106,12 @@ def _build_llms_txt(pages, site_url):
     lines.append("- The full documentation text is available in a single file: "
                  "[llms-full.txt](llms-full.txt)")
     lines.append("- Source and hardware: https://github.com/Architeuthis-Flux/JumperlessV5")
+    lines.append("- Firmware: https://github.com/Architeuthis-Flux/JumperlOS")
+    lines.append("- App: https://github.com/Architeuthis-Flux/Jumperless-App")
     lines.append("- Community Discord: https://discord.gg/bvacV7r3FP")
-    lines.append("- Buy one: https://www.crowdsupply.com/architeuthis-flux/jumperless-v5")
+    lines.append("- Buy the new Jumperless V5 rev 7: https://shop.jumperless.org")
+    lines.append("- Buy a refurbished one: https://shop.jumperless.org/products/jumperless-v5-offcuts")
+    lines.append("- Buy a Jumperless V5 on Crowd Supply: https://www.crowdsupply.com/architeuthis-flux/jumperless-v5")
     lines.append("")
 
     # Group pages into sections

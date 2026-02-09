@@ -22,12 +22,14 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 
 
 If you don't already have one,
-## [Get the latest hardware revision, Jumperless V5 rev 7](https://jumperless.myshopify.com/products/jumperless-v5-rev-7)
+## [Get the latest hardware revision, Jumperless V5 rev 7](https://shop.jumperless.org/products/jumperless-v5-rev-7)
 
 Or if you want to save some money and get a refurbished one,
-## [Jumperless V5 offcuts](https://jumperless.myshopify.com/products/jumperless-v5)
+## [Jumperless V5 offcuts](https://shop.jumperless.org/products/jumperless-v5)
 
 ## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+
+## [Preorder the ALASKAN BULL WORM! PSRAM Mod Kit](https://shop.jumperless.org/products/alaskan-bull-worm-jumperless-v5-psram-mod-kit)
 
 ---
 
