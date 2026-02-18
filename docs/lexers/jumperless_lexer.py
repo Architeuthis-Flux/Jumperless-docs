@@ -44,6 +44,7 @@ class JumperlessPythonLexer(PythonLexer):
         # GPIO Functions
         'gpio_set', 'gpio_get', 'gpio_set_dir', 'gpio_get_dir', 'gpio_set_pull', 'gpio_get_pull',
         'set_gpio', 'get_gpio', 'set_gpio_dir', 'get_gpio_dir', 'set_gpio_pull', 'get_gpio_pull',
+        'gpio_set_read_floating', 'gpio_get_read_floating',
         
         # Connection Functions
         'connect', 'disconnect', 'fast_connect', 'fast_disconnect', 'is_connected', 'nodes_clear', 'node',
