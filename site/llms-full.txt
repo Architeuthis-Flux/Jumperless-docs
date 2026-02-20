@@ -10,9 +10,10 @@
 
 # Home
 
----
 
-# What is it?
+  ---
+
+## What is it?
 
 Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, a function generator, and a logic analyzer) all crammed inside a breadboard.
 
@@ -22,17 +23,21 @@ It's not just about being too lazy to plug in some jumpers. With software contro
 
 But more likely, you'll be using it to get circuits from your brain into hardware with so little friction it feels like you're just thinking them into existence. So yeah, wizard shit.
 
-###**These are the docs where you will learn how to wield your new powers**
+These are the docs where you will learn how to wield your new powers
 
-If you don't already have one,
-## [Get the latest hardware revision, Jumperless V5 rev 7](https://shop.jumperless.org/products/jumperless-v5-rev-7)
+--- 
+
+## If you don't already have one
+
+### [Get the new Jumperless V5 rev 7](https://shop.jumperless.org/products/jumperless-v5-rev-7)
 
 Or if you want to save some money and get a refurbished one,
-## [Jumperless V5 offcuts](https://shop.jumperless.org/products/jumperless-v5)
 
-## [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+### [Jumperless V5 offcuts](https://shop.jumperless.org/products/jumperless-v5)
 
-## [Preorder the ALASKAN BULL WORM! PSRAM Mod Kit](https://shop.jumperless.org/products/alaskan-bull-worm-jumperless-v5-psram-mod-kit)
+### [Get a Jumperless V5 on Crowd Supply](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5)
+
+### [Preorder the ALASKAN BULL WORM! PSRAM Mod Kit](https://shop.jumperless.org/products/alaskan-bull-worm-jumperless-v5-psram-mod-kit)
 
 ---
 
@@ -2684,6 +2689,34 @@ Reads the pull resistor configuration of a GPIO pin.
 *   Returns a `GPIOPull` object (`PULLUP`, `PULLDOWN`, or `NONE`).
 *   **Aliases**: `get_gpio_pull()`
 
+### `gpio_set_read_floating(pin, enabled)`
+Enable or disable special floating detection when reading GPIO inputs. **These are all enabled by default.**
+
+*   `pin`: The GPIO pin number (1-10).
+*   `enabled`: `True` to enable floating-read behavior, `False` to disable.
+*   **Aliases**: `set_gpio_read_floating()`
+
+Description: When enabled, the firmware performs an extra floating-detection check so `gpio_get()` can return `FLOATING` for very-high-impedance inputs. To do this it momentarily biases the pin with a very weak internal pull-up (~50 kΩ) while sampling. That transient bias can affect extremely high‑impedance sources (for example, >10 MΩ sensors) and may cause a small leakage current or change the measured state. If your external circuit is super high‑impedance, either disable floating-read for that pin or add a defined pull resistor.
+
+### `gpio_get_read_floating(pin)`
+Returns whether floating-read detection is enabled for a GPIO pin.
+
+*   `pin`: The GPIO pin number (1-10).
+*   Returns: `True` if floating-read is enabled, otherwise `False`.
+*   **Aliases**: `get_gpio_read_floating()`
+
+**Example:**
+```jython
+# Enable floating detection on GPIO 3
+gpio_set_read_floating(3, True)
+
+# Confirm it is enabled
+print(gpio_get_read_floating(3))  # True or False
+
+# If a connected high‑impedance sensor behaves oddly, disable floating-read
+gpio_set_read_floating(3, False)
+```
+
 **Pinout:**
 *   `1-8`: Routable GPIO pins `GPIO_1` to `GPIO_8`.
 *   `9`: `UART_TX`.
@@ -2985,17 +3018,20 @@ Get a list of all available font families.
 *   Returns: List of font family names (strings)
 
 **Available Fonts:**
-1. Eurostile - Modern geometric sans-serif
-2. Jokerman - Playful decorative font
-3. Comic Sans - Casual rounded font
-4. Courier New - Classic monospace
-5. New Science - Futuristic tech font
-6. New Science Ext - Extended version
-7. Andale Mono - Clean monospace (5pt only)
-8. Free Mono - Compact monospace (4pt only)
-9. Iosevka Regular - Programming font
-10. Berkeley Mono - Professional monospace
-11. Pragmatism - Clean modern font
+
+1. Eurostyle - sans serif, futuristic, like Xenon pinball or Star Trek
+2. Jokerman - decorative font with lots of extra artistic dots and bars
+3. Comic Sans - sans serif, comic book style lettering
+4. Courier New - slab serif, typewriter style
+5. New Science - sans serif, humanist/geometric, like Helvetica
+6. New Science Ext - wider version of New Science
+7. Iosevka Regular - fixed spacing sans serif, like Lucida, slashed zero
+8. Berkeley Mono - fixed spacing, sans serif, large X height
+9. Pragmatism - sans serif, vaguely romantic
+
+10. Andale Mono - fixed spacing sans serif, used for small text
+
+(Descriptions by MadBodger)
 
 **Example:**
 ```jython
@@ -3061,11 +3097,15 @@ Load a bitmap file into the internal bitmap buffer.
 *   Returns: `True` if loaded successfully, `False` on error
 
 **Bitmap File Format:**
+
 - **Raw Format**: Pure bitmap data (guesses dimensions from file size)
+
   - 128x32 = 512 bytes
   - 128x64 = 1024 bytes
   - 64x32 = 256 bytes
+
 - **Custom Format**: 4-byte header + bitmap data
+
   - Bytes 0-1: Width (16-bit little-endian)
   - Bytes 2-3: Height (16-bit little-endian)
   - Remaining: Bitmap data (1 bit per pixel, packed)
@@ -3082,6 +3122,7 @@ else:
 Display a bitmap on the OLED.
 
 **Two modes:**
+
 1. **Use loaded bitmap**: If `data` is `None`, displays the bitmap from `oled_load_bitmap()`
 2. **Direct data**: If `data` is provided, displays that bitmap immediately
 
@@ -4623,27 +4664,7 @@ in the big main menu `switch` statement in `main.cpp`.
 
 [The code](https://github.com/Architeuthis-Flux/JumperlessV5/blob/6fd4fcba572c4b524435ec36c8901adcedbf52c6/RP23V50firmware/src/Apps.cpp#L141) for `Custom App` is an example of the calls available with comments telling you what's going on. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.
 
----
-
-# 3D Printable Stand
-
-
-[[Image: 3DStandCollage]](https://www.printables.com/model/1249365-jumperless-stand)
-
-[Here are the 3D models](https://www.printables.com/model/1249365-jumperless-stand) for you to print your own stand for your Jumperless. It's extremely handy to have it propped up like this to read text on the breadboard. 
-
-## Printing Tips
-
-Yes, the model is at a weird angle, just drop it down in the slicer, if you want it to hold at a shallower angle, just drop the model through the bed a bit when you slice.
-
-## Rubber Feet
-
-These [stick-on rubber feet](https://www.amazon.com/AmazonBasics-300-Piece-Adhesive-Rubber-Bumpers/dp/B087MG3G76) also make it a lot more solid on your desk (and having the different sizes lets you shim the angle by putting different ones on the front and back.)
-
----
-
-# LLM Tools Specification
-
+# LLM Tool Specification for Jumperless V5
 
 A guide for LLMs with some tips to control the Jumperless V5.
 
@@ -5022,7 +5043,9 @@ def scan_all_rows():
                 oled_print(f"{row_a}-{row_b}: {result['type']}")
 
     return connections
-``` -->
+``` 
+
+-->
 
 ### Increasing Confidence
 
@@ -5330,6 +5353,23 @@ Explain actions via `oled_print()` and `print()` before executing them to keep t
 | Slot management | ✅ Implemented |
 | `get_state()` / `set_state()` snapshot | ✅ Implemented |
 | Slot backup for undo | ✅ Implemented (use `save_slot(7)` before destructive ops) |
+
+---
+
+# 3D Printable Stand
+
+
+[[Image: 3DStandCollage]](https://www.printables.com/model/1249365-jumperless-stand)
+
+[Here are the 3D models](https://www.printables.com/model/1249365-jumperless-stand) for you to print your own stand for your Jumperless. It's extremely handy to have it propped up like this to read text on the breadboard. 
+
+## Printing Tips
+
+Yes, the model is at a weird angle, just drop it down in the slicer, if you want it to hold at a shallower angle, just drop the model through the bed a bit when you slice.
+
+## Rubber Feet
+
+These [stick-on rubber feet](https://www.amazon.com/AmazonBasics-300-Piece-Adhesive-Rubber-Bumpers/dp/B087MG3G76) also make it a lot more solid on your desk (and having the different sizes lets you shim the angle by putting different ones on the front and back.)
 
 ---
 

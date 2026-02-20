@@ -44,6 +44,11 @@ class JumperlessPythonLexer(PythonLexer):
         # GPIO Functions
         'gpio_set', 'gpio_get', 'gpio_set_dir', 'gpio_get_dir', 'gpio_set_pull', 'gpio_get_pull',
         'set_gpio', 'get_gpio', 'set_gpio_dir', 'get_gpio_dir', 'set_gpio_pull', 'get_gpio_pull',
+        'gpio_set_read_floating', 'gpio_get_read_floating',
+        'set_gpio_read_floating', 'get_gpio_read_floating',
+        
+        # GPIO Pin Ownership Functions
+        'gpio_claim_pin', 'gpio_release_pin', 'gpio_release_all_pins',
         
         # Connection Functions
         'connect', 'disconnect', 'fast_connect', 'fast_disconnect', 'is_connected', 'nodes_clear', 'node',
@@ -51,7 +56,7 @@ class JumperlessPythonLexer(PythonLexer):
         
         # Net Information API
         'get_net_name', 'set_net_name', 'get_net_color', 'get_net_color_name', 'set_net_color', 'set_net_color_hsv',
-        'get_num_nets', 'get_num_bridges', 'get_net_nodes', 'get_bridge', 'get_net_info',
+        'get_num_nets', 'get_num_bridges', 'get_net_nodes', 'get_bridge', 'get_net_info', 'get_all_nets',
         'net_name', 'net_color', 'net_info',
         
         # Path Query Functions
@@ -125,6 +130,9 @@ class JumperlessPythonLexer(PythonLexer):
         # Graphic Overlays
         'overlay_set', 'overlay_clear', 'overlay_clear_all', 'overlay_set_pixel',
         'overlay_count', 'overlay_shift', 'overlay_place', 'overlay_serialize',
+        
+        # FakeGPIO Classes
+        'FakeGpioPin', 'FakeGpioDisconnect',
         
         # Legacy Filesystem Functions
         'fs_exists', 'fs_listdir', 'fs_read', 'fs_write', 'fs_cwd',
@@ -200,6 +208,9 @@ class JumperlessPythonLexer(PythonLexer):
 
         # Wavegen constants
         'SINE', 'TRIANGLE', 'SAWTOOTH', 'SQUARE', 'RAMP', 'ARBITRARY',
+        
+        # FakeGPIO Modes
+        'FAKE_GPIO_INPUT', 'FAKE_GPIO_OUTPUT',
         
         # Slot Management
         'CURRENT_SLOT',

@@ -10,7 +10,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.jumperless.org/12-llm-tools-specification/">
-    <meta property="og:title" content="LLM Tools Specification - Jumperless Docs">
+    <meta property="og:title" content="LLM Tool Specification for Jumperless V5 - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
     <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
@@ -19,7 +19,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.jumperless.org/12-llm-tools-specification/">
-    <meta name="twitter:title" content="LLM Tools Specification - Jumperless Docs">
+    <meta name="twitter:title" content="LLM Tool Specification for Jumperless V5 - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
     <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
@@ -41,7 +41,7 @@
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">
 
-    <title>LLM Tools Specification - Jumperless Docs</title>
+    <title>LLM Tool Specification for Jumperless V5 - Jumperless Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -116,140 +116,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">LLM Tools Specification</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick Reference</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#communication-methods">Communication Methods</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#method-1-direct-python-commands-main-serial-port">Method 1: Direct Python Commands (Main Serial Port)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#method-2-viperide-raw-repl-3rd-usb-port">Method 2: ViperIDE / Raw REPL (3rd USB Port)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#method-3-arduino-tags-via-uart">Method 3: Arduino Tags (via UART)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#method-4-single-character-commands-main-serial-port">Method 4: Single-Character Commands (Main Serial Port)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#usb-port-structure">USB Port Structure</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#hardware-overview">Hardware Overview</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#physical-layout">Physical Layout</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#power">Power</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#measurement">Measurement</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpio">GPIO</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#node-addressing">Node Addressing</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#breadboard-rows">Breadboard Rows</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#power-rails">Power Rails</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#arduino-pins">Arduino Pins</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpio_1">GPIO</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#adccurrent-sense">ADC/Current Sense</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#core-tool-definitions">Core Tool Definitions</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#connections-slots">Connections &amp; Slots</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#voltage-control">Voltage Control</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#measurement_1">Measurement</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpio-pwm">GPIO &amp; PWM</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#waveform-generator-wavegen">Waveform Generator (WaveGen)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#user-interaction">User Interaction</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#graphic-overlays-breadboard-leds">Graphic Overlays (Breadboard LEDs)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#system-filesystem">System &amp; Filesystem</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#single-character-command-reference-port-1-only">Single-Character Command Reference (Port 1 Only)</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#llm-mental-model-file-format">LLM Mental Model File Format</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mental-model-schema">Mental Model Schema</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#nano-header-device-types">Nano Header Device Types</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#confidence-levels">Confidence Levels</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#automated-component-detection">Automated Component Detection</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#detection-algorithm-flowchart">Detection Algorithm Flowchart</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#python-implementation">Python Implementation</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#test-sequence-for-unknown-board">Test Sequence for Unknown Board</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#3-automated-characterization">3. Automated Characterization</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#component-library-dynamic-lookup">Component Library (Dynamic Lookup)</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#safety-guidelines-for-llms">Safety Guidelines for LLMs</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#llm-preferences-claudes-additions">LLM Preferences (Claude's Additions)</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#1-structured-state-snapshot">1. Structured State Snapshot</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2-return-values-not-just-prints">2. Return Values, Not Just Prints</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#3-error-return-conventions">3. Error Return Conventions</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#4-undo-via-slot-backup">4. Undo via Slot Backup</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#5-measurement-with-context">5. Measurement with Context</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#6-interactive-conversation-patterns">6. Interactive Conversation Patterns</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#llm-best-practices-future-tools">LLM Best Practices &amp; Future Tools</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#1-explicit-state-verification">1. Explicit State Verification</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2-structured-state-snapshot">2. Structured State Snapshot</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#3-search-first-component-handling">3. Search-First Component Handling</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#4-batch-operations">4. Batch Operations</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#5-return-values-over-prints">5. Return Values Over Prints</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#6-undo-via-slot-backup">6. undo via Slot Backup</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#7-context-aware-error-recovery">7. Context-Aware Error Recovery</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#8-interactive-conversation-patterns">8. Interactive Conversation Patterns</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#implementation-status">Implementation Status</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -272,7 +138,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">LLM Tools Specification</li>
+      <li class="breadcrumb-item active">LLM Tool Specification for Jumperless V5</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -702,10 +568,14 @@
 </tbody>
 </table>
 <hr />
-<p>&lt;!-- </p>
-<h2 id="automated-component-detection">Automated Component Detection</h2>
-<p>The Jumperless can perform automated testing to identify unknown components, similar to transistor testers.</p>
-<h3 id="detection-algorithm-flowchart">Detection Algorithm Flowchart</h3>
+<!-- 
+
+## Automated Component Detection
+
+The Jumperless can perform automated testing to identify unknown components, similar to transistor testers.
+
+### Detection Algorithm Flowchart
+
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">START</span><span class="p">:</span> <span class="n">Unknown</span> <span class="n">component</span> <span class="n">between</span> <span class="n">rows</span> <span class="n">A</span> <span class="ow">and</span> <span class="n">B</span>
 <span class="linenos" data-linenos=" 2 "></span>                    <span class="err">│</span>
 <span class="linenos" data-linenos=" 3 "></span>                    <span class="err">▼</span>
@@ -765,7 +635,9 @@
 <span class="linenos" data-linenos="57 "></span><span class="n">absolute</span> <span class="n">identification</span><span class="o">.</span> <span class="n">Crossbar</span> <span class="n">R</span> <span class="n">varies</span> <span class="mi">80</span><span class="o">-</span><span class="mi">88</span><span class="n">Ω</span><span class="o">.</span> <span class="n">Always</span> <span class="nb">set</span> <span class="n">confidence</span>
 <span class="linenos" data-linenos="58 "></span><span class="err">≤</span> <span class="mf">0.85</span> <span class="k">for</span> <span class="n">automated</span> <span class="n">measurements</span><span class="o">.</span> <span class="n">Confirm</span> <span class="k">with</span> <span class="n">user</span> <span class="k">if</span> <span class="n">unsure</span><span class="o">.</span>
 </code></pre></div>
-<h3 id="python-implementation">Python Implementation</h3>
+
+### Python Implementation
+
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">detect_component</span><span class="p">(</span><span class="n">row_a</span><span class="p">,</span> <span class="n">row_b</span><span class="p">):</span>
 <span class="linenos" data-linenos=" 2 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Automated component detection between two rows.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos=" 3 "></span>
@@ -820,9 +692,12 @@
 <span class="linenos" data-linenos="52 "></span>
 <span class="linenos" data-linenos="53 "></span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
 </code></pre></div>
-<h3 id="test-sequence-for-unknown-board">Test Sequence for Unknown Board</h3>
-<p>When a user says "I have some stuff on the board but I'm not sure what":</p>
-<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">scan_all_rows</span><span class="p">():</span>
+
+### Test Sequence for Unknown Board
+
+When a user says "I have some stuff on the board but I'm not sure what":
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">scan_all_rows</span><span class="p">():</span>
 <span class="linenos" data-linenos=" 2 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Scan all 60 rows for connections and components.&quot;&quot;&quot;</span>
 <span class="linenos" data-linenos=" 3 "></span>    <span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="linenos" data-linenos=" 4 "></span>
@@ -837,52 +712,66 @@
 <span class="linenos" data-linenos="13 "></span>                <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row_a</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">row_b</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="linenos" data-linenos="14 "></span>
 <span class="linenos" data-linenos="15 "></span>    <span class="k">return</span> <span class="n">connections</span>
-<span class="linenos" data-linenos="16 "></span><span class="err">```</span> <span class="o">--&gt;</span>
-<span class="linenos" data-linenos="17 "></span>
-<span class="linenos" data-linenos="18 "></span><span class="c1">### Increasing Confidence</span>
-<span class="linenos" data-linenos="19 "></span>
-<span class="linenos" data-linenos="20 "></span><span class="o">|</span> <span class="n">Method</span> <span class="o">|</span> <span class="n">Confidence</span> <span class="n">Boost</span> <span class="o">|</span>
-<span class="linenos" data-linenos="21 "></span><span class="o">|--------|------------------|</span>
-<span class="linenos" data-linenos="22 "></span><span class="o">|</span> <span class="n">User</span> <span class="n">confirms</span> <span class="s2">&quot;yes that&#39;s right&quot;</span> <span class="o">|</span> <span class="o">+</span><span class="mf">0.2</span> <span class="o">|</span>
-<span class="linenos" data-linenos="23 "></span><span class="o">|</span> <span class="n">Electrical</span> <span class="n">measurement</span> <span class="n">matches</span> <span class="o">|</span> <span class="o">+</span><span class="mf">0.3</span> <span class="o">|</span>
-<span class="linenos" data-linenos="24 "></span><span class="o">|</span> <span class="n">Multiple</span> <span class="n">consistent</span> <span class="n">tests</span> <span class="o">|</span> <span class="o">+</span><span class="mf">0.1</span> <span class="n">per</span> <span class="n">test</span> <span class="o">|</span>
-<span class="linenos" data-linenos="25 "></span><span class="o">|</span> <span class="n">User</span> <span class="n">provides</span> <span class="n">datasheet</span> <span class="o">|</span> <span class="n">Set</span> <span class="n">to</span> <span class="mf">0.95</span> <span class="o">|</span>
-<span class="linenos" data-linenos="26 "></span>
-<span class="linenos" data-linenos="27 "></span><span class="o">---</span>
-<span class="linenos" data-linenos="28 "></span>
-<span class="linenos" data-linenos="29 "></span><span class="c1">## Workflows for LLMs</span>
-<span class="linenos" data-linenos="30 "></span>
-<span class="linenos" data-linenos="31 "></span><span class="c1">### 1. Circuit Safe-Check (Mental Model)</span>
-<span class="linenos" data-linenos="32 "></span>
-<span class="linenos" data-linenos="33 "></span><span class="o">**</span><span class="n">CRITICAL</span><span class="o">**</span><span class="p">:</span> <span class="n">The</span> <span class="n">Jumperless</span> <span class="n">prevents</span> <span class="n">internal</span> <span class="n">shorts</span><span class="p">,</span> <span class="n">but</span> <span class="o">**</span><span class="n">cannot</span> <span class="n">see</span> <span class="n">external</span> <span class="n">wires</span> <span class="ow">or</span> <span class="n">components</span><span class="o">**</span> <span class="n">on</span> <span class="n">the</span> <span class="n">breadboard</span><span class="o">.</span>
-<span class="linenos" data-linenos="34 "></span><span class="n">If</span> <span class="n">a</span> <span class="n">user</span> <span class="n">has</span> <span class="n">a</span> <span class="n">physical</span> <span class="n">wire</span> <span class="n">connecting</span> <span class="n">Row</span> <span class="mi">5</span> <span class="n">to</span> <span class="n">Row</span> <span class="mi">10</span><span class="p">,</span> <span class="n">connecting</span> <span class="err">`</span><span class="no no-Jumperless">TOP_RAIL</span><span class="o">-&gt;</span><span class="mi">5</span><span class="err">`</span> <span class="ow">and</span> <span class="err">`</span><span class="no no-Jumperless">GND</span><span class="o">-&gt;</span><span class="mi">10</span><span class="err">`</span> <span class="n">will</span> <span class="n">cause</span> <span class="n">a</span> <span class="n">dead</span> <span class="n">short</span> <span class="n">through</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s wire.</span>
-<span class="linenos" data-linenos="35 "></span>
-<span class="linenos" data-linenos="36 "></span><span class="o">**</span><span class="n">Workflow</span><span class="p">:</span><span class="o">**</span>
-<span class="linenos" data-linenos="37 "></span><span class="mf">1.</span>  <span class="o">**</span><span class="n">Ask</span><span class="o">**</span><span class="p">:</span> <span class="s2">&quot;What is currently on the breadboard? (Wires, components, etc)&quot;</span>
-<span class="linenos" data-linenos="38 "></span><span class="mf">2.</span>  <span class="o">**</span><span class="n">Model</span><span class="o">**</span><span class="p">:</span> <span class="n">Build</span> <span class="n">the</span> <span class="n">mental</span> <span class="n">model</span> <span class="n">JSON</span> <span class="k">with</span> <span class="n">low</span> <span class="n">confidence</span>
-<span class="linenos" data-linenos="39 "></span><span class="mf">3.</span>  <span class="o">**</span><span class="n">Test</span><span class="o">**</span><span class="p">:</span> <span class="n">Run</span> <span class="err">`</span><span class="n">detect_component</span><span class="p">()</span><span class="err">`</span> <span class="n">on</span> <span class="n">key</span> <span class="n">rows</span> <span class="n">to</span> <span class="n">verify</span>
-<span class="linenos" data-linenos="40 "></span><span class="mf">4.</span>  <span class="o">**</span><span class="n">Update</span><span class="o">**</span><span class="p">:</span> <span class="n">Increase</span> <span class="n">confidence</span> <span class="k">as</span> <span class="n">tests</span> <span class="n">confirm</span> <span class="n">the</span> <span class="n">model</span>
-<span class="linenos" data-linenos="41 "></span>
-<span class="linenos" data-linenos="42 "></span><span class="err">```</span><span class="n">jython</span>
-<span class="linenos" data-linenos="43 "></span><span class="c1"># Safe Power-Up Sequence</span>
-<span class="linenos" data-linenos="44 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Checking for shorts...&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos="45 "></span><span class="c1"># Find an unused ADC</span>
-<span class="linenos" data-linenos="46 "></span><span class="n">unused_adc</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos" data-linenos="47 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-<span class="linenos" data-linenos="48 "></span>    <span class="nf nf-JFS">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="linenos" data-linenos="49 "></span>    <span class="n">is_used</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos" data-linenos="50 "></span>    <span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="n">get_all_nets</span><span class="p">():</span>
-<span class="linenos" data-linenos="51 "></span>        <span class="k">if</span> <span class="nf nf-JFS">name</span> <span class="ow">in</span> <span class="n">net</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]:</span>
-<span class="linenos" data-linenos="52 "></span>            <span class="n">is_used</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos" data-linenos="53 "></span>            <span class="k">break</span>
-<span class="linenos" data-linenos="54 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_used</span><span class="p">:</span>
-<span class="linenos" data-linenos="55 "></span>        <span class="n">unused_adc</span> <span class="o">=</span> <span class="n">i</span>
-<span class="linenos" data-linenos="56 "></span>        <span class="k">break</span>
-<span class="linenos" data-linenos="57 "></span>
-<span class="linenos" data-linenos="58 "></span><span class="k">if</span> <span class="n">unused_adc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos" data-linenos="59 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">unused_adc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos" data-linenos="60 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span><span class="p">)</span>
-<span class="linenos" data-linenos="61 "></span>    <span class="c1"># ...</span>
+</code></pre></div>
+
+-->
+
+<h3 id="increasing-confidence">Increasing Confidence</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Confidence Boost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User confirms "yes that's right"</td>
+<td>+0.2</td>
+</tr>
+<tr>
+<td>Electrical measurement matches</td>
+<td>+0.3</td>
+</tr>
+<tr>
+<td>Multiple consistent tests</td>
+<td>+0.1 per test</td>
+</tr>
+<tr>
+<td>User provides datasheet</td>
+<td>Set to 0.95</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="workflows-for-llms">Workflows for LLMs</h2>
+<h3 id="1-circuit-safe-check-mental-model">1. Circuit Safe-Check (Mental Model)</h3>
+<p><strong>CRITICAL</strong>: The Jumperless prevents internal shorts, but <strong>cannot see external wires or components</strong> on the breadboard.
+If a user has a physical wire connecting Row 5 to Row 10, connecting <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span><span class="o">-&gt;</span><span class="mi">5</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">GND</span><span class="o">-&gt;</span><span class="mi">10</span></code> will cause a dead short through the user's wire.</p>
+<p><strong>Workflow:</strong>
+1.  <strong>Ask</strong>: "What is currently on the breadboard? (Wires, components, etc)"
+2.  <strong>Model</strong>: Build the mental model JSON with low confidence
+3.  <strong>Test</strong>: Run <code class="language-jython highlight"><span class="n">detect_component</span><span class="p">()</span></code> on key rows to verify
+4.  <strong>Update</strong>: Increase confidence as tests confirm the model</p>
+<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Safe Power-Up Sequence</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Checking for shorts...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Find an unused ADC</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">unused_adc</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="nf nf-JFS">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">is_used</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="n">get_all_nets</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 9 "></span>        <span class="k">if</span> <span class="nf nf-JFS">name</span> <span class="ow">in</span> <span class="n">net</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]:</span>
+<span class="linenos" data-linenos="10 "></span>            <span class="n">is_used</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos" data-linenos="11 "></span>            <span class="k">break</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_used</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="n">unused_adc</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="k">if</span> <span class="n">unused_adc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">unused_adc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span><span class="p">)</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="c1"># ...</span>
 </code></pre></div>
      model["wires"].append({"from": 5, "to": 10, "confidence": 0.95})
 else:
@@ -1148,10 +1037,6 @@ Explain actions via <code class="language-jython highlight"><span class="nf nf-J
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../10-3d-stand/" class="btn btn-neutral float-left" title="3D Printable Stand"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../99-glossary/" class="btn btn-neutral float-right" title="Glossary of Terms">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -1173,17 +1058,40 @@ Explain actions via <code class="language-jython highlight"><span class="nf nf-J
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../10-3d-stand/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../99-glossary/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
     <!-- Load everything except highlight.js -->
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
         <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var hamburger = document.querySelector("[data-toggle='wy-nav-top']");
+                if (!hamburger) return;
+                hamburger.addEventListener("touchend", function(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, { passive: false });
+            });
+        })();
+    </script>
 
 
 </body>

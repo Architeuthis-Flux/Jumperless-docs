@@ -9227,3 +9227,21 @@ p code span,
 .rst-content code span {
     background: transparent !important;
 }
+
+/* Mobile: tap target and reliable touch for hamburger (nav.wy-nav-top > i.fa.fa-bars) */
+@media screen and (max-width: 768px) {
+    .wy-nav-top [data-toggle="wy-nav-top"] {
+        display: inline-block;
+        min-width: 48px;
+        min-height: 48px;
+        padding: 12px;
+        margin: -8px 8px -8px -8px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+    nav.wy-nav-top {
+        cursor: pointer;
+        touch-action: manipulation;
+    }
+}

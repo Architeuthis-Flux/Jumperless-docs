@@ -27,7 +27,6 @@
 - [MicroPython](https://docs.jumperless.org/08-micropython/): Using the onboard MicroPython interpreter to script circuits
 - [MicroPython API Reference](https://docs.jumperless.org/09.5-micropythonAPIreference/): Complete API reference for all Jumperless MicroPython hardware calls
 - [JFS (Jumperless FileSystem) Module](https://docs.jumperless.org/09.6-jfs/): Jumperless FileSystem module for reading/writing files from MicroPython
-- [LLM Tools Specification](https://docs.jumperless.org/12-llm-tools-specification/): Specification for LLM tool-use with Jumperless serial commands
 
 ## Optional
 

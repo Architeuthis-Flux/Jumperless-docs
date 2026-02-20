@@ -169,10 +169,6 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
               </ul>
@@ -367,6 +363,893 @@ It's even printed on the box</p>
 in the big main menu <code class="language-jython highlight"><span class="n">switch</span></code> statement in <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">cpp</span></code>.</p>
 <h2 id="to-actually-write-the-app">To actually write the app</h2>
 <p><a href="https://github.com/Architeuthis-Flux/JumperlessV5/blob/6fd4fcba572c4b524435ec36c8901adcedbf52c6/RP23V50firmware/src/Apps.cpp#L141">The code</a> for <code class="language-jython highlight"><span class="n">Custom</span> <span class="n">App</span></code> is an example of the calls available with comments telling you what's going on. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.</p>
+<h1 id="llm-tool-specification-for-jumperless-v5">LLM Tool Specification for Jumperless V5</h1>
+<p>A guide for LLMs with some tips to control the Jumperless V5.</p>
+<hr />
+<h2 id="quick-reference">Quick Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Key Tools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Connections</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">save_slot</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">load_slot</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><strong>Voltage</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><strong>Current</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_power</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><strong>GPIO</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><strong>User Interaction</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><strong>Graphic Overlays</strong></td>
+<td><code class="language-jython highlight"><span class="n">overlay_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">overlay_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">overlay_set_pixel</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><strong>State</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>(Refer to the full <a href="../09.5-micropythonAPIreference/">Micropython API Reference</a>)</p>
+<hr />
+<h2 id="communication-methods">Communication Methods</h2>
+<h3 id="method-1-direct-python-commands-main-serial-port">Method 1: Direct Python Commands (Main Serial Port)</h3>
+<p>Prefix single-line Python with <code class="language-jython highlight"><span class="o">&gt;</span></code> on the main serial port (Port 1).
+<em>Best for: Single commands, status checks.</em>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;</span> <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="o">&gt;</span> <span class="n">voltage</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="o">&gt;</span> <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;V = </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;V = </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="method-2-viperide-raw-repl-3rd-usb-port">Method 2: ViperIDE / Raw REPL (3rd USB Port)</h3>
+<p>The <strong>third USB port</strong> provides a MicroPython Raw REPL.
+<em>Best for: Complex logic, loops, automated testing scripts.</em>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Full scripts run on port 3</span>
+<span class="linenos" data-linenos="2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="3 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">voltage</span> <span class="o">=</span> <span class="n">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">voltage</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="method-3-arduino-tags-via-uart">Method 3: Arduino Tags (via UART)</h3>
+<p>From an Arduino connected to the Jumperless.
+<em>Best for: Hybrid Arduino/Python projects.</em>
+<div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;connect(1, 5)&lt;/p&gt;&quot;</span><span class="p">);</span><span class="w">     </span><span class="c1">// Python command</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;&lt;j&gt;n&lt;/j&gt;&quot;</span><span class="p">);</span><span class="w">                 </span><span class="c1">// Menu command</span>
+</code></pre></div></p>
+<h3 id="method-4-single-character-commands-main-serial-port">Method 4: Single-Character Commands (Main Serial Port)</h3>
+<p>Raw characters sent to Port 1 trigger immediate menu actions.
+<em>Best for: Fast state dumps, clearing the board, or manual resets.</em>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">J</span>  <span class="o">&lt;--</span> <span class="n">Immediate</span> <span class="n">JSON</span> <span class="n">state</span> <span class="n">dump</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">L</span>  <span class="o">&lt;--</span> <span class="n">Immediate</span> <span class="n">JSON</span> <span class="n">state</span> <span class="n">load</span> <span class="p">(</span><span class="n">paste</span> <span class="n">JSON</span> <span class="n">after</span> <span class="n">L</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">x</span>  <span class="o">&lt;--</span> <span class="n">Immediate</span> <span class="n">board</span> <span class="n">clear</span>
+</code></pre></div></p>
+<h3 id="usb-port-structure">USB Port Structure</h3>
+<p>macOS / Linux: 
+| Port | Name | Function |
+|------|------|----------|
+| 1 (main) | JLV5port1 | Main terminal, menu, <code class="language-jython highlight"><span class="o">&gt;</span></code> Python commands |
+| 2 | JLV5port3 | Arduino UART passthrough |
+| 3 | JLV5port5 | MicroPython Raw REPL (ViperIDE) |</p>
+<p>Windows: 
+| Port | Name | Function |
+|------|------|----------|
+| 1 (main) | COM1 | Main terminal, menu, <code class="language-jython highlight"><span class="o">&gt;</span></code> Python commands |
+| 2 | COM2 | Arduino UART passthrough |
+| 3 | COM3 | MicroPython Raw REPL (ViperIDE) |</p>
+<hr />
+<h2 id="hardware-overview">Hardware Overview</h2>
+<h3 id="physical-layout">Physical Layout</h3>
+<ul>
+<li><strong>60 breadboard rows</strong> (1-60) with 5 RGB LEDs underneath each</li>
+<li><strong>Arduino Nano header</strong> with routable pins</li>
+<li><strong>OLED display</strong> (128x32, optional but recommended)</li>
+<li><strong>Probe</strong> with touch-sensing tip, 2 buttons, mode switch</li>
+<li><strong>Clickwheel</strong> rotary encoder with button</li>
+<li><strong>12 CH446Q crossbar chips</strong> (A-L) for routing (~80Ω per path)</li>
+</ul>
+<h3 id="power">Power</h3>
+<ul>
+<li><strong>TOP_RAIL / BOTTOM_RAIL</strong>: Main power rails (±8V, 300mA)</li>
+<li><strong>DAC0 / DAC1</strong>: Auxiliary voltage outputs (±8V, 300mA each)</li>
+<li>DAC0 connects to Probe Tip &amp; INA0</li>
+<li>DAC0 and DAC1 are 0-3.3V native but amplified to ±8V</li>
+<li><strong>Current Limits</strong>: ~300mA per rail/DAC</li>
+</ul>
+<h3 id="measurement">Measurement</h3>
+<ul>
+<li><strong>ADC0-3</strong>: 4 user analog inputs (±8V range)</li>
+<li><strong>INA0</strong>: High-side current monitor on DAC0 (Probe Tip)</li>
+<li><strong>INA1</strong>: High-side current monitor on TOP_RAIL (configurable)</li>
+</ul>
+<h3 id="gpio">GPIO</h3>
+<ul>
+<li><strong>10 GPIO pins</strong> (RP2350B, 3.3V logic) Defined as GPIO_1 - GPIO_8 (physical gpio 20-27 on RP2350B), and UART_TX (gpio 0 on RP2350B) and UART_RX (gpio 1 on RP2350B)</li>
+<li><strong>5V Tolerant Inputs</strong>: Yes</li>
+<li><strong>PWM</strong>: Hardware PWM 0.1Hz-62.5MHz on all pins</li>
+</ul>
+<hr />
+<h2 id="node-addressing">Node Addressing</h2>
+<h3 id="breadboard-rows">Breadboard Rows</h3>
+<p><code class="language-jython highlight"><span class="mi">1</span></code> through <code class="language-jython highlight"><span class="mi">60</span></code></p>
+<h3 id="power-rails">Power Rails</h3>
+<table>
+<thead>
+<tr>
+<th>Node</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></td>
+<td>Top power rail (default 5V)</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code></td>
+<td>Bottom rail (default GND)</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code></td>
+<td>Ground reference</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code></td>
+<td>DAC0 (connected to probe tip and INA0)</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code></td>
+<td>DAC1 (8V tolerant)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="arduino-pins">Arduino Pins</h3>
+<p><code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code>-<code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code>-<code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">AREF</span></code>, <code class="language-jython highlight"><span class="n">RESET</span></code></p>
+<h3 id="gpio_1">GPIO</h3>
+<p><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>-<code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code></p>
+<h3 id="adccurrent-sense">ADC/Current Sense</h3>
+<p><code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>-<code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_MINUS</span></code></p>
+<hr />
+<h2 id="core-tool-definitions">Core Tool Definitions</h2>
+<h3 id="connections-slots">Connections &amp; Slots</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># Create connection</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>                 <span class="c1"># Remove connection</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span>                            <span class="c1"># Remove ALL connections</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span>               <span class="c1"># Check if connected</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># Slot Management</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">save_slot</span><span class="p">(</span><span class="n">slot_id</span><span class="p">)</span>                       <span class="c1"># Save current state to slot 0-7</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">load_slot</span><span class="p">(</span><span class="n">slot_id</span><span class="p">)</span>                       <span class="c1"># Load state from slot 0-7</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">get_current_slot</span><span class="p">()</span>                       <span class="c1"># Returns active slot number</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="c1"># JSON State API (Recommended for LLMs)</span>
+<span class="linenos" data-linenos="12 "></span><span class="nf nf-Jumperless">get_state</span><span class="p">()</span>                              <span class="c1"># Get complete state as JSON string</span>
+<span class="linenos" data-linenos="13 "></span><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        <span class="c1"># Apply state from JSON string</span>
+</code></pre></div>
+<h3 id="voltage-control">Voltage Control</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">voltage</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># Set voltage (-8V to +8V)</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">dac_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>                       <span class="c1"># Get current setting</span>
+<span class="linenos" data-linenos="3 "></span><span class="c1"># Channels: 0/DAC0, 1/DAC1, 2/TOP_RAIL, 3/BOTTOM_RAIL</span>
+</code></pre></div>
+<h3 id="measurement_1">Measurement</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>           <span class="c1"># Read ADC voltage (channels 0-3)</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>    <span class="c1"># Read current in Amps (0=DAC0/Probe, 1=TOP_RAIL)</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">ina_get_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>    <span class="c1"># Read INA bus voltage</span>
+<span class="linenos" data-linenos="4 "></span><span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>      <span class="c1"># Read power in Watts</span>
+</code></pre></div>
+<h3 id="gpio-pwm">GPIO &amp; PWM</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>           <span class="c1"># Set output (True=3.3V, False=0V)</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">gpio_get</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>                  <span class="c1"># Returns HIGH, LOW, or FLOATING</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>   <span class="c1"># True=OUTPUT, False=INPUT</span>
+<span class="linenos" data-linenos="4 "></span><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">pull</span><span class="p">)</span>       <span class="c1"># 1=PULLUP, -1=PULLDOWN, 0=NONE</span>
+<span class="linenos" data-linenos="5 "></span><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">duty</span><span class="p">)</span>      <span class="c1"># Start PWM (duty: 0.0-1.0)</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span>                  <span class="c1"># Stop PWM</span>
+</code></pre></div>
+<h3 id="waveform-generator-wavegen">Waveform Generator (WaveGen)</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Setup</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">wavegen_set_output</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>   <span class="c1"># 0=DAC0, 1=DAC1 (Default)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">wavegen_set_wave</span><span class="p">(</span><span class="nb">type</span><span class="p">)</span>        <span class="c1"># 0=Sine, 1=Square, 2=Tri, 3=Saw</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="nf nf-Jumperless">wavegen_set_freq</span><span class="p">(</span><span class="n">hz</span><span class="p">)</span>          <span class="c1"># Frequency in Hz</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="nf nf-Jumperless">wavegen_set_amplitude</span><span class="p">(</span><span class="n">vpp</span><span class="p">)</span>    <span class="c1"># Peak-to-Peak Voltage (e.g. 3.3)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">wavegen_set_offset</span><span class="p">(</span><span class="n">volts</span><span class="p">)</span>     <span class="c1"># DC Offset (e.g. 1.65)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Control</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="nf nf-Jumperless">wavegen_start</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>              <span class="c1"># Start output</span>
+<span class="linenos" data-linenos="10 "></span><span class="nf nf-Jumperless">wavegen_stop</span><span class="p">()</span>                <span class="c1"># Stop output</span>
+</code></pre></div>
+<h3 id="user-interaction">User Interaction</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>       <span class="c1"># Display on OLED</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>                   <span class="c1"># Clear display</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span>          <span class="c1"># Wait for probe touch, return row</span>
+<span class="linenos" data-linenos="4 "></span><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span>       <span class="c1"># Check without waiting (-1 if none)</span>
+<span class="linenos" data-linenos="5 "></span><span class="nf nf-Jumperless">probe_button</span><span class="p">()</span>                 <span class="c1"># Returns CONNECT, REMOVE, or NONE</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">clickwheel_get_direction</span><span class="p">()</span>     <span class="c1"># Returns UP, DOWN, or NONE</span>
+<span class="linenos" data-linenos="7 "></span><span class="nf nf-Jumperless">clickwheel_get_button</span><span class="p">()</span>        <span class="c1"># Returns PRESSED, HELD, RELEASED</span>
+</code></pre></div>
+<h3 id="graphic-overlays-breadboard-leds">Graphic Overlays (Breadboard LEDs)</h3>
+<p>The breadboard LEDs are addressed as a 10x30 grid (Row 1-10, Col 1-30). Rows 1-5 are top half (E-A), Rows 6-10 are bottom half (F-J).</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># overlay_set(name, x, y, height, width, colors)</span>
+<span class="linenos" data-linenos="2 "></span><span class="c1"># Colors can be flat list or 2D list of 0xRRGGBB integers</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mh">0x550000</span><span class="p">]</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="n">overlay_clear</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>           <span class="c1"># Remove overlay</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">overlay_clear_all</span><span class="p">()</span>            <span class="c1"># Remove all</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">overlay_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="c1"># Set single pixel (1-30, 1-10)</span>
+</code></pre></div>
+<h3 id="system-filesystem">System &amp; Filesystem</h3>
+<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Standard Python I/O is supported!</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/config.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="c1"># List files</span>
+<span class="linenos" data-linenos="6 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">os</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">get_net_info</span><span class="p">(</span><span class="n">netNum</span><span class="p">)</span>   <span class="c1"># Get dict with name, color, nodes</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">get_num_nets</span><span class="p">()</span>         <span class="c1"># Count of active nets</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">get_num_bridges</span><span class="p">()</span>      <span class="c1"># Count of bridges</span>
+<span class="linenos" data-linenos="4 "></span><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span>        <span class="c1"># Print bridge table</span>
+</code></pre></div></p>
+<h3 id="single-character-command-reference-port-1-only">Single-Character Command Reference (Port 1 Only)</h3>
+<p>These commands are processed immediately when sent as raw characters (no <code class="language-jython highlight"><span class="o">&gt;</span></code> prefix) to the main serial port.</p>
+<table>
+<thead>
+<tr>
+<th>Char</th>
+<th>Description</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="n">J</span></code></td>
+<td><strong>Show JSON</strong></td>
+<td>Dumps the complete board state as a JSON string.</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">L</span></code></td>
+<td><strong>Load JSON</strong></td>
+<td>Prepares the board to receive a JSON state. Paste JSON and end with an empty line.</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">x</span></code></td>
+<td><strong>Clear All</strong></td>
+<td>Removes all connections and resets paths.</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">n</span></code></td>
+<td><strong>List Nets</strong></td>
+<td>Prints a human-readable list of all active nets.</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">b</span></code></td>
+<td><strong>Show Bridges</strong></td>
+<td>Prints the internal bridge array.</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="o">~</span></code></td>
+<td><strong>Show Config</strong></td>
+<td>Dumps the current <code class="language-jython highlight"><span class="n">config</span><span class="o">.</span><span class="n">txt</span></code> settings.</td>
+</tr>
+</tbody>
+</table>
+<p>| <code class="language-jython highlight"><span class="o">+</span></code> | <strong>Add</strong> | Add connections (e.g., <code class="language-jython highlight"><span class="o">+</span><span class="mi">1</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="o">-</span><span class="mi">12</span></code>). |
+| <code class="language-jython highlight"><span class="o">-</span></code> | <strong>Remove</strong> | Remove connections (e.g., <code class="language-jython highlight"><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">5</span></code>). |
+| <code class="language-jython highlight"><span class="n">v</span></code> | <strong>Read ADC</strong> | Follow with a channel (0-4) to get a quick voltage reading. |</p>
+<p>| <code class="language-jython highlight"><span class="o">@</span></code> | <strong>I2C Scan</strong> | Scans for I2C devices on a row (e.g., <code class="language-jython highlight"><span class="o">@</span><span class="mi">10</span></code>). |</p>
+<p>| <code class="language-jython highlight"><span class="n">r</span></code> | <strong>Reset Arduino</strong> | Follow with <code class="language-jython highlight"><span class="n">t</span></code> or <code class="language-jython highlight"><span class="n">b</span></code> to reset the Top or Bottom Arduino. |
+| <code class="language-jython highlight"><span class="n">A</span></code> | <strong>Connect Arduino UART</strong> | Connects Jumperless's UART to the Arduino D0 and D1 pins (<code class="language-jython highlight"><span class="n">a</span></code> to disconnect). |</p>
+<p>| <code class="language-jython highlight"><span class="n">m</span></code> | <strong>Menu</strong> | Displays the help menu (<code class="language-jython highlight"><span class="n">e</span></code> to show more options). |</p>
+<p>| <code class="language-jython highlight"><span class="p">[</span><span class="n">command</span><span class="p">]</span><span class="err">?</span></code> | <strong>Help</strong> | Displays the help menu for the specified command. |
+| <code class="language-jython highlight"><span class="nf nf-Jumperless">help</span></code> | <strong>Help Menu</strong> | Displays the help menu. |</p>
+<hr />
+<h2 id="llm-mental-model-file-format">LLM Mental Model File Format</h2>
+<p>LLMs should maintain a persistent JSON model of what they believe is physically on the breadboard. This model has <strong>confidence values</strong> that increase through user confirmation or automated testing.</p>
+<h3 id="mental-model-schema">Mental Model Schema</h3>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="w">  </span><span class="nt">&quot;last_updated&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-06T22:00:00Z&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">  </span><span class="nt">&quot;nano_header&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">    </span><span class="nt">&quot;device&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arduino_nano&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// &quot;arduino_nano&quot;, &quot;rp2040&quot;, &quot;rpi_40pin_adapter&quot;, &quot;oled_only&quot;, &quot;empty&quot;</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">    </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">    </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User confirmed Arduino Nano Every&quot;</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">  </span><span class="p">},</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">  </span><span class="nt">&quot;power_rails&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">    </span><span class="nt">&quot;TOP_RAIL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;measured&quot;</span><span class="p">},</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">    </span><span class="nt">&quot;BOTTOM_RAIL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;measured&quot;</span><span class="p">}</span>
+<span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="p">},</span>
+<span class="linenos" data-linenos="13 "></span><span class="w">  </span><span class="nt">&quot;components&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos="14 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="15 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;comp_001&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="16 "></span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;resistor&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="17 "></span><span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="linenos" data-linenos="18 "></span><span class="w">      </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ohms&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="19 "></span><span class="w">      </span><span class="nt">&quot;tolerance&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span>
+<span class="linenos" data-linenos="20 "></span><span class="w">      </span><span class="nt">&quot;pins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span>
+<span class="linenos" data-linenos="21 "></span><span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span>
+<span class="linenos" data-linenos="22 "></span><span class="w">      </span><span class="nt">&quot;detection_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;measured&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="23 "></span><span class="w">      </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Measured 987Ω between rows 5-10&quot;</span>
+<span class="linenos" data-linenos="24 "></span><span class="w">    </span><span class="p">},</span>
+<span class="linenos" data-linenos="25 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="26 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;comp_002&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="27 "></span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;led&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="28 "></span><span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="29 "></span><span class="w">      </span><span class="nt">&quot;forward_voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.8</span><span class="p">,</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">      </span><span class="nt">&quot;pins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;anode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;cathode&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">},</span>
+<span class="linenos" data-linenos="31 "></span><span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span>
+<span class="linenos" data-linenos="32 "></span><span class="w">      </span><span class="nt">&quot;detection_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user_stated&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="33 "></span><span class="w">      </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User said &#39;red LED on rows 15-16&#39;&quot;</span>
+<span class="linenos" data-linenos="34 "></span><span class="w">    </span><span class="p">},</span>
+<span class="linenos" data-linenos="35 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="36 "></span><span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;comp_003&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="37 "></span><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;module&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="38 "></span><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SSD1306 OLED&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="39 "></span><span class="w">      </span><span class="nt">&quot;pins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="40 "></span><span class="w">        </span><span class="nt">&quot;GND&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;VCC&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;SCL&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;SDA&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span>
+<span class="linenos" data-linenos="41 "></span><span class="w">      </span><span class="p">},</span>
+<span class="linenos" data-linenos="42 "></span><span class="w">      </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span>
+<span class="linenos" data-linenos="43 "></span><span class="w">      </span><span class="nt">&quot;detection_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inferred&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="44 "></span><span class="w">      </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Searched pinout, user confirmed row 20&quot;</span>
+<span class="linenos" data-linenos="45 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="46 "></span><span class="w">  </span><span class="p">],</span>
+<span class="linenos" data-linenos="47 "></span><span class="w">  </span><span class="nt">&quot;wires&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos="48 "></span><span class="w">    </span><span class="p">{</span><span class="nt">&quot;from&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;to&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;detection_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;continuity_test&quot;</span><span class="p">}</span>
+<span class="linenos" data-linenos="49 "></span><span class="w">  </span><span class="p">],</span>
+<span class="linenos" data-linenos="50 "></span><span class="w">  </span><span class="nt">&quot;unknowns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos="51 "></span><span class="w">    </span><span class="p">{</span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Something detected but not identified&quot;</span><span class="p">}</span>
+<span class="linenos" data-linenos="52 "></span><span class="w">  </span><span class="p">]</span>
+<span class="linenos" data-linenos="53 "></span><span class="p">}</span>
+</code></pre></div>
+<h3 id="nano-header-device-types">Nano Header Device Types</h3>
+<table>
+<thead>
+<tr>
+<th>Device</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="n">arduino_nano</span></code></td>
+<td>Arduino Nano/Every/RP2040 etc.</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">rp2040</span></code></td>
+<td>Bare RP2040 board</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">rpi_40pin_adapter</span></code></td>
+<td>RPi GPIO adapter board</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">oled_only</span></code></td>
+<td>SBC/SMD/OLED adapter for just the OLED</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">empty</span></code></td>
+<td>Nothing plugged in</td>
+</tr>
+</tbody>
+</table>
+<h3 id="confidence-levels">Confidence Levels</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Source</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td><code class="language-jython highlight"><span class="n">measured</span></code></td>
+<td>Electrically verified</td>
+</tr>
+<tr>
+<td>0.9</td>
+<td><code class="language-jython highlight"><span class="n">user_confirmed</span></code></td>
+<td>User explicitly confirmed</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td><code class="language-jython highlight"><span class="n">user_stated</span></code></td>
+<td>User mentioned it casually</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td><code class="language-jython highlight"><span class="n">inferred</span></code></td>
+<td>LLM guessed from context</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td><code class="language-jython highlight"><span class="n">assumed</span></code></td>
+<td>Default assumption</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<!-- 
+
+## Automated Component Detection
+
+The Jumperless can perform automated testing to identify unknown components, similar to transistor testers.
+
+### Detection Algorithm Flowchart
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">START</span><span class="p">:</span> <span class="n">Unknown</span> <span class="n">component</span> <span class="n">between</span> <span class="n">rows</span> <span class="n">A</span> <span class="ow">and</span> <span class="n">B</span>
+<span class="linenos" data-linenos=" 2 "></span>                    <span class="err">│</span>
+<span class="linenos" data-linenos=" 3 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="err">┌───────────────────────────────────────┐</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="err">│</span> <span class="mf">1.</span> <span class="n">CONTINUITY</span> <span class="n">TEST</span>                    <span class="err">│</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="err">│</span>    <span class="no no-Hardware">Connect</span> <span class="no no-Jumperless">DAC1</span><span class="err">→</span><span class="n">A</span><span class="p">,</span> <span class="no no-Jumperless">ADC0</span><span class="err">→</span><span class="n">B</span><span class="p">,</span> <span class="no no-Jumperless">GND</span><span class="err">→</span><span class="n">B</span>      <span class="err">│</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="err">│</span>    <span class="n">Set</span> <span class="no no-Jumperless">DAC1</span><span class="o">=</span><span class="mf">0.5</span><span class="n">V</span><span class="p">,</span> <span class="no no-Hardware">measure</span> <span class="no no-Jumperless">ADC0</span>        <span class="err">│</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="err">│</span>    <span class="n">If</span> <span class="n">V_B</span> <span class="err">≈</span> <span class="n">V_A</span> <span class="err">→</span> <span class="n">WIRE</span> <span class="p">(</span><span class="n">R</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="n">Ω</span><span class="p">)</span>       <span class="err">│</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="err">└───────────────────────────────────────┘</span>
+<span class="linenos" data-linenos="10 "></span>                    <span class="err">│</span> <span class="n">No</span>
+<span class="linenos" data-linenos="11 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos="12 "></span><span class="err">┌───────────────────────────────────────┐</span>
+<span class="linenos" data-linenos="13 "></span><span class="err">│</span> <span class="mf">2.</span> <span class="n">RESISTANCE</span> <span class="n">TEST</span>                    <span class="err">│</span>
+<span class="linenos" data-linenos="14 "></span><span class="err">│</span>    <span class="no no-Hardware">Measure</span> <span class="n">voltage</span> <span class="n">drop</span><span class="p">,</span> <span class="n">calc</span> <span class="n">R</span>       <span class="err">│</span>
+<span class="linenos" data-linenos="15 "></span><span class="err">│</span>    <span class="n">If</span> <span class="mi">1</span><span class="n">Ω</span> <span class="o">&lt;</span> <span class="n">R</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="n">MΩ</span> <span class="err">→</span> <span class="n">RESISTOR</span>        <span class="err">│</span>
+<span class="linenos" data-linenos="16 "></span><span class="err">└───────────────────────────────────────┘</span>
+<span class="linenos" data-linenos="17 "></span>                    <span class="err">│</span> <span class="n">No</span><span class="o">/</span><span class="n">Very</span> <span class="n">High</span> <span class="n">R</span>
+<span class="linenos" data-linenos="18 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos="19 "></span><span class="err">┌───────────────────────────────────────┐</span>
+<span class="linenos" data-linenos="20 "></span><span class="err">│</span> <span class="mf">3.</span> <span class="n">DIODE</span> <span class="n">TEST</span> <span class="p">(</span><span class="n">Forward</span><span class="p">)</span>               <span class="err">│</span>
+<span class="linenos" data-linenos="21 "></span><span class="err">│</span>    <span class="no no-Jumperless">DAC1</span><span class="err">→</span><span class="n">A</span> <span class="p">(</span><span class="mi">0</span><span class="err">→</span><span class="mi">3</span><span class="n">V</span> <span class="n">ramp</span><span class="p">),</span> <span class="no no-Jumperless">ADC0</span><span class="err">→</span><span class="n">B</span>         <span class="err">│</span>
+<span class="linenos" data-linenos="22 "></span><span class="err">│</span>    <span class="n">If</span> <span class="n">Vf</span> <span class="err">≈</span> <span class="mf">0.3</span><span class="n">V</span> <span class="err">→</span> <span class="n">Schottky</span>            <span class="err">│</span>
+<span class="linenos" data-linenos="23 "></span><span class="err">│</span>    <span class="n">If</span> <span class="n">Vf</span> <span class="err">≈</span> <span class="mf">0.6</span><span class="n">V</span> <span class="err">→</span> <span class="n">Silicon</span> <span class="n">diode</span>       <span class="err">│</span>
+<span class="linenos" data-linenos="24 "></span><span class="err">│</span>    <span class="n">If</span> <span class="n">Vf</span> <span class="err">≈</span> <span class="mf">1.8</span><span class="o">-</span><span class="mf">3.2</span><span class="n">V</span> <span class="err">→</span> <span class="n">LED</span>             <span class="err">│</span>
+<span class="linenos" data-linenos="25 "></span><span class="err">└───────────────────────────────────────┘</span>
+<span class="linenos" data-linenos="26 "></span>                    <span class="err">│</span> <span class="n">No</span> <span class="n">forward</span> <span class="n">drop</span>
+<span class="linenos" data-linenos="27 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos="28 "></span><span class="err">┌───────────────────────────────────────┐</span>
+<span class="linenos" data-linenos="29 "></span><span class="err">│</span> <span class="mf">4.</span> <span class="n">DIODE</span> <span class="n">TEST</span> <span class="p">(</span><span class="n">Reverse</span> <span class="o">-</span> <span class="n">swap</span><span class="p">)</span>        <span class="err">│</span>
+<span class="linenos" data-linenos="30 "></span><span class="err">│</span>    <span class="no no-Jumperless">DAC1</span><span class="err">→</span><span class="n">B</span><span class="p">,</span> <span class="no no-Jumperless">ADC0</span><span class="err">→</span><span class="n">A</span>                     <span class="err">│</span>
+<span class="linenos" data-linenos="31 "></span><span class="err">│</span>    <span class="n">If</span> <span class="n">conducts</span> <span class="nb">reversed</span> <span class="err">→</span> <span class="n">WIRE</span>        <span class="err">│</span>
+<span class="linenos" data-linenos="32 "></span><span class="err">│</span>    <span class="n">If</span> <span class="n">blocks</span> <span class="err">→</span> <span class="n">DIODE</span> <span class="p">(</span><span class="n">note</span> <span class="n">polarity</span><span class="p">)</span>  <span class="err">│</span>
+<span class="linenos" data-linenos="33 "></span><span class="err">└───────────────────────────────────────┘</span>
+<span class="linenos" data-linenos="34 "></span>                    <span class="err">│</span> <span class="n">Blocks</span> <span class="n">both</span> <span class="n">ways</span>
+<span class="linenos" data-linenos="35 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos="36 "></span><span class="err">┌───────────────────────────────────────┐</span>
+<span class="linenos" data-linenos="37 "></span><span class="err">│</span> <span class="mf">5.</span> <span class="n">CAPACITANCE</span> <span class="n">TEST</span>                   <span class="err">│</span>
+<span class="linenos" data-linenos="38 "></span><span class="err">│</span>    <span class="n">Use</span> <span class="n">crossbar</span> <span class="n">R</span> <span class="err">≈</span> <span class="mi">80</span><span class="n">Ω</span><span class="p">,</span> <span class="no no-Hardware">measure</span> <span class="n">τ</span>    <span class="err">│</span>
+<span class="linenos" data-linenos="39 "></span><span class="err">│</span>    <span class="n">C</span> <span class="o">=</span> <span class="n">τ</span> <span class="o">/</span> <span class="mi">80</span><span class="n">Ω</span>                        <span class="err">│</span>
+<span class="linenos" data-linenos="40 "></span><span class="err">│</span>    <span class="n">If</span> <span class="mi">1</span><span class="n">pF</span> <span class="o">&lt;</span> <span class="n">C</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">,</span><span class="mi">000</span><span class="n">µF</span> <span class="err">→</span> <span class="n">CAPACITOR</span>  <span class="err">│</span>
+<span class="linenos" data-linenos="41 "></span><span class="err">└───────────────────────────────────────┘</span>
+<span class="linenos" data-linenos="42 "></span>                    <span class="err">│</span> <span class="n">No</span> <span class="n">capacitance</span> <span class="p">(</span><span class="n">RC</span> <span class="n">method</span><span class="p">)</span>
+<span class="linenos" data-linenos="43 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos="44 "></span><span class="err">┌───────────────────────────────────────┐</span>
+<span class="linenos" data-linenos="45 "></span><span class="err">│</span> <span class="mi">5</span><span class="n">b</span><span class="o">.</span> <span class="n">CAPACITANCE</span><span class="o">/</span><span class="n">INDUCTANCE</span> <span class="p">(</span><span class="n">AC</span> <span class="n">test</span><span class="p">)</span>  <span class="err">│</span>
+<span class="linenos" data-linenos="46 "></span><span class="err">│</span>    <span class="n">Apply</span> <span class="n">AC</span> <span class="n">via</span> <span class="n">WaveGen</span><span class="p">,</span> <span class="no no-Hardware">measure</span> <span class="n">ΔΦ</span>   <span class="err">│</span>
+<span class="linenos" data-linenos="47 "></span><span class="err">│</span>    <span class="n">Leading</span> <span class="n">phase</span> <span class="err">→</span> <span class="n">CAPACITOR</span>          <span class="err">│</span>
+<span class="linenos" data-linenos="48 "></span><span class="err">│</span>    <span class="n">Lagging</span> <span class="n">phase</span> <span class="err">→</span> <span class="n">INDUCTOR</span>           <span class="err">│</span>
+<span class="linenos" data-linenos="49 "></span><span class="err">│</span>    <span class="n">XC</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="n">πfC</span><span class="p">),</span> <span class="n">XL</span> <span class="o">=</span> <span class="mi">2</span><span class="n">πfL</span>           <span class="err">│</span>
+<span class="linenos" data-linenos="50 "></span><span class="err">└───────────────────────────────────────┘</span>
+<span class="linenos" data-linenos="51 "></span>                    <span class="err">│</span> <span class="n">Nothing</span> <span class="n">detected</span>
+<span class="linenos" data-linenos="52 "></span>                    <span class="err">▼</span>
+<span class="linenos" data-linenos="53 "></span>              <span class="n">OPEN</span> <span class="n">CIRCUIT</span> <span class="ow">or</span>
+<span class="linenos" data-linenos="54 "></span>              <span class="n">UNKNOWN</span> <span class="mi">3</span><span class="o">+</span> <span class="n">PIN</span> <span class="n">DEVICE</span>
+<span class="linenos" data-linenos="55 "></span>
+<span class="linenos" data-linenos="56 "></span><span class="o">**</span><span class="n">Note</span> <span class="n">on</span> <span class="n">Confidence</span><span class="o">**</span><span class="p">:</span> <span class="n">These</span> <span class="n">automated</span> <span class="n">tests</span> <span class="n">provide</span> <span class="n">estimates</span><span class="p">,</span> <span class="ow">not</span> 
+<span class="linenos" data-linenos="57 "></span><span class="n">absolute</span> <span class="n">identification</span><span class="o">.</span> <span class="n">Crossbar</span> <span class="n">R</span> <span class="n">varies</span> <span class="mi">80</span><span class="o">-</span><span class="mi">88</span><span class="n">Ω</span><span class="o">.</span> <span class="n">Always</span> <span class="nb">set</span> <span class="n">confidence</span>
+<span class="linenos" data-linenos="58 "></span><span class="err">≤</span> <span class="mf">0.85</span> <span class="k">for</span> <span class="n">automated</span> <span class="n">measurements</span><span class="o">.</span> <span class="n">Confirm</span> <span class="k">with</span> <span class="n">user</span> <span class="k">if</span> <span class="n">unsure</span><span class="o">.</span>
+</code></pre></div>
+
+### Python Implementation
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">detect_component</span><span class="p">(</span><span class="n">row_a</span><span class="p">,</span> <span class="n">row_b</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Automated component detection between two rows.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="c1"># 1. Continuity / Resistance Test</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="n">row_a</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Clear existing</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="n">row_b</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="n">row_a</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="n">row_b</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">row_b</span><span class="p">,</span> <span class="no no-Jumperless">GND</span><span class="p">)</span>  <span class="c1"># Complete circuit through INA</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span>    <span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Apply 1V</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">v_drop</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">current</span> <span class="o">=</span> <span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># If INA1 in path</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span>    <span class="k">if</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">:</span>  <span class="c1"># &gt; 1mA flows</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="n">resistance</span> <span class="o">=</span> <span class="n">v_drop</span> <span class="o">/</span> <span class="n">current</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="k">if</span> <span class="n">resistance</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="linenos" data-linenos="19 "></span>            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;wire&quot;</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.95</span><span class="p">}</span>
+<span class="linenos" data-linenos="20 "></span>        <span class="k">elif</span> <span class="n">resistance</span> <span class="o">&lt;</span> <span class="mi">10_000_000</span><span class="p">:</span>
+<span class="linenos" data-linenos="21 "></span>            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;resistor&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">resistance</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span>    <span class="c1"># 2. Diode Test (Forward)</span>
+<span class="linenos" data-linenos="24 "></span>    <span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="25 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos" data-linenos="26 "></span>    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]:</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="linenos" data-linenos="28 "></span>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.005</span><span class="p">)</span>
+<span class="linenos" data-linenos="29 "></span>        <span class="n">measured</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="k">if</span> <span class="n">measured</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>  <span class="c1"># Conducting</span>
+<span class="linenos" data-linenos="31 "></span>            <span class="n">vf</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="n">measured</span>
+<span class="linenos" data-linenos="32 "></span>            <span class="k">if</span> <span class="n">vf</span> <span class="o">&lt;</span> <span class="mf">0.4</span><span class="p">:</span>
+<span class="linenos" data-linenos="33 "></span>                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;diode&quot;</span><span class="p">,</span> <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;schottky&quot;</span><span class="p">,</span> <span class="s2">&quot;vf&quot;</span><span class="p">:</span> <span class="n">vf</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">}</span>
+<span class="linenos" data-linenos="34 "></span>            <span class="k">elif</span> <span class="n">vf</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>
+<span class="linenos" data-linenos="35 "></span>                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;diode&quot;</span><span class="p">,</span> <span class="s2">&quot;subtype&quot;</span><span class="p">:</span> <span class="s2">&quot;silicon&quot;</span><span class="p">,</span> <span class="s2">&quot;vf&quot;</span><span class="p">:</span> <span class="n">vf</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">}</span>
+<span class="linenos" data-linenos="36 "></span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="37 "></span>                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;led&quot;</span><span class="p">,</span> <span class="s2">&quot;vf&quot;</span><span class="p">:</span> <span class="n">vf</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}</span>
+<span class="linenos" data-linenos="38 "></span>
+<span class="linenos" data-linenos="39 "></span>    <span class="c1"># 3. Diode Test (Reverse - swap polarity)</span>
+<span class="linenos" data-linenos="40 "></span>    <span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="n">row_a</span><span class="p">)</span>
+<span class="linenos" data-linenos="41 "></span>    <span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="n">row_b</span><span class="p">)</span>
+<span class="linenos" data-linenos="42 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="n">row_b</span><span class="p">)</span>
+<span class="linenos" data-linenos="43 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="n">row_a</span><span class="p">)</span>
+<span class="linenos" data-linenos="44 "></span>    <span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="linenos" data-linenos="45 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos" data-linenos="46 "></span>    <span class="k">if</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+<span class="linenos" data-linenos="47 "></span>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;wire&quot;</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">}</span>  <span class="c1"># Conducts both ways</span>
+<span class="linenos" data-linenos="48 "></span>
+<span class="linenos" data-linenos="49 "></span>    <span class="c1"># 4. Capacitance Test (RC time constant)</span>
+<span class="linenos" data-linenos="50 "></span>    <span class="c1"># Use internal resistance + measure charge time</span>
+<span class="linenos" data-linenos="51 "></span>    <span class="c1"># ... (implementation depends on available timing)</span>
+<span class="linenos" data-linenos="52 "></span>
+<span class="linenos" data-linenos="53 "></span>    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span> <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+</code></pre></div>
+
+### Test Sequence for Unknown Board
+
+When a user says "I have some stuff on the board but I'm not sure what":
+
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">def</span><span class="w"> </span><span class="nf">scan_all_rows</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Scan all 60 rows for connections and components.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="k">for</span> <span class="n">row_a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">60</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="k">for</span> <span class="n">row_b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row_a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">61</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 7 "></span>            <span class="n">result</span> <span class="o">=</span> <span class="n">detect_component</span><span class="p">(</span><span class="n">row_a</span><span class="p">,</span> <span class="n">row_b</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span>            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;unknown&quot;</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 9 "></span>                <span class="n">connections</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+<span class="linenos" data-linenos="10 "></span>                    <span class="s2">&quot;rows&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">row_a</span><span class="p">,</span> <span class="n">row_b</span><span class="p">],</span>
+<span class="linenos" data-linenos="11 "></span>                    <span class="o">**</span><span class="n">result</span>
+<span class="linenos" data-linenos="12 "></span>                <span class="p">})</span>
+<span class="linenos" data-linenos="13 "></span>                <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row_a</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">row_b</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">return</span> <span class="n">connections</span>
+</code></pre></div>
+
+-->
+
+<h3 id="increasing-confidence">Increasing Confidence</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Confidence Boost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User confirms "yes that's right"</td>
+<td>+0.2</td>
+</tr>
+<tr>
+<td>Electrical measurement matches</td>
+<td>+0.3</td>
+</tr>
+<tr>
+<td>Multiple consistent tests</td>
+<td>+0.1 per test</td>
+</tr>
+<tr>
+<td>User provides datasheet</td>
+<td>Set to 0.95</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="workflows-for-llms">Workflows for LLMs</h2>
+<h3 id="1-circuit-safe-check-mental-model">1. Circuit Safe-Check (Mental Model)</h3>
+<p><strong>CRITICAL</strong>: The Jumperless prevents internal shorts, but <strong>cannot see external wires or components</strong> on the breadboard.
+If a user has a physical wire connecting Row 5 to Row 10, connecting <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span><span class="o">-&gt;</span><span class="mi">5</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">GND</span><span class="o">-&gt;</span><span class="mi">10</span></code> will cause a dead short through the user's wire.</p>
+<p><strong>Workflow:</strong>
+1.  <strong>Ask</strong>: "What is currently on the breadboard? (Wires, components, etc)"
+2.  <strong>Model</strong>: Build the mental model JSON with low confidence
+3.  <strong>Test</strong>: Run <code class="language-jython highlight"><span class="n">detect_component</span><span class="p">()</span></code> on key rows to verify
+4.  <strong>Update</strong>: Increase confidence as tests confirm the model</p>
+<p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Safe Power-Up Sequence</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Checking for shorts...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Find an unused ADC</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">unused_adc</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="nf nf-JFS">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">is_used</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="n">get_all_nets</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 9 "></span>        <span class="k">if</span> <span class="nf nf-JFS">name</span> <span class="ow">in</span> <span class="n">net</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]:</span>
+<span class="linenos" data-linenos="10 "></span>            <span class="n">is_used</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos" data-linenos="11 "></span>            <span class="k">break</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_used</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="n">unused_adc</span> <span class="o">=</span> <span class="n">i</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="k">if</span> <span class="n">unused_adc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">unused_adc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="no no-Jumperless">DAC1</span><span class="p">)</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="c1"># ...</span>
+</code></pre></div>
+     model["wires"].append({"from": 5, "to": 10, "confidence": 0.95})
+else:
+     connect(5, TOP_RAIL)
+     connect(10, GND)
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1">### 2. Identifying User Circuits</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Use</span> <span class="n">the</span> <span class="n">Probe</span> <span class="n">to</span> <span class="s2">&quot;see&quot;</span> <span class="n">the</span> <span class="n">board</span><span class="o">.</span>
+<span class="linenos" data-linenos="3 "></span><span class="err">```</span><span class="n">jython</span>
+<span class="linenos" data-linenos="4 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Touch the input of your circuit&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">input_row</span> <span class="o">=</span> <span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input is at row </span><span class="si">{</span><span class="n">input_row</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="3-automated-characterization">3. Automated Characterization</h3>
+<p>Use WaveGen and ADC to treat the circuit as a black box.
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">DAC1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="nf nf-Jumperless">wavegen_set_output</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">wavegen_set_freq</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="nf nf-Jumperless">wavegen_set_wave</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Sine</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="nf nf-Jumperless">wavegen_start</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">val</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="component-library-dynamic-lookup">Component Library (Dynamic Lookup)</h2>
+<p>When a user mentions a hardware module, <strong>search the web for its pinout</strong> and build a JSON definition on the fly.</p>
+<p><strong>Workflow:</strong>
+1. User mentions: "I have an SSD1306 OLED on the breadboard"
+2. LLM searches: "SSD1306 OLED pinout"
+3. LLM builds JSON from search results and adds it to <code class="language-jython highlight"><span class="n">mental_model</span><span class="p">[</span><span class="s2">&quot;components&quot;</span><span class="p">]</span></code></p>
+<p><strong>Example: NeoPixel Stick</strong>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NeoPixel Stick 8&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="w">  </span><span class="nt">&quot;pins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">    </span><span class="nt">&quot;GND&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GND&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">    </span><span class="nt">&quot;5V&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">    </span><span class="nt">&quot;DIN&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GPIO_1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">    </span><span class="nt">&quot;DOUT&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NC&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;offset&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">}</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">  </span><span class="p">},</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">  </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">  </span><span class="nt">&quot;voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5V&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">  </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.3V GPIO works for most NeoPixels. Data on offset 2.&quot;</span>
+<span class="linenos" data-linenos="12 "></span><span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Key</strong>: The <code class="language-jython highlight"><span class="n">offset</span></code> field defines pin position relative to pin 1. When user says "pin 1 is on row X", calculate absolute rows as <code class="language-jython highlight"><span class="n">row</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="n">offset</span></code>.</p>
+<hr />
+<h2 id="safety-guidelines-for-llms">Safety Guidelines for LLMs</h2>
+<ol>
+<li><strong>Voltage Check</strong>: ADCs are buffered for ±8V. The board is ±9V tolerant overall.</li>
+<li><strong>Short Circuit Prevention</strong>: The firmware will ignore requests to connect <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code> directly to <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code> or <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>.</li>
+<li><strong>Confirm Power</strong>: Ask: "Is the board powered via USB?" (No barrel jack exists).</li>
+<li><strong>Crossbar Resistance</strong>: Remember ~80Ω per connection. High current paths will have voltage drop. Measure voltage <em>at the destination</em> with an ADC to compensate.</li>
+</ol>
+<hr />
+<h2 id="llm-preferences-claudes-additions">LLM Preferences (Claude's Additions)</h2>
+<h3 id="1-structured-state-snapshot">1. Structured State Snapshot</h3>
+<p><strong>What I want</strong>: A single command that returns the complete board state as structured data (JSON/dict), not just printed text. This lets me reason about the state programmatically.</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># REQUESTED: get_state() -&gt; dict</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="c1"># Returns something like:</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 4 "></span>  <span class="s2">&quot;slot&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span>  <span class="s2">&quot;bridges&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;GND&quot;</span><span class="p">]],</span>
+<span class="linenos" data-linenos=" 6 "></span>  <span class="s2">&quot;rails&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;TOP_RAIL&quot;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;BOTTOM_RAIL&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;DAC0&quot;</span><span class="p">:</span> <span class="mf">3.3</span><span class="p">,</span> <span class="s2">&quot;DAC1&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+<span class="linenos" data-linenos=" 7 "></span>  <span class="s2">&quot;gpio&quot;</span><span class="p">:</span> <span class="p">[</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="p">{</span><span class="s2">&quot;pin&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="s2">&quot;OUTPUT&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;pull&quot;</span><span class="p">:</span> <span class="s2">&quot;NONE&quot;</span><span class="p">},</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="p">{</span><span class="s2">&quot;pin&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;dir&quot;</span><span class="p">:</span> <span class="s2">&quot;INPUT&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;pull&quot;</span><span class="p">:</span> <span class="s2">&quot;PULLUP&quot;</span><span class="p">}</span>
+<span class="linenos" data-linenos="10 "></span>  <span class="p">],</span>
+<span class="linenos" data-linenos="11 "></span>  <span class="s2">&quot;adc_snapshot&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.28</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">5.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03</span><span class="p">]</span>  <span class="c1"># Quick reading of all 4</span>
+<span class="linenos" data-linenos="12 "></span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Why</strong>: Currently I have to call <code class="language-jython highlight"><span class="nf nf-Jumperless">get_num_bridges</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_net_info</span><span class="p">()</span></code> for each net, etc. A single snapshot is faster and less error-prone for building my mental model.</p>
+<h3 id="2-return-values-not-just-prints">2. Return Values, Not Just Prints</h3>
+<p>For debugging, I prefer <strong>return values</strong> over <strong>print statements</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Instead of...</th>
+<th>I prefer...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code> → prints to serial</td>
+<td><code class="language-jython highlight"><span class="n">get_nets</span><span class="p">()</span></code> → returns list of net dicts</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code> → prints to serial</td>
+<td><code class="language-jython highlight"><span class="n">get_bridges</span><span class="p">()</span></code> → returns list of bridge tuples</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">print_paths_compact</span><span class="p">()</span></code> → prints</td>
+<td><code class="language-jython highlight"><span class="n">get_paths</span><span class="p">()</span></code> → returns routing info</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why</strong>: When I call a tool, I want to capture the result and reason about it. Print output goes to the user's terminal but isn't easily parsed by my next step.</p>
+<h3 id="3-error-return-conventions">3. Error Return Conventions</h3>
+<p>Consistent error handling helps me recover:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Good: Returns None or raises exception with message</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">result</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="mi">999</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Invalid node</span>
+<span class="linenos" data-linenos="3 "></span><span class="c1"># Returns: None (or {&quot;error&quot;: &quot;Invalid node: 999&quot;})</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="c1"># Good: Returns success/failure boolean with reason</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">success</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="n">disconnect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  
+<span class="linenos" data-linenos="7 "></span><span class="c1"># Returns: (True, &quot;Disconnected&quot;) or (False, &quot;No such connection&quot;)</span>
+</code></pre></div>
+<h3 id="4-undo-via-slot-backup">4. Undo via Slot Backup</h3>
+<p>For destructive operations like <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>, the existing slot system provides an undo mechanism:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Before destructive operation, save current state to a backup slot</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">save_slot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>           <span class="c1"># Save to slot 7 as backup</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">nodes_clear</span><span class="p">()</span>          <span class="c1"># Now safe to clear</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="c1"># If user wants to undo:</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">load_slot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>           <span class="c1"># Restore from backup</span>
+</code></pre></div>
+<p><strong>Pattern</strong>: Always save the current slot to an unused slot (7 is a good "scratch" slot) before any destructive action. This provides a built-in undo without needing special confirm flags.</p>
+<h3 id="5-measurement-with-context">5. Measurement with Context</h3>
+<p>When measuring, I often want multiple samples or statistics:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># REQUESTED: adc_get_stats(channel, samples=10)</span>
+<span class="linenos" data-linenos="2 "></span><span class="c1"># Returns: {&quot;mean&quot;: 3.28, &quot;min&quot;: 3.25, &quot;max&quot;: 3.31, &quot;stddev&quot;: 0.02}</span>
+</code></pre></div>
+<p><strong>Why</strong>: A single ADC reading might be noisy. Having built-in averaging/stats means I don't have to write loops for every measurement.</p>
+<h3 id="6-interactive-conversation-patterns">6. Interactive Conversation Patterns</h3>
+<p>When helping users debug, I find these patterns effective:</p>
+<p><strong>Explore First, Act Later</strong>:
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">User</span><span class="p">:</span> <span class="s2">&quot;My LED isn&#39;t lighting up&quot;</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Me</span><span class="p">:</span> 
+<span class="linenos" data-linenos="3 "></span>  <span class="mf">1.</span> <span class="s2">&quot;Where is your LED connected? (Touch the anode with the probe)&quot;</span>
+<span class="linenos" data-linenos="4 "></span>  <span class="mf">2.</span> <span class="p">[</span><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span> <span class="err">→</span> <span class="n">row</span> <span class="mi">15</span><span class="p">]</span>
+<span class="linenos" data-linenos="5 "></span>  <span class="mf">3.</span> <span class="s2">&quot;I see row 15. Let me check the voltage there...&quot;</span>
+<span class="linenos" data-linenos="6 "></span>  <span class="mf">4.</span> <span class="p">[</span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="err">→</span> <span class="mf">0.02</span><span class="n">V</span><span class="p">]</span>
+<span class="linenos" data-linenos="7 "></span>  <span class="mf">5.</span> <span class="s2">&quot;Row 15 is at 0V. Is it supposed to be connected to power?&quot;</span>
+</code></pre></div></p>
+<p><strong>Show, Don't Just Do</strong>:
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Before making a connection, describe it:</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Connecting row 5 to 5V...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Done! LED should light now&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p><strong>Verify After Acting</strong>:
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># After connecting power, verify it worked:</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="no no-Jumperless">TOP_RAIL</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">v</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mf">5.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Row 5 at </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="8 "></span>    <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠ Expected 5V, got </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="9 "></span><span class="nf nf-Jumperless">disconnect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<h2 id="llm-best-practices-future-tools">LLM Best Practices &amp; Future Tools</h2>
+<p>This section consolidates recommendations for reliable, high-context hardware interaction.</p>
+<h3 id="1-explicit-state-verification">1. Explicit State Verification</h3>
+<p>Trust but verify. Confirm hardware state after critical operations.</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Goal: Set DAC0 to 3.3V</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">current</span> <span class="o">=</span> <span class="n">dac_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">current</span> <span class="o">-</span> <span class="mf">3.3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">dac_set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># Allow settling</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="n">new_val</span> <span class="o">=</span> <span class="n">dac_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span>    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">new_val</span> <span class="o">-</span> <span class="mf">3.3</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>
+<span class="linenos" data-linenos="8 "></span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: DAC0 failed to set. Got </span><span class="si">{</span><span class="n">new_val</span><span class="si">}</span><span class="s2">V&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="2-structured-state-snapshot">2. Structured State Snapshot</h3>
+<p>A single command to return the complete board state as a formatted JSON string, enabling detailed programmatic reasoning and full state management.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Get the complete current state as a formatted JSON string</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">snapshot</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_state</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="c1"># The snapshot includes:</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># - power: Settings for TOP_RAIL, BOTTOM_RAIL, DAC0, DAC1</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># - nets: All active connections, names, colors, and voltage assignments</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># - gpio: Current configuration and state of all GPIO pins</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Apply a state back to the hardware</span>
+<span class="linenos" data-linenos="10 "></span><span class="c1"># set_state(json_string, clear_first=True)</span>
+<span class="linenos" data-linenos="11 "></span><span class="c1"># If clear_first=True (default), it resets the board before applying</span>
+<span class="linenos" data-linenos="12 "></span><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">snapshot</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="3-search-first-component-handling">3. Search-First Component Handling</h3>
+<p>Ground knowledge by searching for pinouts <em>before</em> asking the user.</p>
+<p><strong>Workflow:</strong>
+1. User: "I have a BME280."
+2. Agent: <code class="language-jython highlight"><span class="n">search_web</span><span class="p">(</span><span class="s2">&quot;BME280 pinout SPI I2C&quot;</span><span class="p">)</span></code>
+3. Agent: "I see the BME280 supports both SPI and I2C. Which one are you using?"</p>
+<h3 id="4-batch-operations">4. Batch Operations</h3>
+<p>Process information efficiently in large chunks to reduce round-trips and ensure atomic updates. The recommended way to perform complex batch reconfigurations is to fetch the current state, modify it in Python, and re-apply it.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Recommended Batch Workflow:</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">state_json</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_state</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">state</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">state_json</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># 1. Modify connections</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;nets&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SIGNAL&quot;</span><span class="p">,</span> <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;D7&quot;</span><span class="p">]})</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># 2. Update power settings</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">][</span><span class="s1">&#39;top_rail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.3</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="c1"># 3. Configure GPIO</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;gpio&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;OUTPUT&quot;</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">state</span><span class="p">[</span><span class="s1">&#39;gpio&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span><span class="c1"># 4. Apply all changes at once</span>
+<span class="linenos" data-linenos="16 "></span><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="5-return-values-over-prints">5. Return Values Over Prints</h3>
+<p>Tools should return data structures (lists, dicts) for programmatic use, not just print to stdout.</p>
+<h3 id="6-undo-via-slot-backup">6. undo via Slot Backup</h3>
+<p>Always save the current state to a scratch slot (e.g. slot 7) before destructive operations like <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>.</p>
+<h3 id="7-context-aware-error-recovery">7. Context-Aware Error Recovery</h3>
+<p>Error messages should include <code class="language-jython highlight"><span class="n">suggested_fix</span></code> fields to allow self-correction without user intervention.</p>
+<h3 id="8-interactive-conversation-patterns">8. Interactive Conversation Patterns</h3>
+<p><strong>Explore First, Act Later</strong>:
+Probe and measure <em>before</em> applying power to unknown circuits.</p>
+<p><strong>Show, Don't Just Do</strong>:
+Explain actions via <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code> and <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code> before executing them to keep the user informed.</p>
+<hr />
+<h2 id="implementation-status">Implementation Status</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">()</span></code></td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ina_</span><span class="o">*</span><span class="p">()</span></code></td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">gpio_</span><span class="o">*</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">()</span></code></td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">probe_</span><span class="o">*</span><span class="p">()</span></code></td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td>WaveGen tools</td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td>Slot management</td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code> snapshot</td>
+<td>✅ Implemented</td>
+</tr>
+<tr>
+<td>Slot backup for undo</td>
+<td>✅ Implemented (use <code class="language-jython highlight"><span class="n">save_slot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span></code> before destructive ops)</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div><footer>
@@ -404,8 +1287,35 @@ in the big main menu <code class="language-jython highlight"><span class="n">swi
 </div>
     <!-- Load everything except highlight.js -->
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
         <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var hamburger = document.querySelector("[data-toggle='wy-nav-top']");
+                if (!hamburger) return;
+                hamburger.addEventListener("touchend", function(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, { passive: false });
+            });
+        })();
+    </script>
 
 
 </body>

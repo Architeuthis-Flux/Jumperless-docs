@@ -217,6 +217,10 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#gpio_get_pullpin">gpio_get_pull(pin)</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gpio_set_read_floatingpin-enabled">gpio_set_read_floating(pin, enabled)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gpio_get_read_floatingpin">gpio_get_read_floating(pin)</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#pwm-pulse-width-modulation">PWM (Pulse-Width Modulation)</a>
@@ -426,10 +430,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
                 </li>
               </ul>
               <ul>
@@ -1234,6 +1234,31 @@ HSV is often more intuitive for color selection than RGB:
 <li>Returns a <code class="language-jython highlight"><span class="n">GPIOPull</span></code> object (<code class="language-jython highlight"><span class="n">PULLUP</span></code>, <code class="language-jython highlight"><span class="n">PULLDOWN</span></code>, or <code class="language-jython highlight"><span class="n">NONE</span></code>).</li>
 <li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="nf nf-Jumperless">get_gpio_pull</span><span class="p">()</span></code></li>
 </ul>
+<h3 id="gpio_set_read_floatingpin-enabled"><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_read_floating</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">enabled</span><span class="p">)</span></code></h3>
+<p>Enable or disable special floating detection when reading GPIO inputs. <strong>These are all enabled by default.</strong></p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">pin</span></code>: The GPIO pin number (1-10).</li>
+<li><code class="language-jython highlight"><span class="n">enabled</span></code>: <code class="language-jython highlight"><span class="kc">True</span></code> to enable floating-read behavior, <code class="language-jython highlight"><span class="kc">False</span></code> to disable.</li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">set_gpio_read_floating</span><span class="p">()</span></code></li>
+</ul>
+<p>Description: When enabled, the firmware performs an extra floating-detection check so <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get</span><span class="p">()</span></code> can return <code class="language-jython highlight"><span class="no no-Jumperless">FLOATING</span></code> for very-high-impedance inputs. To do this it momentarily biases the pin with a very weak internal pull-up (~50 kΩ) while sampling. That transient bias can affect extremely high‑impedance sources (for example, &gt;10 MΩ sensors) and may cause a small leakage current or change the measured state. If your external circuit is super high‑impedance, either disable floating-read for that pin or add a defined pull resistor.</p>
+<h3 id="gpio_get_read_floatingpin"><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get_read_floating</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code></h3>
+<p>Returns whether floating-read detection is enabled for a GPIO pin.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">pin</span></code>: The GPIO pin number (1-10).</li>
+<li>Returns: <code class="language-jython highlight"><span class="kc">True</span></code> if floating-read is enabled, otherwise <code class="language-jython highlight"><span class="kc">False</span></code>.</li>
+<li><strong>Aliases</strong>: <code class="language-jython highlight"><span class="n">get_gpio_read_floating</span><span class="p">()</span></code></li>
+</ul>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Enable floating detection on GPIO 3</span>
+<span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">gpio_set_read_floating</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># Confirm it is enabled</span>
+<span class="linenos" data-linenos="5 "></span><span class="nb">print</span><span class="p">(</span><span class="nf nf-Jumperless">gpio_get_read_floating</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># True or False</span>
+<span class="linenos" data-linenos="6 "></span>
+<span class="linenos" data-linenos="7 "></span><span class="c1"># If a connected high‑impedance sensor behaves oddly, disable floating-read</span>
+<span class="linenos" data-linenos="8 "></span><span class="nf nf-Jumperless">gpio_set_read_floating</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</code></pre></div></p>
 <p><strong>Pinout:</strong>
 *   <code class="language-jython highlight"><span class="mi">1</span><span class="o">-</span><span class="mi">8</span></code>: Routable GPIO pins <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code> to <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code>.
 *   <code class="language-jython highlight"><span class="mi">9</span></code>: <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code>.
@@ -1487,18 +1512,24 @@ HSV is often more intuitive for color selection than RGB:
 <ul>
 <li>Returns: List of font family names (strings)</li>
 </ul>
-<p><strong>Available Fonts:</strong>
-1. Eurostile - Modern geometric sans-serif
-2. Jokerman - Playful decorative font
-3. Comic Sans - Casual rounded font
-4. Courier New - Classic monospace
-5. New Science - Futuristic tech font
-6. New Science Ext - Extended version
-7. Andale Mono - Clean monospace (5pt only)
-8. Free Mono - Compact monospace (4pt only)
-9. Iosevka Regular - Programming font
-10. Berkeley Mono - Professional monospace
-11. Pragmatism - Clean modern font</p>
+<p><strong>Available Fonts:</strong></p>
+<ol>
+<li>Eurostyle - sans serif, futuristic, like Xenon pinball or Star Trek</li>
+<li>Jokerman - decorative font with lots of extra artistic dots and bars</li>
+<li>Comic Sans - sans serif, comic book style lettering</li>
+<li>Courier New - slab serif, typewriter style</li>
+<li>New Science - sans serif, humanist/geometric, like Helvetica</li>
+<li>New Science Ext - wider version of New Science</li>
+<li>Iosevka Regular - fixed spacing sans serif, like Lucida, slashed zero</li>
+<li>Berkeley Mono - fixed spacing, sans serif, large X height</li>
+<li>
+<p>Pragmatism - sans serif, vaguely romantic</p>
+</li>
+<li>
+<p>Andale Mono - fixed spacing sans serif, used for small text</p>
+</li>
+</ol>
+<p>(Descriptions by MadBodger)</p>
 <p><strong>Example:</strong>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
 <span class="linenos" data-linenos=" 2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -1555,15 +1586,27 @@ HSV is often more intuitive for color selection than RGB:
 <li><code class="language-jython highlight"><span class="n">filepath</span></code>: Path to bitmap file (e.g., "/images/logo.bin")</li>
 <li>Returns: <code class="language-jython highlight"><span class="kc">True</span></code> if loaded successfully, <code class="language-jython highlight"><span class="kc">False</span></code> on error</li>
 </ul>
-<p><strong>Bitmap File Format:</strong>
-- <strong>Raw Format</strong>: Pure bitmap data (guesses dimensions from file size)
-  - 128x32 = 512 bytes
-  - 128x64 = 1024 bytes
-  - 64x32 = 256 bytes
-- <strong>Custom Format</strong>: 4-byte header + bitmap data
-  - Bytes 0-1: Width (16-bit little-endian)
-  - Bytes 2-3: Height (16-bit little-endian)
-  - Remaining: Bitmap data (1 bit per pixel, packed)</p>
+<p><strong>Bitmap File Format:</strong></p>
+<ul>
+<li>
+<p><strong>Raw Format</strong>: Pure bitmap data (guesses dimensions from file size)</p>
+</li>
+<li>
+<p>128x32 = 512 bytes</p>
+</li>
+<li>128x64 = 1024 bytes</li>
+<li>
+<p>64x32 = 256 bytes</p>
+</li>
+<li>
+<p><strong>Custom Format</strong>: 4-byte header + bitmap data</p>
+</li>
+<li>
+<p>Bytes 0-1: Width (16-bit little-endian)</p>
+</li>
+<li>Bytes 2-3: Height (16-bit little-endian)</li>
+<li>Remaining: Bitmap data (1 bit per pixel, packed)</li>
+</ul>
 <p><strong>Example:</strong>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">if</span> <span class="nf nf-Jumperless">oled_load_bitmap</span><span class="p">(</span><span class="s2">&quot;/images/jogo32h.bin&quot;</span><span class="p">):</span>
 <span class="linenos" data-linenos="2 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Logo loaded!&quot;</span><span class="p">)</span>
@@ -1572,17 +1615,21 @@ HSV is often more intuitive for color selection than RGB:
 </code></pre></div></p>
 <h4 id="oled_display_bitmapx-y-width-height-datanone"><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_display_bitmap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">])</span></code></h4>
 <p>Display a bitmap on the OLED.</p>
-<p><strong>Two modes:</strong>
-1. <strong>Use loaded bitmap</strong>: If <code class="language-jython highlight"><span class="n">data</span></code> is <code class="language-jython highlight"><span class="kc">None</span></code>, displays the bitmap from <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_load_bitmap</span><span class="p">()</span></code>
-2. <strong>Direct data</strong>: If <code class="language-jython highlight"><span class="n">data</span></code> is provided, displays that bitmap immediately</p>
-<ul>
-<li><code class="language-jython highlight"><span class="n">x</span></code>: X position on display (0-127)</li>
+<p><strong>Two modes:</strong></p>
+<ol>
+<li><strong>Use loaded bitmap</strong>: If <code class="language-jython highlight"><span class="n">data</span></code> is <code class="language-jython highlight"><span class="kc">None</span></code>, displays the bitmap from <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_load_bitmap</span><span class="p">()</span></code></li>
+<li>
+<p><strong>Direct data</strong>: If <code class="language-jython highlight"><span class="n">data</span></code> is provided, displays that bitmap immediately</p>
+</li>
+<li>
+<p><code class="language-jython highlight"><span class="n">x</span></code>: X position on display (0-127)</p>
+</li>
 <li><code class="language-jython highlight"><span class="n">y</span></code>: Y position on display (0-31)</li>
 <li><code class="language-jython highlight"><span class="n">width</span></code>: Bitmap width in pixels (ignored if using loaded bitmap)</li>
 <li><code class="language-jython highlight"><span class="n">height</span></code>: Bitmap height in pixels (ignored if using loaded bitmap)</li>
 <li><code class="language-jython highlight"><span class="n">data</span></code> (optional): Bitmap data to display directly</li>
 <li>Returns: <code class="language-jython highlight"><span class="kc">True</span></code> if successful, <code class="language-jython highlight"><span class="kc">False</span></code> on error</li>
-</ul>
+</ol>
 <p><strong>Example:</strong>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
 <span class="linenos" data-linenos="2 "></span>
@@ -2762,8 +2809,35 @@ For INPUT: Reads the current pin state (0 or 1).</p>
 </div>
     <!-- Load everything except highlight.js -->
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
         <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var hamburger = document.querySelector("[data-toggle='wy-nav-top']");
+                if (!hamburger) return;
+                hamburger.addEventListener("touchend", function(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, { passive: false });
+            });
+        })();
+    </script>
 
 
 </body>

@@ -116,10 +116,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../12-llm-tools-specification/">LLM Tools Specification</a>
-                </li>
-              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Glossary of Terms</a>
     <ul class="current">
@@ -212,7 +208,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../12-llm-tools-specification/" class="btn btn-neutral float-left" title="LLM Tools Specification"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../10-3d-stand/" class="btn btn-neutral float-left" title="3D Printable Stand"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -235,15 +231,42 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../12-llm-tools-specification/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../10-3d-stand/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
 </div>
     <!-- Load everything except highlight.js -->
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
         <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var hamburger = document.querySelector("[data-toggle='wy-nav-top']");
+                if (!hamburger) return;
+                hamburger.addEventListener("touchend", function(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }, { passive: false });
+            });
+        })();
+    </script>
 
 
 </body>
