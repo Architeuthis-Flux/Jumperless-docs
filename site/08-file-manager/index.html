@@ -170,6 +170,10 @@
                 <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -638,14 +642,46 @@
                 for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
                 for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
             }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
             document.addEventListener("DOMContentLoaded", function() {
-                var hamburger = document.querySelector("[data-toggle='wy-nav-top']");
-                if (!hamburger) return;
-                hamburger.addEventListener("touchend", function(e) {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
                     toggleNav();
                     e.preventDefault();
                     e.stopPropagation();
-                }, { passive: false });
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var img = document.createElement("img");
+                    img.src = base_url + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "100%";
+                    img.style.height = "auto";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
             });
         })();
     </script>

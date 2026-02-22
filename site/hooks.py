@@ -3,10 +3,16 @@ MkDocs hooks for registering custom Pygments lexers and styles
 """
 
 def on_config(config):
-    """
-    This hook runs when MkDocs loads the configuration.
-    Since the lexer is now registered via entry points, we just verify it's available.
-    """
+    # Regenerate JUMPERLESS_FUNCTIONS in lexer from API reference before build
+    try:
+        import runpy
+        import os
+        script = os.path.join(os.path.dirname(__file__), "generate_lexer_from_api_ref.py")
+        if os.path.isfile(script):
+            runpy.run_path(script, run_name="__main__")
+    except Exception as e:
+        print(f"⚠ generate_lexer_from_api_ref: {e}")
+    # Verify lexer/style availability
     try:
         from pygments.lexers import get_lexer_by_name
         from pygments.styles import get_style_by_name

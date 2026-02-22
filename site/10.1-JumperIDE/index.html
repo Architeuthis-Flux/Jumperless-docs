@@ -4,13 +4,13 @@
     
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/10-3d-stand/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/10.1-JumperIDE/" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://docs.jumperless.org/10-3d-stand/">
-    <meta property="og:title" content="3D Printable Stand - Jumperless Docs">
+    <meta property="og:url" content="https://docs.jumperless.org/10.1-JumperIDE/">
+    <meta property="og:title" content="10.1 JumperIDE - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
     <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
@@ -18,8 +18,8 @@
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://docs.jumperless.org/10-3d-stand/">
-    <meta name="twitter:title" content="3D Printable Stand - Jumperless Docs">
+    <meta name="twitter:url" content="https://docs.jumperless.org/10.1-JumperIDE/">
+    <meta name="twitter:title" content="10.1 JumperIDE - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
     <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
@@ -31,7 +31,7 @@
     <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://docs.jumperless.org/10-3d-stand/">
+    <link rel="canonical" href="https://docs.jumperless.org/10.1-JumperIDE/">
     
     <!-- LLM-friendly documentation (llms.txt spec) -->
     <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
@@ -41,7 +41,7 @@
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">
 
-    <title>3D Printable Stand - Jumperless Docs</title>
+    <title>10.1 JumperIDE - Jumperless Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -112,14 +112,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">3D Printable Stand</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#printing-tips">Printing Tips</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#rubber-feet">Rubber Feet</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
               </ul>
               <ul>
@@ -148,7 +142,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">3D Printable Stand</li>
+      <li class="breadcrumb-item active">10.1 JumperIDE</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -157,20 +151,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="3d-printable-stand">3D Printable Stand</h1>
-<p><a href="https://www.printables.com/model/1249365-jumperless-stand"><img alt="3DStandCollage" src="https://github.com/user-attachments/assets/37556876-82ce-4ba4-88f6-f9eaf46da09f" /></a></p>
-<p><a href="https://www.printables.com/model/1249365-jumperless-stand">Here are the 3D models</a> for you to print your own stand for your Jumperless. It's extremely handy to have it propped up like this to read text on the breadboard. </p>
-<h2 id="printing-tips">Printing Tips</h2>
-<p>Yes, the model is at a weird angle, just drop it down in the slicer, if you want it to hold at a shallower angle, just drop the model through the bed a bit when you slice.</p>
-<h2 id="rubber-feet">Rubber Feet</h2>
-<p>These <a href="https://www.amazon.com/AmazonBasics-300-Piece-Adhesive-Rubber-Bumpers/dp/B087MG3G76">stick-on rubber feet</a> also make it a lot more solid on your desk (and having the different sizes lets you shim the angle by putting different ones on the front and back.) </p>
+                <p># Jumperless Online (JumperIDE)</p>
+<p>This page hosts <strong>JumperIDE</strong>, a custom fork of <a href="https://viper-ide.org/">ViperIDE</a> tailored for Jumperless. It’s a browser-based MicroPython IDE so you can write, run, and debug scripts without leaving the docs.</p>
+<h2 id="use-the-ide">Use the IDE</h2>
+<p>The IDE runs in your browser. Connect your Jumperless via USB and use the in-page connection (e.g. WebSerial) to get a REPL, file manager, and editor.</p>
+<div style="position: relative; padding-bottom: 60%; height: 0; overflow: hidden; max-width: 200%; border: 1px solid #ccc; border-radius: 8px;">
+  <iframe
+    src="https://viper-ide.org/"
+    title="JumperIDE – ViperIDE fork for Jumperless"
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+    allow="serial"
+  ></iframe>
+</div>
+
+<p><em>If the Jumperless-customized build is deployed, this embed can be switched to that URL (e.g. GitHub Pages for <a href="https://github.com/Architeuthis-Flux/JumperIDE">JumperIDE</a>).</em></p>
+<h2 id="about-jumperide">About JumperIDE</h2>
+<ul>
+<li><strong>Fork:</strong> <a href="https://github.com/Architeuthis-Flux/JumperIDE">Architeuthis-Flux/JumperIDE</a> — ViperIDE with Jumperless-oriented defaults and tweaks.</li>
+<li><strong>Upstream:</strong> <a href="https://viper-ide.org/">ViperIDE</a> by Volodymyr Shymanskyy — MicroPython/CircuitPython IDE for web and mobile.</li>
+</ul>
+<p>For full MicroPython workflow (including using the built-in REPL and <code class="language-jython highlight"><span class="n">jumperless</span></code> module), see <a href="../08-micropython/">MicroPython</a>.</p>
+<h2 id="community-scripts">Community scripts</h2>
+<p>JumperIDE can load a list of community scripts so you can open or add them from the <strong>Scripts</strong> tab in the side menu. The script index URL is:</p>
+<ul>
+<li><strong>Script index:</strong> <a href="https://docs.jumperless.org/scripts/index.json">https://docs.jumperless.org/scripts/index.json</a></li>
+</ul>
+<p>The index is a JSON file with a <code class="language-jython highlight"><span class="n">scripts</span></code> array. Each entry has <code class="language-jython highlight"><span class="nf nf-JFS">name</span></code>, <code class="language-jython highlight"><span class="n">description</span></code>, and <code class="language-jython highlight"><span class="n">url</span></code> (direct link to the raw <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> file). To add your own script, open a pull request that adds an entry to this repo’s <code class="language-jython highlight"><span class="n">docs</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">json</span></code> (and optionally add the script file under <code class="language-jython highlight"><span class="n">docs</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span></code> or link to a raw URL elsewhere).</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../09.8-odds-and-ends/" class="btn btn-neutral float-left" title="Odds and Ends"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../99-glossary/" class="btn btn-neutral float-right" title="Glossary of Terms">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -192,10 +201,6 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../09.8-odds-and-ends/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../99-glossary/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

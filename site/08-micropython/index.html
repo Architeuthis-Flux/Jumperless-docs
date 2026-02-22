@@ -99,7 +99,7 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">MicroPython</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#now-you-can-live-code-with-viper-ide">Now you can live code with Viper IDE!</a>
+    <li class="toctree-l2"><a class="reference internal" href="#now-you-can-live-code-with-jumperide">Now you can live code with JumperIDE!</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#if-you-write-something-cool-send-it-to-me-and-ill-add-it-to-the-default-examples-ill-put-a-page-on-this-site-soon-where-you-can-share-them">If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)</a>
     </li>
@@ -176,6 +176,10 @@
                 <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -214,10 +218,10 @@
 
 <p>If you just want an overview of all the available calls, check out the <a href="../09.5-micropythonAPIreference/"><strong>MicroPython API Reference</strong></a></p>
 <p>For stuff that's not Jumperless-specific, check out the <a href="https://docs.micropython.org/en/latest/index.html">MicroPython Docs</a></p>
-<h2 id="now-you-can-live-code-with-viper-ide">Now you can live code with <a href="https://viper-ide.org/">Viper IDE</a>!</h2>
+<h2 id="now-you-can-live-code-with-jumperide">Now you can live code with <a href="https://ide.jumperless.org/">JumperIDE</a>!</h2>
 <p>Holy shit I should have done this years ago</p>
 <p>Seriously, this is <em>such</em> a better experience than using the onboard text editor and REPL, you should play with it right now</p>
-<p>Go to <a href="https://viper-ide.org/">https://viper-ide.org/</a> and press the connect button.</p>
+<p>Go to <a href="https://ide.jumperless.org/">https://ide.jumperless.org/</a> and press the connect button.</p>
 <p><img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" /></p>
 <p>Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect</p>
 <p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
@@ -451,14 +455,46 @@
                 for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
                 for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
             }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
             document.addEventListener("DOMContentLoaded", function() {
-                var hamburger = document.querySelector("[data-toggle='wy-nav-top']");
-                if (!hamburger) return;
-                hamburger.addEventListener("touchend", function(e) {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
                     toggleNav();
                     e.preventDefault();
                     e.stopPropagation();
-                }, { passive: false });
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var img = document.createElement("img");
+                    img.src = base_url + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "100%";
+                    img.style.height = "auto";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
             });
         })();
     </script>

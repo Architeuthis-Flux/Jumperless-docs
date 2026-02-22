@@ -1782,12 +1782,12 @@ If you just want an overview of all the available calls, check out the [**MicroP
 
 For stuff that's not Jumperless-specific, check out the [MicroPython Docs](https://docs.micropython.org/en/latest/index.html)
 
-## Now you can live code with [Viper IDE](https://viper-ide.org/)!
+## Now you can live code with [JumperIDE](https://ide.jumperless.org/)!
 Holy shit I should have done this years ago
 
 Seriously, this is *such* a better experience than using the onboard text editor and REPL, you should play with it right now
 
-Go to [https://viper-ide.org/](https://viper-ide.org/) and press the connect button.
+Go to [https://ide.jumperless.org/](https://ide.jumperless.org/) and press the connect button.
 
 Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect
 

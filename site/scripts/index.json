@@ -1,0 +1,9 @@
+{
+  "scripts": [
+    {
+      "name": "Example",
+      "description": "Sample script for Jumperless MicroPython",
+      "url": "https://docs.jumperless.org/scripts/example.py"
+    }
+  ]
+}
