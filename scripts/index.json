@@ -6,8 +6,8 @@
       "url": "https://docs.jumperless.org/scripts/adc_basics.py"
     },
     {
-      "name": "This isn't even Jumperless specific, it's just a demo of using select.poll() to check for input on stdin without blocking.",
-      "description": "This isn't even Jumperless specific, it's just a demo of using select.poll() to check for input on stdin without blocking.",
+      "name": "Async Read",
+      "description": "Demo of using select.poll() to check for input on stdin without blocking.",
       "url": "https://docs.jumperless.org/scripts/async_read.py"
     },
     {

@@ -6,8 +6,8 @@
       "url": "https://docs.jumperless.org/scripts/adc_basics.py"
     },
     {
-      "name": "This isn't even Jumperless specific, it's just a demo of using select.poll() to ",
-      "description": "This isn't even Jumperless specific, it's just a demo of using select.poll() to check for input on stdin without blocking.",
+      "name": "Async Read",
+      "description": "Demo of using select.poll() to check for input on stdin without blocking.",
       "url": "https://docs.jumperless.org/scripts/async_read.py"
     },
     {
@@ -19,11 +19,6 @@
       "name": "Basic DAC (Digital-to-Analog Converter) operations",
       "description": "This example shows how to set DAC voltages.",
       "url": "https://docs.jumperless.org/scripts/dac_basics.py"
-    },
-    {
-      "name": "RS-485 Terminal with Fake GPIO (Node-Based API)",
-      "description": "Full-featured RS-485 bidirectional terminal supporting:",
-      "url": "https://docs.jumperless.org/scripts/fake_gpio.py"
     },
     {
       "name": "Basic GPIO (General Purpose Input/Output) operations",

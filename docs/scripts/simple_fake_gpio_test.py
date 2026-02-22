@@ -8,7 +8,6 @@ This script doesn't work, FakeGPIO output is disabled for now.
 """
 
 
-
 print("\n" + "="*70)
 print("FAKE GPIO NODE-BASED API TEST")
 print("="*70)
@@ -17,51 +16,6 @@ print("="*70)
 print("\n→ Clearing connections...")
 nodes_clear()
 time.sleep(0.2)
-
-# Set power rail voltages (dac_set accepts node constants)
-# TOP_RAIL (101) → DAC channel 2
-# BOTTOM_RAIL (102) → DAC channel 3
-print("\n→ Setting power rail voltages...")
-dac_set(TOP_RAIL, 8.0)
-dac_set(BOTTOM_RAIL, -8.0)
-print("  TOP_RAIL = 8.0V (via DAC channel 2)")
-print("  BOTTOM_RAIL = -8.0V (via DAC channel 3)")
-
-# Test 1: Create two differential output pins
-print("\n→ Test 1: Creating differential output pins")
-print("  Pin A (node 10): HIGH=TOP_RAIL, LOW=BOTTOM_RAIL")
-print("  Pin B (node 11): HIGH=BOTTOM_RAIL, LOW=TOP_RAIL (inverted)")
-
-pin_a = FakeGpioPin(10, OUTPUT, TOP_RAIL, BOTTOM_RAIL)
-pin_b = FakeGpioPin(11, OUTPUT, BOTTOM_RAIL, TOP_RAIL)
-
-print("  ✓ Pins created successfully")
-
-# Test 2: Toggle pins
-print("\n→ Test 2: Toggling pins")
-for i in range(5):
-    print(f"  Cycle {i+1}: A=HIGH, B=HIGH (both at their HIGH voltage)")
-    pin_a.on()
-    pin_b.on()
-    time.sleep(0.2)
-    
-    print(f"  Cycle {i+1}: A=LOW, B=LOW (both at their LOW voltage)")
-    pin_a.off()
-    pin_b.off()
-    time.sleep(0.2)
-
-print("  ✓ Toggle test complete")
-
-# Test 3: Fast toggling with pause_core2
-print("\n→ Test 3: Fast toggling (100 iterations with pause_core2)")
-pause_core2(True)
-for i in range(100):
-    pin_a.value(1)
-    pin_b.value(0)
-    pin_a.value(0)
-    pin_b.value(1)
-pause_core2(False)
-print("  ✓ Fast toggle complete")
 
 # Test 4: Create INPUT pin
 print("\n→ Test 4: Creating INPUT pin with loopback")
