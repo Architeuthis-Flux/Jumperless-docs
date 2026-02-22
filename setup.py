@@ -9,6 +9,7 @@ setup(
     version="1.0.0",
     description="Jumperless documentation with custom Python lexer",
     packages=find_packages(),
+    py_modules=["slugify_headings"],
     install_requires=[
         "pygments>=2.12.0",
     ],

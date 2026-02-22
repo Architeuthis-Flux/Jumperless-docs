@@ -132,19 +132,19 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#directory-operations">Directory Operations</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#jfslistdirpath">jfs.listdir(path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfslistdir">jfs.listdir(path)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsmkdirpath">jfs.mkdir(path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsmkdir">jfs.mkdir(path)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsrmdirpath">jfs.rmdir(path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsrmdir">jfs.rmdir(path)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsremovepath">jfs.remove(path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsremove">jfs.remove(path)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsrenameold_path-new_path">jfs.rename(old_path, new_path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsrename">jfs.rename(old_path, new_path)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsexistspath">jfs.exists(path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsexists">jfs.exists(path)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsstatpath">jfs.stat(path)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsstat">jfs.stat(path)</a>
     </li>
         </ul>
     </li>
@@ -156,19 +156,19 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#file-io">File I/O</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#jfsopenpath-moder">jfs.open(path, mode=&#39;r&#39;)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jfsopen">jfs.open(path, mode=&#39;r&#39;)</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#file-object-methods">File Object Methods</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#filereadsize">file.read([size])</a>
+    <li class="toctree-l3"><a class="reference internal" href="#fileread">file.read([size])</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#filewritedata">file.write(data)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#filewrite">file.write(data)</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#fileclose">file.close()</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#fileseekoffset-whence">file.seek(offset, [whence])</a>
+    <li class="toctree-l3"><a class="reference internal" href="#fileseek">file.seek(offset, [whence])</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#filetell">file.tell()</a>
     </li>
@@ -228,7 +228,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="jfs-jumperless-filesystem">JFS (Jumperless FileSystem)</h1>
+                <h1 id="jfs">JFS (Jumperless FileSystem)</h1>
 <p>The <code class="language-jython highlight"><span class="no no-JFS">jfs</span></code> module is basically like MicroPython's <code class="language-jython highlight"><span class="no no-JFS">vfs</span></code> and parts of <code class="language-jython highlight"><span class="n">os</span></code>, but kinda written in a style that's probably more familiar to Arduino-style C++ people (me). It uses the <em>almost</em> standardized API shared by <a href="https://arduino-pico.readthedocs.io/en/latest/fs.html#file-system-object-littlefs-sd-sdfs-fatfs"><code class="language-jython highlight"><span class="no no-JFS">FatFS</span></code> (the one Jumperless actually uses), <code class="language-jython highlight"><span class="no no-JFS">LittleFS</span></code>, and <code class="language-jython highlight"><span class="no no-JFS">SDFS</span></code></a>, but still has been <em>Pythonified</em> to use types that are easier to work with in MicroPython.</p>
 <h2 id="quick-reference">Quick Reference</h2>
 <p>File Operations:</p>
@@ -454,7 +454,7 @@ You can also use module-level functions with file handles:
 <span class="linenos" data-linenos="3 "></span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="directory-operations">Directory Operations</h2>
-<h3 id="jfslistdirpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<h3 id="jfslistdir"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
 <p>Returns a list containing the names of the entries in the directory given by <code class="language-jython highlight"><span class="n">path</span></code>.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path to the directory.</li>
@@ -467,34 +467,34 @@ You can also use module-level functions with file handles:
 <span class="linenos" data-linenos="5 "></span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="s1">&#39;/my_dir&#39;</span><span class="p">)</span>
 <span class="linenos" data-linenos="6 "></span><span class="nb">print</span><span class="p">(</span><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/my_dir&#39;</span><span class="p">))</span>
 </code></pre></div></p>
-<h3 id="jfsmkdirpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<h3 id="jfsmkdir"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
 <p>Create a new directory.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the new directory.</li>
 </ul>
-<h3 id="jfsrmdirpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<h3 id="jfsrmdir"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
 <p>Remove an empty directory.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the directory to remove.</li>
 </ul>
-<h3 id="jfsremovepath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<h3 id="jfsremove"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
 <p>Remove a file.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the file to remove.</li>
 </ul>
-<h3 id="jfsrenameold_path-new_path"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">old_path</span><span class="p">,</span> <span class="n">new_path</span><span class="p">)</span></code></h3>
+<h3 id="jfsrename"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">old_path</span><span class="p">,</span> <span class="n">new_path</span><span class="p">)</span></code></h3>
 <p>Rename a file or directory.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">old_path</span></code> (str): The current path.</li>
 <li><code class="language-jython highlight"><span class="n">new_path</span></code> (str): The new path.</li>
 </ul>
-<h3 id="jfsexistspath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<h3 id="jfsexists"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
 <p>Check if a file or directory exists.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path to check.</li>
 <li>Returns <code class="language-jython highlight"><span class="kc">True</span></code> if it exists, <code class="language-jython highlight"><span class="kc">False</span></code> otherwise.</li>
 </ul>
-<h3 id="jfsstatpath"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
+<h3 id="jfsstat"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></h3>
 <p>Get status of a file or directory.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path of the file or directory.</li>
@@ -514,7 +514,7 @@ You can also use module-level functions with file handles:
 </code></pre></div></p>
 <h2 id="file-io">File I/O</h2>
 <p>The <code class="language-jython highlight"><span class="no no-JFS">jfs</span></code> module supports standard file opening and handling using <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code> and file objects, including support for the <code class="language-jython highlight"><span class="k">with</span></code> statement for automatic resource management.</p>
-<h3 id="jfsopenpath-moder"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span></code></h3>
+<h3 id="jfsopen"><code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span></code></h3>
 <p>Open a file and return a corresponding file object.</p>
 <ul>
 <li><code class="language-jython highlight"><span class="n">path</span></code> (str): The path to the file.</li>
@@ -540,13 +540,13 @@ You can also use module-level functions with file handles:
 </code></pre></div></p>
 <h2 id="file-object-methods">File Object Methods</h2>
 <p>The file object returned by <code class="language-jython highlight"><span class="no no-JFS">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code> has the following methods:</p>
-<h3 id="filereadsize"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">([</span><span class="nf nf-JFS">size</span><span class="p">])</span></code></h3>
+<h3 id="fileread"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">([</span><span class="nf nf-JFS">size</span><span class="p">])</span></code></h3>
 <p>Read <code class="language-jython highlight"><span class="nf nf-JFS">size</span></code> bytes from the file. If <code class="language-jython highlight"><span class="nf nf-JFS">size</span></code> is omitted or negative, the entire file is read.</p>
-<h3 id="filewritedata"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></h3>
+<h3 id="filewrite"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code></h3>
 <p>Write the given string or bytes <code class="language-jython highlight"><span class="n">data</span></code> to the file. Returns the number of bytes written.</p>
 <h3 id="fileclose"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">()</span></code></h3>
 <p>Close the file. A closed file cannot be read or written to.</p>
-<h3 id="fileseekoffset-whence"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="p">[</span><span class="n">whence</span><span class="p">])</span></code></h3>
+<h3 id="fileseek"><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="p">[</span><span class="n">whence</span><span class="p">])</span></code></h3>
 <p>Change the stream position.
 *   <code class="language-jython highlight"><span class="n">offset</span></code>: The byte offset.
 *   <code class="language-jython highlight"><span class="n">whence</span></code> (optional):
@@ -678,6 +678,76 @@ You can also use module-level functions with file handles:
                     ideLink.textContent = "";
                     ideLink.appendChild(img);
                 }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
             });
         })();
     </script>

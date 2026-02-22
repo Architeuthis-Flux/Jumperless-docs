@@ -162,6 +162,13 @@
               
                 <h1 id="micropython-examples-for-jumperless">MicroPython Examples for Jumperless</h1>
 <p>This directory contains example Python scripts that demonstrate various Jumperless features. These examples are automatically embedded into the firmware and can be accessed from the MicroPython REPL.</p>
+<h2 id="scripts-index-jumperide">Scripts index (JumperIDE)</h2>
+<p><code class="language-jython highlight"><span class="n">index</span><span class="o">.</span><span class="n">json</span></code> is <strong>generated automatically</strong> when the docs site is built. <a href="https://ide.jumperless.org">JumperIDE</a> loads it from <code class="language-jython highlight"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">jumperless</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">json</span></code> to list scripts (name, description, open-in-editor). When you add or remove <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> files here and redeploy the site, the index updates.</p>
+<ul>
+<li><strong>Regenerate locally:</strong> <code class="language-jython highlight"><span class="n">python</span> <span class="n">docs</span><span class="o">/</span><span class="n">generate_scripts_index</span><span class="o">.</span><span class="n">py</span></code> (writes <code class="language-jython highlight"><span class="n">docs</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">json</span></code>).</li>
+<li><strong>On deploy:</strong> MkDocs runs the <code class="language-jython highlight"><span class="n">generate_scripts_index</span></code> hook after each build and writes <code class="language-jython highlight"><span class="n">site</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">json</span></code>, so the live site always reflects the contents of this folder.</li>
+</ul>
+<p>Excluded from the index: <code class="language-jython highlight"><span class="n">fuck</span><span class="o">.</span><span class="n">py</span></code>, <code class="language-jython highlight"><span class="n">listFiles</span><span class="o">.</span><span class="n">py</span></code>, <code class="language-jython highlight"><span class="n">viperide_reinit</span><span class="o">.</span><span class="n">py</span></code>. To change that, edit <code class="language-jython highlight"><span class="n">EXCLUDE</span></code> in <code class="language-jython highlight"><span class="n">docs</span><span class="o">/</span><span class="n">generate_scripts_index</span><span class="o">.</span><span class="n">py</span></code>.</p>
 <h2 id="directory-structure">📁 Directory Structure</h2>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">pythonStuff</span><span class="o">/</span>
 <span class="linenos" data-linenos=" 2 "></span><span class="err">├──</span> <span class="n">ex</span><span class="o">/</span>                      <span class="c1"># Example scripts (this directory)</span>
@@ -417,6 +424,76 @@
                     ideLink.textContent = "";
                     ideLink.appendChild(img);
                 }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
             });
         })();
     </script>

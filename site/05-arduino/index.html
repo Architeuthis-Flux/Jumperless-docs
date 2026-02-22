@@ -102,9 +102,9 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#two-types-of-tags">Two Types of Tags</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#j-tags-raw-commands">&lt;j&gt; Tags - Raw Commands</a>
+    <li class="toctree-l4"><a class="reference internal" href="#tags-raw-commands">&lt;j&gt; Tags - Raw Commands</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#p-tags-python-commands">&lt;p&gt; Tags - Python Commands</a>
+    <li class="toctree-l4"><a class="reference internal" href="#tags-python-commands">&lt;p&gt; Tags - Python Commands</a>
     </li>
         </ul>
     </li>
@@ -112,7 +112,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#python-commands-with-p-tags">Python Commands with &lt;p&gt; Tags</a>
+    <li class="toctree-l2"><a class="reference internal" href="#python-commands-with-tags">Python Commands with &lt;p&gt; Tags</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#basic-example">Basic Example</a>
     </li>
@@ -122,7 +122,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#raw-commands-with-j-tags">Raw Commands with &lt;j&gt; Tags</a>
+    <li class="toctree-l2"><a class="reference internal" href="#raw-commands-with-tags">Raw Commands with &lt;j&gt; Tags</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#example-making-connections">Example - Making Connections</a>
     </li>
@@ -232,9 +232,9 @@
 <p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The tags are stripped out and the command is executed - the Arduino never sees them come back.</p>
 <h3 id="two-types-of-tags">Two Types of Tags</h3>
 <p>There are two flavors of command tags, depending on what you want to do:</p>
-<h4 id="j-tags-raw-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags - Raw Commands</h4>
+<h4 id="tags-raw-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags - Raw Commands</h4>
 <p>These run exactly like you typed them in the main Jumperless menu. Use these for things like making connections with <code class="language-jython highlight"><span class="n">f</span></code>, loading files, or any single-character menu command.</p>
-<h4 id="p-tags-python-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags - Python Commands</h4>
+<h4 id="tags-python-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags - Python Commands</h4>
 <p>These run MicroPython commands directly. Perfect for <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, and all the other Python hardware functions. The <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tag automatically prepends the <code class="language-jython highlight"><span class="o">&gt;</span></code> that normally tells the Jumperless "this is a Python command."</p>
 <h3 id="supported-tag-names">Supported Tag Names</h3>
 <p>Any of these work (use matching opening and closing tags):</p>
@@ -265,7 +265,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="python-commands-with-p-tags">Python Commands with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags</h2>
+<h2 id="python-commands-with-tags">Python Commands with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags</h2>
 <p>The <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tag is the most powerful way to control your Jumperless from Arduino code. It gives you direct access to all the MicroPython hardware functions.</p>
 <h3 id="basic-example">Basic Example</h3>
 <div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#define OPENJCOMMAND Serial.print(&quot;&lt;p&gt;&quot;);</span>
@@ -378,7 +378,7 @@
 </code></pre></div>
 <p>See the <a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a> for the complete list.</p>
 <hr />
-<h2 id="raw-commands-with-j-tags">Raw Commands with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags</h2>
+<h2 id="raw-commands-with-tags">Raw Commands with <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags</h2>
 <p>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> tags when you want to send menu commands - the same ones you'd type in the serial terminal.</p>
 <h3 id="example-making-connections">Example - Making Connections</h3>
 <div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="cp">#define OPENJCOMMAND Serial.print(&quot;&lt;j&gt;&quot;);</span>
@@ -574,6 +574,76 @@
                     ideLink.textContent = "";
                     ideLink.appendChild(img);
                 }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
             });
         })();
     </script>

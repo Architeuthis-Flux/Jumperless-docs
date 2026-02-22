@@ -51,25 +51,25 @@ def _extract_from_py(content, filename):
     if name is not None and description is not None:
         return (name, description)
 
-    # Docstring
+    # Docstring (triple-quoted; capture until closing quotes)
     if content.lstrip().startswith('"""'):
-        match = re.match(r'\s*"""\s*(.*?)(?:"""|\n)', content, re.DOTALL)
+        match = re.match(r'\s*"""\s*(.*?)"""', content, re.DOTALL)
         if match:
             block = match.group(1).strip()
-            parts = [p.strip() for p in block.split("\n", 1)]
+            parts = [p.strip() for p in block.split("\n", 1) if p.strip()]
             if not name and parts:
-                name = parts[0].strip('"\'')
+                name = parts[0].strip('"\'').rstrip(".")[:80]
             if not description and len(parts) > 1:
                 description = parts[1].split("\n")[0].strip()[:200]
             elif not description and len(parts) == 1 and len(parts[0]) > 60:
                 description = parts[0][:200]
     elif content.lstrip().startswith("'''"):
-        match = re.match(r"\s*'''\s*(.*?)(?:'''|\n)", content, re.DOTALL)
+        match = re.match(r"\s*'''\s*(.*?)'''", content, re.DOTALL)
         if match:
             block = match.group(1).strip()
-            parts = [p.strip() for p in block.split("\n", 1)]
+            parts = [p.strip() for p in block.split("\n", 1) if p.strip()]
             if not name and parts:
-                name = parts[0].strip('"\'')
+                name = parts[0].strip('"\'').rstrip(".")[:80]
             if not description and len(parts) > 1:
                 description = parts[1].split("\n")[0].strip()[:200]
             elif not description and len(parts) == 1 and len(parts[0]) > 60:

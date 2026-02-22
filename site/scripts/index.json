@@ -1,12 +1,12 @@
 {
   "scripts": [
     {
-      "name": "Basic ADC (Analog-to-Digital Converter) operations.",
-      "description": "Read all ADC channels",
+      "name": "Basic ADC (Analog-to-Digital Converter) operations",
+      "description": "This example shows how to read analog voltages.",
       "url": "https://docs.jumperless.org/scripts/adc_basics.py"
     },
     {
-      "name": "This isn't even Jumperless specific, it's just a demo of using select.poll() to check for input on stdin without blocking.",
+      "name": "This isn't even Jumperless specific, it's just a demo of using select.poll() to ",
       "description": "This isn't even Jumperless specific, it's just a demo of using select.poll() to check for input on stdin without blocking.",
       "url": "https://docs.jumperless.org/scripts/async_read.py"
     },
@@ -16,33 +16,28 @@
       "url": "https://docs.jumperless.org/scripts/clickwheel_menu.py"
     },
     {
-      "name": "Basic DAC (Digital-to-Analog Converter) operations.",
-      "description": "Test all DAC channels",
+      "name": "Basic DAC (Digital-to-Analog Converter) operations",
+      "description": "This example shows how to set DAC voltages.",
       "url": "https://docs.jumperless.org/scripts/dac_basics.py"
     },
     {
-      "name": "Example",
-      "description": "Example script for Jumperless MicroPython",
-      "url": "https://docs.jumperless.org/scripts/example.py"
-    },
-    {
       "name": "RS-485 Terminal with Fake GPIO (Node-Based API)",
-      "description": "============================================================================",
+      "description": "Full-featured RS-485 bidirectional terminal supporting:",
       "url": "https://docs.jumperless.org/scripts/fake_gpio.py"
     },
     {
-      "name": "Basic GPIO (General Purpose Input/Output) operations.",
-      "description": "Test GPIO pin 1",
+      "name": "Basic GPIO (General Purpose Input/Output) operations",
+      "description": "This example shows digital I/O, direction control, and pull resistors.",
       "url": "https://docs.jumperless.org/scripts/gpio_basics.py"
     },
     {
       "name": "Interactive Demo - Control connections with probe, encoder, and buttons",
-      "description": "Interactive Demo - Control connections with probe, encoder, and buttons",
+      "description": "This example shows how to use all the interactive controls together.",
       "url": "https://docs.jumperless.org/scripts/interaction_demo.py"
     },
     {
       "name": "LED Brightness Control Demo",
-      "description": "",
+      "description": "Touch breadboard pads 1-60 to control LED brightness levels.",
       "url": "https://docs.jumperless.org/scripts/led_brightness_control.py"
     },
     {
@@ -51,8 +46,8 @@
       "url": "https://docs.jumperless.org/scripts/lipo_char.py"
     },
     {
-      "name": "Node connection and routing operations.",
-      "description": "Clear all existing connections",
+      "name": "Node connection and routing operations",
+      "description": "This example shows how to connect/disconnect nodes and check connections.",
       "url": "https://docs.jumperless.org/scripts/node_connections.py"
     },
     {
@@ -77,7 +72,7 @@
     },
     {
       "name": "Jumperless Oscilloscope Demo",
-      "description": "",
+      "description": "=============================",
       "url": "https://docs.jumperless.org/scripts/oscilloscope.py"
     },
     {
@@ -102,32 +97,32 @@
     },
     {
       "name": "PSRAM Test Script for Jumperless v5",
-      "description": "",
+      "description": "This script tests whether external PSRAM is available and working.",
       "url": "https://docs.jumperless.org/scripts/psram_test.py"
     },
     {
       "name": "Simple FakeGPIO Node-Based API Test",
-      "description": "",
+      "description": "Quick test to verify the new node-based FakeGPIO API works correctly.",
       "url": "https://docs.jumperless.org/scripts/simple_fake_gpio_test.py"
     },
     {
       "name": "Jumperless Stylophone",
-      "description": "",
+      "description": "Musical instrument using probe and GPIO to generate audio tones.",
       "url": "https://docs.jumperless.org/scripts/stylophone.py"
     },
     {
       "name": "Interactive NeoPixel Demo",
-      "description": "",
+      "description": "This also shows how you can grab modules",
       "url": "https://docs.jumperless.org/scripts/test_neopixel.py"
     },
     {
       "name": "Test script for new OLED MicroPython features",
-      "description": "Test setting text size",
+      "description": "Run this on the Jumperless device to test all new OLED functions",
       "url": "https://docs.jumperless.org/scripts/test_oled_features.py"
     },
     {
-      "name": "Basic UART operations.",
-      "description": "",
+      "name": "Basic UART operations",
+      "description": "This example shows how to use UART.",
       "url": "https://docs.jumperless.org/scripts/uart_basics.py"
     },
     {
@@ -137,7 +132,7 @@
     },
     {
       "name": "Voltage Monitor Demo",
-      "description": "",
+      "description": "Monitor voltage on ADC with real-time OLED display.",
       "url": "https://docs.jumperless.org/scripts/voltage_monitor.py"
     }
   ]

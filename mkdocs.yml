@@ -57,6 +57,9 @@ extra_css: [extra.css, overrides.css]
 
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:
+  # Heading IDs = text before '(' only (e.g. gpio_set, connect) so JumperIDE and links can target #gpio_set
+  - markdown.extensions.toc:
+      slugify: !!python/name:slugify_headings.slugify_name_only
   - pymdownx.highlight:
       use_pygments: true
       pygments_lang_class: true

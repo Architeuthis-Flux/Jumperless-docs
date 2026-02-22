@@ -1,1 +1,2 @@
 jumperless_lexers
+slugify_headings
