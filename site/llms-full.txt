@@ -4108,7 +4108,7 @@ NOTES:
 
 ---
 
-# JFS (Jumperless FileSystem) Module
+# JFS (Jumperless FileSystem)
 
 
 The `jfs` module is basically like MicroPython's `vfs` and parts of `os`, but kinda written in a style that's probably more familiar to Arduino-style C++ people (me). It uses the *almost* standardized API shared by [`FatFS` (the one Jumperless actually uses), `LittleFS`, and `SDFS`](https://arduino-pico.readthedocs.io/en/latest/fs.html#file-system-object-littlefs-sd-sdfs-fatfs), but still has been *Pythonified* to use types that are easier to work with in MicroPython.

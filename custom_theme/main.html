@@ -38,6 +38,16 @@
     <meta name="msapplication-TileColor" content="#ff47A5">
 {% endblock %}
 
+{% block extrahead %}
+    {{ super() }}
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+{% endblock %}
+
 {# Override the libs block to prevent highlight.js from loading #}
 {% block libs %}{% endblock %}
 
@@ -95,12 +105,16 @@
                 // Replace JumperIDE sidebar link text with logo image
                 var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
                 if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
                     var img = document.createElement("img");
-                    img.src = base_url + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
                     img.alt = "JumperIDE";
                     img.className = "sidebar-ide-logo";
-                    img.style.maxWidth = "100%";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
                     img.style.height = "auto";
+                    img.style.objectFit = "contain";
                     img.style.display = "block";
                     ideLink.textContent = "";
                     ideLink.appendChild(img);

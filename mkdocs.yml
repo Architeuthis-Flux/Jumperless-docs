@@ -25,7 +25,7 @@ nav:
   - File Manager: 08-file-manager.md
   - MicroPython: 08-micropython.md
   - MicroPython API Reference: 09.5-micropythonAPIreference.md
-  - JFS (Jumperless FileSystem) Module: 09.6-jfs.md
+  - JFS (Jumperless FileSystem): 09.6-jfs.md
   - Odds and Ends: 09.8-odds-and-ends.md
   - 3D Printable Stand: 10-3d-stand.md
 
@@ -53,7 +53,7 @@ theme:
       # video_controls: True
       # css_style:
       #   width: "100%"
-extra_css: [extra.css]
+extra_css: [extra.css, overrides.css]
 
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:

@@ -1,0 +1,6 @@
+/* Custom overrides for Jumperless docs */
+
+/* Hide prev/next navigation at bottom of content area */
+.rst-footer-buttons {
+  display: none !important;
+}
