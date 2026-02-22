@@ -71,10 +71,11 @@ markdown_extensions:
   - pymdownx.inlinehilite:
       style_plain_text: jython
 
-# Hooks to register custom lexers and generate llms.txt
+# Hooks to register custom lexers and generate llms.txt / scripts index
 hooks:
   - docs/hooks.py
   - docs/generate_llms_txt.py
+  - docs/generate_scripts_index.py
 
 extra:
   meta:

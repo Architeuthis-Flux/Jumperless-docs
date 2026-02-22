@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/scripts/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/scripts/">
+    <meta property="og:title" content="MicroPython Examples for Jumperless - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/scripts/">
+    <meta name="twitter:title" content="MicroPython Examples for Jumperless - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/scripts/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>MicroPython Examples for Jumperless - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">MicroPython Examples for Jumperless</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="micropython-examples-for-jumperless">MicroPython Examples for Jumperless</h1>
+<p>This directory contains example Python scripts that demonstrate various Jumperless features. These examples are automatically embedded into the firmware and can be accessed from the MicroPython REPL.</p>
+<h2 id="directory-structure">📁 Directory Structure</h2>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">pythonStuff</span><span class="o">/</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="err">├──</span> <span class="n">ex</span><span class="o">/</span>                      <span class="c1"># Example scripts (this directory)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">dac_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">interaction_demo</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">led_brightness_control</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">node_connections</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">stylophone</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="10 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">uart_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="11 "></span><span class="err">│</span>   <span class="err">├──</span> <span class="n">uart_loopback</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="12 "></span><span class="err">│</span>   <span class="err">└──</span> <span class="n">voltage_monitor</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="13 "></span><span class="err">├──</span> <span class="n">jumperless_module</span><span class="o">.</span><span class="n">py</span>     <span class="c1"># Main jumperless module wrapper</span>
+<span class="linenos" data-linenos="14 "></span><span class="err">└──</span> <span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span>           <span class="c1"># Type stub for IDE autocomplete</span>
+</code></pre></div>
+<h2 id="automatic-generation-workflow">🔄 Automatic Generation Workflow</h2>
+<p>The examples in this directory are automatically converted to C string literals and embedded in the firmware.</p>
+<h3 id="how-it-works">How It Works</h3>
+<ol>
+<li><strong>Edit Python files</strong> in <code class="language-jython highlight"><span class="n">pythonStuff</span><span class="o">/</span><span class="n">ex</span><span class="o">/</span></code></li>
+<li><strong>Run the generator script</strong>:
+   <div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>python3<span class="w"> </span>scripts/generate_micropython_examples.py
+</code></pre></div></li>
+<li><strong>Rebuild the firmware</strong> with PlatformIO</li>
+</ol>
+<p>The script will:
+- Read all <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> files from <code class="language-jython highlight"><span class="n">pythonStuff</span><span class="o">/</span><span class="n">ex</span><span class="o">/</span></code>
+- Convert them to C raw string literals (<code class="language-jython highlight"><span class="sa">R</span><span class="s2">&quot;(...)&quot;</span></code>)
+- Generate <code class="language-jython highlight"><span class="n">src</span><span class="o">/</span><span class="n">micropythonExamples</span><span class="o">.</span><span class="n">h</span></code> with all examples
+- Include the <code class="language-jython highlight"><span class="n">jumperless_module</span><span class="o">.</span><span class="n">py</span></code> wrapper
+- Include the <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> type stub</p>
+<h3 id="excluded-files">Excluded Files</h3>
+<p>The following files are automatically excluded from the firmware:
+- <code class="language-jython highlight"><span class="n">fuck</span><span class="o">.</span><span class="n">py</span></code> - Old version of interaction_demo
+- <code class="language-jython highlight"><span class="n">batt</span><span class="o">.</span><span class="n">py</span></code> - Incomplete battery test
+- <code class="language-jython highlight"><span class="n">lipo_char</span><span class="o">.</span><span class="n">py</span></code> - Incomplete battery test<br />
+- <code class="language-jython highlight"><span class="n">listFiles</span><span class="o">.</span><span class="n">py</span></code> - ViperIDE utility script</p>
+<p>To exclude additional files, edit the <code class="language-jython highlight"><span class="n">exclude_files</span></code> set in <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">generate_micropython_examples</span><span class="o">.</span><span class="n">py</span></code>.</p>
+<h2 id="example-structure">📝 Example Structure</h2>
+<p>Each example should follow this structure:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="sd">Example Title</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="sd">Brief description of what this example demonstrates.</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="sd">Hardware Setup:</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="sd">1. Connection instructions</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="sd">2. Required components</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="sd">3. Expected behavior</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos="12 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="c1"># Your example code here</span>
+<span class="linenos" data-linenos="15 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example Demo&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>
+<span class="linenos" data-linenos="17 "></span><span class="c1"># Main loop or demonstration</span>
+<span class="linenos" data-linenos="18 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="c1"># Do something interesting</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="available-examples">🎯 Available Examples</h2>
+<h3 id="hardware-basics">Hardware Basics</h3>
+<ul>
+<li><strong><code class="language-jython highlight"><span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span></code></strong> - Read analog voltages from ADC channels</li>
+<li><strong><code class="language-jython highlight"><span class="n">dac_basics</span><span class="o">.</span><span class="n">py</span></code></strong> - Set DAC output voltages</li>
+<li><strong><code class="language-jython highlight"><span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span></code></strong> - Digital I/O, direction control, pull resistors</li>
+<li><strong><code class="language-jython highlight"><span class="n">node_connections</span><span class="o">.</span><span class="n">py</span></code></strong> - Connect/disconnect nodes, check connections</li>
+</ul>
+<h3 id="communication">Communication</h3>
+<ul>
+<li><strong><code class="language-jython highlight"><span class="n">uart_basics</span><span class="o">.</span><span class="n">py</span></code></strong> - Basic UART communication</li>
+<li><strong><code class="language-jython highlight"><span class="n">uart_loopback</span><span class="o">.</span><span class="n">py</span></code></strong> - UART loopback test</li>
+</ul>
+<h3 id="interactive-demos">Interactive Demos</h3>
+<ul>
+<li><strong><code class="language-jython highlight"><span class="n">interaction_demo</span><span class="o">.</span><span class="n">py</span></code></strong> - Use probe, encoder, and buttons together</li>
+<li><strong><code class="language-jython highlight"><span class="n">led_brightness_control</span><span class="o">.</span><span class="n">py</span></code></strong> - Touch-controlled LED brightness</li>
+<li><strong><code class="language-jython highlight"><span class="n">voltage_monitor</span><span class="o">.</span><span class="n">py</span></code></strong> - Real-time voltage monitoring with OLED</li>
+<li><strong><code class="language-jython highlight"><span class="n">stylophone</span><span class="o">.</span><span class="n">py</span></code></strong> - Musical instrument using probe and GPIO</li>
+</ul>
+<h3 id="system-hardware-tests">System &amp; Hardware Tests</h3>
+<ul>
+<li><strong><code class="language-jython highlight"><span class="n">psram_test</span><span class="o">.</span><span class="n">py</span></code></strong> - Test PSRAM availability and run memory diagnostics</li>
+</ul>
+<h2 id="creating-new-examples">🛠️ Creating New Examples</h2>
+<ol>
+<li>Create a new <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> file in <code class="language-jython highlight"><span class="n">pythonStuff</span><span class="o">/</span><span class="n">ex</span><span class="o">/</span></code></li>
+<li>Add a docstring at the top describing the example</li>
+<li>Import <code class="language-jython highlight"><span class="n">jumperless</span> <span class="k">as</span> <span class="n">j</span></code> and any other needed modules</li>
+<li>Write your example code</li>
+<li>Run the generator script to update the firmware header</li>
+<li>Rebuild the firmware</li>
+</ol>
+<p>Example template:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="sd">My New Example</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="sd">Description of what this demonstrates.</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="sd">Hardware Setup:</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="sd">- List any required connections</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
+<span class="linenos" data-linenos="10 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;My New Example&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="c1"># Your code here</span>
+</code></pre></div>
+<h2 id="compile-time-configuration">🔧 Compile-Time Configuration</h2>
+<p>You can disable specific examples at compile time by commenting out their <code class="language-jython highlight"><span class="c1">#define</span></code> in the generated header:</p>
+<div class="language-c highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1">// In src/micropythonExamples.h</span>
+<span class="linenos" data-linenos="2 "></span><span class="c1">// #define INCLUDE_STYLOPHONE  // Comment out to exclude</span>
+<span class="linenos" data-linenos="3 "></span><span class="cp">#define INCLUDE_GPIO_BASICS    </span><span class="c1">// Keep to include</span>
+</code></pre></div>
+<p>Or use convenience macros to disable entire categories:</p>
+<div class="language-c highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="cp">#define DISABLE_DEMO_EXAMPLES      </span><span class="c1">// Disables LED, Voltage, Stylophone</span>
+<span class="linenos" data-linenos="2 "></span><span class="cp">#define DISABLE_HARDWARE_EXAMPLES  </span><span class="c1">// Disables DAC, ADC, GPIO, Node</span>
+<span class="linenos" data-linenos="3 "></span><span class="cp">#define DISABLE_MACHINE_EXAMPLES   </span><span class="c1">// Disables UART examples</span>
+<span class="linenos" data-linenos="4 "></span><span class="cp">#define DISABLE_ALL_EXAMPLES       </span><span class="c1">// Disables everything</span>
+</code></pre></div>
+<h2 id="accessing-examples-in-firmware">📚 Accessing Examples in Firmware</h2>
+<p>Once the firmware is built and flashed, examples are available in the MicroPython filesystem:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="linenos" data-linenos="2 "></span><span class="o">&gt;&gt;&gt;</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;/python_scripts/examples&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="p">[</span><span class="s1">&#39;adc_basics.py&#39;</span><span class="p">,</span> <span class="s1">&#39;dac_basics.py&#39;</span><span class="p">,</span> <span class="s1">&#39;gpio_basics.py&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="o">&gt;&gt;&gt;</span> <span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/python_scripts/examples/gpio_basics.py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">GPIO</span> <span class="n">Basics</span> <span class="n">Demo</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">Testing</span> <span class="n">GPIO</span> <span class="n">pin</span> <span class="mi">1</span>
+<span class="linenos" data-linenos="8 "></span><span class="o">...</span>
+</code></pre></div>
+<h2 id="troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="example-not-showing-up-in-firmware">Example not showing up in firmware?</h3>
+<ol>
+<li>Check that the file isn't in the <code class="language-jython highlight"><span class="n">exclude_files</span></code> list</li>
+<li>Verify the generator script ran successfully</li>
+<li>Rebuild the firmware completely (<code class="language-jython highlight"><span class="n">pio</span> <span class="n">run</span> <span class="o">-</span><span class="n">t</span> <span class="n">clean</span> <span class="o">&amp;&amp;</span> <span class="n">pio</span> <span class="n">run</span></code>)</li>
+</ol>
+<h3 id="syntax-errors-in-generated-header">Syntax errors in generated header?</h3>
+<ul>
+<li>Check for <code class="language-jython highlight"><span class="p">)</span><span class="s2">&quot;</span></code> sequence in your Python code (breaks raw string literal)</li>
+<li>Ensure your Python file is valid UTF-8</li>
+<li>Look for special characters that might need escaping</li>
+</ul>
+<h3 id="out-of-memory-when-building">Out of memory when building?</h3>
+<ul>
+<li>Disable some examples using <code class="language-jython highlight"><span class="c1">#define DISABLE_*_EXAMPLES</span></code></li>
+<li>Remove large or unused examples from <code class="language-jython highlight"><span class="n">pythonStuff</span><span class="o">/</span><span class="n">ex</span><span class="o">/</span></code></li>
+</ul>
+<h2 id="related-documentation">📖 Related Documentation</h2>
+<ul>
+<li><a href="../JUMPERLESS_API_QUICKREF.md">Jumperless API Quick Reference</a></li>
+<li><a href="../MICROPYTHON_MODULE_COMPLETE.md">MicroPython Module Documentation</a></li>
+<li><a href="../VIPER_IDE_SETUP.md">ViperIDE Setup</a></li>
+</ul>
+<h2 id="links">🔗 Links</h2>
+<ul>
+<li><a href="https://architeuthis-flux.github.io/Jumperless-docs/">Jumperless Documentation</a></li>
+<li><a href="https://docs.micropython.org/">MicroPython Documentation</a></li>
+<li><a href="https://www.raspberrypi.com/documentation/pico-sdk/">RP2350 SDK Documentation</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+
+
+</body>
+</html>
