@@ -17,12 +17,12 @@ If you just want an overview of all the available calls, check out the [**MicroP
 
 For stuff that's not Jumperless-specific, check out the [MicroPython Docs](https://docs.micropython.org/en/latest/index.html)
 
-## Now you can live code with [Viper IDE](https://viper-ide.org/)!
+## Now you can live code with [JumperIDE](https://ide.jumperless.org/)!
 Holy shit I should have done this years ago
 
 Seriously, this is *such* a better experience than using the onboard text editor and REPL, you should play with it right now
 
-Go to [https://viper-ide.org/](https://viper-ide.org/) and press the connect button.
+Go to [https://ide.jumperless.org/](https://ide.jumperless.org/) and press the connect button.
 
 <img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" />
 
