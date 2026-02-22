@@ -122,7 +122,7 @@
             });
         })();
     </script>
-    <!-- JumperIDE: scroll to anchor when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
     <script>
         (function() {
             var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
@@ -134,10 +134,40 @@
                     try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
                 }
             }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim();
+                if (!needle) return;
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var text = (el.textContent || "").trim();
+                    if (!text) continue;
+                    if (text.toLowerCase().indexOf(needle) !== -1) {
+                        el.scrollIntoView({ behavior: "smooth", block: "start" });
+                        return;
+                    }
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
             window.addEventListener("message", function(e) {
                 if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
-                if (e.data && e.data.type === "jumperide-scroll-to" && e.data.anchor) {
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
                     scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
                 }
             });
             document.addEventListener("DOMContentLoaded", function() {
