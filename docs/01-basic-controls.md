@@ -21,7 +21,7 @@ The logo should turn blue and the LEDs on the probe should also change
 Now any pair of nodes you tap should get connected as you make them. In connect mode, you're creating `bridges` (see the [glossary](99-glossary.md)), so connections are made in pairs. When you've tapped the first `node` in a pair, the `logo` and `Connect` text on the probe will brighten to show that you're "`holding`" a connection, and the next thing you tap will connect to that first `node`. 
 
 If you make a mistake while `holding` a connection, click the `Connect` button and it will clear it and take you back to the first `node`. 
-If you click the `Connect` button while you're not `holding` a `node`, it will leave `probe mode` and bring you back into `idle mode` (rainbowy `logo`, all 3 `probe LED`s on.)
+If you click the `Connect` button while you're not `holding` a `node`, it will leave `probe mode` and bring you back into `idle mode` (rainbowy`logo`, all 3 `probe LED`s on.)
 
 
 To get out of `Connect` mode, press the button again.
@@ -66,7 +66,7 @@ The special functions work the same way, tap the pad, pick one, and it will remo
 
 **Remember the probe is read by a resistive voltage divider**, so putting your fingers on the pads (or the back sides of the 4 risers that connect those `probe sense` boards to the main board), or anything causing the probe tip not to be at a steady 3.3V will give you weird readings. 
 
-If you can't seem to stop playing with the switch on the probe, run the app `probe calib` and tap around on the board while turning the clickweel until the place you tapped is always spot on (do this with the switch in both modes), and hold the clickwheel button to save. This adjusts the nominal 3.3V `measure` mode puts out should be fairly accurate enough for probing.
+If you can't seem to stop playing with the switch on the probe, run the app `probe calib` and tap around on the board while turning the clickwheel until the place you tapped is always spot on (do this with the switch in both modes), and hold the clickwheel button to save. This adjusts the nominal 3.3V `measure` mode puts out should be fairly accurate enough for probing.
 
 
 ## The Click Wheel
@@ -120,7 +120,7 @@ GPIO Pad
 ¹![You can press R in the main menu to toggle this view](https://github.com/user-attachments/assets/33018aec-be8a-4bc0-b309-baeddad4db66)
 
 
-The 4 `user pads` will be remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`, and `buiding` pads are `Current sense` + and -.
+The 4 `user pads` will be remappable in the future, but for now, `top_guy` is `routable UART Tx` and `bottom_guy` is `routable UART Rx`, and `building` pads are `Current sense` + and -.
 
 The **building pads** have multiple functions:
 - In `idle mode`: Override colors for net highlighting (see [Idle Mode Interactions](#idle-mode-net-highlighting))
