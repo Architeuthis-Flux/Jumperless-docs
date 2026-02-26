@@ -410,7 +410,7 @@ in the big main menu <code class="language-jython highlight"><span class="n">swi
 </tr>
 <tr>
 <td><strong>Graphic Overlays</strong></td>
-<td><code class="language-jython highlight"><span class="n">overlay_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">overlay_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">overlay_set_pixel</span><span class="p">()</span></code></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set_pixel</span><span class="p">()</span></code></td>
 </tr>
 <tr>
 <td><strong>State</strong></td>
@@ -598,11 +598,11 @@ in the big main menu <code class="language-jython highlight"><span class="n">swi
 <p>The breadboard LEDs are addressed as a 10x30 grid (Row 1-10, Col 1-30). Rows 1-5 are top half (E-A), Rows 6-10 are bottom half (F-J).</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># overlay_set(name, x, y, height, width, colors)</span>
 <span class="linenos" data-linenos="2 "></span><span class="c1"># Colors can be flat list or 2D list of 0xRRGGBB integers</span>
-<span class="linenos" data-linenos="3 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mh">0x550000</span><span class="p">]</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="nf nf-Jumperless">overlay_set</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">[</span><span class="mh">0x550000</span><span class="p">]</span><span class="o">*</span><span class="mi">25</span><span class="p">)</span>
 <span class="linenos" data-linenos="4 "></span>
-<span class="linenos" data-linenos="5 "></span><span class="n">overlay_clear</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>           <span class="c1"># Remove overlay</span>
-<span class="linenos" data-linenos="6 "></span><span class="n">overlay_clear_all</span><span class="p">()</span>            <span class="c1"># Remove all</span>
-<span class="linenos" data-linenos="7 "></span><span class="n">overlay_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="c1"># Set single pixel (1-30, 1-10)</span>
+<span class="linenos" data-linenos="5 "></span><span class="nf nf-Jumperless">overlay_clear</span><span class="p">(</span><span class="s2">&quot;box&quot;</span><span class="p">)</span>           <span class="c1"># Remove overlay</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">overlay_clear_all</span><span class="p">()</span>            <span class="c1"># Remove all</span>
+<span class="linenos" data-linenos="7 "></span><span class="nf nf-Jumperless">overlay_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="c1"># Set single pixel (1-30, 1-10)</span>
 </code></pre></div>
 <h3 id="system-filesystem">System &amp; Filesystem</h3>
 <p><div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Standard Python I/O is supported!</span>
@@ -611,7 +611,7 @@ in the big main menu <code class="language-jython highlight"><span class="n">swi
 <span class="linenos" data-linenos="4 "></span>
 <span class="linenos" data-linenos="5 "></span><span class="c1"># List files</span>
 <span class="linenos" data-linenos="6 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="linenos" data-linenos="7 "></span><span class="n">os</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="nf nf-Jumperless">os</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">get_net_info</span><span class="p">(</span><span class="n">netNum</span><span class="p">)</span>   <span class="c1"># Get dict with name, color, nodes</span>
 <span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">get_num_nets</span><span class="p">()</span>         <span class="c1"># Count of active nets</span>
@@ -989,7 +989,7 @@ If a user has a physical wire connecting Row 5 to Row 10, connecting <code class
 <span class="linenos" data-linenos=" 5 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
 <span class="linenos" data-linenos=" 6 "></span>    <span class="nf nf-JFS">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ADC</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="linenos" data-linenos=" 7 "></span>    <span class="n">is_used</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="linenos" data-linenos=" 8 "></span>    <span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="n">get_all_nets</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="k">for</span> <span class="n">net</span> <span class="ow">in</span> <span class="nf nf-Jumperless">get_all_nets</span><span class="p">():</span>
 <span class="linenos" data-linenos=" 9 "></span>        <span class="k">if</span> <span class="nf nf-JFS">name</span> <span class="ow">in</span> <span class="n">net</span><span class="p">[</span><span class="s1">&#39;nodes&#39;</span><span class="p">]:</span>
 <span class="linenos" data-linenos="10 "></span>            <span class="n">is_used</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="linenos" data-linenos="11 "></span>            <span class="k">break</span>

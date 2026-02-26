@@ -1,5 +1,6 @@
 """
-This isn't even Jumperless specific, it's just a demo of using select.poll() to check for input on stdin without blocking.
+Async Read
+Demo of using select.poll() to check for input on stdin without blocking.
 """
 import sys
 import select

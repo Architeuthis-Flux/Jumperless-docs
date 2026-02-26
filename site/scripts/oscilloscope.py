@@ -1,6 +1,5 @@
 """
 Jumperless Oscilloscope Demo
-=============================
 
 Controls:
 - Probe Touch: Connect ADC0 to touched breadboard node (1-60)

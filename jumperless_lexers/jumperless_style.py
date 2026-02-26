@@ -165,4 +165,4 @@ class JumperlessLightStyle(Style):
         JumperlessTokens.JFSFunction:           'bold #ff004d',     # Dark orange for JFS functions
         JumperlessTokens.JFSConstant:           'bold #0d6efd',     # Dark blue for JFS constants
         JumperlessTokens.HardwareConstant:      'bold #5300ff',     # Dark pink for hardware constants
-    }
+    } 
