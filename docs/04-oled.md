@@ -119,7 +119,7 @@ The built-in bitmap editor lets you create and edit OLED images directly on your
 
 You can create a new bitmap file from the file manager:
 1. Navigate to where you want to create the file (e.g., `/images/`)
-2. Pess `n` for "new file"
+2. Press `n` for "new file"
 3. Name it with a `.bin` extension (e.g., `mylogo.bin`)
 4. The editor will automatically create a blank 128×32 bitmap (or whatever your OLED dimensions are set to in config)
 
