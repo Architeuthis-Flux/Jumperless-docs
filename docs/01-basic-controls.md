@@ -8,7 +8,6 @@
 First, keep the switch on the probe set to `Select`
 ![ProbeSelect](https://github.com/user-attachments/assets/1155f75a-f800-4bc0-ba6d-49e603ad39e2)
 
-**Why Select mode?** `Measure` mode allows the probe tip to be ±9V tolerant and routable like any other node, but as of yet, the code to actually do anything with it is unwritten so it just connects to DAC 0 and outputs 3.3V just like it was in `Select` mode. But the DAC is much worse at matching the RP2350B's idea of what 3.3V is *exactly*, so probing will be flaky and may be off from the rows you're tapping in `Measure`.
 
 ## Connecting Rows
 

@@ -15,9 +15,12 @@ The shortcuts to connect `D0` and `D1` to the Jumperless's UART `Tx` and `Rx` is
 ## Automatic Flashing
 
 It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.
-<img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" /> 
 
-**Tip:** You can also use [Wokwi](https://wokwi.com) with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open!
+![](docs/assets/arduinoPort.png)
+
+<!-- <img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" />  -->
+
+**Tip:** You can also use [Wokwi](https://wokwi.com) with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open
 
 ---
 
