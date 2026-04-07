@@ -14,15 +14,18 @@ into the main menu to change a setting
 
 Jumperless Config:
 
-`[config] firmware_version = 5.6.0.0;
+
+`[config] firmware_version = 5.6.5.15;
 
 `[hardware] generation = 5;
-`[hardware] revision = 5;
+`[hardware] revision = 7;
 `[hardware] probe_revision = 5;
+`[hardware] psram_installed = 0;
 
 `[dacs] set_dacs_on_boot = false;
 `[dacs] set_rails_on_boot = true;
 `[dacs] probe_power_dac = 0;
+`[dacs] auto_connect_probe = 1;
 `[dacs] limit_max = 8.00;
 `[dacs] limit_min = -8.00;
 
@@ -31,46 +34,52 @@ Jumperless Config:
 `[debug] nets_to_chips = false;
 `[debug] nets_to_chips_alt = false;
 `[debug] leds = false;
+`[debug] probing = false;
+`[debug] oled = false;
+`[debug] logo_pads = false;
 `[debug] logic_analyzer = true;
 `[debug] arduino = 0;
+`[debug] usb_mass_storage = false;
 
 `[routing] stack_paths = 2;
 `[routing] stack_rails = 3;
 `[routing] stack_dacs = 0;
 `[routing] rail_priority = 1;
 
-`[calibration] top_rail_zero = 1626;
-`[calibration] top_rail_spread = 19.83;
-`[calibration] bottom_rail_zero = 1638;
-`[calibration] bottom_rail_spread = 19.64;
-`[calibration] dac_0_zero = 1629;
-`[calibration] dac_0_spread = 19.90;
-`[calibration] dac_1_zero = 1629;
-`[calibration] dac_1_spread = 19.53;
-`[calibration] adc_0_zero = 8.98;
-`[calibration] adc_0_spread = 18.08;
-`[calibration] adc_1_zero = 9.01;
-`[calibration] adc_1_spread = 18.15;
-`[calibration] adc_2_zero = 8.98;
-`[calibration] adc_2_spread = 18.06;
-`[calibration] adc_3_zero = 8.96;
-`[calibration] adc_3_spread = 18.05;
+`[calibration] top_rail_zero = 1655;
+`[calibration] top_rail_spread = 18.80;
+`[calibration] bottom_rail_zero = 1655;
+`[calibration] bottom_rail_spread = 19.27;
+`[calibration] dac_0_zero = 1655;
+`[calibration] dac_0_spread = 19.53;
+`[calibration] dac_1_zero = 1650;
+`[calibration] dac_1_spread = 19.44;
+`[calibration] adc_0_zero = 8.95;
+`[calibration] adc_0_spread = 17.89;
+`[calibration] adc_1_zero = 8.91;
+`[calibration] adc_1_spread = 17.81;
+`[calibration] adc_2_zero = 8.97;
+`[calibration] adc_2_spread = 17.90;
+`[calibration] adc_3_zero = 8.89;
+`[calibration] adc_3_spread = 17.79;
 `[calibration] adc_4_zero = 0.00;
-`[calibration] adc_4_spread = 4.92;
-`[calibration] adc_7_zero = 10.52;
-`[calibration] adc_7_spread = 20.66;
-`[calibration] probe_max = 4040;
-`[calibration] probe_min = 11;
-`[calibration] probe_switch_threshold_high = 0.35;
-`[calibration] probe_switch_threshold_low = 0.10;
+`[calibration] adc_4_spread = 4.86;
+`[calibration] adc_7_zero = 9.24;
+`[calibration] adc_7_spread = 18.34;
+`[calibration] probe_max = 4055;
+`[calibration] probe_min = 25;
+`[calibration] probe_switch_threshold_high = 1.30;
+`[calibration] probe_switch_threshold_low = 1.14;
 `[calibration] probe_switch_threshold = 0.40;
-`[calibration] measure_mode_output_voltage = 3.30;
-`[calibration] probe_current_zero = 2.72;
+`[calibration] measure_mode_output_voltage = 3.27;
+`[calibration] probe_current_zero = 2.41;
+`[calibration] minimum_probe_reading = 85;
 
 `[logo_pads] top_guy = uart_tx;
 `[logo_pads] bottom_guy = uart_rx;
 `[logo_pads] building_pad_top = isense_pos;
 `[logo_pads] building_pad_bottom = isense-;
+`[logo_pads] repeat_ms = 100;
 
 `[display] lines_wires = wires;
 `[display] menu_brightness = -10;
@@ -89,25 +98,34 @@ Jumperless Config:
 `[serial_1] lock_connection = false;
 `[serial_1] autoconnect_flashing = true;
 `[serial_1] async_passthrough = true;
+`[serial_1] tag_parsing = enabled;
+`[serial_1] flash_reset_type = avr;
+
+`[serial_2] function = micropython;
+`[serial_2] baud_rate = 115200;
+`[serial_2] print_passthrough = false;
+`[serial_2] connect_on_boot = false;
+`[serial_2] lock_connection = false;
+`[serial_2] autoconnect_flashing = false;
 
 `[top_oled] enabled = true;
 `[top_oled] i2c_address = 0x3C;
 `[top_oled] width = 128;
 `[top_oled] height = 32;
-`[top_oled] connection_type = rp6_rp7;
-`[top_oled] sda_pin = 6;
-`[top_oled] scl_pin = 7;
-`[top_oled] gpio_sda = GP_6;
-`[top_oled] gpio_scl = GP_7;
+`[top_oled] connection_type = i2c0;
+`[top_oled] sda_pin = 4;
+`[top_oled] scl_pin = 5;
+`[top_oled] gpio_sda = GP_4;
+`[top_oled] gpio_scl = GP_5;
 `[top_oled] sda_row = -1;
 `[top_oled] scl_row = -1;
-`[top_oled] connect_on_boot = false;
+`[top_oled] connect_on_boot = true;
 `[top_oled] lock_connection = false;
 `[top_oled] show_in_terminal = false;
-`[top_oled] font = Eurostl;
+`[top_oled] font = BerkMono;
 `[top_oled] startup_message = images/bubbleJumpThin.bin
 
-
+`[usb_cdc] ignore_dtr = false;
 ```
 
 

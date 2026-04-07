@@ -173,6 +173,7 @@ class JumperlessPythonLexer(PythonLexer):
         'print_crossbars',
         'print_nets',
         'print_paths',
+        'probe_autoconnect',
         'probe_button',
         'probe_button_blocking',
         'probe_button_nonblocking',
