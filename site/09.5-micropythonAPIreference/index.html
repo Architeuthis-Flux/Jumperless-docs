@@ -112,8 +112,6 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">MicroPython API Reference</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#quick-reference">Quick Reference</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#a-note-on-usage">A Note on Usage</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#node-connections">Node Connections</a>
@@ -298,6 +296,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#check_switch_position">check_switch_position()</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#probe_autoconnect">probe_autoconnect([enable])</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#clickwheel">Clickwheel</a>
@@ -396,7 +396,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#get_state">get_state()</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#set_state">set_state(json, [clear_first=True])</a>
+    <li class="toctree-l3"><a class="reference internal" href="#set_state">set_state(json, [clear_first=True], [from_wokwi=False])</a>
     </li>
         </ul>
     </li>
@@ -488,16 +488,19 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem)</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -594,7 +597,7 @@
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_count</span><span class="p">()</span></code>                  - Get active overlay count</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_serialize</span><span class="p">()</span></code>              - Get overlays as YAML</li>
 </ul>
-<p><a href="#probe">Probe Functions</a> - <em><a href="#probe">Examples</a></em>:</p>
+<p><a href="#probe">Probe Functions</a> (Probe status / actions)=L=e==ft - <em><a href="#probe">Examples</a></em>:</p>
 <ul>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>            - Wait for probe touch (don't return until a pad is touched)</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_nonblocking</span><span class="p">()</span></code>         - Check probe immediately (return -1 if no pad is touched)</li>
@@ -606,6 +609,7 @@
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_switch_position</span><span class="p">()</span></code>            - Get probe switch position (0=measure, 1=select, -1=unknown)</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">set_switch_position</span><span class="p">(</span><span class="nf nf-JFS">position</span><span class="p">)</span></code>    - Set switch position manually</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">check_switch_position</span><span class="p">()</span></code>          - Check switch via current sensing</li>
+<li><code class="language-jython highlight"><span class="n">probe_autoconnect</span><span class="p">([</span><span class="n">enable</span><span class="p">])</span></code>      - Get/set probe auto-connect (True/False, temporary until reboot)</li>
 </ul>
 <p><a href="#clickwheel">Clickwheel</a> (Rotary Encoder / button on the top left) - <em><a href="#clickwheel">Examples</a></em>:</p>
 <ul>
@@ -640,8 +644,7 @@
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_all_paths</span><span class="p">()</span></code>                  - Get all paths as list of dicts</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_path_between</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code>   - Query specific path between nodes</li>
 </ul>
-<p><a href="../09.6-jfs/">JFS</a> (Jumperless File System):</p>
-<p>File Operations:</p>
+<p><a href="#jfs-jumperless-filesystem">JFS</a> (Jumperless File System) - <em><a href="#jfs-jumperless-filesystem">Examples</a></em>:</p>
 <ul>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></code> - Opens file, returns file handle</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span></code> - Read from file </li>
@@ -650,63 +653,45 @@
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get current position</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get file size</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available</li>
-</ul>
-<p>File Object Methods (after <code class="language-jython highlight"><span class="n">f</span> <span class="o">=</span> <span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code>):</p>
-<ul>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code> - Print to the file (like <code class="language-jython highlight"><span class="nf nf-JFS">write</span></code> but auto-flushes)</li>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">flush</span><span class="p">()</span></code> - Flush buffered data to file</li>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">position</span><span class="p">()</span></code> - Alias for <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span></code></li>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">name</span><span class="p">()</span></code> - Get file name</li>
-</ul>
-<p>Directory Operations: </p>
-<ul>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Check if path exists (returns True/False)</li>
+<li>
+<p><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available</p>
+</li>
+<li>
+<p><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Check if path exists (returns True/False)</p>
+</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - List directory contents (returns list)</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Create directory </li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove directory</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove file</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span></code> - Rename/move file</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Get file/directory status info</li>
-</ul>
-<p>Filesystem Info:</p>
+<li>
+<p><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Get file/directory status info</p>
+</li>
+<li>
+<p><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code> - Returns (total, used, free) tuple</p>
+</li>
+<li>
 <ul>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code> - Returns (total, used, free) tuple</li>
+<li><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code> - Print to the file (like <code class="language-jython highlight"><span class="nf nf-JFS">write</span></code> but auto-flushes)</li>
 </ul>
-<h3 id="quick-reference">Quick Reference</h3>
-<p>File Operations:</p>
+</li>
+<li>
 <ul>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span></code> - Opens file, returns file handle</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">size</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span></code> - Read from file </li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code> - Write to file</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">close</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Close file</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">seek</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="nf nf-JFS">position</span><span class="p">,</span> <span class="n">whence</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code> - Seek in file</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get current position</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get file size</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">available</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code> - Get bytes available</li>
+<li><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">flush</span><span class="p">()</span></code> - Flush buffered data to file</li>
 </ul>
-<p>File Object Methods (after <code class="language-jython highlight"><span class="n">f</span> <span class="o">=</span> <span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code>):</p>
+</li>
+<li>
 <ul>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code> - Print to the file (like <code class="language-jython highlight"><span class="nf nf-JFS">write</span></code> but auto-flushes)</li>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">flush</span><span class="p">()</span></code> - Flush buffered data to file</li>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">position</span><span class="p">()</span></code> - Alias for <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span></code></li>
-<li><code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">name</span><span class="p">()</span></code> - Get file name</li>
+<li><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">position</span><span class="p">()</span></code> - Alias for <code class="language-jython highlight"><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">tell</span><span class="p">()</span></code></li>
 </ul>
-<p>Directory Operations: </p>
+</li>
+<li>
 <ul>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Check if path exists (returns True/False)</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - List directory contents (returns list)</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Create directory </li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">rmdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove directory</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Remove file</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">rename</span><span class="p">(</span><span class="n">from</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span></code> - Rename/move file</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">stat</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> - Get file/directory status info</li>
+<li><code class="language-jython highlight"><span class="n">file</span><span class="o">.</span><span class="nf nf-JFS">name</span><span class="p">()</span></code> - Get file name</li>
 </ul>
-<p>Filesystem Info:</p>
-<ul>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">info</span><span class="p">()</span></code> - Returns (total, used, free) tuple</li>
+</li>
 </ul>
-<p><a href="#status-functions">Status</a> - <em><a href="#the-entire-output-of-help">Examples</a></em>:</p>
+<p><a href="#status-functions">Status</a> (Print status stuff to main Serial) - <em><a href="#status-functions">Examples</a></em>:</p>
 <ul>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code>                  - Print all bridges</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_paths</span><span class="p">()</span></code>                    - Print path between nodes</li>
@@ -714,7 +699,7 @@
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code>                     - Print nets</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">print_chip_status</span><span class="p">()</span></code>              - Print chip status</li>
 </ul>
-<p><a href="#system-functions">Misc</a> - <em><a href="#system-functions">Examples</a></em>:</p>
+<p><a href="#system-functions">Misc / System Functions</a> (Things that don't have their own category) - <em><a href="#system-functions">Examples</a></em>:</p>
 <ul>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span></code>                  - Reset Arduino</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s1">&#39;appName&#39;</span><span class="p">)</span></code>               - Run app</li>
@@ -731,8 +716,8 @@
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_discard</span><span class="p">()</span></code>                  - Discard unsaved changes</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_has_changes</span><span class="p">()</span></code>              - Check for unsaved changes</li>
 <li><code class="language-jython highlight"><span class="nf nf-Jumperless">switch_slot</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>                - Switch to a different slot</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>                      - Get complete board state as JSON string</li>
-<li><code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="p">[</span><span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code> - Apply complete state from JSON string</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>                                  - Get complete board state as JSON string</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="p">[</span><span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">],</span> <span class="p">[</span><span class="n">from_wokwi</span><span class="o">=</span><span class="kc">False</span><span class="p">])</span></code> - Apply complete state from JSON string; set <code class="language-jython highlight"><span class="n">from_wokwi</span></code> to True to parse Wokwi diagram</li>
 </ul>
 <p><a href="#help-functions">Help</a> - <em><a href="#the-entire-output-of-help">Examples</a></em>:</p>
 <ul>
@@ -1684,6 +1669,25 @@
 <span class="linenos" data-linenos="10 "></span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Touched: </span><span class="si">{</span><span class="n">pad</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="linenos" data-linenos="11 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 </code></pre></div></p>
+<h3 id="probe_autoconnect"><code class="language-jython highlight"><span class="n">probe_autoconnect</span><span class="p">([</span><span class="n">enable</span><span class="p">])</span></code></h3>
+<p>Gets or sets whether the probe DAC auto-connects on the routable buffer.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">enable</span></code> (optional): <code class="language-jython highlight"><span class="kc">True</span></code> to enable auto-connect, <code class="language-jython highlight"><span class="kc">False</span></code> to disable. If omitted, returns the current state without changing it.</li>
+<li>Returns: <code class="language-jython highlight"><span class="kc">True</span></code> if auto-connect is enabled, <code class="language-jython highlight"><span class="kc">False</span></code> if disabled.</li>
+</ul>
+<p>This is a <strong>temporary</strong> setting that resets to enabled on reboot. Use this when you want to free up the DAC that powers the probe for other purposes without permanently changing the config.</p>
+<p>To persistently disable, use <code class="language-jython highlight"><span class="n">config</span><span class="o">.</span><span class="n">dacs</span><span class="o">.</span><span class="n">auto_connect_probe</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span></code> in the config file instead.</p>
+<p><strong>Example:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Disable probe auto-connect to free up DAC0</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">probe_autoconnect</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># Check current state</span>
+<span class="linenos" data-linenos="5 "></span><span class="k">if</span> <span class="ow">not</span> <span class="n">probe_autoconnect</span><span class="p">():</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Probe auto-connect is disabled&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span>
+<span class="linenos" data-linenos="8 "></span><span class="c1"># Re-enable</span>
+<span class="linenos" data-linenos="9 "></span><span class="n">probe_autoconnect</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div></p>
 <hr />
 <h2 id="clickwheel">Clickwheel</h2>
 <p>Functions for reading the rotary encoder (clickwheel) position, direction, and button state.</p>
@@ -2264,15 +2268,27 @@ HSV is often more intuitive for color selection than RGB:
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">state_json</span> <span class="o">=</span> <span class="nf nf-Jumperless">get_state</span><span class="p">()</span>
 <span class="linenos" data-linenos="2 "></span><span class="nb">print</span><span class="p">(</span><span class="n">state_json</span><span class="p">)</span>
 </code></pre></div></p>
-<h3 id="set_state"><code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="p">[</span><span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">])</span></code></h3>
-<p>Applies a board state from a JSON string.</p>
+<h3 id="set_state"><code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="p">[</span><span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">],</span> <span class="p">[</span><span class="n">from_wokwi</span><span class="o">=</span><span class="kc">False</span><span class="p">])</span></code></h3>
+<p>Applies a board state from a JSON string or, if <code class="language-jython highlight"><span class="n">from_wokwi</span></code> is True, from a
+Wokwi diagram (provided as raw JSON or filepath on the board).</p>
 <ul>
-<li><code class="language-jython highlight"><span class="n">json</span></code>: A JSON string representing the state (same format as returned by <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>).</li>
-<li><code class="language-jython highlight"><span class="n">clear_first</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code> (default), clears all existing connections and FakeGPIO state before applying the new state. Set to <code class="language-jython highlight"><span class="kc">False</span></code> to merge the new state with the existing one.</li>
+<li><code class="language-jython highlight"><span class="n">json</span></code>: A JSON string representing the state (same format as returned by
+    <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>), or a filename/Wokwi JSON when <code class="language-jython highlight"><span class="n">from_wokwi</span></code> is used.</li>
+<li><code class="language-jython highlight"><span class="n">clear_first</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code> (default), clears all existing
+    connections and FakeGPIO state before applying the new state. Set to
+    <code class="language-jython highlight"><span class="kc">False</span></code> to merge the new state with the existing one.</li>
+<li><code class="language-jython highlight"><span class="n">from_wokwi</span></code> (optional): If <code class="language-jython highlight"><span class="kc">True</span></code>, interpret <code class="language-jython highlight"><span class="n">json</span></code> as a Wokwi diagram.json and
+    convert it to a Jumperless state before applying.</li>
 </ul>
-<p><strong>Example:</strong>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Apply a state from a string</span>
+<p><strong>Examples:</strong>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Apply a simple state from a string</span>
 <span class="linenos" data-linenos="2 "></span><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="s1">&#39;{&quot;nets&quot;: [{&quot;index&quot;: 1, &quot;name&quot;: &quot;GND&quot;, &quot;nodes&quot;: [&quot;GND&quot;]}], &quot;power&quot;: {&quot;top_rail&quot;: 5.0}}&#39;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># Apply directly from a Wokwi diagram file saved on the board</span>
+<span class="linenos" data-linenos="5 "></span><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="s1">&#39;/python_scripts/diagram1.json&#39;</span><span class="p">,</span> <span class="n">from_wokwi</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span>
+<span class="linenos" data-linenos="7 "></span><span class="c1"># or supply raw Wokwi JSON text</span>
+<span class="linenos" data-linenos="8 "></span><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">wokwi_json_string</span><span class="p">,</span> <span class="n">from_wokwi</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div></p>
 <hr />
 <h2 id="status-functions">Status Functions</h2>
@@ -3003,7 +3019,7 @@ You can also use module-level functions with file handles:
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../08-micropython/" class="btn btn-neutral float-left" title="MicroPython"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../09.6-jfs/" class="btn btn-neutral float-right" title="JFS (Jumperless FileSystem)">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../09.8-odds-and-ends/" class="btn btn-neutral float-right" title="Odds and Ends">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -3029,7 +3045,7 @@ You can also use module-level functions with file handles:
       <span><a href="../08-micropython/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../09.6-jfs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../09.8-odds-and-ends/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

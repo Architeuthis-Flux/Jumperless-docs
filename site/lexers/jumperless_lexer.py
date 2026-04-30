@@ -173,6 +173,7 @@ class JumperlessPythonLexer(PythonLexer):
         'print_crossbars',
         'print_nets',
         'print_paths',
+        'probe_autoconnect',
         'probe_button',
         'probe_button_blocking',
         'probe_button_nonblocking',
@@ -331,6 +332,48 @@ class JumperlessPythonLexer(PythonLexer):
         'Select', 'Measure', 'select', 'measure', 'Connect', 'Remove', 
     }
 
+    # Temporal Badge API (kept separate from Jumperless symbols)
+    BADGE_FUNCTIONS = {
+        'init', 'exit',
+        'oled_print', 'oled_println', 'oled_clear', 'oled_show',
+        'oled_set_cursor', 'oled_set_text_size', 'oled_get_text_size',
+        'oled_invert', 'oled_text_width', 'oled_text_height',
+        'oled_set_font', 'oled_get_fonts', 'oled_get_current_font',
+        'oled_set_pixel', 'oled_get_pixel', 'oled_draw_box',
+        'oled_set_draw_color', 'oled_get_framebuffer', 'oled_set_framebuffer',
+        'oled_get_framebuffer_size',
+        'ui_header', 'ui_action_bar', 'ui_chrome',
+        'ui_inline_hint', 'ui_inline_hint_right', 'ui_measure_hint',
+        'button', 'button_pressed', 'button_held_ms', 'joy_x', 'joy_y',
+        'led_brightness', 'led_clear', 'led_fill', 'led_set_pixel',
+        'led_get_pixel', 'led_show_image', 'led_set_frame',
+        'led_start_animation', 'led_stop_animation',
+        'led_override_begin', 'led_override_end',
+        'matrix_app_start', 'matrix_app_set_speed',
+        'matrix_app_set_brightness', 'matrix_app_stop',
+        'matrix_app_active', 'matrix_app_info',
+        'imu_ready', 'imu_tilt_x', 'imu_tilt_y',
+        'imu_accel_z', 'imu_face_down', 'imu_motion',
+        'haptic_pulse', 'haptic_strength', 'haptic_off',
+        'tone', 'no_tone', 'tone_playing',
+        'ir_send', 'ir_start', 'ir_stop', 'ir_available', 'ir_read',
+        'ir_send_words', 'ir_read_words', 'ir_flush', 'ir_tx_power',
+        'my_uuid', 'boops',
+        'mouse_overlay', 'mouse_set_bitmap', 'mouse_x', 'mouse_y',
+        'mouse_set_pos', 'mouse_clicked', 'mouse_set_speed', 'mouse_set_mode',
+        'dev',
+    }
+
+    BADGE_CONSTANTS = {
+        'BTN_RIGHT', 'BTN_DOWN', 'BTN_LEFT', 'BTN_UP',
+        'BTN_CIRCLE', 'BTN_CROSS', 'BTN_SQUARE', 'BTN_TRIANGLE',
+        'BTN_CONFIRM', 'BTN_SAVE', 'BTN_BACK', 'BTN_PRESETS',
+        'IMG_SMILEY', 'IMG_HEART', 'IMG_ARROW_UP', 'IMG_ARROW_DOWN',
+        'IMG_X_MARK', 'IMG_DOT',
+        'ANIM_SPINNER', 'ANIM_BLINK_SMILEY', 'ANIM_PULSE_HEART',
+        'MOUSE_ABSOLUTE', 'MOUSE_RELATIVE',
+    }
+
     def get_tokens_unprocessed(self, text):
         """
         Override the parent's token processing to add Jumperless-specific highlighting.
@@ -340,7 +383,11 @@ class JumperlessPythonLexer(PythonLexer):
             if token is Name:
                 if value in self.JUMPERLESS_FUNCTIONS:
                     token = JumperlessTokens.JumperlessFunction
+                elif value in self.BADGE_FUNCTIONS:
+                    token = JumperlessTokens.JumperlessFunction
                 elif value in self.JUMPERLESS_CONSTANTS:
+                    token = JumperlessTokens.JumperlessConstant
+                elif value in self.BADGE_CONSTANTS:
                     token = JumperlessTokens.JumperlessConstant
                 elif value in self.JFS_FUNCTIONS:
                     token = JumperlessTokens.JFSFunction
@@ -378,6 +425,13 @@ class JumperlessPythonLexer(PythonLexer):
             if re.search(pattern, text):
                 score = 0.99  # Almost maximum confidence
                 break  # Only count once per text
+
+        # Check for Temporal Badge functions
+        for func in self.BADGE_FUNCTIONS:
+            pattern = r'\b' + re.escape(func) + r'(\s*\()?'
+            if re.search(pattern, text):
+                score = 0.99
+                break
                 
         # Check for JFS function calls using defined function set
         # Match both jfs.function and standalone function names
@@ -393,6 +447,12 @@ class JumperlessPythonLexer(PythonLexer):
             if re.search(r'\b' + re.escape(const) + r'\b', text):
                 score = 0.99  # Almost maximum confidence
                 break  # Only count once per text
+
+        # Check for Temporal Badge constants
+        for const in self.BADGE_CONSTANTS:
+            if re.search(r'\b' + re.escape(const) + r'\b', text):
+                score = 0.99
+                break
                 
         # Check for JFS constants using defined constant set
         for const in self.JFS_CONSTANTS:

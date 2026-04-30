@@ -154,16 +154,19 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem)</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -206,7 +209,6 @@
 <h2 id="the-probe">The Probe</h2>
 <p>First, keep the switch on the probe set to <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code>
 <img alt="ProbeSelect" src="https://github.com/user-attachments/assets/1155f75a-f800-4bc0-ba6d-49e603ad39e2" /></p>
-<p><strong>Why Select mode?</strong> <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> mode allows the probe tip to be ±9V tolerant and routable like any other node, but as of yet, the code to actually do anything with it is unwritten so it just connects to DAC 0 and outputs 3.3V just like it was in <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code> mode. But the DAC is much worse at matching the RP2350B's idea of what 3.3V is <em>exactly</em>, so probing will be flaky and may be off from the rows you're tapping in <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code>.</p>
 <h2 id="connecting-rows">Connecting Rows</h2>
 <p>Click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button on the probe
 <img alt="connectButton" src="https://github.com/user-attachments/assets/faedd0af-8ea6-4454-8f33-01ff478bb9e7" /></p>
@@ -214,7 +216,7 @@
 <img alt="connect" src="https://github.com/user-attachments/assets/2040417f-64c3-41dd-a3d6-8c900e15445b" /></p>
 <p>Now any pair of nodes you tap should get connected as you make them. In connect mode, you're creating <code class="language-jython highlight"><span class="n">bridges</span></code> (see the <a href="../99-glossary/">glossary</a>), so connections are made in pairs. When you've tapped the first <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> in a pair, the <code class="language-jython highlight"><span class="n">logo</span></code> and <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> text on the probe will brighten to show that you're "<code class="language-jython highlight"><span class="n">holding</span></code>" a connection, and the next thing you tap will connect to that first <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>. </p>
 <p>If you make a mistake while <code class="language-jython highlight"><span class="n">holding</span></code> a connection, click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button and it will clear it and take you back to the first <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>. 
-If you click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button while you're not <code class="language-jython highlight"><span class="n">holding</span></code> a <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>, it will leave <code class="language-jython highlight"><span class="n">probe</span> <span class="n">mode</span></code> and bring you back into <code class="language-jython highlight"><span class="n">idle</span> <span class="n">mode</span></code> (rainbowy <code class="language-jython highlight"><span class="n">logo</span></code>, all 3 <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LED</span></code>s on.)</p>
+If you click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button while you're not <code class="language-jython highlight"><span class="n">holding</span></code> a <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>, it will leave <code class="language-jython highlight"><span class="n">probe</span> <span class="n">mode</span></code> and bring you back into <code class="language-jython highlight"><span class="n">idle</span> <span class="n">mode</span></code> (rainbowy<code class="language-jython highlight"><span class="n">logo</span></code>, all 3 <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LED</span></code>s on.)</p>
 <p>To get out of <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode, press the button again.</p>
 <h3 id="encoder-connections">Encoder Connections</h3>
 <p>You can also make connections using just the clickwheel, without needing to touch the probe to the breadboard:</p>

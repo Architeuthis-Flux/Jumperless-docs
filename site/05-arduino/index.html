@@ -170,16 +170,19 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Jumperless FileSystem)</a>
-                </li>
-              </ul>
-              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -224,9 +227,11 @@
 <h2 id="quick-connection-shortcuts">Quick Connection Shortcuts</h2>
 <p>The shortcuts to connect <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code> to the Jumperless's UART <code class="language-jython highlight"><span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code> is <code class="language-jython highlight"><span class="n">A</span></code> to connect, and <code class="language-jython highlight"><span class="n">a</span></code> to disconnect.</p>
 <h2 id="automatic-flashing">Automatic Flashing</h2>
-<p>It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.
-<img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" /> </p>
-<p><strong>Tip:</strong> You can also use <a href="https://wokwi.com">Wokwi</a> with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open!</p>
+<p>It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.</p>
+<p><img alt="" src="docs/assets/arduinoPort.png" /></p>
+<!-- <img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" />  -->
+
+<p><strong>Tip:</strong> You can also use <a href="https://wokwi.com">Wokwi</a> with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open</p>
 <hr />
 <h2 id="commands-from-routable-uart">Commands from Routable UART</h2>
 <p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The tags are stripped out and the command is executed - the Arduino never sees them come back.</p>

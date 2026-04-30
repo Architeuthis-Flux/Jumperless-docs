@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/badge-developer-guide/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/badge-developer-guide/">
+    <meta property="og:title" content="Developer Guide - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/badge-developer-guide/">
+    <meta name="twitter:title" content="Developer Guide - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/badge-developer-guide/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Developer Guide - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Developer Guide</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-what-is-this-badge">1. What Is This Badge?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#hardware-at-a-glance">Hardware at a Glance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#physical-layout">Physical Layout</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#orientation-and-nametag-mode">Orientation and Nametag Mode</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-getting-started-with-jumperide">2. Getting Started with JumperIDE</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#file-management">File Management</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-your-first-app">3. Your First App</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#hello-world">Hello World</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#adding-input">Adding Input</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#using-the-native-ui-chrome">Using the Native UI Chrome</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-app-structure">4. App Structure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#single-file-apps">Single-File Apps</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#multi-file-apps">Multi-File Apps</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#showing-up-on-the-main-menu">Showing Up on the Main Menu</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#saving-data">Saving Data</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-micropython-cheat-sheet">5. MicroPython Cheat Sheet</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#available-modules">Available Modules</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-differences-from-cpython">Key Differences from CPython</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-hardware-guide">6. Hardware Guide</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#oled-display-12864">OLED Display (128×64)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#led-matrix-88">LED Matrix (8×8)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#buttons">Buttons</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#joystick">Joystick</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#imu">IMU (Accelerometer)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#haptics">Haptics</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ir-sendreceive">IR Send/Receive</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-advanced-topics">7. Advanced Topics</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mouse-overlay">Mouse Overlay</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#flipnametag-detection">Flip/Nametag Detection</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#native-ui-chrome">Native UI Chrome</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-badge-to-badge-communication">8. Badge-to-Badge Communication</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#simple-ping-pong">Simple Ping-Pong</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#richer-data-with-multi-word-frames">Richer Data with Multi-Word Frames</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tips-for-ir-communication">Tips for IR Communication</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-tips-and-gotchas">9. Tips and Gotchas</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#memory-management">Memory Management</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#display">Display</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#led-matrix">LED Matrix</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ir">IR</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#input">Input</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#general">General</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-reference-card">Quick Reference Card</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Temporal Badge</li>
+      <li class="breadcrumb-item active">Developer Guide</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="temporal-badge-micropython-developer-guide">Temporal Badge — MicroPython Developer Guide</h1>
+<p>Write apps for your conference badge using Python. This guide covers
+everything from connecting JumperIDE to building multi-file games with
+LED matrix animations and badge-to-badge IR communication.</p>
+<p>For the exhaustive function-by-function reference, see the
+<a href="../badge-api-reference/">API Reference</a>
+(also available on-device at <code class="language-jython highlight"><span class="o">/</span><span class="n">API_REFERENCE</span><span class="o">.</span><span class="n">md</span></code>).</p>
+<hr />
+<h2 id="1-what-is-this-badge">1. What Is This Badge?</h2>
+<p>The Temporal Badge is a wearable conference badge built on the
+<strong>ESP32-S3-WROOM-1 16N8</strong> module (16 MB flash, 8 MB PSRAM). It runs Arduino
+C++ firmware with an embedded <strong>MicroPython v1.27</strong> runtime, so you can write
+Python apps that control all the hardware directly.</p>
+<h3 id="hardware-at-a-glance">Hardware at a Glance</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MCU</td>
+<td>ESP32-S3-WROOM-1 16N8 (dual-core, 240 MHz, 8 MB PSRAM, 16 MB flash)</td>
+</tr>
+<tr>
+<td>Display</td>
+<td>128×64 monochrome OLED (SSD1306)</td>
+</tr>
+<tr>
+<td>LED Matrix</td>
+<td>8×8 red LEDs (IS31FL3731, PWM per pixel)</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>4 d-pad buttons + analog joystick</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td>LIS2DH12 3-axis accelerometer</td>
+</tr>
+<tr>
+<td>IR</td>
+<td>NEC-protocol TX LED + TSOP receiver</td>
+</tr>
+<tr>
+<td>Haptics</td>
+<td>Vibration motor with coil-tone support</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>FatFS <code class="language-jython highlight"><span class="n">ffat</span></code> partition (0x600000 bytes in <code class="language-jython highlight"><span class="n">partitions_replay_16MB_doom</span><span class="o">.</span><span class="n">csv</span></code>, mounted at <code class="language-jython highlight"><span class="o">/</span><span class="n">apps</span><span class="o">/</span></code>)</td>
+</tr>
+<tr>
+<td>Python heap</td>
+<td>128 KB from PSRAM</td>
+</tr>
+</tbody>
+</table>
+<h3 id="physical-layout">Physical Layout</h3>
+<p>The badge is held <strong>upright</strong> during use. When idle (walking around the
+conference), it rests <strong>upside down</strong> on the lanyard, and the firmware
+automatically flips the display to show a nametag.</p>
+<p><img alt="Badge photo" src="../img/badge-photo.png" /></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>        <span class="err">╭───────────────────────────────────────────────╮</span>
+<span class="linenos" data-linenos=" 2 "></span>        <span class="err">│</span>              <span class="err">▀▀</span> <span class="n">IR</span> <span class="no no-Jumperless">TX</span><span class="o">/</span><span class="no no-Jumperless">RX</span> <span class="err">▀▀</span>                   <span class="err">│</span>
+<span class="linenos" data-linenos=" 3 "></span>        <span class="err">│</span>                                               <span class="err">│</span>
+<span class="linenos" data-linenos=" 4 "></span>        <span class="err">│</span>   <span class="err">╭───────────────────────────────────────╮</span>   <span class="err">│</span>
+<span class="linenos" data-linenos=" 5 "></span>        <span class="err">│</span>   <span class="err">│</span>                                       <span class="err">│</span>   <span class="err">│</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="err">│</span>   <span class="err">│</span>         <span class="mi">128</span><span class="err">×</span><span class="mi">64</span> <span class="n">OLED</span> <span class="n">Display</span>           <span class="err">│</span>   <span class="err">│</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="err">│</span>   <span class="err">│</span>         <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="err">───►</span> <span class="n">x</span>                  <span class="err">│</span>   <span class="err">│</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="err">│</span>   <span class="err">│</span>          <span class="err">│</span>                            <span class="err">│</span>   <span class="err">│</span>
+<span class="linenos" data-linenos=" 9 "></span>        <span class="err">│</span>   <span class="err">│</span>          <span class="err">▼</span> <span class="n">y</span>                          <span class="err">│</span>   <span class="err">│</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="err">│</span>   <span class="err">│</span>                                       <span class="err">│</span>   <span class="err">│</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="err">│</span>   <span class="err">╰───────────────────────────────────────╯</span>   <span class="err">│</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="err">│</span>                                               <span class="err">│</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="err">│</span>              <span class="err">╭───────────╮</span>                    <span class="err">│</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="err">│</span>              <span class="err">│</span> <span class="err">·</span> <span class="err">·</span> <span class="err">·</span> <span class="err">·</span> <span class="err">·</span> <span class="err">│</span>        <span class="p">[</span><span class="n">Y</span><span class="p">]</span>         <span class="err">│</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="err">│</span>     <span class="err">◉</span>        <span class="err">│</span> <span class="err">·</span> <span class="mi">8</span><span class="err">×</span><span class="mi">8</span>   <span class="err">·</span> <span class="err">│</span>     <span class="p">[</span><span class="n">X</span><span class="p">]</span>   <span class="p">[</span><span class="n">B</span><span class="p">]</span>      <span class="err">│</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="err">│</span>   <span class="n">Joystick</span>   <span class="err">│</span> <span class="err">·</span> <span class="n">LED</span>   <span class="err">·</span> <span class="err">│</span>        <span class="p">[</span><span class="n">A</span><span class="p">]</span>         <span class="err">│</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="err">│</span>              <span class="err">│</span> <span class="err">·</span> <span class="n">Matrix·</span> <span class="err">│</span>                    <span class="err">│</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="err">│</span>              <span class="err">│</span> <span class="err">·</span> <span class="err">·</span> <span class="err">·</span> <span class="err">·</span> <span class="err">·</span> <span class="err">│</span>                    <span class="err">│</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="err">│</span>              <span class="err">╰───────────╯</span>                    <span class="err">│</span>
+<span class="linenos" data-linenos="20 "></span>        <span class="err">╰───────────────────────────────────────────────╯</span>
+<span class="linenos" data-linenos="21 "></span>
+<span class="linenos" data-linenos="22 "></span>    <span class="n">Buttons</span><span class="p">:</span>  <span class="p">[</span><span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">BTN_UP</span> <span class="o">/</span> <span class="n">BTN_TRIANGLE</span>
+<span class="linenos" data-linenos="23 "></span>              <span class="p">[</span><span class="n">X</span><span class="p">]</span> <span class="o">=</span> <span class="n">BTN_LEFT</span> <span class="o">/</span> <span class="n">BTN_SQUARE</span>
+<span class="linenos" data-linenos="24 "></span>              <span class="p">[</span><span class="n">B</span><span class="p">]</span> <span class="o">=</span> <span class="n">BTN_RIGHT</span> <span class="o">/</span> <span class="n">BTN_CIRCLE</span>
+<span class="linenos" data-linenos="25 "></span>              <span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="o">=</span> <span class="n">BTN_DOWN</span> <span class="o">/</span> <span class="n">BTN_CROSS</span>
+</code></pre></div>
+<p><strong>Button mapping:</strong></p>
+<ul>
+<li>Physical: <code class="language-jython highlight"><span class="n">BTN_UP</span></code> (Y), <code class="language-jython highlight"><span class="n">BTN_DOWN</span></code> (A), <code class="language-jython highlight"><span class="n">BTN_LEFT</span></code> (X), <code class="language-jython highlight"><span class="n">BTN_RIGHT</span></code> (B)</li>
+<li>PlayStation aliases: <code class="language-jython highlight"><span class="n">BTN_TRIANGLE</span></code>, <code class="language-jython highlight"><span class="n">BTN_CROSS</span></code>, <code class="language-jython highlight"><span class="n">BTN_SQUARE</span></code>, <code class="language-jython highlight"><span class="n">BTN_CIRCLE</span></code></li>
+<li>Semantic: <code class="language-jython highlight"><span class="n">BTN_CONFIRM</span></code> (select/OK), <code class="language-jython highlight"><span class="n">BTN_BACK</span></code> (cancel/back) — these follow
+  the user's confirm/back swap setting</li>
+</ul>
+<h3 id="orientation-and-nametag-mode">Orientation and Nametag Mode</h3>
+<p>The IMU detects when the badge is flipped upside down. The firmware
+automatically:</p>
+<ul>
+<li>Flips the OLED to show an idle display / nametag</li>
+<li>Rotates button and joystick input to match the new orientation</li>
+<li>Flips the LED matrix</li>
+</ul>
+<p>Your app can detect this too — see
+<a href="#flipnametag-detection">Flip/Nametag Detection</a> in the Advanced Topics
+section.</p>
+<hr />
+<h2 id="2-getting-started-with-jumperide">2. Getting Started with JumperIDE</h2>
+<p>The fastest way to write and test badge code is <strong>JumperIDE</strong>, a browser-based
+MicroPython IDE that connects over WebSerial.</p>
+<p>Go to <a href="https://ide.jumperless.org/">https://ide.jumperless.org/</a> and press
+the <strong>Connect</strong> button.</p>
+<p><img width="1303" height="1246" alt="JumperIDE connect button" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" /></p>
+<p>Select the badge serial port from the browser picker.</p>
+<ul>
+<li>On macOS this usually appears as USB/JTAG serial for the ESP32-S3.</li>
+<li>On Windows this appears as a COM port.</li>
+<li>If multiple ports appear, try the one that shows the MicroPython REPL prompt.</li>
+</ul>
+<p><img width="1304" height="1250" alt="Serial port picker" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
+<p>Open or create a script, then hit <strong>Run / Stop</strong> (or press <code class="language-jython highlight"><span class="n">F5</span></code>).</p>
+<p><img width="1304" height="1250" alt="Run/Stop button" src="https://github.com/user-attachments/assets/0190af73-cd5f-49e9-b378-bb6d1c8a7bb4" /></p>
+<p>Press it again to stop. If you make edits, hit the green <strong>Save</strong> button
+(<code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">S</span></code>) to write the file to the badge filesystem.</p>
+<p><img width="1306" height="1249" alt="Save button" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" /></p>
+<p>The REPL terminal at the bottom shows <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code> output and exceptions.
+JumperIDE uses MicroPython raw REPL under the hood, so anything compatible with
+raw REPL workflows (including <code class="language-jython highlight"><span class="n">mpremote</span></code>) also works with the badge.</p>
+<h3 id="file-management">File Management</h3>
+<p>JumperIDE shows the badge filesystem in a tree view. You can:</p>
+<ul>
+<li>Browse <code class="language-jython highlight"><span class="o">/</span><span class="n">apps</span><span class="o">/</span></code>, <code class="language-jython highlight"><span class="o">/</span><span class="n">lib</span><span class="o">/</span></code>, <code class="language-jython highlight"><span class="o">/</span><span class="n">tests</span><span class="o">/</span></code></li>
+<li>Open and edit files directly on the badge</li>
+<li>Create new files and directories</li>
+<li>Save changes with <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">S</span></code></li>
+</ul>
+<h2 id="3-your-first-app">3. Your First App</h2>
+<h3 id="hello-world">Hello World</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Hello Badge!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">led_show_image</span><span class="p">(</span><span class="n">IMG_HEART</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">led_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="n">exit</span><span class="p">()</span>
+</code></pre></div>
+<p>This clears the OLED, prints centered text, shows a heart on the LED matrix for
+3 seconds, then exits back to the menu.</p>
+<h3 id="adding-input">Adding Input</h3>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Press buttons!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Count: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_CONFIRM</span><span class="p">):</span>
+<span class="linenos" data-linenos="14 "></span>        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="n">haptic_pulse</span><span class="p">()</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="n">led_show_image</span><span class="p">(</span><span class="n">IMG_SMILEY</span><span class="p">)</span>
+<span class="linenos" data-linenos="17 "></span>
+<span class="linenos" data-linenos="18 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_BACK</span><span class="p">):</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos="22 "></span>
+<span class="linenos" data-linenos="23 "></span><span class="n">led_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="24 "></span><span class="n">exit</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Key patterns:</strong></p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">button_pressed</span><span class="p">()</span></code> is edge-triggered — it returns <code class="language-jython highlight"><span class="kc">True</span></code> once per press,
+  then <code class="language-jython highlight"><span class="kc">False</span></code> until the button is released and pressed again. Use this for
+  menu navigation.</li>
+<li><code class="language-jython highlight"><span class="n">button</span><span class="p">()</span></code> is level-triggered — it returns <code class="language-jython highlight"><span class="kc">True</span></code> as long as the button is
+  held. Use this for continuous actions (shooting, accelerating).</li>
+<li>Always call <code class="language-jython highlight"><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">20</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span></code> in your main loop to yield CPU time.</li>
+<li>Call <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span></code> after drawing to make changes visible.</li>
+</ul>
+<h3 id="using-the-native-ui-chrome">Using the Native UI Chrome</h3>
+<p>For apps that should look like the built-in firmware screens, use <code class="language-jython highlight"><span class="n">badge_ui</span></code>:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">badge_ui</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ui</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">ui</span><span class="o">.</span><span class="n">chrome</span><span class="p">(</span><span class="s2">&quot;My App&quot;</span><span class="p">,</span> <span class="s2">&quot;v1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">,</span> <span class="s2">&quot;BACK&quot;</span><span class="p">,</span> <span class="s2">&quot;quit&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">ui</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Hello from Python!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">ui</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;This matches the firmware style&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_BACK</span><span class="p">):</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="n">exit</span><span class="p">()</span>
+</code></pre></div>
+<p><code class="language-jython highlight"><span class="n">badge_ui</span></code> calls the native C++ UI layout code, so your app's header, footer,
+and button glyph icons are pixel-identical to the firmware menus. See
+<code class="language-jython highlight"><span class="n">initial_filesystem</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">badge_ui</span><span class="o">.</span><span class="n">py</span></code> for all available helpers.</p>
+<hr />
+<h2 id="4-app-structure">4. App Structure</h2>
+<h3 id="single-file-apps">Single-File Apps</h3>
+<p>Good for quick experiments and small demos. Place a <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> file in <code class="language-jython highlight"><span class="o">/</span><span class="n">apps</span><span class="o">/</span></code>:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">my_demo</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div>
+<p>All <code class="language-jython highlight"><span class="n">badge</span></code> module functions are auto-imported into the global scope — no
+<code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">badge</span></code> needed in single-file apps.</p>
+<h3 id="multi-file-apps">Multi-File Apps</h3>
+<p>For anything beyond a simple demo, use a folder with a <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> entry point:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">/</span><span class="n">apps</span><span class="o">/</span><span class="n">my_game</span><span class="o">/</span>
+<span class="linenos" data-linenos="2 "></span>    <span class="n">main</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Entry point (tiny — just imports and calls main)</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">engine</span><span class="o">.</span><span class="n">py</span>        <span class="c1"># Game loop and logic</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">data</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Constants, level data</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">screens</span><span class="o">.</span><span class="n">py</span>       <span class="c1"># OLED rendering functions</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="n">icon</span><span class="o">.</span><span class="n">py</span>          <span class="c1"># Optional: app icon bitmap for the menu</span>
+</code></pre></div>
+<p>The <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> should be minimal:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;My Game app entry point.&quot;&quot;&quot;</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">APP_DIR</span> <span class="o">=</span> <span class="s2">&quot;/apps/my_game&quot;</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="k">if</span> <span class="n">APP_DIR</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">APP_DIR</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">main</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<p>In your other modules, explicitly import what you need:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">badge</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="linenos" data-linenos="2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="3 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
+</code></pre></div>
+<p>This pattern is used by BreakSnake, Flappy Asteroids, and Synth. The
+<code class="language-jython highlight"><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span></code> lets Python find sibling modules in the app directory.</p>
+<h3 id="showing-up-on-the-main-menu">Showing Up on the Main Menu</h3>
+<p>In dev builds (<code class="language-jython highlight"><span class="n">echo</span><span class="o">-</span><span class="n">dev</span></code>), any folder under <code class="language-jython highlight"><span class="o">/</span><span class="n">apps</span><span class="o">/</span></code> with a <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> is
+automatically listed in the Apps menu. In production firmware, apps are
+registered in the native menu grid with an icon in <code class="language-jython highlight"><span class="n">AppIcons</span><span class="o">.</span><span class="n">h</span></code> and a
+launcher entry in <code class="language-jython highlight"><span class="n">GUI</span><span class="o">.</span><span class="n">cpp</span></code>.</p>
+<p>A filesystem-based app registration system is planned — apps will be able to
+declare their name, icon, and description to appear on the main screen without
+firmware changes.</p>
+<h3 id="saving-data">Saving Data</h3>
+<p>Apps have full filesystem access through the standard <code class="language-jython highlight"><span class="nf nf-Jumperless">os</span></code> module and
+<code class="language-jython highlight"><span class="nb">open</span><span class="p">()</span></code>:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">SAVE_FILE</span> <span class="o">=</span> <span class="s2">&quot;/apps/my_game/save.json&quot;</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="k">def</span><span class="w"> </span><span class="nf">save_state</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">score</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">level</span><span class="p">}</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SAVE_FILE</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="k">def</span><span class="w"> </span><span class="nf">load_state</span><span class="p">():</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="k">try</span><span class="p">:</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">SAVE_FILE</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="k">except</span><span class="p">:</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="5-micropython-cheat-sheet">5. MicroPython Cheat Sheet</h2>
+<h3 id="available-modules">Available Modules</h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="n">sys</span></code></td>
+<td><code class="language-jython highlight"><span class="n">sys</span><span class="o">.</span><span class="n">path</span></code>, <code class="language-jython highlight"><span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">os</span></code></td>
+<td>Filesystem: <code class="language-jython highlight"><span class="nf nf-JFS">listdir</span></code>, <code class="language-jython highlight"><span class="nf nf-JFS">mkdir</span></code>, <code class="language-jython highlight"><span class="nf nf-JFS">remove</span></code>, <code class="language-jython highlight"><span class="nf nf-JFS">stat</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">time</span></code></td>
+<td><code class="language-jython highlight"><span class="n">sleep_ms</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ticks_ms</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ticks_diff</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">random</span></code></td>
+<td><code class="language-jython highlight"><span class="n">randint</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">choice</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">uniform</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">math</span></code></td>
+<td><code class="language-jython highlight"><span class="n">sin</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">cos</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">sqrt</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">pi</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">cmath</span></code></td>
+<td>Complex math</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">struct</span></code></td>
+<td><code class="language-jython highlight"><span class="n">pack</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">unpack</span><span class="p">()</span></code> for binary data</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">array</span></code></td>
+<td>Typed arrays</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">binascii</span></code></td>
+<td><code class="language-jython highlight"><span class="n">hexlify</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">unhexlify</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">json</span></code></td>
+<td><code class="language-jython highlight"><span class="n">loads</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">dumps</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">collections</span></code></td>
+<td><code class="language-jython highlight"><span class="n">OrderedDict</span></code>, <code class="language-jython highlight"><span class="n">namedtuple</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">errno</span></code></td>
+<td>Error constants</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">gc</span></code></td>
+<td><code class="language-jython highlight"><span class="n">collect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">mem_free</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">mem_alloc</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">io</span></code></td>
+<td><code class="language-jython highlight"><span class="n">StringIO</span></code>, <code class="language-jython highlight"><span class="n">BytesIO</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">micropython</span></code></td>
+<td><code class="language-jython highlight"><span class="n">mem_info</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">stack_use</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">uctypes</span></code></td>
+<td>C-compatible struct access</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">badge</span></code></td>
+<td>All badge hardware (auto-imported)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="key-differences-from-cpython">Key Differences from CPython</h3>
+<p><strong>f-strings are supported.</strong> You can use normal MicroPython string formatting:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">score</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="linenos" data-linenos="2 "></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Score: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>  <span class="c1"># also fine</span>
+</code></pre></div>
+<p><strong>Time functions use milliseconds:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>      <span class="c1"># 100 ms</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>           <span class="c1"># 1 second (float OK)</span>
+<span class="linenos" data-linenos="5 "></span>
+<span class="linenos" data-linenos="6 "></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">()</span>
+<span class="linenos" data-linenos="7 "></span><span class="c1"># ... do work ...</span>
+<span class="linenos" data-linenos="8 "></span><span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">ticks_diff</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">ticks_ms</span><span class="p">(),</span> <span class="n">start</span><span class="p">)</span>
+</code></pre></div>
+<p>Use a cooperative main loop. Long-running computation in the foreground loop
+can block input/render responsiveness, so keep per-frame work small and
+use <code class="language-jython highlight"><span class="n">sleep_ms</span><span class="p">()</span></code> to yield.</p>
+<p><strong>Memory is limited.</strong> The Python heap is 128 KB from PSRAM. Call
+<code class="language-jython highlight"><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span></code> periodically in long-running apps, especially after releasing
+large objects:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="linenos" data-linenos="4 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Free:&quot;</span><span class="p">,</span> <span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">(),</span> <span class="s2">&quot;bytes&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>No pip / external packages.</strong> Only the modules listed above are available.
+Shared code goes in <code class="language-jython highlight"><span class="o">/</span><span class="n">lib</span><span class="o">/</span></code> (which is on <code class="language-jython highlight"><span class="n">sys</span><span class="o">.</span><span class="n">path</span></code>).</p>
+<p>For the full MicroPython language reference:
+<a href="https://docs.micropython.org/en/latest/">docs.micropython.org</a></p>
+<hr />
+<h2 id="6-hardware-guide">6. Hardware Guide</h2>
+<h3 id="oled-display-12864">OLED Display (128×64)</h3>
+<p>The coordinate system has <strong>(0, 0) at the top-left corner</strong>. X ranges from
+0–127, Y from 0–63. The display is buffered — draw to the buffer, then call
+<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span></code> to push it to the screen.</p>
+<p><strong>Text rendering:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Top-left&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">oled_set_text_size</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;BIG&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="nf nf-Jumperless">oled_set_text_size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Centering text:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Centered!&quot;</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">w</span> <span class="o">=</span> <span class="n">oled_text_width</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="mi">128</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">oled_set_cursor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Fonts:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">fonts</span> <span class="o">=</span> <span class="nf nf-Jumperless">oled_get_fonts</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fonts</span><span class="p">:</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="nf nf-Jumperless">oled_set_font</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="5 "></span>    <span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span>    <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span>    <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="8 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Drawing primitives:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">oled_set_pixel</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>           <span class="c1"># Single pixel</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">oled_draw_box</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>       <span class="c1"># Filled rectangle</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">oled_set_draw_color</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>              <span class="c1"># XOR mode</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">oled_draw_box</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>        <span class="c1"># XOR overlay</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_set_draw_color</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>              <span class="c1"># Back to white</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Framebuffer access</strong> for advanced effects:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">fb</span> <span class="o">=</span> <span class="nf nf-Jumperless">oled_get_framebuffer</span><span class="p">()</span>         <span class="c1"># bytes object, 1024 bytes</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="nf nf-JFS">size</span> <span class="o">=</span> <span class="nf nf-Jumperless">oled_get_framebuffer_size</span><span class="p">()</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="n">buf</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">fb</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="c1"># Modify buf...</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">oled_set_framebuffer</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="led-matrix-88">LED Matrix (8×8)</h3>
+<p>An 8×8 red LED grid centered below the OLED. Each LED has individual PWM
+brightness (0–255). The matrix has a separate global brightness control.</p>
+<p><strong>Basic operations:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">led_brightness</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>                  <span class="c1"># Set global brightness</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">led_clear</span><span class="p">()</span>                         <span class="c1"># All off</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">led_fill</span><span class="p">()</span>                          <span class="c1"># All on</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">led_set_pixel</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>            <span class="c1"># Single LED at (3,3)</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">val</span> <span class="o">=</span> <span class="n">led_get_pixel</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>           <span class="c1"># Read brightness back</span>
+</code></pre></div>
+<p><strong>Built-in images and animations:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">led_show_image</span><span class="p">(</span><span class="n">IMG_HEART</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="n">led_start_animation</span><span class="p">(</span><span class="n">ANIM_PULSE_HEART</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">led_stop_animation</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Custom bitmask frames:</strong></p>
+<p>Each row is a byte where bit 7 is the leftmost pixel:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Checkerboard pattern</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">led_set_frame</span><span class="p">([</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="mb">0b10101010</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="mb">0b01010101</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="mb">0b10101010</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="mb">0b01010101</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="mb">0b10101010</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="mb">0b01010101</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="mb">0b10101010</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="mb">0b01010101</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span><span class="p">],</span> <span class="mi">60</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Foreground override</strong> — prevent the ambient LED mode from clobbering your
+drawing:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">led_override_begin</span><span class="p">()</span>
+<span class="linenos" data-linenos="2 "></span><span class="c1"># ... draw on the matrix ...</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">led_set_pixel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># ... when done:</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">led_override_end</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Background callbacks</strong> — register a Python function that the firmware calls
+periodically to animate the matrix while your main loop does other things:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">phase</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">def</span><span class="w"> </span><span class="nf">spinner</span><span class="p">(</span><span class="n">now_ms</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="k">global</span> <span class="n">phase</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">led_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="n">x</span> <span class="o">=</span> <span class="n">phase</span> <span class="o">%</span> <span class="mi">8</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="n">led_set_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">phase</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="n">matrix_app_start</span><span class="p">(</span><span class="n">spinner</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos="12 "></span>
+<span class="linenos" data-linenos="13 "></span><span class="c1"># ... main loop handles OLED and input ...</span>
+<span class="linenos" data-linenos="14 "></span><span class="c1"># The spinner runs in the background via the service pump</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="n">matrix_app_stop</span><span class="p">()</span>   <span class="c1"># When done</span>
+</code></pre></div>
+<h3 id="buttons">Buttons</h3>
+<p>Four face buttons arranged in a d-pad layout. Use the semantic constants
+(<code class="language-jython highlight"><span class="n">BTN_CONFIRM</span></code>, <code class="language-jython highlight"><span class="n">BTN_BACK</span></code>) for menu-style interaction, and physical constants
+(<code class="language-jython highlight"><span class="n">BTN_UP</span></code>, <code class="language-jython highlight"><span class="n">BTN_DOWN</span></code>, <code class="language-jython highlight"><span class="n">BTN_LEFT</span></code>, <code class="language-jython highlight"><span class="n">BTN_RIGHT</span></code>) for game controls.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Edge-triggered — fires once per press</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_CONFIRM</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="n">do_action</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># Level-triggered — true while held</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="k">if</span> <span class="n">button</span><span class="p">(</span><span class="n">BTN_UP</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="n">move_up</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 8 "></span>
+<span class="linenos" data-linenos=" 9 "></span><span class="c1"># Hold duration</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">ms</span> <span class="o">=</span> <span class="n">button_held_ms</span><span class="p">(</span><span class="n">BTN_DOWN</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span><span class="k">if</span> <span class="n">ms</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="n">long_press_action</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Escape chord:</strong> Holding all four face buttons for ~1 second force-exits any
+running app. This is a firmware safety net — you don't need to implement it.</p>
+<h3 id="joystick">Joystick</h3>
+<p>A 2-axis analog joystick returning raw ADC values (0–4095). Center position is
+approximately 2048, but varies per unit.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">x</span> <span class="o">=</span> <span class="n">joy_x</span><span class="p">()</span>  <span class="c1"># 0 = full left, 4095 = full right</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">y</span> <span class="o">=</span> <span class="n">joy_y</span><span class="p">()</span>  <span class="c1"># 0 = full up, 4095 = full down</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Dead zone handling</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">CENTER</span> <span class="o">=</span> <span class="mi">2048</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">DEAD</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">dx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">CENTER</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">dy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">CENTER</span>
+<span class="linenos" data-linenos="10 "></span><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">DEAD</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">dx</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos" data-linenos="12 "></span><span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">DEAD</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+<h3 id="imu">IMU (Accelerometer)</h3>
+<p>The LIS2DH12 accelerometer provides tilt sensing and motion detection.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="k">if</span> <span class="ow">not</span> <span class="n">imu_ready</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 2 "></span>    <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;No IMU!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Tilt values in milli-g (±1000 typical)</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">tx</span> <span class="o">=</span> <span class="n">imu_tilt_x</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">ty</span> <span class="o">=</span> <span class="n">imu_tilt_y</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># Map tilt to LED position</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">px</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">tx</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">py</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">ty</span> <span class="o">+</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span><span class="n">px</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">px</span><span class="p">))</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">py</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">py</span><span class="p">))</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="n">led_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="15 "></span><span class="n">led_set_pixel</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</code></pre></div>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Motion detection (edge-triggered)</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">if</span> <span class="n">imu_motion</span><span class="p">():</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Shake detected!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="c1"># Orientation detection</span>
+<span class="linenos" data-linenos="6 "></span><span class="k">if</span> <span class="n">imu_face_down</span><span class="p">():</span>
+<span class="linenos" data-linenos="7 "></span>    <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Badge is flipped!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="haptics">Haptics</h3>
+<p>The vibration motor supports haptic feedback pulses and audible coil tones.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">haptic_pulse</span><span class="p">()</span>                      <span class="c1"># Default pulse</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">haptic_pulse</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>               <span class="c1"># Stronger, 50ms</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">haptic_pulse</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>         <span class="c1"># Full, 100ms, 150Hz carrier</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">haptic_off</span><span class="p">()</span>                        <span class="c1"># Stop immediately</span>
+</code></pre></div>
+<p><strong>Coil tones</strong> — at low duty cycles, the motor coil vibrates audibly:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Play a scale</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">262</span><span class="p">,</span> <span class="mi">294</span><span class="p">,</span> <span class="mi">330</span><span class="p">,</span> <span class="mi">349</span><span class="p">,</span> <span class="mi">392</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">494</span><span class="p">,</span> <span class="mi">523</span><span class="p">]</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">for</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="n">tone</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">250</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Continuous tone</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">tone</span><span class="p">(</span><span class="mi">440</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">no_tone</span><span class="p">()</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="c1"># Check if playing</span>
+<span class="linenos" data-linenos="13 "></span><span class="k">if</span> <span class="n">tone_playing</span><span class="p">():</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Playing!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="ir-sendreceive">IR Send/Receive</h3>
+<p>Infrared communication using a modified NEC protocol. The IR LED is at the top
+of the badge, and the TSOP receiver is next to it.</p>
+<p><strong>You must call <code class="language-jython highlight"><span class="n">ir_start</span><span class="p">()</span></code> before using any IR functions.</strong> IR hardware is
+shared with the Boop screen — Python gets exclusive access while IR mode is
+active.</p>
+<p><strong>Simple frames (1 byte address + 1 byte command):</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">ir_start</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Send</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">ir_send</span><span class="p">(</span><span class="mh">0x42</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># Receive</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">if</span> <span class="n">ir_available</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">frame</span> <span class="o">=</span> <span class="n">ir_read</span><span class="p">()</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="k">if</span> <span class="n">frame</span><span class="p">:</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="n">addr</span><span class="p">,</span> <span class="n">cmd</span> <span class="o">=</span> <span class="n">frame</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Got: &quot;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span><span class="n">ir_stop</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Multi-word frames (up to 64 × 32-bit words):</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">ir_start</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Send a 3-word payload (CRC appended automatically)</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">ir_send_words</span><span class="p">([</span><span class="mh">0xB0</span><span class="p">,</span> <span class="mh">0xDEADBEEF</span><span class="p">,</span> <span class="mh">0x12345678</span><span class="p">])</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="c1"># Receive</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">words</span> <span class="o">=</span> <span class="n">ir_read_words</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">if</span> <span class="n">words</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Got &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; words&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span>
+<span class="linenos" data-linenos="11 "></span><span class="n">ir_flush</span><span class="p">()</span>   <span class="c1"># Clear RX queue</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">ir_stop</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Timing constraint:</strong> Poll <code class="language-jython highlight"><span class="n">ir_read</span><span class="p">()</span></code> or <code class="language-jython highlight"><span class="n">ir_read_words</span><span class="p">()</span></code> within <strong>50 ms</strong>
+or the IRremote buffer on Core 0 may overflow.</p>
+<p><strong>TX power control:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">ir_start</span><span class="p">()</span>
+<span class="linenos" data-linenos="2 "></span><span class="nb">print</span><span class="p">(</span><span class="n">ir_tx_power</span><span class="p">())</span>    <span class="c1"># Default: 50 (percent of 38kHz carrier)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">ir_tx_power</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>          <span class="c1"># Throttle down for close-range testing</span>
+</code></pre></div>
+<hr />
+<h2 id="7-advanced-topics">7. Advanced Topics</h2>
+<h3 id="mouse-overlay">Mouse Overlay</h3>
+<p>A hardware-composited cursor overlay for building point-and-click GUIs. When
+enabled, the joystick moves a cursor sprite and button presses become click
+events.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">mouse_overlay</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">mouse_set_pos</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">mouse_set_speed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">mouse_set_mode</span><span class="p">(</span><span class="n">MOUSE_RELATIVE</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;X:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mouse_x</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot; Y:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mouse_y</span><span class="p">()))</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="13 "></span>
+<span class="linenos" data-linenos="14 "></span>    <span class="n">btn</span> <span class="o">=</span> <span class="n">mouse_clicked</span><span class="p">()</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="k">if</span> <span class="n">btn</span> <span class="o">==</span> <span class="n">BTN_CONFIRM</span><span class="p">:</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="n">haptic_pulse</span><span class="p">()</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="k">if</span> <span class="n">btn</span> <span class="o">==</span> <span class="n">BTN_BACK</span><span class="p">:</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos="21 "></span>
+<span class="linenos" data-linenos="22 "></span><span class="n">mouse_overlay</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Custom cursor sprites:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># 8×8 crosshair (MSB-first, row-major)</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">crosshair</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span>
+<span class="linenos" data-linenos=" 3 "></span>    <span class="mb">0b00010000</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="mb">0b00010000</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span>    <span class="mb">0b00010000</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span>    <span class="mb">0b11101110</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="mb">0b00010000</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="mb">0b00010000</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="mb">0b00010000</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="mb">0b00000000</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span><span class="p">])</span>
+<span class="linenos" data-linenos="12 "></span><span class="n">mouse_set_bitmap</span><span class="p">(</span><span class="n">crosshair</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</code></pre></div>
+<p>The bitmap format is 1-bit-per-pixel, MSB-first within each byte, row-major.
+Maximum size is 32×32 (128 bytes). The hot-spot is automatically set to the
+sprite center.</p>
+<h3 id="flipnametag-detection">Flip/Nametag Detection</h3>
+<p>When the badge hangs upside down on its lanyard, the firmware automatically
+enters nametag mode — flipping the OLED, LED matrix, and input orientation.
+This happens transparently through the service pump.</p>
+<p>Your app can detect and respond to orientation changes:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos=" 4 "></span>    <span class="k">if</span> <span class="n">imu_face_down</span><span class="p">():</span>
+<span class="linenos" data-linenos=" 5 "></span>        <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 6 "></span>        <span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>        <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Walking mode!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span>        <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos" data-linenos="10 "></span>        <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="11 "></span>        <span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+<span class="linenos" data-linenos="12 "></span>        <span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Active mode!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+</code></pre></div>
+<p>You can also use <code class="language-jython highlight"><span class="n">imu_tilt_y</span><span class="p">()</span></code> for a continuous tilt value — negative values
+mean the badge is tilted toward upside-down. The firmware uses a threshold on
+this to trigger the nametag flip.</p>
+<p>Possible use cases:</p>
+<ul>
+<li>Show a custom idle animation when the badge is face-down</li>
+<li>Display a QR code or name badge when inverted</li>
+<li>Pause a game when the badge is flipped</li>
+</ul>
+<h3 id="native-ui-chrome">Native UI Chrome</h3>
+<p>For apps that should look like built-in firmware screens, use the native UI
+helpers directly or through <code class="language-jython highlight"><span class="n">badge_ui</span></code>:</p>
+<p><strong>Direct native calls:</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">ui_header</span><span class="p">(</span><span class="s2">&quot;My App&quot;</span><span class="p">,</span> <span class="s2">&quot;v1.0&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">ui_action_bar</span><span class="p">(</span><span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="s2">&quot;BACK&quot;</span><span class="p">,</span> <span class="s2">&quot;quit&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="c1"># Draw content between header and footer (Y: 10–52)</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_set_cursor</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span><span class="nf nf-Jumperless">oled_print</span><span class="p">(</span><span class="s2">&quot;Content here&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Through badge_ui (recommended):</strong></p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">badge_ui</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ui</span>
+<span class="linenos" data-linenos="2 "></span>
+<span class="linenos" data-linenos="3 "></span><span class="n">ui</span><span class="o">.</span><span class="n">chrome</span><span class="p">(</span><span class="s2">&quot;My App&quot;</span><span class="p">,</span> <span class="s2">&quot;v1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="s2">&quot;BACK&quot;</span><span class="p">,</span> <span class="s2">&quot;quit&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">ui</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;First line&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">ui</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Second line&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">ui</span><span class="o">.</span><span class="n">selected_row</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Selected item&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+</code></pre></div>
+<p>The <code class="language-jython highlight"><span class="n">badge_ui</span></code> module provides additional helpers: <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">center</span><span class="p">()</span></code>,
+<code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">text</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">hline</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">vline</span><span class="p">()</span></code>,
+<code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">frame</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">status_box</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">spinner</span><span class="p">()</span></code>, and composable hint
+functions (<code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">hint</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">hint_text</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ui</span><span class="o">.</span><span class="n">hint_row</span><span class="p">()</span></code>).</p>
+<p>Button glyph names for <code class="language-jython highlight"><span class="n">ui_action_bar</span></code> and inline hints: <code class="language-jython highlight"><span class="n">OK</span></code>, <code class="language-jython highlight"><span class="n">BACK</span></code>, <code class="language-jython highlight"><span class="n">X</span></code>,
+<code class="language-jython highlight"><span class="n">Y</span></code>, <code class="language-jython highlight"><span class="n">A</span></code>, <code class="language-jython highlight"><span class="n">B</span></code>. These render as small button-shaped icons and respect the
+badge's confirm/back swap setting.</p>
+<hr />
+<h2 id="8-badge-to-badge-communication">8. Badge-to-Badge Communication</h2>
+<p>The IR hardware lets two badges exchange data when pointed at each other. This
+enables multiplayer games, contact exchange, and collaborative apps.</p>
+<h3 id="simple-ping-pong">Simple Ping-Pong</h3>
+<p>Two badges take turns sending and receiving:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">ir_start</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">my_id</span> <span class="o">=</span> <span class="n">my_uuid</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;IR Chat&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;CONFIRM = send&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Waiting...&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>    <span class="c1"># Send on button press</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_CONFIRM</span><span class="p">):</span>
+<span class="linenos" data-linenos="15 "></span>        <span class="n">ir_send</span><span class="p">(</span><span class="mh">0x42</span><span class="p">,</span> <span class="mh">0x01</span><span class="p">)</span>
+<span class="linenos" data-linenos="16 "></span>        <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Sent!&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="17 "></span>        <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="18 "></span>        <span class="n">haptic_pulse</span><span class="p">()</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span>    <span class="c1"># Check for incoming</span>
+<span class="linenos" data-linenos="21 "></span>    <span class="k">if</span> <span class="n">ir_available</span><span class="p">():</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="n">frame</span> <span class="o">=</span> <span class="n">ir_read</span><span class="p">()</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="k">if</span> <span class="n">frame</span><span class="p">:</span>
+<span class="linenos" data-linenos="24 "></span>            <span class="n">addr</span><span class="p">,</span> <span class="n">cmd</span> <span class="o">=</span> <span class="n">frame</span>
+<span class="linenos" data-linenos="25 "></span>            <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Got: &quot;</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+<span class="linenos" data-linenos="26 "></span>            <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="27 "></span>            <span class="n">led_show_image</span><span class="p">(</span><span class="n">IMG_HEART</span><span class="p">)</span>
+<span class="linenos" data-linenos="28 "></span>            <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="linenos" data-linenos="29 "></span>            <span class="n">led_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="30 "></span>
+<span class="linenos" data-linenos="31 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_BACK</span><span class="p">):</span>
+<span class="linenos" data-linenos="32 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="33 "></span>
+<span class="linenos" data-linenos="34 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos="35 "></span>
+<span class="linenos" data-linenos="36 "></span><span class="n">ir_stop</span><span class="p">()</span>
+<span class="linenos" data-linenos="37 "></span><span class="n">exit</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="richer-data-with-multi-word-frames">Richer Data with Multi-Word Frames</h3>
+<p>For sending more than 2 bytes, use multi-word frames (up to 256 bytes of
+payload):</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">ir_start</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="k">def</span><span class="w"> </span><span class="nf">send_position</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="c1"># Pack 3 values into 3 words</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="n">ir_send_words</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">score</span><span class="p">])</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="k">def</span><span class="w"> </span><span class="nf">receive_position</span><span class="p">():</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="n">words</span> <span class="o">=</span> <span class="n">ir_read_words</span><span class="p">()</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="k">if</span> <span class="n">words</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos" data-linenos="13 "></span>        <span class="k">return</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">words</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">words</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="k">return</span> <span class="kc">None</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="c1"># Game loop</span>
+<span class="linenos" data-linenos="17 "></span><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_CONFIRM</span><span class="p">):</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="n">send_position</span><span class="p">(</span><span class="n">joy_x</span><span class="p">(),</span> <span class="n">joy_y</span><span class="p">(),</span> <span class="mi">42</span><span class="p">)</span>
+<span class="linenos" data-linenos="20 "></span>
+<span class="linenos" data-linenos="21 "></span>    <span class="n">pos</span> <span class="o">=</span> <span class="n">receive_position</span><span class="p">()</span>
+<span class="linenos" data-linenos="22 "></span>    <span class="k">if</span> <span class="n">pos</span><span class="p">:</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">pos</span>
+<span class="linenos" data-linenos="24 "></span>        <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="25 "></span>        <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Peer: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="n">oled_println</span><span class="p">(</span><span class="s2">&quot;Score: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>
+<span class="linenos" data-linenos="28 "></span>
+<span class="linenos" data-linenos="29 "></span>    <span class="k">if</span> <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_BACK</span><span class="p">):</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="k">break</span>
+<span class="linenos" data-linenos="31 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="linenos" data-linenos="32 "></span>
+<span class="linenos" data-linenos="33 "></span><span class="n">ir_stop</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="tips-for-ir-communication">Tips for IR Communication</h3>
+<ul>
+<li>Always call <code class="language-jython highlight"><span class="n">ir_start</span><span class="p">()</span></code> first and <code class="language-jython highlight"><span class="n">ir_stop</span><span class="p">()</span></code> when done</li>
+<li>Poll <code class="language-jython highlight"><span class="n">ir_read</span><span class="p">()</span></code> within 50 ms to avoid buffer overflow</li>
+<li>A classic frame takes ~110 ms on wire; a 3-word frame takes ~230 ms</li>
+<li>Use <code class="language-jython highlight"><span class="n">ir_flush</span><span class="p">()</span></code> to clear stale frames before starting a new exchange</li>
+<li><code class="language-jython highlight"><span class="n">ir_tx_power</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></code> is useful for testing with two badges close together</li>
+<li>IR is line-of-sight — badges need to be roughly pointed at each other</li>
+</ul>
+<hr />
+<h2 id="9-tips-and-gotchas">9. Tips and Gotchas</h2>
+<h3 id="memory-management">Memory Management</h3>
+<ul>
+<li><strong>128 KB heap.</strong> Call <code class="language-jython highlight"><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span></code> regularly, especially in game loops.</li>
+<li>Avoid creating large temporary objects. Reuse buffers when possible.</li>
+<li>Check available memory: <code class="language-jython highlight"><span class="n">gc</span><span class="o">.</span><span class="n">mem_free</span><span class="p">()</span></code> returns bytes free.</li>
+<li>Source files have a ~16 KB limit per file due to the MicroPython compiler.
+  Split large apps into multiple modules.</li>
+</ul>
+<h3 id="display">Display</h3>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_show</span><span class="p">()</span></code> is required after any drawing operation. Nothing appears on
+  screen until you call it.</li>
+<li><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span></code> resets the cursor to (0,0). Pass <code class="language-jython highlight"><span class="kc">True</span></code> to also refresh:
+  <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_clear</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></code>.</li>
+<li>The display is 128×64 — plan your layouts accordingly. The usable area with
+  <code class="language-jython highlight"><span class="n">badge_ui</span></code> chrome is roughly Y: 10–52 (between header and footer).</li>
+</ul>
+<h3 id="led-matrix">LED Matrix</h3>
+<ul>
+<li>Use <code class="language-jython highlight"><span class="n">led_override_begin</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="n">led_override_end</span><span class="p">()</span></code> when drawing directly on
+  the matrix. Without it, the ambient LED mode may overwrite your pixels.</li>
+<li><code class="language-jython highlight"><span class="n">led_clear</span><span class="p">()</span></code> at the end of your app to be a good citizen.</li>
+<li>Matrix app callbacks (<code class="language-jython highlight"><span class="n">matrix_app_start</span></code>) run from the service pump, not your
+  main loop — keep them fast (no blocking, no heavy computation).</li>
+</ul>
+<h3 id="ir">IR</h3>
+<ul>
+<li><strong>IR is mode-gated</strong> — only works after <code class="language-jython highlight"><span class="n">ir_start</span><span class="p">()</span></code>. Other screens (Boop)
+  share the hardware.</li>
+<li>The RX buffer is 8 frames deep. If you don't read within ~50 ms per frame,
+  frames get dropped.</li>
+<li>Always <code class="language-jython highlight"><span class="n">ir_stop</span><span class="p">()</span></code> and <code class="language-jython highlight"><span class="n">ir_flush</span><span class="p">()</span></code> in your cleanup code.</li>
+</ul>
+<h3 id="input">Input</h3>
+<ul>
+<li><code class="language-jython highlight"><span class="n">button_pressed</span><span class="p">()</span></code> consumes the event — calling it twice for the same button
+  in the same loop iteration will miss the second call. Read it once and store
+  the result.</li>
+<li>The joystick center varies per unit (~2048 typical). Always use a dead zone
+  of at least 200–300.</li>
+</ul>
+<h3 id="general">General</h3>
+<ul>
+<li><strong>f-strings are available</strong>, but string concatenation also works.</li>
+<li><strong>No <code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">badge</span></code> needed</strong> in the entry script — all functions are
+  auto-injected. In imported modules, use <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">badge</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code>.</li>
+<li><strong>Escape chord:</strong> Hold all 4 face buttons for ~1 second to force-exit any
+  stuck app.</li>
+<li><strong>Clean up</strong> before exiting: <code class="language-jython highlight"><span class="n">led_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">haptic_off</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">no_tone</span><span class="p">()</span></code>,
+  <code class="language-jython highlight"><span class="n">ir_stop</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">mouse_overlay</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></code>.</li>
+</ul>
+<hr />
+<h2 id="quick-reference-card">Quick Reference Card</h2>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="err">┌──────────────────────────────────────────────────┐</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="err">│</span> <span class="n">OLED</span> <span class="p">(</span><span class="mi">128</span><span class="err">×</span><span class="mi">64</span><span class="p">)</span>                                    <span class="err">│</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="err">│</span>   <span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span> <span class="err">→</span> <span class="nf nf-Jumperless">oled_print</span><span class="p">()</span> <span class="err">→</span> <span class="nf nf-Jumperless">oled_show</span><span class="p">()</span>      <span class="err">│</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="err">│</span> <span class="n">LED</span> <span class="n">Matrix</span> <span class="p">(</span><span class="mi">8</span><span class="err">×</span><span class="mi">8</span><span class="p">)</span>                                 <span class="err">│</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="err">│</span>   <span class="n">led_show_image</span><span class="p">(</span><span class="n">IMG_HEART</span><span class="p">)</span>                      <span class="err">│</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="err">│</span>   <span class="n">led_set_frame</span><span class="p">([</span><span class="n">row0</span><span class="o">..</span><span class="n">row7</span><span class="p">],</span> <span class="n">brightness</span><span class="p">)</span>        <span class="err">│</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="err">│</span> <span class="n">Buttons</span>                                          <span class="err">│</span>
+<span class="linenos" data-linenos="10 "></span><span class="err">│</span>   <span class="n">button_pressed</span><span class="p">(</span><span class="n">BTN_CONFIRM</span><span class="p">)</span> <span class="err">→</span> <span class="kc">True</span> <span class="n">once</span>        <span class="err">│</span>
+<span class="linenos" data-linenos="11 "></span><span class="err">│</span>   <span class="n">button</span><span class="p">(</span><span class="n">BTN_UP</span><span class="p">)</span> <span class="err">→</span> <span class="kc">True</span> <span class="k">while</span> <span class="n">held</span>               <span class="err">│</span>
+<span class="linenos" data-linenos="12 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="13 "></span><span class="err">│</span> <span class="n">Joystick</span>                                         <span class="err">│</span>
+<span class="linenos" data-linenos="14 "></span><span class="err">│</span>   <span class="n">joy_x</span><span class="p">()</span> <span class="err">→</span> <span class="mi">0</span><span class="err">–</span><span class="mi">4095</span>    <span class="n">joy_y</span><span class="p">()</span> <span class="err">→</span> <span class="mi">0</span><span class="err">–</span><span class="mi">4095</span>          <span class="err">│</span>
+<span class="linenos" data-linenos="15 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="16 "></span><span class="err">│</span> <span class="n">Haptics</span>                                          <span class="err">│</span>
+<span class="linenos" data-linenos="17 "></span><span class="err">│</span>   <span class="n">haptic_pulse</span><span class="p">()</span>    <span class="n">tone</span><span class="p">(</span><span class="mi">440</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>               <span class="err">│</span>
+<span class="linenos" data-linenos="18 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="19 "></span><span class="err">│</span> <span class="n">IR</span>                                               <span class="err">│</span>
+<span class="linenos" data-linenos="20 "></span><span class="err">│</span>   <span class="n">ir_start</span><span class="p">()</span> <span class="err">→</span> <span class="n">ir_send</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="err">→</span> <span class="n">ir_read</span><span class="p">()</span> <span class="err">→</span> <span class="nb">tuple</span> <span class="err">│</span>
+<span class="linenos" data-linenos="21 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="22 "></span><span class="err">│</span> <span class="n">IMU</span>                                              <span class="err">│</span>
+<span class="linenos" data-linenos="23 "></span><span class="err">│</span>   <span class="n">imu_tilt_x</span><span class="p">()</span>  <span class="n">imu_motion</span><span class="p">()</span>  <span class="n">imu_face_down</span><span class="p">()</span>   <span class="err">│</span>
+<span class="linenos" data-linenos="24 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="25 "></span><span class="err">│</span> <span class="n">Mouse</span>                                            <span class="err">│</span>
+<span class="linenos" data-linenos="26 "></span><span class="err">│</span>   <span class="n">mouse_overlay</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="err">→</span> <span class="n">mouse_clicked</span><span class="p">()</span> <span class="err">→</span> <span class="n">btn_id</span><span class="err">│</span>
+<span class="linenos" data-linenos="27 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="28 "></span><span class="err">│</span> <span class="n">Files</span>                                            <span class="err">│</span>
+<span class="linenos" data-linenos="29 "></span><span class="err">│</span>   <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/apps/x/save.json&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span><span class="o">.</span><span class="nf nf-JFS">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>      <span class="err">│</span>
+<span class="linenos" data-linenos="30 "></span><span class="err">│</span>                                                  <span class="err">│</span>
+<span class="linenos" data-linenos="31 "></span><span class="err">│</span> <span class="n">Exit</span>                                             <span class="err">│</span>
+<span class="linenos" data-linenos="32 "></span><span class="err">│</span>   <span class="n">exit</span><span class="p">()</span>  <span class="ow">or</span> <span class="n">hold</span> <span class="nb">all</span> <span class="mi">4</span> <span class="n">buttons</span>                  <span class="err">│</span>
+<span class="linenos" data-linenos="33 "></span><span class="err">└──────────────────────────────────────────────────┘</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../10-3d-stand/" class="btn btn-neutral float-left" title="3D Printable Stand"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../badge-api-reference/" class="btn btn-neutral float-right" title="API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../10-3d-stand/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../badge-api-reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>
