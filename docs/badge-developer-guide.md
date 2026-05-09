@@ -275,14 +275,165 @@ This pattern is used by BreakSnake, Flappy Asteroids, and Synth. The
 
 ### Showing Up on the Main Menu
 
-In dev builds (`echo-dev`), any folder under `/apps/` with a `main.py` is
-automatically listed in the Apps menu. In production firmware, apps are
-registered in the native menu grid with an icon in `AppIcons.h` and a
-launcher entry in `GUI.cpp`.
+Drop a folder with a `main.py` under `/apps/` and the badge picks it up
+automatically — both production and dev firmware. No C++ changes needed. The
+firmware text-scans the top of `main.py` for a few optional dunder
+assignments and uses them to decorate the main-menu tile:
 
-A filesystem-based app registration system is planned — apps will be able to
-declare their name, icon, and description to appear on the main screen without
-firmware changes.
+```jython
+"""My Game — Tamagotchi-style desk pet."""
+
+__title__       = "My Game"
+__description__ = "A tiny pet that lives in your pocket."
+__icon__        = "icon.py"
+```
+
+| Dunder | Default | Notes |
+|--------|---------|-------|
+| `__title__` | slug, title-cased (`my_game` → `My Game`) | max 19 chars |
+| `__description__` | empty | max 63 chars; shown on the tile's detail panel |
+| `__icon__` | tries `icon.py` opportunistically | path to a 12×12 packed XBM tuple |
+| `__matrix_title__` | `__title__` | label in the MATRIX APPS picker |
+| `__order__` | `10000 + discovery index` | signed int; lower = earlier on grid |
+
+#### Icon File (`icon.py`)
+
+A 12×12 monochrome XBM, two bytes per row × 12 rows = 24 bytes. Bit 0 of
+each byte is the leftmost pixel (U8G2 `drawXBM` order). The high 4 bits of
+every odd byte are unused.
+
+```jython
+"""My Game icon."""
+
+WIDTH = 12
+HEIGHT = 12
+# Two bytes per row, binary literals so the dots are visible in the
+# source. XBM byte order is LSB-first, so the literal reads mirrored
+# relative to the rendered icon — that's fine, equivalence at the bit
+# level is what matters.
+DATA = (
+    0b01110111, 0b00000111,
+    0b01110111, 0b00000111,
+    0b00000000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b11111100, 0b00000011,
+    0b00000000, 0b00000000,
+    0b00111110, 0b00000000,
+    0b00100000, 0b00000000,
+    0b11100000, 0b00000011,
+    0b00000000, 0b00000010,
+    0b11000000, 0b00000011,
+)
+```
+
+If `__icon__` is omitted the firmware tries `/apps/<slug>/icon.py` anyway,
+so most apps just need to ship a file with that name.
+
+#### Hot-Refresh
+
+After editing any of `main.py`, `icon.py`, or `matrix.py`, refresh the menu
+without rebooting:
+
+```jython
+import badge
+badge.rescan_apps()
+```
+
+The dev firmware also surfaces a generic Apps screen that lists every `.py`
+under `/apps/` (single-file or folder), useful for one-off scripts you don't
+want on the main grid.
+
+#### Limits
+
+- 32 dynamic apps per badge.
+- Slugs must match `[A-Za-z0-9_-]+` and not start with `.`.
+- The dunder scanner only reads the first ~2 KB of `main.py`. Put your
+  manifest at the very top of the file.
+
+#### Tile Order
+
+Three layers, each overriding the next, feed a signed-int sort key:
+
+1. **Defaults.** Curated tiles use `10 × array index` (with `SETTINGS`
+   pinned to `30000`), dynamic apps use `10000 + discovery index`.
+2. **App manifest** (`__order__ = 50`).
+3. **User override** stored in NVS by the manual reorder screen.
+
+The menu is then stable-sorted by that key, so duplicate values keep the
+placement order from the previous layer. Negative keys land *before* any
+curated tile; large keys land near `SETTINGS`. Inspired typical picks:
+
+```jython
+__order__ = -10  # before BOOP
+__order__ = 25   # between MAP (30) and SCHEDULE (40)
+__order__ = 9999 # nearly last
+```
+
+#### User Reorder
+
+Players can rearrange the grid themselves via **Settings → Menu →
+Reorder**:
+
+| Button | Action |
+|--------|--------|
+| Joystick Y | Move cursor up/down |
+| `X` | Pick up / drop a row |
+| `A` (confirm) | Save and rebuild |
+| `B` (back) | Cancel |
+
+While picked up, joystick Y drags the row in real time. Save writes a
+per-label override into the `menu_order` NVS namespace; the rebuilder
+reads those overrides on the next refresh (immediate after save, and on
+every boot). **Settings → Menu → Reset Order** wipes the namespace and
+returns every tile to its default order.
+
+### Persistent Matrix Apps
+
+Drop a `matrix.py` next to `main.py` and your app gets a slot in the
+**MATRIX APPS** picker (firmware menu → MATRIX APPS). Selecting it persists
+the choice in `/led_state.json` so the badge runs your matrix animation
+across reboots, **even when no foreground Python app is open**.
+
+The script registers a tick callback with
+[`matrix_app_start`](badge-api-reference.md#matrix-app-host) and returns
+immediately:
+
+```jython
+"""Slow drifting dot."""
+
+__matrix_title__ = "Drift"
+
+import badge
+
+_phase = 0
+
+def _tick(now_ms):
+    global _phase
+    _phase = (_phase + 1) & 7
+    frame = [0] * 8
+    frame[7] = 0x80 >> _phase
+    badge.led_set_frame(frame)
+
+badge.matrix_app_start(_tick, 250, 24)
+```
+
+The callback runs from the firmware's matrix service pump — same context as
+any other `matrix_app_start` callback — so the same constraints apply: keep
+it fast, don't block, and don't sit in a `while True` loop. See
+[Section 6 → LED Matrix](#led-matrix-88) for details.
+
+A real example lives in `/apps/tardigotchi/matrix.py`: it reads
+`/tardigrade_save.json`, walks a growing pet glyph along the bottom rows,
+cycles heart/drumstick/face status icons across the top, and pulses the
+haptic motor for Tamagotchi-style beeps. Stat decay continues at 1/10 the
+foreground game's pace and is written back to the save file so the
+foreground app sees the ambient progress next time you launch it.
+
+Switching to any built-in mode (Sparkle, Off, etc.) — or to a different
+matrix app — cleanly stops the previous callback. There is no need to call
+`matrix_app_stop()` from your script; the firmware tears it down for you on
+mode change.
 
 ### Saving Data
 

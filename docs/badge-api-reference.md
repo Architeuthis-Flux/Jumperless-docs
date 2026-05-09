@@ -84,6 +84,13 @@ without needing the `badge.` prefix.
 * `matrix_app_active()` — Check if a callback is registered
 * `matrix_app_info()` — Return diagnostic tuple
 
+[App Manifest](#app-manifest) (Folder-app metadata):
+
+* `__title__`, `__description__`, `__icon__`, `__matrix_title__`, `__order__` — Top-level dunders read from `/apps/<slug>/main.py` to decorate the main menu tile
+* `icon.py` — 12×12 packed-XBM `DATA` tuple for the home-screen icon
+* `matrix.py` — Persistent LED-matrix script registered via `matrix_app_start`
+* `rescan_apps()` — Hot-refresh the registry after editing manifests
+
 [IMU](#imu):
 
 * `imu_ready()` — Check if IMU is initialized
@@ -688,6 +695,176 @@ Check if a background callback is currently registered.
 Return a diagnostic tuple with the current matrix app state.
 
 * Returns `(active, saved, interval_ms, brightness, overridden, invocations)`.
+
+---
+
+## App Manifest
+
+The firmware's `AppRegistry` discovers folder apps under `/apps/<slug>/` at
+boot (and on demand via `rescan_apps()`) and exposes them on the main grid
+menu. Each app's tile is decorated from a small set of optional top-level
+dunder assignments inside `main.py`. The scanner reads the first ~2 KB of
+the file as text and parses the assignments without executing any code, so
+your dunders must sit at the top of the file with simple string literals.
+
+### Dunders
+
+Place these at the top of `/apps/<slug>/main.py`:
+
+| Dunder | Type | Default | Purpose |
+|--------|------|---------|---------|
+| `__title__` | `str` (≤ 19 chars) | slug, title-cased | Main-menu tile label |
+| `__description__` | `str` (≤ 63 chars) | empty | Detail panel text |
+| `__icon__` | `str` (path or inline tuple) | tries `icon.py` | 12×12 home-screen icon |
+| `__matrix_title__` | `str` (≤ 19 chars) | `__title__` | MATRIX APPS picker label (only when `matrix.py` is present) |
+| `__order__` | `int` (signed) | `10000 + discovery index` | Sort key on the main grid; lower = earlier |
+
+```jython
+"""My Game — Tamagotchi-style desk pet."""
+
+__title__       = "My Game"
+__description__ = "A tiny pet that lives in your pocket."
+__icon__        = "icon.py"
+__matrix_title__ = "Pet"
+
+# ... rest of main.py ...
+```
+
+The slug is the folder name. It must match `[A-Za-z0-9_-]+` and may not
+start with a `.`; anything else is silently skipped by the scanner. The
+registry holds at most 32 dynamic apps per badge.
+
+### `icon.py` — Home-Screen Icon
+
+Path resolution for `__icon__`:
+
+* Bare filename (`"icon.py"`) → `/apps/<slug>/icon.py`
+* Absolute path (`"/apps/foo/icon.py"`) → used as-is
+* Inline tuple (`"(0xFF, 0x..., )"`) → parsed directly
+
+The icon file just needs a top-level `DATA = (...)` tuple of 24 bytes
+arranged as a 12×12 packed XBM (2 bytes per row × 12 rows). Bit 0 of each
+byte is the leftmost pixel — same byte order as U8G2's `drawXBM`. The high
+4 bits of every odd byte are unused (the row is only 12 wide). `WIDTH` /
+`HEIGHT` are decorative; the firmware always reads 12×12.
+
+```jython
+"""My Game icon."""
+
+WIDTH = 12
+HEIGHT = 12
+# Two bytes per row (low = cols 0..7, high = cols 8..11). Binary
+# literals so the dot pattern is visible in the source. XBM is
+# LSB-first, so reading the literal left-to-right gives the mirrored
+# row — that's accepted, the bit values are still correct.
+DATA = (
+    0b01110111, 0b00000111,
+    0b01110111, 0b00000111,
+    0b00000000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b11111100, 0b00000011,
+    0b00000000, 0b00000000,
+    0b00111110, 0b00000000,
+    0b00100000, 0b00000000,
+    0b11100000, 0b00000011,
+    0b00000000, 0b00000010,
+    0b11000000, 0b00000011,
+)
+```
+
+If `__icon__` is omitted, the registry still tries
+`/apps/<slug>/icon.py` opportunistically. If that file is missing or
+unparsable the tile falls back to the generic apps glyph.
+
+### `matrix.py` — Persistent Matrix App
+
+A sibling `matrix.py` next to `main.py` enables the app's slot in the
+**MATRIX APPS** picker (main menu → MATRIX APPS). Selecting it persists the
+slug to `/led_state.json` and re-sources `matrix.py` once on every boot
+that selection survives. The script's only job is to register a callback
+via [`matrix_app_start`](#matrix-app-host) and return — *do not* spin a
+main loop.
+
+```jython
+"""Drifting-dot ambient."""
+
+__matrix_title__ = "Drift"
+
+import badge
+
+_phase = 0
+
+def _tick(now_ms):
+    global _phase
+    _phase = (_phase + 1) & 7
+    frame = [0] * 8
+    frame[7] = 0x80 >> _phase
+    badge.led_set_frame(frame)
+
+badge.matrix_app_start(_tick, 250, 24)
+```
+
+Same constraints as any other `matrix_app_start` callback: it runs from the
+firmware service pump, so keep ticks fast and don't block. The firmware
+tears down the previous callback for you when the user picks a different
+matrix app or any built-in mode (Sparkle, Off, etc.) — there's no need to
+call `matrix_app_stop()` from your script when switching modes.
+
+### `rescan_apps()`
+
+Force the registry to re-scan `/apps/` after editing manifests, without
+rebooting:
+
+```jython
+import badge
+badge.rescan_apps()
+```
+
+This rebuilds the main-menu grid in place. Existing screens stay open.
+
+### Tile Order (`__order__`)
+
+The main grid is rendered in stable-sort order by a signed `int16` key.
+Three layers feed the key, each overriding the previous one:
+
+1. **Defaults.** Curated tiles use `10 × array index` (with `SETTINGS`
+   pinned to `30000` so it stays at the back). Dynamic apps default to
+   `10000 + discovery index`.
+2. **App manifest.** `__order__ = 50` at the top of `main.py` claims a
+   specific slot. Any signed integer literal works.
+3. **User override.** The manual reorder UI (Settings → Menu → Reorder)
+   writes per-label overrides into the `menu_order` NVS namespace;
+   those override both of the above.
+
+Ties resolve by insertion order — duplicate keys keep the order
+established by the previous layer. Negative keys land before all
+curated tiles; large keys land near `SETTINGS`.
+
+```jython
+__order__ = -10   # before BOOP / CONTACTS / …
+__order__ = 25    # between MAP (30) and SCHEDULE (40)
+__order__ = 9999  # nearly last
+```
+
+### Manual Reorder Screen
+
+Players can rearrange the grid themselves at runtime:
+
+> Settings → **Menu → Reorder**
+
+| Button | Action |
+|--------|--------|
+| Joystick Y | Move cursor up/down |
+| `X` | Pick up / drop a row |
+| `A` (confirm) | Save and rebuild |
+| `B` (back) | Cancel without saving |
+
+While picked up, dragging Y swaps the row through the list in real
+time. Saving writes the new positions into NVS (`menu_order`
+namespace, FNV-1a-hashed labels as keys). **Settings → Menu → Reset
+Order** wipes the namespace and returns every tile to its default
+order.
 
 ---
 
