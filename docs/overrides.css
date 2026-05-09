@@ -4,3 +4,15 @@
 .rst-footer-buttons {
   display: none !important;
 }
+
+/* Inline badge button glyphs.
+ * Use as: <img class="btn" src="/img/badge-buttons/y.svg" alt="Y">
+ * The SVGs are mono and use currentColor, so they recolor to match
+ * surrounding text automatically.
+ */
+img.btn {
+  height: 1.2em;
+  width: 1.2em;
+  vertical-align: -0.2em;
+  margin: 0 0.1em;
+}

@@ -1073,7 +1073,156 @@ ir_stop()
 
 ---
 
-## 9. Tips and Gotchas
+## 9. Firmware Updates & Asset Library
+
+The badge can update its own firmware over WiFi from GitHub Releases,
+and can fetch user-installable files (like the DOOM WAD) from a
+configurable asset registry. Both systems are user-driven — the badge
+checks once a day in the background, but never installs anything
+without an explicit Confirm.
+
+### What the user sees
+
+- **Status bar glyph.** A small down-arrow appears immediately to
+  the left of the WiFi icon when a newer firmware release has been
+  cached. It disappears as soon as the install completes.
+- **"FW UPDATE" home tile.** Always visible. Label flips to **UPDATE**
+  (with a notification badge dot) when an update is waiting; otherwise
+  it reads as a "Check Updates" affordance. Confirm enters the
+  Firmware Update screen.
+- **"LIBRARY" home tile.** Visible only when `asset_registry_url` is
+  configured in `settings.txt`. Opens the Asset Library — a list of
+  every entry in the remote registry with per-row status (`OK` for
+  installed, `UPD` for update available, blank for not installed).
+
+### Update cadence
+
+The badge polls `api.github.com/repos/<owner>/<repo>/releases/latest`
+at most once every 24 hours, only when WiFi is connected. State
+(latest tag, asset URL, last-check timestamp) is persisted in NVS so
+the indicator survives reboots and offline use. Manual "Check now"
+from the Firmware Update screen ignores the cooldown.
+
+### Installing a firmware update
+
+1. Open **FW UPDATE** from the home grid.
+2. Press Confirm to install (or to re-check, if you're already on the
+   latest version). Battery must be ≥ 30 % unless USB is plugged in.
+3. The screen shows a progress bar as the new image streams into the
+   inactive OTA slot. Do not unplug.
+4. The badge reboots into the new image. If it fails to boot, the
+   bootloader rolls back automatically on the next reset — there is
+   no way for an OTA to brick the badge as long as it has power.
+
+### Asset Library
+
+The registry is a single JSON file the badge fetches once a day. Each
+entry has an `id`, `version`, download `url`, optional SHA-256, and a
+filesystem `dest_path`. The badge streams the file into a `.tmp`,
+verifies the hash if present, then atomically renames into place.
+
+The DOOM tile uses this transparently: if `/doom1.wad` is missing on
+the filesystem, **DOOM → Confirm** routes you to the Asset Library
+detail page for the WAD with a one-tap **Install** button. No need to
+sideload via `uploadfs`.
+
+### `settings.txt` keys
+
+```
+[ota]
+# Override the default GitHub Releases endpoint (advanced; usually
+# leave empty to use the build-baked default).
+manifest_url =
+
+# URL of a registry.json describing downloadable user assets. Empty
+# disables the Asset Library tile.
+asset_registry_url = https://raw.githubusercontent.com/Architeuthis-Flux/Temporal-Replay-26-Badge/main/registry/registry.json
+```
+
+### `registry.json` schema
+
+```json
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "doom1-shareware",         // stable NVS key, never reuse
+      "name": "DOOM 1 Shareware WAD",
+      "version": "1.9",                // opaque; bump to push update
+      "url": "https://...doom1.wad",
+      "sha256": "<hex>",               // optional, corruption check only
+      "size": 4196020,
+      "dest_path": "/doom1.wad",       // absolute FatFS path
+      "min_free_bytes": 4500000,
+      "description": "..."
+    }
+  ]
+}
+```
+
+Anyone with PR access to the repo's `registry/registry.json` can add
+or update entries. There's no firmware change required — badges in
+the field will pick the new entry up the next time they refresh.
+
+See `firmware/docs/OTA-MAINTAINER.md` in the firmware repo for the
+full maintainer walkthrough, including how to host the registry on
+Cloudflare R2 / Pages.
+
+### Expanding storage after a partition bump
+
+Sometimes a firmware update ships with a wider `ffat` partition (the
+2026 v0.1.5 bump grew the FAT partition from 6 MB to ~7.9 MB to reuse
+unused flash). The new firmware will boot fine on existing badges and
+keep all your data — but the FAT volume header is still sized for the
+old partition, so you only see the old capacity until a reformat
+writes a new header.
+
+When this happens, the **Firmware Update** screen shows a
+`Storage: <cur> MB (X = expand <new> MB)` line. Press **X** to start
+the reformat flow:
+
+1. First confirm: shows what gets wiped (contacts, nametags, WAD,
+   `settings.txt`).
+2. Second confirm: "are you really sure?" — final guard against
+   accidental presses.
+3. The badge formats `ffat` and reboots into a clean filesystem with
+   the full partition size available.
+
+The option only appears when there's a real gap to recover (≥ 256 KB
+above what FAT metadata explains away). On freshly USB-flashed
+badges, the FAT is sized to the partition at first boot and you'll
+never see this prompt.
+
+### Forking the firmware
+
+To point OTA at a different repo (or look for a different asset
+filename in the release), edit `firmware/platformio.ini`:
+
+```ini
+'-DOTA_GITHUB_REPO="YourOrg/YourFork"'
+'-DOTA_ASSET_NAME="firmware-yourfork.bin"'
+```
+
+The badge will look for an asset of exactly that name on the latest
+release of the configured repo.
+
+### Security stance
+
+This is open-source firmware. There is no image signing, no
+certificate pinning, no PIN, no auth. SHA-256 hashes are corruption
+checks, not signatures. The threat model is "don't brick the badge",
+which is mitigated by:
+
+- battery ≥ 30 % guard (unless USB is plugged in),
+- bootloader auto-rollback if the new image fails to boot,
+- atomic rename for asset files.
+
+If your fleet needs a hardened OTA, fork `firmware/src/ota/` and
+bring your own keys.
+
+---
+
+## 10. Tips and Gotchas
 
 ### Memory Management
 
@@ -1125,6 +1274,17 @@ ir_stop()
   stuck app.
 - **Clean up** before exiting: `led_clear()`, `haptic_off()`, `no_tone()`,
   `ir_stop()`, `mouse_overlay(False)`.
+
+### Updates & WiFi
+
+- **WiFi is required for OTA and the Asset Library.** Configure it
+  once via Settings → WiFi Setup. The badge auto-connects on boot.
+- **Don't unplug during a firmware install.** A brownout mid-flash is
+  the only thing that can leave the badge in a bad state — and even
+  then the bootloader will roll back on the next reset.
+- **Asset downloads can take several minutes** on slow conference
+  WiFi (the DOOM WAD is 4 MB). The progress screen shows live KB
+  counts; if it stalls for more than 30 s, cancel and retry.
 
 ---
 
