@@ -32,6 +32,7 @@ without needing the `badge.` prefix.
 * `oled_get_framebuffer()` — Get framebuffer as bytes
 * `oled_set_framebuffer(data)` — Set framebuffer from bytes
 * `oled_get_framebuffer_size()` — Get (width, height, bytes)
+* `oled_screenshot([mode])` — Dump OLED framebuffer to terminal as block characters
 
 [Native UI Chrome](#native-ui-chrome):
 
@@ -74,6 +75,9 @@ without needing the `badge.` prefix.
 * `led_stop_animation()` — Stop current animation
 * `led_override_begin()` — Pause ambient LED mode for foreground drawing
 * `led_override_end()` — Release foreground drawing and restore ambient LEDs
+* `led_screenshot([mode], [ansi])` — Dump LED matrix to terminal as block characters
+* `screenshot([mode], [ansi])` — Dump OLED and LED matrix together to terminal;
+  REPL hotkey: bare `o` + Enter
 
 [Matrix App Host](#matrix-app-host) (Background LED Callbacks):
 
@@ -331,6 +335,40 @@ Returns a tuple `(width, height, buffer_size_bytes)`.
 ```jython
 w, h, size = oled_get_framebuffer_size()
 print(str(w) + "x" + str(h) + ", " + str(size) + " bytes")
+```
+
+### `oled_screenshot([mode])`
+
+Dump the current OLED framebuffer to the serial console as a bordered
+block-character image. Useful for inspecting display state without a camera,
+and for capturing UI reference while writing docs (see also `screenshot()`
+and the REPL `o` hotkey below).
+
+* `mode` (optional): Rendering size on the following ladder (smallest first):
+  * `0.5` (float) — **quarter-block**, 2×2 pixels per glyph. OLED 64×32 chars.
+    Smallest output.
+  * `0` (int) — **half-block**, 1×2 pixels per glyph (`▀`/`▄`/`█`/space).
+    OLED 128×32 chars. 1W × 1W square cells on 2:1 monospace fonts.
+  * `N` (int, ≥1) — **square** at `2N` chars wide × `N` char-rows tall per pixel
+    (2NW × 2NW square cells). `1` is the smallest square (2×1 chars), `2` is
+    twice as big (4×2 chars), etc.
+  * `N.5` (float, ≥1.5) — **tall** escape hatch: each pixel = `round(2(N−1))`
+    chars wide × 1 char-row tall. `1.5` gives 1W × 2W per pixel (literal
+    1-char-per-pixel), `2.5` gives 3W × 2W, etc. Use when you want
+    char-per-pixel output without aspect correction.
+
+  Default: `1` (smallest square: 2 chars × 1 row per pixel).
+
+**Example:**
+
+```jython
+oled_clear()
+oled_println("Hello!")
+oled_screenshot()      # int 1 — smallest square, 256 chars wide
+oled_screenshot(0.5)   # float — quarter-block compact, 64 chars wide
+oled_screenshot(0)     # int 0 — half-block compact, 128 chars wide
+oled_screenshot(2)     # int 2 — bigger square, 512 chars wide
+oled_screenshot(1.5)   # float — literal 1 char/pixel, 128 chars wide tall
 ```
 
 ---
@@ -629,6 +667,83 @@ LED app.
 
 Release a foreground LED override and restore the saved ambient LED mode.
 Call this from cleanup paths after `led_override_begin()`.
+
+### `led_screenshot([mode], [ansi])`
+
+Dump the current 8×8 LED matrix to the serial console as a bordered
+block-character image.
+
+* `mode` (optional): Rendering size on the same ladder as `oled_screenshot()`:
+  * `0.5` (float) — **quarter-block**, 4×4 chars (6 wide with border).
+  * `0` (int) — **half-block**, 8×4 chars (10 wide with border).
+  * `N` (int, ≥1) — **square** `2N` chars × `N` char-rows per LED.
+  * `N.5` (float, ≥1.5) — **tall** escape hatch, `round(2(N−1))` chars × 1
+    char-row per LED.
+
+  Default: `1` (smallest square: 2 chars × 1 row per LED, 16 chars wide).
+
+* `ansi` (optional): If `True`, lit LEDs print in bright red via ANSI escape
+  codes. Requires a terminal that interprets ANSI (not PlatformIO device
+  monitor). Default: `True`.
+
+**Example:**
+
+```jython
+led_set_pixel(0, 0, 255)
+led_set_pixel(7, 7, 255)
+led_screenshot()          # int 1 — 2W × 2W square per LED
+led_screenshot(0.5)       # float — quarter-block compact (4×4 chars)
+led_screenshot(0)         # int 0 — half-block compact (8×4 chars)
+led_screenshot(2, False)  # int 2 — bigger square, no ANSI colour
+led_screenshot(1.5)       # float — 1 char × 1 char-row per LED (tall)
+```
+
+### `screenshot([mode], [ansi])`
+
+Dump both the OLED and the LED matrix to the serial console in one call, with
+the LED matrix centred horizontally below the OLED. The quickest way to
+snapshot the full badge display state.
+
+* `mode` (optional): Rendering size for the OLED, on the same ladder as
+  `oled_screenshot()`. The LED renders **one size larger** (so each LED visual
+  cell is a step bigger than an OLED pixel), staying in the same int/float
+  family as the OLED:
+  * `0.5` (float) — OLED quarter-block (66 wide). LED at float 1.5 (1 char ×
+    1 row per LED, tall, 10 wide).
+  * `0` (int) — OLED half-block (130 wide). LED at int 1 (square 2W × 2W per
+    LED, 18 wide).
+  * `N` (int, ≥1) — OLED pixel = 2N × N chars (square). LED cell =
+    2(N+1) × (N+1) chars (square, one step larger).
+  * `N.5` (float, ≥1.5) — OLED tall. LED also tall, one step larger.
+
+  Default: `0`.
+
+* `ansi` (optional): ANSI bright-red for lit LED pixels. Default: `True`.
+
+**Example:**
+
+```jython
+screenshot()           # default — half-block OLED + small square LED
+screenshot(0.5)        # quarter-block OLED + tiny tall LED
+screenshot(1)          # OLED 2W square, LED 4W square
+screenshot(2)          # OLED 4W square, LED 6W square
+screenshot(1.5)        # tall OLED (1 char/pixel) + tall LED (3 chars/LED)
+screenshot(0, False)   # default, no ANSI colour
+```
+
+**REPL hotkey:** typing a bare `o` followed by `<Enter>` at the MicroPython
+REPL runs `screenshot()` with default arguments. `o` is a global singleton
+whose `repr` triggers the screenshot, so `print(o)` and `repr(o)` work the
+same way. Rebinding (`o = 42`) replaces the hotkey within the running
+session.
+
+**Docs workflow:** open the screen on the badge, connect over USB serial
+(JumperIDE, `mpremote`, or `python3 serial_log.py`), type `o` at the REPL,
+and copy or screenshot the terminal output. Default `screenshot()` uses
+half-block OLED glyphs (readable on 2:1 monospace fonts) with the LED matrix
+centred below. Use `screenshot(0, False)` if your terminal does not interpret
+ANSI colour. The [Developer Guide](badge-developer-guide.md#serial-screenshots-oled--led)
+has mode-ladder examples and terminal tips.
 
 ---
 

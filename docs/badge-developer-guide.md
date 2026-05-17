@@ -120,6 +120,11 @@ The REPL terminal at the bottom shows `print()` output and exceptions.
 JumperIDE uses MicroPython raw REPL under the hood, so anything compatible with
 raw REPL workflows (including `mpremote`) also works with the badge.
 
+**Tip:** type `o` and Enter at the REPL to dump a block-art screenshot of the
+current OLED and LED matrix to the terminal — handy while debugging UI or
+capturing reference output for docs. See
+[Serial screenshots](#serial-screenshots-oled--led).
+
 ### File Management
 
 JumperIDE shows the badge filesystem in a tree view. You can:
@@ -894,6 +899,55 @@ print(ir_tx_power())    # Default: 50 (percent of 38kHz carrier)
 ir_tx_power(10)          # Throttle down for close-range testing
 ```
 
+### IR Playground Modes (consumer NEC + raw symbols)
+
+The badge multi-word transport is the badge's own dialect — `ir_send_words` /
+`ir_read_words` always include a CRC32 trailer that real consumer remotes
+don't speak, so as shipped the badge only talks to other badges.
+
+`ir_set_mode()` swaps in alternate routing for the same RMT hardware so
+MicroPython can record and replay arbitrary remotes:
+
+| Mode    | Talks to             | Sends with             | Receives via              |
+|---------|----------------------|------------------------|---------------------------|
+| `badge` | other badges         | `ir_send_words(...)`   | `ir_read_words()`         |
+| `nec`   | NEC TVs / audio gear | `ir_nec_send(addr,cmd)`| `ir_nec_read()`           |
+| `raw`   | any IR protocol      | `ir_raw_send(buf)`     | `ir_raw_capture()`        |
+
+Mode is a queue routing flag — switching does not tear down the channel.
+Switching is rejected while a Boop is in flight; on `ir_stop()` mode resets
+to `badge` so badge↔badge pairing is always safe after the app exits.
+
+```jython
+ir_start()
+ir_set_mode("nec")
+ir_nec_send(0x04, 0x08, repeats=2)   # NEC Samsung-ish power code
+
+frame = ir_nec_read()                # (addr, cmd, is_repeat) or None
+if frame:
+    addr, cmd, is_repeat = frame
+    print(addr, cmd, is_repeat)
+ir_set_mode("badge")
+ir_stop()
+```
+
+**Raw symbol capture and playback** for non-NEC protocols (Sony, RC5/6,
+unusual AC remotes):
+
+```jython
+ir_set_mode("raw")
+buf = ir_raw_capture()       # bytes of packed (mark_us, space_us) uint16 pairs
+if buf:
+    # buf is a bytes object: 4 bytes per (mark, space) pair, little-endian
+    ir_raw_send(buf, 38000)  # replay at 38 kHz carrier
+```
+
+Raw buffers are little-endian `uint16` `(mark_us, space_us)` pairs — exactly
+the layout the ESP32 RMT hardware uses internally. `ir_raw_send()` accepts an
+optional carrier frequency in Hz (default 38000, valid range 3000–60000) so
+the same call covers Sony's 40 kHz, RC5's 36 kHz, etc. Up to 512 pairs per
+buffer (~30 ms of wire time, enough for any normal AC remote).
+
 ---
 
 ## 7. Advanced Topics
@@ -1023,6 +1077,50 @@ functions (`ui.hint()`, `ui.hint_text()`, `ui.hint_row()`).
 Button glyph names for `ui_action_bar` and inline hints: `OK`, `BACK`, `X`,
 `Y`, `A`, `B`. These render as small button-shaped icons and respect the
 badge's confirm/back swap setting.
+
+### Serial screenshots (OLED + LED)
+
+The firmware can dump the live OLED framebuffer and 8×8 LED matrix to the
+USB serial console as bordered Unicode block art. This is the fastest way to
+inspect display state without a camera — and the workflow we use when
+capturing UI screenshots for this guide.
+
+**REPL hotkey:** at the MicroPython REPL (JumperIDE terminal, `mpremote`, or
+`serial_log.py`), type a bare `o` and press Enter. That evaluates the global
+`o` singleton, whose `repr`/`print` handler calls `screenshot()` with default
+arguments (half-block OLED + square LED, ANSI red for lit LEDs). `print(o)`
+works the same way. Rebinding (`o = 42`) disables the hotkey until reboot.
+
+**From code:**
+
+```jython
+screenshot()              # OLED + LED together (default mode 0)
+oled_screenshot(1)        # OLED only — smallest square pixels
+led_screenshot(1, False)  # LED only — no ANSI colour
+screenshot(0.5)           # compact quarter-block OLED + tiny LED
+```
+
+**Mode ladder** (same semantics for `oled_screenshot`, `led_screenshot`, and
+`screenshot`; see [API Reference](badge-api-reference.md) for the full table):
+
+| Argument | OLED output | Typical use |
+|----------|-------------|-------------|
+| `0.5` (float) | Quarter-block, 64×32 chars | Smallest dump |
+| `0` (int) | Half-block, 128×32 chars | Default for `screenshot()` |
+| `1`, `2`, … (int) | Square pixels, 2N×N chars per pixel | Readable detail |
+| `1.5`, `2.5`, … (float) | Tall, ~1 char per pixel | Literal pixel grid |
+
+**Terminal tips:**
+
+- Use a monospace font whose cells are roughly **2× taller than wide** (most
+  terminal fonts). Half-block glyphs (`▀` `▄` `█`) then read as square pixels.
+- ANSI colour (`ansi=True`, the default) needs a real terminal — PlatformIO's
+  device monitor prints escape codes literally. Pass `screenshot(0, False)` if
+  your capture tool chokes on colour.
+- Navigate to the screen you want, trigger the dump, then screenshot or copy
+  from the terminal. For polished docs images, crop the terminal capture or
+  photograph the physical badge; the serial dump is for verification and quick
+  iteration while writing apps.
 
 ---
 
@@ -1161,6 +1259,8 @@ for the full survival matrix.
   (with a notification badge dot) when an update is waiting; otherwise
   it reads as a "Check Updates" affordance. Confirm enters the
   Firmware Update screen.
+
+![Home grid with FW UPDATE tile selected](img/badge-screenshots/fw-update-home.png)
 - **"COMMUNITY APPS" home tile.** Always visible. Opens the Community
   Apps screen — a list of every entry in the remote registry with
   per-row status (`OK` for installed, `UPD` for update available,
@@ -1187,6 +1287,13 @@ from the Firmware Update screen ignores the cooldown.
 4. The badge reboots into the new image. If it fails to boot, the
    bootloader rolls back automatically on the next reset — there is
    no way for an OTA to brick the badge as long as it has power.
+
+![Firmware Update screen showing current/latest version and filesystem size](img/badge-screenshots/fw-update-screen.png)
+
+When a wider `ffat` partition is available but the volume header still
+reflects the old size, the same screen shows a filesystem line such as
+`FS: 5.9 MB ◇ 6.9 MB FS` — the diamond glyph is the expand affordance
+(see [Expanding storage](#expanding-storage-after-a-partition-bump) below).
 
 ### Community Apps
 
@@ -1316,16 +1423,29 @@ keep all your data — but the FAT volume header is still sized for the
 old partition, so you only see the old capacity until a reformat
 writes a new header.
 
-When this happens, the **Firmware Update** screen shows a
-`Storage: <cur> MB (X = expand <new> MB)` line. Press **X** to start
-the reformat flow:
+When this happens, the **Firmware Update** screen shows a filesystem line
+with the current size and an expand affordance (e.g. `FS: 5.9 MB ◇ 6.9 MB FS`).
+Select the diamond glyph on that line to start the reformat flow:
 
-1. First confirm: shows what gets wiped (contacts, nametags, WAD,
+1. **Preflight** — battery/USB, partition layout, and recovery blob checks
+   must all pass before Continue is offered.
+
+![Expand preflight: migrate ffat to the new size](img/badge-screenshots/exp-partition-preflight.png)
+
+2. First confirm: shows what gets wiped (contacts, nametags, WAD,
    `settings.txt`).
-2. Second confirm: "are you really sure?" — final guard against
-   accidental presses.
-3. The badge formats `ffat` and reboots into a clean filesystem with
+3. **Final confirmation** — warns that the partition table is rewritten,
+   `ffat` is wiped, and the badge auto-reboots.
+
+![Final confirmation before partition expand](img/badge-screenshots/exp-partition-final-confirm.png)
+
+4. The badge formats `ffat` and reboots into a clean filesystem with
    the full partition size available.
+
+A **recovery QR** on the expand path documents the USB + `esptool write_flash`
+fallback if anything goes wrong mid-migration:
+
+![Recovery QR for USB esptool write_flash](img/badge-screenshots/exp-partition-recovery-qr.png)
 
 The option only appears when there's a real gap to recover (≥ 256 KB
 above what FAT metadata explains away). On freshly USB-flashed
