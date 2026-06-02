@@ -209,6 +209,14 @@ def main() -> None:
     after = lexer_content[end : end + len(end_marker)] + lexer_content[end + len(end_marker) :]
     new_content = before + new_block + "\n\n    JUMPERLESS_CONSTANTS = {" + lexer_content[end + len(end_marker) :]
 
+    # Only write if content actually changed - otherwise the file's mtime
+    # bumps on every build and mkdocs' watcher rebuilds in an infinite loop.
+    try:
+        existing = LEXER_PY.read_text(encoding="utf-8")
+    except OSError:
+        existing = None
+    if existing == new_content:
+        return
     LEXER_PY.write_text(new_content, encoding="utf-8")
     print(f"[generate_lexer_from_api_ref] Updated {LEXER_PY.name} with {len(names)} functions")
 

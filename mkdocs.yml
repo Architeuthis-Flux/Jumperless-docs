@@ -57,6 +57,10 @@ theme:
       #   width: "100%"
 extra_css: [extra.css, overrides.css]
 
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
+  - mermaid-init.js
+
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:
   # Heading IDs = text before '(' only (e.g. gpio_set, connect) so JumperIDE and links can target #gpio_set
@@ -72,7 +76,11 @@ markdown_extensions:
       guess_lang: false
       default_lang: jython
       # css_class: "codehilite"
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.inlinehilite:
       style_plain_text: jython
 

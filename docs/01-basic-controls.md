@@ -4,6 +4,31 @@
 
 ----
 
+<!-- ## Probe Mode at a Glance
+
+The probe buttons toggle you between three states: `Idle` (rainbow logo, nothing selected), `Connect` mode (logo blue, you're holding a `node` to bridge to the next one you tap), and `Remove` mode (logo red, the next `node` you tap will be disconnected). Once you're in either probe mode, the same two buttons let you swap between them or pop back out without exiting first.
+
+```mermaid
+stateDiagram-v2
+    
+    
+    Idle: Idle (rainbow logo)
+    Connect: Connect mode (logo blue)
+    Remove: Remove mode (logo red)
+
+    Idle --> Connect: Connect button
+    Idle --> Remove: Remove button
+
+    Connect --> Remove: Remove button
+    Remove --> Connect: Connect button
+
+    Connect --> Idle: Connect button
+    Remove --> Idle: Remove button
+    
+```
+
+---- -->
+
 ## The Probe
 First, keep the switch on the probe set to `Select`
 ![ProbeSelect](https://github.com/user-attachments/assets/1155f75a-f800-4bc0-ba6d-49e603ad39e2)
@@ -24,6 +49,8 @@ If you click the `Connect` button while you're not `holding` a `node`, it will l
 
 
 To get out of `Connect` mode, press the button again.
+
+If you make a connection you didn't mean to, **double-tap `Remove`** to undo it - see [Undo / Redo](#undo-redo).
 
 ### Encoder Connections
 
@@ -60,6 +87,8 @@ and the logo should turn reddish
 Now you can swipe along the `pad`s or tap them one at a time. Remember it only disconnects that `node` and anything connected to it directly, not *everything* on the `net`. So tapping say, `row 25` that's connected to `GND` won't clear everything connected to `GND`, but tapping the `-` on the rails (for `GND`) would.
 
 The special functions work the same way, tap the pad, pick one, and it will remove it. Click the button again to get out.
+
+If you delete the wrong row, **double-tap `Remove`** to undo it (or use the History scrub menu to walk back further) - see [Undo / Redo](#undo-redo).
 
 ## Probe Notes
 
@@ -152,6 +181,56 @@ When you tap either building pad in connect or remove mode, you'll get access to
 
 
 ---
+
+
+## Undo / Redo
+
+Every change you make to your circuit gets recorded into an in-memory history ring, and there are two ways to walk back through it: a fast probe-button gesture for one-step undo/redo, and a full scrub menu on the click wheel for going further.
+
+### Double-tap the probe buttons
+
+
+`Double-tap Remove -> Undo (reverts the last change)`
+`Double-tap Connect -> Redo (reapplies a previously undone change)`
+
+  
+  - The `logo` flashes **yellow** for ~600 ms
+  - The OLED shows a 2-line toast like:
+
+![](assets/Undo.png)
+
+<!-- (or `disconnect 50-46`, `clear all`, `DAC0 3.30V`, etc. - whatever the action was that just got reverted)
+
+
+Each of these is one undo step:
+
+- A connection between two `node`s (both directions: `connect` and `disconnect`)
+- A `DAC0` / `DAC1` / top-rail / bottom-rail voltage change
+- A `GPIO` output value or direction change
+- A "clear all" (this one stashes a snapshot under the hood; it's the only op that's not symmetric, but undo restores the full pre-clear state)
+- A `slot` switch -->
+
+
+### History scrub via the click wheel
+
+If you want to walk back further than one or two steps and *see* each state on the breadboard as you go:
+
+1. Open the menu (short `click` the wheel)
+2. Find the **History** entry, `click` in
+3. Now turning the wheel scrubs through every recorded transaction:
+    - **CW** = step backward in time (one txn older)
+    - **CCW** = step forward (newer / into redo land)
+4. The breadboard updates **in real time** as you scrub - actual crosspoints flip and `LED`s change, so you can see exactly what each state looked like
+5. The OLED shows the position (`-3/12`) and the txn label (`connect 50-46`) at each step
+6. **Encoder `click`** OR **probe `Connect`** = commit (cursor stays where you stopped)
+7. **Encoder `hold`** OR **probe `Remove`** = cancel (rewinds to where you were when you opened the menu)
+
+#### Caveats
+
+- **History is fresh on every boot** - undo doesn't survive a power cycle. This is intentional: nothing about your saved `slot` files is touched by undo, only the in-session ring of changes you've made since powering on.
+- The ring holds **~16,000 ops / 4,000 transactions on V5 hardware** (PSRAM), or ~512 ops on SRAM-only builds. Older edits roll off as you make new ones - waypoint decimation keeps the recent history dense and the older history sparse, so the ring covers a long timespan without bloating.
+
+----
 
 ## Idle Mode Net Highlighting
 
