@@ -50,12 +50,106 @@ There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the 
 ### [jumperless.py](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py)
 ### [jumperless.pyi](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi)
 
+---
+
+## JumperIDE for VS Code
 
 
+![](assets/DirtyDeedsJumperlesssm.png)
+
+
+
+
+[![VSCode Marketplace](https://img.shields.io/badge/VSCode%20Marketplace-JumperIDE-blue?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide)
+[![Open VSX](https://img.shields.io/open-vsx/v/ArchiteuthisFlux/jumperide?label=Open%20VSX)](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide)
+[![GitHub Release](https://img.shields.io/github/v/release/Architeuthis-Flux/JumperIDE-VSCode?label=Release)](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue)](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/blob/main/LICENSE)
 
 ---
 
-## Quick Start (to do it from the built-in REPL)
+#### Walkthrough
+
+![](assets/JumperIDEwalkthrough.gif)
+
+**Connect** — the board's serial ports are auto-detected by USB ID, with the MicroPython REPL port pre-selected:
+
+![Connecting to a Jumperless V5](assets/JumperIDEconnect.png)
+
+
+**Serial terminal** — pick any port (port1 is the device menu), or hand the port to the standalone Jumperless App:
+
+![Serial terminal port picker](assets/TerminalConnect.png)
+
+**REPL + device menu side by side** — the MicroPython REPL and the board's interactive menu, each on its own port:
+
+![REPL and main serial terminal side by side](assets/REPLandMainSerial.png)
+
+**OLED bitmap editor** — draw pixels and watch them appear on the board's OLED live:
+
+![Editing an OLED bitmap with live push to the device](assets/EditingOLED.gif)
+
+**API reference panel** — the full MicroPython API docs beside your code:
+
+![API reference panel](assets/APIreferencePanel.png)
+
+---
+
+#### Install
+
+Either search `JumperIDE` in the Extensions view ([Open VSX](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide)) or just download the `.vsix` from the [latest release](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest) (install command included in the release notes).
+
+
+#### Features
+
+##### **Actions panel** 
+Everything in one sidebar panel: a connection button that doubles as live status (hover to connect or disconnect), **Run/Stop**, **Save to Jumperless**, **Save Locally** (export a device file to your computer), **OLED Bitmap**, the **Serial Terminal**, and quick access to the **API reference** and **JumperNet publishing**.
+
+
+##### **Serial connection**
+    
+The V5 exposes four USB serial ports; the extension detects them by USB ID and pre-selects the MicroPython REPL port (the 3rd). Set `jumperless.connectOnStartup` to connect automatically.
+
+##### **Run / Stop**
+`Run` executes the file in the current editor on the board, output streams to the REPL terminal.
+`Stop` interrupts.
+
+![Connect Run Stop](assets/ConnectRunStop.gif)
+
+##### **Device file browser**
+
+The board's filesystem in the sidebar. Files open as local working copies (so the language server works on them); saving pushes back to the board. Files that didn't come from the board ask for a device path on first save, then remember it. Create, delete, and upload files and folders.
+
+##### **REPL terminal**
+A terminal connected to the board's MicroPython prompt. Handles MicroPython line endings and batches output so fast prints don't stall the UI.
+
+##### **Serial terminal** 
+Pick any serial port (port1, the board's menu/CLI, is recommended) for a direct raw-passthrough terminal — the full-color menus and ANSI art render exactly as the board sends them. Or pick `Use Jumperless App` to run the standalone [Jumperless App](https://github.com/Architeuthis-Flux/Jumperless-App) instead (auto-installs from PyPI; autodetects the port and handles reconnection).
+
+###### **Autocomplete & hover docs** 
+Signatures and descriptions for every Jumperless function, sourced from the [API reference](https://docs.jumperless.org/09.5-micropythonAPIreference/) and refreshed automatically. Jumperless calls and constants are highlighted in Python files.
+
+##### **OLED bitmap editor**
+A pixel editor for OLED `.bin` files. While connected, edits push live to the board's OLED as you draw. **Jumperless: New OLED Bitmap** creates a blank 128×32 canvas on the device or locally.
+
+##### **JumperNet registry** 
+Browse community scripts and OLED images, open them, save them to the board, or publish your own (**Jumperless: Publish Script to Registry**). Feel free to publish whatever work in progress scripts, you or (anyone else) can update the same script and keep version history.
+
+##### **API reference panel**
+`Jumperless: Open API Reference` opens the [MicroPython API docs](https://docs.jumperless.org/09.5-micropythonAPIreference/) beside your code.
+
+#### Zero-import autocomplete
+
+On the board, scripts run with the full API preloaded (`from jumperless import *` happens before your code). The editor matches that automatically: on first activation the extension installs typed stubs and points your Python analyzer at them, so files opened from the device resolve the whole API with no imports and no setup. (Controlled by `jumperless.setup.autoSetUpGlobally`, on by default.)
+
+- `typings/jumperless.pyi` — typed stub, synced from [JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS)
+- `typings/builtins.pyi` — standard-library builtins with Jumperless globals layered on top (typo detection still works)
+- `typings/time.pyi` — MicroPython `time` extras (`ticks_ms`, `sleep_ms`, …)
+
+To get the same thing in one of your own project folders (checked into that repo instead of user settings), run **Jumperless: Set Up This Folder for Jumperless Python** — it writes the `typings/` folder and a `pyrightconfig.json` into the workspace.
+
+---
+
+## Quick Start (Built-in REPL)
 
 <!-- ### Starting MicroPython REPL -->
 From the main Jumperless menu, press `p` to enter the MicroPython REPL:

@@ -22,13 +22,13 @@ nav:
   - Arduino Stuff: 05-arduino.md
   - Config File: 06-config.md
   - Debug Views: 07-debugging.md
+  - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
   - MicroPython: 08-micropython.md
   - MicroPython API Reference: 09.5-micropythonAPIreference.md
   - Odds and Ends: 09.8-odds-and-ends.md
   - 3D Printable Stand: 10-3d-stand.md
 
-  # - LLM Tools Specification: 12-llm-tools-specification.md
   - Temporal Badge:
     - Developer Guide: badge-developer-guide.md
     - API Reference: badge-api-reference.md
