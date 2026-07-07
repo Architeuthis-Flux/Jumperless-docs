@@ -17,6 +17,7 @@ exclude_docs: |
 nav:
   - Home: index.md
   - Basic Controls: 01-basic-controls.md
+  - Simple First Projects: 02-simple-projects.md
   - The App: 03-app.md
   - OLED Support: 04-oled.md
   - Arduino Stuff: 05-arduino.md
@@ -95,4 +96,3 @@ extra:
     - name: color-scheme
       content: dark
     - name: darkreader-lock
-
