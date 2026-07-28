@@ -26,8 +26,10 @@ The Jumperless has a built in File Manager which you can access in the menu with
     └── examples/
         ├── adc_basics.py
         ├── dac_basics.py
+        ├── file_io_basics.py
         ├── gpio_basics.py
         ├── interaction_demo.py
+        ├── pin_irq_basics.py
         ├── led_brightness_control.py
         ├── node_connections.py
         ├── oscilloscope.py
@@ -142,6 +144,12 @@ The File Manager automatically creates example Python scripts in `/python_script
 - [**gpio_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/gpio_basics.py): Basic GPIO (General Purpose Input/Output) operations.
     - This example demonstrates digital I/O, direction control, and pull resistors.
     - Tests input mode with pull-up, pull-down, and floating configurations.
+
+- [**file_io_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/file_io_basics.py): Guided tour of file I/O with the `jfs` module.
+    - Walks through writing, append-mode data logging, reading with seek/tell, directory operations, and the open-file limit - narrated as it runs.
+
+- [**pin_irq_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_basics.py): `machine.Pin` interrupt basics.
+    - Routes GPIO_1 to GPIO_2 through the crossbar and catches self-generated edges with an IRQ handler - no external wiring needed.
 
 - [**node_connections.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/node_connections.py): Node connection and routing operations.
     - This example shows how to connect/disconnect nodes, check connections, and clear all connections.
