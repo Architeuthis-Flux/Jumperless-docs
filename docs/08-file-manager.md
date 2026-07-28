@@ -19,16 +19,23 @@ The Jumperless has a built in File Manager which you can access in the menu with
     ├── cool_micropython_script.py
     ├── ... (your python scripts go here)
     │
+    ├── lib/
+    │   ├── jumperless.py
+    │   └── oledgui.py
+    │
     └── examples/
         ├── adc_basics.py
         ├── dac_basics.py
         ├── gpio_basics.py
+        ├── interaction_demo.py
         ├── led_brightness_control.py
         ├── node_connections.py
+        ├── oscilloscope.py
         ├── stylophone.py
         ├── uart_basics.py
         ├── uart_loopback.py
-        └── voltage_monitor.py
+        ├── voltage_monitor.py
+        └── ... (and more)
 ```
 
 Each slot's configuration is stored as a YAML file in the `/slots/` directory, and the global hardware configuration is in `/config.txt`.
@@ -41,17 +48,17 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | Control | Action |
 |---------|--------|
 | **↑/↓ Arrow Keys** or **Rotary Encoder** | Move selection up/down |
-| **Enter** or **Click Encoder** | Open directory or edit file |
+| **Enter** or **Click Encoder** | Open directory or edit file (slot files get *loaded* instead - use `e` to edit them) |
 | **/** | Go to root directory |
-| **.** | Go up one directory|
-| **CTRL + q** | Quit File Manager or Text Editor
+| **.** or **Esc** | Go up one directory|
+| **q** or **CTRL + q** | Quit File Manager (Ctrl+Q also quits the Text Editor)
  
 ---
  
 ### File Manager Commands
 | Key | Action | Description |
 |-----|--------|-------------|
-| [enter] | Open | Open file or enter directory |
+| [enter] | Open | Open file or enter directory (slot files get loaded, `.py` files run from the click menu) |
 | **h** | Help | Show help |
 | **v** | Quick view | View file contents |
 | **.** | Up dir | Go up one directory  |
@@ -66,13 +73,15 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 ### File Type Icons and Colors
 | Icon | File Type | Extensions | Color |
 |------|-----------|------------|-------|
-| **⌘** | Directories | - | Blue |
+| **⌘** | Directories | - | Cyan |
 | **𓆚** | Python files | .py, .pyw, .pyi | Green |
-| **⍺** | Text files | .txt, .md | White |
-| **⚙** | Config files | .cfg, .conf, config.txt | Yellow |
-| **⟐** | JSON/YAML files | .json, .yaml | Cyan |
-| **☊** | Slot files | /slots/slot*.yaml | Magenta |
-| **⎃** | Legacy slot files | nodeFileSlot*.txt | Orange |
+| **⍺** | Text files | .txt, .md | Yellow |
+| **⚙** | Config files | .cfg, .conf, config.txt | Magenta |
+| **⟐** | JSON files | .json | Blue |
+| **☊** | Legacy slot files | nodeFileSlot*.txt | Orange |
+| **⎃** | Net color files | netColorsSlot*.txt | Pink |
+
+Images, audio, video, documents, and archives get their own icons too. Anything unrecognized (currently including the `/slots/*.yaml` slot files) shows as a grey **⍺**.
 
 
 ---
@@ -99,7 +108,7 @@ When using the rotary encoder in the editor:
 - **Click encoder**: Enter character selection mode
 - **Rotate encoder**: Cycle through available characters
 - **Click encoder**: Confirm character selection
-- **Wait 3 seconds**: Exit character selection mode
+- **Wait 5 seconds**: Exit character selection mode
 
 Yes, you could write code with just the click wheel and the OLED if you really wanted to.
 
@@ -160,6 +169,8 @@ The File Manager automatically creates example Python scripts in `/python_script
 
 
 
+These are just the highlights - the firmware ships more examples than listed here (OLED demos, pin-interrupt games, an oscilloscope, a Google Sheets logger, and more).
+
 You can trigger them to regenerate if you messed them up by deleting it with `x` (when you're in the File Manager), and then entering `m` to create new copies of any examples it doesn't see.
 
 
@@ -179,7 +190,7 @@ sourceOfTruth: bridges
 
 bridges:
   - {n1: 1, n2: 10, dup: 2, color: red}
-  - {n1: NANO_D5, n2: GPIO_1, dup: 2}
+  - {n1: NANO_D5, n2: GP_1, dup: 2}
   - {n1: TOP_RAIL, n2: 5, dup: 2}
 
 power:
@@ -189,9 +200,9 @@ power:
   dac1: 0.00
 ```
 
-**Named nodes** you can use: `NANO_D0-D13`, `NANO_A0-A7`, `GPIO_1-8`, `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0_5V`, `DAC1_5V`, and more (see [glossary](99-glossary.md))
+**Named nodes** you can use: `NANO_D0-D13`, `NANO_A0-A7`, `GP_1-8` (or `RP_GPIO_1-8`), `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`, and more (see [glossary](99-glossary.md)). Note these differ from the MicroPython constants - `GPIO_1` won't parse in slot files.
 
-When you edit and save a slot file, the Jumperless will automatically reload it if it's the active slot. This works whether you're using the onboard eKilo editor or have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer in you favorite editor.
+If you edit the active slot's file, the Jumperless automatically reloads it - when you quit the onboard eKilo editor, or, if you have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer, when you eject/unmount the drive.
 
 ---
 
@@ -249,7 +260,7 @@ You can also enter `Z` for a little debug menu
 |-----|--------|
 | u | Memory status |
 | m | Initialize examples |
-| Ctrl+Q | Quit |
+| q or Ctrl+Q | Quit |
 
 
 

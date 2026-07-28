@@ -23,9 +23,9 @@
 
 ## Slots and Files
 
-`slot` = one of **10** saved circuit configurations (slots 0-9) that you can switch between. Use `<` to cycle forward through slots, or use the menus to jump to a specific slot. The **active slot** is the one currently loaded and affecting the hardware.
+`slot` = one of **8** saved circuit configurations (slots 0-7) that you can switch between. Use `<` to cycle forward through slots, or use the menus to jump to a specific slot. The **active slot** is the one currently loaded and affecting the hardware.
 
-`slot file` = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at `/slots/slotN.yaml` where N is 0-9. These files are human-readable and can be edited directly!
+`slot file` = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at `/slots/slotN.yaml` where N is 0-7. These files are human-readable and can be edited directly!
 
 `active slot` = the currently loaded slot. Only the active slot affects the hardware. Use `Q` command to query which slot is active. When you make connections with the probe, they're saved to the active slot automatically.
 
@@ -42,14 +42,14 @@ Slot files use YAML format with named nodes for readability:
 ```yaml
 bridges:
   - {n1: 1, n2: 10, dup: 2, color: red}
-  - {n1: NANO_D5, n2: GPIO_1, dup: 2}
+  - {n1: NANO_D5, n2: GP_1, dup: 2}
 
 power:
   topRail: 3.30
   bottomRail: 2.50
 ```
 
-**Named nodes:** `NANO_D0-D13`, `NANO_A0-A7`, `GPIO_1-8`, `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0_5V`, `DAC1_5V`, etc.
+**Named nodes:** `NANO_D0-D13`, `NANO_A0-A7`, `GP_1-8` (or `RP_GPIO_1-8`), `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`, etc. (Note these differ from the MicroPython constants - `GPIO_1` and `DAC0_5V` won't parse in slot files.)
 
 You can view and edit these files in the [File Manager](08-file-manager.md) or via USB Mass Storage mode (`U` command).
 

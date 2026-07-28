@@ -224,7 +224,7 @@ From the REPL (enter `p` in the main menu), then type `files` to open the file m
 
 Navigate to your script and press Enter to load it for editing, then press `Ctrl+P` to load it into the REPL for execution.
 
-**Note:** The standard Python `exec(open(...).read())` method is not supported in the Jumperless MicroPython environment. Always use the file manager and `Ctrl+P` to run scripts.
+**Note:** The standard Python `exec(open(...).read())` also works - the filesystem is mounted as a MicroPython VFS, so the built-in `open()` and the `os` module operate on the same files as `jfs`.
 
 ### Method 3: REPL Commands
 From the MicroPython REPL, you can use the following commands to manage scripts:

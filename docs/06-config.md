@@ -267,6 +267,6 @@ The Jumperless has **8 slots** (0-7) where you can save different circuit config
 
 When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the [Glossary](99-glossary.md) for more details about slots.
 
-## Live Editing State Files
+## Editing State Files
 
-You can edit the YAML slot files and they will live update to the board! Whether you're editing them in the onboard `eKilo` editor or as a mounted USB MSC device on your computer, changes will be reflected immediately on your Jumperless.
+You can edit the YAML slot files and the board will pick up your changes! If you're editing the active slot in the onboard `eKilo` editor, it reloads when you quit the editor; if the Jumperless is mounted as a USB MSC device on your computer, changes are applied when you eject/unmount the drive.
