@@ -60,6 +60,7 @@ extra_css: [extra.css, overrides.css]
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
   - mermaid-init.js
+  - embed/find-me-dock.js
 
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:

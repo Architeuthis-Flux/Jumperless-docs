@@ -16,3 +16,16 @@ img.btn {
   vertical-align: -0.2em;
   margin: 0 0.1em;
 }
+
+/* Sidebar TOC anchor only — title renders inside find-me-dock */
+.rst-content h2#find-me-on-the-internet {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

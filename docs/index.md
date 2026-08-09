@@ -67,32 +67,9 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 
 ## <p class="yellow">Find Me On The Internet</p>
 
-Join the [Discord](https://discord.gg/bvacV7r3FP) for pretty much instant answers to your questions
-
-<div class="social-icons">
-  <a href="https://github.com/Architeuthis-Flux">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/github.svg" class="social-icon" alt="GitHub">
-  </a>
-  <a href="https://bsky.app/profile/architeuthisflux.bsky.social">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/bluesky.svg" class="social-icon" alt="Bluesky">
-  </a>
-    <a href="https://x.com/arabidsquid">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/twitter.svg" class="social-icon" alt="Twitter">
-  </a>
-    <a href="https://leds.social/@ArchiteuthisFlux">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/mastodon.svg" class="social-icon" alt="Mastodon">
-  </a>
-  <a href="https://discord.gg/bvacV7r3FP">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/discord.svg" class="social-icon" alt="Discord">
-  </a>
-
-
-  <a href="https://www.youtube.com/@arabidsquid">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/youtube.svg" class="social-icon" alt="YouTube">
-  </a>
-
+<div>
+<find-me-dock background="/assets/BusinessCard2022Backpsd.png"></find-me-dock>
 </div>
-
 
 ---
 
