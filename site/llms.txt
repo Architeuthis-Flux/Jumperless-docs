@@ -35,4 +35,3 @@
 - [Developer Guide](https://docs.jumperless.org/badge-developer-guide/): Developer Guide
 - [API Reference](https://docs.jumperless.org/badge-api-reference/): API Reference
 - [Glossary of Terms](https://docs.jumperless.org/99-glossary/): Key terms: slots, nodes, bridges, nets, W command, and more
-- [Find Me Widget](https://docs.jumperless.org/findme/): Find Me Widget

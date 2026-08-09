@@ -44,9 +44,10 @@ def on_config(config):
 
 
 def on_post_build(config):
-    """Copy docs/embed/ into the built site (not handled by MkDocs by default)."""
+    """Copy standalone pages and embed assets into the built site."""
     docs_dir = config["docs_dir"]
     site_dir = config["site_dir"]
+
     embed_src = os.path.join(docs_dir, "embed")
     embed_dst = os.path.join(site_dir, "embed")
     if os.path.isdir(embed_src):

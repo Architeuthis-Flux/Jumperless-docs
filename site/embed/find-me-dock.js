@@ -29,7 +29,7 @@
  * --- iframe embed (no JS on host page) ---
  *
  * <iframe
- *   src="https://docs.jumperless.org/embed/demo.html"
+ *   src="https://docs.jumperless.org/findme/"
  *   width="100%"
  *   height="280"
  *   style="border:0;border-radius:12px;"
@@ -39,13 +39,12 @@
  *
  * --- Self-host ---
  *
- * Copy find-me-dock.js (+ optional demo.html) and point the script src at your copy.
+ * Copy find-me-dock.js and point the script src at your copy.
  * If you use a custom background image, host that too or pass a full URL in background=.
  *
  * --- Local preview ---
  *
  * https://docs.jumperless.org/findme/
- * iframe-only: https://docs.jumperless.org/embed/demo.html
  */
 (() => {
   const DEFAULT_LINKS = [

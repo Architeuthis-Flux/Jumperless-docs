@@ -13,6 +13,10 @@ exclude_docs: |
   .DS_Store
   _*
 
+# Built, but not listed in the left nav
+not_in_nav: |
+  findme.md
+
 # Navigation structure - explicitly define what appears in the sidebar
 nav:
   - Home: index.md
@@ -33,7 +37,6 @@ nav:
     - Developer Guide: badge-developer-guide.md
     - API Reference: badge-api-reference.md
   - Glossary of Terms: 99-glossary.md
-  - Find Me Widget: findme.md
   - Shop: https://shop.jumperless.org
   - JumperIDE: https://ide.jumperless.org/
 
@@ -62,6 +65,7 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
   - mermaid-init.js
   - embed/find-me-dock.js
+  - embed/stl-viewer.js
 
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:
