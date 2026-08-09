@@ -1,17 +1,24 @@
 /**
- * stl-viewer — embeddable STL model viewer with variant switcher + download
+ * stl-viewer — embeddable 3D model viewer with variant switcher + downloads
  *
  * <script src="https://docs.jumperless.org/embed/stl-viewer.js" defer></script>
  * <stl-viewer></stl-viewer>
  *
- * Defaults to the three Jumperless stand STLs (with-probe-holder selected).
+ * With no attributes it fetches /assets/3Dstands/index.json (generated at build
+ * time by docs/generate_3d_models_index.py) and lists every model in that
+ * folder. Files sharing a base name are grouped into one entry with multiple
+ * download formats (e.g. .stl + .step + .3mf). Preview renders .stl (in the
+ * variant's accent color) or .3mf (with its own baked colors); .step and other
+ * non-previewable formats still get a download button.
  *
- * --- Custom models ---
+ * --- Custom / explicit models (skips the manifest) ---
  *
  * <stl-viewer models='[
- *   {"label":"My Part","src":"/assets/mypart.stl"},
- *   {"label":"Other","src":"/assets/other.stl"}
+ *   {"label":"My Part","files":{"stl":"/assets/mypart.stl","step":"/assets/mypart.step"}}
  * ]' color="#7AB7F0"></stl-viewer>
+ *   (legacy {"src":..., "step":...} form is also accepted)
+ *
+ * Point at a different manifest with manifest="/assets/other/index.json".
  *
  * Self-contained (Shadow DOM); host CSS won't leak in/out. three.js is loaded
  * lazily from esm.sh the first time a viewer scrolls into view.
@@ -96,6 +103,37 @@
       }));
     }
     return threePromise;
+  };
+
+  // 3MF loader is loaded on demand (only when a .3mf model is previewed).
+  let tmfPromise = null;
+  const loadThreeMF = () =>
+    (tmfPromise ||= import(`${CDN}/examples/jsm/loaders/3MFLoader.js`).then(
+      (m) => m.ThreeMFLoader
+    ));
+
+  // Formats we can render a preview for, in preference order (first wins).
+  const LOADABLE_EXTS = ["stl", "3mf"];
+  // Every format we'll offer as a download button, in display order. STL first
+  // so it's the primary (filled) action; the rest render as secondary outlines.
+  const DOWNLOAD_ORDER = ["stl", "3mf", "step", "stp", "obj", "ply", "gltf", "glb"];
+  const DOWNLOAD_TITLES = {
+    stl: "Ready to print",
+    "3mf": "Print project (colors + settings)",
+    step: "Editable CAD source",
+    stp: "Editable CAD source",
+  };
+
+  const extOf = (url) => (url.split(".").pop() || "").toLowerCase();
+
+  // Normalize a model entry to the { label, files: { ext: url } } shape, so the
+  // old { src, step } attribute form and the folder manifest both work.
+  const normalizeModel = (m) => {
+    if (m.files) return m;
+    const files = {};
+    if (m.src) files[extOf(m.src)] = m.src;
+    if (m.step) files.step = m.step;
+    return { label: m.label, color: m.color, files };
   };
 
   // Bloom post-processing is loaded separately so a failure here still leaves
@@ -224,22 +262,24 @@
     }
     a.download:hover { filter: brightness(1.08); }
     a.download svg { width: 15px; height: 15px; }
-    /* STEP = editable CAD source, shown as a secondary outlined action */
-    a.download.step {
+    /* Non-primary formats (STEP, 3MF, …) render as outlined secondary actions */
+    a.download.secondary {
       color: var(--stl-accent, #BFF08E);
       background: color-mix(in srgb, var(--stl-accent, #BFF08E) 12%, transparent);
     }
-    a.download.step:hover {
+    a.download.secondary:hover {
       filter: none;
       background: color-mix(in srgb, var(--stl-accent, #BFF08E) 22%, transparent);
     }
   `;
 
+  const DL_ICON =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>';
+
   class STLViewer extends HTMLElement {
     connectedCallback() {
       if (this.shadowRoot) return;
 
-      this.models = this.parseModels(this.getAttribute("models"));
       // Optional single-color override; otherwise each variant gets a rainbow hue.
       this.mono = this.getAttribute("color");
       const height = this.getAttribute("height") || CONFIG.height;
@@ -249,70 +289,89 @@
         <style>${STYLES}</style>
         <div class="wrap">
           <div class="stage">
-            <div class="status">Scroll to load 3D preview…</div>
+            <div class="status">Loading models…</div>
             <div class="hint">drag to rotate · scroll to zoom</div>
           </div>
           <div class="bar">
             <div class="variants"></div>
             <span class="spacer"></span>
-            <div class="downloads">
-              <a class="download step" download title="Editable CAD source">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
-                STEP
-              </a>
-              <a class="download stl" download title="Ready to print">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
-                STL
-              </a>
-            </div>
+            <div class="downloads"></div>
           </div>
         </div>
       `;
 
       this.stage = shadow.querySelector(".stage");
       this.statusEl = shadow.querySelector(".status");
-      this.stlEl = shadow.querySelector("a.download.stl");
-      this.stepEl = shadow.querySelector("a.download.step");
-      const variants = shadow.querySelector(".variants");
-
+      this.downloadsEl = shadow.querySelector(".downloads");
+      this.variantsEl = shadow.querySelector(".variants");
       this.wrap = shadow.querySelector(".wrap");
       this.stage.style.setProperty("--stl-height", height);
-      this.wrap.style.setProperty("--stl-accent", this.variantColor(0));
 
-      this.buttons = this.models.map((m, i) => {
-        const b = document.createElement("button");
-        b.textContent = m.label;
-        b.style.setProperty("--c", this.variantColor(i));
-        b.addEventListener("click", () => this.select(i));
-        variants.appendChild(b);
-        return b;
-      });
-
+      this.models = [];
       this.current = -1;
       this.selectPending = 0;
 
-      // Lazy-init three.js only when the viewer is near the viewport.
-      const io = new IntersectionObserver((entries, obs) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          obs.disconnect();
-          this.init();
-        }
-      }, { rootMargin: "200px" });
-      io.observe(this);
+      // Resolve the model list (attribute or folder manifest), then wire up.
+      this.resolveModels().then((models) => {
+        this.models = models;
+        this.wrap.style.setProperty("--stl-accent", this.variantColor(0));
+        this.buttons = this.models.map((m, i) => {
+          const b = document.createElement("button");
+          b.textContent = m.label;
+          b.style.setProperty("--c", this.variantColor(i));
+          b.addEventListener("click", () => this.select(i));
+          this.variantsEl.appendChild(b);
+          return b;
+        });
+        this.statusEl.textContent = "Scroll to load 3D preview…";
+
+        // Lazy-init three.js only when the viewer is near the viewport.
+        const io = new IntersectionObserver((entries, obs) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            obs.disconnect();
+            this.init();
+          }
+        }, { rootMargin: "200px" });
+        io.observe(this);
+      });
     }
 
     variantColor(i) {
       return (this.models[i] && this.models[i].color) || this.mono || rainbow(i);
     }
 
-    parseModels(raw) {
-      if (!raw) return DEFAULT_MODELS;
-      try {
-        const parsed = JSON.parse(raw);
-        return Array.isArray(parsed) && parsed.length ? parsed : DEFAULT_MODELS;
-      } catch {
-        return DEFAULT_MODELS;
+    // Attribute `models='[...]'` wins; otherwise pull the folder manifest
+    // (generated at build time), falling back to the bundled default list.
+    async resolveModels() {
+      const attr = this.getAttribute("models");
+      if (attr) {
+        try {
+          const parsed = JSON.parse(attr);
+          if (Array.isArray(parsed) && parsed.length) return parsed.map(normalizeModel);
+        } catch {
+          /* fall through to manifest */
+        }
       }
+      const manifest = this.getAttribute("manifest") || "/assets/3Dstands/index.json";
+      try {
+        const r = await fetch(manifest);
+        if (r.ok) {
+          const data = await r.json();
+          if (Array.isArray(data.models) && data.models.length) {
+            return data.models.map(normalizeModel);
+          }
+        }
+      } catch {
+        /* fall through to defaults */
+      }
+      return DEFAULT_MODELS.map(normalizeModel);
+    }
+
+    previewFile(entry) {
+      for (const ext of LOADABLE_EXTS) {
+        if (entry.files[ext]) return [ext, entry.files[ext]];
+      }
+      return null;
     }
 
     async init() {
@@ -326,7 +385,7 @@
       }
       const { THREE, STLLoader, OrbitControls } = lib;
       this.THREE = THREE;
-      this.loader = new STLLoader();
+      this.stlLoader = new STLLoader();
 
       const L = CONFIG.lights;
       const scene = new THREE.Scene();
@@ -426,50 +485,80 @@
 
     async select(index) {
       this.buttons.forEach((b, i) => b.classList.toggle("active", i === index));
-      const model = this.models[index];
+      const entry = this.models[index];
       this.current = index;
-      this.wrap.style.setProperty("--stl-accent", this.variantColor(index));
-
-      this.stlEl.href = model.src;
-      this.stlEl.setAttribute("download", model.src.split("/").pop());
-
-      // STEP = editable CAD source; use an explicit field or derive from the STL name.
-      const stepSrc = model.step || model.src.replace(/\.stl$/i, ".step");
-      this.stepEl.href = stepSrc;
-      this.stepEl.setAttribute("download", stepSrc.split("/").pop());
+      const accentHex = this.variantColor(index);
+      this.wrap.style.setProperty("--stl-accent", accentHex);
+      this.renderDownloads(entry);
 
       if (!this.THREE) return; // three.js not ready yet; select(0) re-runs after init
 
       const token = ++this.selectPending;
+      const preview = this.previewFile(entry);
+      if (!preview) {
+        // Only non-previewable formats (e.g. STEP-only) — show a note, keep DLs.
+        if (this.mesh) { this.scene.remove(this.mesh); this.disposeObject(this.mesh); this.mesh = null; }
+        this.statusEl.textContent = "No 3D preview for this format — download to view.";
+        this.statusEl.classList.remove("error");
+        this.statusEl.style.display = "";
+        return;
+      }
+
       this.statusEl.textContent = "Loading model…";
       this.statusEl.classList.remove("error");
       this.statusEl.style.display = "";
 
-      let buffer;
+      let built;
       try {
-        buffer = await fetchSTL(model.src);
+        built = await this.buildObject(preview, accentHex, token);
       } catch (e) {
         if (token === this.selectPending) this.fail("Model failed to load.");
         return;
       }
-      if (token !== this.selectPending) return; // superseded by a newer click
+      if (!built || token !== this.selectPending) return; // superseded
 
+      if (this.rim) this.rim.color.set(accentHex);
+      if (this.mesh) { this.scene.remove(this.mesh); this.disposeObject(this.mesh); }
+      this.scene.add(built.object);
+      this.mesh = built.object;
+
+      this.frameModel(built.radius);
+      this.statusEl.style.display = "none";
+    }
+
+    // Build a centered, camera-tipped Object3D from a [ext, url] preview file.
+    // STL gets our accent material; 3MF keeps its own baked colors.
+    async buildObject([ext, url], accentHex, token) {
       const THREE = this.THREE;
-      const geometry = this.loader.parse(buffer);
-      geometry.computeVertexNormals();
-      geometry.computeBoundingBox();
-      const center = new THREE.Vector3();
-      geometry.boundingBox.getCenter(center);
-      geometry.translate(-center.x, -center.y, -center.z);
+      const buffer = await fetchSTL(url);
+      if (token !== this.selectPending) return null;
 
-      if (this.mesh) {
-        this.scene.remove(this.mesh);
-        this.mesh.geometry.dispose();
-        this.mesh.material.dispose();
+      let object;
+      if (ext === "stl") {
+        const geometry = this.stlLoader.parse(buffer);
+        geometry.computeVertexNormals();
+        object = new THREE.Mesh(geometry, this.makeMaterial(new THREE.Color(accentHex)));
+      } else if (ext === "3mf") {
+        const ThreeMFLoader = await loadThreeMF();
+        if (token !== this.selectPending) return null;
+        object = new ThreeMFLoader().parse(buffer);
+      } else {
+        return null;
       }
-      const accent = new THREE.Color(this.variantColor(index));
-      if (this.rim) this.rim.color.copy(accent);
-      const material = new THREE.MeshStandardMaterial({
+
+      // Wrap so we can tip Z-up sources into the Y-up view, then recenter.
+      const pivot = new THREE.Group();
+      pivot.add(object);
+      pivot.rotation.x = -Math.PI / 2;
+      const box = new THREE.Box3().setFromObject(pivot);
+      const center = box.getCenter(new THREE.Vector3());
+      pivot.position.sub(center);
+      const radius = box.getSize(new THREE.Vector3()).length() / 2 || 1;
+      return { object: pivot, radius };
+    }
+
+    makeMaterial(accent) {
+      return new this.THREE.MeshStandardMaterial({
         color: accent,
         metalness: CONFIG.material.metalness,
         // Rougher so the form reads clearly and the grid glints stay soft.
@@ -479,20 +568,34 @@
         emissiveIntensity: CONFIG.material.emissiveIntensity,
         flatShading: false,
       });
-      const mesh = new THREE.Mesh(geometry, material);
-      // STLs are usually Z-up; tip toward the camera-friendly Y-up view.
-      mesh.rotation.x = -Math.PI / 2;
-      this.scene.add(mesh);
-      this.mesh = mesh;
-
-      this.frameModel(geometry);
-      this.statusEl.style.display = "none";
     }
 
-    frameModel(geometry) {
-      const THREE = this.THREE;
-      geometry.computeBoundingSphere();
-      const r = geometry.boundingSphere.radius || 1;
+    disposeObject(obj) {
+      obj.traverse((o) => {
+        if (o.geometry) o.geometry.dispose();
+        if (o.material) {
+          (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => m.dispose());
+        }
+      });
+    }
+
+    // Rebuild the download buttons from whatever formats this model has.
+    renderDownloads(entry) {
+      this.downloadsEl.innerHTML = "";
+      const exts = DOWNLOAD_ORDER.filter((ext) => entry.files[ext]);
+      exts.forEach((ext, i) => {
+        const url = entry.files[ext];
+        const a = document.createElement("a");
+        a.className = "download" + (i === 0 ? "" : " secondary");
+        a.href = url;
+        a.setAttribute("download", url.split("/").pop());
+        if (DOWNLOAD_TITLES[ext]) a.title = DOWNLOAD_TITLES[ext];
+        a.innerHTML = `${DL_ICON}<span>${ext.toUpperCase()}</span>`;
+        this.downloadsEl.appendChild(a);
+      });
+    }
+
+    frameModel(r) {
       const dist = r / Math.sin((this.camera.fov * Math.PI) / 180 / 2);
       this.camera.position.set(dist * 0.7, dist * 0.55, dist * 0.9);
       this.camera.near = r / 100;

@@ -95,6 +95,7 @@ hooks:
   - docs/hooks.py
   - docs/generate_llms_txt.py
   - docs/generate_scripts_index.py
+  - docs/generate_3d_models_index.py
 
 extra:
   meta:
