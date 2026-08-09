@@ -100,6 +100,18 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#undo-redo">Undo / Redo</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#double-tap-the-probe-buttons">Double-tap the probe buttons</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#history-scrub-via-the-click-wheel">History scrub via the click wheel</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#caveats">Caveats</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#idle-mode-net-highlighting">Idle Mode Net Highlighting</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#basic-interactions">Basic Interactions</a>
@@ -142,6 +154,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
                 </li>
               </ul>
@@ -170,6 +186,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
                 </li>
               </ul>
               <ul>
@@ -206,6 +226,29 @@
                 <h1 id="basic-controls">Basic Controls</h1>
 <p><img alt="guide-42" src="https://github.com/user-attachments/assets/e35c42e0-b23a-4203-a836-44f0991db7fc" /></p>
 <hr />
+<!-- ## Probe Mode at a Glance
+
+The probe buttons toggle you between three states: `Idle` (rainbow logo, nothing selected), `Connect` mode (logo blue, you're holding a `node` to bridge to the next one you tap), and `Remove` mode (logo red, the next `node` you tap will be disconnected). Once you're in either probe mode, the same two buttons let you swap between them or pop back out without exiting first.
+
+<pre class="mermaid"><code>stateDiagram-v2
+
+
+    Idle: Idle (rainbow logo)
+    Connect: Connect mode (logo blue)
+    Remove: Remove mode (logo red)
+
+    Idle --&gt; Connect: Connect button
+    Idle --&gt; Remove: Remove button
+
+    Connect --&gt; Remove: Remove button
+    Remove --&gt; Connect: Connect button
+
+    Connect --&gt; Idle: Connect button
+    Remove --&gt; Idle: Remove button
+</code></pre>
+
+---- -->
+
 <h2 id="the-probe">The Probe</h2>
 <p>First, keep the switch on the probe set to <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code>
 <img alt="ProbeSelect" src="https://github.com/user-attachments/assets/1155f75a-f800-4bc0-ba6d-49e603ad39e2" /></p>
@@ -218,6 +261,7 @@
 <p>If you make a mistake while <code class="language-jython highlight"><span class="n">holding</span></code> a connection, click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button and it will clear it and take you back to the first <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>. 
 If you click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button while you're not <code class="language-jython highlight"><span class="n">holding</span></code> a <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>, it will leave <code class="language-jython highlight"><span class="n">probe</span> <span class="n">mode</span></code> and bring you back into <code class="language-jython highlight"><span class="n">idle</span> <span class="n">mode</span></code> (rainbowy<code class="language-jython highlight"><span class="n">logo</span></code>, all 3 <code class="language-jython highlight"><span class="n">probe</span> <span class="n">LED</span></code>s on.)</p>
 <p>To get out of <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode, press the button again.</p>
+<p>If you make a connection you didn't mean to, <strong>double-tap <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code></strong> to undo it - see <a href="#undo-redo">Undo / Redo</a>.</p>
 <h3 id="encoder-connections">Encoder Connections</h3>
 <p>You can also make connections using just the clickwheel, without needing to touch the probe to the breadboard:</p>
 <p><strong>To activate:</strong>
@@ -245,12 +289,13 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 <img alt="remove" src="https://github.com/user-attachments/assets/297e169f-f9f5-4151-8fa2-de41ab14492f" /></p>
 <p>Now you can swipe along the <code class="language-jython highlight"><span class="n">pad</span></code>s or tap them one at a time. Remember it only disconnects that <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> and anything connected to it directly, not <em>everything</em> on the <code class="language-jython highlight"><span class="n">net</span></code>. So tapping say, <code class="language-jython highlight"><span class="n">row</span> <span class="mi">25</span></code> that's connected to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> won't clear everything connected to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, but tapping the <code class="language-jython highlight"><span class="o">-</span></code> on the rails (for <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>) would.</p>
 <p>The special functions work the same way, tap the pad, pick one, and it will remove it. Click the button again to get out.</p>
+<p>If you delete the wrong row, <strong>double-tap <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code></strong> to undo it (or use the History scrub menu to walk back further) - see <a href="#undo-redo">Undo / Redo</a>.</p>
 <h2 id="probe-notes">Probe Notes</h2>
 <p><strong>Remember the probe is read by a resistive voltage divider</strong>, so putting your fingers on the pads (or the back sides of the 4 risers that connect those <code class="language-jython highlight"><span class="n">probe</span> <span class="n">sense</span></code> boards to the main board), or anything causing the probe tip not to be at a steady 3.3V will give you weird readings. </p>
 <p>If you can't seem to stop playing with the switch on the probe, run the app <code class="language-jython highlight"><span class="n">probe</span> <span class="n">calib</span></code> and tap around on the board while turning the clickwheel until the place you tapped is always spot on (do this with the switch in both modes), and hold the clickwheel button to save. This adjusts the nominal 3.3V <code class="language-jython highlight"><span class="no no-Hardware">measure</span></code> mode puts out should be fairly accurate enough for probing.</p>
 <h2 id="the-click-wheel">The Click Wheel</h2>
 <p><img alt="wheel copy" src="https://github.com/user-attachments/assets/d69a5425-7131-46e3-8c17-a38819edfc16" /></p>
-<p>There are two kinds of presses, <code class="language-jython highlight"><span class="n">click</span></code> (short press) and <code class="language-jython highlight"><span class="n">hold</span></code> (long press). In general, a <code class="language-jython highlight"><span class="n">click</span></code> (short) is a <code class="language-jython highlight"><span class="n">yes</span></code>, and a <code class="language-jython highlight"><span class="n">hold</span></code> (long) is a <code class="language-jython highlight"><span class="n">no</span></code>/<code class="language-jython highlight"><span class="n">back</span></code>/<code class="language-jython highlight"><span class="n">exit</span></code>/<code class="language-jython highlight"><span class="n">whatever</span></code>. </p>
+<p>There are two kinds of presses, <code class="language-jython highlight"><span class="n">click</span></code> (short press) and <code class="language-jython highlight"><span class="n">hold</span></code> (long press). In general, a <code class="language-jython highlight"><span class="n">click</span></code> (short) is a <code class="language-jython highlight"><span class="n">yes</span></code>, and a <code class="language-jython highlight"><span class="n">hold</span></code> (long) is a <code class="language-jython highlight"><span class="n">no</span></code>/<code class="language-jython highlight"><span class="n">back</span></code>/<code class="language-jython highlight"><span class="nf nf-Jumperless">exit</span></code>/<code class="language-jython highlight"><span class="n">whatever</span></code>. </p>
 <p>When I say <code class="language-jython highlight"><span class="n">click</span></code>, it's more of a diagonal slide toward the center of the board (<a href="https://lcsc.com/product-detail/Rotary-Encoders_Mitsumi-Electric-SIQ-02FVS3_C2925423.html">these encoders</a> were meant to poke out just a little bit from the side of a tablet or whatever.)</p>
 <p>To get to the menu, <code class="language-jython highlight"><span class="n">click</span></code> the button and scroll through the menus, <code class="language-jython highlight"><span class="n">click</span></code> will bring you into that menu, <code class="language-jython highlight"><span class="n">hold</span></code> will take you back one level. If you have trouble reading stuff on the breadboard LEDs, everything is copied to the Serial terminal and the OLED (talked about in <a href="../04-oled/">OLED Section</a>), and adjusting the brightness may help; in the menus, it's <code class="language-jython highlight"><span class="n">Display</span> <span class="n">Options</span></code> &gt; <code class="language-jython highlight"><span class="n">Bright</span></code> &gt; <code class="language-jython highlight"><span class="n">Menu</span></code> and then scroll around until you find a level you like, then <code class="language-jython highlight"><span class="n">click</span></code> to confirm. </p>
 <h2 id="special-functions">Special Functions</h2>
@@ -259,7 +304,7 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 <p>You can think of <code class="language-jython highlight"><span class="n">special</span> <span class="n">functions</span></code> just like any other <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>, the only difference is they're in a sort of "folder" so I didn't need to put a dedicated pad for each of them. </p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">DAC</span> <span class="n">Pad</span>
 <span class="linenos" data-linenos="2 "></span> <span class="err">└─</span> <span class="mi">0</span> <span class="mi">1</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">pads</span> <span class="n">below</span> <span class="n">selection</span><span class="p">]</span><span class="err">¹</span>
-<span class="linenos" data-linenos="3 "></span>  <span class="err">└─</span> <span class="o">-</span><span class="mi">8</span><span class="n">V</span>  <span class="err">!</span><span class="p">:</span><span class="o">.</span><span class="p">:</span><span class="err">!</span>  <span class="o">+</span><span class="mi">8</span><span class="n">V</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">bottom</span> <span class="n">pads</span> <span class="ow">or</span> <span class="n">use</span> <span class="n">clickwheel</span> <span class="n">to</span> <span class="no no-Hardware">select</span> <span class="n">a</span> <span class="n">voltage</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">click</span> <span class="n">probe</span> <span class="no no-Hardware">Connect</span> <span class="n">button</span> <span class="n">to</span> <span class="n">confirm</span><span class="p">]</span><span class="err">²</span>
+<span class="linenos" data-linenos="3 "></span>  <span class="err">└─</span> <span class="o">-</span><span class="mi">8</span><span class="n">V</span>  <span class="err">!</span><span class="p">:</span><span class="o">.</span><span class="p">:</span><span class="err">!</span>  <span class="o">+</span><span class="mi">8</span><span class="n">V</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">bottom</span> <span class="n">pads</span> <span class="ow">or</span> <span class="n">use</span> <span class="n">clickwheel</span> <span class="n">to</span> <span class="no no-Hardware">select</span> <span class="n">a</span> <span class="n">voltage</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">click</span> <span class="n">probe</span> <span class="no no-Hardware">Connect</span> <span class="nf nf-Jumperless">button</span> <span class="n">to</span> <span class="n">confirm</span><span class="p">]</span><span class="err">²</span>
 <span class="linenos" data-linenos="4 "></span>   <span class="err">└─</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">a</span> <span class="n">row</span> <span class="n">to</span> <span class="nf nf-Jumperless">connect</span> <span class="n">it</span> <span class="n">to</span><span class="p">]</span> <span class="p">(</span><span class="ow">or</span> <span class="k">if</span> <span class="n">you</span> <span class="n">were</span> <span class="n">already</span> <span class="s2">&quot;holding&quot;</span> <span class="n">a</span> <span class="nf nf-Jumperless">node</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;ll connect there)³</span>
 </code></pre></div>
 <p><img alt="This is what prints in the terminal" src="https://github.com/user-attachments/assets/fc9be8f8-f99c-48cd-8e00-07fdcb426f99" /></p>
@@ -294,6 +339,48 @@ If you click the <code class="language-jython highlight"><span class="no no-Hard
 
 <p>!!! warning <code class="language-jython highlight"><span class="n">I</span> <span class="n">Sense</span> <span class="o">+</span></code> and <code class="language-jython highlight"><span class="n">I</span> <span class="n">Sense</span> <span class="o">-</span></code> go on different nets but they're shorted internally
     They're two ends of a 2Ω shunt resistor, so remember that these will be shorted together. You measure current in series so this is expected, but it's super easy to forget. Take this warning as the equivalent of your multimeter yelling at you when you have the probes in the current holes and have it set to voltage.</p>
+<hr />
+<h2 id="undo-redo">Undo / Redo</h2>
+<p>Every change you make to your circuit gets recorded into an in-memory history ring, and there are two ways to walk back through it: a fast probe-button gesture for one-step undo/redo, and a full scrub menu on the click wheel for going further.</p>
+<h3 id="double-tap-the-probe-buttons">Double-tap the probe buttons</h3>
+<p><code class="language-jython highlight"><span class="n">Double</span><span class="o">-</span><span class="n">tap</span> <span class="no no-Hardware">Remove</span> <span class="o">-&gt;</span> <span class="n">Undo</span> <span class="p">(</span><span class="n">reverts</span> <span class="n">the</span> <span class="n">last</span> <span class="n">change</span><span class="p">)</span></code>
+<code class="language-jython highlight"><span class="n">Double</span><span class="o">-</span><span class="n">tap</span> <span class="no no-Hardware">Connect</span> <span class="o">-&gt;</span> <span class="n">Redo</span> <span class="p">(</span><span class="n">reapplies</span> <span class="n">a</span> <span class="n">previously</span> <span class="n">undone</span> <span class="n">change</span><span class="p">)</span></code></p>
+<ul>
+<li>The <code class="language-jython highlight"><span class="n">logo</span></code> flashes <strong>yellow</strong> for ~600 ms</li>
+<li>The OLED shows a 2-line toast like:</li>
+</ul>
+<p><img alt="" src="../assets/Undo.png" /></p>
+<!-- (or `disconnect 50-46`, `clear all`, `DAC0 3.30V`, etc. - whatever the action was that just got reverted)
+
+
+Each of these is one undo step:
+
+- A connection between two `node`s (both directions: `connect` and `disconnect`)
+- A `DAC0` / `DAC1` / top-rail / bottom-rail voltage change
+- A `GPIO` output value or direction change
+- A "clear all" (this one stashes a snapshot under the hood; it's the only op that's not symmetric, but undo restores the full pre-clear state)
+- A `slot` switch -->
+
+<h3 id="history-scrub-via-the-click-wheel">History scrub via the click wheel</h3>
+<p>If you want to walk back further than one or two steps and <em>see</em> each state on the breadboard as you go:</p>
+<ol>
+<li>Open the menu (short <code class="language-jython highlight"><span class="n">click</span></code> the wheel)</li>
+<li>Find the <strong>History</strong> entry, <code class="language-jython highlight"><span class="n">click</span></code> in</li>
+<li>Now turning the wheel scrubs through every recorded transaction:<ul>
+<li><strong>CW</strong> = step backward in time (one txn older)</li>
+<li><strong>CCW</strong> = step forward (newer / into redo land)</li>
+</ul>
+</li>
+<li>The breadboard updates <strong>in real time</strong> as you scrub - actual crosspoints flip and <code class="language-jython highlight"><span class="n">LED</span></code>s change, so you can see exactly what each state looked like</li>
+<li>The OLED shows the position (<code class="language-jython highlight"><span class="o">-</span><span class="mi">3</span><span class="o">/</span><span class="mi">12</span></code>) and the txn label (<code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span> <span class="mi">50</span><span class="o">-</span><span class="mi">46</span></code>) at each step</li>
+<li><strong>Encoder <code class="language-jython highlight"><span class="n">click</span></code></strong> OR <strong>probe <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code></strong> = commit (cursor stays where you stopped)</li>
+<li><strong>Encoder <code class="language-jython highlight"><span class="n">hold</span></code></strong> OR <strong>probe <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code></strong> = cancel (rewinds to where you were when you opened the menu)</li>
+</ol>
+<h4 id="caveats">Caveats</h4>
+<ul>
+<li><strong>History is fresh on every boot</strong> - undo doesn't survive a power cycle. This is intentional: nothing about your saved <code class="language-jython highlight"><span class="n">slot</span></code> files is touched by undo, only the in-session ring of changes you've made since powering on.</li>
+<li>The ring holds <strong>~16,000 ops / 4,000 transactions on V5 hardware</strong> (PSRAM), or ~512 ops on SRAM-only builds. Older edits roll off as you make new ones - waypoint decimation keeps the recent history dense and the older history sparse, so the ring covers a long timespan without bloating.</li>
+</ul>
 <hr />
 <h2 id="idle-mode-net-highlighting">Idle Mode Net Highlighting</h2>
 <p>The main thing is that there's a lot more interaction that can be done outside of any particular mode (like not probing and the logo is rainbowy, I'm gonna call this idle mode here until I think of a good name)
@@ -385,6 +472,9 @@ If the highlighted `row` is a `rail` (top or bottom) or `DAC`, `click` the click
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

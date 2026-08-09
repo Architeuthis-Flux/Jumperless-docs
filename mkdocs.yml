@@ -33,6 +33,7 @@ nav:
     - Developer Guide: badge-developer-guide.md
     - API Reference: badge-api-reference.md
   - Glossary of Terms: 99-glossary.md
+  - Find Me Widget: findme.md
   - Shop: https://shop.jumperless.org
   - JumperIDE: https://ide.jumperless.org/
 

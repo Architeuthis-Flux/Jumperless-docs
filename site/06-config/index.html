@@ -110,13 +110,17 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#switching-between-saved-circuits-slots">Switching Between Saved Circuits (Slots)</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#live-editing-state-files">Live Editing State Files</a>
+    <li class="toctree-l2"><a class="reference internal" href="#editing-state-files">Editing State Files</a>
     </li>
     </ul>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
                 </li>
               </ul>
               <ul>
@@ -148,6 +152,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
                 </li>
               </ul>
               <ul>
@@ -261,7 +269,7 @@
 <span class="linenos" data-linenos=" 74 "></span>
 <span class="linenos" data-linenos=" 75 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">lines_wires</span> <span class="o">=</span> <span class="n">wires</span><span class="p">;</span>
 <span class="linenos" data-linenos=" 76 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">menu_brightness</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
-<span class="linenos" data-linenos=" 77 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">led_brightness</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="linenos" data-linenos=" 77 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="nf nf-Jumperless">led_brightness</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="linenos" data-linenos=" 78 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">rail_brightness</span> <span class="o">=</span> <span class="mi">55</span><span class="p">;</span>
 <span class="linenos" data-linenos=" 79 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">special_net_brightness</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
 <span class="linenos" data-linenos=" 80 "></span><span class="err">`</span><span class="p">[</span><span class="n">display</span><span class="p">]</span> <span class="n">net_color_mode</span> <span class="o">=</span> <span class="n">rainbow</span><span class="p">;</span>
@@ -411,8 +419,8 @@
 - <code class="language-jython highlight"><span class="n">Q</span></code> - Query which slot is currently active
 - <code class="language-jython highlight"><span class="n">s</span></code> - Show a list of all saved slots</p>
 <p>When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the <a href="../99-glossary/">Glossary</a> for more details about slots.</p>
-<h2 id="live-editing-state-files">Live Editing State Files</h2>
-<p>You can edit the YAML slot files and they will live update to the board! Whether you're editing them in the onboard <code class="language-jython highlight"><span class="n">eKilo</span></code> editor or as a mounted USB MSC device on your computer, changes will be reflected immediately on your Jumperless.</p>
+<h2 id="editing-state-files">Editing State Files</h2>
+<p>You can edit the YAML slot files and the board will pick up your changes! If you're editing the active slot in the onboard <code class="language-jython highlight"><span class="n">eKilo</span></code> editor, it reloads when you quit the editor; if the Jumperless is mounted as a USB MSC device on your computer, changes are applied when you eject/unmount the drive.</p>
               
             </div>
           </div><footer>
@@ -453,6 +461,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

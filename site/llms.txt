@@ -23,6 +23,7 @@
 ## Programming & APIs
 
 - [Arduino Stuff](https://docs.jumperless.org/05-arduino/): UART passthrough, automatic flashing, and Arduino integration
+- [Automation & LLM Tools](https://docs.jumperless.org/07.5-automation/): Automation hub: which tool to use, USB ports, MCP server, USBSer3 :help backchannel, and LLM workflows
 - [File Manager](https://docs.jumperless.org/08-file-manager/): Filesystem access, YAML slot editing, and built-in text editor
 - [MicroPython](https://docs.jumperless.org/08-micropython/): Using the onboard MicroPython interpreter to script circuits
 - [MicroPython API Reference](https://docs.jumperless.org/09.5-micropythonAPIreference/): Complete API reference for all Jumperless MicroPython hardware calls
@@ -31,4 +32,7 @@
 
 - [Odds and Ends](https://docs.jumperless.org/09.8-odds-and-ends/): Miscellaneous features, tips, and edge cases
 - [3D Printable Stand](https://docs.jumperless.org/10-3d-stand/): 3D printable stand models and printing tips
+- [Developer Guide](https://docs.jumperless.org/badge-developer-guide/): Developer Guide
+- [API Reference](https://docs.jumperless.org/badge-api-reference/): API Reference
 - [Glossary of Terms](https://docs.jumperless.org/99-glossary/): Key terms: slots, nodes, bridges, nets, W command, and more
+- [Find Me Widget](https://docs.jumperless.org/findme/): Find Me Widget

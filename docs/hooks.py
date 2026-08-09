@@ -2,6 +2,10 @@
 MkDocs hooks for registering custom Pygments lexers and styles
 """
 
+import os
+import shutil
+
+
 def on_config(config):
     # Regenerate JUMPERLESS_FUNCTIONS in lexer from API reference before build
     try:
@@ -36,4 +40,15 @@ def on_config(config):
     except Exception as e:
         print(f"⚠ Error checking Jumperless lexer/style: {e}")
     
-    return config 
+    return config
+
+
+def on_post_build(config):
+    """Copy docs/embed/ into the built site (not handled by MkDocs by default)."""
+    docs_dir = config["docs_dir"]
+    site_dir = config["site_dir"]
+    embed_src = os.path.join(docs_dir, "embed")
+    embed_dst = os.path.join(site_dir, "embed")
+    if os.path.isdir(embed_src):
+        shutil.copytree(embed_src, embed_dst, dirs_exist_ok=True)
+        print(f"✓ Copied embed/ → {embed_dst}") 

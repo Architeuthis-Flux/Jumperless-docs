@@ -56,16 +56,27 @@ def _clean_for_llm(text):
 
 
 def _get_nav_pages(config):
-    """Extract ordered (title, file_path) pairs from the mkdocs nav config."""
-    nav = config.get('nav', [])
+    """Extract ordered (title, file_path) pairs from the mkdocs nav config.
+
+    Recurses into nested sections (e.g. "Automation & LLM Tools" -> Overview /
+    Agent Skill) so grouped pages are still emitted into llms.txt.
+    """
     pages = []
-    for entry in nav:
+
+    def walk(entry):
         if isinstance(entry, dict):
-            for title, path in entry.items():
-                if isinstance(path, str) and path.endswith('.md'):
-                    pages.append((title, path))
-        elif isinstance(entry, str):
+            for title, value in entry.items():
+                if isinstance(value, str) and value.endswith('.md'):
+                    pages.append((title, value))
+                else:
+                    walk(value)   # nested section (list) or sub-mapping
+        elif isinstance(entry, list):
+            for item in entry:
+                walk(item)
+        elif isinstance(entry, str) and entry.endswith('.md'):
             pages.append((entry, entry))
+
+    walk(config.get('nav', []))
     return pages
 
 
@@ -83,6 +94,7 @@ def _build_llms_txt(pages, site_url):
         '05-arduino': 'UART passthrough, automatic flashing, and Arduino integration',
         '06-config': 'Persistent settings stored on the device',
         '07-debugging': 'Crossbar view, bridge list, net list, and diagnostic tools',
+        '07.5-automation': 'Automation hub: which tool to use, USB ports, MCP server, USBSer3 :help backchannel, and LLM workflows',
         '08-file-manager': 'Filesystem access, YAML slot editing, and built-in text editor',
         '08-micropython': 'Using the onboard MicroPython interpreter to script circuits',
         '09.5-micropythonAPIreference': 'Complete API reference for all Jumperless MicroPython hardware calls',
@@ -90,7 +102,7 @@ def _build_llms_txt(pages, site_url):
         '09.8-odds-and-ends': 'Miscellaneous features, tips, and edge cases',
         '10-3d-stand': '3D printable stand models and printing tips',
         '11-WritingApps': 'Guide to writing custom apps for the Jumperless firmware',
-        '12-llm-tools-specification': 'Specification for LLM tool-use with Jumperless serial commands',
+        'jumperless-agent-skill': 'Jumperless V5 Agent Skill (Cursor/Claude Code) for driving the board over the MicroPython REPL',
         '99-glossary': 'Key terms: slots, nodes, bridges, nets, W command, and more',
     }
 
@@ -134,7 +146,7 @@ def _build_llms_txt(pages, site_url):
             core_pages.append(entry)
         elif name in ('05-arduino', '08-micropython', '09.5-micropythonAPIreference',
                        '09.6-jfs', '08-file-manager', '11-WritingApps',
-                       '12-llm-tools-specification'):
+                       '07.5-automation', 'jumperless-agent-skill'):
             programming_pages.append(entry)
         else:
             reference_pages.append(entry)

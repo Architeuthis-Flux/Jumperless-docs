@@ -101,6 +101,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">File Manager</a>
     <ul class="current">
@@ -179,6 +183,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
                 </li>
               </ul>
@@ -225,16 +233,25 @@
 <span class="linenos" data-linenos="11 "></span>    <span class="err">├──</span> <span class="n">cool_micropython_script</span><span class="o">.</span><span class="n">py</span>
 <span class="linenos" data-linenos="12 "></span>    <span class="err">├──</span> <span class="o">...</span> <span class="p">(</span><span class="n">your</span> <span class="n">python</span> <span class="n">scripts</span> <span class="n">go</span> <span class="n">here</span><span class="p">)</span>
 <span class="linenos" data-linenos="13 "></span>    <span class="err">│</span>
-<span class="linenos" data-linenos="14 "></span>    <span class="err">└──</span> <span class="n">examples</span><span class="o">/</span>
-<span class="linenos" data-linenos="15 "></span>        <span class="err">├──</span> <span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="16 "></span>        <span class="err">├──</span> <span class="n">dac_basics</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="17 "></span>        <span class="err">├──</span> <span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="18 "></span>        <span class="err">├──</span> <span class="n">led_brightness_control</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="19 "></span>        <span class="err">├──</span> <span class="n">node_connections</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="20 "></span>        <span class="err">├──</span> <span class="n">stylophone</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="21 "></span>        <span class="err">├──</span> <span class="n">uart_basics</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="22 "></span>        <span class="err">├──</span> <span class="n">uart_loopback</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="23 "></span>        <span class="err">└──</span> <span class="n">voltage_monitor</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="14 "></span>    <span class="err">├──</span> <span class="n">lib</span><span class="o">/</span>
+<span class="linenos" data-linenos="15 "></span>    <span class="err">│</span>   <span class="err">├──</span> <span class="n">jumperless</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="16 "></span>    <span class="err">│</span>   <span class="err">└──</span> <span class="n">oledgui</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="err">│</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="err">└──</span> <span class="n">examples</span><span class="o">/</span>
+<span class="linenos" data-linenos="19 "></span>        <span class="err">├──</span> <span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="20 "></span>        <span class="err">├──</span> <span class="n">dac_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="21 "></span>        <span class="err">├──</span> <span class="n">file_io_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="22 "></span>        <span class="err">├──</span> <span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="23 "></span>        <span class="err">├──</span> <span class="n">interaction_demo</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="24 "></span>        <span class="err">├──</span> <span class="n">pin_irq_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="25 "></span>        <span class="err">├──</span> <span class="n">led_brightness_control</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="26 "></span>        <span class="err">├──</span> <span class="n">node_connections</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="27 "></span>        <span class="err">├──</span> <span class="n">oscilloscope</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="28 "></span>        <span class="err">├──</span> <span class="n">stylophone</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="29 "></span>        <span class="err">├──</span> <span class="n">uart_basics</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="30 "></span>        <span class="err">├──</span> <span class="n">uart_loopback</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="31 "></span>        <span class="err">├──</span> <span class="n">voltage_monitor</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="32 "></span>        <span class="err">└──</span> <span class="o">...</span> <span class="p">(</span><span class="ow">and</span> <span class="n">more</span><span class="p">)</span>
 </code></pre></div>
 <p>Each slot's configuration is stored as a YAML file in the <code class="language-jython highlight"><span class="o">/</span><span class="n">slots</span><span class="o">/</span></code> directory, and the global hardware configuration is in <code class="language-jython highlight"><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span></code>.</p>
 <hr />
@@ -254,19 +271,19 @@
 </tr>
 <tr>
 <td><strong>Enter</strong> or <strong>Click Encoder</strong></td>
-<td>Open directory or edit file</td>
+<td>Open directory or edit file (slot files get <em>loaded</em> instead - use <code class="language-jython highlight"><span class="n">e</span></code> to edit them)</td>
 </tr>
 <tr>
 <td><strong>/</strong></td>
 <td>Go to root directory</td>
 </tr>
 <tr>
-<td><strong>.</strong></td>
+<td><strong>.</strong> or <strong>Esc</strong></td>
 <td>Go up one directory</td>
 </tr>
 <tr>
-<td><strong>CTRL + q</strong></td>
-<td>Quit File Manager or Text Editor</td>
+<td><strong>q</strong> or <strong>CTRL + q</strong></td>
+<td>Quit File Manager (Ctrl+Q also quits the Text Editor)</td>
 </tr>
 </tbody>
 </table>
@@ -284,7 +301,7 @@
 <tr>
 <td>[enter]</td>
 <td>Open</td>
-<td>Open file or enter directory</td>
+<td>Open file or enter directory (slot files get loaded, <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> files run from the click menu)</td>
 </tr>
 <tr>
 <td><strong>h</strong></td>
@@ -334,7 +351,7 @@
 <td><strong>⌘</strong></td>
 <td>Directories</td>
 <td>-</td>
-<td>Blue</td>
+<td>Cyan</td>
 </tr>
 <tr>
 <td><strong>𓆚</strong></td>
@@ -346,34 +363,35 @@
 <td><strong>⍺</strong></td>
 <td>Text files</td>
 <td>.txt, .md</td>
-<td>White</td>
+<td>Yellow</td>
 </tr>
 <tr>
 <td><strong>⚙</strong></td>
 <td>Config files</td>
 <td>.cfg, .conf, config.txt</td>
-<td>Yellow</td>
-</tr>
-<tr>
-<td><strong>⟐</strong></td>
-<td>JSON/YAML files</td>
-<td>.json, .yaml</td>
-<td>Cyan</td>
-</tr>
-<tr>
-<td><strong>☊</strong></td>
-<td>Slot files</td>
-<td>/slots/slot*.yaml</td>
 <td>Magenta</td>
 </tr>
 <tr>
-<td><strong>⎃</strong></td>
+<td><strong>⟐</strong></td>
+<td>JSON files</td>
+<td>.json</td>
+<td>Blue</td>
+</tr>
+<tr>
+<td><strong>☊</strong></td>
 <td>Legacy slot files</td>
 <td>nodeFileSlot*.txt</td>
 <td>Orange</td>
 </tr>
+<tr>
+<td><strong>⎃</strong></td>
+<td>Net color files</td>
+<td>netColorsSlot*.txt</td>
+<td>Pink</td>
+</tr>
 </tbody>
 </table>
+<p>Images, audio, video, documents, and archives get their own icons too. Anything unrecognized (currently including the <code class="language-jython highlight"><span class="o">/</span><span class="n">slots</span><span class="o">/*.</span><span class="n">yaml</span></code> slot files) shows as a grey <strong>⍺</strong>.</p>
 <hr />
 <h2 id="jumperless-ekilo-text-editor">Jumperless eKilo Text Editor</h2>
 <p>The File Manager also has text editor based off <a href="https://github.com/antonio-foti/ekilo"><strong>eKilo</strong></a></p>
@@ -393,7 +411,7 @@
 <li><strong>Click encoder</strong>: Enter character selection mode</li>
 <li><strong>Rotate encoder</strong>: Cycle through available characters</li>
 <li><strong>Click encoder</strong>: Confirm character selection</li>
-<li><strong>Wait 3 seconds</strong>: Exit character selection mode</li>
+<li><strong>Wait 5 seconds</strong>: Exit character selection mode</li>
 </ul>
 <p>Yes, you could write code with just the click wheel and the OLED if you really wanted to.</p>
 <p><img alt="1760676653009" src="https://github.com/user-attachments/assets/31541e79-bde0-4219-9542-ee060933ed8a" /></p>
@@ -426,6 +444,18 @@
 <ul>
 <li>This example demonstrates digital I/O, direction control, and pull resistors.</li>
 <li>Tests input mode with pull-up, pull-down, and floating configurations.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/file_io_basics.py"><strong>file_io_basics.py</strong></a>: Guided tour of file I/O with the <code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span></code> module.</p>
+<ul>
+<li>Walks through writing, append-mode data logging, reading with seek/tell, directory operations, and the open-file limit - narrated as it runs.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_basics.py"><strong>pin_irq_basics.py</strong></a>: <code class="language-jython highlight"><span class="n">machine</span><span class="o">.</span><span class="n">Pin</span></code> interrupt basics.</p>
+<ul>
+<li>Routes GPIO_1 to GPIO_2 through the crossbar and catches self-generated edges with an IRQ handler - no external wiring needed.</li>
 </ul>
 </li>
 <li>
@@ -468,6 +498,7 @@
 </ul>
 </li>
 </ul>
+<p>These are just the highlights - the firmware ships more examples than listed here (OLED demos, pin-interrupt games, an oscilloscope, a Google Sheets logger, and more).</p>
 <p>You can trigger them to regenerate if you messed them up by deleting it with <code class="language-jython highlight"><span class="n">x</span></code> (when you're in the File Manager), and then entering <code class="language-jython highlight"><span class="n">m</span></code> to create new copies of any examples it doesn't see.</p>
 <h2 id="editing-slot-files">Editing Slot Files</h2>
 <p>Slot files (located in <code class="language-jython highlight"><span class="o">/</span><span class="n">slots</span><span class="o">/</span></code>) use <strong>YAML format</strong> and can be edited directly! They're human-readable files containing:</p>
@@ -483,7 +514,7 @@
 <span class="linenos" data-linenos=" 3 "></span>
 <span class="linenos" data-linenos=" 4 "></span><span class="nt">bridges</span><span class="p">:</span>
 <span class="linenos" data-linenos=" 5 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="nt"> color</span><span class="p">:</span><span class="w"> </span><span class="nv">red</span><span class="p p-Indicator">}</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">NANO_D5</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">GPIO_1</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">NANO_D5</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">GP_1</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span>
 <span class="linenos" data-linenos=" 7 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">TOP_RAIL</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">5</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span>
 <span class="linenos" data-linenos=" 8 "></span>
 <span class="linenos" data-linenos=" 9 "></span><span class="nt">power</span><span class="p">:</span>
@@ -492,8 +523,8 @@
 <span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="nt">dac0</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.33</span>
 <span class="linenos" data-linenos="13 "></span><span class="w">  </span><span class="nt">dac1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.00</span>
 </code></pre></div></p>
-<p><strong>Named nodes</strong> you can use: <code class="language-jython highlight"><span class="no no-Jumperless">NANO_D0</span><span class="o">-</span><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">NANO_A0</span><span class="o">-</span><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span><span class="o">-</span><span class="mi">8</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="n">DAC0_5V</span></code>, <code class="language-jython highlight"><span class="n">DAC1_5V</span></code>, and more (see <a href="../99-glossary/">glossary</a>)</p>
-<p>When you edit and save a slot file, the Jumperless will automatically reload it if it's the active slot. This works whether you're using the onboard eKilo editor or have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer in you favorite editor.</p>
+<p><strong>Named nodes</strong> you can use: <code class="language-jython highlight"><span class="no no-Jumperless">NANO_D0</span><span class="o">-</span><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">NANO_A0</span><span class="o">-</span><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">GP_1</span><span class="o">-</span><span class="mi">8</span></code> (or <code class="language-jython highlight"><span class="n">RP_GPIO_1</span><span class="o">-</span><span class="mi">8</span></code>), <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code>, and more (see <a href="../99-glossary/">glossary</a>). Note these differ from the MicroPython constants - <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code> won't parse in slot files.</p>
+<p>If you edit the active slot's file, the Jumperless automatically reloads it - when you quit the onboard eKilo editor, or, if you have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer, when you eject/unmount the drive.</p>
 <hr />
 <h2 id="usb-mass-storage">USB Mass Storage</h2>
 <p>Enter <code class="language-jython highlight"><span class="n">U</span></code> in the menu and Jumperless will mount as a USB Mass Storage drive called <code class="language-jython highlight"><span class="n">JUMPERLESS</span></code> where you can edit files on the filesystem.</p>
@@ -594,7 +625,7 @@
 <td>Initialize examples</td>
 </tr>
 <tr>
-<td>Ctrl+Q</td>
+<td>q or Ctrl+Q</td>
 <td>Quit</td>
 </tr>
 </tbody>
@@ -603,7 +634,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../07-debugging/" class="btn btn-neutral float-left" title="Debug Views"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../07.5-automation/" class="btn btn-neutral float-left" title="Automation & LLM Tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../08-micropython/" class="btn btn-neutral float-right" title="MicroPython">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -627,7 +658,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../07-debugging/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../07.5-automation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../08-micropython/" style="color: #fcfcfc">Next &raquo;</a></span>
@@ -639,6 +670,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

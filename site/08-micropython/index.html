@@ -102,6 +102,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
                 </li>
               </ul>
@@ -118,7 +122,39 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#quick-start-to-do-it-from-the-built-in-repl">Quick Start (to do it from the built-in REPL)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#jumperide-for-vs-code">JumperIDE for VS Code</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#walkthrough">Walkthrough</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#install">Install</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#features">Features</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#actions-panel">Actions panel</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#serial-connection">Serial connection</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#run-stop">Run / Stop</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#device-file-browser">Device file browser</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#repl-terminal">REPL terminal</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#serial-terminal">Serial terminal</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#oled-bitmap-editor">OLED bitmap editor</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#jumpernet-registry">JumperNet registry</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#api-reference-panel">API reference panel</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#zero-import-autocomplete">Zero-import autocomplete</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start-built-in-repl">Quick Start (Built-in REPL)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#repl-navigation">REPL Navigation</a>
     </li>
@@ -185,6 +221,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
                 </li>
               </ul>
@@ -247,7 +287,61 @@
 <h3 id="jumperlesspy"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py">jumperless.py</a></h3>
 <h3 id="jumperlesspyi"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi">jumperless.pyi</a></h3>
 <hr />
-<h2 id="quick-start-to-do-it-from-the-built-in-repl">Quick Start (to do it from the built-in REPL)</h2>
+<h2 id="jumperide-for-vs-code">JumperIDE for VS Code</h2>
+<p><img alt="" src="../assets/DirtyDeedsJumperlesssm.png" /></p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide"><img alt="VSCode Marketplace" src="https://img.shields.io/badge/VSCode%20Marketplace-JumperIDE-blue?logo=visual-studio-code" /></a>
+<a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide"><img alt="Open VSX" src="https://img.shields.io/open-vsx/v/ArchiteuthisFlux/jumperide?label=Open%20VSX" /></a>
+<a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/Architeuthis-Flux/JumperIDE-VSCode?label=Release" /></a>
+<a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/blob/main/LICENSE"><img alt="License: Unlicense" src="https://img.shields.io/badge/license-Unlicense-blue" /></a></p>
+<hr />
+<h4 id="walkthrough">Walkthrough</h4>
+<p><img alt="" src="../assets/JumperIDEwalkthrough.gif" /></p>
+<p><strong>Connect</strong> — the board's serial ports are auto-detected by USB ID, with the MicroPython REPL port pre-selected:</p>
+<p><img alt="Connecting to a Jumperless V5" src="../assets/JumperIDEconnect.png" /></p>
+<p><strong>Serial terminal</strong> — pick any port (port1 is the device menu), or hand the port to the standalone Jumperless App:</p>
+<p><img alt="Serial terminal port picker" src="../assets/TerminalConnect.png" /></p>
+<p><strong>REPL + device menu side by side</strong> — the MicroPython REPL and the board's interactive menu, each on its own port:</p>
+<p><img alt="REPL and main serial terminal side by side" src="../assets/REPLandMainSerial.png" /></p>
+<p><strong>OLED bitmap editor</strong> — draw pixels and watch them appear on the board's OLED live:</p>
+<p><img alt="Editing an OLED bitmap with live push to the device" src="../assets/EditingOLED.gif" /></p>
+<p><strong>API reference panel</strong> — the full MicroPython API docs beside your code:</p>
+<p><img alt="API reference panel" src="../assets/APIreferencePanel.png" /></p>
+<hr />
+<h4 id="install">Install</h4>
+<p>Either search <code class="language-jython highlight"><span class="n">JumperIDE</span></code> in the Extensions view (<a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide">Open VSX</a>) or just download the <code class="language-jython highlight"><span class="o">.</span><span class="n">vsix</span></code> from the <a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest">latest release</a> (install command included in the release notes).</p>
+<h4 id="features">Features</h4>
+<h5 id="actions-panel"><strong>Actions panel</strong></h5>
+<p>Everything in one sidebar panel: a connection button that doubles as live status (hover to connect or disconnect), <strong>Run/Stop</strong>, <strong>Save to Jumperless</strong>, <strong>Save Locally</strong> (export a device file to your computer), <strong>OLED Bitmap</strong>, the <strong>Serial Terminal</strong>, and quick access to the <strong>API reference</strong> and <strong>JumperNet publishing</strong>.</p>
+<h5 id="serial-connection"><strong>Serial connection</strong></h5>
+<p>The V5 exposes four USB serial ports; the extension detects them by USB ID and pre-selects the MicroPython REPL port (the 3rd). Set <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">connectOnStartup</span></code> to connect automatically.</p>
+<h5 id="run-stop"><strong>Run / Stop</strong></h5>
+<p><code class="language-jython highlight"><span class="n">Run</span></code> executes the file in the current editor on the board, output streams to the REPL terminal.
+<code class="language-jython highlight"><span class="n">Stop</span></code> interrupts.</p>
+<p><img alt="Connect Run Stop" src="../assets/ConnectRunStop.gif" /></p>
+<h5 id="device-file-browser"><strong>Device file browser</strong></h5>
+<p>The board's filesystem in the sidebar. Files open as local working copies (so the language server works on them); saving pushes back to the board. Files that didn't come from the board ask for a device path on first save, then remember it. Create, delete, and upload files and folders.</p>
+<h5 id="repl-terminal"><strong>REPL terminal</strong></h5>
+<p>A terminal connected to the board's MicroPython prompt. Handles MicroPython line endings and batches output so fast prints don't stall the UI.</p>
+<h5 id="serial-terminal"><strong>Serial terminal</strong></h5>
+<p>Pick any serial port (port1, the board's menu/CLI, is recommended) for a direct raw-passthrough terminal — the full-color menus and ANSI art render exactly as the board sends them. Or pick <code class="language-jython highlight"><span class="n">Use</span> <span class="n">Jumperless</span> <span class="n">App</span></code> to run the standalone <a href="https://github.com/Architeuthis-Flux/Jumperless-App">Jumperless App</a> instead (auto-installs from PyPI; autodetects the port and handles reconnection).</p>
+<h6 id="autocomplete-hover-docs"><strong>Autocomplete &amp; hover docs</strong></h6>
+<p>Signatures and descriptions for every Jumperless function, sourced from the <a href="https://docs.jumperless.org/09.5-micropythonAPIreference/">API reference</a> and refreshed automatically. Jumperless calls and constants are highlighted in Python files.</p>
+<h5 id="oled-bitmap-editor"><strong>OLED bitmap editor</strong></h5>
+<p>A pixel editor for OLED <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> files. While connected, edits push live to the board's OLED as you draw. <strong>Jumperless: New OLED Bitmap</strong> creates a blank 128×32 canvas on the device or locally.</p>
+<h5 id="jumpernet-registry"><strong>JumperNet registry</strong></h5>
+<p>Browse community scripts and OLED images, open them, save them to the board, or publish your own (<strong>Jumperless: Publish Script to Registry</strong>). Feel free to publish whatever work in progress scripts, you or (anyone else) can update the same script and keep version history.</p>
+<h5 id="api-reference-panel"><strong>API reference panel</strong></h5>
+<p><code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="n">Open</span> <span class="n">API</span> <span class="n">Reference</span></code> opens the <a href="https://docs.jumperless.org/09.5-micropythonAPIreference/">MicroPython API docs</a> beside your code.</p>
+<h4 id="zero-import-autocomplete">Zero-import autocomplete</h4>
+<p>On the board, scripts run with the full API preloaded (<code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> happens before your code). The editor matches that automatically: on first activation the extension installs typed stubs and points your Python analyzer at them, so files opened from the device resolve the whole API with no imports and no setup. (Controlled by <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">autoSetUpGlobally</span></code>, on by default.)</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> — typed stub, synced from <a href="https://github.com/Architeuthis-Flux/JumperlOS">JumperlOS</a></li>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">builtins</span><span class="o">.</span><span class="n">pyi</span></code> — standard-library builtins with Jumperless globals layered on top (typo detection still works)</li>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">time</span><span class="o">.</span><span class="n">pyi</span></code> — MicroPython <code class="language-jython highlight"><span class="n">time</span></code> extras (<code class="language-jython highlight"><span class="n">ticks_ms</span></code>, <code class="language-jython highlight"><span class="n">sleep_ms</span></code>, …)</li>
+</ul>
+<p>To get the same thing in one of your own project folders (checked into that repo instead of user settings), run <strong>Jumperless: Set Up This Folder for Jumperless Python</strong> — it writes the <code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span></code> folder and a <code class="language-jython highlight"><span class="n">pyrightconfig</span><span class="o">.</span><span class="n">json</span></code> into the workspace.</p>
+<hr />
+<h2 id="quick-start-built-in-repl">Quick Start (Built-in REPL)</h2>
 <!-- ### Starting MicroPython REPL -->
 <p>From the main Jumperless menu, press <code class="language-jython highlight"><span class="n">p</span></code> to enter the MicroPython REPL:</p>
 <p><img alt="Screenshot 2025-07-04 at 7 03 24 PM" src="https://github.com/user-attachments/assets/e7ce0688-5ddf-48da-8560-4a8f6b747c4f" /></p>
@@ -296,7 +390,7 @@
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="n">files</span>
 </code></pre></div>
 <p>Navigate to your script and press Enter to load it for editing, then press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to load it into the REPL for execution.</p>
-<p><strong>Note:</strong> The standard Python <code class="language-jython highlight"><span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span></code> method is not supported in the Jumperless MicroPython environment. Always use the file manager and <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to run scripts.</p>
+<p><strong>Note:</strong> The standard Python <code class="language-jython highlight"><span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span></code> also works - the filesystem is mounted as a MicroPython VFS, so the built-in <code class="language-jython highlight"><span class="nb">open</span><span class="p">()</span></code> and the <code class="language-jython highlight"><span class="nf nf-Jumperless">os</span></code> module operate on the same files as <code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span></code>.</p>
 <h3 id="method-3-repl-commands">Method 3: REPL Commands</h3>
 <p>From the MicroPython REPL, you can use the following commands to manage scripts:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Load script into editor for modification</span>
@@ -452,6 +546,9 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

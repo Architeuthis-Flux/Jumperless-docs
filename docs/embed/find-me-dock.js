@@ -44,7 +44,8 @@
  *
  * --- Local preview ---
  *
- * https://docs.jumperless.org/embed/demo.html
+ * https://docs.jumperless.org/findme/
+ * iframe-only: https://docs.jumperless.org/embed/demo.html
  */
 (() => {
   const DEFAULT_LINKS = [

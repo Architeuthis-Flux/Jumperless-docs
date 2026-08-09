@@ -102,6 +102,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
                 </li>
               </ul>
@@ -130,6 +134,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
                 </li>
               </ul>
               <ul>
@@ -169,7 +177,7 @@
 <p>You can do literally anything the Jumperless can in an app, so if there's a specific thing, lmk and I'll write an example. Until I make this into a proper operating system, what you're doing when you write an App is just writing a function in the main firmware. There's really no guard rails, and the API is just any function in the firmware. </p>
 <h2 id="first-get-it-platformio-set-up-to-flash-code">First get it PlatformIO set up to flash code</h2>
 <p>So fork the firmware here: https://github.com/Architeuthis-Flux/JumperlessV5</p>
-<p>I'm using PlatformIO in VSCode. And it <em>should</em> just work to open the RP23V50firmware folder in that (you'll probably need to comment out <code class="language-jython highlight"><span class="n">upload_port</span> <span class="o">=</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodem101</span></code> in <code class="language-jython highlight"><span class="n">Platformio</span><span class="o">.</span><span class="n">ini</span></code> so it'll just automatically find it)</p>
+<p>I'm using PlatformIO in VSCode. And it <em>should</em> just work to open the RP23V50firmware folder in that (you'll probably need to comment out <code class="language-jython highlight"><span class="n">upload_port</span> <span class="o">=</span> <span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodem101</span></code> in <code class="language-jython highlight"><span class="n">Platformio</span><span class="o">.</span><span class="n">ini</span></code> so it'll just automatically find it)</p>
 <p>You should just open the <code class="language-jython highlight"><span class="n">RP23V50firmware</span></code> folder, not the entire <code class="language-jython highlight"><span class="n">JumperlessV5</span></code> repo, in VSCode.</p>
 <p>You should probably try to just load the firmware just to make sure everything works.</p>
 <h2 id="to-write-an-app">To write an App</h2>
@@ -245,6 +253,9 @@ in the big main menu <code class="language-jython highlight"><span class="n">swi
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

@@ -102,6 +102,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
                 </li>
               </ul>
@@ -185,6 +189,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
                 </li>
               </ul>
@@ -221,7 +229,7 @@
 <ul>
 <li><strong>Viper IDE and Micropython raw REPL</strong> - Live code on the Jumperless' file system in your browser</li>
 <li><strong>Priority-based task scheduler</strong> - Each component has a <code class="language-jython highlight"><span class="n">service</span><span class="p">()</span></code> routine that checks whether it should do anything, replacing the old busy-wait loop</li>
-<li><strong>Live updating</strong> - Edits to the YAML state files will live update with new connections (whether you're editing them in the onboard editor or as a mounted USB MSC device on your computer)</li>
+<li><strong>Auto-reloading state files</strong> - Edits to the YAML state files are applied automatically - when you quit the onboard editor, or when you eject the USB MSC drive if you edited them from your computer</li>
 <li><strong>Better fonts</strong> - New fonts available: <code class="language-jython highlight"><span class="n">Berkeley</span></code>, <code class="language-jython highlight"><span class="n">Iosevka</span></code>, <code class="language-jython highlight"><span class="n">Pragmat</span><span class="p">[</span><span class="n">ism</span><span class="p">]</span></code></li>
 <li><strong>YAML connection files</strong> - More permissive of malformed syntax</li>
 <li><strong>Unified syntax highlighting</strong> - Works consistently in <code class="language-jython highlight"><span class="n">eKilo</span></code>, <code class="language-jython highlight"><span class="n">python</span></code>, and normal input after <code class="language-jython highlight"><span class="o">&gt;</span></code></li>
@@ -337,7 +345,7 @@ It's even printed on the box</p>
 <p>You can do literally anything the Jumperless can in an app, so if there's a specific thing, lmk and I'll write an example. Until I make this into a proper operating system, what you're doing when you write an App is just writing a function in the main firmware. There's really no guard rails, and the API is just any function in the firmware. </p>
 <h2 id="first-get-it-platformio-set-up-to-flash-code">First get it PlatformIO set up to flash code</h2>
 <p>So fork the firmware here: https://github.com/Architeuthis-Flux/JumperlOS</p>
-<p>I'm using PlatformIO in VSCode. And it <em>should</em> just work to open the RP23V50firmware folder in that (you'll probably need to comment out <code class="language-jython highlight"><span class="n">upload_port</span> <span class="o">=</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port1</span></code> in <code class="language-jython highlight"><span class="n">Platformio</span><span class="o">.</span><span class="n">ini</span></code> so it'll just automatically find it)</p>
+<p>I'm using PlatformIO in VSCode. And it <em>should</em> just work to open the RP23V50firmware folder in that (you'll probably need to comment out <code class="language-jython highlight"><span class="n">upload_port</span> <span class="o">=</span> <span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port1</span></code> in <code class="language-jython highlight"><span class="n">Platformio</span><span class="o">.</span><span class="n">ini</span></code> so it'll just automatically find it)</p>
 <p>You should probably try to just load the firmware just to make sure everything works.</p>
 <h2 id="to-write-an-app">To write an App</h2>
 <p>Before you go writing your app, follow these steps to make it so it's listed in the App library and you can run it from the menus.</p>
@@ -1307,6 +1315,9 @@ Explain actions via <code class="language-jython highlight"><span class="nf nf-J
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

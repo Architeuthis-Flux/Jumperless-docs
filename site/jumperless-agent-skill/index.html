@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/jumperless-agent-skill/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/jumperless-agent-skill/">
+    <meta property="og:title" content="Jumperless V5 Agent Skill - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/jumperless-agent-skill/">
+    <meta name="twitter:title" content="Jumperless V5 Agent Skill - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/jumperless-agent-skill/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Jumperless V5 Agent Skill - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../findme/">Find Me Widget</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Jumperless V5 Agent Skill</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="jumperless-v5-agent-skill">Jumperless V5 Agent Skill</h1>
+<blockquote>
+<p><strong>Canonical source:</strong> <a href="https://github.com/Architeuthis-Flux/Large-Breadboard-Model">Architeuthis-Flux/Large-Breadboard-Model</a> (Agent Skill + <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> submodule)
+<strong>Download:</strong> <a href="https://github.com/Architeuthis-Flux/Large-Breadboard-Model/blob/main/SKILL.md">GitHub <code class="language-jython highlight"><span class="n">SKILL</span><span class="o">.</span><span class="n">md</span></code></a>
+<strong>MCP:</strong> build from the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> submodule in that repo (see the <a href="../07.5-automation/">Automation overview</a>)
+<strong>Install:</strong> clone into <code class="language-jython highlight"><span class="o">~/.</span><span class="n">cursor</span><span class="o">/</span><span class="n">skills</span><span class="o">/</span><span class="n">jumperless</span><span class="o">-</span><span class="n">v5</span></code> or <code class="language-jython highlight"><span class="o">~/.</span><span class="n">claude</span><span class="o">/</span><span class="n">skills</span><span class="o">/</span><span class="n">jumperless</span><span class="o">-</span><span class="n">v5</span></code> with <code class="language-jython highlight"><span class="o">--</span><span class="n">recurse</span><span class="o">-</span><span class="n">submodules</span></code></p>
+</blockquote>
+<p>This is a copy of the <a href="https://agentskills.io/">Agent Skills</a> <code class="language-jython highlight"><span class="n">SKILL</span><span class="o">.</span><span class="n">md</span></code> for the
+Jumperless V5, for readers browsing the docs site. The <strong>canonical, maintained</strong>
+version is in the repo linked above — re-clone from there to get the full
+<code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span></code> tree and the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> server submodule, which are not reproduced on
+this page.</p>
+<h2 id="installation">Installation</h2>
+<p>Clone the repo (with submodules) into your agent's skills directory:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Cursor</span>
+<span class="linenos" data-linenos=" 2 "></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cursor/skills
+<span class="linenos" data-linenos=" 3 "></span><span class="nb">cd</span><span class="w"> </span>~/.cursor/skills
+<span class="linenos" data-linenos=" 4 "></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span><span class="se">\</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">  </span>https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git<span class="w"> </span>jumperless-v5
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Claude Code</span>
+<span class="linenos" data-linenos=" 8 "></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.claude/skills
+<span class="linenos" data-linenos=" 9 "></span><span class="nb">cd</span><span class="w"> </span>~/.claude/skills
+<span class="linenos" data-linenos="10 "></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span><span class="se">\</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">  </span>https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git<span class="w"> </span>jumperless-v5
+</code></pre></div>
+<p>Then install the host helper's one dependency: <code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">pyserial</span></code>. For the
+MCP alternative, build the server from the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> submodule (<code class="language-jython highlight"><span class="n">cd</span> <span class="n">mcp</span> <span class="o">&amp;&amp;</span> <span class="n">cargo</span><span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="o">.</span></code>). The full reference docs referenced below live in the repo's
+<code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span></code> directory; the canonical API reference is
+<a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>.</p>
+<hr />
+<h1 id="jumperless-v5-skill">Jumperless V5 Skill</h1>
+<p>This skill controls real Jumperless V5 hardware via MicroPython REPL.</p>
+<p><strong>Working directory:</strong> the skill root (this repo). All commands below are
+repo-relative — run them from wherever this skill is installed (e.g.
+<code class="language-jython highlight"><span class="o">~/.</span><span class="n">cursor</span><span class="o">/</span><span class="n">skills</span><span class="o">/</span><span class="n">jumperless</span><span class="o">-</span><span class="n">v5</span></code> or <code class="language-jython highlight"><span class="o">~/.</span><span class="n">claude</span><span class="o">/</span><span class="n">skills</span><span class="o">/</span><span class="n">jumperless</span><span class="o">-</span><span class="n">v5</span></code>). Do not
+hardcode an absolute checkout path.</p>
+<h2 id="communication-methods">Communication methods</h2>
+<p>The Jumperless exposes four USB CDC serial interfaces. This skill drives the
+<strong>MicroPython Raw REPL</strong> (port 5) via <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code>, which is the
+primary transport for everything below.</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>macOS suffix</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port1</span></code></td>
+<td>Main terminal, menu, <code class="language-jython highlight"><span class="o">&gt;</span></code> one-liner Python</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port3</span></code></td>
+<td>Arduino UART passthrough</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port5</span></code></td>
+<td>MicroPython Raw REPL — <strong>what this skill uses</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port7</span></code></td>
+<td>USBSer3 read-only machine backchannel (<code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> YAML, <code class="language-jython highlight"><span class="p">:</span><span class="n">gpio</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">leds</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">adc</span></code>, …)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>REPL (port 5) is primary</strong> — <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">detect</span><span class="o">/</span><span class="n">exec</span><span class="o">/</span><span class="n">state</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">guide</span></code>.</li>
+<li><strong>Port 7 (USBSer3)</strong> is an optional fast, read-only telemetry channel: send
+  <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> for a self-describing YAML index of its verbs, or <code class="language-jython highlight"><span class="p">:</span><span class="n">gpio</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">leds</span></code>,
+  <code class="language-jython highlight"><span class="p">:</span><span class="n">slot</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">adc</span></code> for instant non-blocking snapshots. It never mutates state —
+  defer any state changes to the REPL (or the MCP server).</li>
+<li><strong>MCP alternative:</strong> for MCP-native clients, build the server from the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code>
+  submodule (see "MCP alternative" below). Do not run the MCP server and
+  <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> against the same board simultaneously — they both want the
+  USB port exclusively.</li>
+</ul>
+<h2 id="non-negotiable-behavior">Non-negotiable behavior</h2>
+<ul>
+<li><strong>You ARE the operator.</strong> Always run commands yourself using the Shell tool. Never tell the user to run <code class="language-jython highlight"><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="o">...</span></code> — execute it directly. The user should only be asked to perform <strong>physical actions</strong> (place/move parts, press probe/clickwheel).</li>
+<li>Treat the Jumperless as an <strong>active hardware tool</strong>, not a passive advisor. When the user asks to wire, measure, or debug something, do it immediately.</li>
+<li><strong>Settling time matters.</strong> Crossbar routing, DAC changes, and connection changes are not instantaneous. Always allow settling time before measuring:</li>
+<li>After <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>: wait at least 2–10 ms (<code class="language-jython highlight"><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></code> to <code class="language-jython highlight"><span class="n">time</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></code>) before reading ADC or INA values.</li>
+<li>After <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code> or <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code>: wait 50–100 ms.</li>
+<li>For sensitive measurements (resistance, current), 50 ms minimum. For voltage sweeps, 20 ms per step is usually sufficient.</li>
+<li><strong>Always light up the board when asking for physical placement.</strong> Whenever you ask the user to place, move, or remove a component or wire, you MUST run an overlay script first to highlight the target location on the breadboard LEDs, and display the instruction on the OLED. Do not just say "place a resistor at row 5" in text — show them on the board. Clear the overlays once placement is confirmed.</li>
+<li>Before risky operations, snapshot with <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> and restore if needed.</li>
+<li>Never assume external wiring is known; verify with measurements when uncertain.</li>
+</ul>
+<h2 id="full-capabilities-at-a-glance">Full capabilities at a glance</h2>
+<p>Always keep these in mind — even in the middle of a specific task, a different peripheral may be the better tool:</p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Key APIs</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Virtual wiring</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">fast_connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code></td>
+<td>Any routing change on the crossbar</td>
+</tr>
+<tr>
+<td><strong>Voltage measurement</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span></code> with <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code> (±8V), <code class="language-jython highlight"><span class="no no-Jumperless">ADC4</span></code> (5V), <code class="language-jython highlight"><span class="no no-Jumperless">ADC7</span></code>/<code class="language-jython highlight"><span class="no no-Jumperless">PROBE</span></code></td>
+<td>Checking node voltages; always route ADC to node first</td>
+</tr>
+<tr>
+<td><strong>Current measurement</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_bus_voltage</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code></td>
+<td>Put <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code>/<code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_MINUS</span></code> in series; 2Ω shunt</td>
+</tr>
+<tr>
+<td><strong>Power measurement</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span></code></td>
+<td>Quick power draw check on a rail</td>
+</tr>
+<tr>
+<td><strong>Programmable voltage</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></code> — <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code> (±8V)</td>
+<td>Supplying test voltages, driving circuits, sweeps</td>
+</tr>
+<tr>
+<td><strong>Resistance estimation</strong></td>
+<td>DAC + INA + ADC combined (see measurement workflow)</td>
+<td>Use adaptive DAC voltage for best accuracy</td>
+</tr>
+<tr>
+<td><strong>Digital I/O</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">()</span></code></td>
+<td>Driving/reading logic signals on <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code></td>
+</tr>
+<tr>
+<td><strong>PWM output</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">duty</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_stop</span><span class="p">(</span><span class="n">pin</span><span class="p">)</span></code></td>
+<td>Generating clock/PWM signals</td>
+</tr>
+<tr>
+<td><strong>UART passthrough</strong></td>
+<td><code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code> nodes (routable)</td>
+<td>Talking to Arduino/Nano or serial peripherals</td>
+</tr>
+<tr>
+<td><strong>LED guidance</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set_pixel</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear</span><span class="p">()</span></code></td>
+<td>Visual cues on breadboard; use reduced-brightness colors</td>
+</tr>
+<tr>
+<td><strong>OLED display</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span></code></td>
+<td>Showing measurement results or step instructions</td>
+</tr>
+<tr>
+<td><strong>Probe input</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">()</span></code></td>
+<td>User touching a specific pad, button-gated steps</td>
+</tr>
+<tr>
+<td><strong>Clickwheel</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">clickwheel_get_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">clickwheel_get_position</span><span class="p">()</span></code></td>
+<td>User menu/scroll/confirm interactions</td>
+</tr>
+<tr>
+<td><strong>State snapshot</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code></td>
+<td>Bulk save/restore, Wokwi import, batch edits</td>
+</tr>
+<tr>
+<td><strong>Net inspection</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_net_info</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code></td>
+<td>Debugging unexpected routing</td>
+</tr>
+<tr>
+<td><strong>Filesystem</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">open</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">listdir</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span><span class="o">.</span><span class="nf nf-JFS">exists</span><span class="p">()</span></code></td>
+<td>Reading/writing files on the device</td>
+</tr>
+<tr>
+<td><strong>Arduino reset</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">arduino_reset</span><span class="p">()</span></code></td>
+<td>Resetting a Nano-header MCU</td>
+</tr>
+<tr>
+<td><strong>Slots</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_save</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">switch_slot</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code></td>
+<td>Storing/recalling circuit configurations</td>
+</tr>
+<tr>
+<td><strong>Context</strong></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">context_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">context_toggle</span><span class="p">()</span></code></td>
+<td><code class="language-jython highlight"><span class="n">python</span></code> context rolls back on exit; <code class="language-jython highlight"><span class="k">global</span></code> persists</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Think creatively:</strong> If measuring resistance, consider whether INA-based, ADC-based, or mixed approaches suit the range best. If debugging a circuit, you can probe multiple nodes with different ADC channels simultaneously. If a user needs a clock signal, reach for PWM instead of bit-banging GPIO.</p>
+<h2 id="getting-connected">Getting connected</h2>
+<p>Before any hardware interaction, ensure connectivity:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>pip<span class="w"> </span>install<span class="w"> </span>pyserial
+<span class="linenos" data-linenos="2 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span>detect
+<span class="linenos" data-linenos="3 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;print(&#39;ok from jumperless&#39;)&quot;</span>
+</code></pre></div>
+<p>If <code class="language-jython highlight"><span class="n">detect</span></code> succeeds, the port is cached in <code class="language-jython highlight"><span class="o">.</span><span class="n">jumperless_port</span></code> for subsequent calls.</p>
+<h2 id="execution-modes">Execution modes</h2>
+<p>Prefer these modes in order:</p>
+<ol>
+<li><strong>Inline command</strong> (short, single-purpose):</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span><span class="s2">&quot;connect(1, D4)&quot;</span>
+</code></pre></div>
+<ol>
+<li><strong>Script file</strong> (multi-line logic — preferred for anything beyond a one-liner):</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--file<span class="w"> </span>scripts/session.py
+</code></pre></div>
+<ol>
+<li><strong>Piped script</strong> (dynamically generated scripts):</li>
+</ol>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--stdin<span class="w"> </span><span class="s">&lt;&lt;&#39;PYEOF&#39;</span>
+<span class="linenos" data-linenos="2 "></span><span class="s">import time</span>
+<span class="linenos" data-linenos="3 "></span><span class="s">connect(ADC0, 5)</span>
+<span class="linenos" data-linenos="4 "></span><span class="s">time.sleep(0.05)</span>
+<span class="linenos" data-linenos="5 "></span><span class="s">v = adc_get(0)</span>
+<span class="linenos" data-linenos="6 "></span><span class="s">disconnect(ADC0, -1)</span>
+<span class="linenos" data-linenos="7 "></span><span class="s">print(v)</span>
+<span class="linenos" data-linenos="8 "></span><span class="s">PYEOF</span>
+</code></pre></div>
+<p>For complex logic, <strong>write a temporary .py file</strong> and use <code class="language-jython highlight"><span class="o">--</span><span class="n">file</span></code>. Do not cram long multi-line logic into shell-quoted one-liners.</p>
+<p>Use <code class="language-jython highlight"><span class="o">--</span><span class="n">timeout</span> <span class="n">N</span></code> when scripts take longer than the default 8 seconds (e.g. continuous monitors, guided flows).</p>
+<h2 id="updating-a-running-script">Updating a running script</h2>
+<p>Loop scripts run <strong>on the device</strong> in MicroPython. The host <code class="language-jython highlight"><span class="n">exec</span></code> process exits as soon as it finishes sending the script — the serial port is already free. The MicroPython loop keeps running on the Jumperless itself.</p>
+<p>To stop it and send a new version:</p>
+<p><strong>1. Write the updated script to the file.</strong></p>
+<p><strong>2. Run <code class="language-jython highlight"><span class="n">exec</span></code> with the updated file.</strong><br />
+<code class="language-jython highlight"><span class="n">enter_raw_repl</span><span class="p">()</span></code> automatically sends a double Ctrl-C (<code class="language-jython highlight">\<span class="n">x03</span>\<span class="n">x03</span></code>) to the device before sending any new code, interrupting whatever MicroPython loop is currently running.</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--file<span class="w"> </span>scripts/my_loop.py<span class="w"> </span>--timeout<span class="w"> </span><span class="m">300</span>
+</code></pre></div>
+<p>That's it — no process killing needed.</p>
+<p><strong>3. Start every loop script with a cleanup header.</strong><br />
+The interrupted script may have left connections, overlays, or OLED content mid-run. Always reset to a known state at the top:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">nodes_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">overlay_clear_all</span><span class="p">()</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>   <span class="c1"># let crossbar settle after clear</span>
+</code></pre></div>
+<p>Background long-running loops with <code class="language-jython highlight"><span class="n">block_until_ms</span><span class="p">:</span> <span class="mi">0</span></code> so the shell doesn't block waiting for them to finish.</p>
+<h2 id="settling-time-patterns">Settling time patterns</h2>
+<p>Build these into every script. The crossbar routing fabric and DAC output stages need time to stabilize.</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># After making connections</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">connect</span><span class="p">(</span><span class="n">ADC0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">connect</span><span class="p">(</span><span class="n">DAC1</span><span class="p">,</span> <span class="n">ISENSE_PLUS</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># 50ms settle</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="c1"># After changing DAC/rail voltage</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">dac_set</span><span class="p">(</span><span class="n">TOP_RAIL</span><span class="p">,</span> <span class="mf">3.3</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>  <span class="c1"># 20ms for DAC to reach setpoint</span>
+<span class="linenos" data-linenos="11 "></span>
+<span class="linenos" data-linenos="12 "></span><span class="c1"># After bulk state changes</span>
+<span class="linenos" data-linenos="13 "></span><span class="n">set_state</span><span class="p">(</span><span class="n">new_state</span><span class="p">)</span>
+<span class="linenos" data-linenos="14 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>   <span class="c1"># 100ms for full state application</span>
+<span class="linenos" data-linenos="15 "></span>
+<span class="linenos" data-linenos="16 "></span><span class="c1"># For multi-sample measurements, small inter-sample delay</span>
+<span class="linenos" data-linenos="17 "></span><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+<span class="linenos" data-linenos="18 "></span>    <span class="n">v</span> <span class="o">=</span> <span class="n">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="19 "></span>    <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos" data-linenos="20 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># 10ms between samples</span>
+</code></pre></div>
+<h2 id="visual-placement-guidance">Visual placement guidance</h2>
+<p>Whenever the user needs to place, move, or remove something physical, <strong>run an overlay script before asking</strong>. The board shows them exactly where to go; OLED echoes the instruction in text.</p>
+<h3 id="overlay-coordinate-system">Overlay coordinate system</h3>
+<p>The LED canvas is rows 1–10, cols 1–30:</p>
+<ul>
+<li><strong>Rows 1–5</strong> = top breadboard half (breadboard rows 1–30)</li>
+<li><strong>Rows 6–10</strong> = bottom breadboard half (breadboard rows 31–60)</li>
+<li><strong>Col 1–30</strong> = the 30 columns of holes within each half</li>
+</ul>
+<p>Breadboard row N → overlay col N (top half, N 1–30) or col N−30 (bottom half, N 31–60).
+The 5 holes A–E in each strip correspond to overlay rows 1–5 (top) or 6–10 (bottom).</p>
+<h3 id="placement-patterns">Placement patterns</h3>
+<p><strong>Single component / pin — use <code class="language-jython highlight"><span class="n">place_here</span><span class="p">()</span></code> + <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="c1"># Mark a single hole bright red, tell user on OLED</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">overlay_set_pixel</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>          <span class="c1"># direct: row 3, col 10</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># — or using animations helper if loaded —</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;target_pin&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 7 "></span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Place R1 pin 1&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Row 10, top half&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>IC spanning multiple rows — use <code class="language-jython highlight"><span class="n">highlight_range</span><span class="p">()</span></code> for the body, <code class="language-jython highlight"><span class="n">place_here</span><span class="p">()</span></code> per pin:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># IC body across breadboard rows 5-12 (top half → overlay cols 5-12)</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">highlight_range</span><span class="p">(</span><span class="s2">&quot;ic_body&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mh">0x203030</span><span class="p">)</span>   <span class="c1"># single overlay row, cols 5-12</span>
+<span class="linenos" data-linenos="3 "></span><span class="c1"># Pin 1 marker</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;ic_pin1&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
+<span class="linenos" data-linenos="5 "></span>
+<span class="linenos" data-linenos="6 "></span><span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Place 555 timer&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="8 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Pin 1 at row 5&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Span of rows (e.g. resistor leg to leg):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Highlight rows 5 and 15 where resistor legs go</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;r1_a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mh">0xFF8000</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;r1_b&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mh">0xFF8000</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Place R1: row 5 to 15&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Removal / "move this wire":</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Use a different color (e.g. red pulsing) to mark what to remove</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">highlight_row</span><span class="p">(</span><span class="s2">&quot;remove_wire&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span>
+<span class="linenos" data-linenos="4 "></span><span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Remove wire at row 3&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="always-clear-overlays-after-confirmation">Always clear overlays after confirmation</h3>
+<p>After the user confirms placement (probe button, clickwheel, or verbal confirmation), clear the guidance overlays so they don't obscure net colors:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">overlay_clear</span><span class="p">(</span><span class="s2">&quot;target_pin&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">overlay_clear</span><span class="p">(</span><span class="s2">&quot;ic_body&quot;</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="c1"># — or wipe everything —</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">overlay_clear_all</span><span class="p">()</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_clear</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="in-guided-step-flows-pair-each-step-with-an-overlay">In guided step flows, pair each step with an overlay</h3>
+<p>When using <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">guide</span></code>, run a matching overlay script immediately before each button-wait so the board lights up with the current step's target location. Use <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear_all</span><span class="p">()</span></code> at the start of each step to remove the previous step's marks.</p>
+<h2 id="workflow-selection">Workflow selection</h2>
+<p>Choose based on the task, then read only the files needed. But stay aware of the full capabilities table above — better solutions may combine peripherals across workflows.</p>
+<ol>
+<li><strong>Connectivity / rewiring</strong></li>
+<li>Read: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="nf nf-Jumperless">node</span><span class="o">-</span><span class="nb">map</span><span class="o">.</span><span class="n">md</span></code> → <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">connections</span><span class="o">-</span><span class="n">routing</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>
+<p>Use <code class="language-jython highlight"><span class="nf nf-Jumperless">fast_connect</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">fast_disconnect</span><span class="p">()</span></code> for batch operations (skips LED updates)</p>
+</li>
+<li>
+<p><strong>Measurement (V/I/R, sweeps)</strong></p>
+</li>
+<li>Read: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">measurements</span><span class="o">-</span><span class="n">power</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>For reusable patterns: <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">measurements</span><span class="o">.</span><span class="n">py</span></code>, <code class="language-jython highlight"><span class="n">measureR</span><span class="o">.</span><span class="n">py</span></code></li>
+<li>
+<p>Always account for crossbar series resistance (20–40Ω default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, ~80Ω with <code class="language-jython highlight"><span class="n">duplicates</span><span class="o">=</span><span class="mi">0</span></code>) and 2Ω ISENSE shunt</p>
+</li>
+<li>
+<p><strong>Visual guidance (LEDs, OLED)</strong> — mandatory any time you ask for physical action</p>
+</li>
+<li>See "Visual placement guidance" section above for patterns</li>
+<li>Read: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">ui</span><span class="o">-</span><span class="n">interaction</span><span class="o">-</span><span class="n">system</span><span class="o">.</span><span class="n">md</span></code> → <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">animations</span><span class="o">.</span><span class="n">py</span></code></li>
+<li>Use reduced-brightness saturated colors (e.g. <code class="language-jython highlight"><span class="mh">0x2020FF</span></code>, not <code class="language-jython highlight"><span class="mh">0x0000FF</span></code>)</li>
+<li>
+<p><code class="language-jython highlight"><span class="mh">0x000000</span></code> = transparent in overlays; always <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear_all</span><span class="p">()</span></code> after step completes</p>
+</li>
+<li>
+<p><strong>State surgery / batch edits</strong></p>
+</li>
+<li>
+<p>Read: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">state</span><span class="o">-</span><span class="nb">format</span><span class="o">.</span><span class="n">md</span></code> → <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">state</span><span class="o">-</span><span class="n">nets</span><span class="o">-</span><span class="n">filesystem</span><span class="o">.</span><span class="n">md</span></code></p>
+</li>
+<li>
+<p><strong>Guided human-in-the-loop flows</strong></p>
+</li>
+<li><code class="language-jython highlight"><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">guide</span> <span class="o">--</span><span class="n">file</span> <span class="n">steps</span><span class="o">.</span><span class="n">txt</span></code></li>
+<li>One step per line; device shows on OLED and waits for probe button / clickwheel</li>
+</ol>
+<p>Only load <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">reference</span><span class="o">.</span><span class="n">md</span></code> when a task spans multiple API domains.
+For transport/hanging issues, load <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">repl</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">playbook</span><span class="o">.</span><span class="n">md</span></code>.</p>
+<h2 id="core-command-patterns">Core command patterns</h2>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Snapshot full state</span>
+<span class="linenos" data-linenos=" 2 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span>state
+<span class="linenos" data-linenos=" 3 "></span>
+<span class="linenos" data-linenos=" 4 "></span><span class="c1"># Execute a script file</span>
+<span class="linenos" data-linenos=" 5 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--file<span class="w"> </span>scripts/session.py
+<span class="linenos" data-linenos=" 6 "></span>
+<span class="linenos" data-linenos=" 7 "></span><span class="c1"># List device filesystem</span>
+<span class="linenos" data-linenos=" 8 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span>fs
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="c1"># Longer timeout for continuous scripts</span>
+<span class="linenos" data-linenos="11 "></span>python<span class="w"> </span>scripts/jumperless.py<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>--file<span class="w"> </span>scripts/measureR.py<span class="w"> </span>--timeout<span class="w"> </span><span class="m">60</span>
+</code></pre></div>
+<h2 id="measurement-best-practices">Measurement best practices</h2>
+<h3 id="always-settle-always-sample-multiple-times">Always settle, always sample multiple times</h3>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">connect</span><span class="p">(</span><span class="n">ADC0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 5 "></span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">v_avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;V at row 5:&quot;</span><span class="p">,</span> <span class="n">v_avg</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 9 "></span>
+<span class="linenos" data-linenos="10 "></span><span class="n">disconnect</span><span class="p">(</span><span class="n">ADC0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="resistance-choose-method-by-expected-range">Resistance: choose method by expected range</h3>
+<ul>
+<li><strong>Low R (&lt;500Ω):</strong> Use lower DAC voltage (0.5–1.5V) to avoid high current. INA-based is most accurate.</li>
+<li><strong>Medium R (500Ω–10kΩ):</strong> DAC at 2–3V. Mixed ADC+INA gives best results.</li>
+<li><strong>High R (&gt;10kΩ):</strong> Use higher DAC voltage (3–5V). Baseline-corrected method recommended (measure leakage current with load floating, then subtract).</li>
+</ul>
+<h3 id="adaptive-dac-voltage-ladder-from-measurerpy">Adaptive DAC voltage ladder (from <code class="language-jython highlight"><span class="n">measureR</span><span class="o">.</span><span class="n">py</span></code>)</h3>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="k">if</span> <span class="n">R_prev</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>     <span class="n">v_set</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">elif</span> <span class="n">R_prev</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">:</span>     <span class="n">v_set</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos" data-linenos="3 "></span><span class="k">elif</span> <span class="n">R_prev</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>    <span class="n">v_set</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="linenos" data-linenos="4 "></span><span class="k">elif</span> <span class="n">R_prev</span> <span class="o">&lt;</span> <span class="mi">5000</span><span class="p">:</span>    <span class="n">v_set</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="linenos" data-linenos="5 "></span><span class="k">else</span><span class="p">:</span>                  <span class="n">v_set</span> <span class="o">=</span> <span class="mf">4.0</span>
+</code></pre></div>
+<h3 id="hardware-constraints-to-remember">Hardware constraints to remember</h3>
+<ul>
+<li>Crossbar path resistance: ~80Ω with <code class="language-jython highlight"><span class="n">duplicates</span><span class="o">=</span><span class="mi">0</span></code> (single path); ~20–40Ω with default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> (firmware stacks paths in parallel)</li>
+<li>ISENSE shunt: 2Ω (ISENSE_PLUS and ISENSE_MINUS are always connected through it)</li>
+<li>DAC/rail range: approximately ±8V</li>
+<li>ADC0–ADC3: ±8V range; ADC4: 5V range; ADC7/PROBE: probe channel</li>
+<li>Signal bandwidth: ~8MHz through crossbar, ~13MHz 3dB on breadboard</li>
+<li>Firmware refuses dangerous connections (e.g. TOP_RAIL directly to GND)</li>
+<li>Firmware cannot see user-placed external wires — always ask or verify</li>
+</ul>
+<h2 id="electronics-reference">Electronics reference</h2>
+<p>Load <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">electronics</span><span class="o">-</span><span class="n">reference</span><span class="o">.</span><span class="n">md</span></code> for Ohm's Law, series/parallel, voltage dividers, KVL/KCL, RC time constant, logic levels, LED current limiting, pull-up/pull-down, IC pin numbering (DIP diagrams + common IC tables), decoupling capacitors, and a measurement troubleshooting table.</p>
+<p>Load it whenever you need to size a component, verify a measurement makes sense, map IC pins to breadboard rows, or explain a result to the user.</p>
+<h2 id="safety-approach">Safety approach</h2>
+<p>Default to conservative behavior:
+- Snapshot state before making significant changes
+- Confirm before clearing all nets or large rail voltage changes
+- Start with read-only inspections (net info, measurements) before rewiring</p>
+<p>Increase autonomy as user context indicates experience. For power users and the hardware designer, broader rewiring and experimental manipulations are fine — still document what was done and why.</p>
+<h2 id="debugging-circuits">Debugging circuits</h2>
+<p>When measurements don't match expectations:</p>
+<ol>
+<li>Inspect internal state: <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code></li>
+<li>Verify specific connections: <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">)</span></code></li>
+<li>Measure at key nodes using ADC</li>
+<li>Consider external factors (misplaced parts, wrong resistor values, additional loads)</li>
+<li>Cross-reference with the user's description of physical component placement</li>
+</ol>
+<h2 id="performance-and-context-discipline">Performance and context discipline</h2>
+<ul>
+<li>Keep reasoning focused on the active task.</li>
+<li>Read only the reference files needed for the current workflow.</li>
+<li>Prefer writing temporary script files over ad-hoc shell-quoted multi-line strings.</li>
+<li>Return measured results concisely — the user cares about values and conclusions, not pages of planning text.</li>
+<li>For long-running scripts (continuous monitors, guided flows), use <code class="language-jython highlight"><span class="o">--</span><span class="n">timeout</span></code> appropriately and <code class="language-jython highlight"><span class="n">block_until_ms</span><span class="p">:</span> <span class="mi">0</span></code> to background them.</li>
+</ul>
+<h2 id="mcp-alternative">MCP alternative</h2>
+<p>If you are on an MCP-native client (Claude Desktop, Cursor MCP, …), you can use
+the <strong>jumperless-mcp</strong> server instead of this skill's shell transport. It lives
+as the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> git submodule in this repo:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--recursive<span class="w">    </span><span class="c1"># if not cloned with --recurse-submodules</span>
+<span class="linenos" data-linenos="2 "></span><span class="nb">cd</span><span class="w"> </span>mcp<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>cargo<span class="w"> </span>install<span class="w"> </span>--path<span class="w"> </span>.<span class="w">            </span><span class="c1"># or use a release binary</span>
+</code></pre></div>
+<p>Point your MCP client at the built <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">-</span><span class="n">mcp</span></code> binary. See <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span><span class="n">README</span><span class="o">.</span><span class="n">md</span></code>
+for tool list and lifecycle. <strong>The MCP server holds the USB port exclusively
+while running</strong> — don't run <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> against the same board at the same
+time.</p>
+<h2 id="canonical-api-reference">Canonical API reference</h2>
+<p><code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">reference</span><span class="o">.</span><span class="n">md</span></code> (and the <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span></code> split) is a convenience
+copy that can drift. When precise call signatures matter, treat the docs site
+as canonical: <a href="https://docs.jumperless.org/09.5-micropythonAPIreference/">https://docs.jumperless.org/09.5-micropythonAPIreference/</a>.</p>
+<h2 id="file-map">File map</h2>
+<ul>
+<li>Host transport and REPL runner: <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code></li>
+<li>MCP server (submodule): <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> — see <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span><span class="n">README</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>Measurement helpers (device-side): <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">measurements</span><span class="o">.</span><span class="n">py</span></code></li>
+<li>Resistance measurement scratch: <code class="language-jython highlight"><span class="n">measureR</span><span class="o">.</span><span class="n">py</span></code></li>
+<li>LED/OLED animation helpers: <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">animations</span><span class="o">.</span><span class="n">py</span></code></li>
+<li>Progressive routing map: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">progressive</span><span class="o">-</span><span class="n">disclosure</span><span class="o">-</span><span class="nb">map</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>REPL/runtime playbook: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">repl</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">playbook</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>Full deep guide: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">deep</span><span class="o">-</span><span class="n">dive</span><span class="o">/</span><span class="n">full</span><span class="o">-</span><span class="n">skill</span><span class="o">-</span><span class="n">guide</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>API split: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">connections</span><span class="o">-</span><span class="n">routing</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>API split: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">measurements</span><span class="o">-</span><span class="n">power</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>API split: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">state</span><span class="o">-</span><span class="n">nets</span><span class="o">-</span><span class="n">filesystem</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>API split: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">ui</span><span class="o">-</span><span class="n">interaction</span><span class="o">-</span><span class="n">system</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>API monolith (legacy fallback): <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">-</span><span class="n">reference</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>Node IDs/aliases: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="nf nf-Jumperless">node</span><span class="o">-</span><span class="nb">map</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>Hardware behavior: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">hardware</span><span class="o">-</span><span class="n">guide</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>Electronics quick reference: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">electronics</span><span class="o">-</span><span class="n">reference</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>State JSON schema: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">state</span><span class="o">-</span><span class="nb">format</span><span class="o">.</span><span class="n">md</span></code></li>
+<li>Design context/roadmap: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">vision</span><span class="o">.</span><span class="n">md</span></code></li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>

@@ -66,8 +66,6 @@ Or if you want to save some money and get a refurbished one,
 
 ## Find Me On The Internet
 
-Join the [Discord](https://discord.gg/bvacV7r3FP) for pretty much instant answers to your questions
-
 ---
 
 See what Zack Freedman had to say about it:
@@ -117,6 +115,19 @@ Most of the stuff here is relevant as a subset of what Jumperless V5 does.
 
 ----
 
+ Connect: Connect button
+    Idle --> Remove: Remove button
+
+    Connect --> Remove: Remove button
+    Remove --> Connect: Connect button
+
+    Connect --> Idle: Connect button
+    Remove --> Idle: Remove button
+
+```
+
+---- -->
+
 ## The Probe
 First, keep the switch on the probe set to `Select`
 [Image: ProbeSelect]
@@ -135,6 +146,8 @@ If you make a mistake while `holding` a connection, click the `Connect` button a
 If you click the `Connect` button while you're not `holding` a `node`, it will leave `probe mode` and bring you back into `idle mode` (rainbowy`logo`, all 3 `probe LED`s on.)
 
 To get out of `Connect` mode, press the button again.
+
+If you make a connection you didn't mean to, **double-tap `Remove`** to undo it - see [Undo / Redo](#undo-redo).
 
 ### Encoder Connections
 
@@ -171,6 +184,8 @@ and the logo should turn reddish
 Now you can swipe along the `pad`s or tap them one at a time. Remember it only disconnects that `node` and anything connected to it directly, not *everything* on the `net`. So tapping say, `row 25` that's connected to `GND` won't clear everything connected to `GND`, but tapping the `-` on the rails (for `GND`) would.
 
 The special functions work the same way, tap the pad, pick one, and it will remove it. Click the button again to get out.
+
+If you delete the wrong row, **double-tap `Remove`** to undo it (or use the History scrub menu to walk back further) - see [Undo / Redo](#undo-redo).
 
 ## Probe Notes
 
@@ -244,6 +259,39 @@ When you tap either building pad in connect or remove mode, you'll get access to
     They're two ends of a 2Ω shunt resistor, so remember that these will be shorted together. You measure current in series so this is expected, but it's super easy to forget. Take this warning as the equivalent of your multimeter yelling at you when you have the probes in the current holes and have it set to voltage.
 
 ---
+
+## Undo / Redo
+
+Every change you make to your circuit gets recorded into an in-memory history ring, and there are two ways to walk back through it: a fast probe-button gesture for one-step undo/redo, and a full scrub menu on the click wheel for going further.
+
+### Double-tap the probe buttons
+
+`Double-tap Remove -> Undo (reverts the last change)`
+`Double-tap Connect -> Redo (reapplies a previously undone change)`
+
+  - The `logo` flashes **yellow** for ~600 ms
+  - The OLED shows a 2-line toast like:
+
+### History scrub via the click wheel
+
+If you want to walk back further than one or two steps and *see* each state on the breadboard as you go:
+
+1. Open the menu (short `click` the wheel)
+2. Find the **History** entry, `click` in
+3. Now turning the wheel scrubs through every recorded transaction:
+    - **CW** = step backward in time (one txn older)
+    - **CCW** = step forward (newer / into redo land)
+4. The breadboard updates **in real time** as you scrub - actual crosspoints flip and `LED`s change, so you can see exactly what each state looked like
+5. The OLED shows the position (`-3/12`) and the txn label (`connect 50-46`) at each step
+6. **Encoder `click`** OR **probe `Connect`** = commit (cursor stays where you stopped)
+7. **Encoder `hold`** OR **probe `Remove`** = cancel (rewinds to where you were when you opened the menu)
+
+#### Caveats
+
+- **History is fresh on every boot** - undo doesn't survive a power cycle. This is intentional: nothing about your saved `slot` files is touched by undo, only the in-session ring of changes you've made since powering on.
+- The ring holds **~16,000 ops / 4,000 transactions on V5 hardware** (PSRAM), or ~512 ops on SRAM-only builds. Older edits roll off as you make new ones - waypoint decimation keeps the recent history dense and the older history sparse, so the ring covers a long timespan without bloating.
+
+----
 
 ## Idle Mode Net Highlighting
 
@@ -1519,9 +1567,9 @@ The Jumperless has **8 slots** (0-7) where you can save different circuit config
 
 When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the [Glossary](99-glossary.md) for more details about slots.
 
-## Live Editing State Files
+## Editing State Files
 
-You can edit the YAML slot files and they will live update to the board! Whether you're editing them in the onboard `eKilo` editor or as a mounted USB MSC device on your computer, changes will be reflected immediately on your Jumperless.
+You can edit the YAML slot files and the board will pick up your changes! If you're editing the active slot in the onboard `eKilo` editor, it reloads when you quit the editor; if the Jumperless is mounted as a USB MSC device on your computer, changes are applied when you eject/unmount the drive.
 
 ---
 
@@ -1559,6 +1607,848 @@ Enter `n` in the menu to show this one. If you have anything that's doing any me
 
 ---
 
+# Automation & LLM Tools
+
+
+The Jumperless V5 is built to be driven by software — by your own scripts, by
+desktop apps, and by LLM agents (Cursor, Claude Desktop/Code, etc.). This page
+is the hub for **every** way to control the board from outside the menu, and a
+decision guide for picking the right one.
+
+The full hardware/API surface is documented in the
+[MicroPython API Reference](09.5-micropythonAPIreference.md) — this page is
+about *transport and tooling*, not the individual calls.
+
+---
+
+` prefix on port 1 |
+| You want to run **full scripts on the device** | MicroPython **Raw REPL** on port 5 |
+
+All of these ultimately drive the same MicroPython API on the device. The
+backchannel (port 7) is the exception: it is a read-only telemetry channel that
+never enters Python and never mutates state.
+
+```mermaid
+flowchart LR
+  subgraph host [Host / Agent]
+    MCP[jumperless-mcp]
+    SKILL[Agent Skill + jumperless.py]
+    SCRIPT[your scripts]
+  end
+  subgraph dev [Jumperless V5]
+    P1[port 1: menu + > Python]
+    P5[port 5: Raw REPL]
+    P7[port 7: USBSer3 backchannel]
+    API[(MicroPython API)]
+  end
+  MCP - -> P5
+  SKILL - -> P5
+  SCRIPT - -> P1 & P5
+  P1 - -> API
+  P5 - -> API
+  P7 -. read-only .-> API
+```
+
+---
+
+-->
+## USB port structure
+
+The Jumperless enumerates as four USB CDC serial interfaces. On macOS they are
+named `JLV5portN`; on Linux they are sequential `/dev/ttyACMx`; on Windows they
+are sequential `COMx`.
+
+| Port | macOS suffix | Role |
+|------|--------------|------|
+| 1 | `JLV5port1` | Main terminal, menu, `>` one-liner Python, single-char commands |
+| 2 | `JLV5port3` | Arduino UART passthrough |
+| 3 | `JLV5port5` | MicroPython Raw REPL — **primary transport for scripts and the Agent Skill** |
+| 4 | `JLV5port7` | USBSer3 machine backchannel — `:help` (YAML), `:cmds`, read-only status verbs |
+
+> [!TIP]
+> The host helper `scripts/jumperless.py detect` (in the Agent Skill repo)
+> auto-finds the Raw REPL port and caches it, so you rarely need to name ports
+> by hand.
+
+> [!NOTE]
+> I will refer to these ports by their index (1st, 2nd, 3rd, 4th), macOS and Linux claim 2 ports per endpoint (one for each direction) so the numbering is 1,3,5,7
+
+---
+
+## Communication methods
+
+### 1. `>` Python one-liners (1st / main port)
+
+Prefix a single line of Python with `>` on the main terminal. Best for quick
+checks and single commands.
+
+```jython
+> connect(1, 5)
+> v = adc_get(0)
+> print(f"V = {v:.2f}")
+```
+
+### 2. MicroPython Raw REPL (3rd port)
+
+The canonical transport for anything beyond a one-liner: full scripts, loops,
+guided flows. This is what the Agent Skill's `jumperless.py` and the MCP server
+both speak under the hood.
+
+```python
+import time
+for i in range(10):
+    print(i, adc_get(0))
+    time.sleep(0.5)
+```
+
+### 3. Arduino tags (2nd port, via UART)
+
+From an Arduino connected to the Jumperless headers:
+
+```cpp
+Serial.print("connect(1, 5)");   // run Python
+Serial.print("n");                // menu command
+```
+
+### 4. Single-character commands (1st port)
+
+Raw characters sent to port 1 trigger immediate menu actions — fast state
+dumps, board clears, etc. (`J` = JSON state, `x` = clear, `n` = list nets, …).
+
+### 5. USBSer3 backchannel (4th port) — read-only telemetry
+
+A dedicated *machine* port that never blocks and never changes state. It speaks
+two command forms:
+
+- **Single characters** dispatch instantly: `A` full status, `V` ADC+current,
+  `G` GPIO, `N` nets, `K` YAML.
+- **`:` verbs** read a newline-terminated line: `:gpio:s`, `:leds`, `:crossbar`,
+  `:adc`, `:yaml`, `:every:1ms:100:gpio:s`, …
+
+Every command is gated by an access tag; only read-only queries run here, so an
+agent can poll the board freely without risk of mutating it.
+
+#### Self-describing `:help` (YAML)
+
+The backchannel describes itself. Send `:help` (or a bare `:`) and it emits a
+**YAML** document — readable straight in a serial terminal, and parseable with
+`yaml.safe_load()`:
+
+```text
+---YAML_HELP_START---
+ser3_help: 1
+protocol:
+  single_char: "Instant dispatch; no line collection. Multi-char modifiers use ':' verbs."
+  ...
+verbs:
+  - name: "gpio:s"
+    summary: "48-pin GPIO state snapshot"
+    args: "[float]"
+    output: "s{}"
+    example: ":gpio:s"
+    min_us: 20
+  ...
+---YAML_HELP_END---
+```
+
+Targeted help is available too:
+
+| Command | Returns |
+|---------|---------|
+| `:help` | Full YAML help document |
+| `:help:` | One verb's details (e.g. `:help:gpio:s`) |
+| `:help:` | A single-char command's long help (e.g. `:help:c`) |
+| `:help:json` | The same content in JSON |
+| `:cmds` / `:cmds_all` | Machine command list (JSON) — `:cmds_all` includes blocked commands and their access tags |
+
+A host harness for the backchannel ships with the firmware repo at
+`scripts/bench_backchannel.py` (drives `:bench`, times verbs).
+
+---
+
+## MCP server 
+
+[**Jumperless-mcp** by LesbianVelociraptor](https://github.com/LesbianVelociraptor/jumperless-mcp)
+
+For MCP-native clients (Claude Desktop, Cursor MCP, …), the Jumperless exposes
+a Model Context Protocol server: a Rust MCP front-end plus a resident Python
+library on the device. It presents the board's capabilities as typed tools
+(connections, power, measurement, GPIO/PWM, OLED, overlays, state, …).
+
+It lives as the **`mcp/` git submodule** inside the canonical automation repo,
+so one checkout gives you both the Agent Skill and the MCP server:
+
+```bash
+git clone --recurse-submodules https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git
+cd Large-Breadboard-Model/mcp
+cargo install --path .        # or use a release binary
+```
+
+Point your MCP client at the built binary:
+
+```json
+{
+  "mcpServers": {
+    "jumperless": {
+      "command": "/path/to/Large-Breadboard-Model/mcp/target/release/jumperless-mcp"
+    }
+  }
+}
+```
+
+> **Exclusive port:** the MCP server holds the USB serial port while running.
+> Don't run `jumperless.py` (the Agent Skill transport) against the same board
+> at the same time.
+
+---
+
+## Agent Skill
+
+If your agent supports the [Agent Skills](https://agentskills.io/) standard
+(Cursor, Claude Code), install the Jumperless V5 skill. It teaches the agent the
+device's capabilities and drives it through `scripts/jumperless.py` over the Raw
+REPL, with progressive-disclosure reference docs loaded only as needed.
+
+- **On this site:** [Jumperless V5 Agent Skill](jumperless-agent-skill.md)
+- **Canonical source:** [Architeuthis-Flux/Large-Breadboard-Model](https://github.com/Architeuthis-Flux/Large-Breadboard-Model)
+
+```bash
+mkdir -p ~/.cursor/skills          # or ~/.claude/skills
+cd ~/.cursor/skills
+git clone --recurse-submodules \
+  https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git jumperless-v5
+```
+
+---
+
+## Node Map 
+
+This file documents the numeric IDs and common names for all key nodes on the Jumperless V5, based on `modules/jumperless/modjumperless.c`. Use it to translate between human‑readable names (like `D13` or `TOP_RAIL`) and the internal node numbers.
+
+All constants are available in the MicroPython REPL; you normally do **not** need the numbers directly, but the mapping is useful for mental models and debugging.
+
+### Breadboard rows (1–60)
+
+Rows 1–60 represent the breadboard rows along the main area:
+
+- `1`–`30` — upper half
+- `31`–`60` — lower half
+
+Each row corresponds to a vertical strip of 5 holes on the physical board.
+
+Example:
+
+```python
+connect(1, 10)   # connect top row 1 to top row 10
+connect(35, GND) # connect lower half row 35 to ground
+```
+
+---
+
+### DACs and ADCs
+
+#### Special nodes and supplies
+
+| Name                | Aliases                              | ID  | Notes                                   |
+|---------------------|--------------------------------------|-----|-----------------------------------------|
+| `GND`               | `GROUND`                             | 100 | Global ground net                       |
+| `TOP_RAIL`          | `T_R`, `TOP_R`                       | 101 | Adjustable top rail                     |
+| `BOTTOM_RAIL`       | `BOT_RAIL`, `B_R`                    | 102 | Adjustable bottom rail                  |
+| `DAC0`              | `DAC_0`          | 106 | DAC channel 0 `*`        |
+| `DAC1`              | `DAC_1`          | 107 | DAC channel 1          |
+
+> [!CAUTION] 
+> `*` Avoid using **DAC 0** and **ROUTABLE_BUFFER_IN** because they're used for probe switch sensing
+
+#### Current sense
+
+| Name            | Aliases                                   | ID  |
+|-----------------|-------------------------------------------|-----|
+| `ISENSE_PLUS`   | `ISENSE_POS`, `ISENSE_P`, `INA_P`, `I_P`, `CURRENT_SENSE_PLUS`, `I_POS` | 108 |
+| `ISENSE_MINUS`  | `ISENSE_NEG`, `ISENSE_N`, `INA_N`, `I_N`, `CURRENT_SENSE_MINUS`, `I_NEG` | 109 |
+
+These two nodes are the ends of a **2 Ω shunt resistor** and are internally shorted through that shunt; always use them in series with the circuit being measured.
+
+#### ADC nodes
+
+| Name    | Aliases        | ID  | Notes                        |
+|---------|----------------|-----|------------------------------|
+| `ADC0`  | `ADC_0`, `ADC0_8V` | 110 | ADC channel 0 (±8 V)         |
+| `ADC1`  | `ADC_1`, `ADC1_8V` | 111 | ADC channel 1 (±8 V)         |
+| `ADC2`  | `ADC_2`, `ADC2_8V` | 112 | ADC channel 2 (±8 V)         |
+| `ADC3`  | `ADC_3`, `ADC3_8V` | 113 | ADC channel 3 (±8 V)         |
+| `ADC4`  | `ADC_4`, `ADC4_5V` | 114 | ADC channel 4 (5 V range)    |
+| `ADC7`  | `ADC_7`, `ADC7_PROBE`, `PROBE` | 115 | Probe ADC channel           |
+
+---
+
+### User GPIO pins
+
+These are the main user‑accessible GPIOs.
+
+| Name         | Aliases                          | ID  | RP2350B Pin | Notes |
+|--------------|----------------------------------|-----|------------|-------------------|
+| `GPIO_1`  | `RP_GPIO_1`, `GPIO1`, `GP_1`, `GP1` | 131 | 20         | I'm sorry they're 1-indexed like this
+| `GPIO_2`  | `RP_GPIO_2`, `GPIO2`, `GP_2`, `GP2` | 132 | 21         |
+| `GPIO_3`  | `RP_GPIO_3`, `GPIO3`, `GP_3`, `GP3` | 133 | 22         |
+| `GPIO_4`  | `RP_GPIO_4`, `GPIO4`, `GP_4`, `GP4` | 134 | 23         |
+| `GPIO_5`  | `RP_GPIO_5`, `GPIO5`, `GP_5`, `GP5` | 135 | 24         |
+| `GPIO_6`  | `RP_GPIO_6`, `GPIO6`, `GP_6`, `GP6` | 136 | 25         |
+| `GPIO_7`  | `RP_GPIO_7`, `GPIO7`, `GP_7`, `GP7` | 137 | 25         |
+| `GPIO_8`  | `RP_GPIO_8`, `GPIO8`, `GP_8`, `GP8` | 138 | 27         |
+| `UART_TX` | `RP_UART_TX`, `TX`                  | 116 | 0          | 2nd serial port passthrough
+| `UART_RX` | `RP_UART_RX`, `RX`                  | 117 | 1          |
+
+When working at the MicroPython level you will usually use `GPIO_1`–`GPIO_8` and the higher‑level GPIO APIs.
+
+---
+
+### Buffer nodes
+
+These correspond to a routable buffer block:
+
+| Name                | Aliases                 | ID  |
+|---------------------|-------------------------|-----|
+| `ROUTABLE_BUFFER_IN`  | `BUFFER_IN`, `BUF_IN`, `BUFF_IN`, `BUFFIN` | 139 |
+| `ROUTABLE_BUFFER_OUT` | `BUFFER_OUT`, `BUF_OUT`, `BUFF_OUT`, `BUFFOUT` | 140 |
+
+> [!CAUTION] 
+> `*` Avoid using **DAC 0** and **ROUTABLE_BUFFER_IN** because they're used for probe switch sensing
+---
+
+### Arduino Nano header
+
+The Nano header pins are mapped as follows:
+
+| Name          | Aliases  | ID  | Routable? | Notes |
+|---------------|----------|-----|-----------|-------|
+| `NANO_VIN`    | `VIN`    | 69  |N
+| `NANO_D0`     | `D0`     | 70  |Y
+| `NANO_D1`     | `D1`     | 71  |Y
+| `NANO_D2`     | `D2`     | 72  |Y
+| `NANO_D3`     | `D3`     | 73  |Y
+| `NANO_D4`     | `D4`     | 74  |Y
+| `NANO_D5`     | `D5`     | 75  |Y
+| `NANO_D6`     | `D6`     | 76  |Y
+| `NANO_D7`     | `D7`     | 77  |Y
+| `NANO_D9`     | `D9`     | 79  |Y
+| `NANO_D10`    | `D10`    | 80  |Y
+| `NANO_D11`    | `D11`    | 81  |Y
+| `NANO_D12`    | `D12`    | 82  |Y
+| `NANO_D13`    | `D13`    | 83  |Y
+| `NANO_AREF`   | `AREF`   | 85  |Y
+| `NANO_A0`     | `A0`     | 86  |Y
+| `NANO_A1`     | `A1`     | 87  |Y
+| `NANO_A2`     | `A2`     | 88  |Y
+| `NANO_A3`     | `A3`     | 89  |Y
+| `NANO_A4`     | `A4`     | 90  |Y
+| `NANO_A5`     | `A5`     | 91  |Y
+| `NANO_A6`     | `A6`     | 92  |Y
+| `NANO_A7`     | `A7`     | 93  |Y
+| `NANO_RESET_0`| `RST0`   | 94  |N|Wired directly to RP2350B pin 18
+| `NANO_RESET_1`| `RST1`   | 95  |N|PSRAM Mod kits use this as CS (pin 19)
+| `NANO_GND_1`  | `N_GND1` | 96  |N
+| `NANO_GND_0`  | `N_GND0` | 97  |N
+| `NANO_3V3`    |          | 98  |N
+| `NANO_5V`     |          | 99  |N
+
+These nodes let you route signals between the RP2350, the breadboard, and any compatible Nano‑footprint dev board (classic Nano, Nano ESP32, Nano RP2040 Connect, etc.).
+
+---
+
+### Rail pads
+
+Special nodes representing where the probe can tap the rails:
+
+| Name             | Aliases                  | ID  |
+|------------------|--------------------------|-----|
+| `TOP_RAIL`       | `TOP_RAIL_PAD`          | 101 |
+| `BOTTOM_RAIL`    | `BOTTOM_RAIL_PAD`       | 102 |
+| `TOP_RAIL_GND`   | `TOP_GND_PAD`           | 104 |
+| `BOTTOM_RAIL_GND`| `BOT_RAIL_GND`, `BOTTOM_GND_PAD` | 126 |
+
+---
+
+### Breadboard layout (high‑level)
+
+The board follows a standard half‑size breadboard geometry:
+
+- Nano header at the top:
+    - Top row: `D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 GND RST1 D0 D1`
+    - Second row: `D13 3V3 REF A0 A1 A2 A3 A4 A5 A6 A7 5V RST0 GND VIN`
+
+- Top power rail:
+    - `TOP_RAIL`
+    - `GND`
+
+- Breadboard rows:
+    - Rows `1`–`30` — upper half, between the top rails and the center gap
+    - Rows `31`–`60` — lower half, between the center gap and the bottom rails
+
+- Bottom power rail:
+    - `BOTTOM_RAIL`
+    - `GND`
+
+An ASCII diagram (from the docs) approximates the layout; the agent should treat rows and rails as in any typical solderless breadboard, with the addition that every hole has an individually controllable RGB LED.
+
+#### DIP ICs straddling the center gap
+
+A DIP chip (555, op-amp, logic, …) sits across the center gap, with each side in
+a different breadboard half. The two halves are independent rows, so the two
+sides of the chip map to numerically distant nodes. For a chip whose first pin
+sits at upper-half row `N`, the upper-side pins run `N, N+1, …` and the
+lower-side pins run from the row directly across the gap (`N+30`).
+
+Worked example — an 8-pin DIP (e.g. a 555) with pin 1 at row 1:
+
+| Pin | Node | Pin | Node |
+|-----|------|-----|------|
+| 1 | `1` | 8 | `31` |
+| 2 | `2` | 7 | `32` |
+| 3 | `3` | 6 | `33` |
+| 4 | `4` | 5 | `34` |
+
+Pins 1–4 are on the upper side (rows 1–4); pins 5–8 are across the gap on the
+lower side (rows 34→31, counting back toward pin 1). Adjust the base row to wherever
+the chip is actually placed; verify with the probe or a measurement when unsure.
+
+---
+
+#### How to use this map
+
+- Prefer named constants like `D13`, `TOP_RAIL`, `GPIO_1`, `ADC0`, `ISENSE_PLUS` when generating code.
+- Use the numeric IDs only when inspecting low‑level debugging output or when matching numeric IDs in `get_state()` / `get_net_info()` results.
+- When the user describes physical positions (“top rail”, “bottom left rail”, “row 25”), translate them into these node names/IDs before constructing `connect(...)` commands.
+
+## JSON State Format
+
+The function `get_state()` returns a **JSON string** describing the entire board state: power rails, nets, GPIOs, and overlays. `set_state(json_str, clear_first=True, from_wokwi=False)` applies such a state.
+
+> [!NOTE]
+> The entire immediate state of the board is defined in this JSON (or YAML) slot file and can be shared to another Jumperless, saved as a backups, included in tutorials, etc. 
+
+This file explains the structure so agents can safely inspect, modify, and re‑apply state.
+
+---
+
+### Top-level structure
+
+A typical `get_state()` JSON (pretty‑printed) looks like:
+
+```json
+{
+  "power": {
+    "top_rail": 3.8,
+    "bottom_rail": 3.8,
+    "dac0": 3.25,
+    "dac1": 0.0
+  },
+  "nets": [
+    {
+      "index": 1,
+      "name": "GND",
+      "nodes": ["GND", "21"],
+      "special": "none"
+    },
+    {
+      "index": 2,
+      "name": "Top Rail",
+      "nodes": ["TOP_R", "23"],
+      "special": "RAIL",
+      "voltage": 3.8
+    }
+    // ...
+  ],
+  "gpio": [
+    {
+      "pin": 1,
+      "net": null,
+      "function": "SIO",
+      "direction": "INPUT",
+      "pull": "down",
+      "reading": "unknown",
+      "floating_read": 1
+    },
+    {
+      "pin": "TX",
+      "net": 7,
+      "function": "UART",
+      "direction": "OUTPUT",
+      "pull": "down",
+      "reading": "unknown",
+      "floating_read": 0
+    }
+  ],
+  "overlays": [
+    {
+      "name": "border",
+      "row": 1,
+      "col": 1,
+      "width": 30,
+      "height": 10,
+      "colors": ["003333", "003333", "..."]
+    }
+  ]
+}
+```
+
+There may be additional keys in future firmware versions; agents should **not** assume the set of keys is fixed and should preserve unknown keys when round‑tripping.
+
+---
+
+### `power` section
+
+```json
+"power": {
+  "top_rail": 3.8,
+  "bottom_rail": 3.8,
+  "dac0": 3.25,
+  "dac1": 0.0
+}
+```
+
+Fields:
+
+- `top_rail` — voltage (float) configured for `TOP_RAIL`
+- `bottom_rail` — voltage configured for `BOTTOM_RAIL`
+- `dac0`, `dac1` — DAC channel setpoints
+
+When using `set_state`, changing these values is equivalent to calling `dac_set()` on the corresponding channels.
+
+---
+
+### `nets` section
+
+Each item describes a net (set of nodes that are electrically connected inside the crossbar).
+
+Example:
+
+```json
+{
+  "index": 4,
+  "name": "DAC 0",
+  "nodes": ["DAC_0", "BUF_IN"],
+  "special": "DAC",
+  "voltage": 3.25
+}
+```
+
+Fields:
+
+- `index` — numeric net index
+- `name` — human‑readable net name (may be auto‑generated or user‑defined)
+- `nodes` — array of node names (strings), such as `"GND"`, `"TOP_R"`, `"21"`, `"D13"`, etc.
+  - These names correspond to the mapping in `reference/node-map.md`.
+- `special` — optional annotation for special nets; typical values:
+  - `"none"` — normal net
+  - `"RAIL"` — power rail (top or bottom)
+  - `"DAC"` — DAC output net
+  - `"UART_TX"` / `"UART_RX"` — UART nets
+  - Other firmware‑defined markers
+- `voltage` — optional; expected or configured voltage on this net (when known)
+- Other fields (like `color`, `anim`, etc.) may be present and should be preserved.
+
+**Important:** `nets` describes **logical groupings** of nodes. It is **not** a direct list of bridges; bridges are derived from the crossbar configuration internally.
+
+---
+
+### `gpio` section
+
+Each entry describes one logical GPIO:
+
+```json
+{
+  "pin": 1,
+  "net": null,
+  "function": "SIO",
+  "direction": "INPUT",
+  "pull": "down",
+  "reading": "unknown",
+  "floating_read": 1
+}
+```
+
+Fields:
+
+- `pin` — either:
+  - An integer `1`–`8` for `GPIO_1`–`GPIO_8`
+  - `"TX"` or `"RX"` for the UART pins
+- `net` — net index this pin is connected to (or `null` if unconnected)
+- `function` — textual description of function:
+  - `"SIO"` — standard GPIO
+  - `"UART"` — UART TX/RX
+  - Other firmware‑defined roles
+- `direction` — `"INPUT"` or `"OUTPUT"`
+- `pull` — `"up"`, `"down"`, or `"none"`
+- `reading` — textual summary of the last known logic state (`"high"`, `"low"`, `"unknown"`, etc.)
+- `floating_read` — boolean (0/1) indicating whether floating detection is enabled
+
+Agents can **inspect** this section to understand logical GPIO usage, but should generally **change GPIO configuration via the MicroPython APIs** (`gpio_set_dir`, `gpio_set_pull`, etc.) rather than editing this JSON directly.
+
+---
+
+### `overlays` section
+
+Overlays describe additional graphics drawn on the breadboard RGB LEDs. They are rendered **on top of** the firmware’s net coloring.
+
+Example:
+
+```json
+{
+  "name": "border",
+  "row": 1,
+  "col": 1,
+  "width": 30,
+  "height": 10,
+  "colors": [
+    "003333", "003333", "...",
+    "003333", "000000", "...",
+    "... more hex color strings ..."
+  ]
+}
+```
+
+Fields:
+
+- `name` — overlay name (string)
+- `row` — top row (1–10)
+- `col` — left column (1–30)
+- `width` — width in columns
+- `height` — height in rows
+- `colors` — flat array of **hex color strings without `0x` prefix**, e.g. `"003333"`, `"FF2020"`
+  - Length = `width * height`
+  - Order is row‑major: top row left→right, then next row down, etc.
+  - `"000000"` means “transparent” — do not override underlying LED color
+
+Brightness recommendation:
+
+- Avoid full‑scale white `FFFFFF`.
+- Prefer saturated colors with reduced magnitude (~25%): e.g. `2020FF`, `20FF20`, `FF2020`, `404040`.
+
+When editing overlays via JSON:
+
+- Always maintain the correct `width * height` number of color entries.
+- Preserve unknown fields if present.
+- Ensure that `row`, `col`, `width`, and `height` keep the overlay within the 5×60 canvas (rows 1–10, columns 1–30).
+
+Often it is easier to use the MicroPython overlay APIs (`overlay_set`, `overlay_clear`, etc.) directly instead of editing `overlays` in the state JSON manually. The JSON is still useful for inspection and for bulk export/import of complex scenes.
+
+---
+
+### Editing state safely
+
+General guidelines:
+
+1. **Fetch once, apply locally.**
+   - Call `get_state()` and parse the JSON in the host environment.
+   - Keep this as your “baseline” snapshot.
+
+2. **Work on a copy.**
+   - Clone the baseline object before modifying it.
+   - Preserve unknown fields.
+
+3. **Modify only what you care about.**
+   - For power: update `power.top_rail`, `power.dac0`, etc.
+   - For overlays: add or replace specific entries in `overlays`.
+   - Avoid rewriting `nets` unless you fully understand the implications; it is often better to use `connect()`/`disconnect()` APIs to modify connectivity.
+
+4. **Re‑serialize and apply.**
+   - Use a standard JSON encoder.
+   - Call `set_state(json_string, clear_first=True)` when applying a complete, authoritative state.
+   - If you are only adding overlays or adjusting power but want to preserve dynamic routing changes, you may choose `clear_first=False` (if supported and appropriate) or modify only overlays via MicroPython functions.
+
+5. **Rollback on problems.**
+   - If `set_state` leads to unexpected behavior, re‑apply the saved baseline snapshot.
+
+---
+
+### Example: adjusting top rail voltage via state
+
+Instead of:
+
+```python
+dac_set(TOP_RAIL, 5.0)
+```
+
+You can do:
+
+```python
+import json
+state = json.loads(get_state())
+state["power"]["top_rail"] = 5.0
+set_state(json.dumps(state))
+```
+
+This approach is useful when batching multiple changes (e.g. updating both rail voltages and overlays) in a single atomic operation.
+
+---
+
+### Example: augmenting overlays
+
+Suppose `get_state()` returns a state with existing overlays, and you want to add a new “place‑here” marker at row 3, column 10:
+
+```python
+import json
+
+state = json.loads(get_state())
+
+# Create a 1×1 overlay with a bright but not full‑scale green
+place_here = {
+    "name": "place_here_row3_col10",
+    "row": 3,
+    "col": 10,
+    "width": 1,
+    "height": 1,
+    "colors": ["20FF20"]
+}
+
+state.setdefault("overlays", [])
+state["overlays"] = [
+    o for o in state["overlays"] if o.get("name") != place_here["name"]
+] + [place_here]
+
+set_state(json.dumps(state))
+```
+
+This pattern:
+
+- Preserves existing overlays.
+- Replaces any prior overlay with the same name.
+- Leaves other state fields untouched.
+
+---
+
+### Wokwi import (`from_wokwi=True`)
+
+When `from_wokwi=True`, `set_state()` expects `json_str` to be a Wokwi `diagram.json` rather than a Jumperless state JSON. The firmware converts the Wokwi representation into bridges, nets, and colors.
+
+Agents can:
+
+- Ask the user to paste a Wokwi JSON.
+- Pass it directly to `set_state(wokwi_json, clear_first=True, from_wokwi=True)`.
+
+After that, a subsequent `get_state()` will return the standard Jumperless state JSON.
+
+---
+
+### Robustness tips for agents
+
+- Treat `get_state()` as **authoritative** for the current internal configuration, but always cross‑check against the user’s description of external wiring and components.
+- Always preserve unknown keys when editing state; future firmware versions may add fields.
+- Prefer using high‑level MicroPython APIs (`connect`, `disconnect`, `dac_set`, `overlay_set`, etc.) for incremental changes, and use state JSON editing for **bulk** or **offline** transformations (import/export, heavy refactoring, or pre‑computed overlays).
+
+### MicroPython tool reference (subset)
+
+The complete, authoritative list is the
+[MicroPython API Reference](09.5-micropythonAPIreference.md). The most common
+calls for automation:
+
+| Category | Key tools |
+|----------|-----------|
+| Connections | `connect()`, `disconnect()`, `nodes_clear()`, `is_connected()`, `fast_connect()` |
+| Slots | `nodes_save(slot)`, `switch_slot(slot)`, `get_current_slot()` |
+| State | `get_state()`, `set_state(json, clear_first=True)` |
+| Voltage | `dac_set(ch, v)`, `dac_get(ch)` |
+| Measurement | `adc_get(ch)`, `ina_get_current(s)`, `ina_get_voltage(s)`, `ina_get_power(s)` |
+| GPIO / PWM | `gpio_set()`, `gpio_get()`, `gpio_set_dir()`, `gpio_set_pull()`, `pwm()`, `pwm_stop()` |
+| WaveGen | `wavegen_set_wave()`, `wavegen_set_freq()`, `wavegen_set_amplitude()`, `wavegen_start()` |
+| UI | `oled_print()`, `oled_clear()`, `probe_read_blocking()`, `probe_button()`, `clickwheel_get_button()` |
+| LED overlays | `overlay_set()`, `overlay_set_pixel()`, `overlay_clear()`, `overlay_clear_all()` |
+| Net inspection | `get_net_info()`, `get_num_nets()`, `print_nets()`, `print_bridges()` |
+
+#### Node addressing (quick form)
+
+- **Breadboard rows:** `1`–`60`
+- **Rails / supplies:** `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`
+- **Arduino:** `D0`–`D13`, `A0`–`A7`, `AREF`, `RESET`
+- **GPIO:** `GPIO_1`–`GPIO_8`, `UART_TX`, `UART_RX`
+- **Measurement:** `ADC0`–`ADC3`, `ISENSE_PLUS`, `ISENSE_MINUS`
+
+---
+
+### A mental model for LLM agents
+
+The Jumperless prevents internal shorts, but **cannot see external wires or
+components** physically on the breadboard. An agent should maintain a model of
+what it believes is on the board and raise confidence through measurement and
+user confirmation.
+
+A lightweight per-component record works well:
+
+```json
+{
+  "id": "comp_001",
+  "type": "resistor",
+  "value": 1000,
+  "pins": [5, 10],
+  "confidence": 0.95,
+  "detection_method": "measured",
+  "notes": "Measured 987Ω between rows 5-10"
+}
+```
+
+| Confidence | Source | Meaning |
+|-----------|--------|---------|
+| 1.0 | `measured` | Electrically verified |
+| 0.9 | `user_confirmed` | User explicitly confirmed |
+| 0.7 | `user_stated` | User mentioned it casually |
+| 0.5 | `inferred` | Guessed from context |
+| 0.3 | `assumed` | Default assumption |
+
+---
+
+### Workflows
+
+**Safe power-up.** Before energizing an unknown board, ask what's on it, build a
+low-confidence model, then verify key rows with an ADC before connecting power —
+a hidden user wire between two rows can turn `TOP_RAIL` + `GND` into a dead
+short.
+
+**Identify with the probe.** Use `probe_read_blocking()` to let the user point
+at a node, then route an ADC to it and measure.
+
+**Characterize as a black box.** Drive a node with the WaveGen / DAC and sweep
+while reading an ADC.
+
+**Batch edits via state.** Fetch `get_state()`, mutate the JSON in Python, and
+re-apply with `set_state()` — one atomic round-trip instead of many calls.
+
+**Undo via a scratch slot.** Before destructive ops like `nodes_clear()`, save
+to an unused slot (e.g. `nodes_save(7)`); restore with `switch_slot(7)`.
+
+---
+
+### Safety guidelines
+
+1. **Voltage range.** ADC0–ADC3 are buffered for ±8V; the board is ±9V
+   tolerant overall.
+2. **Short protection.** The firmware refuses dangerous internal connections
+   (e.g. `TOP_RAIL` directly to `GND`), but cannot see external wiring.
+3. **Confirm power.** The board is USB-powered (no barrel jack); ask if unsure.
+4. **Crossbar resistance.** ~ 20–40Ω per default `connect()` path (~ 80Ω with a
+   single path). Measure voltage *at the destination* to compensate for drop.
+5. **Settling time.** Allow a few ms after routing/DAC changes (50–100 ms after
+   `nodes_clear()` / `set_state()`) before measuring.
+
+---
+
+### Implementation status
+
+| Feature | Status |
+|---------|--------|
+| `connect()`, `disconnect()`, `is_connected()` | Implemented |
+| `dac_set()`, `adc_get()`, `ina_*()` | Implemented |
+| `gpio_*()`, `pwm()` | Implemented |
+| `oled_print()`, `probe_*()` | Implemented |
+| WaveGen tools | Implemented |
+| Slot management | Implemented |
+| `get_state()` / `set_state()` snapshot | Implemented |
+| `adc_get_stats()` (averaged sampling) | Available via the MCP server |
+| Slot backup for undo | Implemented (`nodes_save(7)` before destructive ops) |
+| USBSer3 `:help` self-describing backchannel | Implemented (firmware) |
+
+---
+
 # File Manager
 
 
@@ -1580,16 +2470,25 @@ The Jumperless has a built in File Manager which you can access in the menu with
     ├── cool_micropython_script.py
     ├── ... (your python scripts go here)
     │
+    ├── lib/
+    │   ├── jumperless.py
+    │   └── oledgui.py
+    │
     └── examples/
         ├── adc_basics.py
         ├── dac_basics.py
+        ├── file_io_basics.py
         ├── gpio_basics.py
+        ├── interaction_demo.py
+        ├── pin_irq_basics.py
         ├── led_brightness_control.py
         ├── node_connections.py
+        ├── oscilloscope.py
         ├── stylophone.py
         ├── uart_basics.py
         ├── uart_loopback.py
-        └── voltage_monitor.py
+        ├── voltage_monitor.py
+        └── ... (and more)
 ```
 
 Each slot's configuration is stored as a YAML file in the `/slots/` directory, and the global hardware configuration is in `/config.txt`.
@@ -1602,17 +2501,17 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 | Control | Action |
 |---------|--------|
 | **↑/↓ Arrow Keys** or **Rotary Encoder** | Move selection up/down |
-| **Enter** or **Click Encoder** | Open directory or edit file |
+| **Enter** or **Click Encoder** | Open directory or edit file (slot files get *loaded* instead - use `e` to edit them) |
 | **/** | Go to root directory |
-| **.** | Go up one directory|
-| **CTRL + q** | Quit File Manager or Text Editor
+| **.** or **Esc** | Go up one directory|
+| **q** or **CTRL + q** | Quit File Manager (Ctrl+Q also quits the Text Editor)
 
 ---
 
 ### File Manager Commands
 | Key | Action | Description |
 |-----|--------|-------------|
-| [enter] | Open | Open file or enter directory |
+| [enter] | Open | Open file or enter directory (slot files get loaded, `.py` files run from the click menu) |
 | **h** | Help | Show help |
 | **v** | Quick view | View file contents |
 | **.** | Up dir | Go up one directory  |
@@ -1625,13 +2524,15 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 ### File Type Icons and Colors
 | Icon | File Type | Extensions | Color |
 |------|-----------|------------|-------|
-| **⌘** | Directories | - | Blue |
+| **⌘** | Directories | - | Cyan |
 | **𓆚** | Python files | .py, .pyw, .pyi | Green |
-| **⍺** | Text files | .txt, .md | White |
-| **⚙** | Config files | .cfg, .conf, config.txt | Yellow |
-| **⟐** | JSON/YAML files | .json, .yaml | Cyan |
-| **☊** | Slot files | /slots/slot*.yaml | Magenta |
-| **⎃** | Legacy slot files | nodeFileSlot*.txt | Orange |
+| **⍺** | Text files | .txt, .md | Yellow |
+| **⚙** | Config files | .cfg, .conf, config.txt | Magenta |
+| **⟐** | JSON files | .json | Blue |
+| **☊** | Legacy slot files | nodeFileSlot*.txt | Orange |
+| **⎃** | Net color files | netColorsSlot*.txt | Pink |
+
+Images, audio, video, documents, and archives get their own icons too. Anything unrecognized (currently including the `/slots/*.yaml` slot files) shows as a grey **⍺**.
 
 ---
 
@@ -1653,7 +2554,7 @@ When using the rotary encoder in the editor:
 - **Click encoder**: Enter character selection mode
 - **Rotate encoder**: Cycle through available characters
 - **Click encoder**: Confirm character selection
-- **Wait 3 seconds**: Exit character selection mode
+- **Wait 5 seconds**: Exit character selection mode
 
 Yes, you could write code with just the click wheel and the OLED if you really wanted to.
 
@@ -1686,6 +2587,12 @@ The File Manager automatically creates example Python scripts in `/python_script
     - This example demonstrates digital I/O, direction control, and pull resistors.
     - Tests input mode with pull-up, pull-down, and floating configurations.
 
+- [**file_io_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/file_io_basics.py): Guided tour of file I/O with the `jfs` module.
+    - Walks through writing, append-mode data logging, reading with seek/tell, directory operations, and the open-file limit - narrated as it runs.
+
+- [**pin_irq_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_basics.py): `machine.Pin` interrupt basics.
+    - Routes GPIO_1 to GPIO_2 through the crossbar and catches self-generated edges with an IRQ handler - no external wiring needed.
+
 - [**node_connections.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/node_connections.py): Node connection and routing operations.
     - This example shows how to connect/disconnect nodes, check connections, and clear all connections.
     - Demonstrates working with breadboard nodes, DAC outputs, and GPIO pins.
@@ -1710,6 +2617,8 @@ The File Manager automatically creates example Python scripts in `/python_script
     - Hardware setup: Connect speaker between rows 25 (positive) and 55 (negative).
     - Touch breadboard pads to play different frequencies, use probe buttons to adjust sustain.
 
+These are just the highlights - the firmware ships more examples than listed here (OLED demos, pin-interrupt games, an oscilloscope, a Google Sheets logger, and more).
+
 You can trigger them to regenerate if you messed them up by deleting it with `x` (when you're in the File Manager), and then entering `m` to create new copies of any examples it doesn't see.
 
 ## Editing Slot Files
@@ -1728,7 +2637,7 @@ sourceOfTruth: bridges
 
 bridges:
   - {n1: 1, n2: 10, dup: 2, color: red}
-  - {n1: NANO_D5, n2: GPIO_1, dup: 2}
+  - {n1: NANO_D5, n2: GP_1, dup: 2}
   - {n1: TOP_RAIL, n2: 5, dup: 2}
 
 power:
@@ -1738,9 +2647,9 @@ power:
   dac1: 0.00
 ```
 
-**Named nodes** you can use: `NANO_D0-D13`, `NANO_A0-A7`, `GPIO_1-8`, `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0_5V`, `DAC1_5V`, and more (see [glossary](99-glossary.md))
+**Named nodes** you can use: `NANO_D0-D13`, `NANO_A0-A7`, `GP_1-8` (or `RP_GPIO_1-8`), `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`, and more (see [glossary](99-glossary.md)). Note these differ from the MicroPython constants - `GPIO_1` won't parse in slot files.
 
-When you edit and save a slot file, the Jumperless will automatically reload it if it's the active slot. This works whether you're using the onboard eKilo editor or have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer in you favorite editor.
+If you edit the active slot's file, the Jumperless automatically reloads it - when you quit the onboard eKilo editor, or, if you have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer, when you eject/unmount the drive.
 
 ---
 
@@ -1785,7 +2694,7 @@ You can also enter `Z` for a little debug menu
 |-----|--------|
 | u | Memory status |
 | m | Initialize examples |
-| Ctrl+Q | Quit |
+| q or Ctrl+Q | Quit |
 
 ---
 
@@ -1822,7 +2731,93 @@ There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the 
 
 ---
 
-## Quick Start (to do it from the built-in REPL)
+## JumperIDE for VS Code
+
+[[Image: VSCode Marketplace]](https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide)
+[[Image: Open VSX]](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide)
+[[Image: GitHub Release]](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest)
+[[Image: License: Unlicense]](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/blob/main/LICENSE)
+
+---
+
+#### Walkthrough
+
+**Connect** — the board's serial ports are auto-detected by USB ID, with the MicroPython REPL port pre-selected:
+
+[Image: Connecting to a Jumperless V5]
+
+**Serial terminal** — pick any port (port1 is the device menu), or hand the port to the standalone Jumperless App:
+
+[Image: Serial terminal port picker]
+
+**REPL + device menu side by side** — the MicroPython REPL and the board's interactive menu, each on its own port:
+
+[Image: REPL and main serial terminal side by side]
+
+**OLED bitmap editor** — draw pixels and watch them appear on the board's OLED live:
+
+[Image: Editing an OLED bitmap with live push to the device]
+
+**API reference panel** — the full MicroPython API docs beside your code:
+
+[Image: API reference panel]
+
+---
+
+#### Install
+
+Either search `JumperIDE` in the Extensions view ([Open VSX](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide)) or just download the `.vsix` from the [latest release](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest) (install command included in the release notes).
+
+#### Features
+
+##### **Actions panel** 
+Everything in one sidebar panel: a connection button that doubles as live status (hover to connect or disconnect), **Run/Stop**, **Save to Jumperless**, **Save Locally** (export a device file to your computer), **OLED Bitmap**, the **Serial Terminal**, and quick access to the **API reference** and **JumperNet publishing**.
+
+##### **Serial connection**
+
+The V5 exposes four USB serial ports; the extension detects them by USB ID and pre-selects the MicroPython REPL port (the 3rd). Set `jumperless.connectOnStartup` to connect automatically.
+
+##### **Run / Stop**
+`Run` executes the file in the current editor on the board, output streams to the REPL terminal.
+`Stop` interrupts.
+
+[Image: Connect Run Stop]
+
+##### **Device file browser**
+
+The board's filesystem in the sidebar. Files open as local working copies (so the language server works on them); saving pushes back to the board. Files that didn't come from the board ask for a device path on first save, then remember it. Create, delete, and upload files and folders.
+
+##### **REPL terminal**
+A terminal connected to the board's MicroPython prompt. Handles MicroPython line endings and batches output so fast prints don't stall the UI.
+
+##### **Serial terminal** 
+Pick any serial port (port1, the board's menu/CLI, is recommended) for a direct raw-passthrough terminal — the full-color menus and ANSI art render exactly as the board sends them. Or pick `Use Jumperless App` to run the standalone [Jumperless App](https://github.com/Architeuthis-Flux/Jumperless-App) instead (auto-installs from PyPI; autodetects the port and handles reconnection).
+
+###### **Autocomplete & hover docs** 
+Signatures and descriptions for every Jumperless function, sourced from the [API reference](https://docs.jumperless.org/09.5-micropythonAPIreference/) and refreshed automatically. Jumperless calls and constants are highlighted in Python files.
+
+##### **OLED bitmap editor**
+A pixel editor for OLED `.bin` files. While connected, edits push live to the board's OLED as you draw. **Jumperless: New OLED Bitmap** creates a blank 128×32 canvas on the device or locally.
+
+##### **JumperNet registry** 
+Browse community scripts and OLED images, open them, save them to the board, or publish your own (**Jumperless: Publish Script to Registry**). Feel free to publish whatever work in progress scripts, you or (anyone else) can update the same script and keep version history.
+
+##### **API reference panel**
+`Jumperless: Open API Reference` opens the [MicroPython API docs](https://docs.jumperless.org/09.5-micropythonAPIreference/) beside your code.
+
+#### Zero-import autocomplete
+
+On the board, scripts run with the full API preloaded (`from jumperless import *` happens before your code). The editor matches that automatically: on first activation the extension installs typed stubs and points your Python analyzer at them, so files opened from the device resolve the whole API with no imports and no setup. (Controlled by `jumperless.setup.autoSetUpGlobally`, on by default.)
+
+- `typings/jumperless.pyi` — typed stub, synced from [JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS)
+- `typings/builtins.pyi` — standard-library builtins with Jumperless globals layered on top (typo detection still works)
+- `typings/time.pyi` — MicroPython `time` extras (`ticks_ms`, `sleep_ms`, …)
+
+To get the same thing in one of your own project folders (checked into that repo instead of user settings), run **Jumperless: Set Up This Folder for Jumperless Python** — it writes the `typings/` folder and a `pyrightconfig.json` into the workspace.
+
+---
+
+## Quick Start (Built-in REPL)
 
 From the main Jumperless menu, press `p` to enter the MicroPython REPL:
 
@@ -1888,7 +2883,7 @@ From the REPL (enter `p` in the main menu), then type `files` to open the file m
 
 Navigate to your script and press Enter to load it for editing, then press `Ctrl+P` to load it into the REPL for execution.
 
-**Note:** The standard Python `exec(open(...).read())` method is not supported in the Jumperless MicroPython environment. Always use the file manager and `Ctrl+P` to run scripts.
+**Note:** The standard Python `exec(open(...).read())` also works - the filesystem is mounted as a MicroPython VFS, so the built-in `open()` and the `os` module operate on the same files as `jfs`.
 
 ### Method 3: REPL Commands
 From the MicroPython REPL, you can use the following commands to manage scripts:
@@ -2079,6 +3074,7 @@ connect("TOP_RAIL", "GPIO_1") # Same as connect(101, 131)
  - `oled_clear()`                     - Clear display
  - `oled_connect()`                   - Connect OLED
  - `oled_disconnect()`                - Disconnect OLED
+ - `Screen()` / `Text(...)` (oledgui) - Retained, live-updating layouts ([OLED Layout / Screens](#oled-layout--screens-retained-live-updating))
 
 [Graphic Overlays](#graphic-overlays) (Directly controlling the breadboard LEDs) - *[Examples](#graphic-overlays)*:
 
@@ -2138,6 +3134,12 @@ connect("TOP_RAIL", "GPIO_1") # Same as connect(101, 131)
  - `get_all_paths()`                  - Get all paths as list of dicts
  - `get_path_between(node1, node2)`   - Query specific path between nodes
 
+[Net Current Scan](#net-current-scan-api) (Board-wide passive voltage/current sensing) - *[Examples](#net-current-scan-api)*:
+
+ - `get_node_voltage(node)`           - Scanned node voltage (None if no data)
+ - `get_net_current(netNum)`          - Net current info dict (None if no data)
+ - `get_path_current(path_idx)`       - Signed path current in mA (None if no data)
+
 [JFS](#jfs-jumperless-filesystem) (Jumperless File System) - *[Examples](#jfs-jumperless-filesystem)*:
 
 - `jfs.open(path, mode)` - Opens file, returns file handle
@@ -2159,7 +3161,7 @@ connect("TOP_RAIL", "GPIO_1") # Same as connect(101, 131)
 
 - `jfs.info()` - Returns (total, used, free) tuple
 
-  -  - `file.print(data)` - Print to the file (like `write` but auto-flushes)
+  -  - `file.print(data)` - Print to the file (like `print()` but writes to the file, adds a newline)
   -  - `file.flush()` - Flush buffered data to file
   -  - `file.position()` - Alias for `f.tell()`
   -  - `file.name()` - Get file name
@@ -2912,6 +3914,94 @@ else:
     print("Error reading pixel")
 ```
 
+### OLED Layout / Screens (retained, live-updating)
+
+The layout system lets you build a **retained screen** out of positioned text
+and shapes, then `show()` it. A background render service keeps the screen
+up to date: any text containing `{token}` templates re-resolves automatically,
+and you can move/restyle elements live. This is ideal for stats pages and for
+designing layouts you intend to bake into firmware.
+
+It is available as an object-oriented wrapper in the `oledgui` module, or as a
+flat handle-based API on the native `jumperless` module.
+
+#### Object-oriented API (`oledgui`)
+
+```python
+from oledgui import Screen, Text, Line, Rect, set_var, ALIGN_CENTER, ALIGN_TOP
+
+scr = Screen()
+
+# Title centered along the top, divider beneath it
+scr.add(Text("JUMPERLESS", font="Eurostile", size=8,
+             halign=ALIGN_CENTER, valign=ALIGN_TOP))
+scr.add(Line(0, 11, 127, 11))
+
+# Live readouts - these update on their own every render tick
+scr.add(Text("A0 {adc:0}V", x=2, y=14, font="Pragmatism", size=8))
+scr.add(Text("up {uptime}", x=2, y=23, font="Pragmatism", size=7))
+
+scr.show()                 # becomes the active display
+
+# Push your own values into a {name} token
+set_var("status", "ready")
+
+scr.save("dashboard")      # -> /screens/dashboard.json
+```
+
+**Live value tokens** (resolved in the background, no redraw loop needed):
+
+| Token | Value |
+|-------|-------|
+| `{adc:N}` | ADC channel N voltage |
+| `{gpio:N}` | GPIO N state (`HIGH`/`LOW`) |
+| `{dac:N}` | DAC channel N voltage |
+| `{uptime}` | time since boot (`m:ss`) |
+| `{freemem}` | free heap bytes |
+| `{undo}` | last undo/redo action label |
+| `{name}` | any custom value pushed with `set_var("name", value)` |
+
+**Fonts** are selected by name + point size (nearest available size is used,
+falling back to Pragmatism for unknown names). Get available names with
+`oled_get_fonts()`.
+
+**Positioning** is absolute `(x, y)` by default; pass `halign`/`valign` (or
+call `.anchor(h, v)`) to anchor an element so it adapts to content width.
+
+**Classes:**
+
+*   `Screen()` — `.add(el)`, `.text(...)`, `.shape(...)`, `.show()`, `.hide()`, `.clear()`, `.save(name)`, `.free()`
+*   `Text(text, x, y, font, size, halign, valign, z)` — live props: `.text`, `.font`, `.size`, `.x`, `.y`, `.z`, `.visible`
+*   `Shape(kind, x, y, w, h, filled, z)` plus helpers `Line(x, y, x2, y2)` and `Rect(x, y, w, h, filled=False)`
+*   `load_screen(name)` → `Screen` (loads `/screens/.json`)
+
+#### Flat API (native `jumperless`)
+
+The OO classes are built on these; use them directly if you prefer:
+
+*   `oled_screen()` → screen handle
+*   `oled_add_text(screen, text, x=, y=, font=, size=, halign=-1, valign=-1, z=0)` → element handle
+*   `oled_add_shape(screen, kind, x=, y=, w=, h=, filled=, z=)` → element handle (kind: 0=line, 1=rect, 2=filled rect)
+*   `oled_set(elem, prop, value)` — `prop` is `text`/`font` (str) or `x`/`y`/`w`/`h`/`z`/`size`/`visible`/`anchor`/`halign`/`valign`/`shape`/`filled` (int)
+*   `oled_set_var(name, value)` — push a live `{name}` value
+*   `oled_screen_show(screen)` / `oled_screen_hide()`
+*   `oled_screen_save(screen, name)` / `oled_screen_load(name)` → screen handle
+*   `oled_screen_clear(screen)` / `oled_screen_free(screen)`
+
+```python
+import jumperless as j
+s = j.oled_screen()
+j.oled_add_text(s, "Hello {uptime}", x=0, y=0, font="Pragmatism", size=10)
+j.oled_screen_show(s)
+```
+
+#### Designing layouts to bake into firmware
+
+Build and tweak a screen live (e.g. with the `oled_layout_editor.py` example,
+driven by the clickwheel + probe), then `save()` it. The resulting
+`/screens/.json` is human-readable — read the `font`, `size`, `x`, `y`,
+`halign`/`valign` values straight out of it and copy them into native C++ code.
+
 ### Advanced OLED Examples
 
 #### Debug Output to OLED
@@ -3359,6 +4449,71 @@ else:
 
 ---
 
+## Net Current Scan API
+
+The Jumperless (V5 only) continuously measures the voltage of every routed node in the background by momentarily tapping a free ADC onto each one, then derives the current through every connection from the voltage difference across its known crosspoint resistance. These are the same numbers that drive the marching-ant current animation on the LEDs, and scripts can query them directly.
+
+**How the scan behaves:**
+
+*   Enabled by the `net_currents` setting in the `[display]` config section (on by default) — the `i` serial command toggles it. When the scan is off, every function below returns `None`.
+*   The scan round-robins through all routed nodes, refreshing the full board about once per second; currents are recomputed from the latest voltages 20 times per second.
+*   It is completely passive: the ADC tap is high impedance (~1 MΩ) and never disturbs your circuit.
+*   **DC only** — nodes carrying PWM or other oscillating signals are rejected by the scan's drift check and read `None`.
+*   Accuracy is roughly ±10%, tied to the `crosspoint_resistance` value in the `[calibration]` config section.
+*   Reported currents are always **conventional** (positive = higher potential toward lower). The `current_flow` display setting only flips the LED animation direction, never these numbers.
+
+### `get_node_voltage(node)`
+Gets the scanned voltage of any routed node.
+
+*   `node`: Node number, name, or node object (e.g. `15`, `"D2"`, `TOP_RAIL`)
+*   Returns the voltage in volts, or `None` when the scan has no fresh sample (scan disabled, node not routed, or the node is floating)
+*   Alias: `node_voltage()`
+
+**Example:**
+```jython
+v = get_node_voltage(15)
+if v is not None:
+    print(f"Row 15 sits at {v:.2f} V")
+else:
+    print("Row 15 is not routed (or floating)")
+```
+
+### `get_net_current(netNum)`
+Gets the current flowing in a net's dominant path.
+
+*   `netNum`: Net number (1 to `get_num_nets()`)
+*   Returns a dict with keys: `current_mA` (magnitude), `voltage` (midpoint voltage, used for the ant color), `from_node`, `to_node` (conventional current flows from → to)
+*   Returns `None` when the scan has no data for this net
+*   Alias: `net_current()`
+
+**Example:**
+```jython
+info = get_net_current(4)
+if info:
+    print(f"{info['current_mA']:.2f} mA flowing from {info['from_node']} to {info['to_node']}")
+```
+
+### `get_path_current(path_idx)`
+Gets the signed current through one routing path. Uses the same index space as `get_path_info()`, so you can match currents to specific connections.
+
+*   `path_idx`: Path index (0 to `get_num_paths()-1`)
+*   Returns the current in mA; **positive means conventional current flows `node1` → `node2`** (matching `get_path_info()`'s fields)
+*   Returns `None` when the scan has no data for this path (unrouted, floating, or the scan is off)
+*   Alias: `path_current()`
+
+**Example:**
+```jython
+# Print the current through every connection on the board
+for i in range(get_num_paths(False)):
+    path = get_path_info(i)
+    i_mA = get_path_current(i)
+    if path and i_mA is not None:
+        src, dst = (path['node1'], path['node2']) if i_mA >= 0 else (path['node2'], path['node1'])
+        print(f"{src} -> {dst}: {abs(i_mA):.2f} mA")
+```
+
+---
+
 ## Fake GPIO (Virtual GPIO Pins)
 
 Fake GPIO uses the Jumperless' internal crossbar switches to create virtual GPIO pins on any routable node. Unlike the RP2350's hardware GPIO (limited to 10 routable pins at 0-3.3V), Fake GPIO lets you use any node with custom voltage levels from -8V to +8V, or as inputs, you can have as many as you like and the ADC will switch to that node and take a reading on demand.
@@ -3642,8 +4797,10 @@ print(files)
 ```
 Output:
 ```jython
-['config.txt', 'nodeFileSlot0.txt', 'python_scripts/', 'nodeFileSlot1.txt', 'nodeFileSlot2.txt', 'nodeFileSlot3.txt', 'nodeFileSlot4.txt', 'nodeFileSlot5.txt', 'nodeFileSlot6.txt', 'nodeFileSlot7.txt', 'net_colors/']
+['config.txt', 'slots/', 'python_scripts/']
 ```
+
+(Directories come back with a trailing `/`. Older filesystems may also show legacy `nodeFileSlot*.txt` files and a `net_colors/` directory at the root.)
 
 If you want to make this print with subdirectories
 
@@ -3662,30 +4819,19 @@ for file in range(len(files)):
 ```
 
 Output: 
-```config.txt
-nodeFileSlot0.txt
+```
+config.txt
+slots/
+     - slot0.yaml
+     - slot1.yaml
+     - slot2.yaml
 python_scripts/
      - history.txt
      - examples/
-     - fake_gpio.py
-     - _temp_repl_edit.py
-     - Hey.txt
+     - lib/
      - script_1.py
      - script_2.py
-     - script_3.py
      - log.txt
-     - lib/
-     - script_4.py
-     - pathtest.py
-nodeFileSlot1.txt
-nodeFileSlot2.txt
-nodeFileSlot3.txt
-nodeFileSlot4.txt
-nodeFileSlot5.txt
-nodeFileSlot6.txt
-nodeFileSlot7.txt
-net_colors/
-    - netColorsSlot0.txt
 ```
 
 ---
@@ -3726,15 +4872,18 @@ with jfs.open('data.txt', 'w+') as f:
 
 #### Using `f.print()` for logging
 
-The `f.print()` method works like Python's `print()` but writes to the file. It automatically converts arguments to strings and flushes after each call - perfect for logging:
+The `f.print()` method works like Python's `print()` but writes to the file. It automatically converts arguments to strings, joins multiple arguments with spaces, and adds a newline - perfect for logging.
+
+**Note:** `f.print()` does *not* flush after each call (a FatFS flush takes ~2 seconds, so auto-flushing would make logging loops crawl). Data is committed when you `f.close()` or `f.seek()` - if you're logging data you can't afford to lose to a crash or reset, call `f.flush()` yourself at checkpoints:
 
 ```jython
-# Great for logging - auto-converts types and flushes immediately
+# Great for logging - auto-converts types and adds newlines
 with jfs.open('log.txt', 'w+') as f:
     f.print("Starting test...")
     voltage = adc_get(0)
     f.print("Voltage:", voltage, "V")    # Multiple args work
     f.print("Test complete!")
+    f.flush()                            # Commit to flash at a checkpoint
 
 # Unlike f.write(), f.print() handles non-strings automatically
 f = jfs.open('data.txt', 'w')
@@ -3762,10 +4911,12 @@ jfs.close(f)                        # Module-level function
 
 #### 3. Direct String Operations (For simple cases)
 
+The whole-file path-based helpers live in the `jumperless` module (available globally), not in `jfs`:
+
 ```jython
 # Write/read entire files at once (no file handles needed)
-jfs.write('config.txt', 'key=value\nother=setting')
-content = jfs.read('config.txt')
+fs_write('notes.txt', 'key=value\nother=setting')
+content = fs_read('notes.txt')
 ```
 
 ### File Modes
@@ -3781,7 +4932,9 @@ When using `jfs.open(path, mode)`, the following modes are supported:
 | `'w+'` | Read + Write | ✅ | ✅ | ✅ |
 | `'a+'` | Read + Append | ✅ | ✅ | ✅ |
 
-**Important:** You cannot read from a file opened in write-only mode (`'w'` or `'a'`). Use `'w+'`, `'r+'`, or `'a+'` if you need both read and write access.
+**Important:** You cannot read from a file opened in write-only mode (`'w'` or `'a'`) - reads just come back empty. Use `'w+'`, `'r+'`, or `'a+'` if you need both read and write access.
+
+You can also add `'b'` to any mode (e.g. `'rb'`, `'wb'`) to open in binary mode: reads return `bytes` and writes accept `bytes`/`bytearray`/`memoryview`.
 
 ### Open a file for writing
 
@@ -3839,7 +4992,7 @@ Check if a file or directory exists.
 Get status of a file or directory.
 
 *   `path` (str): The path of the file or directory.
-*   Returns a tuple with file information (mode, size, etc.), similar to `os.stat()`.
+*   Returns a 10-element tuple in the same order as `os.stat()`. Only the size field (index 6) is really populated - mode and timestamps are placeholders.
 
 ### Filesystem Information
 
@@ -3889,7 +5042,7 @@ with jfs.open('data.log', 'a') as log_file:
 The file object returned by `jfs.open()` has the following methods:
 
 #### `file.read([size])`
-Read `size` bytes from the file. If `size` is omitted or negative, the entire file is read.
+Read `size` bytes from the file. If `size` is omitted, reads from the current position to the end of the file. Reads are capped at 8192 bytes per call, so loop if you're reading a file bigger than 8 KB.
 
 #### `file.write(data)`
 Write the given string or bytes `data` to the file. Returns the number of bytes written.
@@ -3915,8 +5068,8 @@ Return the total size of the file in bytes.
 #### `file.available()`
 Return the number of bytes available to be read from the current position to the end of the file.
 
-#### `file.name`
-Returns the name of the file.
+#### `file.name()`
+Returns the name of the file. (It's a method call, not an attribute - `f.name` gives you the bound method, not the string.)
 
 ---
 
@@ -4262,12 +5415,19 @@ Filesystem:
   jfs.read(file, size)              - Read from file
   jfs.write(file, data)             - Write to file
   jfs.close(file)                   - Close file
+  jfs.seek(file, pos, whence)       - Seek in file
+  jfs.tell(file)                    - Get current position
+  jfs.size(file)                    - Get file size
+  jfs.available(file)               - Get bytes available
   jfs.exists(path)                  - Check if file exists
   jfs.listdir(path)                 - List directory
   jfs.mkdir(path)                   - Create directory
+  jfs.rmdir(path)                   - Remove directory
   jfs.remove(path)                  - Remove file
   jfs.rename(from, to)              - Rename file
+  jfs.stat(path)                    - Get file status
   jfs.info()                        - Get filesystem info
+  fs_read(path) / fs_write(path, s) - Whole-file helpers (jumperless module)
 
 Misc:
 
@@ -4361,7 +5521,7 @@ JumperlOS is now a proper operating system with a priority-based task scheduler!
 
 - **Viper IDE and Micropython raw REPL** - Live code on the Jumperless' file system in your browser
 - **Priority-based task scheduler** - Each component has a `service()` routine that checks whether it should do anything, replacing the old busy-wait loop
-- **Live updating** - Edits to the YAML state files will live update with new connections (whether you're editing them in the onboard editor or as a mounted USB MSC device on your computer)
+- **Auto-reloading state files** - Edits to the YAML state files are applied automatically - when you quit the onboard editor, or when you eject the USB MSC drive if you edited them from your computer
 - **Better fonts** - New fonts available: `Berkeley`, `Iosevka`, `Pragmat[ism]`
 - **YAML connection files** - More permissive of malformed syntax
 - **Unified syntax highlighting** - Works consistently in `eKilo`, `python`, and normal input after `>`
@@ -5270,6 +6430,2579 @@ These [stick-on rubber feet](https://www.amazon.com/AmazonBasics-300-Piece-Adhes
 
 ---
 
+# Developer Guide
+
+
+Write apps for your conference badge using Python. This guide covers
+everything from connecting JumperIDE to building multi-file games with
+LED matrix animations and badge-to-badge IR communication.
+
+For the exhaustive function-by-function reference, see the
+[API Reference](badge-api-reference.md)
+(also available on-device at `/API_REFERENCE.md`).
+
+---
+
+## 1. What Is This Badge?
+
+The Temporal Badge is a wearable conference badge built on the
+**ESP32-S3-WROOM-1 16N8** module (16 MB flash, 8 MB PSRAM). It runs Arduino
+C++ firmware with an embedded **MicroPython v1.27** runtime, so you can write
+Python apps that control all the hardware directly.
+
+### Hardware at a Glance
+
+| Component | Spec |
+|-----------|------|
+| MCU | ESP32-S3-WROOM-1 16N8 (dual-core, 240 MHz, 8 MB PSRAM, 16 MB flash) |
+| Display | 128×64 monochrome OLED (SSD1306) |
+| LED Matrix | 8×8 red LEDs (IS31FL3731, PWM per pixel) |
+| Input | 4 d-pad buttons + analog joystick |
+| Motion | LIS2DH12 3-axis accelerometer |
+| IR | NEC-protocol TX LED + TSOP receiver |
+| Haptics | Vibration motor with coil-tone support |
+| Storage | FatFS `ffat` partition (0x600000 bytes in `partitions_replay_16MB_doom.csv`, mounted at `/apps/`) |
+| Python heap | 128 KB from PSRAM |
+
+### Physical Layout
+
+The badge is held **upright** during use. When idle (walking around the
+conference), it rests **upside down** on the lanyard, and the firmware
+automatically flips the display to show a nametag.
+
+[Image: Badge photo]
+
+```
+        ╭───────────────────────────────────────────────╮
+        │              ▀▀ IR TX/RX ▀▀                   │
+        │                                               │
+        │   ╭───────────────────────────────────────╮   │
+        │   │                                       │   │
+        │   │         128×64 OLED Display           │   │
+        │   │         (0,0) ───► x                  │   │
+        │   │          │                            │   │
+        │   │          ▼ y                          │   │
+        │   │                                       │   │
+        │   ╰───────────────────────────────────────╯   │
+        │                                               │
+        │              ╭───────────╮                    │
+        │              │ · · · · · │        [Y]         │
+        │     ◉        │ · 8×8   · │     [X]   [B]      │
+        │   Joystick   │ · LED   · │        [A]         │
+        │              │ · Matrix· │                    │
+        │              │ · · · · · │                    │
+        │              ╰───────────╯                    │
+        ╰───────────────────────────────────────────────╯
+
+    Buttons:  [Y] = BTN_UP / BTN_TRIANGLE
+              [X] = BTN_LEFT / BTN_SQUARE
+              [B] = BTN_RIGHT / BTN_CIRCLE
+              [A] = BTN_DOWN / BTN_CROSS
+```
+
+**Button mapping:**
+
+- Physical: `BTN_UP` (Y), `BTN_DOWN` (A), `BTN_LEFT` (X), `BTN_RIGHT` (B)
+- PlayStation aliases: `BTN_TRIANGLE`, `BTN_CROSS`, `BTN_SQUARE`, `BTN_CIRCLE`
+- Semantic: `BTN_CONFIRM` (select/OK), `BTN_BACK` (cancel/back) — these follow
+  the user's confirm/back swap setting
+
+### Orientation and Nametag Mode
+
+The IMU detects when the badge is flipped upside down. The firmware
+automatically:
+
+- Flips the OLED to show an idle display / nametag
+- Rotates button and joystick input to match the new orientation
+- Flips the LED matrix
+
+Your app can detect this too — see
+[Flip/Nametag Detection](#flipnametag-detection) in the Advanced Topics
+section.
+
+---
+
+## 2. Getting Started with JumperIDE
+
+The fastest way to write and test badge code is **JumperIDE**, a browser-based
+MicroPython IDE that connects over WebSerial.
+
+Go to [https://ide.jumperless.org/](https://ide.jumperless.org/) and press
+the **Connect** button.
+
+Select the badge serial port from the browser picker.
+
+- On macOS this usually appears as USB/JTAG serial for the ESP32-S3.
+- On Windows this appears as a COM port.
+- If multiple ports appear, try the one that shows the MicroPython REPL prompt.
+
+Open or create a script, then hit **Run / Stop** (or press `F5`).
+
+Press it again to stop. If you make edits, hit the green **Save** button
+(`Ctrl+S`) to write the file to the badge filesystem.
+
+The REPL terminal at the bottom shows `print()` output and exceptions.
+JumperIDE uses MicroPython raw REPL under the hood, so anything compatible with
+raw REPL workflows (including `mpremote`) also works with the badge.
+
+**Tip:** type `o` and Enter at the REPL to dump a block-art screenshot of the
+current OLED and LED matrix to the terminal — handy while debugging UI or
+capturing reference output for docs. See
+[Serial screenshots](#serial-screenshots-oled--led).
+
+### File Management
+
+JumperIDE shows the badge filesystem in a tree view. You can:
+
+- Browse `/apps/`, `/lib/`, `/tests/`
+- Open and edit files directly on the badge
+- Create new files and directories
+- Save changes with `Ctrl+S`
+
+## 3. Your First App
+
+### Hello World
+
+```jython
+import time
+
+oled_clear()
+oled_set_cursor(32, 28)
+oled_print("Hello Badge!")
+oled_show()
+
+led_show_image(IMG_HEART)
+time.sleep_ms(3000)
+led_clear()
+
+exit()
+```
+
+This clears the OLED, prints centered text, shows a heart on the LED matrix for
+3 seconds, then exits back to the menu.
+
+### Adding Input
+
+```jython
+import time
+
+count = 0
+
+while True:
+    oled_clear()
+    oled_set_cursor(0, 0)
+    oled_print("Press buttons!")
+    oled_set_cursor(0, 20)
+    oled_print("Count: " + str(count))
+    oled_show()
+
+    if button_pressed(BTN_CONFIRM):
+        count += 1
+        haptic_pulse()
+        led_show_image(IMG_SMILEY)
+
+    if button_pressed(BTN_BACK):
+        break
+
+    time.sleep_ms(30)
+
+led_clear()
+exit()
+```
+
+**Key patterns:**
+
+- `button_pressed()` is edge-triggered — it returns `True` once per press,
+  then `False` until the button is released and pressed again. Use this for
+  menu navigation.
+- `button()` is level-triggered — it returns `True` as long as the button is
+  held. Use this for continuous actions (shooting, accelerating).
+- Always call `time.sleep_ms(20-30)` in your main loop to yield CPU time.
+- Call `oled_show()` after drawing to make changes visible.
+
+### Using the Native UI Chrome
+
+For apps that should look like the built-in firmware screens, use `badge_ui`:
+
+```jython
+import badge_ui as ui
+import time
+
+ui.chrome("My App", "v1.0", "OK", "action", "BACK", "quit")
+ui.line(0, "Hello from Python!")
+ui.line(1, "This matches the firmware style")
+oled_show()
+
+while True:
+    if button_pressed(BTN_BACK):
+        break
+    time.sleep_ms(30)
+
+exit()
+```
+
+`badge_ui` calls the native C++ UI layout code, so your app's header, footer,
+and button glyph icons are pixel-identical to the firmware menus. See
+`initial_filesystem/lib/badge_ui.py` for all available helpers.
+
+---
+
+## 4. App Structure
+
+### Single-File Apps
+
+Good for quick experiments and small demos. Place a `.py` file in `/apps/`:
+
+```
+/apps/my_demo.py
+```
+
+All `badge` module functions are auto-imported into the global scope — no
+`import badge` needed in single-file apps.
+
+### Multi-File Apps
+
+For anything beyond a simple demo, use a folder with a `main.py` entry point:
+
+```
+/apps/my_game/
+    main.py          # Entry point (tiny — just imports and calls main)
+    engine.py        # Game loop and logic
+    data.py          # Constants, level data
+    screens.py       # OLED rendering functions
+    icon.py          # Optional: app icon bitmap for the menu
+```
+
+The `main.py` should be minimal:
+
+```jython
+"""My Game app entry point."""
+
+import sys
+
+APP_DIR = "/apps/my_game"
+
+if APP_DIR not in sys.path:
+    sys.path.insert(0, APP_DIR)
+
+from engine import main
+
+main()
+```
+
+In your other modules, explicitly import what you need:
+
+```jython
+from badge import *
+import time
+import gc
+```
+
+This pattern is used by BreakSnake, Flappy Asteroids, and Synth. The
+`sys.path.insert` lets Python find sibling modules in the app directory.
+
+### Showing Up on the Main Menu
+
+Drop a folder with a `main.py` under `/apps/` and the badge picks it up
+automatically — both production and dev firmware. No C++ changes needed. The
+firmware text-scans the top of `main.py` for a few optional dunder
+assignments and uses them to decorate the main-menu tile:
+
+```jython
+"""My Game — Tamagotchi-style desk pet."""
+
+__title__       = "My Game"
+__description__ = "A tiny pet that lives in your pocket."
+__icon__        = "icon.py"
+```
+
+| Dunder | Default | Notes |
+|--------|---------|-------|
+| `__title__` | slug, title-cased (`my_game` → `My Game`) | max 19 chars |
+| `__description__` | empty | max 63 chars; shown on the tile's detail panel |
+| `__icon__` | tries `icon.py` opportunistically | path to a 12×12 packed XBM tuple |
+| `__matrix_title__` | `__title__` | label in the MATRIX APPS picker |
+| `__order__` | `10000 + discovery index` | signed int; lower = earlier on grid |
+
+#### Icon File (`icon.py`)
+
+A 12×12 monochrome XBM, two bytes per row × 12 rows = 24 bytes. Bit 0 of
+each byte is the leftmost pixel (U8G2 `drawXBM` order). The high 4 bits of
+every odd byte are unused.
+
+```jython
+"""My Game icon."""
+
+WIDTH = 12
+HEIGHT = 12
+# Two bytes per row, binary literals so the dots are visible in the
+# source. XBM byte order is LSB-first, so the literal reads mirrored
+# relative to the rendered icon — that's fine, equivalence at the bit
+# level is what matters.
+DATA = (
+    0b01110111, 0b00000111,
+    0b01110111, 0b00000111,
+    0b00000000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b11111100, 0b00000011,
+    0b00000000, 0b00000000,
+    0b00111110, 0b00000000,
+    0b00100000, 0b00000000,
+    0b11100000, 0b00000011,
+    0b00000000, 0b00000010,
+    0b11000000, 0b00000011,
+)
+```
+
+If `__icon__` is omitted the firmware tries `/apps//icon.py` anyway,
+so most apps just need to ship a file with that name.
+
+#### Hot-Refresh
+
+After editing any of `main.py`, `icon.py`, or `matrix.py`, refresh the menu
+without rebooting:
+
+```jython
+import badge
+badge.rescan_apps()
+```
+
+The dev firmware also surfaces a generic Apps screen that lists every `.py`
+under `/apps/` (single-file or folder), useful for one-off scripts you don't
+want on the main grid.
+
+#### Limits
+
+- 32 dynamic apps per badge.
+- Slugs must match `[A-Za-z0-9_-]+` and not start with `.`.
+- The dunder scanner only reads the first ~2 KB of `main.py`. Put your
+  manifest at the very top of the file.
+
+#### Tile Order
+
+Three layers, each overriding the next, feed a signed-int sort key:
+
+1. **Defaults.** Curated tiles use `10 × array index` (with `SETTINGS`
+   pinned to `30000`), dynamic apps use `10000 + discovery index`.
+2. **App manifest** (`__order__ = 50`).
+3. **User override** stored in NVS by the manual reorder screen.
+
+The menu is then stable-sorted by that key, so duplicate values keep the
+placement order from the previous layer. Negative keys land *before* any
+curated tile; large keys land near `SETTINGS`. Inspired typical picks:
+
+```jython
+__order__ = -10  # before BOOP
+__order__ = 25   # between MAP (30) and SCHEDULE (40)
+__order__ = 9999 # nearly last
+```
+
+#### User Reorder
+
+Players can rearrange the grid themselves via **Settings → Menu →
+Reorder**:
+
+| Button | Action |
+|--------|--------|
+| Joystick Y | Move cursor up/down |
+| `X` | Pick up / drop a row |
+| `A` (confirm) | Save and rebuild |
+| `B` (back) | Cancel |
+
+While picked up, joystick Y drags the row in real time. Save writes a
+per-label override into the `menu_order` NVS namespace; the rebuilder
+reads those overrides on the next refresh (immediate after save, and on
+every boot). **Settings → Menu → Reset Order** wipes the namespace and
+returns every tile to its default order.
+
+### Persistent Matrix Apps
+
+Drop a `matrix.py` next to `main.py` and your app gets a slot in the
+**MATRIX APPS** picker (firmware menu → MATRIX APPS). Selecting it persists
+the choice in `/led_state.json` so the badge runs your matrix animation
+across reboots, **even when no foreground Python app is open**.
+
+The script registers a tick callback with
+[`matrix_app_start`](badge-api-reference.md#matrix-app-host) and returns
+immediately:
+
+```jython
+"""Slow drifting dot."""
+
+__matrix_title__ = "Drift"
+
+import badge
+
+_phase = 0
+
+def _tick(now_ms):
+    global _phase
+    _phase = (_phase + 1) & 7
+    frame = [0] * 8
+    frame[7] = 0x80 >> _phase
+    badge.led_set_frame(frame)
+
+badge.matrix_app_start(_tick, 250, 24)
+```
+
+The callback runs from the firmware's matrix service pump — same context as
+any other `matrix_app_start` callback — so the same constraints apply: keep
+it fast, don't block, and don't sit in a `while True` loop. See
+[Section 6 → LED Matrix](#led-matrix-88) for details.
+
+A real example lives in `/apps/tardigotchi/matrix.py`: it reads
+`/tardigrade_save.json`, walks a growing pet glyph along the bottom rows,
+cycles heart/drumstick/face status icons across the top, and pulses the
+haptic motor for Tamagotchi-style beeps. Stat decay continues at 1/10 the
+foreground game's pace and is written back to the save file so the
+foreground app sees the ambient progress next time you launch it.
+
+Switching to any built-in mode (Sparkle, Off, etc.) — or to a different
+matrix app — cleanly stops the previous callback. There is no need to call
+`matrix_app_stop()` from your script; the firmware tears it down for you on
+mode change.
+
+### Saving Data
+
+There are two ways to persist data, and the choice matters:
+
+**Use `badge.kv` for state that must survive a reflash** — game saves,
+high scores, user prefs. NVS is invariant across firmware updates,
+factory reflashes, and Community Apps installs.
+
+```jython
+import badge
+
+# Read with a default; write any str/int/float/bytes value.
+hi = badge.kv_get("hi_breaksnake", 0)
+hi += 1
+badge.kv_put("hi_breaksnake", hi)
+```
+
+Or via the friendlier wrapper baked into `/lib/badge_kv.py`:
+
+```jython
+from badge_kv import kv
+
+kv.put("hi_breaksnake", kv.get("hi_breaksnake", 0) + 1)
+```
+
+Limits: 15 chars per key, 1 KB per value, 64 keys per badge.
+Supported value types: `str`, `int`, `float`, `bytes`.
+
+**Use the filesystem for replaceable content** — caches, downloaded
+data, large blobs over 1 KB. FATFS files survive a firmware-only
+reflash but are wiped by a `fatfs.bin` reflash or a JumperIDE
+"Sync Filesystem" with `--clear-extras`:
+
+```jython
+# Fine — it's a cache that can be rebuilt.
+import json
+
+with open("/cache/last_query.json", "w") as f:
+    f.write(json.dumps(result))
+```
+
+> **Why this matters**: as of firmware v0.2, only `/lib` and
+> `/matrixApps` are baked into the firmware image. Everything else
+> (your app, docs, images, the DOOM WAD) ships via factory
+> `fatfs.bin` flash and can be re-pushed via Community Apps or
+> JumperIDE. State you care about belongs in NVS so it can't get
+> wiped by a reflash. See
+> [Storage Model](https://github.com/Architeuthis-Flux/Temporal-Replay-26-Badge/blob/main/firmware/docs/STORAGE-MODEL.md)
+> for the full survival matrix.
+
+---
+
+## 5. MicroPython Cheat Sheet
+
+### Available Modules
+
+| Module | Notes |
+|--------|-------|
+| `sys` | `sys.path`, `sys.exit()` |
+| `os` | Filesystem: `listdir`, `mkdir`, `remove`, `stat` |
+| `time` | `sleep_ms()`, `ticks_ms()`, `ticks_diff()` |
+| `random` | `randint()`, `choice()`, `uniform()` |
+| `math` | `sin()`, `cos()`, `sqrt()`, `pi` |
+| `cmath` | Complex math |
+| `struct` | `pack()`, `unpack()` for binary data |
+| `array` | Typed arrays |
+| `binascii` | `hexlify()`, `unhexlify()` |
+| `json` | `loads()`, `dumps()` |
+| `collections` | `OrderedDict`, `namedtuple` |
+| `errno` | Error constants |
+| `gc` | `collect()`, `mem_free()`, `mem_alloc()` |
+| `io` | `StringIO`, `BytesIO` |
+| `micropython` | `mem_info()`, `stack_use()` |
+| `uctypes` | C-compatible struct access |
+| `badge` | All badge hardware (auto-imported) |
+
+### Key Differences from CPython
+
+**f-strings are supported.** You can use normal MicroPython string formatting:
+
+```jython
+score = 42
+print(f"Score: {score}")
+print("Score: " + str(score))  # also fine
+```
+
+**Time functions use milliseconds:**
+
+```jython
+import time
+
+time.sleep_ms(100)      # 100 ms
+time.sleep(1)           # 1 second (float OK)
+
+start = time.ticks_ms()
+# ... do work ...
+elapsed = time.ticks_diff(time.ticks_ms(), start)
+```
+
+Use a cooperative main loop. Long-running computation in the foreground loop
+can block input/render responsiveness, so keep per-frame work small and
+use `sleep_ms()` to yield.
+
+**Memory is limited.** The Python heap is 128 KB from PSRAM. Call
+`gc.collect()` periodically in long-running apps, especially after releasing
+large objects:
+
+```jython
+import gc
+
+gc.collect()
+print("Free:", gc.mem_free(), "bytes")
+```
+
+**No pip / external packages.** Only the modules listed above are available.
+Shared code goes in `/lib/` (which is on `sys.path`).
+
+For the full MicroPython language reference:
+[docs.micropython.org](https://docs.micropython.org/en/latest/)
+
+---
+
+## 6. Hardware Guide
+
+### OLED Display (128×64)
+
+The coordinate system has **(0, 0) at the top-left corner**. X ranges from
+0–127, Y from 0–63. The display is buffered — draw to the buffer, then call
+`oled_show()` to push it to the screen.
+
+**Text rendering:**
+
+```jython
+oled_clear()
+oled_set_cursor(0, 0)
+oled_print("Top-left")
+
+oled_set_cursor(0, 30)
+oled_set_text_size(2)
+oled_print("BIG")
+oled_set_text_size(1)
+
+oled_show()
+```
+
+**Centering text:**
+
+```jython
+text = "Centered!"
+w = oled_text_width(text)
+x = (128 - w) // 2
+oled_set_cursor(x, 28)
+oled_print(text)
+oled_show()
+```
+
+**Fonts:**
+
+```jython
+fonts = oled_get_fonts().split(",")
+for f in fonts:
+    oled_set_font(f)
+    oled_clear()
+    oled_set_cursor(0, 20)
+    oled_print(f)
+    oled_show()
+    time.sleep_ms(500)
+```
+
+**Drawing primitives:**
+
+```jython
+oled_set_pixel(64, 32, 1)           # Single pixel
+oled_draw_box(10, 10, 50, 20)       # Filled rectangle
+oled_set_draw_color(2)              # XOR mode
+oled_draw_box(20, 5, 30, 30)        # XOR overlay
+oled_set_draw_color(1)              # Back to white
+oled_show()
+```
+
+**Framebuffer access** for advanced effects:
+
+```jython
+fb = oled_get_framebuffer()         # bytes object, 1024 bytes
+w, h, size = oled_get_framebuffer_size()
+
+buf = bytearray(fb)
+# Modify buf...
+oled_set_framebuffer(buf)
+oled_show()
+```
+
+**Drawing XBM bitmaps from Python.** The badge has no native `oled_draw_xbm`
+helper, but you can blit a 1-bit XBM by walking the bytes and calling
+`oled_set_pixel` for each lit bit. XBM is LSB-first within each byte, so
+bit 0 is the leftmost pixel:
+
+```jython
+def draw_xbm(bits, offset, w, h, x0, y0):
+    stride = (w + 7) // 8
+    for row in range(h):
+        base = offset + row * stride
+        for col_byte in range(stride):
+            byte = bits[base + col_byte]
+            if not byte:
+                continue
+            for bit in range(8):
+                col = (col_byte = w:
+                    break
+                if byte & (1  1000:
+    long_press_action()
+```
+
+**Escape chord:** Holding all four face buttons for ~1 second force-exits any
+running app. This is a firmware safety net — you don't need to implement it.
+
+### Joystick
+
+A 2-axis analog joystick returning raw ADC values (0–4095). Center position is
+approximately 2048, but varies per unit.
+
+```jython
+x = joy_x()  # 0 = full left, 4095 = full right
+y = joy_y()  # 0 = full up, 4095 = full down
+
+# Dead zone handling
+CENTER = 2048
+DEAD = 300
+
+dx = x - CENTER
+dy = y - CENTER
+if abs(dx) = 3:
+        return words[0], words[1], words[2]
+    return None
+
+# Game loop
+while True:
+    if button_pressed(BTN_CONFIRM):
+        send_position(joy_x(), joy_y(), 42)
+
+    pos = receive_position()
+    if pos:
+        x, y, score = pos
+        oled_clear()
+        oled_println("Peer: " + str(x) + "," + str(y))
+        oled_println("Score: " + str(score))
+        oled_show()
+
+    if button_pressed(BTN_BACK):
+        break
+    time.sleep_ms(30)
+
+ir_stop()
+```
+
+### Tips for IR Communication
+
+- Always call `ir_start()` first and `ir_stop()` when done
+- Poll `ir_read()` within 50 ms to avoid buffer overflow
+- A classic frame takes ~110 ms on wire; a 3-word frame takes ~230 ms
+- Use `ir_flush()` to clear stale frames before starting a new exchange
+- `ir_tx_power(10)` is useful for testing with two badges close together
+- IR is line-of-sight — badges need to be roughly pointed at each other
+
+---
+
+## 9. Firmware Updates & Community Apps
+
+The badge can update its own firmware over WiFi from GitHub Releases,
+and can fetch installable apps + user files (like the DOOM WAD) from
+a configurable Community Apps registry. Both systems are user-driven —
+the badge checks once a day in the background, but never installs
+anything without an explicit Confirm.
+
+### Where state lives (mental model)
+
+Three storage tiers; one rule: **state in NVS, code on FATFS**.
+
+| Tier | Holds | Survives a... |
+|------|-------|---------------|
+| NVS | badge ID, WiFi creds, contacts, badgeInfo, `badge.kv` saves | every flash type |
+| FATFS | Python source, docs, images, doom1.wad, user uploads | firmware-only flash; **wiped** by `fatfs.bin` reflash + `--clear-extras` sync |
+| app0 | C++ binary + survival floor (`/lib`, `/matrixApps`) | replaced only by a firmware flash |
+
+Putting game saves in `badge.kv` (see § 4 Saving Data) means a
+firmware reflash, factory flash, or Community Apps install never
+loses them. Files on FATFS are re-pushable via JumperIDE / Community
+Apps / `python3 -m badge_sync sync`. See the
+[Storage Model](https://github.com/Architeuthis-Flux/Temporal-Replay-26-Badge/blob/main/firmware/docs/STORAGE-MODEL.md)
+for the full survival matrix.
+
+### What the user sees
+
+- **Status bar glyph.** A small down-arrow appears immediately to
+  the left of the WiFi icon when a newer firmware release has been
+  cached. It disappears as soon as the install completes.
+- **"FW UPDATE" home tile.** Always visible. Label flips to **UPDATE**
+  (with a notification badge dot) when an update is waiting; otherwise
+  it reads as a "Check Updates" affordance. Confirm enters the
+  Firmware Update screen.
+
+[Image: Home grid with FW UPDATE tile selected]
+- **"COMMUNITY APPS" home tile.** Always visible. Opens the Community
+  Apps screen — a list of every entry in the remote registry with
+  per-row status (`OK` for installed, `UPD` for update available,
+  blank for not installed). The legacy "Asset Library" / "LIBRARY"
+  label was renamed in v0.2 firmware. Empty when `community_apps_url`
+  isn't configured (the default firmware ships with a working URL,
+  so this only happens if you explicitly clear it).
+
+### Update cadence
+
+The badge polls `api.github.com/repos///releases/latest`
+at most once every 24 hours, only when WiFi is connected. State
+(latest tag, asset URL, last-check timestamp) is persisted in NVS so
+the indicator survives reboots and offline use. Manual "Check now"
+from the Firmware Update screen ignores the cooldown.
+
+### Installing a firmware update
+
+1. Open **FW UPDATE** from the home grid.
+2. Press Confirm to install (or to re-check, if you're already on the
+   latest version). Battery must be ≥ 30 % unless USB is plugged in.
+3. The screen shows a progress bar as the new image streams into the
+   inactive OTA slot. Do not unplug.
+4. The badge reboots into the new image. If it fails to boot, the
+   bootloader rolls back automatically on the next reset — there is
+   no way for an OTA to brick the badge as long as it has power.
+
+[Image: Firmware Update screen showing current/latest version and filesystem size]
+
+When a wider `ffat` partition is available but the volume header still
+reflects the old size, the same screen shows a filesystem line such as
+`FS: 5.9 MB ◇ 6.9 MB FS` — the diamond glyph is the expand affordance
+(see [Expanding storage](#expanding-storage-after-a-partition-bump) below).
+
+### Community Apps
+
+The registry is a single JSON file the badge fetches once a day. Each
+entry has an `id`, `version`, download `url`, optional SHA-256, and a
+filesystem `dest_path` (or `dest_dir` for multi-file apps). The badge
+streams each file into a `.tmp`, verifies the hash if present, then
+atomically renames into place.
+
+The DOOM tile uses this transparently: if `/doom1.wad` is missing on
+the filesystem, **DOOM → Confirm** routes you to the Community Apps
+detail page for the WAD with a one-tap **Install** button. No need
+to sideload via `uploadfs`.
+
+### Pushing files via JumperIDE
+
+JumperIDE (`ide.jumperless.org`) is the easiest non-WiFi path for
+getting files onto the badge:
+
+- **Save** (`Ctrl+S`) writes the open file to the badge over USB,
+  same as `mpremote cp` would.
+- **Sync Filesystem** (planned button next to the firmware-update
+  modal) does a one-click diff: it lists everything currently on
+  the badge, compares against the upstream
+  [`firmware/data/manifest.json`](https://github.com/Architeuthis-Flux/Temporal-Replay-26-Badge/blob/main/firmware/data/manifest.json),
+  and pushes anything missing or stale. Useful after a firmware-only
+  reflash where you want to refresh apps without losing your local
+  edits.
+
+If you prefer a CLI: `python3 firmware/scripts/badge_sync.py sync /dev/cu.usbmodemXXXX`
+does the same diff from a shell. Disconnect any active serial monitor
+first (the badge port is single-owner). See
+`firmware/docs/STORAGE-MODEL.md` for full options.
+
+### Re-flashing the FATFS partition
+
+Two ways to repopulate everything (apps, docs, images, the DOOM WAD)
+without touching firmware:
+
+```bash
+cd firmware
+# Always use the bundled pio binary — the macOS / micromamba shell `pio`
+# shim often resolves to a Python without platformio installed.
+~/.platformio/penv/bin/pio run -e echo -t uploadfs
+```
+
+This builds `fatfs.bin` from `firmware/data/` (mirror of
+`firmware/initial_filesystem/`) and writes it directly to the badge's
+ffat partition. Includes `/doom1.wad` (4 MB) which is otherwise
+downloaded over WiFi via Community Apps. NVS state (game saves,
+contacts, badge identity) is untouched.
+
+If you see `ModuleNotFoundError: No module named 'platformio'`, that's
+the system `pio` shim issue — call the bundled binary by absolute
+path as shown above.
+
+### `settings.txt` keys
+
+```
+[ota]
+# Override the default GitHub Releases endpoint (advanced; usually
+# leave empty to use the build-baked default).
+manifest_url =
+
+# URL of the Community Apps registry JSON. Empty disables the
+# Community Apps tile. The legacy `asset_registry_url` key still
+# works for backwards compatibility.
+community_apps_url = https://raw.githubusercontent.com/Architeuthis-Flux/Temporal-Replay-26-Badge/main/registry/community_apps.json
+```
+
+### `community_apps.json` schema (v2)
+
+Two entry kinds: single files and multi-file app bundles.
+
+```json
+{
+  "schema_version": 2,
+  "assets": [
+    {
+      "id": "doom1-shareware",
+      "kind": "file",
+      "name": "DOOM 1 Shareware WAD",
+      "version": "1.9",
+      "url": "https://...doom1.wad",
+      "sha256": "",
+      "size": 4196020,
+      "dest_path": "/doom1.wad",
+      "min_free_bytes": 4500000,
+      "description": "..."
+    },
+    {
+      "id": "tardigotchi",
+      "kind": "app",
+      "name": "Tardigotchi",
+      "version": "8b139b84ef0b",
+      "dest_dir": "/apps/tardigotchi",
+      "size": 33744,
+      "description": "Hatch and care for a tiny tardigrade.",
+      "files": [
+        {"path": "/main.py",   "size": 187,   "sha256": "...", "url": "https://..."},
+        {"path": "/engine.py", "size": 24006, "sha256": "...", "url": "https://..."},
+        {"path": "/icon.py",   "size": 9551,  "sha256": "...", "url": "https://..."}
+      ]
+    }
+  ]
+}
+```
+
+App bundle file lists are inlined directly into the registry — there's
+no per-app `manifest.json`. `registry/community_apps.json` is
+auto-generated by `firmware/scripts/generate_startup_files.py` from
+`firmware/initial_filesystem/`; drop your app folder there and re-run
+the script (or trigger a PlatformIO build). The legacy
+`registry/registry.json` (schema v1) is frozen for backwards
+compatibility; new entries go into v2.
+
+See `firmware/docs/OTA-MAINTAINER.md` in the firmware repo for the
+full maintainer walkthrough, including how to host the registry on
+Cloudflare R2 / Pages.
+
+### Expanding storage after a partition bump
+
+Sometimes a firmware update ships with a wider `ffat` partition (the
+2026 v0.1.5 bump grew the FAT partition from 6 MB to ~7.9 MB to reuse
+unused flash). The new firmware will boot fine on existing badges and
+keep all your data — but the FAT volume header is still sized for the
+old partition, so you only see the old capacity until a reformat
+writes a new header.
+
+When this happens, the **Firmware Update** screen shows a filesystem line
+with the current size and an expand affordance (e.g. `FS: 5.9 MB ◇ 6.9 MB FS`).
+Select the diamond glyph on that line to start the reformat flow:
+
+1. **Preflight** — battery/USB, partition layout, and recovery blob checks
+   must all pass before Continue is offered.
+
+[Image: Expand preflight: migrate ffat to the new size]
+
+2. First confirm: shows what gets wiped (contacts, nametags, WAD,
+   `settings.txt`).
+3. **Final confirmation** — warns that the partition table is rewritten,
+   `ffat` is wiped, and the badge auto-reboots.
+
+[Image: Final confirmation before partition expand]
+
+4. The badge formats `ffat` and reboots into a clean filesystem with
+   the full partition size available.
+
+A **recovery QR** on the expand path documents the USB + `esptool write_flash`
+fallback if anything goes wrong mid-migration:
+
+[Image: Recovery QR for USB esptool write_flash]
+
+The option only appears when there's a real gap to recover (≥ 256 KB
+above what FAT metadata explains away). On freshly USB-flashed
+badges, the FAT is sized to the partition at first boot and you'll
+never see this prompt.
+
+### Forking the firmware
+
+To point OTA at a different repo (or look for a different asset
+filename in the release), edit `firmware/platformio.ini`:
+
+```ini
+'-DOTA_GITHUB_REPO="YourOrg/YourFork"'
+'-DOTA_ASSET_NAME="firmware-yourfork.bin"'
+```
+
+The badge will look for an asset of exactly that name on the latest
+release of the configured repo.
+
+### Security stance
+
+This is open-source firmware. There is no image signing, no
+certificate pinning, no PIN, no auth. SHA-256 hashes are corruption
+checks, not signatures. The threat model is "don't brick the badge",
+which is mitigated by:
+
+- battery ≥ 30 % guard (unless USB is plugged in),
+- bootloader auto-rollback if the new image fails to boot,
+- atomic rename for asset files.
+
+If your fleet needs a hardened OTA, fork `firmware/src/ota/` and
+bring your own keys.
+
+---
+
+## 10. Tips and Gotchas
+
+### Memory Management
+
+- **128 KB heap.** Call `gc.collect()` regularly, especially in game loops.
+- Avoid creating large temporary objects. Reuse buffers when possible.
+- Check available memory: `gc.mem_free()` returns bytes free.
+- Source files have a ~16 KB limit per file due to the MicroPython compiler.
+  Split large apps into multiple modules.
+
+### Display
+
+- `oled_show()` is required after any drawing operation. Nothing appears on
+  screen until you call it.
+- `oled_clear()` resets the cursor to (0,0). Pass `True` to also refresh:
+  `oled_clear(True)`.
+- The display is 128×64 — plan your layouts accordingly. The usable area with
+  `badge_ui` chrome is roughly Y: 10–52 (between header and footer).
+
+### LED Matrix
+
+- Use `led_override_begin()` / `led_override_end()` when drawing directly on
+  the matrix. Without it, the ambient LED mode may overwrite your pixels.
+- `led_clear()` at the end of your app to be a good citizen.
+- Matrix app callbacks (`matrix_app_start`) run from the service pump, not your
+  main loop — keep them fast (no blocking, no heavy computation).
+
+### IR
+
+- **IR is mode-gated** — only works after `ir_start()`. Other screens (Boop)
+  share the hardware.
+- The RX buffer is 8 frames deep. If you don't read within ~50 ms per frame,
+  frames get dropped.
+- Always `ir_stop()` and `ir_flush()` in your cleanup code.
+
+### Input
+
+- `button_pressed()` consumes the event — calling it twice for the same button
+  in the same loop iteration will miss the second call. Read it once and store
+  the result.
+- The joystick center varies per unit (~2048 typical). Always use a dead zone
+  of at least 200–300.
+
+### General
+
+- **f-strings are available**, but string concatenation also works.
+- **No `import badge` needed** in the entry script — all functions are
+  auto-injected. In imported modules, use `from badge import *`.
+- **Escape chord:** Hold all 4 face buttons for ~1 second to force-exit any
+  stuck app.
+- **Clean up** before exiting: `led_clear()`, `haptic_off()`, `no_tone()`,
+  `ir_stop()`, `mouse_overlay(False)`.
+
+### Updates & WiFi
+
+- **WiFi is required for OTA and Community Apps.** Configure it
+  once via Settings → WiFi Setup. The badge auto-connects on boot.
+  JumperIDE works over USB so it can push files without WiFi.
+- **Don't unplug during a firmware install.** A brownout mid-flash is
+  the only thing that can leave the badge in a bad state — and even
+  then the bootloader will roll back on the next reset.
+- **Asset downloads can take several minutes** on slow conference
+  WiFi (the DOOM WAD is 4 MB). The progress screen shows live KB
+  counts; if it stalls for more than 30 s, cancel and retry.
+
+---
+
+## Quick Reference Card
+
+```
+┌──────────────────────────────────────────────────┐
+│ OLED (128×64)                                    │
+│   oled_clear() → oled_print() → oled_show()      │
+│                                                  │
+│ LED Matrix (8×8)                                 │
+│   led_show_image(IMG_HEART)                      │
+│   led_set_frame([row0..row7], brightness)        │
+│                                                  │
+│ Buttons                                          │
+│   button_pressed(BTN_CONFIRM) → True once        │
+│   button(BTN_UP) → True while held               │
+│                                                  │
+│ Joystick                                         │
+│   joy_x() → 0–4095    joy_y() → 0–4095          │
+│                                                  │
+│ Haptics                                          │
+│   haptic_pulse()    tone(440, 200)               │
+│                                                  │
+│ IR                                               │
+│   ir_start() → ir_send(a,c) → ir_read() → tuple │
+│                                                  │
+│ IMU                                              │
+│   imu_tilt_x()  imu_motion()  imu_face_down()   │
+│                                                  │
+│ Mouse                                            │
+│   mouse_overlay(True) → mouse_clicked() → btn_id│
+│                                                  │
+│ Files                                            │
+│   open("/apps/x/save.json","w").write(data)      │
+│                                                  │
+│ Exit                                             │
+│   exit()  or hold all 4 buttons                  │
+└──────────────────────────────────────────────────┘
+```
+
+---
+
+# API Reference
+
+
+All functions and constants from the `badge` module are automatically imported
+into the global namespace. You can call them directly (e.g. `button(BTN_CONFIRM)`)
+without needing the `badge.` prefix.
+
+---
+
+[Init](#init):
+
+* `init()` — Initialize the badge hardware bridge (called automatically)
+
+[OLED Display](#oled-display):
+
+* `oled_print(text)` — Print text at cursor
+* `oled_println(text)` — Print text + newline + show
+* `oled_clear([show])` — Clear display
+* `oled_show()` — Refresh display
+* `oled_set_cursor(x, y)` — Set text cursor
+* `oled_set_text_size(size)` — Set text size (1–4)
+* `oled_get_text_size()` — Get text size
+* `oled_invert(enable)` — Invert display colors
+* `oled_text_width(text)` — Get pixel width of a string
+* `oled_text_height()` — Get pixel height of current font
+* `oled_set_font(name)` — Set font by name
+* `oled_get_fonts()` — Get available font names
+* `oled_get_current_font()` — Get current font name
+* `oled_set_pixel(x, y, color)` — Set single pixel
+* `oled_get_pixel(x, y)` — Read single pixel
+* `oled_draw_box(x, y, w, h)` — Draw filled rectangle
+* `oled_set_draw_color(color)` — Set draw color (0=black, 1=white, 2=XOR)
+* `oled_get_framebuffer()` — Get framebuffer as bytes
+* `oled_set_framebuffer(data)` — Set framebuffer from bytes
+* `oled_get_framebuffer_size()` — Get (width, height, bytes)
+* `oled_screenshot([mode])` — Dump OLED framebuffer to terminal as block characters
+
+[Native UI Chrome](#native-ui-chrome):
+
+* `ui_header(title, [right])` — Draw the standard header and rule
+* `ui_action_bar([left_button], [left_label], [right_button], [right_label])` — Draw footer actions with native button glyphs
+* `ui_chrome(title, [right], [left_button], [left_label], [right_button], [right_label])` — Clear and draw standard header/footer chrome
+* `ui_inline_hint(x, y, hint)` — Draw an inline hint with native button glyphs
+* `ui_inline_hint_right(right_x, y, hint)` — Right-align an inline hint
+* `ui_measure_hint(hint)` — Return an inline hint's pixel width
+
+[Mouse Overlay](#mouse-overlay):
+
+* `mouse_overlay(enable)` — Enable/disable cursor overlay
+* `mouse_set_bitmap(data, w, h)` — Set cursor sprite (row-major bitmap, max 32×32)
+* `mouse_x()` — Current cursor X position
+* `mouse_y()` — Current cursor Y position
+* `mouse_set_pos(x, y)` — Warp cursor to position
+* `mouse_clicked()` — Read last click button ID (-1 if none)
+* `mouse_set_speed(speed)` — Set cursor speed (1–20, default 3)
+* `mouse_set_mode(mode)` — Set positioning mode (`MOUSE_ABSOLUTE` or `MOUSE_RELATIVE`, default `MOUSE_RELATIVE`)
+
+[Buttons & Joystick](#buttons-joystick):
+
+* `button(id)` — Read button state (True if held)
+* `button_pressed(id)` — Edge-triggered press (True once per press)
+* `button_held_ms(id)` — Milliseconds button has been held
+* `joy_x()` — Joystick X axis (0–4095)
+* `joy_y()` — Joystick Y axis (0–4095)
+
+[LED Matrix](#led-matrix-88) (8×8):
+
+* `led_brightness(value)` — Set global brightness (0–255)
+* `led_clear()` — Turn off all LEDs
+* `led_fill([brightness])` — Turn on all LEDs
+* `led_set_pixel(x, y, brightness)` — Set single LED
+* `led_get_pixel(x, y)` — Read single LED brightness
+* `led_show_image(name)` — Show builtin image by name
+* `led_set_frame(rows, [brightness])` — Draw 8×8 bitmask pattern
+* `led_start_animation(name, [interval_ms])` — Start builtin animation
+* `led_stop_animation()` — Stop current animation
+* `led_override_begin()` — Pause ambient LED mode for foreground drawing
+* `led_override_end()` — Release foreground drawing and restore ambient LEDs
+* `led_screenshot([mode], [ansi])` — Dump LED matrix to terminal as block characters
+* `screenshot([mode], [ansi])` — Dump OLED and LED matrix together to terminal;
+  REPL hotkey: bare `o` + Enter
+
+[Matrix App Host](#matrix-app-host) (Background LED Callbacks):
+
+* `matrix_app_start(callback, [interval_ms], [brightness])` — Register a Python callback for background LED matrix rendering
+* `matrix_app_set_speed(interval_ms)` — Change the tick interval
+* `matrix_app_set_brightness(brightness)` — Change the LED brightness
+* `matrix_app_stop()` — Unregister the callback
+* `matrix_app_active()` — Check if a callback is registered
+* `matrix_app_info()` — Return diagnostic tuple
+
+[App Manifest](#app-manifest) (Folder-app metadata):
+
+* `__title__`, `__description__`, `__icon__`, `__matrix_title__`, `__order__` — Top-level dunders read from `/apps//main.py` to decorate the main menu tile
+* `icon.py` — 12×12 packed-XBM `DATA` tuple for the home-screen icon
+* `matrix.py` — Persistent LED-matrix script registered via `matrix_app_start`
+* `rescan_apps()` — Hot-refresh the registry after editing manifests
+
+[IMU](#imu):
+
+* `imu_ready()` — Check if IMU is initialized
+* `imu_tilt_x()` — X-axis tilt in milli-g
+* `imu_tilt_y()` — Y-axis tilt in milli-g
+* `imu_accel_z()` — Z-axis acceleration in milli-g
+* `imu_face_down()` — True if badge is face-down
+* `imu_motion()` — Consume motion event (True if motion detected since last call)
+
+[Haptics](#haptics) (Vibration Motor + Coil Tone):
+
+* `haptic_pulse([strength], [duration_ms], [freq_hz])` — Fire vibration pulse
+* `haptic_strength([value])` — Get or set motor strength (0–255)
+* `haptic_off()` — Stop motor
+* `tone(freq_hz, [duration_ms], [duty])` — Play audible tone from motor coil
+* `no_tone()` — Stop tone
+* `tone_playing()` — Check if tone is active
+
+[IR Send/Receive](#ir-sendreceive) (NEC Protocol):
+
+* `ir_send(addr, cmd)` — Transmit one 1-byte-addr / 1-byte-cmd NEC frame
+* `ir_start()` — Start IR receive mode
+* `ir_stop()` — Stop IR receive, flush queue
+* `ir_available()` — Check if a received frame is waiting
+* `ir_read()` — Read received (addr, cmd) as a tuple
+* `ir_send_words(words)` — Transmit a multi-word NEC frame (1–64 × 32-bit)
+* `ir_read_words()` — Read a received multi-word NEC frame as a tuple
+* `ir_flush()` — Drop every pending RX frame
+* `ir_tx_power([percent])` — Get/set IR carrier duty (1–50%)
+
+[Badge Identity & Boops](#badge-identity-boops):
+
+* `my_uuid()` — Return this badge's 12-char hex UID
+* `boops()` — Return `/boops.json` contents as a string
+
+[Script Control](#script-control):
+
+* `exit()` — Raise `SystemExit` to cleanly stop the running app
+* `dev(*args)` — Test harness dispatcher *(dev builds only)*
+
+[Filesystem Access](#filesystem-access):
+
+* Standard `os` module — `listdir`, `mkdir`, `remove`, `rename`, `stat`, etc.
+* Standard `open()` / `read()` / `write()` / `close()`
+
+---
+
+## Init
+
+### `init()`
+
+Initialize the badge hardware bridge. This is called automatically when the
+badge module loads — you should not normally need to call it. Returns `0` on
+success; raises `OSError` on failure.
+
+---
+
+## OLED Display
+
+128×64 monochrome SSD1306 OLED display controlled via U8G2.
+
+### `oled_print(text)`
+
+Print text at the current cursor position. Does not refresh the display
+automatically — call `oled_show()` to make it visible.
+
+* `text`: String to display.
+
+### `oled_println(text)`
+
+Print text followed by a newline, then automatically refresh the display.
+
+* `text`: String to display.
+
+**Example:**
+
+```jython
+oled_clear()
+oled_println("Hello, badge!")
+oled_println("Line 2")
+```
+
+### `oled_clear([show])`
+
+Clear the display and reset cursor to (0, 0).
+
+* `show` (optional): If `True`, refresh display immediately. Default `False`.
+
+**Example:**
+
+```jython
+oled_clear()          # Clear buffer only
+oled_clear(True)      # Clear and refresh immediately
+```
+
+### `oled_show()`
+
+Refresh the display to show buffered changes. Required after `oled_print()`,
+`oled_set_pixel()`, or `oled_set_framebuffer()` to make changes visible.
+
+### `oled_set_cursor(x, y)`
+
+Move the text cursor to pixel coordinates.
+
+* `x`: X position (0–127).
+* `y`: Y position (0–63).
+
+### `oled_set_text_size(size)`
+
+Set the text rendering size.
+
+* `size`: Text size multiplier (1–4). Returns `True` on success.
+
+### `oled_get_text_size()`
+
+Returns the current text size (1–4).
+
+### `oled_invert(enable)`
+
+Invert the display colors.
+
+* `enable`: `True` to invert, `False` for normal.
+
+### `oled_text_width(text)`
+
+Get the pixel width of a string in the current font.
+
+* `text`: The string to measure.
+* Returns the width in pixels.
+
+**Example:**
+
+```jython
+w = oled_text_width("Hello")
+x = (128 - w) // 2
+oled_set_cursor(x, 30)
+oled_print("Hello")
+oled_show()
+```
+
+### `oled_text_height()`
+
+Get the maximum character height of the current font.
+
+* Returns the height in pixels.
+
+### `oled_set_font(name)`
+
+Set the font by name.
+
+* `name`: Font family name (case-sensitive).
+* Returns `True` if font was found, `False` otherwise.
+
+### `oled_get_fonts()`
+
+Returns a comma-separated string of available font names.
+
+**Example:**
+
+```jython
+fonts = oled_get_fonts().split(",")
+for f in fonts:
+    oled_set_font(f)
+    oled_clear()
+    oled_println(f)
+    import time; time.sleep(1)
+```
+
+### `oled_get_current_font()`
+
+Returns the name of the currently active font.
+
+### `oled_set_pixel(x, y, color)`
+
+Set a single pixel in the framebuffer.
+
+* `x`: X coordinate (0–127).
+* `y`: Y coordinate (0–63).
+* `color`: `1` for white/on, `0` for black/off.
+
+Call `oled_show()` after setting pixels to make changes visible.
+
+### `oled_get_pixel(x, y)`
+
+Read the color of a single pixel.
+
+* Returns `1` (white/on) or `0` (black/off).
+
+### `oled_draw_box(x, y, w, h)`
+
+Draw a filled rectangle in the framebuffer using the current draw color.
+
+* `x`: Left edge (0–127).
+* `y`: Top edge (0–63).
+* `w`: Width in pixels.
+* `h`: Height in pixels.
+
+Call `oled_show()` after drawing to make changes visible.
+
+**Example:**
+
+```jython
+oled_clear()
+oled_draw_box(10, 10, 50, 20)
+oled_set_draw_color(0)
+oled_set_cursor(12, 12)
+oled_print("Hello")
+oled_set_draw_color(1)
+oled_show()
+```
+
+### `oled_set_draw_color(color)`
+
+Set the drawing color for subsequent draw operations.
+
+* `color`: `0` = black/off, `1` = white/on (default), `2` = XOR (inverts
+  existing pixels).
+
+### `oled_get_framebuffer()`
+
+Returns the entire display framebuffer as a `bytes` object. Format: 1 bit per
+pixel, organized in vertical bytes (Adafruit SSD1306 format).
+
+### `oled_set_framebuffer(data)`
+
+Replace the entire display framebuffer and refresh.
+
+* `data`: `bytes` or `bytearray` of the correct size (typically 1024 bytes for
+  128×64).
+* Returns `True` on success, `False` on size mismatch.
+
+### `oled_get_framebuffer_size()`
+
+Returns a tuple `(width, height, buffer_size_bytes)`.
+
+**Example:**
+
+```jython
+w, h, size = oled_get_framebuffer_size()
+print(str(w) + "x" + str(h) + ", " + str(size) + " bytes")
+```
+
+### `oled_screenshot([mode])`
+
+Dump the current OLED framebuffer to the serial console as a bordered
+block-character image. Useful for inspecting display state without a camera,
+and for capturing UI reference while writing docs (see also `screenshot()`
+and the REPL `o` hotkey below).
+
+* `mode` (optional): Rendering size on the following ladder (smallest first):
+  * `0.5` (float) — **quarter-block**, 2×2 pixels per glyph. OLED 64×32 chars.
+    Smallest output.
+  * `0` (int) — **half-block**, 1×2 pixels per glyph (`▀`/`▄`/`█`/space).
+    OLED 128×32 chars. 1W × 1W square cells on 2:1 monospace fonts.
+  * `N` (int, ≥1) — **square** at `2N` chars wide × `N` char-rows tall per pixel
+    (2NW × 2NW square cells). `1` is the smallest square (2×1 chars), `2` is
+    twice as big (4×2 chars), etc.
+  * `N.5` (float, ≥1.5) — **tall** escape hatch: each pixel = `round(2(N−1))`
+    chars wide × 1 char-row tall. `1.5` gives 1W × 2W per pixel (literal
+    1-char-per-pixel), `2.5` gives 3W × 2W, etc. Use when you want
+    char-per-pixel output without aspect correction.
+
+  Default: `1` (smallest square: 2 chars × 1 row per pixel).
+
+**Example:**
+
+```jython
+oled_clear()
+oled_println("Hello!")
+oled_screenshot()      # int 1 — smallest square, 256 chars wide
+oled_screenshot(0.5)   # float — quarter-block compact, 64 chars wide
+oled_screenshot(0)     # int 0 — half-block compact, 128 chars wide
+oled_screenshot(2)     # int 2 — bigger square, 512 chars wide
+oled_screenshot(1.5)   # float — literal 1 char/pixel, 128 chars wide tall
+```
+
+---
+
+## Native UI Chrome
+
+These helpers draw the same header, footer, and button glyph style used by
+the firmware screens. App code should usually import `badge_ui`, which wraps
+these native functions with Python conveniences like `ui.chrome(...)`.
+`badge_ui` also includes `ui.hint(...)`, `ui.hint_text(...)`, and
+`ui.hint_row(...)` helpers for composing multiple glyph-backed action hints
+without hand-building strings throughout an app.
+
+### `ui_header(title, [right])`
+
+Draw the standard small header and divider. `right` is optional top-right text.
+
+### `ui_action_bar([left_button], [left_label], [right_button], [right_label])`
+
+Draw footer actions with native button glyphs. Button names include `OK`,
+`BACK`, `X`, `Y`, `A`, and `B`; semantic names respect the badge's confirm/back
+swap setting.
+
+### `ui_chrome(title, [right], [left_button], [left_label], [right_button], [right_label])`
+
+Clear the OLED buffer, draw the standard header, then draw the footer action
+bar. Call `oled_show()` after drawing your screen content.
+
+### `ui_inline_hint(x, y, hint)`
+
+Draw inline text with native button glyph replacement, such as `"OK:start"` or
+`"BACK quit"`. Returns the drawn width in pixels.
+
+### `ui_inline_hint_right(right_x, y, hint)`
+
+Right-align an inline hint to `right_x`. Returns the drawn width in pixels.
+
+### `ui_measure_hint(hint)`
+
+Return the pixel width an inline hint will use.
+
+---
+
+## Buttons & Joystick
+
+Four face buttons and a 2-axis analog joystick. The directional constants are
+kept for compatibility; new apps should prefer the semantic aliases where they
+fit the interaction.
+
+### Button Constants
+
+```jython
+BTN_RIGHT = 0
+BTN_DOWN  = 1
+BTN_LEFT  = 2
+BTN_UP    = 3
+
+BTN_CIRCLE   = BTN_RIGHT
+BTN_CROSS    = BTN_DOWN
+BTN_SQUARE   = BTN_LEFT
+BTN_TRIANGLE = BTN_UP
+
+BTN_CONFIRM = 4
+BTN_SAVE    = BTN_CONFIRM
+BTN_BACK    = 5
+BTN_PRESETS = BTN_TRIANGLE
+```
+
+`BTN_CONFIRM`/`BTN_SAVE` and `BTN_BACK` follow the firmware
+`swap_ok` setting: the default is B/Circle confirm and A/Cross back; setting
+`swap_ok = 0` uses A/Cross confirm and B/Circle back. The physical constants and
+PlayStation-style shape constants always refer to the actual hardware button.
+
+### `button(id)`
+
+Read the current state of a button.
+
+* `id`: Button constant (`BTN_CONFIRM`, `BTN_BACK`, `BTN_PRESETS`, etc.).
+* Returns `True` if the button is currently held down.
+
+**Example:**
+
+```jython
+if button(BTN_CONFIRM):
+    oled_println("confirm held!")
+```
+
+### `button_pressed(id)`
+
+Edge-triggered button press detection. Returns `True` **once** per physical
+press, then `False` until the button is released and pressed again. Consumes
+the press event on read.
+
+* `id`: Button constant.
+* Returns `True` if a new press was detected since the last call.
+
+**Example:**
+
+```jython
+import time
+count = 0
+while True:
+    if button_pressed(BTN_CONFIRM):
+        count += 1
+        oled_clear()
+        oled_println("Presses: " + str(count))
+    time.sleep(0.02)
+```
+
+### `button_held_ms(id)`
+
+Get how long a button has been continuously held.
+
+* `id`: Button constant.
+* Returns milliseconds the button has been held, or `0` if not pressed.
+
+**Example:**
+
+```jython
+ms = button_held_ms(BTN_DOWN)
+if ms > 1000:
+    oled_println("Long press!")
+```
+
+### `joy_x()`
+
+Read the joystick X axis.
+
+* Returns an integer 0–4095. Center is approximately 2047.
+
+### `joy_y()`
+
+Read the joystick Y axis.
+
+* Returns an integer 0–4095. Center is approximately 2047.
+
+**Example:**
+
+```jython
+x = joy_x()
+y = joy_y()
+oled_clear()
+oled_println("X:" + str(x) + " Y:" + str(y))
+```
+
+---
+
+## LED Matrix (8×8)
+
+8×8 LED matrix driven by the IS31FL3731 with per-pixel PWM brightness control.
+
+### Image Constants
+
+Builtin image names for use with `led_show_image()`:
+
+```jython
+IMG_SMILEY    = "smiley"
+IMG_HEART     = "heart"
+IMG_ARROW_UP  = "arrow_up"
+IMG_ARROW_DOWN = "arrow_down"
+IMG_X_MARK    = "x_mark"
+IMG_DOT       = "dot"
+```
+
+### Animation Constants
+
+Builtin animation names for use with `led_start_animation()`:
+
+```jython
+ANIM_SPINNER      = "spinner"
+ANIM_BLINK_SMILEY = "blink_smiley"
+ANIM_PULSE_HEART  = "pulse_heart"
+```
+
+### `led_brightness(value)`
+
+Set the global LED brightness.
+
+* `value`: Brightness level (0–255). `0` is off, `255` is maximum.
+
+### `led_clear()`
+
+Turn off all LEDs on the matrix.
+
+### `led_fill([brightness])`
+
+Turn on all LEDs. If `brightness` is omitted, uses the current global brightness.
+
+* `brightness` (optional): Per-pixel brightness (0–255).
+
+### `led_set_pixel(x, y, brightness)`
+
+Set a single LED brightness.
+
+* `x`: Column (0–7).
+* `y`: Row (0–7).
+* `brightness`: LED brightness (0–255).
+
+**Example:**
+
+```jython
+led_clear()
+led_set_pixel(3, 3, 100)
+led_set_pixel(4, 4, 100)
+```
+
+### `led_get_pixel(x, y)`
+
+Read the brightness of a single LED.
+
+* Returns brightness value (0–255).
+
+### `led_show_image(name)`
+
+Display a builtin image on the matrix.
+
+* `name`: Image name string (see Image Constants above).
+* Returns `True` if the image was found.
+
+**Example:**
+
+```jython
+led_show_image(IMG_HEART)
+
+import time
+time.sleep(2)
+led_show_image("smiley")    # string name works too
+```
+
+### `led_set_frame(rows, [brightness])`
+
+Draw an arbitrary 8×8 pattern from a list of row bitmasks. Each row is a uint8
+where the MSB is the leftmost pixel.
+
+* `rows`: List or tuple of exactly 8 integers (0–255), one per row.
+* `brightness` (optional): On-pixel brightness (0–255). Defaults to current
+  global brightness.
+
+**Example:**
+
+```jython
+# Draw a smiley face
+led_set_frame([
+    0b00111100,
+    0b01000010,
+    0b10100101,
+    0b10000001,
+    0b10100101,
+    0b10011001,
+    0b01000010,
+    0b00111100,
+])
+
+# Draw an X with explicit brightness
+led_set_frame([
+    0b10000001,
+    0b01000010,
+    0b00100100,
+    0b00011000,
+    0b00011000,
+    0b00100100,
+    0b01000010,
+    0b10000001,
+], 50)  # dim
+```
+
+### `led_start_animation(name, [interval_ms])`
+
+Start a builtin animation on the matrix.
+
+* `name`: Animation name string (see Animation Constants above).
+* `interval_ms` (optional): Frame interval in milliseconds. Default 120ms.
+* Returns `True` on success.
+
+**Example:**
+
+```jython
+led_start_animation(ANIM_PULSE_HEART)
+
+import time
+time.sleep(5)
+led_stop_animation()
+```
+
+### `led_stop_animation()`
+
+Stop the currently running animation.
+
+### `led_override_begin()`
+
+Pause the saved ambient LED mode so a foreground app can draw on the matrix.
+Call this before direct LED drawing when you want to temporarily override the
+LED app.
+
+### `led_override_end()`
+
+Release a foreground LED override and restore the saved ambient LED mode.
+Call this from cleanup paths after `led_override_begin()`.
+
+### `led_screenshot([mode], [ansi])`
+
+Dump the current 8×8 LED matrix to the serial console as a bordered
+block-character image.
+
+* `mode` (optional): Rendering size on the same ladder as `oled_screenshot()`:
+  * `0.5` (float) — **quarter-block**, 4×4 chars (6 wide with border).
+  * `0` (int) — **half-block**, 8×4 chars (10 wide with border).
+  * `N` (int, ≥1) — **square** `2N` chars × `N` char-rows per LED.
+  * `N.5` (float, ≥1.5) — **tall** escape hatch, `round(2(N−1))` chars × 1
+    char-row per LED.
+
+  Default: `1` (smallest square: 2 chars × 1 row per LED, 16 chars wide).
+
+* `ansi` (optional): If `True`, lit LEDs print in bright red via ANSI escape
+  codes. Requires a terminal that interprets ANSI (not PlatformIO device
+  monitor). Default: `True`.
+
+**Example:**
+
+```jython
+led_set_pixel(0, 0, 255)
+led_set_pixel(7, 7, 255)
+led_screenshot()          # int 1 — 2W × 2W square per LED
+led_screenshot(0.5)       # float — quarter-block compact (4×4 chars)
+led_screenshot(0)         # int 0 — half-block compact (8×4 chars)
+led_screenshot(2, False)  # int 2 — bigger square, no ANSI colour
+led_screenshot(1.5)       # float — 1 char × 1 char-row per LED (tall)
+```
+
+### `screenshot([mode], [ansi])`
+
+Dump both the OLED and the LED matrix to the serial console in one call, with
+the LED matrix centred horizontally below the OLED. The quickest way to
+snapshot the full badge display state.
+
+* `mode` (optional): Rendering size for the OLED, on the same ladder as
+  `oled_screenshot()`. The LED renders **one size larger** (so each LED visual
+  cell is a step bigger than an OLED pixel), staying in the same int/float
+  family as the OLED:
+  * `0.5` (float) — OLED quarter-block (66 wide). LED at float 1.5 (1 char ×
+    1 row per LED, tall, 10 wide).
+  * `0` (int) — OLED half-block (130 wide). LED at int 1 (square 2W × 2W per
+    LED, 18 wide).
+  * `N` (int, ≥1) — OLED pixel = 2N × N chars (square). LED cell =
+    2(N+1) × (N+1) chars (square, one step larger).
+  * `N.5` (float, ≥1.5) — OLED tall. LED also tall, one step larger.
+
+  Default: `0`.
+
+* `ansi` (optional): ANSI bright-red for lit LED pixels. Default: `True`.
+
+**Example:**
+
+```jython
+screenshot()           # default — half-block OLED + small square LED
+screenshot(0.5)        # quarter-block OLED + tiny tall LED
+screenshot(1)          # OLED 2W square, LED 4W square
+screenshot(2)          # OLED 4W square, LED 6W square
+screenshot(1.5)        # tall OLED (1 char/pixel) + tall LED (3 chars/LED)
+screenshot(0, False)   # default, no ANSI colour
+```
+
+**REPL hotkey:** typing a bare `o` followed by `` at the MicroPython
+REPL runs `screenshot()` with default arguments. `o` is a global singleton
+whose `repr` triggers the screenshot, so `print(o)` and `repr(o)` work the
+same way. Rebinding (`o = 42`) replaces the hotkey within the running
+session.
+
+**Docs workflow:** open the screen on the badge, connect over USB serial
+(JumperIDE, `mpremote`, or `python3 serial_log.py`), type `o` at the REPL,
+and copy or screenshot the terminal output. Default `screenshot()` uses
+half-block OLED glyphs (readable on 2:1 monospace fonts) with the LED matrix
+centred below. Use `screenshot(0, False)` if your terminal does not interpret
+ANSI colour. The [Developer Guide](badge-developer-guide.md#serial-screenshots-oled--led)
+has mode-ladder examples and terminal tips.
+
+---
+
+## Matrix App Host
+
+Register a Python callback that the firmware calls periodically to render on
+the 8×8 LED matrix in the background. This lets apps run LED animations that
+continue while the main Python loop handles OLED and input, or even while
+no Python code is running (the callback fires from the service pump).
+
+### `matrix_app_start(callback, [interval_ms], [brightness])`
+
+Register a callable to be invoked every `interval_ms` milliseconds.
+
+* `callback`: A callable that accepts one argument — the current `millis()`
+  timestamp. Pass `None` to clear the callback.
+* `interval_ms` (optional): Tick interval in milliseconds. Minimum 16 ms.
+  Defaults to the firmware's ambient interval.
+* `brightness` (optional): LED brightness (0–255). Defaults to the firmware's
+  ambient brightness.
+
+**Example:**
+
+```jython
+frame = 0
+
+def led_tick(now_ms):
+    global frame
+    led_clear()
+    col = frame % 8
+    for row in range(8):
+        led_set_pixel(col, row, 80)
+    frame += 1
+
+matrix_app_start(led_tick, 100, 40)
+```
+
+### `matrix_app_set_speed(interval_ms)`
+
+Change the tick interval for the active callback.
+
+* `interval_ms`: New interval in milliseconds (minimum 16 ms).
+* Returns the clamped interval.
+
+### `matrix_app_set_brightness(brightness)`
+
+Change the LED brightness for the active callback.
+
+* `brightness`: New brightness (0–255).
+* Returns the clamped brightness.
+
+### `matrix_app_stop()`
+
+Unregister the callback and restore default ambient LED mode.
+
+### `matrix_app_active()`
+
+Check if a background callback is currently registered.
+
+* Returns `True` if a callback is active.
+
+### `matrix_app_info()`
+
+Return a diagnostic tuple with the current matrix app state.
+
+* Returns `(active, saved, interval_ms, brightness, overridden, invocations)`.
+
+---
+
+## App Manifest
+
+The firmware's `AppRegistry` discovers folder apps under `/apps//` at
+boot (and on demand via `rescan_apps()`) and exposes them on the main grid
+menu. Each app's tile is decorated from a small set of optional top-level
+dunder assignments inside `main.py`. The scanner reads the first ~2 KB of
+the file as text and parses the assignments without executing any code, so
+your dunders must sit at the top of the file with simple string literals.
+
+### Dunders
+
+Place these at the top of `/apps//main.py`:
+
+| Dunder | Type | Default | Purpose |
+|--------|------|---------|---------|
+| `__title__` | `str` (≤ 19 chars) | slug, title-cased | Main-menu tile label |
+| `__description__` | `str` (≤ 63 chars) | empty | Detail panel text |
+| `__icon__` | `str` (path or inline tuple) | tries `icon.py` | 12×12 home-screen icon |
+| `__matrix_title__` | `str` (≤ 19 chars) | `__title__` | MATRIX APPS picker label (only when `matrix.py` is present) |
+| `__order__` | `int` (signed) | `10000 + discovery index` | Sort key on the main grid; lower = earlier |
+
+```jython
+"""My Game — Tamagotchi-style desk pet."""
+
+__title__       = "My Game"
+__description__ = "A tiny pet that lives in your pocket."
+__icon__        = "icon.py"
+__matrix_title__ = "Pet"
+
+# ... rest of main.py ...
+```
+
+The slug is the folder name. It must match `[A-Za-z0-9_-]+` and may not
+start with a `.`; anything else is silently skipped by the scanner. The
+registry holds at most 32 dynamic apps per badge.
+
+### `icon.py` — Home-Screen Icon
+
+Path resolution for `__icon__`:
+
+* Bare filename (`"icon.py"`) → `/apps//icon.py`
+* Absolute path (`"/apps/foo/icon.py"`) → used as-is
+* Inline tuple (`"(0xFF, 0x..., )"`) → parsed directly
+
+The icon file just needs a top-level `DATA = (...)` tuple of 24 bytes
+arranged as a 12×12 packed XBM (2 bytes per row × 12 rows). Bit 0 of each
+byte is the leftmost pixel — same byte order as U8G2's `drawXBM`. The high
+4 bits of every odd byte are unused (the row is only 12 wide). `WIDTH` /
+`HEIGHT` are decorative; the firmware always reads 12×12.
+
+```jython
+"""My Game icon."""
+
+WIDTH = 12
+HEIGHT = 12
+# Two bytes per row (low = cols 0..7, high = cols 8..11). Binary
+# literals so the dot pattern is visible in the source. XBM is
+# LSB-first, so reading the literal left-to-right gives the mirrored
+# row — that's accepted, the bit values are still correct.
+DATA = (
+    0b01110111, 0b00000111,
+    0b01110111, 0b00000111,
+    0b00000000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b01100000, 0b00000000,
+    0b11111100, 0b00000011,
+    0b00000000, 0b00000000,
+    0b00111110, 0b00000000,
+    0b00100000, 0b00000000,
+    0b11100000, 0b00000011,
+    0b00000000, 0b00000010,
+    0b11000000, 0b00000011,
+)
+```
+
+If `__icon__` is omitted, the registry still tries
+`/apps//icon.py` opportunistically. If that file is missing or
+unparsable the tile falls back to the generic apps glyph.
+
+### `matrix.py` — Persistent Matrix App
+
+A sibling `matrix.py` next to `main.py` enables the app's slot in the
+**MATRIX APPS** picker (main menu → MATRIX APPS). Selecting it persists the
+slug to `/led_state.json` and re-sources `matrix.py` once on every boot
+that selection survives. The script's only job is to register a callback
+via [`matrix_app_start`](#matrix-app-host) and return — *do not* spin a
+main loop.
+
+```jython
+"""Drifting-dot ambient."""
+
+__matrix_title__ = "Drift"
+
+import badge
+
+_phase = 0
+
+def _tick(now_ms):
+    global _phase
+    _phase = (_phase + 1) & 7
+    frame = [0] * 8
+    frame[7] = 0x80 >> _phase
+    badge.led_set_frame(frame)
+
+badge.matrix_app_start(_tick, 250, 24)
+```
+
+Same constraints as any other `matrix_app_start` callback: it runs from the
+firmware service pump, so keep ticks fast and don't block. The firmware
+tears down the previous callback for you when the user picks a different
+matrix app or any built-in mode (Sparkle, Off, etc.) — there's no need to
+call `matrix_app_stop()` from your script when switching modes.
+
+### `rescan_apps()`
+
+Force the registry to re-scan `/apps/` after editing manifests, without
+rebooting:
+
+```jython
+import badge
+badge.rescan_apps()
+```
+
+This rebuilds the main-menu grid in place. Existing screens stay open.
+
+### Tile Order (`__order__`)
+
+The main grid is rendered in stable-sort order by a signed `int16` key.
+Three layers feed the key, each overriding the previous one:
+
+1. **Defaults.** Curated tiles use `10 × array index` (with `SETTINGS`
+   pinned to `30000` so it stays at the back). Dynamic apps default to
+   `10000 + discovery index`.
+2. **App manifest.** `__order__ = 50` at the top of `main.py` claims a
+   specific slot. Any signed integer literal works.
+3. **User override.** The manual reorder UI (Settings → Menu → Reorder)
+   writes per-label overrides into the `menu_order` NVS namespace;
+   those override both of the above.
+
+Ties resolve by insertion order — duplicate keys keep the order
+established by the previous layer. Negative keys land before all
+curated tiles; large keys land near `SETTINGS`.
+
+```jython
+__order__ = -10   # before BOOP / CONTACTS / …
+__order__ = 25    # between MAP (30) and SCHEDULE (40)
+__order__ = 9999  # nearly last
+```
+
+### Manual Reorder Screen
+
+Players can rearrange the grid themselves at runtime:
+
+> Settings → **Menu → Reorder**
+
+| Button | Action |
+|--------|--------|
+| Joystick Y | Move cursor up/down |
+| `X` | Pick up / drop a row |
+| `A` (confirm) | Save and rebuild |
+| `B` (back) | Cancel without saving |
+
+While picked up, dragging Y swaps the row through the list in real
+time. Saving writes the new positions into NVS (`menu_order`
+namespace, FNV-1a-hashed labels as keys). **Settings → Menu → Reset
+Order** wipes the namespace and returns every tile to its default
+order.
+
+---
+
+## IMU (Accelerometer)
+
+LIS2DH12 3-axis accelerometer for tilt sensing and motion detection.
+
+### `imu_ready()`
+
+Check if the IMU is initialized and taking readings.
+
+* Returns `True` if the IMU is ready.
+
+### `imu_tilt_x()`
+
+Read the smoothed X-axis tilt.
+
+* Returns a float in milli-g (mG). Typical range ±1000 mG.
+
+### `imu_tilt_y()`
+
+Read the smoothed Y-axis tilt.
+
+* Returns a float in milli-g (mG). Typical range ±1000 mG.
+
+### `imu_accel_z()`
+
+Read the Z-axis acceleration.
+
+* Returns a float in milli-g (mG). ~1000 mG when stationary (1g gravity).
+
+### `imu_face_down()`
+
+Check if the badge is face-down.
+
+* Returns `True` if the badge is face-down (Z-axis below threshold).
+
+### `imu_motion()`
+
+Check for a motion event. **Consumes** the event on read — calling again
+returns `False` until new motion is detected.
+
+* Returns `True` if motion was detected since the last call.
+
+**Example:**
+
+```jython
+import time
+
+while True:
+    if imu_motion():
+        oled_clear()
+        oled_println("Motion!")
+        haptic_pulse()
+
+    x = imu_tilt_x()
+    y = imu_tilt_y()
+
+    # Map tilt to LED matrix pixel
+    px = int((x + 1000) / 250)
+    py = int((y + 1000) / 250)
+    px = max(0, min(7, px))
+    py = max(0, min(7, py))
+
+    led_clear()
+    led_set_pixel(px, py, 100)
+    time.sleep(0.05)
+```
+
+---
+
+## Haptics
+
+Vibration motor with PWM control and audible coil tone support. The motor can
+produce haptic feedback pulses or, at very low duty cycles, audible tones from
+coil vibration.
+
+### `haptic_pulse([strength], [duration_ms], [freq_hz])`
+
+Fire a haptic vibration pulse. All parameters are optional — omitted values use
+the configured defaults (strength ~155, duration ~35ms, frequency ~80Hz).
+
+* `strength` (optional): Motor intensity (0–255).
+* `duration_ms` (optional): Pulse duration in milliseconds.
+* `freq_hz` (optional): PWM carrier frequency in Hz.
+
+**Example:**
+
+```jython
+haptic_pulse()              # Default pulse
+haptic_pulse(200)           # Stronger
+haptic_pulse(100, 50)       # Medium strength, 50ms
+haptic_pulse(255, 100, 150) # Full strength, 100ms, 150Hz carrier
+```
+
+### `haptic_strength([value])`
+
+Get or set the default motor strength used by `haptic_pulse()`.
+
+* `value` (optional): New strength (0–255). If omitted, just returns current.
+* Returns the current strength (0–255).
+
+**Example:**
+
+```jython
+print(haptic_strength())    # Read current
+haptic_strength(200)        # Set to 200
+```
+
+### `haptic_off()`
+
+Immediately stop the motor and cancel any active pulse.
+
+### `tone(freq_hz, [duration_ms], [duty])`
+
+Play an audible tone from the motor coil. At very low duty cycles (~30/255),
+the coil doesn't spin but vibrates audibly at the PWM frequency.
+
+* `freq_hz`: Tone frequency in Hz.
+* `duration_ms` (optional): Duration in milliseconds. `0` or omitted = play
+  until `no_tone()`.
+* `duty` (optional): Duty cycle (0–255). Default 30.
+
+**Example:**
+
+```jython
+import time
+
+# Play a scale
+for freq in [262, 294, 330, 349, 392, 440, 494, 523]:
+    tone(freq, 200)
+    time.sleep(0.25)
+
+# Continuous tone until stopped
+tone(440)
+time.sleep(2)
+no_tone()
+```
+
+### `no_tone()`
+
+Stop the currently playing tone.
+
+### `tone_playing()`
+
+Check if a tone is currently playing.
+
+* Returns `True` if a tone is active.
+
+---
+
+## IR Send/Receive
+
+Infrared communication over a modified NEC protocol using the onboard IR LED
+(TX) and TSOP receiver (RX). The RMT-driven encoder automatically prepends an
+NEC leader, packs each payload word, appends a CRC32, and emits a trailing
+pulse — MicroPython just picks the payload.
+
+Two payload shapes are available:
+
+* **Classic 1-byte/1-byte frames** via `ir_send(addr, cmd)` / `ir_read()`.
+  A single 32-bit NEC word `(~addr, addr, ~cmd, cmd)`, ~110 ms on wire.
+* **Multi-word frames** via `ir_send_words(words)` / `ir_read_words()`.
+  1–64 raw 32-bit words (up to 256 bytes of payload) with an appended CRC.
+  Each data word adds ~54 ms, so a 3-word frame ≈ 230 ms on wire.
+
+The Boop screen and MicroPython share the same RMT hardware; `ir_start()`
+brings the radio up for Python use and waits for it to be ready before
+returning, so the first `ir_send*()` after `ir_start()` will not race.
+
+### `ir_send(addr, cmd)`
+
+Transmit a single classic NEC frame.
+
+* `addr`: NEC address byte (0–255).
+* `cmd`: NEC command byte (0–255).
+
+Blocks briefly while the RMT hardware streams the frame. Returns `0` on
+success; raises `OSError` if the IR hardware is down (e.g. called before
+`ir_start()`).
+
+### `ir_start()`
+
+Bring the IR hardware up and start receiving in Python mode. Incoming frames
+are queued in an 8-slot ring buffer for retrieval with `ir_read()` or
+`ir_read_words()`. `ir_start()` blocks up to ~500 ms while Core 0 powers the
+RMT channel, and drains any stale frames left over from the Boop screen.
+
+### `ir_stop()`
+
+Stop Python IR RX and drop any queued frames. Does **not** power down the
+hardware — the Boop screen may still use it.
+
+### `ir_available()`
+
+Check if at least one classic NEC frame is waiting in the RX queue.
+
+* Returns `True` if `ir_read()` would return a frame.
+
+### `ir_read()`
+
+Pop one classic NEC frame from the queue.
+
+* Returns `(addr, cmd)` if a frame is available, or `None` if the queue
+  is empty.
+
+**Example:**
+
+```jython
+import time
+
+ir_start()
+oled_println("Listening for IR...")
+
+while True:
+    if ir_available():
+        frame = ir_read()
+        if frame:
+            addr, cmd = frame
+            oled_clear()
+            oled_println("IR: " + hex(addr) + " " + hex(cmd))
+            haptic_pulse()
+    time.sleep(0.05)
+```
+
+### `ir_send_words(words)`
+
+Transmit a multi-word NEC frame. The encoder automatically emits a leader,
+then each word LSB-first, then a CRC32 over the payload.
+
+* `words`: A list, tuple or other sequence of 1–64 integers. Each element is
+  converted to an unsigned 32-bit value.
+* Raises `ValueError` if the sequence is empty or longer than 64 words.
+* Raises `OSError(1)` if the IR hardware is not up (e.g. before `ir_start()`).
+
+**Example:**
+
+```jython
+ir_start()
+ir_send_words([0xB0, 0xDEADBEEF, 0x12345678])
+```
+
+### `ir_read_words()`
+
+Read one received multi-word NEC frame.
+
+* Returns a `tuple` of up to 64 integers (the payload words, CRC-validated
+  and stripped by the decoder) if a frame is available.
+* Returns `None` if the RX queue is empty.
+
+### `ir_flush()`
+
+Drop every pending RX frame (both classic and multi-word queues). Safe to
+call at any time; a no-op if the IR hardware is down.
+
+### `ir_tx_power([percent])`
+
+Get or set the IR carrier duty cycle. A higher duty drives the IR LED harder
+and extends range at the cost of current and LED stress.
+
+* `percent` (optional): New duty cycle in the range **1–50** (percent of the
+  38 kHz carrier period). Call with no argument to just read the current
+  value. Power-on default is **50**.
+* Returns the current duty as an integer percent after the (optional) set.
+* Raises `ValueError` if `percent` is outside 1–50.
+
+**Example:**
+
+```jython
+ir_start()
+print("Default duty:", ir_tx_power())   # 50
+ir_tx_power(10)                          # throttle down for self-loopback
+```
+
+---
+
+## Badge Identity & Boops
+
+### `my_uuid()`
+
+Return this badge's globally unique identifier, derived from the ESP32-S3
+eFuse `OPTIONAL_UNIQUE_ID` (first 6 bytes, hex-encoded).
+
+* Returns a 12-character lowercase hex string, e.g. `"a1b2c3d4e5f6"`.
+
+### `boops()`
+
+Return the on-flash `/boops.json` contents as a string. This is the same
+document that the Boop screen maintains — each completed boop is appended
+with the peer UID, peer name / ticket (if the server backfilled them), and
+a `status` field (`"ok"`, `"local"`, etc.).
+
+* Returns a JSON string. When no boops have been recorded yet, returns
+  `'{"pairings":[]}'` so callers can always `json.loads()` the result.
+
+**Example:**
+
+```jython
+import json
+
+data = json.loads(boops())
+for p in data.get("pairings", []):
+    oled_println(p.get("peer_badge_uid", "?"))
+oled_show()
+```
+
+---
+
+## Script Control
+
+### `exit()`
+
+Cleanly stop the currently running MicroPython app by raising `SystemExit`.
+Prefer this over `sys.exit()` so the host runtime sees the same exception
+type the rest of the firmware expects.
+
+Holding all four face buttons for about 1 second also force-exits the running
+app from outside.
+
+### `dev(*args)` *(dev builds only)*
+
+Variadic string-argument dispatcher for the firmware test harness. Only
+available in builds with `BADGE_ENABLE_MP_DEV` (e.g. the `echo-dev`
+PlatformIO environment). Each argument is coerced to a string and forwarded
+to the C++ runtime. Returns a string result.
+
+---
+
+## Filesystem Access
+
+The badge's VFS is mounted and accessible through the standard `os` module.
+Apps can read and write files for saving state, high scores, or configuration.
+
+```jython
+import os
+
+os.listdir("/apps")
+os.listdir("/")
+
+with open("/apps/my_app/save.json", "w") as f:
+    f.write('{"score": 42}')
+
+with open("/apps/my_app/save.json", "r") as f:
+    data = f.read()
+```
+
+Available `os` operations: `listdir`, `mkdir`, `remove`, `rename`, `stat`,
+`getcwd`, `chdir`, `ilistdir`, `statvfs`. Standard `open()` / `read()` /
+`write()` / `close()` work as expected.
+
+---
+
+## Mouse Overlay
+
+Hardware-composited cursor overlay for building GUIs and games. When enabled,
+a cursor sprite is automatically drawn on top of the OLED framebuffer at every
+display refresh. The joystick controls cursor position and face buttons
+generate click events — all handled asynchronously in the service pump so
+Python code only needs to query position and clicks.
+
+### `mouse_overlay(enable)`
+
+Enable or disable the cursor overlay.
+
+* `enable`: `True` to enable, `False` to disable.
+
+When enabled, the joystick moves the cursor and button presses are captured
+as click events (instead of being consumed by `button_pressed()`).
+
+**Example:**
+
+```jython
+mouse_overlay(True)
+mouse_set_pos(64, 32)
+
+while True:
+    oled_clear()
+    oled_set_cursor(0, 0)
+    oled_print("x:" + str(mouse_x()) + " y:" + str(mouse_y()))
+    oled_show()
+
+    btn = mouse_clicked()
+    if btn == BTN_RIGHT:
+        oled_println("Clicked!")
+    if btn == BTN_LEFT:
+        break
+    time.sleep_ms(30)
+
+mouse_overlay(False)
+```
+
+### `mouse_set_bitmap(data, w, h)`
+
+Set a custom cursor sprite. Format is a packed 1-bit-per-pixel bitmap,
+row-major, **MSB-first within each byte** (the leftmost pixel of a row is
+bit 7 of its first byte). Each row is padded to a whole number of bytes, so
+`ceil(w / 8) * h` bytes are read from `data`.
+
+* `data`: `bytes` or `bytearray` containing the bitmap.
+* `w`: Width in pixels (1–32). Values larger than 32 are clamped to 32.
+* `h`: Height in pixels (1–32). Values larger than 32 are clamped to 32.
+
+The internal cursor buffer is 128 bytes, so any `(w, h)` with
+`ceil(w / 8) * h ≤ 128` is accepted. A 32×32 sprite uses the entire buffer.
+The hot-spot is automatically set to the sprite's center. The default cursor
+is an 8×8 arrow pointer.
+
+**Example:**
+
+```jython
+# 8x8 crosshair cursor
+crosshair = bytes([
+    0b00010000,
+    0b00010000,
+    0b00010000,
+    0b11101110,
+    0b00010000,
+    0b00010000,
+    0b00010000,
+    0b00000000,
+])
+mouse_set_bitmap(crosshair, 8, 8)
+```
+
+### `mouse_x()`
+
+Returns the current cursor X position (0–127).
+
+### `mouse_y()`
+
+Returns the current cursor Y position (0–63).
+
+### `mouse_set_pos(x, y)`
+
+Warp the cursor to an absolute position.
+
+* `x`: X position (clamped to 0–127).
+* `y`: Y position (clamped to 0–63).
+
+### `mouse_clicked()`
+
+Read the last click event. Returns the button ID (`BTN_RIGHT`, `BTN_DOWN`,
+`BTN_LEFT`, `BTN_UP`) or `-1` if no click is pending. **Consumes** the event
+on read — calling again returns `-1` until a new button is pressed.
+
+### `mouse_set_speed(speed)`
+
+Set the cursor movement speed (only affects relative mode).
+
+* `speed`: Pixels per joystick poll at full deflection (1–20). Default is 3.
+
+**Example:**
+
+```jython
+mouse_set_speed(5)   # faster cursor
+mouse_set_speed(1)   # very precise
+```
+
+### `mouse_set_mode(mode)`
+
+Switch between absolute and relative positioning.
+
+* `mode`: `MOUSE_ABSOLUTE` (joystick position = cursor position) or
+  `MOUSE_RELATIVE` (joystick deflection = cursor velocity). Default is
+  `MOUSE_RELATIVE`.
+
+In **absolute** mode the cursor tracks the joystick 1:1 — stick center is
+screen center. In **relative** mode the joystick acts like a mouse — deflect
+to move, release to stop. Use `mouse_set_speed()` and `mouse_set_pos()` to
+tune relative mode.
+
+**Example:**
+
+```jython
+mouse_set_mode(MOUSE_RELATIVE)
+mouse_set_pos(64, 32)
+mouse_set_speed(4)
+```
+
+---
+
+## Constants Reference
+
+### Buttons
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `BTN_RIGHT` | 0 | Right button |
+| `BTN_DOWN` | 1 | Down button |
+| `BTN_LEFT` | 2 | Left button |
+| `BTN_UP` | 3 | Up button |
+| `BTN_CIRCLE` | 0 | PlayStation-style alias for right |
+| `BTN_CROSS` | 1 | PlayStation-style alias for down |
+| `BTN_SQUARE` | 2 | PlayStation-style alias for left |
+| `BTN_TRIANGLE` | 3 | PlayStation-style alias for up |
+| `BTN_CONFIRM` | 4 | Semantic confirm/select, follows `swap_ok` |
+| `BTN_SAVE` | 4 | Semantic save/apply, follows `swap_ok` |
+| `BTN_BACK` | 5 | Semantic back/cancel, follows `swap_ok` |
+| `BTN_PRESETS` | 3 | Semantic alias for preset/actions |
+
+### LED Matrix Images
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `IMG_SMILEY` | `"smiley"` | Smiley face |
+| `IMG_HEART` | `"heart"` | Heart shape |
+| `IMG_ARROW_UP` | `"arrow_up"` | Upward arrow |
+| `IMG_ARROW_DOWN` | `"arrow_down"` | Downward arrow |
+| `IMG_X_MARK` | `"x_mark"` | X mark |
+| `IMG_DOT` | `"dot"` | Center dot |
+
+### LED Matrix Animations
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `ANIM_SPINNER` | `"spinner"` | Rotating spinner |
+| `ANIM_BLINK_SMILEY` | `"blink_smiley"` | Blinking smiley face |
+| `ANIM_PULSE_HEART` | `"pulse_heart"` | Pulsing heart |
+
+### Mouse Overlay Modes
+
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `MOUSE_ABSOLUTE` | 1 | Joystick position = cursor position |
+| `MOUSE_RELATIVE` | 0 | Joystick deflection = cursor velocity (default) |
+
+---
+
 # Glossary of Terms
 
 
@@ -5295,9 +9028,9 @@ These [stick-on rubber feet](https://www.amazon.com/AmazonBasics-300-Piece-Adhes
 
 ## Slots and Files
 
-`slot` = one of **10** saved circuit configurations (slots 0-9) that you can switch between. Use `<` to cycle forward through slots, or use the menus to jump to a specific slot. The **active slot** is the one currently loaded and affecting the hardware.
+`slot` = one of **8** saved circuit configurations (slots 0-7) that you can switch between. Use `<` to cycle forward through slots, or use the menus to jump to a specific slot. The **active slot** is the one currently loaded and affecting the hardware.
 
-`slot file` = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at `/slots/slotN.yaml` where N is 0-9. These files are human-readable and can be edited directly!
+`slot file` = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at `/slots/slotN.yaml` where N is 0-7. These files are human-readable and can be edited directly!
 
 `active slot` = the currently loaded slot. Only the active slot affects the hardware. Use `Q` command to query which slot is active. When you make connections with the probe, they're saved to the active slot automatically.
 
@@ -5314,14 +9047,14 @@ Slot files use YAML format with named nodes for readability:
 ```yaml
 bridges:
   - {n1: 1, n2: 10, dup: 2, color: red}
-  - {n1: NANO_D5, n2: GPIO_1, dup: 2}
+  - {n1: NANO_D5, n2: GP_1, dup: 2}
 
 power:
   topRail: 3.30
   bottomRail: 2.50
 ```
 
-**Named nodes:** `NANO_D0-D13`, `NANO_A0-A7`, `GPIO_1-8`, `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0_5V`, `DAC1_5V`, etc.
+**Named nodes:** `NANO_D0-D13`, `NANO_A0-A7`, `GP_1-8` (or `RP_GPIO_1-8`), `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`, etc. (Note these differ from the MicroPython constants - `GPIO_1` and `DAC0_5V` won't parse in slot files.)
 
 You can view and edit these files in the [File Manager](08-file-manager.md) or via USB Mass Storage mode (`U` command).
 
@@ -5336,5 +9069,60 @@ You can view and edit these files in the [File Manager](08-file-manager.md) or v
 5. Circuit is converted and saved to active slot
 
 The parser automatically maps Wokwi breadboard pins, Arduino Nano pins, and logic analyzer channels to Jumperless nodes, and preserves your wire colors from Wokwi!
+
+---
+
+# Find Me Widget
+
+
+Hover an icon — it grows, goes rainbow, and shows the link in the middle so you can copy it. This is the same widget on the [home page](/).
+
+---
+
+## Embed on your site
+
+One script tag, one element. Styles stay inside a Shadow DOM so your site's CSS won't fight it.
+
+### Basic
+
+```html
+
+```
+
+Uses the default links and background image from this site.
+
+### Custom background or height
+
+```html
+
+```
+
+### Custom title
+
+```html
+
+```
+
+### Custom links
+
+Icon names come from [Simple Icons](https://simpleicons.org/) (`discord`, `github`, `bluesky`, `youtube`, …).
+
+```html
+
+```
+
+### iframe (no JavaScript on your page)
+
+Minimal chrome-free version for CMSes that only allow embeds:
+
+```html
+
+```
+
+### Self-host
+
+Copy [`find-me-dock.js`](/embed/find-me-dock.js) to your server and point the script tag at your copy. Host your own background image or pass a full URL in `background=`.
+
+Full API comments are at the top of that file in the repo.
 
 ---
