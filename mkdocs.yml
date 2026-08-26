@@ -21,6 +21,7 @@ not_in_nav: |
 nav:
   - Home: index.md
   - Basic Controls: 01-basic-controls.md
+  - Parts: 02-parts.md
   - The App: 03-app.md
   - OLED Support: 04-oled.md
   - Arduino Stuff: 05-arduino.md
