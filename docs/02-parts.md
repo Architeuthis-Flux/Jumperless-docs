@@ -14,7 +14,9 @@ Click into the menu and pick `Parts`. You'll get a class picker on the breadboar
 - `Transistors` - BJTs and MOSFETs
 - `Displays` - OLED panels and friends
 - `Modules` - BME280, MPU6050, and other breakout boards
-- `Clear parts` - shows up whenever you have parts placed
+- `Remove parts` - take parts off the board (leg by leg, or whole)
+
+(There's also [`Auto Scan`](#auto-scan), where the board figures out what's plugged in by itself.)
 
 Scroll with the clickwheel, click to pick a class, then pick your part the same way.
 
@@ -29,6 +31,49 @@ Modules and SIP-header parts have **no standard pin order** - one vendor's OLED 
 Every tap you land flashes that row green, and the rows you've already tapped stay lit so you can see your progress. Tapped the wrong row? It won't let you tap the same row twice for one part, and clicking the wheel backs you out to try again.
 
 Two-legged passives (resistors, LEDs, diodes) get both ends tapped - one hole on the top half, the matching hole on the bottom half. For polarized parts, whichever signal you tap is where that signal *is*, so the anode/cathode labels always match reality.
+
+## Auto Scan
+
+Or skip all that: `Parts` > `Auto Scan` sweeps the board, measures whatever conducts, names what it can prove, and asks - one find at a time - whether to add it as a placed part. It starts by **lifting your wiring** so every row is measurable; finished, aborted, or refused, every wire goes back exactly as it was. Any press stops it - probe button, wheel, or any key.
+
+The board itself shows the work: the census cursor drags a rainbow down the rows, anything that conducts stays lit green, empties go dark. A second pass sweeps *pairs* of rows to catch parts a single-row poke can't see (a lone transistor conducts between its legs, not to ground). The OLED narrates the phase; the terminal gets the full play-by-play.
+
+![The board mid-scan: everything that conducts is lit green](assets/autoscan-hits.png)
+
+![OLED: scanning the board](assets/autoscan-oled-scanning.png)
+
+Then each cluster of hits gets interrogated with the same measurement machinery `Test Part` uses - real characterization, not just continuity, so this part takes a minute or two:
+
+```jython
+PARTSCAN spans=6
+  interrogating rows 3-6...
+  rows 3-6: 4 legs (a chip?)
+  row 10: noise (nothing conducts)
+  rows 44-46: BJT_PNP 0.59V
+  walking everything that shares row 58...
+  rows 57,55,54,52,28,27,23,22 all light from row 58 - a 7-seg display? (common anode)
+PARTSCAN auto done in 123s - 2 placeable (CONNECT adds them to the board)
+```
+
+- **Two-lead parts** come back typed and measured - `RESISTOR 10.0kΩ`, `LED 1.85V` - anode painted **red**, cathode **blue**.
+- **Transistors** get their pinout (emitter **red**, base **amber**, collector **blue**) and the measured junction drop. Something that *acts* like a transistor with an impossible junction voltage gets called a chip's pins instead - a TTL input fakes transistor action, but it can't fake physics.
+- **Chips** are reported as presence - `4 legs (a chip?)` - never a guessed part number. But the scan reads their clamp diodes to find the power pins, quietly powers them, and knocks on the I2C bus: a module that answers is named by address (an SSD1306 shows up as `I2C 0x3C module`) and *is* placeable.
+- **LED displays** are caught through their common pin: rows that all light from one shared row become `a 7-seg display?` - and it offers to wire it (below).
+- **Noise is dismissed** after a real interrogation, and parts you've already placed are recognized (`7SEG52 (placed)`) and left alone.
+
+![The verdict: a chip's span, a PNP in E/B/C colors, and a 7-seg with its common](assets/autoscan-verdict.png)
+
+**Saying yes.** Findings are offered one at a time: `Connect` (or `y`) adds, click (or `n`) skips, hold the wheel to finish early. An added part is a real placed part - labels, tap-to-ask, saved with your slot - and its labels bloom right after the scan:
+
+![OLED: add BJT_PNP rows 44-46?](assets/autoscan-oled-confirm.png)
+
+![New parts' labels blooming after the scan](assets/autoscan-bloom.gif)
+
+**A display wires itself.** If the scan found an LED display, the last question is `wire? 8-seg display (common 58) to GPIOs`. Say yes and every segment gets its own GPIO through the crossbar, the common goes to the rail matching its polarity, and the nets are named `7SEG52_S1`-`S8` - drive it from MicroPython without ever touching a wire.
+
+![OLED: wire the display to GPIOs?](assets/autoscan-oled-wire.png)
+
+**When it refuses:** a board that reads powered (`board reads powered - scan can't see parts`), a span that reads powered (`not a part`), or no free ADC lane to measure with (`no clean ADC lane`) each stop the scan honestly rather than clustering phantoms out of your supply rail.
 
 ## Power is wired for you
 
@@ -48,7 +93,7 @@ If you tap a power pin onto a row that's already connected to the *opposite* thi
 
 **Warnings show, never block.** If a part's power pin ends up on a grounded net, or its ground pin on a hot rail, the part's pins light up in warning colors and the OLED tells you why (`VCC_TO_GND!`). That's it - the board never refuses your wiring, it just makes sure you know.
 
-**Clearing.** `Parts` > `Clear parts` removes every part (it asks first - confirm with the probe's `Connect` button). Clearing the whole board clears its parts too. Parts are saved with your slot, so they come back after a reboot.
+**Removing.** `Parts` > `Remove parts` splits the work between the control surfaces, the way you'd expect. The probe does the precise work: tap a leg of a placed part and just that leg is removed - its bridge, its net name, its entry in the part - and removing the last leg removes the part itself. The wheel does the coarse work: scroll through your placed parts (each one highlights on the board with its card on the panel) and a click removes the whole highlighted part. The scroll's last stop is `All`, which clears every part (it asks first - confirm with the probe's `Connect` button). Clearing the whole board (`x`) clears its parts too. Parts are saved with your slot, so they come back after a reboot.
 
 ## Breadboard Displays
 

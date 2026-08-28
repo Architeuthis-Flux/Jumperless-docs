@@ -1,31 +1,95 @@
 # Config File
 
-To change any persistent settings that apply to the Jumperless as a whole, there's a `config` file. You can read it with `~` and edit settings by copying any of those lines, pasting it back, and changing the value to whatever you want it to be. 
+To change any persistent settings that apply to the Jumperless as a whole, there's a `config` file. There are three ways to poke at it, pick whichever fits your mood:
+
+1. **The interactive editor** - enter a bare `` ` `` (backtick) and get a full menu with arrow keys, descriptions, and live-updating values
+2. **Copy / paste** - print the config with `~`, copy a line, change the value, paste it back
+3. **Edit the file** - it's just `config.txt` on the filesystem, edit it however you like
+
+## The Interactive Editor
+
+Enter a single `` ` `` (backtick, nothing else) into the terminal and you get a config menu instead of a config file:
+
+![The interactive config editor's category list](assets/config-tui-categories.png)
+
+The categories are organized by what you're actually trying to mess with (`Probe`, `Clickwheel`, `Measurement`, `Display`...), with the plumbing (`Calibration`, `Hardware`) further down, and `All` at the top if you'd rather scroll one flat list of everything.
+
+The keys:
+
+- `up` / `down` - move (the pane on the right describes whatever you're on: what it does, its range, its default)
+- `enter` - open a category, or change the highlighted value (numbers and strings get inline editing, on/off options just toggle)
+- `left` / `right` - step a value up/down, or cycle through its choices
+- `d` - reset the highlighted option to its default
+- `left` or `q` - back / exit
+
+![Inside the Probe category](assets/config-tui-probe.png)
+
+**Changes apply live.** Every edit goes through the same machinery as the paste path, so the board reacts while you're still in the menu - hold `right` on `led_brightness` and the breadboard gets brighter under your finger, change the OLED font and it redraws, tweak the menu FX and the next transition wears it.
+
+![The Display category - brightness sliders that apply as you arrow through them](assets/config-tui-display.png)
+
+There's also a `Menu FX Tuner` category at the bottom that opens a live tuner for the click-menu frame transitions (it drives the real breadboard menu while you play with it), and a `Reset to defaults` that resets everything except calibration and hardware identity.
 
 ## Viewing Config.txt
 
-You can enter `~` to print the config. 
+If you'd rather see the whole thing at once, enter `~` to print the config. 
 
 ```jython
 ~
 
 copy / edit / paste any of these lines 
+
 into the main menu to change a setting
 
 Jumperless Config:
 
-
-`[config] firmware_version = 5.6.5.15;
+`[config] firmware_version = 5.7.8.1;
 
 `[hardware] generation = 5;
 `[hardware] revision = 7;
 `[hardware] probe_revision = 5;
-`[hardware] psram_installed = 0;
+`[hardware] psram_installed = false;
+`[hardware] psram_app_size_kb = 2048;
 
-`[dacs] set_dacs_on_boot = false;
-`[dacs] set_rails_on_boot = true;
-`[dacs] probe_power_dac = 0;
-`[dacs] auto_connect_probe = 1;
+`[probe] auto_connect = on;
+`[probe] power_source = dac0_first;
+`[probe] use_pio_button = true;
+`[probe] led_on_button_pin = true;
+`[probe] led_refresh_us = 0;
+`[probe] pad_max = 4056;
+`[probe] pad_min = 15;
+`[probe] pad_max_measure = 4111;
+`[probe] pad_max_measure_gpio = 4110;
+`[probe] pad_min_measure = 10;
+`[probe] switch_threshold_high = 1.2000;
+`[probe] switch_threshold_low = 0.9000;
+`[probe] switch_select_max_ma = 0.0000;
+`[probe] switch_blink_hold_pct = 50;
+`[probe] measure_voltage = 3.3671;
+`[probe] current_zero = 2.1667;
+`[probe] min_valid_reading = 85;
+`[probe] droop_v0 = 3.3500;
+`[probe] droop_ohms = 169.6479;
+`[probe] pad_ohms = 5.0000;
+
+`[clickwheel] encoder_pio = auto;
+`[clickwheel] rail_click_adjust = oled_only;
+`[clickwheel] fx_type = glow;
+`[clickwheel] fx_duration_ms = 160;
+`[clickwheel] fx_tint = 0x00;
+`[clickwheel] fx_density = 128;
+
+`[measurement] net_currents = 1;
+`[measurement] current_flow = conventional;
+`[measurement] show_probe_current = 0;
+`[measurement] crosspoint_resistance = 40.0000;
+
+`[terminal] colors = true;
+`[terminal] line_buffering = true;
+
+`[undo] persist = true;
+`[undo] max_saved_actions = 256;
+
 `[dacs] limit_max = 8.00;
 `[dacs] limit_min = -8.00;
 
@@ -33,53 +97,50 @@ Jumperless Config:
 `[debug] net_manager = false;
 `[debug] nets_to_chips = false;
 `[debug] nets_to_chips_alt = false;
-`[debug] leds = false;
 `[debug] probing = false;
-`[debug] oled = false;
-`[debug] logo_pads = false;
-`[debug] logic_analyzer = true;
 `[debug] arduino = 0;
-`[debug] usb_mass_storage = false;
+`[debug] show_node_errors = true;
+`[debug] probe_switch_stats = false;
+`[debug] probe_switch_agree = false;
+`[debug] net_voltage_scan = false;
+`[debug] net_scan_pair_taps = 1;
 
 `[routing] stack_paths = 2;
 `[routing] stack_rails = 3;
 `[routing] stack_dacs = 0;
-`[routing] rail_priority = 1;
+
+`[slots] boot_mode = last_active;
+`[slots] boot_slot = 0;
 
 `[calibration] top_rail_zero = 1655;
-`[calibration] top_rail_spread = 18.80;
-`[calibration] bottom_rail_zero = 1655;
-`[calibration] bottom_rail_spread = 19.27;
+`[calibration] top_rail_spread = 18.4000;
+`[calibration] bottom_rail_zero = 1639;
+`[calibration] bottom_rail_spread = 19.0000;
 `[calibration] dac_0_zero = 1655;
-`[calibration] dac_0_spread = 19.53;
-`[calibration] dac_1_zero = 1650;
-`[calibration] dac_1_spread = 19.44;
-`[calibration] adc_0_zero = 8.95;
-`[calibration] adc_0_spread = 17.89;
-`[calibration] adc_1_zero = 8.91;
-`[calibration] adc_1_spread = 17.81;
-`[calibration] adc_2_zero = 8.97;
-`[calibration] adc_2_spread = 17.90;
-`[calibration] adc_3_zero = 8.89;
-`[calibration] adc_3_spread = 17.79;
-`[calibration] adc_4_zero = 0.00;
-`[calibration] adc_4_spread = 4.86;
-`[calibration] adc_7_zero = 9.24;
-`[calibration] adc_7_spread = 18.34;
-`[calibration] probe_max = 4055;
-`[calibration] probe_min = 25;
-`[calibration] probe_switch_threshold_high = 1.30;
-`[calibration] probe_switch_threshold_low = 1.14;
-`[calibration] probe_switch_threshold = 0.40;
-`[calibration] measure_mode_output_voltage = 3.27;
-`[calibration] probe_current_zero = 2.41;
-`[calibration] minimum_probe_reading = 85;
+`[calibration] dac_0_spread = 18.2300;
+`[calibration] dac_1_zero = 1629;
+`[calibration] dac_1_spread = 19.0300;
+`[calibration] adc_0_zero = 8.9969;
+`[calibration] adc_0_spread = 18.0563;
+`[calibration] adc_1_zero = 8.9903;
+`[calibration] adc_1_spread = 18.0659;
+`[calibration] adc_2_zero = 8.9993;
+`[calibration] adc_2_spread = 18.0637;
+`[calibration] adc_3_zero = 8.9826;
+`[calibration] adc_3_spread = 18.0345;
+`[calibration] adc_4_zero = 0.0000;
+`[calibration] adc_4_spread = 4.9151;
+`[calibration] adc_7_zero = 8.8184;
+`[calibration] adc_7_spread = 17.7676;
 
 `[logo_pads] top_guy = uart_tx;
 `[logo_pads] bottom_guy = uart_rx;
 `[logo_pads] building_pad_top = isense_pos;
-`[logo_pads] building_pad_bottom = isense-;
-`[logo_pads] repeat_ms = 100;
+`[logo_pads] building_pad_bottom = isense_neg;
+`[logo_pads] top_guy_idle = off;
+`[logo_pads] bottom_guy_idle = off;
+`[logo_pads] building_pad_top_idle = off;
+`[logo_pads] building_pad_bottom_idle = off;
 
 `[display] lines_wires = wires;
 `[display] menu_brightness = -10;
@@ -87,45 +148,49 @@ Jumperless Config:
 `[display] rail_brightness = 55;
 `[display] special_net_brightness = 20;
 `[display] net_color_mode = rainbow;
-`[display] dump_leds = ;
-`[display] dump_format = image;
-`[display] terminal_line_buffering = 0;
 
 `[serial_1] function = passthrough;
 `[serial_1] baud_rate = 115200;
-`[serial_1] print_passthrough = false;
-`[serial_1] connect_on_boot = false;
-`[serial_1] lock_connection = false;
-`[serial_1] autoconnect_flashing = true;
+`[serial_1] print_passthrough = 0;
+`[serial_1] connect_on_boot = 0;
+`[serial_1] lock_connection = 0;
+`[serial_1] autoconnect_flashing = 1;
 `[serial_1] async_passthrough = true;
 `[serial_1] tag_parsing = enabled;
 `[serial_1] flash_reset_type = avr;
 
 `[serial_2] function = micropython;
 `[serial_2] baud_rate = 115200;
-`[serial_2] print_passthrough = false;
-`[serial_2] connect_on_boot = false;
-`[serial_2] lock_connection = false;
-`[serial_2] autoconnect_flashing = false;
+`[serial_2] print_passthrough = 0;
+`[serial_2] connect_on_boot = 0;
+`[serial_2] lock_connection = 0;
 
-`[top_oled] enabled = true;
+`[top_oled] enabled = 1;
 `[top_oled] i2c_address = 0x3C;
 `[top_oled] width = 128;
 `[top_oled] height = 32;
+`[top_oled] rotation = 0;
 `[top_oled] connection_type = i2c0;
 `[top_oled] sda_pin = 4;
 `[top_oled] scl_pin = 5;
-`[top_oled] gpio_sda = GP_4;
-`[top_oled] gpio_scl = GP_5;
+`[top_oled] gpio_sda = 134;
+`[top_oled] gpio_scl = 135;
 `[top_oled] sda_row = -1;
 `[top_oled] scl_row = -1;
-`[top_oled] connect_on_boot = true;
-`[top_oled] lock_connection = false;
-`[top_oled] show_in_terminal = false;
-`[top_oled] font = BerkMono;
-`[top_oled] startup_message = images/bubbleJumpThin.bin
+`[top_oled] connect_on_boot = 1;
+`[top_oled] lock_connection = 0;
+`[top_oled] show_in_terminal = off;
+`[top_oled] font = Eurostl;
+`[top_oled] startup_message = images/bubbleJumpThin.bin;
 
 `[usb_cdc] ignore_dtr = false;
+
+`[usb_audio] enabled = false;
+`[usb_audio] left = 0;
+`[usb_audio] right = 1;
+`[usb_audio] rate = 16000;
+`[usb_audio] full_scale = 8.00;
+`[usb_audio] dc_block = true;
 ```
 
 
@@ -135,14 +200,10 @@ This is just a file on your filesystem called `config.txt` and just editing that
 
 ## Config Help
 
-There's also a `help` you can get to by entering `~?`
+There's also a `help` you can get to by entering `~help`
 
-```c++
-~?
-
-Help for command: ~
-
-
+```jython
+~help
 
                               Read config 
                           ~ = show current config
@@ -150,10 +211,9 @@ Help for command: ~
                    ~numbers = show numbers for settings
                  ~[section] = show specific section (e.g. ~[routing])
 
-
                               Write config 
 `[section] setting = value; = enter config settings (pro tip: copy/paste setting from ~ output and just change the value)
-
+                          ` = open the interactive config menu (arrow keys)
 
                               Reset config
                      `reset = reset to defaults (keeps calibration and hardware version)
@@ -161,15 +221,14 @@ Help for command: ~
          `reset_calibration = reset calibration settings (keeps hardware version)
                  `reset_all = reset to defaults and clear all settings
          `force_first_start = clears everything to factory settings and runs first startup calibration
-
+                 `self_test = run the hardware self test (non-destructive)
+          `self_test_report = re-print the stored self test report
 
                               Help
                          ~? = show this help
+```
 
-
-
-``` 
-
+(Small quirk: `~?` currently shows a shorter one-line command card instead; `~help` is the one that prints all of the above.)
 
 ## State File
 
