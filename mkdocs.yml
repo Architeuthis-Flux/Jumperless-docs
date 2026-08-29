@@ -21,11 +21,12 @@ not_in_nav: |
 nav:
   - Home: index.md
   - Basic Controls: 01-basic-controls.md
-  - Parts: 02-parts.md
+
   - The App: 03-app.md
   - OLED Support: 04-oled.md
   - Arduino Stuff: 05-arduino.md
   - Config File: 06-config.md
+  - Parts: 05.5-parts.md
   - Debug Views: 07-debugging.md
   - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
