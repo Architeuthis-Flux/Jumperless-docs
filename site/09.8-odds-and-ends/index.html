@@ -98,6 +98,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -120,8 +124,6 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Odds and Ends</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#whats-new-in-jumperlos">What's New in JumperlOS</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#safety-info">Safety Info</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#joom">Joom</a>
@@ -220,21 +222,25 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="odds-and-ends">Odds and Ends</h1>
-<h2 id="whats-new-in-jumperlos">What's New in JumperlOS</h2>
-<p>JumperlOS is now a proper operating system with a priority-based task scheduler! This is a huge refactor from the original firmware:</p>
-<ul>
-<li><strong>Viper IDE and Micropython raw REPL</strong> - Live code on the Jumperless' file system in your browser</li>
-<li><strong>Priority-based task scheduler</strong> - Each component has a <code class="language-jython highlight"><span class="n">service</span><span class="p">()</span></code> routine that checks whether it should do anything, replacing the old busy-wait loop</li>
-<li><strong>Auto-reloading state files</strong> - Edits to the YAML state files are applied automatically - when you quit the onboard editor, or when you eject the USB MSC drive if you edited them from your computer</li>
-<li><strong>Better fonts</strong> - New fonts available: <code class="language-jython highlight"><span class="n">Berkeley</span></code>, <code class="language-jython highlight"><span class="n">Iosevka</span></code>, <code class="language-jython highlight"><span class="n">Pragmat</span><span class="p">[</span><span class="n">ism</span><span class="p">]</span></code></li>
-<li><strong>YAML connection files</strong> - More permissive of malformed syntax</li>
-<li><strong>Unified syntax highlighting</strong> - Works consistently in <code class="language-jython highlight"><span class="n">eKilo</span></code>, <code class="language-jython highlight"><span class="n">python</span></code>, and normal input after <code class="language-jython highlight"><span class="o">&gt;</span></code></li>
-<li><strong>Encoder-based connections</strong> - Use the clickwheel to scroll through and select nodes without touching the probe</li>
-<li><strong>Current sensing marching ants</strong> - Animated visual feedback showing current flow direction between I+ and I- connections</li>
-<li><strong>Python context switching</strong> - Toggle between <code class="language-jython highlight"><span class="k">global</span></code> and <code class="language-jython highlight"><span class="n">python</span></code> connection contexts in the MicroPython REPL</li>
-</ul>
-<p>The JumperlOS firmware repo is at <a href="https://github.com/Architeuthis-Flux/JumperlOS">https://github.com/Architeuthis-Flux/JumperlOS</a></p>
-<hr />
+<!-- 
+## What's New in JumperlOS
+
+JumperlOS is now a proper operating system with a priority-based task scheduler! This is a huge refactor from the original firmware:
+
+- **Viper IDE and Micropython raw REPL** - Live code on the Jumperless' file system in your browser
+- **Priority-based task scheduler** - Each component has a `service()` routine that checks whether it should do anything, replacing the old busy-wait loop
+- **Auto-reloading state files** - Edits to the YAML state files are applied automatically - when you quit the onboard editor, or when you eject the USB MSC drive if you edited them from your computer
+- **Better fonts** - New fonts available: `Berkeley`, `Iosevka`, `Pragmat[ism]`
+- **YAML connection files** - More permissive of malformed syntax
+- **Unified syntax highlighting** - Works consistently in `eKilo`, `python`, and normal input after `>`
+- **Encoder-based connections** - Use the clickwheel to scroll through and select nodes without touching the probe
+- **Current sensing marching ants** - Animated visual feedback showing current flow direction between I+ and I- connections
+- **Python context switching** - Toggle between `global` and `python` connection contexts in the MicroPython REPL
+
+The JumperlOS firmware repo is at [https://github.com/Architeuthis-Flux/JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS)
+
+--- -->
+
 <h2 id="safety-info">Safety Info</h2>
 <p>Here's an image of the little card that should have been inside your box</p>
 <p><img alt="Safety info Never put voltages above +9V or below -9V anywhere on this board. Don't use unpowered, the crossbars need power to block voltage too. Don't power externally, use the internal power supplies (rails / DACs). It can be powered from the 5V and GND pins on the Nano header or the FPC adapter instead of USB. External signals are okay, as long as the board remains powered.This board gets fairly warm in normal operation from the LEDs, if it ever gets hot, unplug it immediately and let me know. When the switch on the probe is set to Select Mode,
@@ -1314,6 +1320,7 @@ Explain actions via <code class="language-jython highlight"><span class="nf nf-J
         <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
         <script src="../mermaid-init.js"></script>
         <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

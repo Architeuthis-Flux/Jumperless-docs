@@ -30,6 +30,7 @@
 
 ## Optional
 
+- [Parts](https://docs.jumperless.org/05.5-parts/): Parts
 - [Odds and Ends](https://docs.jumperless.org/09.8-odds-and-ends/): Miscellaneous features, tips, and edge cases
 - [3D Printable Stand](https://docs.jumperless.org/10-3d-stand/): 3D printable stand models and printing tips
 - [Developer Guide](https://docs.jumperless.org/badge-developer-guide/): Developer Guide

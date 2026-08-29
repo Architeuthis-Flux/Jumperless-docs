@@ -1,0 +1,25 @@
+{
+  "models": [
+    {
+      "label": "Probe Holder",
+      "files": {
+        "stl": "/assets/3Dstands/JumperlessStandProbeHolder.stl",
+        "step": "/assets/3Dstands/JumperlessStandProbeHolder.step"
+      }
+    },
+    {
+      "label": "No Probe Holder",
+      "files": {
+        "stl": "/assets/3Dstands/JumperlessStandNoProbeHolder.stl",
+        "step": "/assets/3Dstands/JumperlessStandNoProbeHolder.step"
+      }
+    },
+    {
+      "label": "FPC",
+      "files": {
+        "stl": "/assets/3Dstands/JumperlessStandFPC.stl",
+        "step": "/assets/3Dstands/JumperlessStandFPC.step"
+      }
+    }
+  ]
+}
