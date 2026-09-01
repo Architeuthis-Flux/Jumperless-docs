@@ -108,6 +108,7 @@ Jumperless Config:
 `[routing] stack_paths = 2;
 `[routing] stack_rails = 3;
 `[routing] stack_dacs = 0;
+`[routing] part_safety = off;
 
 `[slots] boot_mode = last_active;
 `[slots] boot_slot = 0;

@@ -261,6 +261,8 @@ If the highlighted `row` is a `rail` (top or bottom) or `DAC`, `click` the click
 
 **Tip:** You can also tap the `DAC` or `rail` pads to highlight them, then click the encoder to adjust the output directly without connecting anything. Short `hold` the clickwheel button to confirm.
 
+**Negative rails are blue.** Set a rail below 0V and everything that shows that rail turns blue - the gauge on the rail strip, the wires on the rail's `net`, and the flowing row animation - with the same motion the red has. The danger cue for 5V and up stays orange either way, so it reads the same at both polarities.
+
 --->
 #### Connect Button
 - `connect` button will bring you into probing mode with the highlighted row already selected and then spit you back out to `idle` mode once you've made a connection to another row, or click `connect` again to exit

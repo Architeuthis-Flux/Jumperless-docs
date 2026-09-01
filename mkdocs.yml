@@ -27,6 +27,7 @@ nav:
   - Arduino Stuff: 05-arduino.md
   - Config File: 06-config.md
   - Parts: 05.5-parts.md
+  - GPIO & BCD Counter: 05.7-gpio.md
   - Debug Views: 07-debugging.md
   - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
