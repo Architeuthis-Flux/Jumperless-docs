@@ -13,31 +13,15 @@ this page.
 
 ## Installation
 
-Clone the repo (with submodules) into your agent's skills directory:
-
-```bash
-# Cursor
-mkdir -p ~/.cursor/skills
-cd ~/.cursor/skills
-git clone --recurse-submodules \
-  https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git jumperless-v5
-
-# Claude Code
-mkdir -p ~/.claude/skills
-cd ~/.claude/skills
-git clone --recurse-submodules \
-  https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git jumperless-v5
-```
-
-Then install the host helper's one dependency: `pip install pyserial`. For the
-MCP alternative, build the server from the `mcp/` submodule (`cd mcp && cargo
-install --path .`). The full reference docs referenced below live in the repo's
-`reference/` directory; the canonical API reference is
+The install steps — cloning the repo into your agent's skills directory,
+`pip install pyserial`, and building the MCP server — live on the
+[Automation overview](07.5-automation.md). The full reference docs referenced
+below live in the repo's `reference/` directory; the canonical API reference is
 [MicroPython API Reference](09.5-micropythonAPIreference.md).
 
 ---
 
-# Jumperless V5 Skill
+## Jumperless V5 Skill
 
 This skill controls real Jumperless V5 hardware via MicroPython REPL.
 
@@ -52,12 +36,8 @@ The Jumperless exposes four USB CDC serial interfaces. This skill drives the
 **MicroPython Raw REPL** (port 5) via `scripts/jumperless.py`, which is the
 primary transport for everything below.
 
-| Port | macOS suffix | Role |
-|------|--------------|------|
-| 1 | `JLV5port1` | Main terminal, menu, `>` one-liner Python |
-| 3 | `JLV5port3` | Arduino UART passthrough |
-| 5 | `JLV5port5` | MicroPython Raw REPL — **what this skill uses** |
-| 7 | `JLV5port7` | USBSer3 read-only machine backchannel (`:help` YAML, `:gpio`, `:leds`, `:adc`, …) |
+The four ports and what each one carries are listed on the
+[Automation overview](07.5-automation.md).
 
 - **REPL (port 5) is primary** — `jumperless.py detect/exec/state/fs/guide`.
 - **Port 7 (USBSer3)** is an optional fast, read-only telemetry channel: send
@@ -88,7 +68,7 @@ Always keep these in mind — even in the middle of a specific task, a different
 | Capability | Key APIs | When to reach for it |
 |---|---|---|
 | **Virtual wiring** | `connect()`, `disconnect()`, `fast_connect()`, `nodes_clear()` | Any routing change on the crossbar |
-| **Voltage measurement** | `adc_get(ch)` with `ADC0`–`ADC3` (±8V), `ADC4` (5V), `ADC7`/`PROBE` | Checking node voltages; always route ADC to node first |
+| **Voltage measurement** | `adc_get(ch)` with a channel number 0–7 (0–3 breadboard ±8V, 4 = 0–5V, 5 = probe pad, 7 = probe tip) | Checking node voltages; route `ADC0`–`ADC3` to the node with `connect()` first |
 | **Current measurement** | `ina_get_current(sensor)`, `ina_get_bus_voltage(sensor)` | Put `ISENSE_PLUS`/`ISENSE_MINUS` in series; 2Ω shunt |
 | **Power measurement** | `ina_get_power(sensor)` | Quick power draw check on a rail |
 | **Programmable voltage** | `dac_set(ch, v)` — `DAC0`, `DAC1`, `TOP_RAIL`, `BOTTOM_RAIL` (±8V) | Supplying test voltages, driving circuits, sweeps |
@@ -152,7 +132,10 @@ PYEOF
 
 For complex logic, **write a temporary .py file** and use `--file`. Do not cram long multi-line logic into shell-quoted one-liners.
 
-Use `--timeout N` when scripts take longer than the default 8 seconds (e.g. continuous monitors, guided flows).
+Use `--timeout N` when scripts take longer than the default (8 seconds for
+`exec`; `guide` defaults to 120, `state` to 5, `fs` to 10). `detect --roles`
+lists all four CDC interfaces labeled by role, and `exec --soft-reboot`
+soft-reboots into the raw REPL before running your code.
 
 ## Updating a running script
 
@@ -228,28 +211,30 @@ The 5 holes A–E in each strip correspond to overlay rows 1–5 (top) or 6–10
 
 ### Placement patterns
 
-**Single component / pin — use `place_here()` + `oled_print()`:**
+**Single component / pin — use `overlay_set()` + `oled_print()`:**
+
+Column comes first, row second, in both overlay calls.
 
 ```python
 import time
 
 # Mark a single hole bright red, tell user on OLED
-overlay_set_pixel(3, 10, 0xFF2020)          # direct: row 3, col 10
-# — or using animations helper if loaded —
-place_here("target_pin", 3, 10, 0xFF2020)
+overlay_set("target_pin", 10, 3, 1, 1, [0xFF2020])   # col 10, row 3, 1 high, 1 wide
+# — or without a name —
+overlay_set_pixel(10, 3, 0xFF2020)
 
 oled_clear()
 oled_print("Place R1 pin 1")
 oled_print("Row 10, top half")
 ```
 
-**IC spanning multiple rows — use `highlight_range()` for the body, `place_here()` per pin:**
+**IC spanning multiple rows — use `overlay_set()` for the body, one pixel per pin:**
 
 ```python
 # IC body across breadboard rows 5-12 (top half → overlay cols 5-12)
-highlight_range("ic_body", 1, 1, 0x203030)   # single overlay row, cols 5-12
+overlay_set("ic_body", 5, 1, 1, 8, [0x203030] * 8)   # col 5, row 1, 1 high, 8 wide
 # Pin 1 marker
-place_here("ic_pin1", 2, 5, 0xFF2020)
+overlay_set("ic_pin1", 5, 2, 1, 1, [0xFF2020])
 
 oled_clear()
 oled_print("Place 555 timer")
@@ -260,8 +245,8 @@ oled_print("Pin 1 at row 5")
 
 ```python
 # Highlight rows 5 and 15 where resistor legs go
-place_here("r1_a", 1, 5, 0xFF8000)
-place_here("r1_b", 1, 15, 0xFF8000)
+overlay_set("r1_a", 5, 1, 1, 1, [0xFF8000])
+overlay_set("r1_b", 15, 1, 1, 1, [0xFF8000])
 
 oled_clear()
 oled_print("Place R1: row 5 to 15")
@@ -270,8 +255,9 @@ oled_print("Place R1: row 5 to 15")
 **Removal / "move this wire":**
 
 ```python
-# Use a different color (e.g. red pulsing) to mark what to remove
-highlight_row("remove_wire", 3, 0xFF2020)
+# Use a different color (e.g. red) to mark what to remove
+# Breadboard row 3 is overlay col 3, 5 holes tall
+overlay_set("remove_wire", 3, 1, 5, 1, [0xFF2020] * 5)
 
 oled_clear()
 oled_print("Remove wire at row 3")
@@ -304,7 +290,7 @@ Choose based on the task, then read only the files needed. But stay aware of the
 2. **Measurement (V/I/R, sweeps)**
    - Read: `reference/api/measurements-power.md`
    - For reusable patterns: `scripts/measurements.py`, `measureR.py`
-   - Always account for crossbar series resistance (20–40Ω default `connect()`, ~80Ω with `duplicates=0`) and 2Ω ISENSE shunt
+   - Always account for crossbar series resistance (20–40Ω default `connect()`, ~80Ω with a single path — `connect(a, b, 0)`) and 2Ω ISENSE shunt
 
 3. **Visual guidance (LEDs, OLED)** — mandatory any time you ask for physical action
    - See "Visual placement guidance" section above for patterns
@@ -373,12 +359,12 @@ else:                  v_set = 4.0
 
 ### Hardware constraints to remember
 
-- Crossbar path resistance: ~80Ω with `duplicates=0` (single path); ~20–40Ω with default `connect()` (firmware stacks paths in parallel)
+- Crossbar path resistance: ~80Ω with a single path (`connect(a, b, 0)` — the third positional argument is the stacking count); ~20–40Ω with default `connect()` (firmware stacks paths in parallel)
 - ISENSE shunt: 2Ω (ISENSE_PLUS and ISENSE_MINUS are always connected through it)
 - DAC/rail range: approximately ±8V
 - ADC0–ADC3: ±8V range; ADC4: 5V range; ADC7/PROBE: probe channel
 - Signal bandwidth: ~8MHz through crossbar, ~13MHz 3dB on breadboard
-- Firmware refuses dangerous connections (e.g. TOP_RAIL directly to GND)
+- Firmware refuses dangerous connections (e.g. TOP_RAIL directly to GND), but silently — `connect()` returns nothing either way, so check with `is_connected()` or `print_nets()`
 - Firmware cannot see user-placed external wires — always ask or verify
 
 ## Electronics reference

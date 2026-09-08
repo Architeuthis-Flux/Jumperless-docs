@@ -4,7 +4,7 @@ To change any persistent settings that apply to the Jumperless as a whole, there
 
 1. **The interactive editor** - enter a bare `` ` `` (backtick) and get a full menu with arrow keys, descriptions, and live-updating values
 2. **Copy / paste** - print the config with `~`, copy a line, change the value, paste it back
-3. **Edit the file** - it's just `config.txt` on the filesystem, edit it however you like
+3. **Edit the file** - it's just `config.txt` on the filesystem, edit it however you like; those edits get read at the next boot
 
 ## The Interactive Editor
 
@@ -17,18 +17,22 @@ The categories are organized by what you're actually trying to mess with (`Probe
 The keys:
 
 - `up` / `down` - move (the pane on the right describes whatever you're on: what it does, its range, its default)
-- `enter` - open a category, or change the highlighted value (numbers and strings get inline editing, on/off options just toggle)
-- `left` / `right` - step a value up/down, or cycle through its choices
+- `enter` - open a category, or highlight the value of the option you're on (text options like `startup_message` go straight to typing)
+- `left` / `right` - step a highlighted value, cycle its choices, or flip it on/off; while you're just moving around, `left` is back and `right` opens/selects like `enter`
+- `e` - type an exact value
 - `d` - reset the highlighted option to its default
+- `enter` again - done with the value
 - `left` or `q` - back / exit
+
+`j` / `k` move too, `PgUp` / `PgDn` page, `Home` / `End` jump to the ends, and `esc` backs out like `left`.
 
 ![Inside the Probe category](assets/config-tui-probe.png)
 
-**Changes apply live.** Every edit goes through the same machinery as the paste path, so the board reacts while you're still in the menu - hold `right` on `led_brightness` and the breadboard gets brighter under your finger, change the OLED font and it redraws, tweak the menu FX and the next transition wears it.
+**Most changes apply live.** Every edit goes through the same machinery as the paste path, so the board reacts while you're still in the menu - hit `enter` on `led_brightness` and hold `right`, and the breadboard gets brighter under your finger, change the OLED font and it redraws, tweak the menu FX and the next transition wears it. The exceptions only take effect on the next boot: the `[hardware]` keys, `probe.use_pio_button`, `probe.led_on_button_pin`, `clickwheel.encoder_pio`, and the `[usb_audio]` keys (turning `usb_audio.enabled` on live re-enumerates USB and drops the serial ports for about 2 seconds).
 
 ![The Display category - brightness sliders that apply as you arrow through them](assets/config-tui-display.png)
 
-There's also a `Menu FX Tuner` category at the bottom that opens a live tuner for the click-menu frame transitions (it drives the real breadboard menu while you play with it), and a `Reset to defaults` that resets everything except calibration and hardware identity.
+There's also a `Menu FX Tuner` category at the bottom that opens a live tuner for the click-menu frame transitions (it drives the real breadboard menu while you play with it), a `Reset to defaults` that resets everything except calibration and hardware identity, and an `Exit` row that closes the menu (`left` and `q` do too).
 
 ## Viewing Config.txt
 
@@ -43,7 +47,7 @@ into the main menu to change a setting
 
 Jumperless Config:
 
-`[config] firmware_version = 5.7.8.1;
+`[config] firmware_version = 5.7.11.0;
 
 `[hardware] generation = 5;
 `[hardware] revision = 7;
@@ -74,6 +78,7 @@ Jumperless Config:
 
 `[clickwheel] encoder_pio = auto;
 `[clickwheel] rail_click_adjust = oled_only;
+`[clickwheel] part_walk = z;
 `[clickwheel] fx_type = glow;
 `[clickwheel] fx_duration_ms = 160;
 `[clickwheel] fx_tint = 0x00;
@@ -108,6 +113,8 @@ Jumperless Config:
 `[routing] stack_paths = 2;
 `[routing] stack_rails = 3;
 `[routing] stack_dacs = 0;
+`[routing] stack_gpio = 0;
+`[routing] stack_adcs = 0;
 `[routing] part_safety = off;
 
 `[slots] boot_mode = last_active;
@@ -195,9 +202,9 @@ Jumperless Config:
 ```
 
 
-This is just a file on your filesystem called `config.txt` and just editing that file directly works too.
+This is just a file on your filesystem called `config.txt` and you can edit that file directly too. It only gets read at boot, so your edits land on the next reboot - and the firmware rewrites `config.txt` from its live settings whenever a setting changes, so edit it with the board idle and reboot afterwards. If you want the change right now, use the editor or paste the line back in.
 
-<img width="1470" height="1007" alt="Screenshot 2025-12-08 at 8 42 59 PM" src="https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754" />
+![config.txt open in a text editor on a computer, with the Jumperless mounted as a drive](https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754)
 
 ## Config Help
 
@@ -231,11 +238,9 @@ There's also a `help` you can get to by entering `~help`
 
 (Small quirk: `~?` currently shows a shorter one-line command card instead; `~help` is the one that prints all of the above.)
 
-## State File
-
 ## States vs Config
 
-States are now saved as YAML and we did away with the old text file format. `globalState` holds all connections, paths, and other circuit configuration in a single object that most of the code uses now. 
+States are now saved as YAML and we did away with the old text file format. Each slot's YAML file holds one complete circuit - connections, colors, rail and DAC voltages, GPIO setup. 
 
 **State vs Config - What's the Difference?**
 
@@ -248,30 +253,23 @@ Rail voltages, GPIO settings, and other circuit-specific parameters now go with 
 
 For things specific to the current `state` of the Jumperless, there's a YAML file that contains all the connections, colors (optional), `rail` / `DAC` voltages, `GPIO` directions and pulls, stuff like that. The idea is this defines a complete setup of a particular circuit that can be switched between in different `slots`. 
 
-The Jumperless always boots at `Slot 0`, and you can switch to other `slots` with `<` (cycle through them) or selecting one with the `click menu` with `Slots` > `Load` > `0-7` (it will show a preview of each one.) To save a copy of the currently `active slot`; 
-`Slots` > `Save` > `0-7` will save a copy of the `active slot` to another `slot` and also make that target slot the `active`.
+The Jumperless boots into whichever `slot` was last active (`[slots] boot_mode = last_active`); set `boot_mode = fixed_slot` and `boot_slot = N` if you'd rather it always come up in slot N. You can switch to other `slots` with `<` (cycle through them) or `<5` (jump straight to slot 5), or by selecting one with the `click menu` with `Slots` > `Load` > `0-7` (it will show a preview of each one.) To save a copy of the currently `active slot`; 
+`Slots` > `Save to` > `0-7` will save a copy of the `active slot` to another `slot` and also make that target slot the `active`. `Slots` > `Clear` > `0-7` deletes a `slot`'s file.
 
+
+Enter `Y` to print the current state (`Y0` plain, `Y1` colored hex, `Y2` colored blocks). It prints the YAML itself, with a `Time since last change` line on top if you have unsaved edits. `S` loads a pasted state back in, in the same format.
 
 ```jython
-
-╭────────────────────────────────────╮
-│      Current YAML State (RAM)     │
-╰────────────────────────────────────╯
-
-Active Slot: 0
-Dirty Flag: NO (saved)
-
-─── YAML Output ───
+Y
 
 version: 2
 sourceOfTruth: bridges
 
 bridges:
-  - {n1: 38, n2: 44, dup: 2}
-  - {n1: 21, n2: 28, dup: 2}
-  - {n1: 48, n2: 55, dup: 2}
+  - {n1: 38, n2: 44}
+  - {n1: 21, n2: 28}
+  - {n1: 48, n2: 55}
   - {n1: 4, n2: 2, dup: 2}
-  - {n1: BUFFER_IN, n2: DAC0, dup: 1}
 
 nets:
   - {num: 4, nodes: [DAC_0, BUF_IN], name: "DAC 0", anim: true}
@@ -294,16 +292,13 @@ config:
     pwmFrequency: [1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00,1.00]
     pwmDutyCycle: [0.50,0.50,0.50,0.50,0.50,0.50,0.50,0.50,0.50,0.50]
     pwmEnabled:   [0,0,0,0,0,0,0,0,0,0]
+    readFloating: [0,0,0,0,0,0,0,0,0,0]
   uart: {txFunction: 0, rxFunction: 1}
   oled: {connected: false, lockConnection: false}
-
-
-─── Memory Usage ───
-Connections: 5
-State RAM: ~58048 bytes
-
-
+  bcd: {pins: 0, value: 0}
 ```
+
+`dup:` only shows up on connections where you asked for a particular stack count. If you've placed parts, the file also carries a `parts:` section, and a `guideProgress:` line while you're partway through a guided project.
 
 ## Source of Truth
 
@@ -321,12 +316,13 @@ The Jumperless has **8 slots** (0-7) where you can save different circuit config
 - Type `<` in the terminal to cycle to the next slot
 
 **Other slot commands:**
-- `l 5` - Load slot 5 specifically
+- `<5` - Jump straight to slot 5
 - `Q` - Query which slot is currently active
-- `s` - Show a list of all saved slots
+
+To browse the slots and see a preview of each one, use the `click menu`: `Slots` > `Load` > `0-7`.
 
 When you make connections with the probe, they're automatically saved to whichever slot is currently active. See the [Glossary](99-glossary.md) for more details about slots.
 
 ## Editing State Files
 
-You can edit the YAML slot files and the board will pick up your changes! If you're editing the active slot in the onboard `eKilo` editor, it reloads when you quit the editor; if the Jumperless is mounted as a USB MSC device on your computer, changes are applied when you eject/unmount the drive.
+You can edit the YAML slot files and the board will pick up your changes - see [Editing Slot Files](08-file-manager.md#editing-slot-files).

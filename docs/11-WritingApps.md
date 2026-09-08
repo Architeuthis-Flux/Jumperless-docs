@@ -1,62 +1,47 @@
--
 # Writing Apps
 
+## Here's a the example app that should show the calls for most of the things you might want to do
 
+You can do literally anything the Jumperless can in an app, so if there's a specific thing, lmk and I'll write an example. Until I make this into a proper operating system, what you're doing when you write an App is just writing a function in the main firmware. There's really no guard rails, and the API is just any function in the firmware.
 
-### Here's a the example app that should show the calls for most of the things you might want to do
-
-You can do literally anything the Jumperless can in an app, so if there's a specific thing, lmk and I'll write an example. Until I make this into a proper operating system, what you're doing when you write an App is just writing a function in the main firmware. There's really no guard rails, and the API is just any function in the firmware. 
-
+If you don't want to recompile anything, you don't have to. A `.py` script saved on the board's file system is an app too, you just pick it from the `Files` row on the clickwheel and it runs. See [MicroPython](08-micropython.md) and the [File Manager](08-file-manager.md). From Python you can also run any of the built-in apps by name with `jumperless.run_app("Custom App")`.
 
 ## First get it PlatformIO set up to flash code
 
-So fork the firmware here: https://github.com/Architeuthis-Flux/JumperlessV5
+So fork the firmware here: https://github.com/Architeuthis-Flux/JumperlOS
 
-I'm using PlatformIO in VSCode. And it *should* just work to open the RP23V50firmware folder in that (you'll probably need to comment out `upload_port = /dev/cu.usbmodem101` in `Platformio.ini` so it'll just automatically find it)
+I'm using PlatformIO in VSCode. Open the cloned `JumperlOS` folder itself, `platformio.ini` is at the root so the whole repo is the PlatformIO project.
 
-You should just open the `RP23V50firmware` folder, not the entire `JumperlessV5` repo, in VSCode.
+The build environment is `jumperless_v5`. There's also `jumperless_v5_debug` (flashes over SWD), `jumperless_v5_erase` (wipes the file system while flashing) and `jumperless_og` for the original RP2040 Jumperless. `CodeDocs/CONTRIBUTING.md` has the `pio run` / `pio run -t upload` steps.
+
+If your board doesn't come up on the port PlatformIO expects, comment out (or change) `upload_port = /dev/cu.usbmodemJLV5port1` and `monitor_port = /dev/cu.usbmodemJLV5port1` in `platformio.ini` so it'll just automatically find it. On macOS with a stock V5 that's the name it enumerates as, so you may not need to touch them.
 
 You should probably try to just load the firmware just to make sure everything works.
 
 ## To write an App
 
-
 Before you go writing your app, follow these steps to make it so it's listed in the App library and you can run it from the menus.
 
-- Go to [`menuTree.h`](https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/RP23V50firmware/src/menuTree.h) and add the name of your app under `Apps\n\` (shown as `-Custom App\n\` here, it needs to fit in 7x2 chars to show on the breadboard)
-<img width="349" alt="menutree" src="https://github.com/user-attachments/assets/c619f655-de53-4a8c-8bde-24c536956546" />
+- Go to `src/remembering/menuTree.h` and add the name of your app under `"Apps"`. Each menu row is its own quoted string in the array, and an Apps entry looks like `"-Custom \31App"`. The leading `-` puts it one level under `Apps`, and the `\31` is the line break between the two halves. It needs to fit in 7x2 chars to show on the breadboard.
 
-- Go to `Apps.h` and declare your function where you'll write your app
-<img width="758" alt="Appdoth" src="https://github.com/user-attachments/assets/63f7fbab-a63c-4f7c-b454-b4166875d6af" />
+- Go to `src/Apps.h` and declare your function where you'll write your app, a plain `void yourApp(void);` next to the other prototypes. The body goes in `src/Apps.cpp`, or any `.cpp` under `src/`, every folder is on the include path.
 
-- Go to `Apps.cpp` and add a struct in the `struct app apps[30]` for your app 
-`{"Name", index, ??idk, name of the function (unused)}`
-<img width="510" alt="appStruct" src="https://github.com/user-attachments/assets/f2b02ab6-0a49-46be-bf38-264bc8022417" />
+- Go to `src/Apps.cpp` and add a row to `apps[NUM_APPS]` for your app: `{"Name", index, works, function}`. The name is up to 19 chars, `index` is informational, `works` has to be `1` or the app gets skipped with `App not found`, and `function` is the one `runApp` actually calls. The table is exactly full, so bump `NUM_APPS` in `src/Apps.h` by one for each row you add or it won't compile.
 
-- Go to `Apps.cpp > runApp()` and add a `case` for your app's index (this is so you can also find it by index rather than exact matching the name `"Custom App"`
-<img width="587" alt="runApp" src="https://github.com/user-attachments/assets/3285c3d4-3efd-4685-9683-da4cd44cac51" />
+- The name in `menuTree.h` and the name in `apps[]` have to match. Picking the row on the clickwheel passes the row's own text to `runApp`, so `"-Custom \31App"` and `"Custom App"` line up once the `\31` is dropped and runs of spaces are collapsed. Case doesn't matter. If they don't match, the row just prints `App not found` and does nothing.
+
+- You don't need to edit `runApp()` itself. It finds the app by name in `apps[]` (or by array position when you give it a number) and calls that row's function pointer.
 
 - Make a function that's the entirety of your app, I just pushed a demo function called `customApp(void)` with some (non exhaustive) examples of things you can do from an app.
-<img width="907" alt="customApp" src="https://github.com/user-attachments/assets/57787127-ac7f-4923-9073-c2eb0611bd6a" />
 
 - Run your app with the clickwheel, `Apps > Custom App`.
 
-The quick way run `"Custom App"` is to just enter `2` in the main menu, or just use the clickwheel and go Apps > Custom App.
+From the terminal you run it from MicroPython with `jumperless.run_app("Custom App")` (the `>` prefix works, so `>run_app("Custom App")`). There's no digit shortcut.
 
-<img width="418" alt="mainSwitch" src="https://github.com/user-attachments/assets/8fbc2583-0f4f-4cc1-a245-b6fbad5ac785" />
-
-If you want to add your own shortcut, find an unused menu character and add a 
-```
-case'3':
-{
-runApp(3); //the app index you set above
-break;
-}
-``` 
-in the big main menu `switch` statement in `main.cpp`.
+If you want your own single-character shortcut, find an unused one and register it in `src/SingleCharCommands.cpp` with `registerCommand('<char>', "short description", "help text", callback, ...)`, where the callback calls `runApp(-1, (char*)"Your App Name")` and returns `CMD_DONT_SHOW_MENU`. Run it by name, not by number.
 
 ## To actually write the app
 
-[The code](https://github.com/Architeuthis-Flux/JumperlessV5/blob/6fd4fcba572c4b524435ec36c8901adcedbf52c6/RP23V50firmware/src/Apps.cpp#L141) for `Custom App` is an example of the calls available with comments telling you what's going on. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.
+The code for `Custom App` is [`customApp()` in `src/Apps.cpp`](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/src/Apps.cpp) (line 1358 in 5.7.11.0). It's mostly uncommented, but it shows the calls: `addBridgeToState` / `removeBridgeFromState` plus `refreshConnections`, `setTopRail`, `setDacByNumber`, `readAdcVoltage`, INA0 current and bus voltage, `probing.justReadProbe` and `checkProbeButtonState`, and `b.print` on the LEDs. Fair warning, it paints `Fuck    you!` on the breadboard at one point. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.
 
--
+If your app changes connections, call `SlotManager::getInstance().enterTemporarySlot(8)` at the start and `leaveApp()` on every way out, so the user's slot comes back the way they left it.

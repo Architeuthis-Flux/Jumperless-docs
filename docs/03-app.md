@@ -4,11 +4,14 @@
 
 ### The Jumperless App is now on PyPi!
 
-The easiest way to get started is with pip:
+The easiest way to get started is an isolated tool install:
 
 ```bash
-pip install jumperless
+uv tool install jumperless
+# or: pipx install jumperless
 ```
+
+Plain `pip install jumperless` works too, it just only updates the copy in that Python.
 
 Then run it with:
 
@@ -16,13 +19,15 @@ Then run it with:
 jumperless
 ```
 
-**Note:** If the app version shows less than the latest release, `pip` defaults to a local version if it's available. In that case, run:
+To upgrade, use the command that matches the install you have:
 
 ```bash
-pip install --no-cache-dir --upgrade jumperless
+uv tool upgrade jumperless
+pipx upgrade jumperless
+pip install --upgrade jumperless
 ```
 
-to make sure it grabs the latest version.
+If the version still looks old, `which jumperless` will tell you which install you're actually running.
 
 The app repo is at [https://github.com/Architeuthis-Flux/Jumperless-App](https://github.com/Architeuthis-Flux/Jumperless-App)
 
@@ -31,24 +36,26 @@ The app repo is at [https://github.com/Architeuthis-Flux/Jumperless-App](https:/
 #### Find the latest release
 [https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest](https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest)
 
-The link above will magically lead you to the latest version, and will look something like `https://github.com/Architeuthis-Flux/JumperlessV5/releases/tag/5.2.0.0`
+The link above will magically lead you to the latest version, and will look something like `https://github.com/Architeuthis-Flux/JumperlessV5/releases/tag/5.7.11.0`
 
 **At the bottom under Assets, download the Jumperless App for your OS**
 
 ### Windows
 
-  - `Jumperless.exe`
-  - `Jumperless-Windows-x64.zip`
+  - `Jumperless-Windows-x64.exe`
   
 ### macOS
 
-  - `Jumperless_Installer.dmg`
-  - `Jumperless_macOS.zip`
+  - `Jumperless-macOS.dmg` (universal, signed and notarized)
   
 ### Linux
 
-  - x86 `Jumperless-linux-x86_64.tar.gz` (if you're not sure which flavor of Linux, use this one)
-  - arm64 `Jumperless-linux-arm64.tar.gz`
+  - `Jumperless-Linux-x86_64.AppImage` (if you're not sure which flavor of Linux, use this one)
+  - `Jumperless-Linux-x64.tar.gz` as a fallback if the AppImage won't run
+
+### Launcher
+
+  - `Jumperless-Launcher-Windows.zip`, `Jumperless-Launcher-macOS.zip`, `Jumperless-Launcher-Linux.zip` (see Launch Scripts below)
   
 ### Python
 
@@ -74,7 +81,7 @@ But that's like the *least* cool thing the new app can do, here's a list of what
 - **Properly detects** which port is the main Jumperless Serial and which is routable UART
 - **Arduino flashing from [Wokwi](https://wokwi.com/)** works once again and is a lot more solid
   - It installs [arduino-cli](https://github.com/arduino/arduino-cli) on first startup and uses it pull in libraries, compile, and flash an arduino Nano in the header
-  - If the routable UART lines aren't connected when the app detects a change in the sketch file, it will connect them to flash the new code and then return them to how they were
+  - When a flash starts, the Jumperless itself connects the UART to the Nano's D0/D1 if they aren't already connected. That happens for any flasher (the app, Arduino IDE, arduino-cli) because the board just watches for the DTR reset pulse, and it's the `[serial_1] autoconnect_flashing` config setting, on by default. The connections are left in place afterwards, use `a` if you want them gone
   - [avrdude](https://github.com/avrdudes/avrdude) output is shown in real time (you'd be amazed how difficult this was)
 - **Direct Wokwi circuit import** - Copy diagram.json from Wokwi and import it with the `W` command (see below)
 - **No longer a janky pile of garbage**
@@ -90,9 +97,10 @@ But that's like the *least* cool thing the new app can do, here's a list of what
 
 ## Launch Scripts
 
-- Launch scripts included to easily run it from your favorite terminal emulator and not just the system default (terminal.app on macOS, Powershell on Windows, idk on Linux), just go to the directory in a terminal and run the script in [tabby](https://tabby.sh/) or whatever
-- The launcher *should* kill other instances (and close their windows) that happen to be open because it's such a common issue for me at least
-- Linux people are no longer red-headed stepchildren, there are proper tar.gz packages now for you nerds
+- The launcher bundles (`Jumperless-Launcher-Windows/macOS/Linux.zip`) are a tiny clickable app that installs or updates the `jumperless` PyPI package with uv and then runs it in the system default terminal (Terminal.app on macOS, Windows Terminal or cmd on Windows, gnome-terminal/konsole/xfce4-terminal/xterm on Linux)
+- It doesn't kill or close other instances that happen to be open
+- To run it in your favorite terminal emulator instead ([tabby](https://tabby.sh/), iTerm2, whatever), just open that terminal and type `jumperless` (or `python3 JumperlessWokwiBridge.py` if you downloaded the script)
+- Linux people are no longer red-headed stepchildren, there's a single-file AppImage now for you nerds, with a tar.gz as a fallback
 
 ---
 
@@ -133,12 +141,12 @@ Enter a name for this new project: cool project zone
 
 ### Supported Wokwi Components
 
-- **Half breadboard** - Wokwi's breadboard maps directly to Jumperless rows
-- **Arduino Nano** - All pins (D0-D13, A0-A7) (GND, 5V, 3.3V, and RST pins are hardwired and don't do anything)
+- **Half breadboard** - Wokwi's breadboard maps directly to Jumperless rows. Top rows 1-30 are rows 1-30, bottom rows 1-30 are rows 31-60. The column letter is ignored, all five holes in a row are one node anyway. The top `+` rail maps to `TOP_RAIL`, the bottom `+` rail to `BOTTOM_RAIL`, and both `-` rails to `GND`
+- **Arduino Nano** - D0-D13 and A0-A7 map to the Nano header nodes. GND maps to the `GND` net, 5V (or VCC) to `TOP_RAIL`, and 3V3 to `BOTTOM_RAIL`, so wires to those pins do make real connections. RESET, AREF, VIN and RX/TX are ignored
 - **Logic Analyzer** - Channels map to GPIO: D0-7 → GPIO 1-8
 - **Wire colors** - Wokwi wire colors preserved
 - **Rail voltages** - Detected from text labels in Wokwi
-- **VCC and GND Nodes** - VCC maps to the `TOP_RAIL`
+- **VCC and GND Nodes** - VCC maps to `TOP_RAIL`, GND maps to `GND`
 
 ![LogicAnalyzerMappingV5](https://github.com/user-attachments/assets/3b7bd360-9703-4b0b-925a-aea8ed7e0526)
 
@@ -154,13 +162,15 @@ Enter a name for this new project: cool project zone
 
 All Wokwi wire colors are preserved and displayed on the breadboard LEDs:
 
-`red`, `orange`, `yellow`, `green`, `blue`, `violet`, `purple`, `magenta`, `cyan`, `white`, `gray`, `black`, `brown`, `limegreen`, `gold`
+`red`, `orange`, `yellow`, `green`, `blue`, `violet`, `purple`, `magenta`, `pink`, `cyan`, `white`, `gray`, `grey`, `black`, `brown`, `limegreen`, `gold`
+
+A couple of them land on the same LED color: `gold` looks the same as `orange`, and `pink` the same as `magenta`. A color name that isn't in the list shows up as a dim white.
 
 **Note:** Black wires let the Jumperless auto-assign a color.
 
 If you leave all the wires green (the default in Wokwi) or make a wire black, it'll just auto assign colors.
 
-**About color assignment:** There is some weirdness because colors in Wokwi are applied to `bridges` (a pair of `nodes`) while color in the Jumperless gets assigned to `nets` (a collection of connected `nodes`). So if you have a bunch of things electrically connected together with different wire colors, it'll just pick one. It tries to pick unique colors first (no other nets with that same color), but if it can't, it'll shift the hue a bit so it's still that color but you can hopefully tell them apart.
+**About color assignment:** There is some weirdness because colors in Wokwi are applied to `bridges` (a pair of `nodes`) while color in the Jumperless gets assigned to `nets` (a collection of connected `nodes`). So if you have a bunch of things electrically connected together with different wire colors, it'll use the first colored wire it finds in that net and drop the rest.
 
 ### Rail Voltage Detection
 
@@ -173,17 +183,20 @@ bottom rail 3.5V
 
 The Jumperless parser will automatically detect these values and set the rails accordingly
 
+It's not picky about the format, `TOP RAIL = 5V`, `top_rail: 4.5V`, `toprail 3v3`, `bot rail 2.5V` and `BOTTOM_RAIL = -5V` all work, and negative voltages are fine. A label like `VCC = 5V` sets the top rail if there's no top rail label.
+
 ### Command Variants
 
 ```
 W              # Paste JSON, save to active slot
 W 5            # Paste JSON, save to slot 5
 W /file.json   # Load from file, save to active slot
+W /file.json 5 # Load from file, save to slot 5
 ```
 
 ### After Import
 
-Use `<` to cycle through slots to activate your imported circuit, or it will be active immediately if imported to the current slot.
+Use `<` to cycle through slots to activate your imported circuit, or `<5` to jump straight to slot 5. An import into the active slot is applied to the hardware immediately, an import into another slot just sits in that slot's file until you select it.
 
 ## Terminal Compatibility
 

@@ -88,7 +88,7 @@ def _build_llms_txt(pages, site_url):
     # Short descriptions for each page (keyed by filename without extension)
     descriptions = {
         'index': 'Overview of Jumperless V5 features and getting started links',
-        '01-basic-controls': 'Probe, click wheel, slot system, and connecting/disconnecting nodes',
+        '01-getting-started': 'What is in the box, the probe, click wheel, power, measuring, slots, and where to go next',
         '03-app': 'Companion desktop app for serial control, Wokwi import, and Arduino flashing',
         '04-oled': 'Adding and using an external OLED display',
         '05-arduino': 'UART passthrough, automatic flashing, and Arduino integration',
@@ -142,7 +142,7 @@ def _build_llms_txt(pages, site_url):
         desc = descriptions.get(name, title)
         entry = (title, f"{site_url}/{url_path}", desc)
 
-        if name in ('index', '01-basic-controls', '03-app', '04-oled', '06-config', '07-debugging'):
+        if name in ('index', '01-getting-started', '03-app', '04-oled', '06-config', '07-debugging'):
             core_pages.append(entry)
         elif name in ('05-arduino', '08-micropython', '09.5-micropythonAPIreference',
                        '09.6-jfs', '08-file-manager', '11-WritingApps',

@@ -39,16 +39,18 @@ Press it again to Stop. If you make changes, hit the green Save button next to i
 
 <img width="1306" height="1249" alt="Screenshot 2025-12-08 at 6 15 54 PM" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" />
 
-### If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)
+### If you write something cool, publish it to the JumperNet registry from JumperIDE for VS Code (**Jumperless: Publish Script to Registry**) and I'll add the good ones to the default examples.
 
 
-This is using [MicroPython's built-in Raw REPL](https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode), so anything that can interact with that will work here. I've only tested with Viper IDE but I'm pretty sure just about anything else would work.
+This is using [MicroPython's built-in Raw REPL](https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode), so anything that can interact with that will work here. I've tested it with JumperIDE, both the web one and the VS Code extension, but anything that speaks the raw REPL (like `mpremote`) should work on that 3rd port.
 
 
-There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in ViperIDE.) You can grab them here:
+There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in the web IDE. JumperIDE for VS Code installs these stubs for you.) You can grab them here:
 
-### [jumperless.py](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py)
+### [jumperless_module.py](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless_module.py)
 ### [jumperless.pyi](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi)
+
+They're also already on the board as `/python_scripts/lib/jumperless.py` and `/python_scripts/lib/jumperless.pyi`, so you can just copy them off it.
 
 ---
 
@@ -125,7 +127,7 @@ A terminal connected to the board's MicroPython prompt. Handles MicroPython line
 ##### **Serial terminal** 
 Pick any serial port (port1, the board's menu/CLI, is recommended) for a direct raw-passthrough terminal — the full-color menus and ANSI art render exactly as the board sends them. Or pick `Use Jumperless App` to run the standalone [Jumperless App](https://github.com/Architeuthis-Flux/Jumperless-App) instead (auto-installs from PyPI; autodetects the port and handles reconnection).
 
-###### **Autocomplete & hover docs** 
+##### **Autocomplete & hover docs** 
 Signatures and descriptions for every Jumperless function, sourced from the [API reference](https://docs.jumperless.org/09.5-micropythonAPIreference/) and refreshed automatically. Jumperless calls and constants are highlighted in Python files.
 
 ##### **OLED bitmap editor**
@@ -166,7 +168,7 @@ In history mode, the `>>>` prompts will be pink, when you're editing, they'll be
 
 ## Hardware Control Functions
 
-All Jumperless hardware functions are automatically imported into the global namespace - no prefix is actually necessary, but it's probably good to use `import jumperless as j` when using Viper IDE or something so it doesn't complain about not undefined names.
+All Jumperless hardware functions are automatically imported into the global namespace - no prefix is actually necessary. JumperIDE for VS Code already resolves them with its stubs, but in an editor without those it's probably good to use `import jumperless as j` so it doesn't complain about undefined names.
 
 ---
 
@@ -212,8 +214,8 @@ print("Script complete!")
 ## Loading and Running Scripts
 
 
-### Method 1 (Recommended): [Viper IDE](https://viper-ide.blackhart.dev/)
-See [above](#now-you-can-live-code-with-viper-ide) for instructions. It's at the top of the page for a reason, it's awesome.
+### Method 1 (Recommended): [JumperIDE](https://ide.jumperless.org/)
+See [above](#now-you-can-live-code-with-jumperide) for instructions. It's at the top of the page for a reason, it's awesome.
 
 ### Method 2: File Manager
 From the REPL (enter `p` in the main menu), then type `files` to open the file manager:
@@ -230,10 +232,11 @@ Navigate to your script and press Enter to load it for editing, then press `Ctrl
 From the MicroPython REPL, you can use the following commands to manage scripts:
 
 ```jython
-# Load script into editor for modification
+# Put a saved script on the REPL input line to edit or run
+# (bare `load` lists the saved scripts with numbers)
 load my_script.py
 
-# Save current session as script
+# Save the last executed script (auto-named if you leave the name off)
 save my_new_script.py
 ```
 
@@ -254,11 +257,16 @@ From main menu: Press `p`
 ### REPL Commands
 ```jython
 CTRL + q           - Exit REPL
+exit / quit        - Exit REPL
 history            - Show command history and saved scripts
 save [name]        - Save last executed script
 load <name>        - Load script by name or number
+delete <name>      - Delete a saved script
 files              - Open file manager
 new                - Create new script with eKilo editor
+edit               - Open the last input in the eKilo editor
+multiline on|off|auto - Force multiline mode on or off, or go back to automatic
+context            - Toggle connection context
 helpl              - Show REPL help
 help()             - Show hardware commands
 ```
@@ -286,7 +294,7 @@ The REPL automatically detects when you need multiple lines after a `:`
 >>> blink_led()
 ```
 
-If you want to use *real* multiline mode, use the Kilo file editor. 
+If you want *real* multiline mode, type `multiline on` and then `run` to execute what you typed. `new` and `edit` open the eKilo editor straight from the REPL. 
 
 ### Command History
 - Use ↑/↓ arrows to browse previous commands
@@ -299,43 +307,26 @@ If you want to use *real* multiline mode, use the Kilo file editor.
 The MicroPython REPL now supports **connection contexts** that determine how connections persist:
 
 - **`global` context**: Changes persist to global state - connections remain after exiting Python
-- **`python` context**: Connections are restored to how they were when exiting REPL (saved to `slots/slotPython.yaml`)
+- **`python` context**: Connections you make in the session are undone when you exit, and the state from when you entered comes back
 
 **To toggle contexts:** Type `context` in the REPL
 
 **How it works:**
 - In `global` mode: Any connections you make become permanent, just like using the normal command interface
 - In `python` mode: The connection state when you entered the REPL is saved, and restored when you exit
-- The current context is displayed in the REPL prompt
+- The current context is shown in the REPL banner when you enter, and by `helpl`. Typing `context` prints it too. The default is `global`
 
 
 ## Built-in Examples
-The system includes several example scripts. To run an example:
+The board comes with a pile of example scripts in `/python_scripts/examples/`. Every one of them is described on the [Examples](08.5-examples.md) page.
 
-1. Type `files` in the REPL.
-2. Navigate to the `examples/` directory.
-3. Select the desired script and press Enter to edit/view it.
-4. Press `Ctrl+P` to load it into the REPL for execution.
-
-Example scripts include:
-
-- `dac_basics.py`
-- `adc_basics.py`
-- `gpio_basics.py`
-- `node_connections.py`
-- `led_brightness_control.py`
-- `stylophone.py`
-- `uart_basics.py`
-- `uart_loopback.py`
-- `interaction_demo.py`
-- `test_neopixel.py`
-- `fake_gpio.py`
+There are three ways to run one. From the REPL, type `files`, open the script, and press `Ctrl+P`. From the main menu, `/` opens the file manager and `/python_scripts/examples/adc_basics.py` runs a script directly. From the clickwheel, `Files` lists the filesystem and clicking a `.py` file runs it.
 
 
-
+## Troubleshooting
 
 **REPL not responding:**
-- Press Ctrl+Q to force quit
+- Press Ctrl+Q to force quit on the main menu port (port 1), or Ctrl+C on the 3rd port that JumperIDE uses
 - Unplug / replug your Jumperless (don't worry, almost everything is persistent)
 
 

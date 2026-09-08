@@ -188,9 +188,9 @@ Testing GPIO pin 1
 
 ## 📖 Related Documentation
 
-- [Jumperless API Quick Reference](../JUMPERLESS_API_QUICKREF.md)
-- [MicroPython Module Documentation](../MICROPYTHON_MODULE_COMPLETE.md)
-- [ViperIDE Setup](../VIPER_IDE_SETUP.md)
+- [Jumperless API Quick Reference](../09.5-micropythonAPIreference.md)
+- [MicroPython Module Documentation](../09.5-micropythonAPIreference.md)
+- [ViperIDE Setup](../08-micropython.md)
 
 ## 🔗 Links
 

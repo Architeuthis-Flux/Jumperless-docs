@@ -13,29 +13,34 @@ Ignore the really cool LEDs.
 They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.
 ![SBCBP-4 copy](https://github.com/user-attachments/assets/43232b06-380d-4e18-9aab-924e45790740)
 
-Yo
-
+That's how rev 5 boards (the Crowd Supply and Mouser ones) do it, and the OLED talks to GPIO 7 and 8 through the crossbar to rows `D2` and `D3`. Rev 7 boards have dedicated OLED headers on the internal I2C bus instead, so the firmware finds the display by itself at boot and no rows or routable GPIO get used up. If you have one of those, the `Connection`, `Lock Connection` and GPIO stuff below doesn't apply to you.
 
 This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. 
 
 ## Connection
 
-To connect the data lines to the Jumperless' GPIO 7 and 8, just use the menu option `.` (that's a period). It will try to find the OLED on the I2C bus, after a few failed attempts, it'll automatically disconnect to free up GPIO 7 and 8. 
+To connect the data lines to the Jumperless' GPIO 7 and 8, just use the menu option `.` (that's a period). Press it again to disconnect and free up GPIO 7 and 8, or use `.1` and `.0` to force it on or off. If no display answers, the routing stays put and the firmware keeps checking for one every few seconds.
+
+In the click menu the same things live under `OLED`: `Connect`, `Connect On Boot`, `Lock Connect` and `Show in Term`. `Show in Term` (or the `k` command, or `` `[top_oled] show_in_terminal = port_1;``, which also takes `off`, `port_3`, `port_5`, `port_7` and `uart`) mirrors whatever's on the OLED into your terminal. `t` opens an OLED terminal where anything you type goes straight to the display.
 
 ## Auto-Connect on Boot
 
-If you want to use this all the time, there's a config option to connect the OLED on startup. You can just paste this into the main menu:
+The OLED gets connected on startup by default. If you'd rather it didn't, paste this into the main menu:
 ```
-`[top_oled] connect_on_boot = true;
-``` 
+`[top_oled] connect_on_boot = 0;
+```
+
+The full list of `[top_oled]` keys with their current values is on the [config page](06-config.md).
 
 ## Lock Connection
 
 Locking the connection to the OLED ensures that it stays connected even when you enter a complete `node` list. So if you're using Wokwi or manually adding connections in a file, you don't need to add `GPIO_7 - D2` and `GPIO_8 - D3` to keep the I2C connected to the OLED.
 
 ```
-`[top_oled] lock_connection = true;
+`[top_oled] lock_connection = 1;
 ```
+
+This only matters when the OLED is on the crossbar (the `gpio_7_8` or `custom` connection types) - the hardwired RP6/RP7 and internal I2C connections have no routing to lose.
  
   
 ## Custom Startup Message
@@ -50,7 +55,7 @@ Set a custom text message to display on the OLED at startup (max 32 characters):
 `[top_oled] startup_message = Your Message Here;
 ```
 
-This message will appear after the Jumperless logo on boot.
+This shows up instead of the Jumperless logo on boot, in big text. Once you start using the board, the usual idle logo comes back.
 
 ### Bitmap Image
 
@@ -61,7 +66,7 @@ Display a custom bitmap image at startup by just giving it a path on the filesys
 ```
 
 **Requirements:**
-- Image must be a bitmap file (`.bin` format) with 4-byte header
+- Image must be a bitmap file (`.bin` format), either with the 4-byte header (recommended) or raw at 512, 1024, 256 or 496 bytes
 - Recommended size: 128×32 pixels (standard OLED size)
 - Use the built-in [Bitmap Editor](#bitmap-editor) to create or edit images
 - Store images in the `/images/` directory on the Jumperless filesystem
@@ -75,26 +80,24 @@ If you have a different sized OLED (like 128x64), you can set the dimensions:
 ```jython
 `[top_oled] width = 128;
 `[top_oled] height = 64;
+`[top_oled] rotation = 0;
 ```
+
+`rotation` goes 0 to 3 in 90 degree steps. If your display sits at some other I2C address, set `` `[top_oled] i2c_address = 0x3C;`` to whatever it actually is. The click menu can do the size too: `OLED` > `Display Size` > `Width` or `Height`, with `32`, `64`, `128`, `256` and `Custom`.
 
 ## Advanced GPIO Configuration
 
-You can change both the GPIO used for the display or the rows it connects to with the config options:
-
-```jython
-`[top_oled] sda_pin = 26;
-`[top_oled] scl_pin = 27;
-`[top_oled] gpio_sda = GP_7;
-`[top_oled] gpio_scl = GP_8;
-`[top_oled] sda_row = D2;
-`[top_oled] scl_row = D3;
-```
+You don't set the GPIO and row keys by hand - pick a connection type and the firmware fills them all in for you. The exception is the `custom` type, which uses whatever you put in `` `[top_oled] sda_pin = 26;`` and `` `[top_oled] scl_pin = 27;``. Those two are refused on the internal I2C bus, which is hardwired to GPIO 4 and 5.
 
 ## Connection type
+
+There are four of them. `gpio_7_8` runs the OLED through the crossbar to rows `D2` and `D3` (the rev 5 default), `rp6_rp7` uses the hardwired GPIO 6 and 7, `i2c0` (also spelled `internal`) uses the internal I2C bus on GPIO 4 and 5 that rev 7 boards have their OLED headers on, and `custom` uses the `sda_pin`/`scl_pin` you set yourself.
 
 ```jython
 `[top_oled] connection_type = rp6_rp7;
 ```
+
+The `O` command cycles through GPIO 7/8, RP6/RP7 and internal I2C0, or you can jump straight to one with `O0` through `O3` or a name like `O i2c0`. In the click menu it's `OLED` > `Pins`, with `GPIO7/8`, `RP6/7` and `Intrnal`.
 
 ## Bitmap Editor
 
@@ -121,7 +124,10 @@ You can create a new bitmap file from the file manager:
 1. Navigate to where you want to create the file (e.g., `/images/`)
 2. Press `n` for "new file"
 3. Name it with a `.bin` extension (e.g., `mylogo.bin`)
-4. The editor will automatically create a blank 128×32 bitmap (or whatever your OLED dimensions are set to in config)
+4. Open the new file (Enter or `click`) - `n` only creates it, opening it is what starts the editor
+5. The editor sees the empty file and makes a blank 128×32 bitmap (or whatever your OLED dimensions are set to in config)
+
+`.bmp` files open in the editor too.
 
 ## Editor Interface
 
@@ -203,20 +209,20 @@ When the cursor reaches the bottom edge and you press down, you enter the menu b
 - **Ctrl+Q**: Quit (prompts to save if modified)
 - **h or ?**: Show help screen
 
-The editor automatically adds the 4-byte header (width and height) when saving, making the file compatible as a startup image.
+A new file gets the 4-byte header (width and height) when you save, and a file that already had one keeps it. A raw headerless file is saved back raw, which still works as a startup image at the common sizes.
 
 ## Example Workflow: Creating a Startup Logo
 
 1. Open file manager, navigate to `/images/`
 2. Create new file: `mylogo.bin`
-3. Editor opens with blank 128×32 canvas
+3. Open it - the editor starts with a blank 128×32 canvas
 4. Switch to Half Block mode (`m`) for better overview
 5. Use clickwheel to navigate, Connect button to draw
 6. Save with Ctrl+S
 7. Set as startup image: 
-    - By editing the config file: ``` `[top_oled] startup_image = /images/mylogo.bin``` 
-    - Or use the click menus `OLED` > `Startup message` > `image` > (scroll through all the images and `click` to select)
-8. Reboot or enter/exit the click menu to see your custom logo
+    - By editing the config file: ``` `[top_oled] startup_message = /images/mylogo.bin;``` 
+    - Or use the click menus `OLED` > `StartUp Messge` > `Bitmap` > (scroll through all the images and `click` to select)
+8. Reboot to see your custom logo. Picking it in the menu previews it right away; after boot the idle screen goes back to the standard logo.
 
 ## Editor Screenshots
 
@@ -380,7 +386,7 @@ Cursor Colors:
 The editor works with `.bin` files in two formats:
 
 **With Header (Recommended):**
-- 4 bytes: Width (16-bit little-endian)
+- 2 bytes: Width (16-bit little-endian)
 - 2 bytes: Height (16-bit little-endian)  
 - Remaining: Bitmap data (MSB-first, row-major)
 - Example: 128×32 = 4 header + 512 data = 516 bytes total
@@ -389,7 +395,7 @@ The editor works with `.bin` files in two formats:
 - Just bitmap data, dimensions inferred from file size
 - 512 bytes → 128×32, 1024 bytes → 128×64, etc.
 
-The editor automatically adds headers when saving, making files ready to use as startup images.
+The editor only writes a header if the file already had one, or if it's a new file - a raw file stays raw.
 
 ## Converting External Images
 
@@ -476,6 +482,8 @@ print("Test complete!")
 # Disable when done
 j.oled_copy_print(False)
 ```
+
+Print copying and the default text size go back to their defaults (off, size 2) after a script finishes running. If you turned them on from the REPL they stay on until you run a script or reboot.
 
 This is perfect for debugging projects where you don't have easy access to the serial console.
 
@@ -569,6 +577,7 @@ The API includes:
 - Bitmap functions (`oled_load_bitmap`, `oled_display_bitmap`, `oled_show_bitmap_file`)
 - Framebuffer access (`oled_get_framebuffer`, `oled_set_framebuffer`, `oled_get_framebuffer_size`)
 - Pixel manipulation (`oled_set_pixel`, `oled_get_pixel`)
+- Retained screens and layouts (`oled_screen`, `oled_add_text`, `oled_add_shape`, `oled_set`, `oled_set_var`, `oled_screen_show`/`_hide`/`_save`/`_load`) - see the [OLED Layout / Screens section](09.5-micropythonAPIreference.md#oled-display)
 
 ### Example Projects
 

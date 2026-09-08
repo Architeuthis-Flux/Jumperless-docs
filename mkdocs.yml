@@ -16,11 +16,13 @@ exclude_docs: |
 # Built, but not listed in the left nav
 not_in_nav: |
   findme.md
+  01-basic-controls.md
+  jumperless-agent-skill.md
 
 # Navigation structure - explicitly define what appears in the sidebar
 nav:
   - Home: index.md
-  - Basic Controls: 01-basic-controls.md
+  - Getting Started: 01-getting-started.md
 
   - The App: 03-app.md
   - OLED Support: 04-oled.md
@@ -32,8 +34,11 @@ nav:
   - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
   - MicroPython: 08-micropython.md
+  - Examples: 08.5-examples.md
   - MicroPython API Reference: 09.5-micropythonAPIreference.md
+  - JFS (Filesystem): 09.6-jfs.md
   - Odds and Ends: 09.8-odds-and-ends.md
+  - Writing Apps: 11-WritingApps.md
   - 3D Printable Stand: 10-3d-stand.md
 
   - Temporal Badge:
@@ -72,6 +77,9 @@ extra_javascript:
 
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:
+  - admonition
+  - md_in_html
+  - pymdownx.details
   # Heading IDs = text before '(' only (e.g. gpio_set, connect) so JumperIDE and links can target #gpio_set
   - markdown.extensions.toc:
       slugify: !!python/name:slugify_headings.slugify_name_only

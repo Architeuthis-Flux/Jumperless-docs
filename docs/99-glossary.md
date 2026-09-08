@@ -23,31 +23,24 @@
 
 ## Slots and Files
 
-`slot` = one of **8** saved circuit configurations (slots 0-7) that you can switch between. Use `<` to cycle forward through slots, or use the menus to jump to a specific slot. The **active slot** is the one currently loaded and affecting the hardware.
+`slot` = one of **8** saved circuit configurations (slots 0-7) that you can switch between. Type `<` to cycle forward through slots or `<5` to jump straight to one, or on the clickwheel use `Slots` > `Load` > `0-7` (it previews each one as you scroll). `Slots` > `Save to` > `0-7` copies the active slot into another, and `Slots` > `Clear` > `0-7` empties one.
 
-`slot file` = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at `/slots/slotN.yaml` where N is 0-7. These files are human-readable and can be edited directly!
+`slot file` = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at `/slots/slotN.yaml` where N is 0-7. These files are human-readable and can be edited directly! See [State File Structure](06-config.md#state-file-structure) for what's in one.
 
-`active slot` = the currently loaded slot. Only the active slot affects the hardware. Use `Q` command to query which slot is active. When you make connections with the probe, they're saved to the active slot automatically.
+`active slot` = the context that's actually loaded onto the hardware. Usually that's one of the numbered slots, but it can also be a project's `wiring.yaml` opened from the Files browser or with `z <project>`. Enter `Q` to see which. When you make connections with the probe, they're saved to whatever's active automatically.
 
 ## Slot Management Commands
 
-- `<` = cycle to next slot (0→1→2...→7→0)
-- `Q` = query which slot is currently active (returns `ACTIVE_SLOT:X`)
-- `Y` = print YAML
+- `<` = cycle to next slot (0→1→2...→7→0), or `<N` (e.g. `<5`) to jump straight to slot N. From a project file, a bare `<` goes to slot 0.
+- `Q` = query which context is active. It prints `ACTIVE_SLOT:N` and then `ACTIVE_PATH:/slots/slotN.yaml`. With a project file loaded the slot is `-1` and the path is that file's.
+- `Y` = print YAML (`Y0` plain, `Y1` colored with hex values, `Y2` colored blocks, which is the default)
+- `S` = paste a YAML state back in, in the same format `Y` prints. End the paste with an empty line and it's applied right away.
 
 ## YAML Format
 
-Slot files use YAML format with named nodes for readability:
+Slot files use YAML format with named nodes for readability. [State File Structure](06-config.md#state-file-structure) has a full example of one.
 
-```yaml
-bridges:
-  - {n1: 1, n2: 10, dup: 2, color: red}
-  - {n1: NANO_D5, n2: GP_1, dup: 2}
-
-power:
-  topRail: 3.30
-  bottomRail: 2.50
-```
+`dup` is an optional per-bridge override of how many parallel crosspoint paths get stacked for that one connection, like `- {n1: NANO_D5, n2: GP_1, dup: 4}`. Leave it out and you get the default from the `[routing]` `stack_paths` key (2), with `stack_rails` (3), `stack_gpio` (0), `stack_adcs` (0) and `stack_dacs` (0) covering those classes. `color:` is optional too, and takes a color name, `0xRRGGBB`, or `#RRGGBB`.
 
 **Named nodes:** `NANO_D0-D13`, `NANO_A0-A7`, `GP_1-8` (or `RP_GPIO_1-8`), `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`, etc. (Note these differ from the MicroPython constants - `GPIO_1` and `DAC0_5V` won't parse in slot files.)
 
@@ -55,13 +48,7 @@ You can view and edit these files in the [File Manager](08-file-manager.md) or v
 
 ## Wokwi Import
 
-`W` = Import circuit from [Wokwi](https://wokwi.com) simulator
+`W` = import a circuit from the [Wokwi](https://wokwi.com) simulator into the active slot. `W 3` imports into slot 3 instead (written to its file, hardware untouched unless 3 is the active one), `W diagram.json` reads a diagram already on the filesystem, and `W diagram.json 3` does both. When you're pasting, it knows you're done when the closing brace arrives.
 
-1. Design circuit on wokwi.com
-2. Copy `diagram.json` content
-3. Type `W` in Jumperless
-4. Paste JSON content
-5. Circuit is converted and saved to active slot
-
-The parser automatically maps Wokwi breadboard pins, Arduino Nano pins, and logic analyzer channels to Jumperless nodes, and preserves your wire colors from Wokwi!
+The whole walkthrough is on the [app page](03-app.md#importing-circuits-from-wokwi).
 

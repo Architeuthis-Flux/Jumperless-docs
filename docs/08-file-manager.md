@@ -3,6 +3,8 @@
 
 The Jumperless has a built in File Manager which you can access in the menu with `/`, or enter `U` in the menu and Jumperless will mount as a USB Mass Storage drive called `JUMPERLESS` where you can edit files on the filesystem.
 
+`/` on its own opens the File Manager. Put a filename after it, like `/adc_basics.py`, and that script runs straight away - it looks in `/python_scripts`, its `examples`, `lib` and `modules` folders, then the root.
+
 ## File System Structure
 
 ```
@@ -14,6 +16,19 @@ The Jumperless has a built in File Manager which you can access in the menu with
 │   ├── slot2.yaml
 │   └── ... (up to slot7.yaml)
 │
+├── projects/
+│   ├── 555/
+│   │   ├── README.md
+│   │   ├── main.py
+│   │   └── wiring.yaml
+│   ├── i2cscrn/
+│   ├── nand00/
+│   └── eeprom/
+│
+├── images/                (bitmaps for the OLED)
+├── screens/               (OLED GUI layouts)
+├── undo.hist              (the undo history, saved with your slots)
+│
 └── python_scripts/
     ├── history.txt
     ├── cool_micropython_script.py
@@ -21,7 +36,10 @@ The Jumperless has a built in File Manager which you can access in the menu with
     │
     ├── lib/
     │   ├── jumperless.py
+    │   ├── jumperless.pyi
     │   └── oledgui.py
+    │
+    ├── modules/
     │
     └── examples/
         ├── adc_basics.py
@@ -46,44 +64,41 @@ Each slot's configuration is stored as a YAML file in the `/slots/` directory, a
 
 ## Navigation
 
-### Basic Movement
 | Control | Action |
 |---------|--------|
 | **↑/↓ Arrow Keys** or **Rotary Encoder** | Move selection up/down |
-| **Enter** or **Click Encoder** | Open directory or edit file (slot files get *loaded* instead - use `e` to edit them) |
+| **Enter** or **Click Encoder** | Open directory or edit file. Slot files get *loaded* instead (use `e` to edit them), `.bin` and `.bmp` open in the bitmap editor, and clicking a project's `wiring.yaml` in `/projects/` starts that project. `.py` files run if you got here from the clickwheel `Files` menu; from the terminal `/` they open in the editor. |
+| **Hold Encoder** | Go up one directory (at the root it quits) |
+| **Long hold Encoder** | Quit File Manager |
 | **/** | Go to root directory |
-| **.** or **Esc** | Go up one directory|
-| **q** or **CTRL + q** | Quit File Manager (Ctrl+Q also quits the Text Editor)
- 
----
- 
-### File Manager Commands
-| Key | Action | Description |
-|-----|--------|-------------|
-| [enter] | Open | Open file or enter directory (slot files get loaded, `.py` files run from the click menu) |
-| **h** | Help | Show help |
-| **v** | Quick view | View file contents |
-| **.** | Up dir | Go up one directory  |
-| **n** | New file | Create new file (prompts for filename) |
-| **d** | New directory | Create new directory |
-| **x** | Delete | Delete file or directory (confirm with `y`/`N`) |
- 
+| **.** | Go up one directory |
+| **Esc** | Go up one directory, or quit if you're already at the root |
+| **h** | Show help |
+| **v** | Quick view of file contents |
+| **e** | Edit file |
+| **i** | File info |
+| **n** | New file (prompts for filename) |
+| **d** | New directory |
+| **x** | Delete file or directory (confirm with `y`/`N`) |
+| **r** | Refresh directory listing |
+| **u** | Memory status |
+| **m** | Force initialize MicroPython examples |
+| **q** or **CTRL + q** | Quit File Manager (Ctrl+Q also quits the Text Editor) |
 
 ---
-   
-   
+
 ### File Type Icons and Colors
 | Icon | File Type | Extensions | Color |
 |------|-----------|------------|-------|
 | **⌘** | Directories | - | Cyan |
 | **𓆚** | Python files | .py, .pyw, .pyi | Green |
-| **⍺** | Text files | .txt, .md | Yellow |
-| **⚙** | Config files | .cfg, .conf, config.txt | Magenta |
-| **⟐** | JSON files | .json | Blue |
+| **⍺** | Text files | .txt, .md, .readme | Yellow |
+| **⚙** | Config files | .cfg, .conf, any name starting with `config` | Magenta |
+| **⟐** | JSON files | .json, .yaml, .yml | Blue |
 | **☊** | Legacy slot files | nodeFileSlot*.txt | Orange |
 | **⎃** | Net color files | netColorsSlot*.txt | Pink |
 
-Images, audio, video, documents, and archives get their own icons too. Anything unrecognized (currently including the `/slots/*.yaml` slot files) shows as a grey **⍺**.
+Images, audio, video, documents, and archives get their own icons too. Slot files are `.yaml`, so they show up blue like JSON. Anything unrecognized shows as a grey **⍺**.
 
 
 ---
@@ -98,11 +113,14 @@ The File Manager also has text editor based off [**eKilo**](https://github.com/a
 
 ### Editor Controls
 - **Ctrl+S**: Save file
-- **Ctrl+Q**: Quit editor
-- **Ctrl+P**: Save and launch MicroPython REPL
+- **Ctrl+Q**: Quit editor. If you have unsaved changes it asks you to press it 3 more times (Esc doesn't discard your edits, it just tells you how to leave)
+- **Ctrl+P**: Save and load the file into the MicroPython REPL - `.py` files only, anything else just saves
+- **Ctrl+U**: Memory status
+- **Tab**: Indent
 - **Arrow keys**: Navigate cursor
-- **Rotary encoder**: Move cursor horizontally
+- **Rotary encoder**: Move cursor horizontally. Turn past the end of the file (or back before the start) and you get a Save/Cancel menu to pick from with the wheel and a click
 - **Click encoder**: Enter character selection mode (you can scroll through the letters on the OLED and click again to insert it)
+- **Long hold encoder**: Save (if you've changed anything) and quit
 
 ### Character Selection With the Click Wheel and OLED
 When using the rotary encoder in the editor:
@@ -130,66 +148,19 @@ If you have an OLED connected, the File Manager shows:
 ---
 
 ### MicroPython Examples
-The File Manager automatically creates example Python scripts in `/python_scripts/examples/`:
+The example scripts live in `/python_scripts/examples/`. Click one in the File Manager to run it, and see the [Examples](08.5-examples.md) page for the full list and what each one does.
 
-#### Basic Hardware Examples
-
-- [**adc_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/adc_basics.py): Basic ADC (Analog-to-Digital Converter) operations.
-    - This example shows how to read analog voltages from all ADC channels (0-3). Connect voltage sources to ADC inputs and monitor readings in real-time.
-
-- [**dac_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/dac_basics.py): Basic DAC (Digital-to-Analog Converter) operations.
-    - Shows how to set DAC voltages on all channels (DAC_A, DAC_B, TOP_RAIL, BOTTOM_RAIL).
-    - Hardware setup: Connect voltmeter or LED to DAC output pins.
-
-- [**gpio_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/gpio_basics.py): Basic GPIO (General Purpose Input/Output) operations.
-    - This example demonstrates digital I/O, direction control, and pull resistors.
-    - Tests input mode with pull-up, pull-down, and floating configurations.
-
-- [**file_io_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/file_io_basics.py): Guided tour of file I/O with the `jfs` module.
-    - Walks through writing, append-mode data logging, reading with seek/tell, directory operations, and the open-file limit - narrated as it runs.
-
-- [**pin_irq_basics.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_basics.py): `machine.Pin` interrupt basics.
-    - Routes GPIO_1 to GPIO_2 through the crossbar and catches self-generated edges with an IRQ handler - no external wiring needed.
-
-- [**node_connections.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/node_connections.py): Node connection and routing operations.
-    - This example shows how to connect/disconnect nodes, check connections, and clear all connections.
-    - Demonstrates working with breadboard nodes, DAC outputs, and GPIO pins.
-    - 
-- [**uart_loopback.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/uart_loopback.py): UART Loopback Demo.
-    - Demonstrates UART communication by looping back data from UART_TX to UART_RX.
-    - Open a serial monitor on the Jumperless's second port at 115200 baud to see the looped messages.
-
-#### Interactive Examples
-
-- [**interaction_demo.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/interaction_demo.py): Interactive Demo - Control connections with probe, encoder, and buttons.
-    - This example shows how to use all the interactive controls together.
-    - No special hardware needed - use the probe to tap nodes, the encoder to adjust bridge spread, and buttons to change colors.
-
-- [**led_brightness_control.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/led_brightness_control.py): LED Brightness Control Demo.
-    - Tap breadboard pads 1-60 to control the voltage on an LED and display the current draw.
-    - Hardware setup: Connect LED anode to breadboard row 15, connect LED cathode to GND.
-    - Displays voltage and current on OLED.
-
-- [**stylophone.py**](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/stylophone.py): Jumperless Stylophone.
-    - Musical instrument using probe and GPIO to generate audio tones.
-    - Hardware setup: Connect speaker between rows 25 (positive) and 55 (negative).
-    - Touch breadboard pads to play different frequencies, use probe buttons to adjust sustain.
-
-
-
-These are just the highlights - the firmware ships more examples than listed here (OLED demos, pin-interrupt games, an oscilloscope, a Google Sheets logger, and more).
-
-You can trigger them to regenerate if you messed them up by deleting it with `x` (when you're in the File Manager), and then entering `m` to create new copies of any examples it doesn't see.
+If you delete one it comes back on its own the next time the File Manager opens. `m` forces a refresh: it also updates examples that still match an older firmware's version and always refreshes the `lib/` modules, and if you've edited an example it leaves yours alone and writes the current default next to it as `<name>_original.py`.
 
 
 ## Editing Slot Files
 
 Slot files (located in `/slots/`) use **YAML format** and can be edited directly! They're human-readable files containing:
 
-- **bridges** - Your circuit connections
-- **power** - Rail and DAC voltages
-- **colors** - Wire colors from Wokwi or custom colors
+- **bridges** - Your circuit connections, with `dup:` and `color:` on each line
+- **power** - Rail and DAC voltages (topRail, bottomRail, dac0, dac1)
 - **config** - Routing preferences and GPIO settings
+- **nets**, **parts** and **overlays** - written by the board itself
 
 **Example slot file:**
 ```yaml
@@ -212,6 +183,8 @@ power:
 
 If you edit the active slot's file, the Jumperless automatically reloads it - when you quit the onboard eKilo editor, or, if you have the Jumperless mounted as a USB Mass Storage drive and are editing the files on your computer, when you eject/unmount the drive.
 
+Opening any `/slots/slotN.yaml` in the onboard editor previews that slot on the breadboard while you're editing it. When you close the editor the board goes back to whichever slot was active and re-reads its file, which is how your saved edits to the active slot land.
+
 ---
 
 ## USB Mass Storage
@@ -220,9 +193,9 @@ Enter `U` in the menu and Jumperless will mount as a USB Mass Storage drive call
 
 Keep in mind that file operations are pretty slow, so make sure to give it time to fully save files when you drop them onto the filesystem.
 
-When you're finished `u` (or just eject the drive) will unmount the Mass Storage device.
+Ejecting the drive from your computer applies your edits - the board syncs, saves anything pending, and reloads the active slot - but it's still a drive you can remount. Enter `u` to actually turn Mass Storage off.
 
-You can also enter `Z` for a little debug menu
+You can also enter `Z` for a little debug menu: `1` toggles USB debug output, `2` forces a refresh of the filesystem from what your computer wrote, and `3` validates every slot file. While the drive is on, `u` disables it, `G` reloads config.txt, `y` refreshes connections, and `S` shows status.
 
 <img width="757" height="380" alt="Screenshot 2025-07-15 at 8 55 44 AM" src="https://github.com/user-attachments/assets/124d2f5a-a320-453f-8598-7604f37a57d7" />
   
@@ -232,44 +205,3 @@ You can also enter `Z` for a little debug menu
   
 
 <img width="1014" height="463" alt="Screenshot 2025-07-15 at 8 56 13 AM" src="https://github.com/user-attachments/assets/a9e79a69-a7da-4365-a457-44b2c5d2fc24" />
-
-
-
-
-
----
-
-## Navigation Reference
-| Key | Action |
-|-----|--------|
-| ↑/↓ | Move selection |
-| Enter | Open/Edit |
-| / | Go to root |
-| . | Go up directory |
-| h | Show help |
-  
----
-  
-### File Operations
-| Key | Action |
-|-----|--------|
-| v | View file |
-| e | Edit file |
-| i | File info |
-| n | New file |
-| d | New directory |
-| x | Delete |
-| r | Refresh |
- 
----
-
-### System
-| Key | Action |
-|-----|--------|
-| u | Memory status |
-| m | Initialize examples |
-| q or Ctrl+Q | Quit |
-
-
-
-

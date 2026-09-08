@@ -2,8 +2,10 @@
 
 Look *Inside* your Jumperless
 
+You type all of these at the terminal prompt. `n` is on the menu you always see, `b` and `c` show up once you press `e`, and `C` isn't listed anywhere but it still works.
+
 ## Crossbar Array
-There's a new way to see what the 12 analog crossbar switches are up to, just enter `C` in the menu
+To see what the 12 analog crossbar switches are up to, just enter `C`
 
 
 ![Crossbar View](assets/CrossbarView.png)
@@ -81,7 +83,7 @@ Lowercase `c` will show a compact version
 
 ![Crossbar Compact](assets/CrossbarCompact.png)
 
-You can also set it to live updating mode with `c!` 
+You can also set it to live updating mode with `c!`. A second `c!` turns it back off, or use `c0` and `c1` to force it off and on. Turning it on clears the screen and pins the crossbar to the top of the terminal, and everything else scrolls underneath it. The live view only draws on the main serial port.
 
 
 <video autoplay loop muted playsinline controls width="100%">
@@ -92,7 +94,9 @@ You can also set it to live updating mode with `c!`
 ---
 
 ## Bridge Array
-Enter `b` in the menu. This is generally the most helpful one for *me* to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.
+Enter `b`. This is generally the most helpful one for *me* to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.
+
+It prints your duplicate stacking settings first, then the bridge array, then the paths, then the chip status. `b0` shows every path instead of just the routed duplicates, and `b2` shows every duplicate.
 
 ![Screenshot 2025-05-30 at 7 04 54 AM](https://github.com/user-attachments/assets/05e55021-b1f1-49af-8e7b-230d47522aed)
 
@@ -100,6 +104,6 @@ Enter `b` in the menu. This is generally the most helpful one for *me* to troubl
 ---
 
 ## Net List
-Enter `n` in the menu to show this one. If you have anything that's doing any measurement (`gpio` input or `ADC`s), it'll stay up and live update if any of them change. (And just like basically any menu not asking for input, entering anything will bring you back to the main menu.)
+Enter `n` to show this one. If you have an `ADC`, a `gpio` input, or a `gpio` output routed to a net, it'll stay up and live update when those readings change, or when you move the clickwheel highlight. Any key ends it, and so does a probe button press or a click of the clickwheel. That key doesn't get eaten though, it runs as your next command, so press Enter or space to get out quietly rather than a letter that does something (`x` would clear all your connections).
 
 ![Screenshot 2025-05-30 at 7 10 04 AM](https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804) 

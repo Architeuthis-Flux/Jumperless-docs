@@ -4,19 +4,27 @@
 
 With an Arduino Nano in the header and the UART lines connected, anything on those lines should be passed through to the second serial port that shows up when you plug in your Jumperless. 
 
-(You can also set the config option `[serial_1] print_passthrough = true;` and have it print on both. Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.
+Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.
+
+The Nano goes in the header socket on the board, and every signal pin on that header is a routable node - `D0` through `D13`, `A0` through `A7`, `AREF` and `RESET`. You can connect any of them to a breadboard row or a rail just like anything else. The power pins (`5V`, `3V3`, `VIN`, `GND`) aren't routable. `D0` and `D1` are the only ones that ever get wired up for you.
 
 <img width="360" alt="Screenshot 2025-05-19 at 11 07 55 AM" src="https://github.com/user-attachments/assets/2b255e34-0d0a-4e86-b577-d59c9561fa42" />
 
 ## Quick Connection Shortcuts
 
-The shortcuts to connect `D0` and `D1` to the Jumperless's UART `Tx` and `Rx` is `A` to connect, and `a` to disconnect.
+The shortcuts to connect `D0` and `D1` to the Jumperless's UART `Tx` and `Rx` is `A` to connect, and `a` to disconnect. Add a `?` to ask instead of doing - `A?` tells you whether the UART is routed and whether a Nano is there, `a?` just whether it's routed.
+
+`r` resets the Nano. `rt` and `rb` pick which `RESET` pad to pulse, and `r2` does both.
+
+You don't need `A` before an upload, flashing routes the UART for you. It's only there for talking to the sketch afterwards if you'd disconnected it.
 
 ## Automatic Flashing
 
 It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.
 
-![](docs/assets/arduinoPort.png)
+That reset twiddling is set up for a classic AVR Nano. If you've got a Nano ESP32 in the header, set the `[serial_1]` config key `flash_reset_type` to `esp32` or the upload will never get it into the bootloader.
+
+![](assets/arduinoPort.png)
 
 <!-- <img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" />  -->
 
@@ -26,17 +34,17 @@ It will even sense when Arduino IDE is trying to upload code and twiddle the res
 
 ## Commands from Routable UART
 
-You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The tags are stripped out and the command is executed - the Arduino never sees them come back.
+You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The command inside the tags gets executed. The tagged text still shows up on the passthrough port along with everything else your Arduino prints, it doesn't get stripped out - but it's never echoed back down the UART to the Arduino.
 
 ### Two Types of Tags
 
 There are two flavors of command tags, depending on what you want to do:
 
 #### `<j>` Tags - Raw Commands
-These run exactly like you typed them in the main Jumperless menu. Use these for things like making connections with `f`, loading files, or any single-character menu command.
+These run exactly like you typed them in the main Jumperless menu. Use these for things like making connections with `f`, loading files, or any single-character menu command. They don't send anything back to the Arduino.
 
 #### `<p>` Tags - Python Commands  
-These run MicroPython commands directly. Perfect for `connect()`, `disconnect()`, `adc_get()`, `dac_set()`, and all the other Python hardware functions. The `<p>` tag automatically prepends the `>` that normally tells the Jumperless "this is a Python command."
+These run MicroPython commands directly. Perfect for `connect()`, `disconnect()`, `adc_get()`, `dac_set()`, and all the other Python hardware functions. The `<p>` tag automatically prepends the `>` that normally tells the Jumperless "this is a Python command." A `<p>` command sends back exactly what it prints and nothing else, so wrap anything you want to read in `print()`.
 
 ### Supported Tag Names
 
@@ -47,7 +55,7 @@ Any of these work (use matching opening and closing tags):
 | `<j>` | `<j>f 1-30</j>` |
 | `<jumperless>` | `<jumperless>x</jumperless>` |
 | `<jumperlessCommand>` | `<jumperlessCommand>n</jumperlessCommand>` |
-| `<p>` | `<p>adc_get(0)</p>` |
+| `<p>` | `<p>print(adc_get(0))</p>` |
 
 ---
 
@@ -69,7 +77,7 @@ void setup() {
 void loop() {
   // Read voltage on ADC channel 0
   OPENJCOMMAND
-  Serial.print("adc_get(0)");
+  Serial.print("print(adc_get(0))");
   CLOSEJCOMMAND
   delay(100);
   
@@ -131,7 +139,7 @@ void loop() {
 
   // Read the voltage
   OPENJCOMMAND
-  Serial.print("adc_get(0)");
+  Serial.print("print(adc_get(0))");
   CLOSEJCOMMAND
   delay(delayTime);
 
@@ -165,7 +173,7 @@ Here are the most useful functions you can call with `<p>` tags:
 "nodes_clear()"               // Clear ALL connections
 
 // Analog I/O
-"adc_get(0)"                  // Read voltage (channels 0-4)
+"adc_get(0)"                  // Read voltage (channels 0-7, 0-3 are the routable ones)
 "dac_set(0, 3.3)"            // Set DAC output voltage
 "dac_set(TOP_RAIL, 5.0)"     // Set rail voltage
 
@@ -176,7 +184,7 @@ Here are the most useful functions you can call with `<p>` tags:
 
 // Current sensing
 "ina_get_current(0)"         // Read current in amps
-"ina_get_voltage(0)"         // Read shunt voltage
+"ina_get_voltage(0)"         // Read bus voltage at the current sensor
 ```
 
 See the [MicroPython API Reference](09.5-micropythonAPIreference.md) for the complete list.
@@ -219,15 +227,6 @@ void loop() {
   CLOSEJCOMMAND
   delay(delayTime);
 
-  // Read any response
-  char response[30] = {0};
-  int idx = 0;
-  while(Serial.available() > 0 && idx < 29) {
-    response[idx++] = Serial.read();
-    delay(5);
-  }
-  
-  Serial.println(response);
   digitalWrite(LED_BUILTIN, LOW);
 }
 ```
@@ -241,7 +240,6 @@ void loop() {
 | `- 1-30` | Remove connection |
 | `x` | Clear all connections |
 | `n` | Show net list |
-| `s` | Save current state |
 
 ---
 
@@ -251,7 +249,7 @@ void loop() {
 The Jumperless needs a little time to process each command. A delay of 40-100ms between commands is usually safe. If you're seeing weird behavior, try increasing the delay.
 
 ### Response Reading
-Commands often return data (like `adc_get()` returning a voltage). Make sure to read the Serial buffer after sending commands, or it'll fill up and cause issues.
+Only `<p>` commands send anything back, and only what they print - `print(adc_get(0))` gets you a voltage, `adc_get(0)` on its own gets you nothing. `<j>` commands are fire-and-forget from the Arduino's side. Make sure to read the Serial buffer after a command that does return data, or it'll fill up and cause issues.
 
 ### Startup Delay
 Add a `delay(1500)` in your `setup()` to give the Jumperless time to fully boot before sending commands.
@@ -261,7 +259,7 @@ Just use the Arduino IDE normally - select the second serial port that shows up 
 
 ### Which Tag to Use?
 - **Use `<p>`** for anything that's a Python function: `connect()`, `adc_get()`, `dac_set()`, etc.
-- **Use `<j>`** for menu commands: `f`, `x`, `n`, `s`, etc.
+- **Use `<j>`** for menu commands: `f`, `x`, `n`, etc.
 
 ---
 
