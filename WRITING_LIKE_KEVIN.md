@@ -44,7 +44,7 @@ Shape
 Joints
 - A bare comma joins independent clauses. No em-dashes, no semicolons, no ellipses. A spaced hyphen after a list lead, `>` between menu items, a slash for "or".
 - The aside is in parentheses after the thing it qualifies. One per paragraph; two if both are about the state of his code.
-- Notes are "(note: ...)", "Keep in mind that", "Remember". No Note, Warning or Tip box.
+- Notes are "(note: ...)", "Keep in mind that", "Remember". He never wrote a Note, Warning or Tip box himself, but he does ask for one now and then ("put a little note box" for the idle-current caveat on Getting Started, 2026-09-09), so a box is fine when he asks or the page already has them; keep the words inside it his.
 
 Words
 - "should" is the result of a step; "might" is a bug; "just" means this is the whole step; "kinda", never "kind of"; "idk" for a fact he does not have; "lmk" once a page at most.
