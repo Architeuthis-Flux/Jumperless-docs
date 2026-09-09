@@ -189,7 +189,7 @@ ADC Pad
   └─ [Tap a row to connect it to, and its voltage shows on the LEDs]
 ```
 
-The four `user pads` (the two little guys and the two buildings) are shortcuts to a fixed set: `top guy` is `UART Tx`, `bottom guy` is `UART Rx`, and the two `buildings` are the current sense inputs `I+` and `I-`. You can reassign them in the [config](06-config.md) under `[logo_pads]`.
+The four `user pads` (the two little guys and the two buildings) are shortcuts to a fixed set: `top guy` is `UART Tx`, `bottom guy` is `UART Rx`, and the two `buildings` are the current sense inputs `I+` and `I-` (the `buildings` don't always register a tap, so get to `I+` / `I-` with the click wheel instead, see [Measuring](#measuring-things)). You can reassign them in the [config](06-config.md) under `[logo_pads]`.
 
 ![userPads](https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78)
 
@@ -209,7 +209,7 @@ A few ways to see what your circuit is doing:
 - **The probe's `Measure` switch.** Touch a row, read the voltage. Nothing gets saved.
 - **The `ADC` pad.** Connect an ADC to a row and it stays there, showing the voltage on that row's LEDs and, if you highlight it, on the OLED / terminal. The ADCs read -8 V to +8 V.
 - **The `Show` menu.** `Show` > `Voltage` / `Digital` / `Current` picks a measurement and a row to put it on from the wheel instead of the probe.
-- **Current sense.** Tap the `building` pads in `Connect` mode to get `I+` (top) and `I-` (bottom). Put them on two different `net`s and a virtual wire with "marching ants" shows the current flowing between them. (The background scan puts ants on any wire with current flowing too, the `net_currents` key in the [config](06-config.md) turns it off.)
+- **Current sense.** In `Connect` mode, turn the wheel counterclockwise past `row 1`. A couple of detents and it wraps onto `Current`, the OLED reads `Current -` and the breadboard spells it out with `I-` lit. One more detent counterclockwise is `I+` (if you overshoot into `UART`, one detent clockwise comes back). `Click` within 5 seconds of the last turn, then tap the row it goes on. With `I+` and `I-` on two different `net`s, a virtual wire with "marching ants" should show the current flowing between them. Or `Show` > `Current` from the menu, which asks for `Pos`, its row, `Neg`, its row (rows and Nano pins only, it can't reach the rail pads). (The background scan puts ants on any wire with current flowing too, the `net_currents` key in the [config](06-config.md) turns it off.)
 
 !!! note "Idle mode currents are an estimate"
     They're read using the crossbar's own resistance as the shunt (about 40Ω per crosspoint) and one ADC is multiplexed across every net, so connecting current sense manually with `I+` / `I-` is a bit more accurate.
@@ -224,7 +224,7 @@ A few ways to see what your circuit is doing:
 
 ??? tip "Try it"
     1. Set the top rail to 3.3 V (`Rails` > `Top`, see [Power](#power-rails-and-dacs)), then put an LED and a resistor (anything 220 Ω to 1 kΩ) in series between `row 10` and `row 12`, LED long leg toward row 10.
-    2. Click `Connect`, tap the top rail `+`, then `row 10`. Then tap the top `building` pad (`I+`) and `row 12`. Then tap the bottom `building` pad (`I-`) and the `-` rail pad.
+    2. With the probe off the board, click `Connect`, tap the top rail `+`, then `row 10`. Turn the wheel counterclockwise past `row 1` until the OLED reads `Current -`, one more detent to `Current +`, `click`, and tap `row 12`. The cursor jumps back to `row 15` after that, so turn counterclockwise again until it reads `Current -`, `click`, and tap the `-` rail pad.
     3. The LED lights, and the ants march from `I+` to `I-`. The OLED shows the current as soon as `I+` and `I-` are connected (the net is called `I Sense`), and tapping row 12 in idle mode shows it on the terminal too.
 
 ----
