@@ -24,20 +24,41 @@ Seriously, this is *such* a better experience than using the onboard text editor
 
 Go to [https://ide.jumperless.org/](https://ide.jumperless.org/) and press the connect button.
 
-<img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" />
-
+![JumperIDE before connecting](assets/verify/jumperide-landing.png)
 
 Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect
 
-<img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" />
+<img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" />
 
 Then open some examples (this update should overwrite the examples with the new ones) and hit the Run / Stop button
 
-<img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 14 23 PM" src="https://github.com/user-attachments/assets/0190af73-cd5f-49e9-b378-bb6d1c8a7bb4" />
+![gpio_basics.py running in JumperIDE](assets/verify/jumperide-run.png)
 
 Press it again to Stop. If you make changes, hit the green Save button next to it (it takes a second and the script should be stopped.)
 
-<img width="1306" height="1249" alt="Screenshot 2025-12-08 at 6 15 54 PM" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" />
+![an edited file waiting to be saved](assets/verify/jumperide-save.png)
+
+**Serial terminal.** The `Serial Terminal` tab is port 1, the board's main menu, so you get the REPL and the menu side by side. Click `Connect` in that tab, choose the 1st Jumperless port this time, and type `m`.
+
+![the Serial Terminal tab showing the main menu](assets/verify/jumperide-terminal.png)
+
+**API reference.** The book icon opens the MicroPython API docs on the right, and if you have `Go To Clicked Function` checked, the docs should jump to whatever function you click in your code.
+
+![the API reference following a click on adc_get](assets/verify/jumperide-api-ref.png)
+
+**JumperNet Registry.** The Jumperless icon in the sidebar is the JumperNet Registry, scripts other people have shared. Click one and it opens in a tab, `Run` runs it on your board, and if you want to share yours, click `Upload script to registry`.
+
+![the JumperNet Registry list](assets/verify/jumperide-registry.png)
+
+![a registry script open in the editor](assets/verify/jumperide-registry-script.png)
+
+**OLED bitmaps.** `Tools` > `New OLED bitmap` gives you a 128x32 canvas, click or drag to draw, and with `Live to device` checked it should show up on the board's OLED as you draw ([more about the OLED here](04-oled.md)). `Download .bin` saves it and `Upload to registry` shares it. `Browse Images` in the registry shows everyone else's.
+
+![drawing in the OLED bitmap editor](assets/verify/jumperide-oled-editor.png)
+
+![the same drawing on the board's OLED](assets/verify/jumperide-oled-live.png)
+
+![the shared OLED images in the registry](assets/verify/jumperide-registry-images.png)
 
 ### If you write something cool, publish it to the JumperNet registry from JumperIDE for VS Code (**Jumperless: Publish Script to Registry**) and I'll add the good ones to the default examples.
 
