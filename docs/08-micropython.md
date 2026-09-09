@@ -241,11 +241,11 @@ save my_new_script.py
 ```
 
 ### Method 4: Direct Execution
-From the main Jumperless menu, you can execute single commands:
+From the main Jumperless menu, you can execute single commands. The `>` is the command, type it with the line, and use `print()` to see a value:
 
 ```jython
 > gpio_set(1, True)
-> adc_get(0)
+> print(adc_get(0))
 > connect(1, 5)
 ```
 
@@ -257,15 +257,14 @@ From main menu: Press `p`
 ### REPL Commands
 ```jython
 CTRL + q           - Exit REPL
-exit / quit        - Exit REPL
+quit               - Exit REPL
 history            - Show command history and saved scripts
 save [name]        - Save last executed script
 load <name>        - Load script by name or number
-delete <name>      - Delete a saved script
 files              - Open file manager
 new                - Create new script with eKilo editor
 edit               - Open the last input in the eKilo editor
-multiline on|off|auto - Force multiline mode on or off, or go back to automatic
+multiline on|off|auto - Force multiline mode on or off, or go back to automatic (not in `helpl`, but it works)
 context            - Toggle connection context
 helpl              - Show REPL help
 help()             - Show hardware commands
@@ -281,7 +280,7 @@ Ctrl+Q             - Force quit REPL or interrupt running script
 ```
 
 ### Multiline Auto-Indent Mode
-The REPL automatically detects when you need multiple lines after a `:`
+The REPL automatically detects when you need multiple lines after a `:`, and it indents for you, so type the lines without the leading spaces.
 
 ```jython
 >>> def blink_led():

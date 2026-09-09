@@ -21,7 +21,7 @@ Two things that are *not* in the box but you'll probably want: a [stand](10-3d-s
 
 Plug in the USB-C and it will do a startup animation on the LEDs. That's it, it's on.
 
-It also shows up on your computer as four serial ports. The first one is the main terminal, where the menu prints and where most of the typed commands on this site go. You don't *need* the terminal for anything on this page, but it's useful to have open because everything the board prints on the LEDs gets printed there too. The easiest way to open it is [the App](03-app.md), but any serial terminal works (the baud rate doesn't matter).
+It also shows up on your computer as four serial ports. The first one is the main terminal, where the menu shows up when you type `m` and where most of the typed commands on this site go. You don't *need* the terminal for anything on this page, but it's useful to have open because everything the board prints on the LEDs gets printed there too. The easiest way to open it is [the App](03-app.md), but any serial terminal works (the baud rate doesn't matter).
 
 When it boots it loads the last `slot` you were using, so your circuit is still there after a power cycle.
 
@@ -144,7 +144,9 @@ There are four adjustable voltage sources: the `top rail`, the `bottom rail`, `D
 
 **DACs** are the same idea but they're `node`s you connect to a row rather than a whole strip: `Output` > `Voltage` > `DAC 0` / `DAC 1`, pick the voltage, then pick a row. You can also tap the `DAC` pad by the logo while probing (see [special functions](#special-functions)). By default `DAC 0` is busy powering the probe, so `DAC 1` is the one to reach for.
 
-**Shortcut:** in idle mode, tap a rail pad or a DAC to highlight it, then `click` the wheel to adjust that voltage right there. This shortcut is on by default only when an OLED is connected, because the OLED's `adjust?` hint is what makes it discoverable. To have it always on, put this in your [config](06-config.md):
+**Shortcut:** in idle mode, tap a rail `+` pad to highlight it, then `click` the wheel to adjust that voltage right there. Same for a `DAC`, once it's connected to something. This shortcut is on by default only when an OLED is connected, because the OLED's `adjust?` hint is what makes it discoverable. To have it always on, put this in your [config](06-config.md):
+
+Type it into the terminal, backtick and all (the backtick is the config command):
 
 ```jython
 `[clickwheel] rail_click_adjust = always;
@@ -217,9 +219,9 @@ A few ways to see what your circuit is doing:
     They're the two ends of a 2 Ω shunt resistor. You measure current in series so this is expected, but it's easy to forget. Treat this like your multimeter yelling at you when the probes are in the current holes and it's set to volts.
 
 ??? tip "Try it"
-    1. With the top rail at 3.3 V, put an LED and a resistor (anything 220 Ω to 1 kΩ) in series between `row 10` and `row 12`, LED long leg toward row 10.
+    1. Set the top rail to 3.3 V (`Rails` > `Top`, see [Power](#power-rails-and-dacs)), then put an LED and a resistor (anything 220 Ω to 1 kΩ) in series between `row 10` and `row 12`, LED long leg toward row 10.
     2. Click `Connect`, tap the top rail `+`, then `row 10`. Then tap the top `building` pad (`I+`) and `row 12`. Then tap the bottom `building` pad (`I-`) and the `-` rail pad.
-    3. The LED lights, and the ants march from `I+` to `I-`. Highlight row 12 in idle mode to read the current on the OLED / terminal.
+    3. The LED lights, and the ants march from `I+` to `I-`. The OLED shows the current as soon as `I+` and `I-` are connected (the net is called `I Sense`), and tapping row 12 in idle mode shows it on the terminal too.
 
 ----
 
@@ -233,7 +235,7 @@ Most of the time the probe isn't in a mode (rainbow `logo`), and there's a lot y
 - **Turn the click wheel** to walk the highlight along the rows, as if you tapped each one.
 - **`Connect`** puts you in `Connect` mode already `holding` the row you tapped, and drops you back to idle once you've connected it to something. (If you got to the row by turning the wheel instead of tapping it, you start out holding nothing.)
 - **`Remove`** flashes a warning on the highlighted net; press it again within a second or so and you're in `Remove` mode with that `node` already picked.
-- If the highlighted net has a **measurement** on it (a `GPIO` input, an `ADC`, current sense), the reading prints on the OLED and the terminal.
+- The highlighted net's voltage and current print on the OLED and the terminal, whatever is on it. A `GPIO` input or an `ADC` on the net shows its reading too.
 - If it has a **`GPIO` output** on it, `Connect` toggles it high / low.
 - If it's a **rail or a DAC**, `click` the wheel to [adjust the voltage](#power-rails-and-dacs).
 - If it's a **`GPIO`**, a quick `click` opens that pin's options. See [GPIO](05.7-gpio.md).
@@ -241,6 +243,8 @@ Most of the time the probe isn't in a mode (rainbow `logo`), and there's a lot y
 
 ??? tip "Try it"
     1. Tap any connected row. Its whole net lights up.
+
+    ![a highlighted net on rows 40, 50 and 58](assets/verify/idle-highlight.png)
     2. Turn the wheel a few detents each way. The highlight walks along the rows.
     3. Press `Connect`, tap another row, and you're back in idle with a new wire.
 
@@ -253,7 +257,7 @@ There are 8 `slot`s (0-7), and each one is a saved circuit: connections, rail an
 - `Click` > `Slots` > `Load` picks a slot to switch to.
 - `Slots` > `Save to` copies the current circuit into another slot.
 - `Slots` > `Clear` empties a slot.
-- In the terminal, `<` cycles to the next slot, and `<3` jumps to slot 3.
+- In the terminal, `<` cycles to the next slot (it wraps from 7 back to 0), and `<3` jumps to slot 3.
 
 On boot it loads the last slot you had active. If you'd rather always start on one particular slot, set `[slots] boot_mode = fixed_slot;` and `boot_slot` in the [config](06-config.md).
 
@@ -268,7 +272,7 @@ The slot files are plain YAML on the board's filesystem, so you can also read an
 
 ## From the terminal
 
-Everything above can also be done by typing. Open the first serial port ([the App](03-app.md) does this for you) and the menu prints. A few to know:
+Everything above can also be done by typing. Open the first serial port ([the App](03-app.md) does this for you) and type `m` to print the menu. A few to know:
 
 ```jython
 m           show the menu again
@@ -282,12 +286,16 @@ p           MicroPython REPL
 U           show up as a USB drive
 ```
 
+`p` and `/` take over the terminal, `Ctrl+Q` gets you back out of both. A script you run leaves whatever it connected on the board, `x` clears it.
+
 Type `help` or `[command]?` for the onboard docs on any of them, and `e` to show more of the menu.
 
 ??? tip "Try it"
     1. Type `+ 1-5` and watch the wire appear on the board.
     2. Type `n` to see it in the net list.
     3. Type `- 1-5` to remove it.
+
+![rows 1 and 5 connected, row 10 on GND, as the board draws it](assets/verify/terminal-plus-1-5-10-gnd.png)
 
 ----
 

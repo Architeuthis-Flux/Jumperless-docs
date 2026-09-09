@@ -26,6 +26,8 @@ In the click menu the same things live under `OLED`: `Connect`, `Connect On Boot
 ## Auto-Connect on Boot
 
 The OLED gets connected on startup by default. If you'd rather it didn't, paste this into the main menu:
+Type it into the terminal, backtick and all (the backtick is the config command):
+
 ```
 `[top_oled] connect_on_boot = 0;
 ```

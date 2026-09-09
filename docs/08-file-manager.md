@@ -12,9 +12,7 @@ The Jumperless has a built in File Manager which you can access in the menu with
 │
 ├── slots/
 │   ├── slot0.yaml
-│   ├── slot1.yaml
-│   ├── slot2.yaml
-│   └── ... (up to slot7.yaml)
+│   └── ... (a file shows up for each slot you've saved to, up to slot7.yaml)
 │
 ├── projects/
 │   ├── 555/
@@ -26,8 +24,8 @@ The Jumperless has a built in File Manager which you can access in the menu with
 │   └── eeprom/
 │
 ├── images/                (bitmaps for the OLED)
-├── screens/               (OLED GUI layouts)
-├── undo.hist              (the undo history, saved with your slots)
+├── screens/               (OLED GUI layouts, once something has saved one)
+├── undo_history.txt             (the undo history, saved with your slots)
 │
 └── python_scripts/
     ├── history.txt
@@ -113,7 +111,7 @@ The File Manager also has text editor based off [**eKilo**](https://github.com/a
 
 ### Editor Controls
 - **Ctrl+S**: Save file
-- **Ctrl+Q**: Quit editor. If you have unsaved changes it asks you to press it 3 more times (Esc doesn't discard your edits, it just tells you how to leave)
+- **Ctrl+Q**: Quit editor. If you have unsaved changes it asks you to press it once more (Esc doesn't discard your edits, it just tells you how to leave)
 - **Ctrl+P**: Save and load the file into the MicroPython REPL - `.py` files only, anything else just saves
 - **Ctrl+U**: Memory status
 - **Tab**: Indent
@@ -148,7 +146,7 @@ If you have an OLED connected, the File Manager shows:
 ---
 
 ### MicroPython Examples
-The example scripts live in `/python_scripts/examples/`. Click one in the File Manager to run it, and see the [Examples](08.5-examples.md) page for the full list and what each one does.
+The example scripts live in `/python_scripts/examples/`. Open one in the File Manager and press `Ctrl+P` to run it (or just type its path at the main menu), and see the [Examples](08.5-examples.md) page for the full list and what each one does.
 
 If you delete one it comes back on its own the next time the File Manager opens. `m` forces a refresh: it also updates examples that still match an older firmware's version and always refreshes the `lib/` modules, and if you've edited an example it leaves yours alone and writes the current default next to it as `<name>_original.py`.
 
@@ -157,7 +155,7 @@ If you delete one it comes back on its own the next time the File Manager opens.
 
 Slot files (located in `/slots/`) use **YAML format** and can be edited directly! They're human-readable files containing:
 
-- **bridges** - Your circuit connections, with `dup:` and `color:` on each line
+- **bridges** - Your circuit connections, one `{n1: A, n2: B}` pair per line (`dup:` and `color:` show up only where they're set; net colors and names live under `nets`)
 - **power** - Rail and DAC voltages (topRail, bottomRail, dac0, dac1)
 - **config** - Routing preferences and GPIO settings
 - **nets**, **parts** and **overlays** - written by the board itself
