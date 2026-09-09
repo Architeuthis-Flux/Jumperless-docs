@@ -205,10 +205,14 @@ The four `user pads` (the two little guys and the two buildings) are shortcuts t
 
 A few ways to see what your circuit is doing:
 
+- **Just tap it.** Leave the switch on `Select` and tap a connected row, or scroll to it with the click wheel, and the OLED and terminal show the voltage on that net and the current flowing through that connection (the biggest one, if the net has a few wires). The board is measuring voltage and current on every net in the background, so there's nothing to set up.
 - **The probe's `Measure` switch.** Touch a row, read the voltage. Nothing gets saved.
 - **The `ADC` pad.** Connect an ADC to a row and it stays there, showing the voltage on that row's LEDs and, if you highlight it, on the OLED / terminal. The ADCs read -8 V to +8 V.
 - **The `Show` menu.** `Show` > `Voltage` / `Digital` / `Current` picks a measurement and a row to put it on from the wheel instead of the probe.
-- **Current sense.** Tap the `building` pads in `Connect` mode to get `I+` (top) and `I-` (bottom). Put them on two different `net`s and a virtual wire with "marching ants" shows the current flowing between them. (The board also scans every wire in the background and puts ants on the ones with current flowing, which you can turn off with `[measurement] net_currents = 0;` in the [config](06-config.md).)
+- **Current sense.** Tap the `building` pads in `Connect` mode to get `I+` (top) and `I-` (bottom). Put them on two different `net`s and a virtual wire with "marching ants" shows the current flowing between them. (The background scan puts ants on any wire with current flowing too, the `net_currents` key in the [config](06-config.md) turns it off.)
+
+!!! note "Idle mode currents are an estimate"
+    They're read using the crossbar's own resistance as the shunt (about 40Ω per crosspoint) and one ADC is multiplexed across every net, so connecting current sense manually with `I+` / `I-` is a bit more accurate.
 
 <video autoplay loop muted playsinline width="60%">
   <source src="https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0" type="video/mp4">
