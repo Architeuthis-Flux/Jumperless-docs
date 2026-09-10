@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -99,6 +99,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
                 </li>
               </ul>
               <ul>
@@ -136,23 +140,7 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#breadboard-rows-160">Breadboard rows (1–60)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#dacs-and-adcs">DACs and ADCs</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#special-nodes-and-supplies">Special nodes and supplies</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#current-sense">Current sense</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#adc-nodes">ADC nodes</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#user-gpio-pins">User GPIO pins</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#buffer-nodes">Buffer nodes</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#arduino-nano-header">Arduino Nano header</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#rail-pads">Rail pads</a>
+    <li class="toctree-l3"><a class="reference internal" href="#node-names-and-ids">Node names and IDs</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#breadboard-layout-highlevel">Breadboard layout (high‑level)</a>
         <ul>
@@ -214,7 +202,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -222,7 +218,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -270,8 +274,7 @@
                 <h1 id="automation-llm-tools">Automation &amp; LLM Tools</h1>
 <p>The Jumperless V5 is built to be driven by software — by your own scripts, by
 desktop apps, and by LLM agents (Cursor, Claude Desktop/Code, etc.). This page
-is the hub for <strong>every</strong> way to control the board from outside the menu, and a
-decision guide for picking the right one.</p>
+is the hub for <strong>every</strong> way to control the board from outside the menu.</p>
 <p>The full hardware/API surface is documented in the
 <a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a> — this page is
 about <em>transport and tooling</em>, not the individual calls.</p>
@@ -351,14 +354,19 @@ are sequential <code class="language-jython highlight"><span class="n">COMx</spa
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!TIP]
-The host helper <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">detect</span></code> (in the Agent Skill repo)
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The host helper <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">detect</span></code> (in the Agent Skill repo)
 auto-finds the Raw REPL port and caches it, so you rarely need to name ports
 by hand.</p>
-<p>[!NOTE]
-I will refer to these ports by their index (1st, 2nd, 3rd, 4th), macOS and Linux claim 2 ports per endpoint (one for each direction) so the numbering is 1,3,5,7</p>
-</blockquote>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I will refer to these ports by their index (1st, 2nd, 3rd, 4th). macOS names
+them by USB interface index, and each serial port uses two interfaces (control
+and data), so the suffixes step by two: 1, 3, 5, 7. Linux and Windows number
+them sequentially.</p>
+</div>
 <hr />
 <h2 id="communication-methods">Communication methods</h2>
 <h3 id="1-python-one-liners-1st-main-port">1. <code class="language-jython highlight"><span class="o">&gt;</span></code> Python one-liners (1st / main port)</h3>
@@ -492,7 +500,7 @@ REPL, with progressive-disclosure reference docs loaded only as needed.</p>
 </code></pre></div>
 <hr />
 <h2 id="node-map">Node Map</h2>
-<p>This file documents the numeric IDs and common names for all key nodes on the Jumperless V5, based on <code class="language-jython highlight"><span class="n">modules</span><span class="o">/</span><span class="n">jumperless</span><span class="o">/</span><span class="n">modjumperless</span><span class="o">.</span><span class="n">c</span></code>. Use it to translate between human‑readable names (like <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code> or <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>) and the internal node numbers.</p>
+<p>Use this to translate between human‑readable names (like <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code> or <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>) and the internal node numbers.</p>
 <p>All constants are available in the MicroPython REPL; you normally do <strong>not</strong> need the numbers directly, but the mapping is useful for mental models and debugging.</p>
 <h3 id="breadboard-rows-160">Breadboard rows (1–60)</h3>
 <p>Rows 1–60 represent the breadboard rows along the main area:</p>
@@ -506,495 +514,15 @@ REPL, with progressive-disclosure reference docs loaded only as needed.</p>
 <span class="linenos" data-linenos="2 "></span><span class="n">connect</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">GND</span><span class="p">)</span> <span class="c1"># connect lower half row 35 to ground</span>
 </code></pre></div>
 <hr />
-<h3 id="dacs-and-adcs">DACs and ADCs</h3>
-<h4 id="special-nodes-and-supplies">Special nodes and supplies</h4>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code></td>
-<td><code class="language-jython highlight"><span class="n">GROUND</span></code></td>
-<td>100</td>
-<td>Global ground net</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></td>
-<td><code class="language-jython highlight"><span class="n">T_R</span></code>, <code class="language-jython highlight"><span class="n">TOP_R</span></code></td>
-<td>101</td>
-<td>Adjustable top rail</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BOT_RAIL</span></code>, <code class="language-jython highlight"><span class="n">B_R</span></code></td>
-<td>102</td>
-<td>Adjustable bottom rail</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">DAC_0</span></code></td>
-<td>106</td>
-<td>DAC channel 0 <code class="language-jython highlight"><span class="o">*</span></code></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">DAC_1</span></code></td>
-<td>107</td>
-<td>DAC channel 1</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>[!CAUTION] 
-<code class="language-jython highlight"><span class="o">*</span></code> Avoid using <strong>DAC 0</strong> and <strong>ROUTABLE_BUFFER_IN</strong> because they're used for probe switch sensing</p>
-</blockquote>
-<h4 id="current-sense">Current sense</h4>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ISENSE_POS</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_P</span></code>, <code class="language-jython highlight"><span class="n">INA_P</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">I_P</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">CURRENT_SENSE_PLUS</span></code>, <code class="language-jython highlight"><span class="n">I_POS</span></code></td>
-<td>108</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_MINUS</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ISENSE_NEG</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_N</span></code>, <code class="language-jython highlight"><span class="n">INA_N</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">I_N</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">CURRENT_SENSE_MINUS</span></code>, <code class="language-jython highlight"><span class="n">I_NEG</span></code></td>
-<td>109</td>
-</tr>
-</tbody>
-</table>
-<p>These two nodes are the ends of a <strong>2 Ω shunt resistor</strong> and are internally shorted through that shunt; always use them in series with the circuit being measured.</p>
-<h4 id="adc-nodes">ADC nodes</h4>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ADC_0</span></code>, <code class="language-jython highlight"><span class="n">ADC0_8V</span></code></td>
-<td>110</td>
-<td>ADC channel 0 (±8 V)</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ADC1</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ADC_1</span></code>, <code class="language-jython highlight"><span class="n">ADC1_8V</span></code></td>
-<td>111</td>
-<td>ADC channel 1 (±8 V)</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ADC2</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ADC_2</span></code>, <code class="language-jython highlight"><span class="n">ADC2_8V</span></code></td>
-<td>112</td>
-<td>ADC channel 2 (±8 V)</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ADC_3</span></code>, <code class="language-jython highlight"><span class="n">ADC3_8V</span></code></td>
-<td>113</td>
-<td>ADC channel 3 (±8 V)</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ADC4</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ADC_4</span></code>, <code class="language-jython highlight"><span class="n">ADC4_5V</span></code></td>
-<td>114</td>
-<td>ADC channel 4 (5 V range)</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">ADC7</span></code></td>
-<td><code class="language-jython highlight"><span class="n">ADC_7</span></code>, <code class="language-jython highlight"><span class="n">ADC7_PROBE</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">PROBE</span></code></td>
-<td>115</td>
-<td>Probe ADC channel</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="user-gpio-pins">User GPIO pins</h3>
-<p>These are the main user‑accessible GPIOs.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-<th>RP2350B Pin</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_1</span></code>, <code class="language-jython highlight"><span class="n">GPIO1</span></code>, <code class="language-jython highlight"><span class="n">GP_1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP1</span></code></td>
-<td>131</td>
-<td>20</td>
-<td>I'm sorry they're 1-indexed like this</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_2</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_2</span></code>, <code class="language-jython highlight"><span class="n">GPIO2</span></code>, <code class="language-jython highlight"><span class="n">GP_2</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP2</span></code></td>
-<td>132</td>
-<td>21</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_3</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_3</span></code>, <code class="language-jython highlight"><span class="n">GPIO3</span></code>, <code class="language-jython highlight"><span class="n">GP_3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP3</span></code></td>
-<td>133</td>
-<td>22</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_4</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_4</span></code>, <code class="language-jython highlight"><span class="n">GPIO4</span></code>, <code class="language-jython highlight"><span class="n">GP_4</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP4</span></code></td>
-<td>134</td>
-<td>23</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_5</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_5</span></code>, <code class="language-jython highlight"><span class="n">GPIO5</span></code>, <code class="language-jython highlight"><span class="n">GP_5</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP5</span></code></td>
-<td>135</td>
-<td>24</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_6</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_6</span></code>, <code class="language-jython highlight"><span class="n">GPIO6</span></code>, <code class="language-jython highlight"><span class="n">GP_6</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP6</span></code></td>
-<td>136</td>
-<td>25</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_7</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_7</span></code>, <code class="language-jython highlight"><span class="n">GPIO7</span></code>, <code class="language-jython highlight"><span class="n">GP_7</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP7</span></code></td>
-<td>137</td>
-<td>25</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_GPIO_8</span></code>, <code class="language-jython highlight"><span class="n">GPIO8</span></code>, <code class="language-jython highlight"><span class="n">GP_8</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GP8</span></code></td>
-<td>138</td>
-<td>27</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_UART_TX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">TX</span></code></td>
-<td>116</td>
-<td>0</td>
-<td>2nd serial port passthrough</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RP_UART_RX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">RX</span></code></td>
-<td>117</td>
-<td>1</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>When working at the MicroPython level you will usually use <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code> and the higher‑level GPIO APIs.</p>
-<hr />
-<h3 id="buffer-nodes">Buffer nodes</h3>
-<p>These correspond to a routable buffer block:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_IN</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BUFFER_IN</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BUF_IN</span></code>, <code class="language-jython highlight"><span class="n">BUFF_IN</span></code>, <code class="language-jython highlight"><span class="n">BUFFIN</span></code></td>
-<td>139</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="n">ROUTABLE_BUFFER_OUT</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BUFFER_OUT</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BUF_OUT</span></code>, <code class="language-jython highlight"><span class="n">BUFF_OUT</span></code>, <code class="language-jython highlight"><span class="n">BUFFOUT</span></code></td>
-<td>140</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>[!CAUTION] 
-<code class="language-jython highlight"><span class="o">*</span></code> Avoid using <strong>DAC 0</strong> and <strong>ROUTABLE_BUFFER_IN</strong> because they're used for probe switch sensing</p>
-</blockquote>
-<hr />
-<h3 id="arduino-nano-header">Arduino Nano header</h3>
-<p>The Nano header pins are mapped as follows:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-<th>Routable?</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_VIN</span></code></td>
-<td><code class="language-jython highlight"><span class="n">VIN</span></code></td>
-<td>69</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D0</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code></td>
-<td>70</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D1</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code></td>
-<td>71</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D2</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D2</span></code></td>
-<td>72</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D3</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D3</span></code></td>
-<td>73</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D4</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D4</span></code></td>
-<td>74</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D5</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D5</span></code></td>
-<td>75</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D6</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D6</span></code></td>
-<td>76</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D7</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D7</span></code></td>
-<td>77</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D9</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D9</span></code></td>
-<td>79</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D10</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D10</span></code></td>
-<td>80</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D11</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D11</span></code></td>
-<td>81</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D12</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D12</span></code></td>
-<td>82</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_D13</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code></td>
-<td>83</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="n">NANO_AREF</span></code></td>
-<td><code class="language-jython highlight"><span class="n">AREF</span></code></td>
-<td>85</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A0</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code></td>
-<td>86</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A1</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A1</span></code></td>
-<td>87</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A2</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A2</span></code></td>
-<td>88</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A3</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A3</span></code></td>
-<td>89</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A4</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A4</span></code></td>
-<td>90</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A5</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A5</span></code></td>
-<td>91</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A6</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A6</span></code></td>
-<td>92</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_A7</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code></td>
-<td>93</td>
-<td>Y</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_RESET_0</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RST0</span></code></td>
-<td>94</td>
-<td>N</td>
-<td>Wired directly to RP2350B pin 18</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_RESET_1</span></code></td>
-<td><code class="language-jython highlight"><span class="n">RST1</span></code></td>
-<td>95</td>
-<td>N</td>
-<td>PSRAM Mod kits use this as CS (pin 19)</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_GND_1</span></code></td>
-<td><code class="language-jython highlight"><span class="n">N_GND1</span></code></td>
-<td>96</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_GND_0</span></code></td>
-<td><code class="language-jython highlight"><span class="n">N_GND0</span></code></td>
-<td>97</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_3V3</span></code></td>
-<td></td>
-<td>98</td>
-<td>N</td>
-<td></td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">NANO_5V</span></code></td>
-<td></td>
-<td>99</td>
-<td>N</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>These nodes let you route signals between the RP2350, the breadboard, and any compatible Nano‑footprint dev board (classic Nano, Nano ESP32, Nano RP2040 Connect, etc.).</p>
-<hr />
-<h3 id="rail-pads">Rail pads</h3>
-<p>Special nodes representing where the probe can tap the rails:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Aliases</th>
-<th>ID</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL_PAD</span></code></td>
-<td>101</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL_PAD</span></code></td>
-<td>102</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL_GND</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">TOP_GND_PAD</span></code></td>
-<td>104</td>
-</tr>
-<tr>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL_GND</span></code></td>
-<td><code class="language-jython highlight"><span class="no no-Jumperless">BOT_RAIL_GND</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_GND_PAD</span></code></td>
-<td>126</td>
-</tr>
-</tbody>
-</table>
+<h3 id="node-names-and-ids">Node names and IDs</h3>
+<p>Every node name, alias and ID lives in
+<a href="../09.5-micropythonAPIreference/#node-names-and-constants">Node Names and Constants</a>
+in the MicroPython API Reference.</p>
+<p><code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_MINUS</span></code> are the two ends of a <strong>2 Ω shunt resistor</strong> and are internally shorted through that shunt; always use them in series with the circuit being measured.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Avoid using <strong>DAC 0</strong> and <strong>ROUTABLE_BUFFER_IN</strong> because they're used for probe switch sensing</p>
+</div>
 <hr />
 <h3 id="breadboard-layout-highlevel">Breadboard layout (high‑level)</h3>
 <p>The board follows a standard half‑size breadboard geometry:</p>
@@ -1083,11 +611,13 @@ the chip is actually placed; verify with the probe or a measurement when unsure.
 <li>When the user describes physical positions (“top rail”, “bottom left rail”, “row 25”), translate them into these node names/IDs before constructing <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code> commands.</li>
 </ul>
 <h2 id="json-state-format">JSON State Format</h2>
-<p>The function <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> returns a <strong>JSON string</strong> describing the entire board state: power rails, nets, GPIOs, and overlays. <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_str</span><span class="p">,</span> <span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">from_wokwi</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code> applies such a state.</p>
-<blockquote>
-<p>[!NOTE]
-The entire immediate state of the board is defined in this JSON (or YAML) slot file and can be shared to another Jumperless, saved as a backups, included in tutorials, etc. </p>
-</blockquote>
+<p>The function <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> returns a <strong>JSON string</strong> describing the entire board state: power rails, nets, GPIOs, and overlays. <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span></code> applies such a state. Two optional flags follow it, and they have to be positional — <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_str</span><span class="p">,</span> <span class="n">clear_first</span><span class="p">,</span> <span class="n">from_wokwi</span><span class="p">)</span></code>, where <code class="language-jython highlight"><span class="n">clear_first</span></code> defaults to true and <code class="language-jython highlight"><span class="n">from_wokwi</span></code> to false. Keyword arguments raise a <code class="language-jython highlight"><span class="ne">TypeError</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The entire immediate state of the board is defined in this JSON and can be
+shared to another Jumperless, saved as a backup, included in tutorials, etc.
+Slots themselves are stored as YAML, which is what <code class="language-jython highlight"><span class="n">K</span></code> and <code class="language-jython highlight"><span class="p">:</span><span class="n">yaml</span></code> dump.</p>
+</div>
 <p>This file explains the structure so agents can safely inspect, modify, and re‑apply state.</p>
 <hr />
 <h3 id="top-level-structure">Top-level structure</h3>
@@ -1163,7 +693,7 @@ The entire immediate state of the board is defined in this JSON (or YAML) slot f
 <li><code class="language-jython highlight"><span class="n">bottom_rail</span></code> — voltage configured for <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code></li>
 <li><code class="language-jython highlight"><span class="n">dac0</span></code>, <code class="language-jython highlight"><span class="n">dac1</span></code> — DAC channel setpoints</li>
 </ul>
-<p>When using <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span></code>, changing these values is equivalent to calling <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code> on the corresponding channels.</p>
+<p>When using <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span></code>, changing these values drives the corresponding channels and is saved into the current slot. Any value outside -8 V to 8 V is rejected.</p>
 <hr />
 <h3 id="nets-section"><code class="language-jython highlight"><span class="n">nets</span></code> section</h3>
 <p>Each item describes a net (set of nodes that are electrically connected inside the crossbar).</p>
@@ -1181,15 +711,10 @@ The entire immediate state of the board is defined in this JSON (or YAML) slot f
 <li><code class="language-jython highlight"><span class="n">index</span></code> — numeric net index</li>
 <li><code class="language-jython highlight"><span class="nf nf-JFS">name</span></code> — human‑readable net name (may be auto‑generated or user‑defined)</li>
 <li><code class="language-jython highlight"><span class="n">nodes</span></code> — array of node names (strings), such as <code class="language-jython highlight"><span class="s2">&quot;GND&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;TOP_R&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;21&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;D13&quot;</span></code>, etc.</li>
-<li>These names correspond to the mapping in <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="nf nf-Jumperless">node</span><span class="o">-</span><span class="nb">map</span><span class="o">.</span><span class="n">md</span></code>.</li>
-<li><code class="language-jython highlight"><span class="n">special</span></code> — optional annotation for special nets; typical values:</li>
-<li><code class="language-jython highlight"><span class="s2">&quot;none&quot;</span></code> — normal net</li>
-<li><code class="language-jython highlight"><span class="s2">&quot;RAIL&quot;</span></code> — power rail (top or bottom)</li>
-<li><code class="language-jython highlight"><span class="s2">&quot;DAC&quot;</span></code> — DAC output net</li>
-<li><code class="language-jython highlight"><span class="s2">&quot;UART_TX&quot;</span></code> / <code class="language-jython highlight"><span class="s2">&quot;UART_RX&quot;</span></code> — UART nets</li>
-<li>Other firmware‑defined markers</li>
-<li><code class="language-jython highlight"><span class="n">voltage</span></code> — optional; expected or configured voltage on this net (when known)</li>
-<li>Other fields (like <code class="language-jython highlight"><span class="n">color</span></code>, <code class="language-jython highlight"><span class="n">anim</span></code>, etc.) may be present and should be preserved.</li>
+<li>These names correspond to the mapping in <a href="../09.5-micropythonAPIreference/#node-names-and-constants">Node Names and Constants</a>.</li>
+<li><code class="language-jython highlight"><span class="n">special</span></code> — annotation for special nets; the values are <code class="language-jython highlight"><span class="s2">&quot;none&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;RAIL&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;DAC&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;ADC&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;GPIO&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;UART_TX&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;UART_RX&quot;</span></code> and <code class="language-jython highlight"><span class="s2">&quot;FAKE_GPIO_IN&quot;</span></code></li>
+<li><code class="language-jython highlight"><span class="n">voltage</span></code> — present on <code class="language-jython highlight"><span class="n">ADC</span></code>, <code class="language-jython highlight"><span class="n">DAC</span></code>, <code class="language-jython highlight"><span class="n">RAIL</span></code> and <code class="language-jython highlight"><span class="n">FAKE_GPIO_IN</span></code> nets</li>
+<li><code class="language-jython highlight"><span class="n">logic</span></code> — present on <code class="language-jython highlight"><span class="n">GPIO</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code> nets; the logic level (0 or 1)</li>
 </ul>
 <p><strong>Important:</strong> <code class="language-jython highlight"><span class="n">nets</span></code> describes <strong>logical groupings</strong> of nodes. It is <strong>not</strong> a direct list of bridges; bridges are derived from the crossbar configuration internally.</p>
 <hr />
@@ -1259,7 +784,7 @@ The entire immediate state of the board is defined in this JSON (or YAML) slot f
 <ul>
 <li>Always maintain the correct <code class="language-jython highlight"><span class="n">width</span> <span class="o">*</span> <span class="n">height</span></code> number of color entries.</li>
 <li>Preserve unknown fields if present.</li>
-<li>Ensure that <code class="language-jython highlight"><span class="n">row</span></code>, <code class="language-jython highlight"><span class="n">col</span></code>, <code class="language-jython highlight"><span class="n">width</span></code>, and <code class="language-jython highlight"><span class="n">height</span></code> keep the overlay within the 5×60 canvas (rows 1–10, columns 1–30).</li>
+<li>Ensure that <code class="language-jython highlight"><span class="n">row</span></code>, <code class="language-jython highlight"><span class="n">col</span></code>, <code class="language-jython highlight"><span class="n">width</span></code>, and <code class="language-jython highlight"><span class="n">height</span></code> keep the overlay within the canvas, which is 10 rows by 30 columns: row 1 is the top outer edge, rows 5 and 6 straddle the center gap, and row 10 is the bottom outer edge.</li>
 </ul>
 <p>Often it is easier to use the MicroPython overlay APIs (<code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear</span></code>, etc.) directly instead of editing <code class="language-jython highlight"><span class="n">overlays</span></code> in the state JSON manually. The JSON is still useful for inspection and for bulk export/import of complex scenes.</p>
 <hr />
@@ -1290,9 +815,9 @@ The entire immediate state of the board is defined in this JSON (or YAML) slot f
 <p><strong>Re‑serialize and apply.</strong></p>
 </li>
 <li>Use a standard JSON encoder.</li>
-<li>Call <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_string</span><span class="p">,</span> <span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> when applying a complete, authoritative state.</li>
+<li>Call <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_string</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></code> when applying a complete, authoritative state.</li>
 <li>
-<p>If you are only adding overlays or adjusting power but want to preserve dynamic routing changes, you may choose <code class="language-jython highlight"><span class="n">clear_first</span><span class="o">=</span><span class="kc">False</span></code> (if supported and appropriate) or modify only overlays via MicroPython functions.</p>
+<p>If you are only adding overlays or adjusting power, send a JSON with just those sections. <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span></code> accepts any subset of <code class="language-jython highlight"><span class="n">power</span></code>, <code class="language-jython highlight"><span class="n">nets</span></code>, <code class="language-jython highlight"><span class="n">gpio</span></code> and <code class="language-jython highlight"><span class="n">overlays</span></code> and only applies the sections that are there. <code class="language-jython highlight"><span class="n">clear_first</span></code> matters only when a <code class="language-jython highlight"><span class="n">nets</span></code> section is present — that is when it clears every existing connection first.</p>
 </li>
 <li>
 <p><strong>Rollback on problems.</strong></p>
@@ -1347,7 +872,7 @@ The entire immediate state of the board is defined in this JSON (or YAML) slot f
 <p>Agents can:</p>
 <ul>
 <li>Ask the user to paste a Wokwi JSON.</li>
-<li>Pass it directly to <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">wokwi_json</span><span class="p">,</span> <span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">from_wokwi</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>.</li>
+<li>Pass it directly to <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">wokwi_json</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></code>.</li>
 </ul>
 <p>After that, a subsequent <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> will return the standard Jumperless state JSON.</p>
 <hr />
@@ -1375,11 +900,11 @@ calls for automation:</p>
 </tr>
 <tr>
 <td>Slots</td>
-<td><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_save</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">switch_slot</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="n">get_current_slot</span><span class="p">()</span></code></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_save</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">switch_slot</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">CURRENT_SLOT</span><span class="p">()</span></code></td>
 </tr>
 <tr>
 <td>State</td>
-<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="n">clear_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code></td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">)</span></code></td>
 </tr>
 <tr>
 <td>Voltage</td>
@@ -1484,8 +1009,10 @@ at a node, then route an ADC to it and measure.</p>
 while reading an ADC.</p>
 <p><strong>Batch edits via state.</strong> Fetch <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, mutate the JSON in Python, and
 re-apply with <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code> — one atomic round-trip instead of many calls.</p>
-<p><strong>Undo via a scratch slot.</strong> Before destructive ops like <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>, save
-to an unused slot (e.g. <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_save</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span></code>); restore with <code class="language-jython highlight"><span class="nf nf-Jumperless">switch_slot</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span></code>.</p>
+<p><strong>Undo.</strong> The firmware keeps a history ring, so you don't need to burn a slot
+before destructive ops like <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>. Call <code class="language-jython highlight"><span class="n">undo</span><span class="p">()</span></code> and <code class="language-jython highlight"><span class="n">redo</span><span class="p">()</span></code> from
+MicroPython (<code class="language-jython highlight"><span class="o">^</span></code> and <code class="language-jython highlight"><span class="o">&amp;</span></code> in the terminal), or keep a <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> snapshot to
+re‑apply.</p>
 <hr />
 <h3 id="safety-guidelines">Safety guidelines</h3>
 <ol>
@@ -1542,8 +1069,8 @@ to an unused slot (e.g. <code class="language-jython highlight"><span class="nf 
 <td>Available via the MCP server</td>
 </tr>
 <tr>
-<td>Slot backup for undo</td>
-<td>Implemented (<code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_save</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span></code> before destructive ops)</td>
+<td><code class="language-jython highlight"><span class="n">undo</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="n">redo</span><span class="p">()</span></code> history</td>
+<td>Implemented</td>
 </tr>
 <tr>
 <td>USBSer3 <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> self-describing backchannel</td>

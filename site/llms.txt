@@ -14,7 +14,7 @@
 ## Core Documentation
 
 - [Home](https://docs.jumperless.org/): Overview of Jumperless V5 features and getting started links
-- [Basic Controls](https://docs.jumperless.org/01-basic-controls/): Probe, click wheel, slot system, and connecting/disconnecting nodes
+- [Getting Started](https://docs.jumperless.org/01-getting-started/): What is in the box, the probe, click wheel, power, measuring, slots, and where to go next
 - [The App](https://docs.jumperless.org/03-app/): Companion desktop app for serial control, Wokwi import, and Arduino flashing
 - [OLED Support](https://docs.jumperless.org/04-oled/): Adding and using an external OLED display
 - [Config File](https://docs.jumperless.org/06-config/): Persistent settings stored on the device
@@ -27,12 +27,17 @@
 - [File Manager](https://docs.jumperless.org/08-file-manager/): Filesystem access, YAML slot editing, and built-in text editor
 - [MicroPython](https://docs.jumperless.org/08-micropython/): Using the onboard MicroPython interpreter to script circuits
 - [MicroPython API Reference](https://docs.jumperless.org/09.5-micropythonAPIreference/): Complete API reference for all Jumperless MicroPython hardware calls
+- [JFS (Filesystem)](https://docs.jumperless.org/09.6-jfs/): Jumperless FileSystem module for reading/writing files from MicroPython
+- [Writing Apps](https://docs.jumperless.org/11-WritingApps/): Guide to writing custom apps for the Jumperless firmware
 
 ## Optional
 
 - [Parts](https://docs.jumperless.org/05.5-parts/): Parts
+- [GPIO & BCD Counter](https://docs.jumperless.org/05.7-gpio/): GPIO & BCD Counter
+- [Examples](https://docs.jumperless.org/08.5-examples/): Examples
 - [Odds and Ends](https://docs.jumperless.org/09.8-odds-and-ends/): Miscellaneous features, tips, and edge cases
 - [3D Printable Stand](https://docs.jumperless.org/10-3d-stand/): 3D printable stand models and printing tips
+- [OG Jumperless](https://docs.jumperless.org/10.5-og-jumperless/): OG Jumperless
 - [Developer Guide](https://docs.jumperless.org/badge-developer-guide/): Developer Guide
 - [API Reference](https://docs.jumperless.org/badge-api-reference/): API Reference
 - [Glossary of Terms](https://docs.jumperless.org/99-glossary/): Key terms: slots, nodes, bridges, nets, W command, and more

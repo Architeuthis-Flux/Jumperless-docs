@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul class="current">
@@ -99,6 +99,8 @@
     <li class="toctree-l3"><a class="reference internal" href="#macos">macOS</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#linux">Linux</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#launcher">Launcher</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#python">Python</a>
     </li>
@@ -150,6 +152,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -166,7 +172,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -174,7 +188,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -222,36 +244,42 @@
                 <h1 id="the-app">The App</h1>
 <h2 id="installation-guide">Installation guide</h2>
 <h3 id="the-jumperless-app-is-now-on-pypi">The Jumperless App is now on PyPi!</h3>
-<p>The easiest way to get started is with pip:</p>
-<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>pip<span class="w"> </span>install<span class="w"> </span>jumperless
+<p>The easiest way to get started is an isolated tool install:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>jumperless
+<span class="linenos" data-linenos="2 "></span><span class="c1"># or: pipx install jumperless</span>
 </code></pre></div>
+<p>Plain <code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">jumperless</span></code> works too, it just only updates the copy in that Python.</p>
 <p>Then run it with:</p>
 <div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>jumperless
 </code></pre></div>
-<p><strong>Note:</strong> If the app version shows less than the latest release, <code class="language-jython highlight"><span class="n">pip</span></code> defaults to a local version if it's available. In that case, run:</p>
-<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--upgrade<span class="w"> </span>jumperless
+<p>To upgrade, use the command that matches the install you have:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>uv<span class="w"> </span>tool<span class="w"> </span>upgrade<span class="w"> </span>jumperless
+<span class="linenos" data-linenos="2 "></span>pipx<span class="w"> </span>upgrade<span class="w"> </span>jumperless
+<span class="linenos" data-linenos="3 "></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>jumperless
 </code></pre></div>
-<p>to make sure it grabs the latest version.</p>
+<p>If the version still looks old, <code class="language-jython highlight"><span class="n">which</span> <span class="n">jumperless</span></code> will tell you which install you're actually running.</p>
 <p>The app repo is at <a href="https://github.com/Architeuthis-Flux/Jumperless-App">https://github.com/Architeuthis-Flux/Jumperless-App</a></p>
 <h3 id="alternative-download-pre-built-binaries">Alternative: Download Pre-built Binaries</h3>
 <h4 id="find-the-latest-release">Find the latest release</h4>
 <p><a href="https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest">https://github.com/Architeuthis-Flux/JumperlessV5/releases/latest</a></p>
-<p>The link above will magically lead you to the latest version, and will look something like <code class="language-jython highlight"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Architeuthis</span><span class="o">-</span><span class="n">Flux</span><span class="o">/</span><span class="n">JumperlessV5</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">tag</span><span class="o">/</span><span class="mf">5.2.0.0</span></code></p>
+<p>The link above will magically lead you to the latest version, and will look something like <code class="language-jython highlight"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Architeuthis</span><span class="o">-</span><span class="n">Flux</span><span class="o">/</span><span class="n">JumperlessV5</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">tag</span><span class="o">/</span><span class="mf">5.7.11.0</span></code></p>
 <p><strong>At the bottom under Assets, download the Jumperless App for your OS</strong></p>
 <h3 id="windows">Windows</h3>
 <ul>
-<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">.</span><span class="n">exe</span></code></li>
-<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Windows</span><span class="o">-</span><span class="n">x64</span><span class="o">.</span><span class="n">zip</span></code></li>
+<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Windows</span><span class="o">-</span><span class="n">x64</span><span class="o">.</span><span class="n">exe</span></code></li>
 </ul>
 <h3 id="macos">macOS</h3>
 <ul>
-<li><code class="language-jython highlight"><span class="n">Jumperless_Installer</span><span class="o">.</span><span class="n">dmg</span></code></li>
-<li><code class="language-jython highlight"><span class="n">Jumperless_macOS</span><span class="o">.</span><span class="n">zip</span></code></li>
+<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">macOS</span><span class="o">.</span><span class="n">dmg</span></code> (universal, signed and notarized)</li>
 </ul>
 <h3 id="linux">Linux</h3>
 <ul>
-<li>x86 <code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span></code> (if you're not sure which flavor of Linux, use this one)</li>
-<li>arm64 <code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">arm64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span></code></li>
+<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">AppImage</span></code> (if you're not sure which flavor of Linux, use this one)</li>
+<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Linux</span><span class="o">-</span><span class="n">x64</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span></code> as a fallback if the AppImage won't run</li>
+</ul>
+<h3 id="launcher">Launcher</h3>
+<ul>
+<li><code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Launcher</span><span class="o">-</span><span class="n">Windows</span><span class="o">.</span><span class="n">zip</span></code>, <code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Launcher</span><span class="o">-</span><span class="n">macOS</span><span class="o">.</span><span class="n">zip</span></code>, <code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Launcher</span><span class="o">-</span><span class="n">Linux</span><span class="o">.</span><span class="n">zip</span></code> (see Launch Scripts below)</li>
 </ul>
 <h3 id="python">Python</h3>
 <ol>
@@ -271,7 +299,7 @@
 <li><strong>Properly detects</strong> which port is the main Jumperless Serial and which is routable UART</li>
 <li><strong>Arduino flashing from <a href="https://wokwi.com/">Wokwi</a></strong> works once again and is a lot more solid</li>
 <li>It installs <a href="https://github.com/arduino/arduino-cli">arduino-cli</a> on first startup and uses it pull in libraries, compile, and flash an arduino Nano in the header</li>
-<li>If the routable UART lines aren't connected when the app detects a change in the sketch file, it will connect them to flash the new code and then return them to how they were</li>
+<li>When a flash starts, the Jumperless itself connects the UART to the Nano's D0/D1 if they aren't already connected. That happens for any flasher (the app, Arduino IDE, arduino-cli) because the board just watches for the DTR reset pulse, and it's the <code class="language-jython highlight"><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">autoconnect_flashing</span></code> config setting, on by default. The connections are left in place afterwards, use <code class="language-jython highlight"><span class="n">a</span></code> if you want them gone</li>
 <li><a href="https://github.com/avrdudes/avrdude">avrdude</a> output is shown in real time (you'd be amazed how difficult this was)</li>
 <li><strong>Direct Wokwi circuit import</strong> - Copy diagram.json from Wokwi and import it with the <code class="language-jython highlight"><span class="n">W</span></code> command (see below)</li>
 <li><strong>No longer a janky pile of garbage</strong></li>
@@ -286,9 +314,10 @@
 <p><img width="1330" alt="Screenshot 2025-05-29 at 9 16 14 AM" src="https://github.com/user-attachments/assets/766dbb09-254e-45c5-8f75-358684729907" /></p>
 <h2 id="launch-scripts">Launch Scripts</h2>
 <ul>
-<li>Launch scripts included to easily run it from your favorite terminal emulator and not just the system default (terminal.app on macOS, Powershell on Windows, idk on Linux), just go to the directory in a terminal and run the script in <a href="https://tabby.sh/">tabby</a> or whatever</li>
-<li>The launcher <em>should</em> kill other instances (and close their windows) that happen to be open because it's such a common issue for me at least</li>
-<li>Linux people are no longer red-headed stepchildren, there are proper tar.gz packages now for you nerds</li>
+<li>The launcher bundles (<code class="language-jython highlight"><span class="n">Jumperless</span><span class="o">-</span><span class="n">Launcher</span><span class="o">-</span><span class="n">Windows</span><span class="o">/</span><span class="n">macOS</span><span class="o">/</span><span class="n">Linux</span><span class="o">.</span><span class="n">zip</span></code>) are a tiny clickable app that installs or updates the <code class="language-jython highlight"><span class="n">jumperless</span></code> PyPI package with uv and then runs it in the system default terminal (Terminal.app on macOS, Windows Terminal or cmd on Windows, gnome-terminal/konsole/xfce4-terminal/xterm on Linux)</li>
+<li>It doesn't kill or close other instances that happen to be open</li>
+<li>To run it in your favorite terminal emulator instead (<a href="https://tabby.sh/">tabby</a>, iTerm2, whatever), just open that terminal and type <code class="language-jython highlight"><span class="n">jumperless</span></code> (or <code class="language-jython highlight"><span class="n">python3</span> <span class="n">JumperlessWokwiBridge</span><span class="o">.</span><span class="n">py</span></code> if you downloaded the script)</li>
+<li>Linux people are no longer red-headed stepchildren, there's a single-file AppImage now for you nerds, with a tar.gz as a fallback</li>
 </ul>
 <hr />
 <h2 id="importing-circuits-from-wokwi">Importing Circuits from Wokwi</h2>
@@ -322,12 +351,12 @@
 </ol>
 <h3 id="supported-wokwi-components">Supported Wokwi Components</h3>
 <ul>
-<li><strong>Half breadboard</strong> - Wokwi's breadboard maps directly to Jumperless rows</li>
-<li><strong>Arduino Nano</strong> - All pins (D0-D13, A0-A7) (GND, 5V, 3.3V, and RST pins are hardwired and don't do anything)</li>
+<li><strong>Half breadboard</strong> - Wokwi's breadboard maps directly to Jumperless rows. Top rows 1-30 are rows 1-30, bottom rows 1-30 are rows 31-60. The column letter is ignored, all five holes in a row are one node anyway. The top <code class="language-jython highlight"><span class="o">+</span></code> rail maps to <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, the bottom <code class="language-jython highlight"><span class="o">+</span></code> rail to <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, and both <code class="language-jython highlight"><span class="o">-</span></code> rails to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code></li>
+<li><strong>Arduino Nano</strong> - D0-D13 and A0-A7 map to the Nano header nodes. GND maps to the <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> net, 5V (or VCC) to <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, and 3V3 to <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, so wires to those pins do make real connections. RESET, AREF, VIN and RX/TX are ignored</li>
 <li><strong>Logic Analyzer</strong> - Channels map to GPIO: D0-7 → GPIO 1-8</li>
 <li><strong>Wire colors</strong> - Wokwi wire colors preserved</li>
 <li><strong>Rail voltages</strong> - Detected from text labels in Wokwi</li>
-<li><strong>VCC and GND Nodes</strong> - VCC maps to the <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></li>
+<li><strong>VCC and GND Nodes</strong> - VCC maps to <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, GND maps to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code></li>
 </ul>
 <p><img alt="LogicAnalyzerMappingV5" src="https://github.com/user-attachments/assets/3b7bd360-9703-4b0b-925a-aea8ed7e0526" /></p>
 <p><strong>Note:</strong> The app still works with the OG Jumperless and those original mappings remain the same.</p>
@@ -336,30 +365,33 @@
 <p><img alt="wokwiColor-2" src="https://github.com/user-attachments/assets/e5607cf9-3a95-42f7-b67c-875ba23e2ee9" /></p>
 <p><img alt="wokwiColor-1" src="https://github.com/user-attachments/assets/8a148940-60f8-4741-8905-6b9911ac1f21" /></p>
 <p>All Wokwi wire colors are preserved and displayed on the breadboard LEDs:</p>
-<p><code class="language-jython highlight"><span class="n">red</span></code>, <code class="language-jython highlight"><span class="n">orange</span></code>, <code class="language-jython highlight"><span class="n">yellow</span></code>, <code class="language-jython highlight"><span class="n">green</span></code>, <code class="language-jython highlight"><span class="n">blue</span></code>, <code class="language-jython highlight"><span class="n">violet</span></code>, <code class="language-jython highlight"><span class="n">purple</span></code>, <code class="language-jython highlight"><span class="n">magenta</span></code>, <code class="language-jython highlight"><span class="n">cyan</span></code>, <code class="language-jython highlight"><span class="n">white</span></code>, <code class="language-jython highlight"><span class="n">gray</span></code>, <code class="language-jython highlight"><span class="n">black</span></code>, <code class="language-jython highlight"><span class="n">brown</span></code>, <code class="language-jython highlight"><span class="n">limegreen</span></code>, <code class="language-jython highlight"><span class="n">gold</span></code></p>
+<p><code class="language-jython highlight"><span class="n">red</span></code>, <code class="language-jython highlight"><span class="n">orange</span></code>, <code class="language-jython highlight"><span class="n">yellow</span></code>, <code class="language-jython highlight"><span class="n">green</span></code>, <code class="language-jython highlight"><span class="n">blue</span></code>, <code class="language-jython highlight"><span class="n">violet</span></code>, <code class="language-jython highlight"><span class="n">purple</span></code>, <code class="language-jython highlight"><span class="n">magenta</span></code>, <code class="language-jython highlight"><span class="n">pink</span></code>, <code class="language-jython highlight"><span class="n">cyan</span></code>, <code class="language-jython highlight"><span class="n">white</span></code>, <code class="language-jython highlight"><span class="n">gray</span></code>, <code class="language-jython highlight"><span class="n">grey</span></code>, <code class="language-jython highlight"><span class="n">black</span></code>, <code class="language-jython highlight"><span class="n">brown</span></code>, <code class="language-jython highlight"><span class="n">limegreen</span></code>, <code class="language-jython highlight"><span class="n">gold</span></code></p>
+<p>A couple of them land on the same LED color: <code class="language-jython highlight"><span class="n">gold</span></code> looks the same as <code class="language-jython highlight"><span class="n">orange</span></code>, and <code class="language-jython highlight"><span class="n">pink</span></code> the same as <code class="language-jython highlight"><span class="n">magenta</span></code>. A color name that isn't in the list shows up as a dim white.</p>
 <p><strong>Note:</strong> Black wires let the Jumperless auto-assign a color.</p>
 <p>If you leave all the wires green (the default in Wokwi) or make a wire black, it'll just auto assign colors.</p>
-<p><strong>About color assignment:</strong> There is some weirdness because colors in Wokwi are applied to <code class="language-jython highlight"><span class="n">bridges</span></code> (a pair of <code class="language-jython highlight"><span class="n">nodes</span></code>) while color in the Jumperless gets assigned to <code class="language-jython highlight"><span class="n">nets</span></code> (a collection of connected <code class="language-jython highlight"><span class="n">nodes</span></code>). So if you have a bunch of things electrically connected together with different wire colors, it'll just pick one. It tries to pick unique colors first (no other nets with that same color), but if it can't, it'll shift the hue a bit so it's still that color but you can hopefully tell them apart.</p>
+<p><strong>About color assignment:</strong> There is some weirdness because colors in Wokwi are applied to <code class="language-jython highlight"><span class="n">bridges</span></code> (a pair of <code class="language-jython highlight"><span class="n">nodes</span></code>) while color in the Jumperless gets assigned to <code class="language-jython highlight"><span class="n">nets</span></code> (a collection of connected <code class="language-jython highlight"><span class="n">nodes</span></code>). So if you have a bunch of things electrically connected together with different wire colors, it'll use the first colored wire it finds in that net and drop the rest.</p>
 <h3 id="rail-voltage-detection">Rail Voltage Detection</h3>
 <p>Add a text label in your Wokwi diagram to specify rail voltages:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">top</span> <span class="n">rail</span> <span class="mf">5.5</span><span class="n">V</span>
 <span class="linenos" data-linenos="2 "></span><span class="n">bottom</span> <span class="n">rail</span> <span class="mf">3.5</span><span class="n">V</span>
 </code></pre></div>
 <p>The Jumperless parser will automatically detect these values and set the rails accordingly</p>
+<p>It's not picky about the format, <code class="language-jython highlight"><span class="n">TOP</span> <span class="n">RAIL</span> <span class="o">=</span> <span class="mi">5</span><span class="n">V</span></code>, <code class="language-jython highlight"><span class="n">top_rail</span><span class="p">:</span> <span class="mf">4.5</span><span class="n">V</span></code>, <code class="language-jython highlight"><span class="n">toprail</span> <span class="mi">3</span><span class="n">v3</span></code>, <code class="language-jython highlight"><span class="n">bot</span> <span class="n">rail</span> <span class="mf">2.5</span><span class="n">V</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="n">V</span></code> all work, and negative voltages are fine. A label like <code class="language-jython highlight"><span class="n">VCC</span> <span class="o">=</span> <span class="mi">5</span><span class="n">V</span></code> sets the top rail if there's no top rail label.</p>
 <h3 id="command-variants">Command Variants</h3>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">W</span>              <span class="c1"># Paste JSON, save to active slot</span>
 <span class="linenos" data-linenos="2 "></span><span class="n">W</span> <span class="mi">5</span>            <span class="c1"># Paste JSON, save to slot 5</span>
 <span class="linenos" data-linenos="3 "></span><span class="n">W</span> <span class="o">/</span><span class="n">file</span><span class="o">.</span><span class="n">json</span>   <span class="c1"># Load from file, save to active slot</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">W</span> <span class="o">/</span><span class="n">file</span><span class="o">.</span><span class="n">json</span> <span class="mi">5</span> <span class="c1"># Load from file, save to slot 5</span>
 </code></pre></div>
 <h3 id="after-import">After Import</h3>
-<p>Use <code class="language-jython highlight"><span class="o">&lt;</span></code> to cycle through slots to activate your imported circuit, or it will be active immediately if imported to the current slot.</p>
+<p>Use <code class="language-jython highlight"><span class="o">&lt;</span></code> to cycle through slots to activate your imported circuit, or <code class="language-jython highlight"><span class="o">&lt;</span><span class="mi">5</span></code> to jump straight to slot 5. An import into the active slot is applied to the hardware immediately, an import into another slot just sits in that slot's file until you select it.</p>
 <h2 id="terminal-compatibility">Terminal Compatibility</h2>
 <p>Or you can use any terminal emulator you like, <a href="https://iterm2.com/">iTerm2</a>, <a href="https://invisible-island.net/xterm/">xTerm</a>, <a href="https://github.com/Eugeny/tabby">Tabby</a>, <a href="https://www.arduino.cc/en/software/">Arduino IDE</a>'s Serial Monitor, whatever. The TUI is all handled from the Jumperless itself so it just needs something to print text. </p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../01-basic-controls/" class="btn btn-neutral float-left" title="Basic Controls"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../01-getting-started/" class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../04-oled/" class="btn btn-neutral float-right" title="OLED Support">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -383,7 +415,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../01-basic-controls/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../01-getting-started/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../04-oled/" style="color: #fcfcfc">Next &raquo;</a></span>

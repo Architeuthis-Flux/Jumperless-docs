@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/01-getting-started/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/01-getting-started/">
+    <meta property="og:title" content="Getting Started - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/01-getting-started/">
+    <meta name="twitter:title" content="Getting Started - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/01-getting-started/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Getting Started - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Getting Started</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#whats-in-the-box">What's in the box</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#plug-it-in">Plug it in</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-probe">The probe</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#connecting-rows">Connecting rows</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#connecting-with-just-the-click-wheel">Connecting with just the click wheel</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#removing-rows">Removing rows</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#undo-redo">Undo / Redo</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-click-wheel">The click wheel</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#power-rails-and-dacs">Power: rails and DACs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#special-functions">Special functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#measuring-things">Measuring things</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#idle-mode">Idle mode</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#slots">Slots</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#from-the-terminal">From the terminal</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#where-to-go-next">Where to go next</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Getting Started</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="getting-started">Getting Started</h1>
+<p><img alt="guide-42" src="https://github.com/user-attachments/assets/e35c42e0-b23a-4203-a836-44f0991db7fc" /></p>
+<p>This page walks you through the first hour with a Jumperless V5. Each section ends with a little <code class="language-jython highlight"><span class="n">Try</span> <span class="n">it</span></code> box you can follow along with on the board. If you'd rather just poke at it and come back when something confuses you, that works too.</p>
+<hr />
+<h2 id="whats-in-the-box">What's in the box</h2>
+<ul>
+<li><strong>The Jumperless.</strong> The breadboard with the RP2350 and 12 crossbar switches underneath it.</li>
+<li><strong>The probe.</strong> Plugs into the socket on the right side of the board. It has a <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code> / <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> switch and two buttons, <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> (front) and <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> (rear).</li>
+<li><strong>A little breakout board and a ribbon cable.</strong> It brings the DACs, GPIO, and a few other signals out to pin headers so you can clip a scope or meter to them. It's optional, you don't need it for anything on this page.</li>
+<li><strong>A sheet of stick-on rubber feet.</strong> These are for the <a href="../10-3d-stand/">3D printed stand</a>, which isn't in the box because it doesn't fit.</li>
+</ul>
+<p>Two things that are <em>not</em> in the box but you'll probably want: a <a href="../10-3d-stand/">stand</a> and an <a href="../04-oled/">OLED</a>. The OLED copies everything the breadboard LEDs say into actual text, and a few interactions are easier with one. On rev 7 boards it plugs straight into the pin headers on the board; on rev 5 boards (Crowd Supply and Mouser) it goes on the breakout board.</p>
+<hr />
+<h2 id="plug-it-in">Plug it in</h2>
+<p>Plug in the USB-C and it will do a startup animation on the LEDs. That's it, it's on.</p>
+<p>It also shows up on your computer as four serial ports. The first one is the main terminal, where the menu shows up when you type <code class="language-jython highlight"><span class="n">m</span></code> and where most of the typed commands on this site go. You don't <em>need</em> the terminal for anything on this page, but it's useful to have open because everything the board prints on the LEDs gets printed there too. The easiest way to open it is <a href="../03-app/">the App</a>, but any serial terminal works (the baud rate doesn't matter).</p>
+<p>When it boots it loads the last <code class="language-jython highlight"><span class="n">slot</span></code> you were using, so your circuit is still there after a power cycle.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Plug in the Jumperless and watch the startup animation.</li>
+<li>Open the first serial port in <a href="../03-app/">the App</a> or a terminal.</li>
+<li>Type <code class="language-jython highlight"><span class="n">m</span></code> to print the menu, or <code class="language-jython highlight"><span class="err">?</span></code> to see the firmware version.</li>
+</ol>
+</details>
+<hr />
+<h2 id="the-probe">The probe</h2>
+<p>Keep the switch on the probe set to <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code>. That's the normal probing mode.</p>
+<p><img alt="ProbeSelect" src="https://github.com/user-attachments/assets/1155f75a-f800-4bc0-ba6d-49e603ad39e2" /></p>
+<p><code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> turns the probe into a voltmeter: the <code class="language-jython highlight"><span class="n">logo</span></code> goes purple, and touching any <code class="language-jython highlight"><span class="n">row</span></code> reads its voltage on the OLED and in the terminal. It uses a temporary ADC connection that never gets saved, so you can poke around without changing your circuit.</p>
+<p><strong>The probe is read by a resistive voltage divider</strong>, so putting your fingers on the pads (or the back sides of the 4 risers that connect the <code class="language-jython highlight"><span class="n">probe</span> <span class="n">sense</span></code> boards to the main board) will give you weird readings. If taps land on the wrong row, run <code class="language-jython highlight"><span class="n">Calibration</span></code> &gt; <code class="language-jython highlight"><span class="n">Probe</span> <span class="n">Pads</span></code> from the click wheel menu and follow the prompts.</p>
+<hr />
+<h2 id="connecting-rows">Connecting rows</h2>
+<p>Click the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> button on the probe.</p>
+<p><img alt="connectButton" src="https://github.com/user-attachments/assets/faedd0af-8ea6-4454-8f33-01ff478bb9e7" /></p>
+<p>The <code class="language-jython highlight"><span class="n">logo</span></code> turns blue and the probe LEDs change.</p>
+<p><img alt="connect" src="https://github.com/user-attachments/assets/2040417f-64c3-41dd-a3d6-8c900e15445b" /></p>
+<p>Now tap two <code class="language-jython highlight"><span class="n">row</span></code>s and they get connected. Connections are made in pairs (a <code class="language-jython highlight"><span class="n">bridge</span></code>, see the <a href="../99-glossary/">glossary</a>). When you've tapped the first <code class="language-jython highlight"><span class="n">row</span></code>, the <code class="language-jython highlight"><span class="n">logo</span></code> and the <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> text on the probe brighten to show you're <code class="language-jython highlight"><span class="n">holding</span></code> it, and the next thing you tap connects to it. A wire shows up on the LEDs between them.</p>
+<p>Anything can be an end of a bridge: breadboard rows, the rails (<code class="language-jython highlight"><span class="o">+</span></code> and <code class="language-jython highlight"><span class="o">-</span></code> pads at the ends of the rail strips), the Nano header pins, and the <a href="#special-functions">special functions</a> pads by the logo.</p>
+<ul>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> while <code class="language-jython highlight"><span class="n">holding</span></code> a row to drop it and start over.</li>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> while not <code class="language-jython highlight"><span class="n">holding</span></code> anything to leave <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode and go back to <code class="language-jython highlight"><span class="n">idle</span></code> (rainbow <code class="language-jython highlight"><span class="n">logo</span></code>, all 3 probe LEDs on).</li>
+<li>Made a connection you didn't mean to? <strong>Double-tap <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code></strong> to undo it. See <a href="#undo-redo">Undo / Redo</a>.</li>
+</ul>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>. The logo turns blue.</li>
+<li>Tap <code class="language-jython highlight"><span class="n">row</span> <span class="mi">1</span></code>, then <code class="language-jython highlight"><span class="n">row</span> <span class="mi">5</span></code>. A wire appears between them.</li>
+<li>Tap <code class="language-jython highlight"><span class="n">row</span> <span class="mi">5</span></code> again, then the <code class="language-jython highlight"><span class="o">-</span></code> pad on the bottom rail. Now rows 1 and 5 are both on <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, and the whole <code class="language-jython highlight"><span class="n">net</span></code> shares one color.</li>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> again to get back to idle.</li>
+</ol>
+</details>
+<h3 id="connecting-with-just-the-click-wheel">Connecting with just the click wheel</h3>
+<p>You can also make connections without touching the probe to the board: <code class="language-jython highlight"><span class="n">Click</span></code> &gt; <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> &gt; <code class="language-jython highlight"><span class="n">Add</span></code> (or <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code>), or just turn the wheel while you're already in <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode. Turning the wheel scrolls a cursor through every <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> (rows, Nano pins, rails, DACs, ADCs, GPIO, UART, current sense), <code class="language-jython highlight"><span class="n">click</span></code> selects the one it's on, <code class="language-jython highlight"><span class="n">hold</span></code> exits. The cursor hides itself after 5 seconds without a turn.</p>
+<hr />
+<h2 id="removing-rows">Removing rows</h2>
+<p>Click the <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> button.</p>
+<p><img alt="removeButton" src="https://github.com/user-attachments/assets/7fc020b7-f5ce-48f6-99eb-4e9a753a0329" /></p>
+<p>The <code class="language-jython highlight"><span class="n">logo</span></code> goes red.</p>
+<p><img alt="remove" src="https://github.com/user-attachments/assets/297e169f-f9f5-4151-8fa2-de41ab14492f" /></p>
+<p>Now tap a <code class="language-jython highlight"><span class="n">row</span></code> (or swipe along a few) and it gets disconnected. It only removes that <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> and what's connected directly to it, not everything on the <code class="language-jython highlight"><span class="n">net</span></code>. So tapping a <code class="language-jython highlight"><span class="n">row</span> <span class="mi">25</span></code> that's on <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> doesn't clear everything on <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, but tapping the <code class="language-jython highlight"><span class="o">-</span></code> rail pad does.</p>
+<p>The special function pads work the same way in <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> mode: tap the pad, pick the function, and it's gone. Click <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> again to leave.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code>. The logo turns red.</li>
+<li>Tap <code class="language-jython highlight"><span class="n">row</span> <span class="mi">1</span></code>. The wire to row 5 disappears, and row 5 is still on <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>.</li>
+<li>Tap the <code class="language-jython highlight"><span class="o">-</span></code> pad on the bottom rail. Row 5 comes off <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> too.</li>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> to get back to idle.</li>
+</ol>
+</details>
+<hr />
+<h2 id="undo-redo">Undo / Redo</h2>
+<p>Every change to your circuit gets recorded, and there are two ways back through it.</p>
+<p><strong>Double-tap <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> to undo, double-tap <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> to redo.</strong> The <code class="language-jython highlight"><span class="n">logo</span></code> flashes yellow and the OLED shows what got reverted.</p>
+<p><img alt="" src="../assets/Undo.png" /></p>
+<p><strong>To walk back further,</strong> <code class="language-jython highlight"><span class="n">click</span></code> the wheel, find <code class="language-jython highlight"><span class="n">History</span></code>, and <code class="language-jython highlight"><span class="n">click</span></code> in. Now turning the wheel scrubs through every change, two detents a step: clockwise steps back in time, counterclockwise steps forward. The breadboard updates live as you go so you can see each state, and the OLED shows where you are (<code class="language-jython highlight"><span class="mi">3</span><span class="o">/</span><span class="mi">12</span></code>) and what that change was. <code class="language-jython highlight"><span class="n">Click</span></code> the wheel (or press <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>) to keep where you stopped, <code class="language-jython highlight"><span class="n">hold</span></code> (or press <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code>) to go back to where you started.</p>
+<p>In the terminal, <code class="language-jython highlight"><span class="o">^</span></code> is undo and <code class="language-jython highlight"><span class="o">&amp;</span></code> is redo.</p>
+<p>The history is saved with your slots, so it's still there after a power cycle. Undo only ever touches the live circuit.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Connect <code class="language-jython highlight"><span class="n">row</span> <span class="mi">10</span></code> to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">15</span></code>, then <code class="language-jython highlight"><span class="n">row</span> <span class="mi">15</span></code> to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">20</span></code>.</li>
+<li>Double-tap <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code>. The last wire disappears.</li>
+<li>Double-tap <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>. It comes back.</li>
+<li><code class="language-jython highlight"><span class="n">Click</span></code> the wheel, scroll to <code class="language-jython highlight"><span class="n">History</span></code>, <code class="language-jython highlight"><span class="n">click</span></code>, and turn the wheel back and forth. <code class="language-jython highlight"><span class="n">Hold</span></code> to leave it where it was.</li>
+</ol>
+</details>
+<hr />
+<h2 id="the-click-wheel">The click wheel</h2>
+<p><img alt="wheel copy" src="https://github.com/user-attachments/assets/d69a5425-7131-46e3-8c17-a38819edfc16" /></p>
+<p>There are two kinds of presses: <code class="language-jython highlight"><span class="n">click</span></code> (short) and <code class="language-jython highlight"><span class="n">hold</span></code> (long). In general a <code class="language-jython highlight"><span class="n">click</span></code> is <code class="language-jython highlight"><span class="n">yes</span></code> / <code class="language-jython highlight"><span class="n">go</span> <span class="ow">in</span></code>, and a <code class="language-jython highlight"><span class="n">hold</span></code> is <code class="language-jython highlight"><span class="n">no</span></code> / <code class="language-jython highlight"><span class="n">back</span></code> / <code class="language-jython highlight"><span class="n">get</span> <span class="n">me</span> <span class="n">out</span> <span class="n">of</span> <span class="n">here</span></code>.</p>
+<p>When I say <code class="language-jython highlight"><span class="n">click</span></code>, it's more of a diagonal push toward the center of the board (<a href="https://lcsc.com/product-detail/Rotary-Encoders_Mitsumi-Electric-SIQ-02FVS3_C2925423.html">these encoders</a> were meant to poke out a little from the side of a tablet).</p>
+<p><code class="language-jython highlight"><span class="n">Click</span></code> to open the menu, turn to scroll, <code class="language-jython highlight"><span class="n">click</span></code> to go into a submenu, <code class="language-jython highlight"><span class="n">hold</span></code> to back out one level. The menu draws on the breadboard LEDs, and it's copied to the terminal and the <a href="../04-oled/">OLED</a> if you have one. If the text on the LEDs is hard to read, turn up the brightness: <code class="language-jython highlight"><span class="n">Display</span> <span class="n">Options</span></code> &gt; <code class="language-jython highlight"><span class="n">Bright</span></code> &gt; <code class="language-jython highlight"><span class="n">Menu</span></code>, scroll to a level you like, and <code class="language-jython highlight"><span class="n">click</span></code>.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li><code class="language-jython highlight"><span class="n">Click</span></code> the wheel. The menu shows up on the LEDs (and the terminal).</li>
+<li>Turn it to scroll through <code class="language-jython highlight"><span class="n">Rails</span></code>, <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>, <code class="language-jython highlight"><span class="n">Parts</span></code>, <code class="language-jython highlight"><span class="n">GPIO</span></code>, <code class="language-jython highlight"><span class="n">Output</span></code>, <code class="language-jython highlight"><span class="n">Show</span></code>, <code class="language-jython highlight"><span class="n">Apps</span></code> and the rest.</li>
+<li>Scroll to <code class="language-jython highlight"><span class="n">Display</span> <span class="n">Options</span></code> &gt; <code class="language-jython highlight"><span class="n">Bright</span></code> &gt; <code class="language-jython highlight"><span class="n">Menu</span></code> and pick a brightness. <code class="language-jython highlight"><span class="n">Click</span></code> to set it.</li>
+<li><code class="language-jython highlight"><span class="n">Hold</span></code> a couple of times to get all the way out.</li>
+</ol>
+</details>
+<hr />
+<h2 id="power-rails-and-dacs">Power: rails and DACs</h2>
+<p>There are four adjustable voltage sources: the <code class="language-jython highlight"><span class="n">top</span> <span class="n">rail</span></code>, the <code class="language-jython highlight"><span class="n">bottom</span> <span class="n">rail</span></code>, <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code>, and <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">1</span></code>. All of them go from -8 V to +8 V.</p>
+<p><strong>Rails</strong> are the easiest. <code class="language-jython highlight"><span class="n">Click</span></code> the wheel, pick <code class="language-jython highlight"><span class="n">Rails</span></code>, then <code class="language-jython highlight"><span class="n">Top</span></code>, <code class="language-jython highlight"><span class="n">Bottom</span></code>, or <code class="language-jython highlight"><span class="n">Both</span></code>. Turn the wheel to pick a voltage, <code class="language-jython highlight"><span class="n">click</span></code> to set it, <code class="language-jython highlight"><span class="n">hold</span></code> to cancel. The rail strips light up with the voltage (red for positive, blue for negative), and the <code class="language-jython highlight"><span class="o">+</span></code> pads on the ends of the rails are now that voltage. The <code class="language-jython highlight"><span class="o">-</span></code> pads are always <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>.</p>
+<p><strong>DACs</strong> are the same idea but they're <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s you connect to a row rather than a whole strip: <code class="language-jython highlight"><span class="n">Output</span></code> &gt; <code class="language-jython highlight"><span class="n">Voltage</span></code> &gt; <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> / <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">1</span></code>, pick the voltage, then pick a row. You can also tap the <code class="language-jython highlight"><span class="n">DAC</span></code> pad by the logo while probing (see <a href="#special-functions">special functions</a>). By default <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> is busy powering the probe, so <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">1</span></code> is the one to reach for.</p>
+<p><strong>Shortcut:</strong> in idle mode, tap a rail <code class="language-jython highlight"><span class="o">+</span></code> pad to highlight it, then <code class="language-jython highlight"><span class="n">click</span></code> the wheel to adjust that voltage right there. Same for a <code class="language-jython highlight"><span class="n">DAC</span></code>, once it's connected to something. This shortcut is on by default only when an OLED is connected, because the OLED's <code class="language-jython highlight"><span class="n">adjust</span><span class="err">?</span></code> hint is what makes it discoverable. To have it always on, put this in your <a href="../06-config/">config</a>:</p>
+<p>Type it into the terminal, backtick and all (the backtick is the config command):</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">clickwheel</span><span class="p">]</span> <span class="n">rail_click_adjust</span> <span class="o">=</span> <span class="n">always</span><span class="p">;</span>
+</code></pre></div>
+<p>Rail and DAC voltages are saved with the <code class="language-jython highlight"><span class="n">slot</span></code>, so each circuit keeps its own power settings.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li><code class="language-jython highlight"><span class="n">Click</span></code> the wheel, pick <code class="language-jython highlight"><span class="n">Rails</span></code> &gt; <code class="language-jython highlight"><span class="n">Top</span></code>, turn until it says <code class="language-jython highlight"><span class="mf">3.3</span></code>, and <code class="language-jython highlight"><span class="n">click</span></code>. The top rail strip lights up.</li>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>, tap the top rail <code class="language-jython highlight"><span class="o">+</span></code> pad, then <code class="language-jython highlight"><span class="n">row</span> <span class="mi">10</span></code>. Row 10 is now at 3.3 V.</li>
+<li>Flip the probe switch to <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> and touch row 10. The OLED / terminal reads about 3.3 V. Flip it back to <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code>.</li>
+</ol>
+</details>
+<hr />
+<h2 id="special-functions">Special functions</h2>
+<p>The three pads next to the logo, <code class="language-jython highlight"><span class="n">DAC</span></code>, <code class="language-jython highlight"><span class="n">GPIO</span></code>, and <code class="language-jython highlight"><span class="n">ADC</span></code>, are how you connect the internal stuff to your circuit. Tap one while probing and a chooser shows up on the breadboard LEDs (and the terminal / OLED), pick what you want, then tap the row to connect it to. If you were already <code class="language-jython highlight"><span class="n">holding</span></code> a row, it connects there.</p>
+<p><img alt="gpioTapped" src="https://github.com/user-attachments/assets/0b0c45ff-b98e-4a45-87b3-d3cc5c7a4544" /></p>
+<p>Think of them as <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s that are in a folder, so there didn't need to be a dedicated pad for each one.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">DAC</span> <span class="n">Pad</span>
+<span class="linenos" data-linenos="2 "></span> <span class="err">└─</span> <span class="mi">0</span> <span class="mi">1</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">the</span> <span class="n">pads</span> <span class="n">below</span> <span class="n">the</span> <span class="n">selection</span><span class="p">]</span>
+<span class="linenos" data-linenos="3 "></span>  <span class="err">└─</span> <span class="o">-</span><span class="mi">8</span><span class="n">V</span>  <span class="err">!</span><span class="p">:</span><span class="o">.</span><span class="p">:</span><span class="err">!</span>  <span class="o">+</span><span class="mi">8</span><span class="n">V</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">the</span> <span class="n">bottom</span> <span class="n">pads</span> <span class="ow">or</span> <span class="n">turn</span> <span class="n">the</span> <span class="n">clickwheel</span> <span class="n">to</span> <span class="n">pick</span> <span class="n">a</span> <span class="n">voltage</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">click</span> <span class="no no-Hardware">Connect</span> <span class="n">to</span> <span class="n">confirm</span><span class="p">]</span>
+<span class="linenos" data-linenos="4 "></span>   <span class="err">└─</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">a</span> <span class="n">row</span> <span class="n">to</span> <span class="nf nf-Jumperless">connect</span> <span class="n">it</span> <span class="n">to</span><span class="p">]</span>
+</code></pre></div>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">GPIO</span> <span class="n">Pad</span>
+<span class="linenos" data-linenos="2 "></span> <span class="err">└─</span> <span class="n">ⁱ1</span><span class="err">⁰</span> <span class="n">ⁱ2</span><span class="err">⁰</span> <span class="n">ⁱ3</span><span class="err">⁰</span> <span class="n">ⁱ4</span><span class="err">⁰</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="err">₁</span><span class="mi">5</span><span class="err">₀</span> <span class="err">₁</span><span class="mi">6</span><span class="err">₀</span> <span class="err">₁</span><span class="mi">7</span><span class="err">₀</span> <span class="err">₁</span><span class="mi">8</span><span class="err">₀</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">a</span> <span class="n">number</span><span class="p">:</span> <span class="n">left</span> <span class="n">side</span> <span class="k">for</span> <span class="nb">input</span><span class="p">,</span> <span class="n">right</span> <span class="n">side</span> <span class="k">for</span> <span class="n">output</span><span class="p">]</span>
+<span class="linenos" data-linenos="4 "></span>     <span class="err">└─</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">a</span> <span class="n">row</span> <span class="n">to</span> <span class="nf nf-Jumperless">connect</span> <span class="n">it</span> <span class="n">to</span><span class="p">]</span>
+</code></pre></div>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">ADC</span> <span class="n">Pad</span>
+<span class="linenos" data-linenos="2 "></span> <span class="err">└─</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="n">P</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">an</span> <span class="n">ADC</span><span class="p">,</span> <span class="mi">0</span><span class="o">-</span><span class="mi">3</span> <span class="n">are</span> <span class="n">the</span> <span class="n">general</span> <span class="n">purpose</span> <span class="err">±</span><span class="mi">8</span> <span class="n">V</span> <span class="n">ones</span><span class="p">]</span>
+<span class="linenos" data-linenos="3 "></span>  <span class="err">└─</span> <span class="p">[</span><span class="n">Tap</span> <span class="n">a</span> <span class="n">row</span> <span class="n">to</span> <span class="nf nf-Jumperless">connect</span> <span class="n">it</span> <span class="n">to</span><span class="p">,</span> <span class="ow">and</span> <span class="n">its</span> <span class="n">voltage</span> <span class="n">shows</span> <span class="n">on</span> <span class="n">the</span> <span class="n">LEDs</span><span class="p">]</span>
+</code></pre></div>
+<p>The four <code class="language-jython highlight"><span class="n">user</span> <span class="n">pads</span></code> (the two little guys and the two buildings) are shortcuts to a fixed set: <code class="language-jython highlight"><span class="n">top</span> <span class="n">guy</span></code> is <code class="language-jython highlight"><span class="n">UART</span> <span class="n">Tx</span></code>, <code class="language-jython highlight"><span class="n">bottom</span> <span class="n">guy</span></code> is <code class="language-jython highlight"><span class="n">UART</span> <span class="n">Rx</span></code>, and the two <code class="language-jython highlight"><span class="n">buildings</span></code> are the current sense inputs <code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> and <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code>. You can reassign them in the <a href="../06-config/">config</a> under <code class="language-jython highlight"><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span></code>.</p>
+<p><img alt="userPads" src="https://github.com/user-attachments/assets/6925e9ed-fb6b-46a2-b377-205107df6a78" /></p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>, then tap the <code class="language-jython highlight"><span class="n">GPIO</span></code> pad by the logo.</li>
+<li>Tap the right side of the <code class="language-jython highlight"><span class="mi">1</span></code> (output). Then tap <code class="language-jython highlight"><span class="n">row</span> <span class="mi">20</span></code>. <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> is now driving row 20.</li>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> to go back to idle, and tap row 20 to highlight it. Now click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> and watch the row toggle between high and low.</li>
+<li>Everything here is a normal connection, so <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> mode and undo work on it the same way.</li>
+</ol>
+</details>
+<hr />
+<h2 id="measuring-things">Measuring things</h2>
+<p>A few ways to see what your circuit is doing:</p>
+<ul>
+<li><strong>Just tap it.</strong> The board is always measuring voltage and current in the background, so leave the switch in <code class="language-jython highlight"><span class="no no-Hardware">select</span></code>, tap a row (or scroll to it with the click wheel) and the OLED and terminal show the voltage on that net and the current flowing through that connection. Nothing to set up.</li>
+<li><strong>The probe's <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> switch.</strong> Touch a row, read the voltage. Nothing gets saved.</li>
+<li><strong>The <code class="language-jython highlight"><span class="n">ADC</span></code> pad.</strong> Connect an ADC to a row and it stays there, showing the voltage on that row's LEDs and, if you highlight it, on the OLED / terminal. The ADCs read -8 V to +8 V.</li>
+<li><strong>The <code class="language-jython highlight"><span class="n">Show</span></code> menu.</strong> <code class="language-jython highlight"><span class="n">Show</span></code> &gt; <code class="language-jython highlight"><span class="n">Voltage</span></code> / <code class="language-jython highlight"><span class="n">Digital</span></code> / <code class="language-jython highlight"><span class="n">Current</span></code> picks a measurement and a row to put it on from the wheel instead of the probe.</li>
+<li><strong>Current sense.</strong> Tap the <code class="language-jython highlight"><span class="n">building</span></code> pads in <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode to get <code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> (top) and <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code> (bottom). Put them on two different <code class="language-jython highlight"><span class="n">net</span></code>s and a virtual wire with "marching ants" shows the current flowing between them. (The background scan puts ants on any wire with current flowing too, <code class="language-jython highlight"><span class="p">[</span><span class="n">measurement</span><span class="p">]</span> <span class="n">net_currents</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code> in the <a href="../06-config/">config</a> turns it off.)</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Idle mode currents are a bit rough</p>
+<p>They're read using the crossbar's own resistance as the shunt (about 40Ω per crosspoint) with one ADC multiplexed across every net, so connecting current sense (<code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> / <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code>) manually is a bit more accurate.</p>
+</div>
+<video autoplay loop muted playsinline width="60%">
+  <source src="https://github.com/user-attachments/assets/7fa478f0-bbdf-4d48-b6a3-dcb1a36f23d0" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<div class="admonition warning">
+<p class="admonition-title"><code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> and <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code> are shorted together internally</p>
+<p>They're the two ends of a 2 Ω shunt resistor. You measure current in series so this is expected, but it's easy to forget. Treat this like your multimeter yelling at you when the probes are in the current holes and it's set to volts.</p>
+</div>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Set the top rail to 3.3 V (<code class="language-jython highlight"><span class="n">Rails</span></code> &gt; <code class="language-jython highlight"><span class="n">Top</span></code>, see <a href="#power-rails-and-dacs">Power</a>), then put an LED and a resistor (anything 220 Ω to 1 kΩ) in series between <code class="language-jython highlight"><span class="n">row</span> <span class="mi">10</span></code> and <code class="language-jython highlight"><span class="n">row</span> <span class="mi">12</span></code>, LED long leg toward row 10.</li>
+<li>Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>, tap the top rail <code class="language-jython highlight"><span class="o">+</span></code>, then <code class="language-jython highlight"><span class="n">row</span> <span class="mi">10</span></code>. Then tap the top <code class="language-jython highlight"><span class="n">building</span></code> pad (<code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code>) and <code class="language-jython highlight"><span class="n">row</span> <span class="mi">12</span></code>. Then tap the bottom <code class="language-jython highlight"><span class="n">building</span></code> pad (<code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code>) and the <code class="language-jython highlight"><span class="o">-</span></code> rail pad.</li>
+<li>The LED lights, and the ants march from <code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> to <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code>. The OLED shows the current as soon as <code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> and <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code> are connected (the net is called <code class="language-jython highlight"><span class="n">I</span> <span class="n">Sense</span></code>), and tapping row 12 in idle mode shows it on the terminal too.</li>
+</ol>
+</details>
+<hr />
+<h2 id="idle-mode">Idle mode</h2>
+<p>Most of the time the probe isn't in a mode (rainbow <code class="language-jython highlight"><span class="n">logo</span></code>), and there's a lot you can do from here:</p>
+<p><img alt="idle" src="https://github.com/user-attachments/assets/304d787a-c5f5-4da0-bd95-1a82bcdf83c1" /></p>
+<ul>
+<li><strong>Tap a row to highlight its <code class="language-jython highlight"><span class="n">net</span></code>.</strong> The row you tapped gets a slightly different animation from the rest of the net.</li>
+<li><strong>Turn the click wheel</strong> to walk the highlight along the rows, as if you tapped each one.</li>
+<li><strong><code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code></strong> puts you in <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> mode already <code class="language-jython highlight"><span class="n">holding</span></code> the row you tapped, and drops you back to idle once you've connected it to something. (If you got to the row by turning the wheel instead of tapping it, you start out holding nothing.)</li>
+<li><strong><code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code></strong> flashes a warning on the highlighted net; press it again within a second or so and you're in <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> mode with that <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> already picked.</li>
+<li>The highlighted net's voltage and current print on the OLED and the terminal, whatever is on it. A <code class="language-jython highlight"><span class="n">GPIO</span></code> input or an <code class="language-jython highlight"><span class="n">ADC</span></code> on the net shows its reading too.</li>
+<li>If it has a <strong><code class="language-jython highlight"><span class="n">GPIO</span></code> output</strong> on it, <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> toggles it high / low.</li>
+<li>If it's a <strong>rail or a DAC</strong>, <code class="language-jython highlight"><span class="n">click</span></code> the wheel to <a href="#power-rails-and-dacs">adjust the voltage</a>.</li>
+<li>If it's a <strong><code class="language-jython highlight"><span class="n">GPIO</span></code></strong>, a quick <code class="language-jython highlight"><span class="n">click</span></code> opens that pin's options. See <a href="../05.7-gpio/">GPIO</a>.</li>
+<li>If it's a pin of a <strong>placed part</strong>, the OLED shows the part and pin name. See <a href="../05.5-parts/">Parts</a>.</li>
+</ul>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Tap any connected row. Its whole net lights up.</li>
+</ol>
+<p><img alt="a highlighted net on rows 40, 50 and 58" src="../assets/verify/idle-highlight.png" />
+2. Turn the wheel a few detents each way. The highlight walks along the rows.
+3. Press <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>, tap another row, and you're back in idle with a new wire.</p>
+</details>
+<hr />
+<h2 id="slots">Slots</h2>
+<p>There are 8 <code class="language-jython highlight"><span class="n">slot</span></code>s (0-7), and each one is a saved circuit: connections, rail and DAC voltages, GPIO setup, colors. Everything you do with the probe saves into the active slot automatically, so you don't have to save anything. Switching slots switches the whole circuit.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">Click</span></code> &gt; <code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Load</span></code> picks a slot to switch to.</li>
+<li><code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span></code> copies the current circuit into another slot.</li>
+<li><code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Clear</span></code> empties a slot.</li>
+<li>In the terminal, <code class="language-jython highlight"><span class="o">&lt;</span></code> cycles to the next slot (it wraps from 7 back to 0), and <code class="language-jython highlight"><span class="o">&lt;</span><span class="mi">3</span></code> jumps to slot 3.</li>
+</ul>
+<p>On boot it loads the last slot you had active. If you'd rather always start on one particular slot, set <code class="language-jython highlight"><span class="p">[</span><span class="n">slots</span><span class="p">]</span> <span class="n">boot_mode</span> <span class="o">=</span> <span class="n">fixed_slot</span><span class="p">;</span></code> and <code class="language-jython highlight"><span class="n">boot_slot</span></code> in the <a href="../06-config/">config</a>.</p>
+<p>The slot files are plain YAML on the board's filesystem, so you can also read and edit them by hand. See <a href="../08-file-manager/">File Manager</a>.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>With a few connections made, <code class="language-jython highlight"><span class="n">click</span></code> &gt; <code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span></code> &gt; <code class="language-jython highlight"><span class="mi">1</span></code>.</li>
+<li><code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Load</span></code> &gt; <code class="language-jython highlight"><span class="mi">2</span></code>. Empty board (or whatever was in slot 2).</li>
+<li><code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Load</span></code> &gt; <code class="language-jython highlight"><span class="mi">1</span></code>. Your circuit is back.</li>
+</ol>
+</details>
+<hr />
+<h2 id="from-the-terminal">From the terminal</h2>
+<p>Everything above can also be done by typing. Open the first serial port (<a href="../03-app/">the App</a> does this for you) and type <code class="language-jython highlight"><span class="n">m</span></code> to print the menu. A few to know:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">m</span>           <span class="n">show</span> <span class="n">the</span> <span class="n">menu</span> <span class="n">again</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">n</span>           <span class="n">show</span> <span class="n">the</span> <span class="n">net</span> <span class="nb">list</span> <span class="p">(</span><span class="n">what</span><span class="s1">&#39;s connected to what)</span>
+<span class="linenos" data-linenos="3 "></span><span class="o">+</span> <span class="mi">1</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="o">-</span><span class="n">gnd</span>   <span class="n">add</span> <span class="n">connections</span>
+<span class="linenos" data-linenos="4 "></span><span class="o">-</span> <span class="mi">1</span><span class="o">-</span><span class="mi">5</span>       <span class="nf nf-JFS">remove</span> <span class="n">a</span> <span class="n">connection</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">x</span>           <span class="n">clear</span> <span class="nb">all</span> <span class="n">connections</span>
+<span class="linenos" data-linenos="6 "></span><span class="o">&lt;</span>           <span class="nb">next</span> <span class="n">slot</span> <span class="p">(</span><span class="ow">or</span> <span class="o">&lt;</span><span class="mi">3</span> <span class="k">for</span> <span class="n">slot</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos" data-linenos="7 "></span><span class="n">p</span>           <span class="n">MicroPython</span> <span class="n">REPL</span>
+<span class="linenos" data-linenos="8 "></span><span class="o">/</span>           <span class="n">file</span> <span class="n">manager</span> <span class="p">(</span><span class="ow">or</span> <span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span> <span class="n">to</span> <span class="n">run</span> <span class="n">a</span> <span class="n">script</span><span class="p">)</span>
+<span class="linenos" data-linenos="9 "></span><span class="n">U</span>           <span class="n">show</span> <span class="n">up</span> <span class="k">as</span> <span class="n">a</span> <span class="n">USB</span> <span class="n">drive</span>
+</code></pre></div>
+<p><code class="language-jython highlight"><span class="n">p</span></code> and <code class="language-jython highlight"><span class="o">/</span></code> take over the terminal, <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> gets you back out of both. A script you run leaves whatever it connected on the board, <code class="language-jython highlight"><span class="n">x</span></code> clears it.</p>
+<p>Type <code class="language-jython highlight"><span class="nf nf-Jumperless">help</span></code> or <code class="language-jython highlight"><span class="p">[</span><span class="n">command</span><span class="p">]</span><span class="err">?</span></code> for the onboard docs on any of them, and <code class="language-jython highlight"><span class="n">e</span></code> to show more of the menu.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Type <code class="language-jython highlight"><span class="o">+</span> <span class="mi">1</span><span class="o">-</span><span class="mi">5</span></code> and watch the wire appear on the board.</li>
+<li>Type <code class="language-jython highlight"><span class="n">n</span></code> to see it in the net list.</li>
+<li>Type <code class="language-jython highlight"><span class="o">-</span> <span class="mi">1</span><span class="o">-</span><span class="mi">5</span></code> to remove it.</li>
+</ol>
+</details>
+<p><img alt="rows 1 and 5 connected, row 10 on GND, as the board draws it" src="../assets/verify/terminal-plus-1-5-10-gnd.png" /></p>
+<hr />
+<h2 id="where-to-go-next">Where to go next</h2>
+<ul>
+<li><strong><a href="../08.5-examples/">Examples</a></strong> - the MicroPython scripts and guided projects already on the board. A good next step is the 555 LED flasher project, which shows you where each part of a real circuit goes.</li>
+<li><strong><a href="../03-app/">The App</a></strong> - the terminal, Wokwi import, and Arduino flashing from one place.</li>
+<li><strong><a href="../04-oled/">OLED</a></strong> - add a screen. Cheap, and it makes a lot of this easier.</li>
+<li><strong><a href="../05-arduino/">Arduino Stuff</a></strong> - drop a Nano in the header, flash it through the Jumperless, and let it send commands back.</li>
+<li><strong><a href="../05.5-parts/">Parts</a></strong> - tell the Jumperless what chips are in the board and it wires and labels them for you.</li>
+<li><strong><a href="../05.7-gpio/">GPIO</a></strong> - direction, pulls, PWM, and a binary counter, all from the board.</li>
+<li><strong><a href="../08-micropython/">MicroPython</a></strong> - script the circuit itself. <a href="https://ide.jumperless.org/">JumperIDE</a> is the easiest way in.</li>
+<li><strong><a href="../06-config/">Config File</a></strong> - every setting, including the ones mentioned on this page.</li>
+<li><strong><a href="../07-debugging/">Debug Views</a></strong> - the net list, bridge array, and crossbar views for when something isn't doing what you expect.</li>
+<li><strong><a href="../07.5-automation/">Automation &amp; LLM Tools</a></strong> - drive the board from scripts, an MCP server, or an agent skill.</li>
+<li><strong><a href="../99-glossary/">Glossary</a></strong> - what I mean by <code class="language-jython highlight"><span class="n">net</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>, <code class="language-jython highlight"><span class="n">row</span></code>, <code class="language-jython highlight"><span class="n">bridge</span></code>, and <code class="language-jython highlight"><span class="n">slot</span></code>.</li>
+</ul>
+<p>And if you get stuck, ask in the <a href="https://discord.gg/bvacV7r3FP">Discord</a>. Seriously, even the dumb questions help me figure out what to put here.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../03-app/" class="btn btn-neutral float-right" title="The App">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../03-app/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>

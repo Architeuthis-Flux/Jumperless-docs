@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -102,6 +102,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -118,7 +122,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -126,7 +138,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -184,25 +204,13 @@ version is in the repo linked above — re-clone from there to get the full
 <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span></code> tree and the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> server submodule, which are not reproduced on
 this page.</p>
 <h2 id="installation">Installation</h2>
-<p>Clone the repo (with submodules) into your agent's skills directory:</p>
-<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># Cursor</span>
-<span class="linenos" data-linenos=" 2 "></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cursor/skills
-<span class="linenos" data-linenos=" 3 "></span><span class="nb">cd</span><span class="w"> </span>~/.cursor/skills
-<span class="linenos" data-linenos=" 4 "></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span><span class="se">\</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="w">  </span>https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git<span class="w"> </span>jumperless-v5
-<span class="linenos" data-linenos=" 6 "></span>
-<span class="linenos" data-linenos=" 7 "></span><span class="c1"># Claude Code</span>
-<span class="linenos" data-linenos=" 8 "></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.claude/skills
-<span class="linenos" data-linenos=" 9 "></span><span class="nb">cd</span><span class="w"> </span>~/.claude/skills
-<span class="linenos" data-linenos="10 "></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span><span class="se">\</span>
-<span class="linenos" data-linenos="11 "></span><span class="w">  </span>https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git<span class="w"> </span>jumperless-v5
-</code></pre></div>
-<p>Then install the host helper's one dependency: <code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">pyserial</span></code>. For the
-MCP alternative, build the server from the <code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> submodule (<code class="language-jython highlight"><span class="n">cd</span> <span class="n">mcp</span> <span class="o">&amp;&amp;</span> <span class="n">cargo</span><span class="n">install</span> <span class="o">--</span><span class="n">path</span> <span class="o">.</span></code>). The full reference docs referenced below live in the repo's
-<code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span></code> directory; the canonical API reference is
+<p>The install steps — cloning the repo into your agent's skills directory,
+<code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">pyserial</span></code>, and building the MCP server — live on the
+<a href="../07.5-automation/">Automation overview</a>. The full reference docs referenced
+below live in the repo's <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span></code> directory; the canonical API reference is
 <a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>.</p>
 <hr />
-<h1 id="jumperless-v5-skill">Jumperless V5 Skill</h1>
+<h2 id="jumperless-v5-skill">Jumperless V5 Skill</h2>
 <p>This skill controls real Jumperless V5 hardware via MicroPython REPL.</p>
 <p><strong>Working directory:</strong> the skill root (this repo). All commands below are
 repo-relative — run them from wherever this skill is installed (e.g.
@@ -212,37 +220,8 @@ hardcode an absolute checkout path.</p>
 <p>The Jumperless exposes four USB CDC serial interfaces. This skill drives the
 <strong>MicroPython Raw REPL</strong> (port 5) via <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code>, which is the
 primary transport for everything below.</p>
-<table>
-<thead>
-<tr>
-<th>Port</th>
-<th>macOS suffix</th>
-<th>Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code class="language-jython highlight"><span class="n">JLV5port1</span></code></td>
-<td>Main terminal, menu, <code class="language-jython highlight"><span class="o">&gt;</span></code> one-liner Python</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code class="language-jython highlight"><span class="n">JLV5port3</span></code></td>
-<td>Arduino UART passthrough</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code class="language-jython highlight"><span class="n">JLV5port5</span></code></td>
-<td>MicroPython Raw REPL — <strong>what this skill uses</strong></td>
-</tr>
-<tr>
-<td>7</td>
-<td><code class="language-jython highlight"><span class="n">JLV5port7</span></code></td>
-<td>USBSer3 read-only machine backchannel (<code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> YAML, <code class="language-jython highlight"><span class="p">:</span><span class="n">gpio</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">leds</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">adc</span></code>, …)</td>
-</tr>
-</tbody>
-</table>
+<p>The four ports and what each one carries are listed on the
+<a href="../07.5-automation/">Automation overview</a>.</p>
 <ul>
 <li><strong>REPL (port 5) is primary</strong> — <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">detect</span><span class="o">/</span><span class="n">exec</span><span class="o">/</span><span class="n">state</span><span class="o">/</span><span class="n">fs</span><span class="o">/</span><span class="n">guide</span></code>.</li>
 <li><strong>Port 7 (USBSer3)</strong> is an optional fast, read-only telemetry channel: send
@@ -284,8 +263,8 @@ primary transport for everything below.</p>
 </tr>
 <tr>
 <td><strong>Voltage measurement</strong></td>
-<td><code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span></code> with <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code> (±8V), <code class="language-jython highlight"><span class="no no-Jumperless">ADC4</span></code> (5V), <code class="language-jython highlight"><span class="no no-Jumperless">ADC7</span></code>/<code class="language-jython highlight"><span class="no no-Jumperless">PROBE</span></code></td>
-<td>Checking node voltages; always route ADC to node first</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span></code> with a channel number 0–7 (0–3 breadboard ±8V, 4 = 0–5V, 5 = probe pad, 7 = probe tip)</td>
+<td>Checking node voltages; route <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code> to the node with <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> first</td>
 </tr>
 <tr>
 <td><strong>Current measurement</strong></td>
@@ -407,7 +386,10 @@ primary transport for everything below.</p>
 <span class="linenos" data-linenos="8 "></span><span class="s">PYEOF</span>
 </code></pre></div>
 <p>For complex logic, <strong>write a temporary .py file</strong> and use <code class="language-jython highlight"><span class="o">--</span><span class="n">file</span></code>. Do not cram long multi-line logic into shell-quoted one-liners.</p>
-<p>Use <code class="language-jython highlight"><span class="o">--</span><span class="n">timeout</span> <span class="n">N</span></code> when scripts take longer than the default 8 seconds (e.g. continuous monitors, guided flows).</p>
+<p>Use <code class="language-jython highlight"><span class="o">--</span><span class="n">timeout</span> <span class="n">N</span></code> when scripts take longer than the default (8 seconds for
+<code class="language-jython highlight"><span class="n">exec</span></code>; <code class="language-jython highlight"><span class="n">guide</span></code> defaults to 120, <code class="language-jython highlight"><span class="n">state</span></code> to 5, <code class="language-jython highlight"><span class="n">fs</span></code> to 10). <code class="language-jython highlight"><span class="n">detect</span> <span class="o">--</span><span class="n">roles</span></code>
+lists all four CDC interfaces labeled by role, and <code class="language-jython highlight"><span class="n">exec</span> <span class="o">--</span><span class="n">soft</span><span class="o">-</span><span class="n">reboot</span></code>
+soft-reboots into the raw REPL before running your code.</p>
 <h2 id="updating-a-running-script">Updating a running script</h2>
 <p>Loop scripts run <strong>on the device</strong> in MicroPython. The host <code class="language-jython highlight"><span class="n">exec</span></code> process exits as soon as it finishes sending the script — the serial port is already free. The MicroPython loop keeps running on the Jumperless itself.</p>
 <p>To stop it and send a new version:</p>
@@ -461,23 +443,24 @@ The interrupted script may have left connections, overlays, or OLED content mid-
 <p>Breadboard row N → overlay col N (top half, N 1–30) or col N−30 (bottom half, N 31–60).
 The 5 holes A–E in each strip correspond to overlay rows 1–5 (top) or 6–10 (bottom).</p>
 <h3 id="placement-patterns">Placement patterns</h3>
-<p><strong>Single component / pin — use <code class="language-jython highlight"><span class="n">place_here</span><span class="p">()</span></code> + <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>:</strong></p>
+<p><strong>Single component / pin — use <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span><span class="p">()</span></code> + <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>:</strong></p>
+<p>Column comes first, row second, in both overlay calls.</p>
 <div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="linenos" data-linenos=" 2 "></span>
 <span class="linenos" data-linenos=" 3 "></span><span class="c1"># Mark a single hole bright red, tell user on OLED</span>
-<span class="linenos" data-linenos=" 4 "></span><span class="n">overlay_set_pixel</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>          <span class="c1"># direct: row 3, col 10</span>
-<span class="linenos" data-linenos=" 5 "></span><span class="c1"># — or using animations helper if loaded —</span>
-<span class="linenos" data-linenos=" 6 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;target_pin&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;target_pin&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mh">0xFF2020</span><span class="p">])</span>   <span class="c1"># col 10, row 3, 1 high, 1 wide</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># — or without a name —</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">overlay_set_pixel</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
 <span class="linenos" data-linenos=" 7 "></span>
 <span class="linenos" data-linenos=" 8 "></span><span class="n">oled_clear</span><span class="p">()</span>
 <span class="linenos" data-linenos=" 9 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Place R1 pin 1&quot;</span><span class="p">)</span>
 <span class="linenos" data-linenos="10 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Row 10, top half&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>IC spanning multiple rows — use <code class="language-jython highlight"><span class="n">highlight_range</span><span class="p">()</span></code> for the body, <code class="language-jython highlight"><span class="n">place_here</span><span class="p">()</span></code> per pin:</strong></p>
+<p><strong>IC spanning multiple rows — use <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span><span class="p">()</span></code> for the body, one pixel per pin:</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># IC body across breadboard rows 5-12 (top half → overlay cols 5-12)</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">highlight_range</span><span class="p">(</span><span class="s2">&quot;ic_body&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mh">0x203030</span><span class="p">)</span>   <span class="c1"># single overlay row, cols 5-12</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;ic_body&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="p">[</span><span class="mh">0x203030</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span>   <span class="c1"># col 5, row 1, 1 high, 8 wide</span>
 <span class="linenos" data-linenos="3 "></span><span class="c1"># Pin 1 marker</span>
-<span class="linenos" data-linenos="4 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;ic_pin1&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;ic_pin1&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mh">0xFF2020</span><span class="p">])</span>
 <span class="linenos" data-linenos="5 "></span>
 <span class="linenos" data-linenos="6 "></span><span class="n">oled_clear</span><span class="p">()</span>
 <span class="linenos" data-linenos="7 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Place 555 timer&quot;</span><span class="p">)</span>
@@ -485,18 +468,19 @@ The 5 holes A–E in each strip correspond to overlay rows 1–5 (top) or 6–10
 </code></pre></div>
 <p><strong>Span of rows (e.g. resistor leg to leg):</strong></p>
 <div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Highlight rows 5 and 15 where resistor legs go</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;r1_a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mh">0xFF8000</span><span class="p">)</span>
-<span class="linenos" data-linenos="3 "></span><span class="n">place_here</span><span class="p">(</span><span class="s2">&quot;r1_b&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mh">0xFF8000</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;r1_a&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mh">0xFF8000</span><span class="p">])</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;r1_b&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mh">0xFF8000</span><span class="p">])</span>
 <span class="linenos" data-linenos="4 "></span>
 <span class="linenos" data-linenos="5 "></span><span class="n">oled_clear</span><span class="p">()</span>
 <span class="linenos" data-linenos="6 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Place R1: row 5 to 15&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Removal / "move this wire":</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Use a different color (e.g. red pulsing) to mark what to remove</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">highlight_row</span><span class="p">(</span><span class="s2">&quot;remove_wire&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mh">0xFF2020</span><span class="p">)</span>
-<span class="linenos" data-linenos="3 "></span>
-<span class="linenos" data-linenos="4 "></span><span class="n">oled_clear</span><span class="p">()</span>
-<span class="linenos" data-linenos="5 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Remove wire at row 3&quot;</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Use a different color (e.g. red) to mark what to remove</span>
+<span class="linenos" data-linenos="2 "></span><span class="c1"># Breadboard row 3 is overlay col 3, 5 holes tall</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">overlay_set</span><span class="p">(</span><span class="s2">&quot;remove_wire&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mh">0xFF2020</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_clear</span><span class="p">()</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;Remove wire at row 3&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="always-clear-overlays-after-confirmation">Always clear overlays after confirmation</h3>
 <p>After the user confirms placement (probe button, clickwheel, or verbal confirmation), clear the guidance overlays so they don't obscure net colors:</p>
@@ -522,7 +506,7 @@ The 5 holes A–E in each strip correspond to overlay rows 1–5 (top) or 6–10
 <li>Read: <code class="language-jython highlight"><span class="n">reference</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">measurements</span><span class="o">-</span><span class="n">power</span><span class="o">.</span><span class="n">md</span></code></li>
 <li>For reusable patterns: <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">measurements</span><span class="o">.</span><span class="n">py</span></code>, <code class="language-jython highlight"><span class="n">measureR</span><span class="o">.</span><span class="n">py</span></code></li>
 <li>
-<p>Always account for crossbar series resistance (20–40Ω default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, ~80Ω with <code class="language-jython highlight"><span class="n">duplicates</span><span class="o">=</span><span class="mi">0</span></code>) and 2Ω ISENSE shunt</p>
+<p>Always account for crossbar series resistance (20–40Ω default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, ~80Ω with a single path — <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></code>) and 2Ω ISENSE shunt</p>
 </li>
 <li>
 <p><strong>Visual guidance (LEDs, OLED)</strong> — mandatory any time you ask for physical action</p>
@@ -588,12 +572,12 @@ For transport/hanging issues, load <code class="language-jython highlight"><span
 </code></pre></div>
 <h3 id="hardware-constraints-to-remember">Hardware constraints to remember</h3>
 <ul>
-<li>Crossbar path resistance: ~80Ω with <code class="language-jython highlight"><span class="n">duplicates</span><span class="o">=</span><span class="mi">0</span></code> (single path); ~20–40Ω with default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> (firmware stacks paths in parallel)</li>
+<li>Crossbar path resistance: ~80Ω with a single path (<code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></code> — the third positional argument is the stacking count); ~20–40Ω with default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> (firmware stacks paths in parallel)</li>
 <li>ISENSE shunt: 2Ω (ISENSE_PLUS and ISENSE_MINUS are always connected through it)</li>
 <li>DAC/rail range: approximately ±8V</li>
 <li>ADC0–ADC3: ±8V range; ADC4: 5V range; ADC7/PROBE: probe channel</li>
 <li>Signal bandwidth: ~8MHz through crossbar, ~13MHz 3dB on breadboard</li>
-<li>Firmware refuses dangerous connections (e.g. TOP_RAIL directly to GND)</li>
+<li>Firmware refuses dangerous connections (e.g. TOP_RAIL directly to GND), but silently — <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> returns nothing either way, so check with <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">()</span></code> or <code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code></li>
 <li>Firmware cannot see user-placed external wires — always ask or verify</li>
 </ul>
 <h2 id="electronics-reference">Electronics reference</h2>

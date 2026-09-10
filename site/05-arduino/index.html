@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -158,6 +158,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -174,7 +178,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -182,7 +194,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -230,25 +250,29 @@
                 <h1 id="arduino-stuff">Arduino Stuff</h1>
 <h2 id="uart-passthrough">UART Passthrough</h2>
 <p>With an Arduino Nano in the header and the UART lines connected, anything on those lines should be passed through to the second serial port that shows up when you plug in your Jumperless. </p>
-<p>(You can also set the config option <code class="language-jython highlight"><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span> <span class="n">print_passthrough</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span></code> and have it print on both. Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.</p>
+<p>Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.</p>
+<p>The Nano goes in the header socket on the board, and every signal pin on that header is a routable node - <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> through <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code> through <code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">AREF</span></code> and <code class="language-jython highlight"><span class="n">RESET</span></code>. You can connect any of them to a breadboard row or a rail just like anything else. The power pins (<code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code>, <code class="language-jython highlight"><span class="mi">3</span><span class="n">V3</span></code>, <code class="language-jython highlight"><span class="n">VIN</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>) aren't routable. <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code> are the only ones that ever get wired up for you.</p>
 <p><img width="360" alt="Screenshot 2025-05-19 at 11 07 55 AM" src="https://github.com/user-attachments/assets/2b255e34-0d0a-4e86-b577-d59c9561fa42" /></p>
 <h2 id="quick-connection-shortcuts">Quick Connection Shortcuts</h2>
-<p>The shortcuts to connect <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code> to the Jumperless's UART <code class="language-jython highlight"><span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code> is <code class="language-jython highlight"><span class="n">A</span></code> to connect, and <code class="language-jython highlight"><span class="n">a</span></code> to disconnect.</p>
+<p>The shortcuts to connect <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code> to the Jumperless's UART <code class="language-jython highlight"><span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code> is <code class="language-jython highlight"><span class="n">A</span></code> to connect, and <code class="language-jython highlight"><span class="n">a</span></code> to disconnect. Add a <code class="language-jython highlight"><span class="err">?</span></code> to ask instead of doing - <code class="language-jython highlight"><span class="n">A</span><span class="err">?</span></code> tells you whether the UART is routed and whether a Nano is there, <code class="language-jython highlight"><span class="n">a</span><span class="err">?</span></code> just whether it's routed.</p>
+<p><code class="language-jython highlight"><span class="n">r</span></code> resets the Nano. <code class="language-jython highlight"><span class="n">rt</span></code> and <code class="language-jython highlight"><span class="n">rb</span></code> pick which <code class="language-jython highlight"><span class="n">RESET</span></code> pad to pulse, and <code class="language-jython highlight"><span class="n">r2</span></code> does both.</p>
+<p>You don't need <code class="language-jython highlight"><span class="n">A</span></code> before an upload, flashing routes the UART for you. It's only there for talking to the sketch afterwards if you'd disconnected it.</p>
 <h2 id="automatic-flashing">Automatic Flashing</h2>
 <p>It will even sense when Arduino IDE is trying to upload code and twiddle the reset lines to allow you to flash code with just a single USB cable going to your Jumperless.</p>
-<p><img alt="" src="docs/assets/arduinoPort.png" /></p>
+<p>That reset twiddling is set up for a classic AVR Nano. If you've got a Nano ESP32 in the header, set the <code class="language-jython highlight"><span class="p">[</span><span class="n">serial_1</span><span class="p">]</span></code> config key <code class="language-jython highlight"><span class="n">flash_reset_type</span></code> to <code class="language-jython highlight"><span class="n">esp32</span></code> or the upload will never get it into the bootloader.</p>
+<p><img alt="" src="../assets/arduinoPort.png" /></p>
 <!-- <img width="1277" alt="Screenshot 2025-05-19 at 11 09 38 AM" src="https://github.com/user-attachments/assets/625ebf79-7308-4abb-a321-f1bf1f713d4f" />  -->
 
 <p><strong>Tip:</strong> You can also use <a href="https://wokwi.com">Wokwi</a> with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open</p>
 <hr />
 <h2 id="commands-from-routable-uart">Commands from Routable UART</h2>
-<p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The tags are stripped out and the command is executed - the Arduino never sees them come back.</p>
+<p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The command inside the tags gets executed. The tagged text still shows up on the passthrough port along with everything else your Arduino prints, it doesn't get stripped out - but it's never echoed back down the UART to the Arduino.</p>
 <h3 id="two-types-of-tags">Two Types of Tags</h3>
 <p>There are two flavors of command tags, depending on what you want to do:</p>
 <h4 id="tags-raw-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags - Raw Commands</h4>
-<p>These run exactly like you typed them in the main Jumperless menu. Use these for things like making connections with <code class="language-jython highlight"><span class="n">f</span></code>, loading files, or any single-character menu command.</p>
+<p>These run exactly like you typed them in the main Jumperless menu. Use these for things like making connections with <code class="language-jython highlight"><span class="n">f</span></code>, loading files, or any single-character menu command. They don't send anything back to the Arduino.</p>
 <h4 id="tags-python-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> Tags - Python Commands</h4>
-<p>These run MicroPython commands directly. Perfect for <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, and all the other Python hardware functions. The <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tag automatically prepends the <code class="language-jython highlight"><span class="o">&gt;</span></code> that normally tells the Jumperless "this is a Python command."</p>
+<p>These run MicroPython commands directly. Perfect for <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, and all the other Python hardware functions. The <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> tag automatically prepends the <code class="language-jython highlight"><span class="o">&gt;</span></code> that normally tells the Jumperless "this is a Python command." A <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> command sends back exactly what it prints and nothing else, so wrap anything you want to read in <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code>.</p>
 <h3 id="supported-tag-names">Supported Tag Names</h3>
 <p>Any of these work (use matching opening and closing tags):</p>
 <table>
@@ -273,7 +297,7 @@
 </tr>
 <tr>
 <td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code></td>
-<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span></code></td>
+<td><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nb">print</span><span class="p">(</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -292,7 +316,7 @@
 <span class="linenos" data-linenos=" 9 "></span><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos" data-linenos="10 "></span><span class="w">  </span><span class="c1">// Read voltage on ADC channel 0</span>
 <span class="linenos" data-linenos="11 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
-<span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;adc_get(0)&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="12 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;print(adc_get(0))&quot;</span><span class="p">);</span>
 <span class="linenos" data-linenos="13 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
 <span class="linenos" data-linenos="14 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 <span class="linenos" data-linenos="15 "></span>
@@ -346,7 +370,7 @@
 <span class="linenos" data-linenos="34 "></span>
 <span class="linenos" data-linenos="35 "></span><span class="w">  </span><span class="c1">// Read the voltage</span>
 <span class="linenos" data-linenos="36 "></span><span class="w">  </span><span class="n">OPENJCOMMAND</span>
-<span class="linenos" data-linenos="37 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;adc_get(0)&quot;</span><span class="p">);</span>
+<span class="linenos" data-linenos="37 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;print(adc_get(0))&quot;</span><span class="p">);</span>
 <span class="linenos" data-linenos="38 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
 <span class="linenos" data-linenos="39 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
 <span class="linenos" data-linenos="40 "></span>
@@ -376,7 +400,7 @@
 <span class="linenos" data-linenos=" 5 "></span><span class="s">&quot;nodes_clear()&quot;</span><span class="w">               </span><span class="c1">// Clear ALL connections</span>
 <span class="linenos" data-linenos=" 6 "></span>
 <span class="linenos" data-linenos=" 7 "></span><span class="c1">// Analog I/O</span>
-<span class="linenos" data-linenos=" 8 "></span><span class="s">&quot;adc_get(0)&quot;</span><span class="w">                  </span><span class="c1">// Read voltage (channels 0-4)</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="s">&quot;adc_get(0)&quot;</span><span class="w">                  </span><span class="c1">// Read voltage (channels 0-7, 0-3 are the routable ones)</span>
 <span class="linenos" data-linenos=" 9 "></span><span class="s">&quot;dac_set(0, 3.3)&quot;</span><span class="w">            </span><span class="c1">// Set DAC output voltage</span>
 <span class="linenos" data-linenos="10 "></span><span class="s">&quot;dac_set(TOP_RAIL, 5.0)&quot;</span><span class="w">     </span><span class="c1">// Set rail voltage</span>
 <span class="linenos" data-linenos="11 "></span>
@@ -387,7 +411,7 @@
 <span class="linenos" data-linenos="16 "></span>
 <span class="linenos" data-linenos="17 "></span><span class="c1">// Current sensing</span>
 <span class="linenos" data-linenos="18 "></span><span class="s">&quot;ina_get_current(0)&quot;</span><span class="w">         </span><span class="c1">// Read current in amps</span>
-<span class="linenos" data-linenos="19 "></span><span class="s">&quot;ina_get_voltage(0)&quot;</span><span class="w">         </span><span class="c1">// Read shunt voltage</span>
+<span class="linenos" data-linenos="19 "></span><span class="s">&quot;ina_get_voltage(0)&quot;</span><span class="w">         </span><span class="c1">// Read bus voltage at the current sensor</span>
 </code></pre></div>
 <p>See the <a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a> for the complete list.</p>
 <hr />
@@ -423,17 +447,8 @@
 <span class="linenos" data-linenos="27 "></span><span class="w">  </span><span class="n">CLOSEJCOMMAND</span>
 <span class="linenos" data-linenos="28 "></span><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="n">delayTime</span><span class="p">);</span>
 <span class="linenos" data-linenos="29 "></span>
-<span class="linenos" data-linenos="30 "></span><span class="w">  </span><span class="c1">// Read any response</span>
-<span class="linenos" data-linenos="31 "></span><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">response</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-<span class="linenos" data-linenos="32 "></span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="linenos" data-linenos="33 "></span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">Serial</span><span class="p">.</span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">29</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos" data-linenos="34 "></span><span class="w">    </span><span class="n">response</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Serial</span><span class="p">.</span><span class="n">read</span><span class="p">();</span>
-<span class="linenos" data-linenos="35 "></span><span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-<span class="linenos" data-linenos="36 "></span><span class="w">  </span><span class="p">}</span>
-<span class="linenos" data-linenos="37 "></span>
-<span class="linenos" data-linenos="38 "></span><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
-<span class="linenos" data-linenos="39 "></span><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
-<span class="linenos" data-linenos="40 "></span><span class="p">}</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span>
+<span class="linenos" data-linenos="31 "></span><span class="p">}</span>
 </code></pre></div>
 <h3 id="useful-raw-commands">Useful Raw Commands</h3>
 <table>
@@ -464,10 +479,6 @@
 <td><code class="language-jython highlight"><span class="n">n</span></code></td>
 <td>Show net list</td>
 </tr>
-<tr>
-<td><code class="language-jython highlight"><span class="n">s</span></code></td>
-<td>Save current state</td>
-</tr>
 </tbody>
 </table>
 <hr />
@@ -475,7 +486,7 @@
 <h3 id="timing">Timing</h3>
 <p>The Jumperless needs a little time to process each command. A delay of 40-100ms between commands is usually safe. If you're seeing weird behavior, try increasing the delay.</p>
 <h3 id="response-reading">Response Reading</h3>
-<p>Commands often return data (like <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code> returning a voltage). Make sure to read the Serial buffer after sending commands, or it'll fill up and cause issues.</p>
+<p>Only <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code> commands send anything back, and only what they print - <code class="language-jython highlight"><span class="nb">print</span><span class="p">(</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></code> gets you a voltage, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></code> on its own gets you nothing. <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> commands are fire-and-forget from the Arduino's side. Make sure to read the Serial buffer after a command that does return data, or it'll fill up and cause issues.</p>
 <h3 id="startup-delay">Startup Delay</h3>
 <p>Add a <code class="language-jython highlight"><span class="n">delay</span><span class="p">(</span><span class="mi">1500</span><span class="p">)</span></code> in your <code class="language-jython highlight"><span class="n">setup</span><span class="p">()</span></code> to give the Jumperless time to fully boot before sending commands.</p>
 <h3 id="flashing-your-arduino">Flashing Your Arduino</h3>
@@ -483,7 +494,7 @@
 <h3 id="which-tag-to-use">Which Tag to Use?</h3>
 <ul>
 <li><strong>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span></code></strong> for anything that's a Python function: <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, etc.</li>
-<li><strong>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code></strong> for menu commands: <code class="language-jython highlight"><span class="n">f</span></code>, <code class="language-jython highlight"><span class="n">x</span></code>, <code class="language-jython highlight"><span class="n">n</span></code>, <code class="language-jython highlight"><span class="n">s</span></code>, etc.</li>
+<li><strong>Use <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code></strong> for menu commands: <code class="language-jython highlight"><span class="n">f</span></code>, <code class="language-jython highlight"><span class="n">x</span></code>, <code class="language-jython highlight"><span class="n">n</span></code>, etc.</li>
 </ul>
 <hr />
 <h2 id="wokwi-integration">Wokwi Integration</h2>

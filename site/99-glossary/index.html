@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -102,6 +102,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -118,7 +122,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -126,7 +138,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -197,37 +217,24 @@
 <p><code class="language-jython highlight"><span class="n">chip</span></code> = shorthand for the CH446Qs specifically, lettered A-L. The first 8 (A-H) are considered "breadboard <code class="language-jython highlight"><span class="n">chips</span></code>", and the last 4 (I-L) are considered "special function" chips (enter <code class="language-jython highlight"><span class="n">c</span></code> to see their connections)</p>
 <p><code class="language-jython highlight"><span class="n">menu</span></code> = I generally mean the onboard clickwheel <code class="language-jython highlight"><span class="n">menu</span></code> when I say this (<code class="language-jython highlight"><span class="n">click</span></code> the wheel to enter those and <code class="language-jython highlight"><span class="n">scroll</span></code> around.) Sometimes I mean the <code class="language-jython highlight"><span class="n">main</span> <span class="n">menu</span></code> which is the list of single character command that gets presented over serial.</p>
 <h2 id="slots-and-files">Slots and Files</h2>
-<p><code class="language-jython highlight"><span class="n">slot</span></code> = one of <strong>8</strong> saved circuit configurations (slots 0-7) that you can switch between. Use <code class="language-jython highlight"><span class="o">&lt;</span></code> to cycle forward through slots, or use the menus to jump to a specific slot. The <strong>active slot</strong> is the one currently loaded and affecting the hardware.</p>
-<p><code class="language-jython highlight"><span class="n">slot</span> <span class="n">file</span></code> = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at <code class="language-jython highlight"><span class="o">/</span><span class="n">slots</span><span class="o">/</span><span class="n">slotN</span><span class="o">.</span><span class="n">yaml</span></code> where N is 0-7. These files are human-readable and can be edited directly!</p>
-<p><code class="language-jython highlight"><span class="n">active</span> <span class="n">slot</span></code> = the currently loaded slot. Only the active slot affects the hardware. Use <code class="language-jython highlight"><span class="n">Q</span></code> command to query which slot is active. When you make connections with the probe, they're saved to the active slot automatically.</p>
+<p><code class="language-jython highlight"><span class="n">slot</span></code> = one of <strong>8</strong> saved circuit configurations (slots 0-7) that you can switch between. Type <code class="language-jython highlight"><span class="o">&lt;</span></code> to cycle forward through slots or <code class="language-jython highlight"><span class="o">&lt;</span><span class="mi">5</span></code> to jump straight to one, or on the clickwheel use <code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Load</span></code> &gt; <code class="language-jython highlight"><span class="mi">0</span><span class="o">-</span><span class="mi">7</span></code> (it previews each one as you scroll). <code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span></code> &gt; <code class="language-jython highlight"><span class="mi">0</span><span class="o">-</span><span class="mi">7</span></code> copies the active slot into another, and <code class="language-jython highlight"><span class="n">Slots</span></code> &gt; <code class="language-jython highlight"><span class="n">Clear</span></code> &gt; <code class="language-jython highlight"><span class="mi">0</span><span class="o">-</span><span class="mi">7</span></code> empties one.</p>
+<p><code class="language-jython highlight"><span class="n">slot</span> <span class="n">file</span></code> = a YAML file on the filesystem that stores a complete circuit configuration including bridges, power settings, and colors. Located at <code class="language-jython highlight"><span class="o">/</span><span class="n">slots</span><span class="o">/</span><span class="n">slotN</span><span class="o">.</span><span class="n">yaml</span></code> where N is 0-7. These files are human-readable and can be edited directly! See <a href="../06-config/#state-file-structure">State File Structure</a> for what's in one.</p>
+<p><code class="language-jython highlight"><span class="n">active</span> <span class="n">slot</span></code> = the context that's actually loaded onto the hardware. Usually that's one of the numbered slots, but it can also be a project's <code class="language-jython highlight"><span class="n">wiring</span><span class="o">.</span><span class="n">yaml</span></code> opened from the Files browser or with <code class="language-jython highlight"><span class="n">z</span> <span class="o">&lt;</span><span class="n">project</span><span class="o">&gt;</span></code>. Enter <code class="language-jython highlight"><span class="n">Q</span></code> to see which. When you make connections with the probe, they're saved to whatever's active automatically.</p>
 <h2 id="slot-management-commands">Slot Management Commands</h2>
 <ul>
-<li><code class="language-jython highlight"><span class="o">&lt;</span></code> = cycle to next slot (0→1→2...→7→0)</li>
-<li><code class="language-jython highlight"><span class="n">Q</span></code> = query which slot is currently active (returns <code class="language-jython highlight"><span class="n">ACTIVE_SLOT</span><span class="p">:</span><span class="n">X</span></code>)</li>
-<li><code class="language-jython highlight"><span class="n">Y</span></code> = print YAML</li>
+<li><code class="language-jython highlight"><span class="o">&lt;</span></code> = cycle to next slot (0→1→2...→7→0), or <code class="language-jython highlight"><span class="o">&lt;</span><span class="n">N</span></code> (e.g. <code class="language-jython highlight"><span class="o">&lt;</span><span class="mi">5</span></code>) to jump straight to slot N. From a project file, a bare <code class="language-jython highlight"><span class="o">&lt;</span></code> goes to slot 0.</li>
+<li><code class="language-jython highlight"><span class="n">Q</span></code> = query which context is active. It prints <code class="language-jython highlight"><span class="n">ACTIVE_SLOT</span><span class="p">:</span><span class="n">N</span></code> and then <code class="language-jython highlight"><span class="n">ACTIVE_PATH</span><span class="p">:</span><span class="o">/</span><span class="n">slots</span><span class="o">/</span><span class="n">slotN</span><span class="o">.</span><span class="n">yaml</span></code>. With a project file loaded the slot is <code class="language-jython highlight"><span class="o">-</span><span class="mi">1</span></code> and the path is that file's.</li>
+<li><code class="language-jython highlight"><span class="n">Y</span></code> = print YAML (<code class="language-jython highlight"><span class="n">Y0</span></code> plain, <code class="language-jython highlight"><span class="n">Y1</span></code> colored with hex values, <code class="language-jython highlight"><span class="n">Y2</span></code> colored blocks, which is the default)</li>
+<li><code class="language-jython highlight"><span class="n">S</span></code> = paste a YAML state back in, in the same format <code class="language-jython highlight"><span class="n">Y</span></code> prints. End the paste with an empty line and it's applied right away.</li>
 </ul>
 <h2 id="yaml-format">YAML Format</h2>
-<p>Slot files use YAML format with named nodes for readability:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nt">bridges</span><span class="p">:</span>
-<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="nt"> color</span><span class="p">:</span><span class="w"> </span><span class="nv">red</span><span class="p p-Indicator">}</span>
-<span class="linenos" data-linenos="3 "></span><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt">n1</span><span class="p">:</span><span class="w"> </span><span class="nv">NANO_D5</span><span class="p p-Indicator">,</span><span class="nt"> n2</span><span class="p">:</span><span class="w"> </span><span class="nv">GP_1</span><span class="p p-Indicator">,</span><span class="nt"> dup</span><span class="p">:</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">}</span>
-<span class="linenos" data-linenos="4 "></span>
-<span class="linenos" data-linenos="5 "></span><span class="nt">power</span><span class="p">:</span>
-<span class="linenos" data-linenos="6 "></span><span class="w">  </span><span class="nt">topRail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.30</span>
-<span class="linenos" data-linenos="7 "></span><span class="w">  </span><span class="nt">bottomRail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.50</span>
-</code></pre></div>
+<p>Slot files use YAML format with named nodes for readability. <a href="../06-config/#state-file-structure">State File Structure</a> has a full example of one.</p>
+<p><code class="language-jython highlight"><span class="n">dup</span></code> is an optional per-bridge override of how many parallel crosspoint paths get stacked for that one connection, like <code class="language-jython highlight"><span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="no no-Jumperless">NANO_D5</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="n">GP_1</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span></code>. Leave it out and you get the default from the <code class="language-jython highlight"><span class="p">[</span><span class="n">routing</span><span class="p">]</span></code> <code class="language-jython highlight"><span class="n">stack_paths</span></code> key (2), with <code class="language-jython highlight"><span class="n">stack_rails</span></code> (3), <code class="language-jython highlight"><span class="n">stack_gpio</span></code> (0), <code class="language-jython highlight"><span class="n">stack_adcs</span></code> (0) and <code class="language-jython highlight"><span class="n">stack_dacs</span></code> (0) covering those classes. <code class="language-jython highlight"><span class="n">color</span><span class="p">:</span></code> is optional too, and takes a color name, <code class="language-jython highlight"><span class="mi">0</span><span class="n">xRRGGBB</span></code>, or <code class="language-jython highlight"><span class="c1">#RRGGBB</span></code>.</p>
 <p><strong>Named nodes:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">NANO_D0</span><span class="o">-</span><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">NANO_A0</span><span class="o">-</span><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">GP_1</span><span class="o">-</span><span class="mi">8</span></code> (or <code class="language-jython highlight"><span class="n">RP_GPIO_1</span><span class="o">-</span><span class="mi">8</span></code>), <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code>, etc. (Note these differ from the MicroPython constants - <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code> and <code class="language-jython highlight"><span class="n">DAC0_5V</span></code> won't parse in slot files.)</p>
 <p>You can view and edit these files in the <a href="../08-file-manager/">File Manager</a> or via USB Mass Storage mode (<code class="language-jython highlight"><span class="n">U</span></code> command).</p>
 <h2 id="wokwi-import">Wokwi Import</h2>
-<p><code class="language-jython highlight"><span class="n">W</span></code> = Import circuit from <a href="https://wokwi.com">Wokwi</a> simulator</p>
-<ol>
-<li>Design circuit on wokwi.com</li>
-<li>Copy <code class="language-jython highlight"><span class="n">diagram</span><span class="o">.</span><span class="n">json</span></code> content</li>
-<li>Type <code class="language-jython highlight"><span class="n">W</span></code> in Jumperless</li>
-<li>Paste JSON content</li>
-<li>Circuit is converted and saved to active slot</li>
-</ol>
-<p>The parser automatically maps Wokwi breadboard pins, Arduino Nano pins, and logic analyzer channels to Jumperless nodes, and preserves your wire colors from Wokwi!</p>
+<p><code class="language-jython highlight"><span class="n">W</span></code> = import a circuit from the <a href="https://wokwi.com">Wokwi</a> simulator into the active slot. <code class="language-jython highlight"><span class="n">W</span> <span class="mi">3</span></code> imports into slot 3 instead (written to its file, hardware untouched unless 3 is the active one), <code class="language-jython highlight"><span class="n">W</span> <span class="n">diagram</span><span class="o">.</span><span class="n">json</span></code> reads a diagram already on the filesystem, and <code class="language-jython highlight"><span class="n">W</span> <span class="n">diagram</span><span class="o">.</span><span class="n">json</span> <span class="mi">3</span></code> does both. When you're pasting, it knows you're done when the closing brace arrives.</p>
+<p>The whole walkthrough is on the <a href="../03-app/#importing-circuits-from-wokwi">app page</a>.</p>
               
             </div>
           </div><footer>

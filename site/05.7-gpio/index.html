@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/05.7-gpio/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/05.7-gpio/">
+    <meta property="og:title" content="GPIO & BCD Counter - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/05.7-gpio/">
+    <meta name="twitter:title" content="GPIO & BCD Counter - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/05.7-gpio/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>GPIO & BCD Counter - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">GPIO & BCD Counter</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#set-up-a-pin">Set up a pin</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-counter">The counter</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#counting">Counting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#range">Range</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#counting-with-the-logo-pads">Counting with the logo pads</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#choosing-a-gpio-on-the-oled">Choosing a GPIO on the OLED</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#whats-saved">What's saved</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">GPIO & BCD Counter</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="gpio">GPIO</h1>
+<p>The ten routable GPIOs (<code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code>-<code class="language-jython highlight"><span class="mi">8</span></code> plus the UART <code class="language-jython highlight"><span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code> pins) can be set up from the board itself, no terminal needed: direction, pull resistors, PWM, and a counter that drives a group of them as one number. All of it shows on the OLED and the terminal. Nothing here paints the breadboard, so the LEDs keep showing your circuit.</p>
+<p>To <em>connect</em> a GPIO to a row, use the <code class="language-jython highlight"><span class="n">GPIO</span></code> pad by the logo while probing (see <a href="../01-getting-started/#special-functions">Getting Started</a>). This page is about what the pin does once it's connected.</p>
+<h2 id="set-up-a-pin">Set up a pin</h2>
+<p>Two ways in:</p>
+<p><strong>Highlight it and click.</strong> Land the highlight on a <code class="language-jython highlight"><span class="n">row</span></code> that has a GPIO on it (scroll there with the wheel, or tap it with the probe). The OLED shows the pin and its level, like <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">3</span> <span class="n">out</span></code> / <code class="language-jython highlight"><span class="no no-Jumperless">HIGH</span></code>, with an <code class="language-jython highlight"><span class="n">options</span><span class="err">?</span></code> tag. While that tag is showing, <code class="language-jython highlight"><span class="n">click</span></code> the wheel and the pin's options open. The tag goes away after a second, and a click after that just opens the regular menu. Turning the wheel only ever scrolls, so you can scroll right past a GPIO row without opening anything. This one needs an OLED.</p>
+<p><strong>From the menu.</strong> <code class="language-jython highlight"><span class="n">Click</span></code> &gt; <code class="language-jython highlight"><span class="n">GPIO</span></code> &gt; <code class="language-jython highlight"><span class="n">Set</span> <span class="n">Pins</span></code> lists all ten pins with what they're doing right now: <code class="language-jython highlight"><span class="mi">3</span>  <span class="n">out</span> <span class="no no-Jumperless">HIGH</span></code>, <code class="language-jython highlight"><span class="mi">5</span>  <span class="ow">in</span>  <span class="n">pull</span><span class="o">-</span><span class="n">up</span></code>, <code class="language-jython highlight"><span class="mi">2</span>  <span class="n">PWM</span> <span class="mf">1.0</span><span class="n">k</span></code>, <code class="language-jython highlight"><span class="n">Tx</span>  <span class="n">UART</span></code>. Pick one.</p>
+<p>Either way you get the same options. Turn to move between them, <code class="language-jython highlight"><span class="n">click</span></code> to edit one, <code class="language-jython highlight"><span class="n">hold</span></code> to leave. The probe buttons work too: <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> is <code class="language-jython highlight"><span class="n">click</span></code>, <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> is <code class="language-jython highlight"><span class="n">hold</span></code>.</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">Dir</span></code> - <code class="language-jython highlight"><span class="ow">in</span></code> or <code class="language-jython highlight"><span class="n">out</span></code></li>
+<li><code class="language-jython highlight"><span class="n">Pulls</span></code> - <code class="language-jython highlight"><span class="n">down</span></code>, <code class="language-jython highlight"><span class="n">up</span></code>, <code class="language-jython highlight"><span class="n">none</span></code>, or <code class="language-jython highlight"><span class="n">keep</span></code>. On an input it takes effect right away. On an output it's remembered for when the pin becomes an input.</li>
+<li><code class="language-jython highlight"><span class="n">PWM</span></code> - <code class="language-jython highlight"><span class="n">on</span></code> or <code class="language-jython highlight"><span class="n">off</span></code>. Turning it on gives you <code class="language-jython highlight"><span class="n">Freq</span></code> and <code class="language-jython highlight"><span class="n">Duty</span></code> to set with the wheel, and the pin changes live while you turn. <code class="language-jython highlight"><span class="n">Click</span></code> keeps what you landed on, <code class="language-jython highlight"><span class="n">hold</span></code> puts the old value back and drops you on the <code class="language-jython highlight"><span class="n">Freq</span></code> / <code class="language-jython highlight"><span class="n">Duty</span></code> picker (so it's one more <code class="language-jython highlight"><span class="n">hold</span></code> to get out of PWM than the others). Not offered on <code class="language-jython highlight"><span class="n">Tx</span></code> / <code class="language-jython highlight"><span class="n">Rx</span></code>.</li>
+<li><code class="language-jython highlight"><span class="n">BCD</span></code> - jumps to the <a href="#the-counter">counter</a></li>
+</ul>
+<p>If something else is using the pin, the OLED tells you what (<code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">7</span></code> / <code class="language-jython highlight"><span class="n">OLED</span></code>) and the options don't open. That's the OLED's I2C pins, a pin a MicroPython script has claimed, the probe's power pin, or the UART passthrough.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Connect <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">20</span></code> as an output (<code class="language-jython highlight"><span class="n">GPIO</span></code> pad, right side of <code class="language-jython highlight"><span class="mi">1</span></code>, tap row 20).</li>
+<li>Tap row 20 to highlight it. While the OLED says <code class="language-jython highlight"><span class="n">options</span><span class="err">?</span></code>, <code class="language-jython highlight"><span class="n">click</span></code> the wheel.</li>
+<li>Turn to <code class="language-jython highlight"><span class="n">PWM</span></code>, <code class="language-jython highlight"><span class="n">click</span></code>, turn to <code class="language-jython highlight"><span class="n">on</span></code>, <code class="language-jython highlight"><span class="n">click</span></code>. Pick <code class="language-jython highlight"><span class="n">Freq</span></code>, and turn the wheel while watching the row's LED brightness change. <code class="language-jython highlight"><span class="n">Click</span></code> to keep it.</li>
+<li><code class="language-jython highlight"><span class="n">Hold</span></code> to back out of PWM. <code class="language-jython highlight"><span class="n">Hold</span></code> again to leave the options.</li>
+</ol>
+</details>
+<h2 id="the-counter">The counter</h2>
+<p>Pick some pins, and the Jumperless drives them as the bits of one number that you turn up and down with the wheel. It's for things like feeding a 7447 that's driving a 7-segment display, or stepping through the addresses of a memory chip by hand. (The menu calls it <code class="language-jython highlight"><span class="n">BCD</span></code>, but it's plain binary and the readout is hex.)</p>
+<p><code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> is the lowest bit, then up through <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">8</span></code>, then <code class="language-jython highlight"><span class="n">Tx</span></code>, then <code class="language-jython highlight"><span class="n">Rx</span></code>. With 4 pins you count <code class="language-jython highlight"><span class="mi">0</span></code>-<code class="language-jython highlight"><span class="n">F</span></code>, with 8 you count <code class="language-jython highlight"><span class="mi">00</span></code>-<code class="language-jython highlight"><span class="n">FF</span></code>, and it wraps around at both ends.</p>
+<h3 id="counting">Counting</h3>
+<p><code class="language-jython highlight"><span class="n">Click</span></code> &gt; <code class="language-jython highlight"><span class="n">GPIO</span></code> &gt; <code class="language-jython highlight"><span class="n">BCD</span> <span class="n">Counter</span></code> &gt; <code class="language-jython highlight"><span class="n">Count</span></code>. (Or pick <code class="language-jython highlight"><span class="n">BCD</span></code> from a pin's options.) The OLED shows every pin in the range along the top with its current level underneath, and the count in hex next to it. Turn the wheel: clockwise counts up, and the rows those pins are wired to change right along with it. <code class="language-jython highlight"><span class="n">Click</span></code> or <code class="language-jython highlight"><span class="n">hold</span></code> to leave. Whatever's on the pins stays there.</p>
+<p>If you haven't set a range yet, it picks one for you: every GPIO you've already wired to the board, or if there aren't any, a run of 4 free pins. If no pin is free it says <code class="language-jython highlight"><span class="n">no</span> <span class="n">free</span> <span class="n">pins</span></code> and stays put.</p>
+<h3 id="range">Range</h3>
+<p><code class="language-jython highlight"><span class="n">GPIO</span></code> &gt; <code class="language-jython highlight"><span class="n">BCD</span> <span class="n">Counter</span></code> &gt; <code class="language-jython highlight"><span class="n">Range</span></code> picks the pins yourself. The first option is <code class="language-jython highlight"><span class="n">Routed</span></code>, which is just the pins you've wired (<code class="language-jython highlight"><span class="mi">1</span><span class="o">-</span><span class="mi">4</span></code>, or <code class="language-jython highlight"><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">T</span></code> if they're not next to each other). <code class="language-jython highlight"><span class="n">Click</span></code> it and that's your range. Turn past it for <code class="language-jython highlight"><span class="n">Start</span></code> and <code class="language-jython highlight"><span class="n">Width</span></code> to pick a run of pins by hand. <code class="language-jython highlight"><span class="n">Click</span></code> sets it, <code class="language-jython highlight"><span class="n">hold</span></code> cancels.</p>
+<h3 id="counting-with-the-logo-pads">Counting with the logo pads</h3>
+<p>You can put counting on the pads by the logo so you don't have to open a menu at all. In your <a href="../06-config/">config</a>:</p>
+<p>Type it into the terminal, backtick and all (the backtick is the config command):</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">top_guy_idle</span> <span class="o">=</span> <span class="n">bcd_up</span><span class="p">;</span>
+<span class="linenos" data-linenos="2 "></span><span class="err">`</span><span class="p">[</span><span class="n">logo_pads</span><span class="p">]</span> <span class="n">bottom_guy_idle</span> <span class="o">=</span> <span class="n">bcd_down</span><span class="p">;</span>
+</code></pre></div>
+<p>Then with the probe idle and its switch on <code class="language-jython highlight"><span class="no no-Hardware">Select</span></code>, tapping the top guy counts up and the bottom guy counts down, one step per tap. The OLED shows the new count each time. (<code class="language-jython highlight"><span class="n">building_pad_top_idle</span></code> and <code class="language-jython highlight"><span class="n">building_pad_bottom_idle</span></code> take the same values.)</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Connect <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code>, <code class="language-jython highlight"><span class="mi">2</span></code>, <code class="language-jython highlight"><span class="mi">3</span></code>, and <code class="language-jython highlight"><span class="mi">4</span></code> as outputs to rows <code class="language-jython highlight"><span class="mi">10</span></code>, <code class="language-jython highlight"><span class="mi">11</span></code>, <code class="language-jython highlight"><span class="mi">12</span></code>, and <code class="language-jython highlight"><span class="mi">13</span></code>.</li>
+<li><code class="language-jython highlight"><span class="n">Click</span></code> &gt; <code class="language-jython highlight"><span class="n">GPIO</span></code> &gt; <code class="language-jython highlight"><span class="n">BCD</span> <span class="n">Counter</span></code> &gt; <code class="language-jython highlight"><span class="n">Count</span></code>.</li>
+<li>Turn the wheel and watch the four rows count in binary. <code class="language-jython highlight"><span class="n">Hold</span></code> to leave.</li>
+</ol>
+</details>
+<h2 id="choosing-a-gpio-on-the-oled">Choosing a GPIO on the OLED</h2>
+<p>When you tap the <code class="language-jython highlight"><span class="n">GPIO</span></code> pad while probing, the chooser draws on the breadboard as always, and the OLED mirrors it: <code class="language-jython highlight"><span class="mi">1</span></code>-<code class="language-jython highlight"><span class="mi">4</span></code> across the top, <code class="language-jython highlight"><span class="mi">5</span></code>-<code class="language-jython highlight"><span class="mi">8</span></code> across the bottom, with <code class="language-jython highlight"><span class="n">i</span></code> and <code class="language-jython highlight"><span class="n">o</span></code> marks where the input and output tap zones are. When you tap one it confirms what you picked (<code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">3</span></code> / <code class="language-jython highlight"><span class="n">Input</span></code>). Picking a pin something else owns tells you who has it and cancels instead of taking it.</p>
+<h2 id="whats-saved">What's saved</h2>
+<p>Direction, pulls, PWM, and the counter's pins and value are all saved with the <code class="language-jython highlight"><span class="n">slot</span></code>, so loading a slot puts the pins back the way they were.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../05.5-parts/" class="btn btn-neutral float-left" title="Parts"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../07-debugging/" class="btn btn-neutral float-right" title="Debug Views">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../05.5-parts/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../07-debugging/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>

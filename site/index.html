@@ -100,7 +100,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -124,6 +124,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -140,7 +144,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -148,7 +160,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -198,8 +218,8 @@
 
 <hr />
 <h2 id="what-is-it"><p class="big-pink">What is it?</p></h2>
-<p>Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, a function generator, and a logic analyzer) all crammed inside a breadboard.</p>
-<p>You can connect any point to any other using software-defined jumpers, so the four individually programmable ±8 V power supplies; ten GPIO; and seven management channels for voltage, current, and resistance can all be connected anywhere on the breadboard or the Arduino Nano header. RGB LEDs under each hole turn the breadboard itself into a display that provides real-time information about whatever’s happening in your circuit.</p>
+<p>Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, and a function generator) all crammed inside a breadboard.</p>
+<p>You can connect any point to any other using software-defined jumpers, so the four individually programmable ±8 V power supplies; ten GPIO; and seven measurement channels for voltage, current, and resistance can all be connected anywhere on the breadboard or the Arduino Nano header. RGB LEDs under each hole turn the breadboard itself into a display that provides real-time information about whatever’s happening in your circuit.</p>
 <p>It's not just about being too lazy to plug in some jumpers. With software controlled wiring, the circuit <em>itself</em> is now <a href="08-micropython/"><strong><em>scriptable</em></strong></a>, which opens up a world of infinite crazy new things you could never do on a regular breadboard. Have a script try out every combination of parts until it does what you want (<em>à la</em> <a href="https://evolvablehardware.org/">evolvable hardware</a>), automatically switch around audio effects on the fly, characterize some unknown chip with the part numbers sanded off, or don't bother with any of that and just <a href="https://www.youtube.com/watch?v=xWYWruUO0F4">play Doom on it</a>.</p>
 <p>But more likely, you'll be using it to get circuits from your brain into hardware with so little friction it feels like you're just thinking them into existence. So yeah, wizard shit.</p>
 <p class="gold">These are the docs where you will learn how to wield your new powers</p>
@@ -207,7 +227,7 @@
 <p><img alt="" src="assets/Explodraft.png" /></p>
 <hr />
 <h2 id="if-you-dont-already-have-one"><p class="mint">If you don't already have one</p></h2>
-<h3 id="get-the-new-jumperless-v5-rev-7"><a href="https://shop.jumperless.org/products/jumperless-v5-rev-7"><p class="big-blue">Get the new Jumperless V5 rev 7</p></a></p></h3>
+<h3 id="get-the-new-jumperless-v5-rev-7"><a href="https://shop.jumperless.org/products/jumperless-v5-rev-7"><p class="big-blue">Get the new Jumperless V5 rev 7</p></a></h3>
 <p class="tight">Or if you want to save some money and get a refurbished one,</p>
 
 <h3 id="jumperless-v5-offcuts"><a href="https://shop.jumperless.org/products/jumperless-v5"><p class="indigo">Jumperless V5 offcuts</p></a></h3>
@@ -218,14 +238,18 @@
 <p><img alt="guide-42" src="https://github.com/user-attachments/assets/e35c42e0-b23a-4203-a836-44f0991db7fc" /></p>
 <h2 id="documentation-sections"><p class="orange">Documentation Sections</p></h2>
 <ul>
-<li><strong><a href="01-basic-controls/">Basic Controls</a></strong> - Learn how to use the probe, click wheel, and slot system</li>
+<li><strong><a href="01-getting-started/">Getting Started</a></strong> - What's in the box, the probe, the click wheel, power, measuring, and slots, with follow-along steps</li>
 <li><strong><a href="03-app/">The App</a></strong> - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches</li>
 <li><strong><a href="04-oled/">OLED</a></strong> - Add a better display</li>
 <li><strong><a href="05-arduino/">Arduino</a></strong> - UART passthrough and automatic flashing</li>
 <li><strong><a href="06-config/">Configuration</a></strong> - Persistent settings</li>
+<li><strong><a href="05.5-parts/">Parts</a></strong> - Tell it what chips are in the board and it wires and labels them</li>
+<li><strong><a href="05.7-gpio/">GPIO</a></strong> - Direction, pulls, PWM, and a binary counter from the board</li>
 <li><strong><a href="07-debugging/">Debugging</a></strong> - Crossbar, bridge, and net list views</li>
+<li><strong><a href="07.5-automation/">Automation &amp; LLM Tools</a></strong> - Drive it from scripts, an MCP server, or an agent skill</li>
 <li><strong><a href="08-file-manager/">File Manager</a></strong> - Filesystem access, YAML slot file editing, and text editor</li>
 <li><strong><a href="08-micropython/">MicroPython</a></strong> - Use the onboard MicroPython interpreter</li>
+<li><strong><a href="08.5-examples/">Examples</a></strong> - The scripts and guided projects that come loaded on the board, and what each one shows</li>
 <li><strong><a href="09.5-micropythonAPIreference/">MicroPython API Reference</a></strong> - All the Jumperless-specific hardware calls</li>
 <li><strong><a href="09.8-odds-and-ends/">Odds and Ends</a></strong> - Stuff I couldn't think of a good category for</li>
 <li><strong><a href="10-3d-stand/">3D Printable Stand</a></strong> - Print your own stand</li>
@@ -272,7 +296,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="01-basic-controls/" class="btn btn-neutral float-right" title="Basic Controls">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="01-getting-started/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -296,7 +320,7 @@
     
     
     
-      <span><a href="01-basic-controls/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="01-getting-started/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -448,5 +472,5 @@
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-08-29 05:04:21.725192+00:00
+Build Date UTC : 2026-09-09 22:29:07.000212+00:00
 -->

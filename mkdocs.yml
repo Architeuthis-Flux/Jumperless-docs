@@ -29,7 +29,7 @@ nav:
   - Arduino Stuff: 05-arduino.md
   - Config File: 06-config.md
   - Parts: 05.5-parts.md
-  - GPIO & BCD Counter: 05.7-gpio.md
+  - GPIO: 05.7-gpio.md
   - Debug Views: 07-debugging.md
   - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
@@ -40,10 +40,11 @@ nav:
   - Odds and Ends: 09.8-odds-and-ends.md
   - Writing Apps: 11-WritingApps.md
   - 3D Printable Stand: 10-3d-stand.md
+  - OG Jumperless: 10.5-og-jumperless.md
 
-  - Temporal Badge:
-    - Developer Guide: badge-developer-guide.md
-    - API Reference: badge-api-reference.md
+  # - Temporal Badge:
+  #   - Developer Guide: badge-developer-guide.md
+  #   - API Reference: badge-api-reference.md
   - Glossary of Terms: 99-glossary.md
   - Shop: https://shop.jumperless.org
   - JumperIDE: https://ide.jumperless.org/

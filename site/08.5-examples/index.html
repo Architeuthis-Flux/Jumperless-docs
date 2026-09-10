@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/08.5-examples/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/08.5-examples/">
+    <meta property="og:title" content="Examples - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/08.5-examples/">
+    <meta name="twitter:title" content="Examples - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/08.5-examples/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Examples - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Examples</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#running-an-example">Running an example</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-basics">The basics</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interrupts">Interrupts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#interactive">Interactive</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#oled">OLED</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tools">Tools</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#guided-projects">Guided projects</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#555-led-flasher">555 LED Flasher</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#logic-gates-101">Logic Gates 101</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#type-to-screen">Type to Screen</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#eeprom-dumper">EEPROM Dumper</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#where-to-go-next">Where to go next</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="examples">Examples</h1>
+<p>Every Jumperless ships with a set of MicroPython example scripts in <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span></code> and four guided projects in <code class="language-jython highlight"><span class="o">/</span><span class="n">projects</span><span class="o">/</span></code>. This page says what each one does, what you need to plug in, and what you'll see, so you can pick one instead of opening them one at a time. The sources are in the <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts/ex">JumperlOS repo</a> if you want to read them without a board.</p>
+<p>If you're new to this, start with the <a href="#555-led-flasher">555 LED Flasher</a> project. It shows you where each part of a real circuit goes and measures each one once it's in.</p>
+<h2 id="running-an-example">Running an example</h2>
+<p>Three ways, pick whichever is closest to hand:</p>
+<ul>
+<li><strong>Click wheel:</strong> <code class="language-jython highlight"><span class="n">click</span></code> &gt; <code class="language-jython highlight"><span class="n">Files</span></code> &gt; <code class="language-jython highlight"><span class="n">examples</span></code> &gt; pick a script and <code class="language-jython highlight"><span class="n">click</span></code>. It runs, and the output goes to the terminal (and the OLED where the script uses it).</li>
+<li><strong>Terminal:</strong> type its path, like <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span></code>. (<code class="language-jython highlight"><span class="o">/</span></code> opens the file manager, but picking a script there opens it in the editor, and <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> from the editor is flaky right now, so just type the path.)</li>
+<li><strong>MicroPython REPL:</strong> type <code class="language-jython highlight"><span class="n">p</span></code> to get into the REPL, then <code class="language-jython highlight"><span class="n">files</span></code>, open a script, press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to paste it into the REPL, and <code class="language-jython highlight"><span class="n">Enter</span></code> to run it. Or from <a href="https://ide.jumperless.org/">JumperIDE</a>, open the file from the device browser and hit run.</li>
+</ul>
+<p>To stop one that loops forever, press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> in the terminal (or <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code> from the REPL or JumperIDE). It prints a <code class="language-jython highlight"><span class="ne">KeyboardInterrupt</span></code> traceback, that's normal. If it doesn't take, hold the click wheel for a few seconds. If you started it from the file manager or the REPL, <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> backs you out one layer at a time.</p>
+<p>A few of these call <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code> when they start, which wipes whatever you had connected. They're marked below. Your slots aren't touched, so you can just load the slot again afterward.</p>
+<details class="tip">
+<summary>Try it</summary>
+<ol>
+<li>Open the terminal and run <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span></code> (it clears the board first). Rows 3 and 13 light up green as <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> and <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">2</span></code> get wired to them, and the terminal prints what it reads back.</li>
+<li>Run <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span></code>. It prints the four ADC voltages twice a second. Press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop it.</li>
+</ol>
+<p><img alt="gpio_basics.py: rows 3 and 13 on GPIO 1 and 2" src="../assets/verify/gpio-basics.png" /></p>
+</details>
+<p>On the board they all live in <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span></code>. The links go to the source on GitHub.</p>
+<h2 id="the-basics">The basics</h2>
+<p>Short scripts, one idea each, no parts needed unless it says so.</p>
+<ul>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/dac_basics.py">dac_basics.py</a></strong> - Steps <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">1</span></code> and both rails through 0 V, 1.5 V and 3.3 V, reading each one back with <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_get</span><span class="p">()</span></code>. You'll see the rail LEDs change with it. It skips <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> because that one normally powers the probe. Runs once. It leaves the rails at 0 V when it's done, so set them again after.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/adc_basics.py">adc_basics.py</a></strong> - Prints the voltage on <code class="language-jython highlight"><span class="n">ADC</span> <span class="mi">0</span></code>-<code class="language-jython highlight"><span class="mi">3</span></code> twice a second, forever. It doesn't connect anything, so route a voltage to an ADC first (the <code class="language-jython highlight"><span class="n">ADC</span></code> pad on the probe, or <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="no no-Jumperless">ADC0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span></code>) or you'll just see noise. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/gpio_basics.py">gpio_basics.py</a></strong> - Wires <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">3</span></code> and <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">2</span></code> to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">13</span></code>, blinks the output, cycles the input's pull resistor through none / up / down, then bridges the two rows so the input reads the output back. Everything prints to the terminal and the OLED. Runs once. <em>Clears the board first.</em></li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/node_connections.py">node_connections.py</a></strong> - <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code> and <code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code> on four pairs of nodes (rows, <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>). The LEDs are the show here: each pair lights as its own net for half a second and then goes out. Runs once. <em>Clears the board first and last.</em></li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/machine_pin_basics.py">machine_pin_basics.py</a></strong> - The same GPIO driven two ways: the Jumperless <code class="language-jython highlight"><span class="n">gpio_</span><span class="o">*</span><span class="p">()</span></code> calls with node names, and stock MicroPython <code class="language-jython highlight"><span class="n">machine</span><span class="o">.</span><span class="n">Pin</span></code> (<code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>-<code class="language-jython highlight"><span class="mi">8</span></code> are RP2350 pins 20-27). Routes <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> to <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">2</span></code> through the crossbar so one drives and the other reads, and ends with a <code class="language-jython highlight"><span class="n">pin</span><span class="o">.</span><span class="n">irq</span><span class="p">()</span></code> edge count. Runs once, no parts.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/file_io_basics.py">file_io_basics.py</a></strong> - A tour of the <a href="../09.6-jfs/">jfs</a> filesystem framed as a little data logger: write, append, seek, list, rename, delete, and what happens when you open too many files. Terminal only, runs once.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/uart_basics.py">uart_basics.py</a></strong> - Opens <code class="language-jython highlight"><span class="n">machine</span><span class="o">.</span><span class="n">UART</span></code> at 115200 and routes <code class="language-jython highlight"><span class="n">UART</span> <span class="n">Tx</span></code>/<code class="language-jython highlight"><span class="n">Rx</span></code> to the Nano header's <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code>/<code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code>, then sends a message every 1.5 seconds. You need something in the Nano header listening; the script itself prints nothing after the banner. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/uart_loopback.py">uart_loopback.py</a></strong> - Connects <code class="language-jython highlight"><span class="n">UART</span> <span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code> to the same node so the board talks to itself, and prints what it reads back every half second. A good "is the UART alive" check with no parts. (At the moment it mostly prints <code class="language-jython highlight"><span class="kc">None</span></code>, the loopback needs a fix.) <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/voltage_monitor.py">voltage_monitor.py</a></strong> - Connects <code class="language-jython highlight"><span class="n">ADC</span> <span class="mi">0</span></code> to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">12</span></code> and shows the voltage on the OLED and the terminal, refreshed constantly. It clears row 12 when it starts, so put your 0 to 3.3 V on row 12 (a pot wiper, a rail, a DAC) after it's running. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+</ul>
+<h2 id="interrupts">Interrupts</h2>
+<p>These use <code class="language-jython highlight"><span class="n">machine</span><span class="o">.</span><span class="n">Pin</span><span class="o">.</span><span class="n">irq</span><span class="p">()</span></code>, which fires the instant a pin changes instead of whenever a loop gets around to checking.</p>
+<ul>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_basics.py">pin_irq_basics.py</a></strong> - Routes <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> to <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">2</span></code>, pulses one, and catches the rising and falling edges on the other with a handler. Prints the running counts and a <code class="language-jython highlight"><span class="n">PASS</span></code> line. No parts, runs once.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_freq_counter.py">pin_irq_freq_counter.py</a></strong> - A frequency counter. PWM on <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code>, routed to <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">2</span></code> and to <code class="language-jython highlight"><span class="n">row</span> <span class="mi">20</span></code> so you can scope it, and a hard interrupt counting the edges. Turn the wheel to change the frequency and watch the measurement follow it. <code class="language-jython highlight"><span class="n">Click</span></code> the wheel to quit. No parts.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/pin_irq_reaction_game.py">pin_irq_reaction_game.py</a></strong> - A reaction timer. Wait for the green block on the LEDs, then tap as fast as you can; a hard interrupt timestamps the tap to the microsecond. Five rounds, then a best / average. Needs a tact switch across rows <code class="language-jython highlight"><span class="mi">28</span></code> and <code class="language-jython highlight"><span class="mi">30</span></code> (or a jumper wire in row 30 that you tap into row 28). If you never tap, it just ends after five misses.</li>
+</ul>
+<h2 id="interactive">Interactive</h2>
+<ul>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/interaction_demo.py">interaction_demo.py</a></strong> - Reads every control at once from one loop: tap a pad to move a bridge there, turn the wheel to slide it, press the probe buttons to shift its color, and flip the probe switch to <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> to have it walk up the board on its own. It prints nothing, watch the board. No parts. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/led_brightness_control.py">led_brightness_control.py</a></strong> - Touch a pad and <code class="language-jython highlight"><span class="n">DAC</span> <span class="mi">0</span></code> goes to that pad number's share of 5 V (pad 30 is 2.5 V), dimming an LED on <code class="language-jython highlight"><span class="n">row</span> <span class="mi">15</span></code>. The OLED shows the voltage and the current it draws. Put an LED (with a resistor) from row 15 to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>. (This one crashes with a <code class="language-jython highlight"><span class="ne">NameError</span></code> on its first loop unless the probe is already on a pad, I'm fixing it.) <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/stylophone.py">stylophone.py</a></strong> - Touch a pad and <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> plays a tone at 40 Hz times the pad number. The probe buttons lengthen and shorten the sustain. Put a speaker or piezo between <code class="language-jython highlight"><span class="n">row</span> <span class="mi">25</span></code> and <code class="language-jython highlight"><span class="n">row</span> <span class="mi">55</span></code>. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/oled_layout_editor.py">oled_layout_editor.py</a></strong> - Lay out two lines of text on the OLED with the board itself: tap a top-row pad to put the selected text on the top line at that position, a bottom-row pad for the bottom line, rail pads to nudge it up and down, the wheel to change the size, <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> to change the font, and type the text in the terminal. <code class="language-jython highlight"><span class="no no-Hardware">Remove</span></code> saves it to <code class="language-jython highlight"><span class="o">/</span><span class="n">screens</span><span class="o">/</span><span class="n">layout</span><span class="o">.</span><span class="n">json</span></code> so you can read the numbers off for your own scripts. Needs an OLED. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code> to stop.</li>
+</ul>
+<h2 id="oled">OLED</h2>
+<p>These need an <a href="../04-oled/">OLED</a>.</p>
+<ul>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/oled_stats_page.py">oled_stats_page.py</a></strong> - Builds a screen with the four ADC voltages and the uptime, and makes it the idle page in place of the logo. The numbers keep updating after the script ends, and the page steps aside for menus and comes back after. To get rid of it, run <code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">oledgui</span><span class="p">;</span> <span class="n">oledgui</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></code> in the REPL.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/test_oled_features.py">test_oled_features.py</a></strong> - Runs through the OLED functions one section at a time: text sizes, print mirroring, fonts, bitmaps, the framebuffer, scrolling. About 30 seconds. (Right now the terminal output stops partway, at the small text scrolling test.). Handy as a copy-paste reference for each call.</li>
+<li><strong>oledgui.py</strong> (in <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span></code>) - Not a script you run. It's the library the two above import: <code class="language-jython highlight"><span class="n">Screen</span></code>, <code class="language-jython highlight"><span class="n">Text</span></code>, <code class="language-jython highlight"><span class="n">Line</span></code> and <code class="language-jython highlight"><span class="n">Rect</span></code> objects on top of the retained-screen OLED calls, with <code class="language-jython highlight"><span class="p">{</span><span class="n">adc</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span></code>-style tokens that update themselves. See the <a href="../09.5-micropythonAPIreference/">API reference</a>.</li>
+</ul>
+<h2 id="tools">Tools</h2>
+<p>Bigger scripts that turn the board into an instrument.</p>
+<ul>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/oscilloscope.py">oscilloscope.py</a></strong> - A scope on the OLED. Tap a row with the probe to put <code class="language-jython highlight"><span class="n">ADC</span> <span class="mi">0</span></code> there, turn the wheel to change the selected setting, <code class="language-jython highlight"><span class="n">click</span></code> to cycle through timebase, volts per division, trigger level, trigger edge and auto-range. The front probe button resets the settings; the rear one exits. Signals need to be 0 to 3.3 V. Needs an OLED. (Too big to load on a board without PSRAM right now, it says <code class="language-jython highlight"><span class="n">out</span> <span class="n">of</span> <span class="n">memory</span></code>.)</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/usb_audio_mic.py">usb_audio_mic.py</a></strong> - Makes the Jumperless show up on your computer as a 2-channel 16 kHz microphone called <code class="language-jython highlight"><span class="n">JL</span> <span class="n">Audio</span> <span class="n">In</span></code> (the rate is a <code class="language-jython highlight"><span class="p">[</span><span class="n">usb_audio</span><span class="p">]</span></code> key in <a href="../06-config/">config</a>), with <code class="language-jython highlight"><span class="n">row</span> <span class="mi">20</span></code> as the left channel and <code class="language-jython highlight"><span class="n">row</span> <span class="mi">40</span></code> as the right (±8 V full scale). Run it once to turn the device on (the serial port drops and comes back after a couple of seconds), then run it again to watch the levels. Record with anything: Audacity, QuickTime, a browser. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> to stop the script, <code class="language-jython highlight"><span class="n">JL</span> <span class="n">Audio</span> <span class="n">In</span></code> stays on your computer until you unplug the board.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/excel_listener.py">excel_listener.py</a></strong> - The board side of the Excel GUI workbook: it takes connection and voltage commands over serial and answers with measurements. Needs <code class="language-jython highlight"><span class="p">[</span><span class="n">usb_cdc</span><span class="p">]</span> <span class="n">ignore_dtr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span></code> in your <a href="../06-config/">config</a>, and it tells you so if it's missing. <em>Clears the board first.</em> (Same problem as the oscilloscope, it doesn't load without PSRAM.)</li>
+</ul>
+<h2 id="utilities">Utilities</h2>
+<ul>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/async_read.py">async_read.py</a></strong> - Nothing Jumperless-specific, just how to check for keyboard input without blocking (<code class="language-jython highlight"><span class="no no-Hardware">select</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span></code> on <code class="language-jython highlight"><span class="n">stdin</span></code>). Type something and it prints an <code class="language-jython highlight"><span class="n">ack</span></code> and echoes it. Its banner says <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code>, but <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> is what stops it from the terminal.</li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/test_neopixel.py">test_neopixel.py</a></strong> - Drives a WS2812 strip from <code class="language-jython highlight"><span class="n">GPIO</span> <span class="mi">1</span></code> with six animations; the wheel picks the speed and its button picks the mode. Data on <code class="language-jython highlight"><span class="n">row</span> <span class="mi">15</span></code>, ground on <code class="language-jython highlight"><span class="n">row</span> <span class="mi">14</span></code>, power from the top rail on <code class="language-jython highlight"><span class="n">row</span> <span class="mi">16</span></code> (set the rail to 5 V yourself, <code class="language-jython highlight"><span class="n">Rails</span></code> &gt; <code class="language-jython highlight"><span class="n">Top</span></code> on the wheel or <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="no no-Jumperless">TOP_RAIL</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span></code> in the REPL). Until the <code class="language-jython highlight"><span class="n">neopixel</span></code> package is installed it stops at <code class="language-jython highlight"><span class="ne">ImportError</span><span class="p">:</span> <span class="n">no</span> <span class="n">module</span> <span class="n">named</span> <span class="n">neopixel</span></code>. It also shows how to install a module from the ViperIDE package manager, which you have to do first or <code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">neopixel</span></code> fails. <em>Clears the board first.</em></li>
+<li><strong><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/ex/viperide_reinit.py">viperide_reinit.py</a></strong> - The handshake an IDE runs when it connects: board info, flash usage and a file listing in a machine-readable format. Not really an example, but it's there if you're writing your own host tool.</li>
+</ul>
+<h2 id="guided-projects">Guided projects</h2>
+<p>The four projects in <code class="language-jython highlight"><span class="o">/</span><span class="n">projects</span><span class="o">/</span></code> are the "hello world" circuits. Each one is a wiring file, a README, and a <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code>. The first time you open one it loads as your circuit: the top rail gets set (5 V for the 555, 3.3 V for the others), the parts' pins light up along the board edge so you can see where they go, and the OLED walks you through them one at a time. You push the parts in, and the Jumperless can measure each one to tell you it's seated right.</p>
+<p>To open one, type <code class="language-jython highlight"><span class="n">z</span></code> and its name in the terminal (<code class="language-jython highlight"><span class="n">z</span> <span class="mi">555</span></code>), or from the wheel go to <code class="language-jython highlight"><span class="n">Files</span></code> &gt; <code class="language-jython highlight"><span class="n">projects</span></code> &gt; the project's folder and <code class="language-jython highlight"><span class="n">click</span></code> <code class="language-jython highlight"><span class="n">wiring</span><span class="o">.</span><span class="n">yaml</span></code>. Then:</p>
+<ul>
+<li>
+<p>The OLED shows the step (<code class="language-jython highlight"><span class="mi">555</span> <span class="n">LED</span> <span class="n">Flasher</span> <span class="mi">3</span><span class="o">/</span><span class="mi">9</span></code>) and the rows for that step's part light up (they stay lit while the steps are showing).</p>
+<p><img alt="the step card on the OLED" src="../assets/verify/nand00-step-oled.png" /></p>
+<p><img alt="Logic Gates 101 just opened: the 74HC00's rows and the LED's rows marked along the edge, top rail at 3.3 V" src="../assets/verify/nand00-part-labels.png" />
+ Turn the wheel to move between steps, <code class="language-jython highlight"><span class="n">hold</span></code> to put the steps away. In the terminal, <code class="language-jython highlight"><span class="n">z</span> <span class="n">steps</span></code> prints the current step, and <code class="language-jython highlight"><span class="n">z</span> <span class="n">steps</span> <span class="nb">next</span></code>, <code class="language-jython highlight"><span class="n">z</span> <span class="n">steps</span> <span class="n">prev</span></code>, <code class="language-jython highlight"><span class="n">z</span> <span class="n">steps</span> <span class="mi">3</span></code>, <code class="language-jython highlight"><span class="n">z</span> <span class="n">steps</span> <span class="n">off</span></code> and <code class="language-jython highlight"><span class="n">z</span> <span class="n">steps</span> <span class="n">on</span></code> do what they say.
+- Push the part in where the step says. Tap one of its rows with the probe and the OLED tells you which pin that is.
+- <code class="language-jython highlight"><span class="n">z</span> <span class="n">check</span> <span class="n">R1</span></code> (any part name, or <code class="language-jython highlight"><span class="n">z</span> <span class="n">check</span> <span class="n">step</span> <span class="mi">3</span></code>) measures the part and prints what it read: a resistor's value, an LED's forward voltage, whether a chip answers. A resistor that reads <code class="language-jython highlight"><span class="nb">open</span></code> has a leg out of the hole, <code class="language-jython highlight"><span class="n">short</span></code> means both legs are on the same side of the gap. The 555's resistor steps only measure, any value passes. The other projects check the value, so a resistor far from the one in the wiring file gets a <code class="language-jython highlight"><span class="n">fail</span></code> and a <code class="language-jython highlight"><span class="n">wrong</span> <span class="n">part</span><span class="err">?</span></code>.
+- Opening a project doesn't make the connections between the parts. In this version you make those yourself, with the probe or the <code class="language-jython highlight"><span class="o">+</span></code> command, from the wiring file's <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">:</span></code> lines. The 555's are all in the box below.
+- <code class="language-jython highlight"><span class="n">z</span> <span class="mi">555</span></code> runs <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> as soon as the project opens, <code class="language-jython highlight"><span class="n">z</span> <span class="mi">555</span> <span class="n">noscript</span></code> opens it without. From the Files browser, run <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> yourself from the project's folder. <code class="language-jython highlight"><span class="n">Hold</span></code> the wheel for a few seconds to stop it. <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> works too, as long as you haven't typed anything else into the terminal since it started.
+- What you build is saved in the project's own run file (<code class="language-jython highlight"><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="mi">555</span><span class="o">/</span><span class="mi">555</span><span class="n">_run</span><span class="o">.</span><span class="n">yaml</span></code>), so it's still there next time you open it. <code class="language-jython highlight"><span class="n">z</span> <span class="mi">555</span> <span class="n">new</span></code>, or clicking <code class="language-jython highlight"><span class="n">wiring</span><span class="o">.</span><span class="n">yaml</span></code> in Files, starts over from the shipped wiring. <code class="language-jython highlight"><span class="n">x</span></code> clears a project's parts along with its connections, so if a project opens with no parts and only a couple of steps, that's what happened to its run file. <code class="language-jython highlight"><span class="n">z</span> <span class="mi">555</span> <span class="n">new</span></code> brings it back.</p>
+</li>
+</ul>
+<details class="tip">
+<summary>The 555's connections</summary>
+<p>With the chip's pin 1 at <code class="language-jython highlight"><span class="n">row</span> <span class="mi">35</span></code> and the other parts where the steps put them, this one line makes every connection in the wiring file:</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">+</span> <span class="mi">35</span><span class="o">-</span><span class="n">gnd</span><span class="p">,</span><span class="mi">36</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">38</span><span class="o">-</span><span class="n">top_rail</span><span class="p">,</span><span class="mi">5</span><span class="o">-</span><span class="n">top_rail</span><span class="p">,</span><span class="mi">10</span><span class="o">-</span><span class="n">top_rail</span><span class="p">,</span><span class="mi">40</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">13</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">43</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">18</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="mi">19</span><span class="o">-</span><span class="n">gnd</span><span class="p">,</span><span class="mi">23</span><span class="o">-</span><span class="n">gnd</span><span class="p">,</span><span class="mi">16</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span><span class="mi">46</span><span class="o">-</span><span class="mi">22</span>
+</code></pre></div>
+<p>That's the 555's <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="n">TRIG</span></code>, <code class="language-jython highlight"><span class="n">RESET</span></code> and <code class="language-jython highlight"><span class="n">VCC</span></code>, R1 from the rail to <code class="language-jython highlight"><span class="n">DIS</span></code>, R2 from <code class="language-jython highlight"><span class="n">DIS</span></code> to <code class="language-jython highlight"><span class="n">THR</span></code>, the cap and the LED to ground, and R3 from <code class="language-jython highlight"><span class="n">OUT</span></code> (row 37) to the LED.</p>
+<p><img alt="the 555 wired up by that line" src="../assets/verify/555-wired.png" /></p>
+</details>
+<h3 id="555-led-flasher">555 LED Flasher</h3>
+<p>An NE555 blinking an LED. <code class="language-jython highlight"><span class="n">z</span> <span class="mi">555</span></code>. Parts: an NE555 (DIP-8, pin 1 at <code class="language-jython highlight"><span class="n">row</span> <span class="mi">35</span></code>, across the middle gap), two resistors around 10k and 47k, a 10 µF capacitor, an LED, and a 330 Ω resistor for it. The exact values don't matter, anything in the right order of magnitude works, because <code class="language-jython highlight"><span class="n">z</span> <span class="n">check</span> <span class="n">R1</span></code> measures each resistor and <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> uses those readings to work out the blink rate <em>your</em> parts should give. Then it counts the actual blinks and prints both next to each other, and even solves backward for the capacitor's real value from the blink it sees. <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts/projects/555">Source and full README.</a></p>
+<h3 id="logic-gates-101">Logic Gates 101</h3>
+<p>One gate of a 74HC00 quad NAND. <code class="language-jython highlight"><span class="n">z</span> <span class="n">nand00</span></code>. The Jumperless drives both inputs from GPIO, reads the output back on a third, and lights an LED from the same output. <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> prints the truth table with an <code class="language-jython highlight"><span class="n">ok</span></code> / <code class="language-jython highlight"><span class="n">WRONG</span></code> per row, then lets you type input pairs (<code class="language-jython highlight"><span class="mi">00</span></code>, <code class="language-jython highlight"><span class="mi">01</span></code>, <code class="language-jython highlight"><span class="mi">10</span></code>, <code class="language-jython highlight"><span class="mi">11</span></code>) and see what comes out. Parts: a 74HC00 (DIP-14, pin 1 at <code class="language-jython highlight"><span class="n">row</span> <span class="mi">35</span></code>), an LED, and a 330 Ω resistor. <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts/projects/nand00">Source.</a></p>
+<h3 id="type-to-screen">Type to Screen</h3>
+<p>An I2C OLED module pushed into the breadboard anywhere you like, wired to the Jumperless's I2C pins by the crossbar. <code class="language-jython highlight"><span class="n">z</span> <span class="n">i2cscrn</span></code>. <code class="language-jython highlight"><span class="n">main</span><span class="o">.</span><span class="n">py</span></code> asks where you put <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="n">VCC</span></code>, <code class="language-jython highlight"><span class="n">SCL</span></code> and <code class="language-jython highlight"><span class="n">SDA</span></code> (tap each with the probe), lets you pick the driver (SSD1306 128x32 or 128x64, SH1106), and then whatever you type in the terminal shows up on the module. Parts: any 4-pin SSD1306 or SH1106 module. Turn the Jumperless's own top OLED off while you use this, they share the I2C pins. <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts/projects/i2cscrn">Source.</a></p>
+<h3 id="eeprom-dumper">EEPROM Dumper</h3>
+<p>A 24C02 or 24C16 serial EEPROM read over I2C and hex-dumped to the terminal, with the write-protect pin held by the board's own wiring. <code class="language-jython highlight"><span class="n">z</span> <span class="n">eeprom</span></code>. Parts: the EEPROM (DIP-8, pin 1 at <code class="language-jython highlight"><span class="n">row</span> <span class="mi">35</span></code>) and two 4.7k pull-up resistors. Same note as above about the top OLED. <a href="https://github.com/Architeuthis-Flux/JumperlOS/tree/main/scripts/projects/eeprom">Source.</a></p>
+<h2 id="where-to-go-next">Where to go next</h2>
+<ul>
+<li><strong><a href="../08-micropython/">MicroPython</a></strong> - the REPL, JumperIDE, and how scripts are structured.</li>
+<li><strong><a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a></strong> - every function these scripts call.</li>
+<li><strong><a href="../09.6-jfs/">JFS</a></strong> - reading and writing files on the board.</li>
+<li><strong><a href="../05.5-parts/">Parts</a></strong> - the part placement and Auto Scan the guided projects are built on.</li>
+</ul>
+<p>If you write something cool, send it to me and I'll add it to the examples.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../08-micropython/" class="btn btn-neutral float-left" title="MicroPython"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../09.5-micropythonAPIreference/" class="btn btn-neutral float-right" title="MicroPython API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../08-micropython/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../09.5-micropythonAPIreference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>

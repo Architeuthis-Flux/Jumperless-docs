@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -192,6 +192,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
                 </li>
               </ul>
@@ -208,7 +212,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -216,7 +228,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Temporal Badge</span></p>
@@ -270,31 +290,35 @@ Ignore the really cool LEDs.</p>
 <h2 id="installation">Installation</h2>
 <p>They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.
 <img alt="SBCBP-4 copy" src="https://github.com/user-attachments/assets/43232b06-380d-4e18-9aab-924e45790740" /></p>
-<p>Yo</p>
+<p>That's how rev 5 boards (the Crowd Supply and Mouser ones) do it, and the OLED talks to GPIO 7 and 8 through the crossbar to rows <code class="language-jython highlight"><span class="no no-Jumperless">D2</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D3</span></code>. Rev 7 boards have dedicated OLED headers on the internal I2C bus instead, so the firmware finds the display by itself at boot and no rows or routable GPIO get used up. If you have one of those, the <code class="language-jython highlight"><span class="n">Connection</span></code>, <code class="language-jython highlight"><span class="n">Lock</span> <span class="n">Connection</span></code> and GPIO stuff below doesn't apply to you.</p>
 <p>This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. </p>
 <h2 id="connection">Connection</h2>
-<p>To connect the data lines to the Jumperless' GPIO 7 and 8, just use the menu option <code class="language-jython highlight"><span class="o">.</span></code> (that's a period). It will try to find the OLED on the I2C bus, after a few failed attempts, it'll automatically disconnect to free up GPIO 7 and 8. </p>
+<p>To connect the data lines to the Jumperless' GPIO 7 and 8, just use the menu option <code class="language-jython highlight"><span class="o">.</span></code> (that's a period). Press it again to disconnect and free up GPIO 7 and 8, or use <code class="language-jython highlight"><span class="mf">.1</span></code> and <code class="language-jython highlight"><span class="mf">.0</span></code> to force it on or off. If no display answers, the routing stays put and the firmware keeps checking for one every few seconds.</p>
+<p>In the click menu the same things live under <code class="language-jython highlight"><span class="n">OLED</span></code>: <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code>, <code class="language-jython highlight"><span class="no no-Hardware">Connect</span> <span class="n">On</span> <span class="n">Boot</span></code>, <code class="language-jython highlight"><span class="n">Lock</span> <span class="no no-Hardware">Connect</span></code> and <code class="language-jython highlight"><span class="n">Show</span> <span class="ow">in</span> <span class="n">Term</span></code>. <code class="language-jython highlight"><span class="n">Show</span> <span class="ow">in</span> <span class="n">Term</span></code> (or the <code class="language-jython highlight"><span class="n">k</span></code> command, or <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">show_in_terminal</span> <span class="o">=</span> <span class="n">port_1</span><span class="p">;</span></code>, which also takes <code class="language-jython highlight"><span class="n">off</span></code>, <code class="language-jython highlight"><span class="n">port_3</span></code>, <code class="language-jython highlight"><span class="n">port_5</span></code>, <code class="language-jython highlight"><span class="n">port_7</span></code> and <code class="language-jython highlight"><span class="n">uart</span></code>) mirrors whatever's on the OLED into your terminal. <code class="language-jython highlight"><span class="n">t</span></code> opens an OLED terminal where anything you type goes straight to the display.</p>
 <h2 id="auto-connect-on-boot">Auto-Connect on Boot</h2>
-<p>If you want to use this all the time, there's a config option to connect the OLED on startup. You can just paste this into the main menu:
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
-</code></pre></div></p>
+<p>The OLED gets connected on startup by default. If you'd rather it didn't, paste this into the main menu:
+Type it into the terminal, backtick and all (the backtick is the config command):</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connect_on_boot</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<p>The full list of <code class="language-jython highlight"><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span></code> keys with their current values is on the <a href="../06-config/">config page</a>.</p>
 <h2 id="lock-connection">Lock Connection</h2>
 <p>Locking the connection to the OLED ensures that it stays connected even when you enter a complete <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> list. So if you're using Wokwi or manually adding connections in a file, you don't need to add <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_7</span> <span class="o">-</span> <span class="no no-Jumperless">D2</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span> <span class="o">-</span> <span class="no no-Jumperless">D3</span></code> to keep the I2C connected to the OLED.</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">lock_connection</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
+<p>This only matters when the OLED is on the crossbar (the <code class="language-jython highlight"><span class="n">gpio_7_8</span></code> or <code class="language-jython highlight"><span class="n">custom</span></code> connection types) - the hardwired RP6/RP7 and internal I2C connections have no routing to lose.</p>
 <h2 id="custom-startup-message">Custom Startup Message</h2>
 <p>You can customize what appears on the OLED when your Jumperless boots up. There are two options: text messages or custom bitmap images.</p>
 <h3 id="text-message">Text Message</h3>
 <p>Set a custom text message to display on the OLED at startup (max 32 characters):</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_message</span> <span class="o">=</span> <span class="n">Your</span> <span class="n">Message</span> <span class="n">Here</span><span class="p">;</span>
 </code></pre></div>
-<p>This message will appear after the Jumperless logo on boot.</p>
+<p>This shows up instead of the Jumperless logo on boot, in big text. Once you start using the board, the usual idle logo comes back.</p>
 <h3 id="bitmap-image">Bitmap Image</h3>
 <p>Display a custom bitmap image at startup by just giving it a path on the filesystem.</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_message</span> <span class="o">=</span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span><span class="p">;</span>
 </code></pre></div>
 <p><strong>Requirements:</strong>
-- Image must be a bitmap file (<code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> format) with 4-byte header
+- Image must be a bitmap file (<code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> format), either with the 4-byte header (recommended) or raw at 512, 1024, 256 or 496 bytes
 - Recommended size: 128×32 pixels (standard OLED size)
 - Use the built-in <a href="#bitmap-editor">Bitmap Editor</a> to create or edit images
 - Store images in the <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code> directory on the Jumperless filesystem</p>
@@ -302,19 +326,16 @@ Ignore the really cool LEDs.</p>
 <p>If you have a different sized OLED (like 128x64), you can set the dimensions:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
 <span class="linenos" data-linenos="2 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">64</span><span class="p">;</span>
+<span class="linenos" data-linenos="3 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
+<p><code class="language-jython highlight"><span class="n">rotation</span></code> goes 0 to 3 in 90 degree steps. If your display sits at some other I2C address, set <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">i2c_address</span> <span class="o">=</span> <span class="mh">0x3C</span><span class="p">;</span></code> to whatever it actually is. The click menu can do the size too: <code class="language-jython highlight"><span class="n">OLED</span></code> &gt; <code class="language-jython highlight"><span class="n">Display</span> <span class="n">Size</span></code> &gt; <code class="language-jython highlight"><span class="n">Width</span></code> or <code class="language-jython highlight"><span class="n">Height</span></code>, with <code class="language-jython highlight"><span class="mi">32</span></code>, <code class="language-jython highlight"><span class="mi">64</span></code>, <code class="language-jython highlight"><span class="mi">128</span></code>, <code class="language-jython highlight"><span class="mi">256</span></code> and <code class="language-jython highlight"><span class="n">Custom</span></code>.</p>
 <h2 id="advanced-gpio-configuration">Advanced GPIO Configuration</h2>
-<p>You can change both the GPIO used for the display or the rows it connects to with the config options:</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_pin</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span>
-<span class="linenos" data-linenos="2 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_pin</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span>
-<span class="linenos" data-linenos="3 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_sda</span> <span class="o">=</span> <span class="n">GP_7</span><span class="p">;</span>
-<span class="linenos" data-linenos="4 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">gpio_scl</span> <span class="o">=</span> <span class="n">GP_8</span><span class="p">;</span>
-<span class="linenos" data-linenos="5 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_row</span> <span class="o">=</span> <span class="no no-Jumperless">D2</span><span class="p">;</span>
-<span class="linenos" data-linenos="6 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_row</span> <span class="o">=</span> <span class="no no-Jumperless">D3</span><span class="p">;</span>
-</code></pre></div>
+<p>You don't set the GPIO and row keys by hand - pick a connection type and the firmware fills them all in for you. The exception is the <code class="language-jython highlight"><span class="n">custom</span></code> type, which uses whatever you put in <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">sda_pin</span> <span class="o">=</span> <span class="mi">26</span><span class="p">;</span></code> and <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">scl_pin</span> <span class="o">=</span> <span class="mi">27</span><span class="p">;</span></code>. Those two are refused on the internal I2C bus, which is hardwired to GPIO 4 and 5.</p>
 <h2 id="connection-type">Connection type</h2>
+<p>There are four of them. <code class="language-jython highlight"><span class="n">gpio_7_8</span></code> runs the OLED through the crossbar to rows <code class="language-jython highlight"><span class="no no-Jumperless">D2</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D3</span></code> (the rev 5 default), <code class="language-jython highlight"><span class="n">rp6_rp7</span></code> uses the hardwired GPIO 6 and 7, <code class="language-jython highlight"><span class="n">i2c0</span></code> (also spelled <code class="language-jython highlight"><span class="n">internal</span></code>) uses the internal I2C bus on GPIO 4 and 5 that rev 7 boards have their OLED headers on, and <code class="language-jython highlight"><span class="n">custom</span></code> uses the <code class="language-jython highlight"><span class="n">sda_pin</span></code>/<code class="language-jython highlight"><span class="n">scl_pin</span></code> you set yourself.</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">connection_type</span> <span class="o">=</span> <span class="n">rp6_rp7</span><span class="p">;</span>
 </code></pre></div>
+<p>The <code class="language-jython highlight"><span class="n">O</span></code> command cycles through GPIO 7/8, RP6/RP7 and internal I2C0, or you can jump straight to one with <code class="language-jython highlight"><span class="n">O0</span></code> through <code class="language-jython highlight"><span class="n">O3</span></code> or a name like <code class="language-jython highlight"><span class="n">O</span> <span class="n">i2c0</span></code>. In the click menu it's <code class="language-jython highlight"><span class="n">OLED</span></code> &gt; <code class="language-jython highlight"><span class="n">Pins</span></code>, with <code class="language-jython highlight"><span class="n">GPIO7</span><span class="o">/</span><span class="mi">8</span></code>, <code class="language-jython highlight"><span class="n">RP6</span><span class="o">/</span><span class="mi">7</span></code> and <code class="language-jython highlight"><span class="n">Intrnal</span></code>.</p>
 <h2 id="bitmap-editor">Bitmap Editor</h2>
 <p>The built-in bitmap editor lets you create and edit OLED images directly on your Jumperless using your terminal and the clickwheel.</p>
 <video autoplay loop muted playsinline controls width="70%">
@@ -334,7 +355,9 @@ Ignore the really cool LEDs.</p>
 1. Navigate to where you want to create the file (e.g., <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code>)
 2. Press <code class="language-jython highlight"><span class="n">n</span></code> for "new file"
 3. Name it with a <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> extension (e.g., <code class="language-jython highlight"><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span></code>)
-4. The editor will automatically create a blank 128×32 bitmap (or whatever your OLED dimensions are set to in config)</p>
+4. Open the new file (Enter or <code class="language-jython highlight"><span class="n">click</span></code>) - <code class="language-jython highlight"><span class="n">n</span></code> only creates it, opening it is what starts the editor
+5. The editor sees the empty file and makes a blank 128×32 bitmap (or whatever your OLED dimensions are set to in config)</p>
+<p><code class="language-jython highlight"><span class="o">.</span><span class="n">bmp</span></code> files open in the editor too.</p>
 <h2 id="editor-interface">Editor Interface</h2>
 <p>The bitmap editor displays your image in the terminal and on the OLED (if connected). You'll see:</p>
 <ul>
@@ -406,21 +429,21 @@ Ignore the really cool LEDs.</p>
 <li><strong>Ctrl+Q</strong>: Quit (prompts to save if modified)</li>
 <li><strong>h or ?</strong>: Show help screen</li>
 </ul>
-<p>The editor automatically adds the 4-byte header (width and height) when saving, making the file compatible as a startup image.</p>
+<p>A new file gets the 4-byte header (width and height) when you save, and a file that already had one keeps it. A raw headerless file is saved back raw, which still works as a startup image at the common sizes.</p>
 <h2 id="example-workflow-creating-a-startup-logo">Example Workflow: Creating a Startup Logo</h2>
 <ol>
 <li>Open file manager, navigate to <code class="language-jython highlight"><span class="o">/</span><span class="n">images</span><span class="o">/</span></code></li>
 <li>Create new file: <code class="language-jython highlight"><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span></code></li>
-<li>Editor opens with blank 128×32 canvas</li>
+<li>Open it - the editor starts with a blank 128×32 canvas</li>
 <li>Switch to Half Block mode (<code class="language-jython highlight"><span class="n">m</span></code>) for better overview</li>
 <li>Use clickwheel to navigate, Connect button to draw</li>
 <li>Save with Ctrl+S</li>
 <li>Set as startup image: <ul>
-<li>By editing the config file: <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_image</span> <span class="o">=</span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span></code> </li>
-<li>Or use the click menus <code class="language-jython highlight"><span class="n">OLED</span></code> &gt; <code class="language-jython highlight"><span class="n">Startup</span> <span class="n">message</span></code> &gt; <code class="language-jython highlight"><span class="n">image</span></code> &gt; (scroll through all the images and <code class="language-jython highlight"><span class="n">click</span></code> to select)</li>
+<li>By editing the config file: <code class="language-jython highlight"><span class="err">`</span><span class="p">[</span><span class="n">top_oled</span><span class="p">]</span> <span class="n">startup_message</span> <span class="o">=</span> <span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">mylogo</span><span class="o">.</span><span class="n">bin</span><span class="p">;</span></code> </li>
+<li>Or use the click menus <code class="language-jython highlight"><span class="n">OLED</span></code> &gt; <code class="language-jython highlight"><span class="n">StartUp</span> <span class="n">Messge</span></code> &gt; <code class="language-jython highlight"><span class="n">Bitmap</span></code> &gt; (scroll through all the images and <code class="language-jython highlight"><span class="n">click</span></code> to select)</li>
 </ul>
 </li>
-<li>Reboot or enter/exit the click menu to see your custom logo</li>
+<li>Reboot to see your custom logo. Picking it in the menu previews it right away; after boot the idle screen goes back to the standard logo.</li>
 </ol>
 <h2 id="editor-screenshots">Editor Screenshots</h2>
 <p>Full size view (1:1 pixel mapping):
@@ -563,14 +586,14 @@ Ignore the really cool LEDs.</p>
 <h2 id="bitmap-file-format">Bitmap File Format</h2>
 <p>The editor works with <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> files in two formats:</p>
 <p><strong>With Header (Recommended):</strong>
-- 4 bytes: Width (16-bit little-endian)
+- 2 bytes: Width (16-bit little-endian)
 - 2 bytes: Height (16-bit little-endian)<br />
 - Remaining: Bitmap data (MSB-first, row-major)
 - Example: 128×32 = 4 header + 512 data = 516 bytes total</p>
 <p><strong>Raw Format:</strong>
 - Just bitmap data, dimensions inferred from file size
 - 512 bytes → 128×32, 1024 bytes → 128×64, etc.</p>
-<p>The editor automatically adds headers when saving, making files ready to use as startup images.</p>
+<p>The editor only writes a header if the file already had one, or if it's a new file - a raw file stays raw.</p>
 <h2 id="converting-external-images">Converting External Images</h2>
 <p>Want to use your own images? The JumperlOS repository includes Python scripts to convert PNG/JPG images to OLED bitmaps:</p>
 <p><strong>Location:</strong> <code class="language-jython highlight"><span class="n">JumperlOS</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">image_to_oled_bitmap</span><span class="o">.</span><span class="n">py</span></code></p>
@@ -637,6 +660,7 @@ Ignore the really cool LEDs.</p>
 <span class="linenos" data-linenos="12 "></span><span class="c1"># Disable when done</span>
 <span class="linenos" data-linenos="13 "></span><span class="n">j</span><span class="o">.</span><span class="nf nf-Jumperless">oled_copy_print</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 </code></pre></div>
+<p>Print copying and the default text size go back to their defaults (off, size 2) after a script finishes running. If you turned them on from the REPL they stay on until you run a script or reboot.</p>
 <p>This is perfect for debugging projects where you don't have easy access to the serial console.</p>
 <h3 id="multiple-fonts">Multiple Fonts</h3>
 <p>Choose from 11 different font families:</p>
@@ -708,7 +732,8 @@ Ignore the really cool LEDs.</p>
 - Font system (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_fonts</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_font</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_current_font</span></code>)
 - Bitmap functions (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_load_bitmap</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_display_bitmap</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_show_bitmap_file</span></code>)
 - Framebuffer access (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_framebuffer</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_framebuffer</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_framebuffer_size</span></code>)
-- Pixel manipulation (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_pixel</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_pixel</span></code>)</p>
+- Pixel manipulation (<code class="language-jython highlight"><span class="nf nf-Jumperless">oled_set_pixel</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_get_pixel</span></code>)
+- Retained screens and layouts (<code class="language-jython highlight"><span class="n">oled_screen</span></code>, <code class="language-jython highlight"><span class="n">oled_add_text</span></code>, <code class="language-jython highlight"><span class="n">oled_add_shape</span></code>, <code class="language-jython highlight"><span class="n">oled_set</span></code>, <code class="language-jython highlight"><span class="n">oled_set_var</span></code>, <code class="language-jython highlight"><span class="n">oled_screen_show</span></code>/<code class="language-jython highlight"><span class="n">_hide</span></code>/<code class="language-jython highlight"><span class="n">_save</span></code>/<code class="language-jython highlight"><span class="n">_load</span></code>) - see the <a href="../09.5-micropythonAPIreference/#oled-display">OLED Layout / Screens section</a></p>
 <h3 id="example-projects">Example Projects</h3>
 <p><strong>Animated Sine Wave:</strong>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span>
