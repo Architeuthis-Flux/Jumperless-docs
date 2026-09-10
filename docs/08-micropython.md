@@ -46,11 +46,21 @@ Press it again to Stop. If you make changes, hit the green Save button next to i
 
 ![the API reference following a click on adc_get](assets/verify/jumperide-api-ref.png)
 
-**JumperNet Registry.** The Jumperless icon in the sidebar is the JumperNet Registry, scripts other people have shared. Click one and it opens in a tab, `Run` runs it on your board, and if you want to share yours, click `Upload script to registry`.
+**JumperNet Registry.** The Jumperless icon in the sidebar is the JumperNet Registry, scripts people have shared from their own boards. It's one list, everybody sees the same one, and there's no account. Click a script and it opens in a tab, `Run` runs it on your board.
 
 ![the JumperNet Registry list](assets/verify/jumperide-registry.png)
 
 ![a registry script open in the editor](assets/verify/jumperide-registry-script.png)
+
+To share yours, have it open in a tab and click `Upload script to registry` at the top of the list. It asks for a name, your name, and a line about what it does (the code box is already filled in from the tab), and `Upload` puts it in the list for everyone right away, there's no review step. Work in progress scripts are fine, that's what it's for.
+
+![the upload dialog](assets/verify/jumperide-registry-upload.png)
+
+The three little icons on a row are open, edit and history. Anyone can edit anyone's script (it's wiki style, so fix the typos you find, and replace the prefilled `Your name` with yours or the edit gets filed under the last author), every version stays in the history, and `Load` opens an old one in its own tab without touching the current one.
+
+To delete a script, edit it and set the name to `delete`. Nothing checks who you are, so only delete your own. OLED images work the same way for uploading and deleting (`Upload OLED image` shows up when a `.bin` is the open tab, `Browse Images` is the gallery), except only the original author can edit one, and an image's history is the last 50 versions. Every script uploaded gets synced into the [JumperIDE repo](https://github.com/Architeuthis-Flux/JumperIDE/tree/main/cloudflare/script-registry-worker/scripts) on its own, so the scripts are all on GitHub too, images live only in the registry.
+
+![a script's history](assets/verify/jumperide-registry-history.png)
 
 **OLED bitmaps.** `Tools` > `New OLED bitmap` gives you a 128x32 canvas, click or drag to draw, and with `Live to device` checked it should show up on the board's OLED as you draw ([more about the OLED here](04-oled.md)). `Download .bin` saves it and `Upload to registry` shares it. `Browse Images` in the registry shows everyone else's.
 
@@ -77,88 +87,88 @@ They're also already on the board as `/python_scripts/lib/jumperless.py` and `/p
 
 ## JumperIDE for VS Code
 
-
 ![](assets/DirtyDeedsJumperlesssm.png)
-
-
-
 
 [![VSCode Marketplace](https://img.shields.io/badge/VSCode%20Marketplace-JumperIDE-blue?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide)
 [![Open VSX](https://img.shields.io/open-vsx/v/ArchiteuthisFlux/jumperide?label=Open%20VSX)](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide)
 [![GitHub Release](https://img.shields.io/github/v/release/Architeuthis-Flux/JumperIDE-VSCode?label=Release)](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest)
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue)](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/blob/main/LICENSE)
 
----
-
-#### Walkthrough
+Same idea as the web IDE, but it runs in VS Code (or Cursor, or VSCodium), so you get Pylance, git, and everything else you already have. Everything is in one sidebar, and the board shows up as a terminal.
 
 ![](assets/JumperIDEwalkthrough.gif)
 
-**Connect** — the board's serial ports are auto-detected by USB ID, with the MicroPython REPL port pre-selected:
-
-![Connecting to a Jumperless V5](assets/JumperIDEconnect.png)
-
-
-**Serial terminal** — pick any port (port1 is the device menu), or hand the port to the standalone Jumperless App:
-
-![Serial terminal port picker](assets/TerminalConnect.png)
-
-**REPL + device menu side by side** — the MicroPython REPL and the board's interactive menu, each on its own port:
-
-![REPL and main serial terminal side by side](assets/REPLandMainSerial.png)
-
-**OLED bitmap editor** — draw pixels and watch them appear on the board's OLED live:
-
-![Editing an OLED bitmap with live push to the device](assets/EditingOLED.gif)
-
-**API reference panel** — the full MicroPython API docs beside your code:
-
-![API reference panel](assets/APIreferencePanel.png)
-
----
-
 #### Install
 
-Either search `JumperIDE` in the Extensions view ([Open VSX](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide)) or just download the `.vsix` from the [latest release](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest) (install command included in the release notes).
+Search `JumperIDE` in the Extensions view, it's on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide) and [Open VSX](https://open-vsx.org/extension/ArchiteuthisFlux/jumperide) (that's the one Cursor and VSCodium search). Or download the `.vsix` from the [latest release](https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest) and run `code --install-extension jumperide-1.0.2.vsix` from the folder it's in.
 
+The first time it loads it sets up autocomplete for the whole Jumperless API in every workspace (the stubs go in `~/.jumperless/typings`) and asks you to reload the window. The hover docs need Python and Pylance, `Set Up This Folder for Jumperless` offers to install them if you don't have them.
 
-#### Features
+#### Connect
 
-##### **Actions panel** 
-Everything in one sidebar panel: a connection button that doubles as live status (hover to connect or disconnect), **Run/Stop**, **Save to Jumperless**, **Save Locally** (export a device file to your computer), **OLED Bitmap**, the **Serial Terminal**, and quick access to the **API reference** and **JumperNet publishing**.
+Click the Jumperless icon in the activity bar. The `Actions` view is the whole thing: a connection button that shows the state, `Run` and `Stop`, saving, the OLED editor, the terminal, the API reference, and publishing.
 
+![the Actions view](assets/verify/vscode-actions.png)
 
-##### **Serial connection**
-    
-The V5 exposes four USB serial ports; the extension detects them by USB ID and pre-selects the MicroPython REPL port (the 3rd). Set `jumperless.connectOnStartup` to connect automatically.
+Click `Disconnected` (or `Jumperless` in the status bar, or `Jumperless: Connect` from the command palette) and pick the starred port, the one whose description ends in `MicroPython REPL — recommended`. On a Mac it reads `port5`. It's the 3rd Jumperless port and it isn't pre-selected, so don't just hit `Enter`, that gets you `port1`, the menu, which can't run scripts, and you end up in terminal-only mode with an empty file tree.
 
-##### **Run / Stop**
-`Run` executes the file in the current editor on the board, output streams to the REPL terminal.
-`Stop` interrupts.
+![the port picker](assets/verify/vscode-connect-picker.png)
+
+The status bar should turn pink with the board's name, `Device Files` fills in, and a `Jumperless REPL` terminal opens at the `>>>` prompt.
+
+![connected](assets/verify/vscode-connected.png)
+
+#### Files, run, stop
+
+Click a file in `Device Files` and it opens as a local working copy, so Pylance sees it and hovering a Jumperless function gives you its docs. `Cmd+S` / `Ctrl+S` pushes it back to the board. The icons in the view's header are disconnect, refresh, new file, new folder and a new OLED bitmap, `Delete from Device` is on the right-click menu.
+
+![a device file open, with the hover docs](assets/verify/vscode-hover.png)
+
+`F5` (or `Run Current File`) runs whatever is in the editor, as is, it doesn't save first. The output goes to the `Jumperless REPL` terminal. `Shift+F5` (or `Stop`) sends a `Ctrl+C`.
+
+![running gpio_basics.py](assets/verify/vscode-run.png)
 
 ![Connect Run Stop](assets/ConnectRunStop.gif)
 
-##### **Device file browser**
+`Save to Jumperless` pushes the current file to the board (a file that didn't come from the board asks for a device path, prefilled with last time's answer), `Save Locally` saves a copy on your computer.
 
-The board's filesystem in the sidebar. Files open as local working copies (so the language server works on them); saving pushes back to the board. Files that didn't come from the board ask for a device path on first save, then remember it. Create, delete, and upload files and folders.
+#### Serial terminal
 
-##### **REPL terminal**
-A terminal connected to the board's MicroPython prompt. Handles MicroPython line endings and batches output so fast prints don't stall the UI.
+`Serial Terminal` (or `Jumperless: Open Serial Terminal`) opens a second terminal on any port. `port1` is the starred one, that's the board's menu, and it types `m` for you so the menu comes up.
 
-##### **Serial terminal** 
-Pick any serial port (port1, the board's menu/CLI, is recommended) for a direct raw-passthrough terminal — the full-color menus and ANSI art render exactly as the board sends them. Or pick `Use Jumperless App` to run the standalone [Jumperless App](https://github.com/Architeuthis-Flux/Jumperless-App) instead (auto-installs from PyPI; autodetects the port and handles reconnection).
+`Ctrl+Q` goes through to the board in these terminals instead of to VS Code. Or pick `Use Jumperless App` and it runs the [standalone app](https://github.com/Architeuthis-Flux/Jumperless-App) in a terminal instead.
 
-##### **Autocomplete & hover docs** 
-Signatures and descriptions for every Jumperless function, sourced from the [API reference](https://docs.jumperless.org/09.5-micropythonAPIreference/) and refreshed automatically. Jumperless calls and constants are highlighted in Python files.
+![the serial terminal port picker](assets/verify/vscode-serial-picker.png)
 
-##### **OLED bitmap editor**
-A pixel editor for OLED `.bin` files. While connected, edits push live to the board's OLED as you draw. **Jumperless: New OLED Bitmap** creates a blank 128×32 canvas on the device or locally.
+![the board's menu in the serial terminal](assets/verify/vscode-serial-terminal.png)
 
-##### **JumperNet registry** 
-Browse community scripts and OLED images, open them, save them to the board, or publish your own (**Jumperless: Publish Script to Registry**). Feel free to publish whatever work in progress scripts, you or (anyone else) can update the same script and keep version history.
+#### OLED bitmaps
 
-##### **API reference panel**
-`Jumperless: Open API Reference` opens the [MicroPython API docs](https://docs.jumperless.org/09.5-micropythonAPIreference/) beside your code.
+`New OLED Bitmap` asks whether the file lives on the Jumperless or on this computer (if you're not connected it just saves locally), then opens a 128x32 pixel editor, and any `.bin` in `Device Files` opens in it too. `Black`, `White` and `Toggle` are the pens, and with `Live to device` checked every stroke should show up on the board's OLED as you draw (it `Ctrl+C`s a running script to do it). `Save` writes the `.bin`, `Push to Device` sends the whole thing once.
+
+![the OLED bitmap editor](assets/verify/vscode-oled-editor.png)
+
+![the same drawing on the board's OLED](assets/verify/vscode-oled-live.png)
+
+#### API reference
+
+`API Reference` opens the [MicroPython API docs](09.5-micropythonAPIreference.md) beside your code. The hover docs and autocomplete come from the same place.
+
+![the API reference beside the code](assets/verify/vscode-api-ref.png)
+
+#### JumperNet
+
+`JumperNet Registry` and `OLED Images` in the sidebar are the shared registry, the same one the web IDE shows. Click a script and it opens, right-click for `Save to Device`.
+
+`Publish to JumperNet` (or `Jumperless: Publish Script to Registry`) uploads the file in the editor, it asks for a name, a description and your name. Editing and history are in the web IDE only.
+
+![a registry script opened from the sidebar](assets/verify/vscode-registry.png)
+
+![publishing a script](assets/verify/vscode-publish.png)
+
+#### Settings
+
+`jumperless.serial.preferredPortIndex` is which Jumperless port gets the star (2, the 3rd one), `jumperless.serial.baud` is 115200, `jumperless.registry.baseUrl` is the registry, and `jumperless.connectOnStartup` opens the port picker when VS Code starts.
 
 #### Zero-import autocomplete
 
