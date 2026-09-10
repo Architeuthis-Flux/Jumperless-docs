@@ -106,7 +106,7 @@ But that's like the *least* cool thing the new app can do, here's a list of what
 
 ## Importing Circuits from Wokwi
 
-You can design circuits in the [Wokwi online simulator](https://wokwi.com) and import them directly to your Jumperless with the `W` command, or use the Jumperless App and it'll pull it from your project automatically and live update.
+You can design circuits in the [Wokwi online simulator](https://wokwi.com) and import them directly to your Jumperless with the `W` command, or use the Jumperless App and it'll pull it from your project automatically and live update. This has been around since the OG Jumperless, there's a demo in [this Crowd Supply update](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly).
 
 ### Direct Link Import
 

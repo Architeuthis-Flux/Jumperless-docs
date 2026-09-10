@@ -27,6 +27,7 @@ nav:
   - The App: 03-app.md
   - OLED Support: 04-oled.md
   - Arduino Stuff: 05-arduino.md
+  - Adapter Boards: 05.3-adapters.md
   - Config File: 06-config.md
   - Parts: 05.5-parts.md
   - GPIO: 05.7-gpio.md

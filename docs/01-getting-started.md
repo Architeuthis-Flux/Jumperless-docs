@@ -8,12 +8,15 @@ This page walks you through the first hour with a Jumperless V5. Each section en
 
 ## What's in the box
 
+![the box: the probe, the Jumperless, the SBC adapter and the FPC adapter](assets/batchone-2.jpg)
+
 - **The Jumperless.** The breadboard with the RP2350 and 12 crossbar switches underneath it.
 - **The probe.** Plugs into the socket on the right side of the board. It has a `Select` / `Measure` switch and two buttons, `Connect` (front) and `Remove` (rear).
-- **A little breakout board and a ribbon cable.** It brings the DACs, GPIO, and a few other signals out to pin headers so you can clip a scope or meter to them. It's optional, you don't need it for anything on this page.
+- **The SBC adapter.** It plugs into the Nano header and turns it into a Raspberry Pi's 40 pin header (both adapters are on the [Adapter Boards](05.3-adapters.md) page).
+- **The FPC adapter and a ribbon cable.** It brings the DACs, ADCs, GPIO and the UART out to pin headers so you can clip a scope or meter to them, plus 2 Qwiic ports and a spot for a Bus Pirate. It's optional, you don't need it for anything on this page.
 - **A sheet of stick-on rubber feet.** These are for the [3D printed stand](10-3d-stand.md), which isn't in the box because it doesn't fit.
 
-Two things that are *not* in the box but you'll probably want: a [stand](10-3d-stand.md) and an [OLED](04-oled.md). The OLED copies everything the breadboard LEDs say into actual text, and a few interactions are easier with one. On rev 7 boards it plugs straight into the pin headers on the board; on rev 5 boards (Crowd Supply and Mouser) it goes on the breakout board.
+Two things that are *not* in the box but you'll probably want: a [stand](10-3d-stand.md) and an [OLED](04-oled.md). The OLED copies everything the breadboard LEDs say into actual text, and a few interactions are easier with one. On rev 7 boards it plugs straight into the pin headers on the Jumperless, on rev 5 boards (Crowd Supply and Mouser) it goes on the SBC adapter.
 
 ----
 
@@ -209,7 +212,7 @@ A few ways to see what your circuit is doing:
 - **The probe's `Measure` switch.** Touch a row, read the voltage. Nothing gets saved.
 - **The `ADC` pad.** Connect an ADC to a row and it stays there, showing the voltage on that row's LEDs and, if you highlight it, on the OLED / terminal. The ADCs read -8 V to +8 V.
 - **The `Show` menu.** `Show` > `Voltage` / `Digital` / `Current` picks a measurement and a row to put it on from the wheel instead of the probe.
-- **Current sense.** In `Connect` mode, turn the wheel counterclockwise past `row 1`. A couple of detents and it wraps onto `Current`, the OLED reads `Current -` and the breadboard spells it out with `I-` lit. One more detent counterclockwise is `I+` (if you overshoot into `UART`, one detent clockwise comes back). `Click` within 5 seconds of the last turn, then tap the row it goes on. With `I+` and `I-` on two different `net`s, a virtual wire with "marching ants" should show the current flowing between them. Or `Show` > `Current` from the menu, which asks for `Pos`, its row, `Neg`, its row (rows and Nano pins only, it can't reach the rail pads). (The background scan puts ants on any wire with current flowing too, the `net_currents` key in the [config](06-config.md) turns it off.)
+- **Current sense.** In `Connect` mode, turn the wheel counterclockwise past `row 1`. A couple of detents and it wraps onto `Current`, the OLED reads `Current -` and the breadboard spells it out with `I-` lit. One more detent counterclockwise is `I+` (if you overshoot into `UART`, one detent clockwise comes back). `Click` within 5 seconds of the last turn, then tap the row it goes on. With `I+` and `I-` on two different `net`s, a virtual wire with "marching ants" should show the current flowing between them. Or `Show` > `Current` from the menu, which asks for `Pos`, its row, `Neg`, its row (rows and Nano pins only, it can't reach the rail pads). (The background scan puts ants on any wire with current flowing too, the `net_currents` key in the [config](06-config.md) turns it off, and `current_flow = electron;` makes them march the other way, the numbers stay conventional.)
 
 !!! note "Idle mode currents are an estimate"
     They're read using the crossbar's own resistance as the shunt (about 40Ω per crosspoint) and one ADC is multiplexed across every net, so connecting current sense manually with `I+` / `I-` is a bit more accurate.
@@ -291,6 +294,8 @@ U           show up as a USB drive
 ```
 
 `p` and `/` take over the terminal, `Ctrl+Q` gets you back out of both. A script you run leaves whatever it connected on the board, `x` clears it.
+
+The connection lists are whitespace and case insensitive (`1 - 5, 10-GND` is the same thing), and if you send it something that would obviously cause problems, like `TOP_RAIL-GND`, it'll just ignore it and move on. There's more on the netlist format in [this Crowd Supply update](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly).
 
 Type `help` or `[command]?` for the onboard docs on any of them, and `e` to show more of the menu.
 

@@ -11,9 +11,25 @@ Ignore the really cool LEDs.
 ## Installation
 
 They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.
-![SBCBP-4 copy](https://github.com/user-attachments/assets/43232b06-380d-4e18-9aab-924e45790740)
 
 That's how rev 5 boards (the Crowd Supply and Mouser ones) do it, and the OLED talks to GPIO 7 and 8 through the crossbar to rows `D2` and `D3`. Rev 7 boards have dedicated OLED headers on the internal I2C bus instead, so the firmware finds the display by itself at boot and no rows or routable GPIO get used up. If you have one of those, the `Connection`, `Lock Connection` and GPIO stuff below doesn't apply to you.
+
+??? note "Where the OLED goes"
+    Rev 7 boards have 2 OLED headers (4 pins each), one at each end of the Nano header between the two rows. Either one works, they're on the same bus.
+
+    On the `D12` end it lies across the Nano header:
+
+    ![an OLED in the header at the D12 end of the Nano header, lying across it](assets/oledPositions.jpg)
+
+    On the `VIN` end it sticks out past the edge next to the USB-C:
+
+    ![an OLED in the header at the VIN end of the Nano header, sticking out past the edge by the USB-C](assets/oledPositions-2.jpg)
+
+    On rev 5 boards it goes in the 4 pin column at the bottom left of the SBC/SMD/OLED board (the [SBC adapter](05.3-adapters.md)), with that in the Nano header:
+
+    ![the SBC adapter with the OLED spot marked](assets/oledPositions-3.jpg)
+
+    ![the SBC adapter with an OLED plugged into it](assets/oledPositions-3-on.jpg)
 
 This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. 
 

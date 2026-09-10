@@ -52,6 +52,7 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 - **[The App](03-app.md)** - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches
 - **[OLED](04-oled.md)** - Add a better display
 - **[Arduino](05-arduino.md)** - UART passthrough and automatic flashing
+- **[Adapter Boards](05.3-adapters.md)** - The SBC adapter and the FPC adapter that come in the box
 - **[Configuration](06-config.md)** - Persistent settings
 - **[Parts](05.5-parts.md)** - Tell it what chips are in the board and it wires and labels them
 - **[GPIO](05.7-gpio.md)** - Direction, pulls, PWM, and a binary counter from the board

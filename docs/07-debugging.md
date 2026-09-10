@@ -94,7 +94,7 @@ You can also set it to live updating mode with `c!`. A second `c!` turns it back
 ---
 
 ## Bridge Array
-Enter `b`. This is generally the most helpful one for *me* to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.
+Enter `b`. This is generally the most helpful one for *me* to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me. (there's an older version of this output in [this Crowd Supply update](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly))
 
 It prints your duplicate stacking settings first, then the bridge array, then the paths, then the chip status. `b0` shows every path instead of just the routed duplicates, and `b2` shows every duplicate.
 
@@ -106,4 +106,9 @@ It prints your duplicate stacking settings first, then the bridge array, then th
 ## Net List
 Enter `n` to show this one. If you have an `ADC`, a `gpio` input, or a `gpio` output routed to a net, it'll stay up and live update when those readings change, or when you move the clickwheel highlight. Any key ends it, and so does a probe button press or a click of the clickwheel. That key doesn't get eaten though, it runs as your next command, so press Enter or space to get out quietly rather than a letter that does something (`x` would clear all your connections).
 
-![Screenshot 2025-05-30 at 7 10 04 AM](https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804) 
+![Screenshot 2025-05-30 at 7 10 04 AM](https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804)
+
+---
+
+## Scan
+`Apps` > `Scan` on the click wheel goes through every row and prints the voltage on it, rows with nothing on them come out as `floating` (that's how you tell a floating row from one that's tied to GND, which reads 0V). It keeps looping until you type something or click the wheel.

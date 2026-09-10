@@ -4,7 +4,7 @@
 
 With an Arduino Nano in the header and the UART lines connected, anything on those lines should be passed through to the second serial port that shows up when you plug in your Jumperless. 
 
-Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.
+Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly. Same for the parity and stop bits, so stuff that isn't 8N1 goes through (UPDI wants 8E2, one of the beta testers found that out flashing an ATtiny412 through it, that whole saga is in [this Crowd Supply update](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/a-series-of-tubes)).
 
 The Nano goes in the header socket on the board, and every signal pin on that header is a routable node - `D0` through `D13`, `A0` through `A7`, `AREF` and `RESET`. You can connect any of them to a breadboard row or a rail just like anything else. The power pins (`5V`, `3V3`, `VIN`, `GND`) aren't routable. `D0` and `D1` are the only ones that ever get wired up for you.
 
@@ -34,7 +34,7 @@ That reset twiddling is set up for a classic AVR Nano. If you've got a Nano ESP3
 
 ## Commands from Routable UART
 
-You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The command inside the tags gets executed. The tagged text still shows up on the passthrough port along with everything else your Arduino prints, it doesn't get stripped out - but it's never echoed back down the UART to the Arduino.
+You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The command inside the tags gets executed. The tagged text still shows up on the passthrough port along with everything else your Arduino prints, it doesn't get stripped out - but it's never echoed back down the UART to the Arduino. (there's a demo of netlists going in over the UART in [this Crowd Supply update](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly).)
 
 ### Two Types of Tags
 

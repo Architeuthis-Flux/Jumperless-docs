@@ -40,7 +40,7 @@
 
 Slot files use YAML format with named nodes for readability. [State File Structure](06-config.md#state-file-structure) has a full example of one.
 
-`dup` is an optional per-bridge override of how many parallel crosspoint paths get stacked for that one connection, like `- {n1: NANO_D5, n2: GP_1, dup: 4}`. Leave it out and you get the default from the `[routing]` `stack_paths` key (2), with `stack_rails` (3), `stack_gpio` (0), `stack_adcs` (0) and `stack_dacs` (0) covering those classes. `color:` is optional too, and takes a color name, `0xRRGGBB`, or `#RRGGBB`.
+`dup` is an optional per-bridge override of how many parallel crosspoint paths get stacked for that one connection, like `- {n1: NANO_D5, n2: GP_1, dup: 4}`. Leave it out and you get the default from the `[routing]` `stack_paths` key (2), with `stack_rails` (3), `stack_gpio` (0), `stack_adcs` (0) and `stack_dacs` (0) covering those classes (the resistance math behind stacking is in [this Crowd Supply update](https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/a-farewell-to-campaigns)). `color:` is optional too, and takes a color name, `0xRRGGBB`, or `#RRGGBB`.
 
 **Named nodes:** `NANO_D0-D13`, `NANO_A0-A7`, `GP_1-8` (or `RP_GPIO_1-8`), `TOP_RAIL`, `BOTTOM_RAIL`, `GND`, `DAC0`, `DAC1`, etc. (Note these differ from the MicroPython constants - `GPIO_1` and `DAC0_5V` won't parse in slot files.)
 
