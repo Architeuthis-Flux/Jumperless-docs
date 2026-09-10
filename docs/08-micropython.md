@@ -73,7 +73,7 @@ To delete a script, edit it and set the name to `delete`. Nothing checks who you
 ### If you write something cool, publish it to the JumperNet registry from JumperIDE for VS Code (**Jumperless: Publish Script to Registry**) and I'll add the good ones to the default examples.
 
 
-This is using [MicroPython's built-in Raw REPL](https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode), so anything that can interact with that will work here. I've tested it with JumperIDE, both the web one and the VS Code extension, but anything that speaks the raw REPL (like `mpremote`) should work on that 3rd port.
+This is using [MicroPython's built-in Raw REPL](https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode), so anything that can interact with that will work here. I've tested it with JumperIDE, both the web one and the VS Code extension, but anything that speaks the raw REPL (like `mpremote`) works on that 3rd port.
 
 
 There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in the web IDE. JumperIDE for VS Code installs these stubs for you.) You can grab them here:
@@ -82,6 +82,64 @@ There's also `jumperless.py` and `jumperless.pyi` module with stubs for all the 
 ### [jumperless.pyi](https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi)
 
 They're also already on the board as `/python_scripts/lib/jumperless.py` and `/python_scripts/lib/jumperless.pyi`, so you can just copy them off it.
+
+### Stubs by hand
+
+JumperIDE for VS Code sets this up for you (globally, or per folder with `Set Up This Folder for Jumperless Python`), but if you just want autocomplete in a project of your own it's 3 files, in VS Code or Cursor or whatever else runs Pylance. The `.pyi` is the one the editor reads. The `.py` is the same API as plain Python, for running on the Jumperless, no types in it.
+
+Make a `typings` folder in your project and put the `jumperless.pyi` from above in it. Pylance looks there for stubs by default, `from jumperless import *` should resolve, every function gets its real signature and docs.
+
+Next to it, make `typings/__builtins__.pyi` with one line in it:
+
+```python
+from jumperless import *
+```
+
+That tells Pylance the whole API is a builtin, which is what it is on the Jumperless, `from jumperless import *` happens before your script runs so you don't need to write it, in the editor or on the Jumperless.
+
+Then a `pyrightconfig.json` in the project root:
+
+```json
+{
+    "stubPath": "typings",
+    "reportMissingModuleSource": false
+}
+```
+
+The first line makes this folder override the global stubs my VS Code extension sets up (those are a few functions behind the one on main), the second one turns off the yellow squiggle you'd get on `from jumperless import *` because there's a stub but no `.py` behind it, it's harmless, just annoying.
+
+(note: `pip install jumperless` / `uv add jumperless` gets you the Jumperless Wokwi Bridge. Its module is `jumperless_pkg` and it has nothing to do with the board's API, the stubs aren't on PyPI.)
+
+### Jupyter notebooks
+
+[micropython-magic](https://github.com/Josverl/micropython-magic) runs a notebook cell on the Jumperless while the rest of the notebook runs on your computer, and it works with the stubs above.
+
+`pip install micropython-magic` (or `uv add`), then in the first cell:
+
+```python
+%load_ext micropython_magic
+%mpy --select /dev/cu.usbmodemJLV5port5
+```
+
+The port is the 3rd Jumperless one, the same one JumperIDE uses, so disconnect JumperIDE first, mpremote can't open a port something else is holding. On a Mac it's `/dev/cu.usbmodemJLV5port5`, on Linux it's `/dev/ttyACM` and a number, on Windows it's a COM number and they're not always in order, it's the one where Enter gets you a `>>>`. `--verify` didn't work for me, plain `--select` does.
+
+Then start a cell with `# %%micropython` and it runs on the Jumperless:
+
+```python
+# %%micropython
+for i in range(5):
+    print(adc_get(0))
+print(gpio_get(1))
+oled_print("hi from a notebook")
+```
+
+![a notebook cell running on the Jumperless](assets/verify/vscode-notebook-run.png)
+
+The `#` is on purpose, Pylance skips any cell that starts with a `%%` magic it doesn't know, so with a bare `%%micropython` you get no squiggles or hover or anything. micropython-magic turns `# %%micropython` back into the real magic when the cell runs, the editor sees plain Python, hovering `adc_get` gives you the signature and docs from the stub.
+
+![the stub's signature in a cell that runs on the Jumperless](assets/verify/vscode-notebook-hover.png)
+
+Run the `%load_ext` cell first. Until it's loaded, `# %%micropython` is just a comment and the cell runs on your computer, where `adc_get` isn't a thing (you get `NameError: name 'adc_get' is not defined`, that's what that means, the Jumperless never saw it).
 
 ---
 
@@ -174,7 +232,7 @@ Click a file in `Device Files` and it opens as a local working copy, so Pylance 
 
 On the board, scripts run with the full API preloaded (`from jumperless import *` happens before your code). The editor matches that automatically: on first activation the extension installs typed stubs and points your Python analyzer at them, so files opened from the device resolve the whole API with no imports and no setup. (Controlled by `jumperless.setup.autoSetUpGlobally`, on by default.)
 
-- `typings/jumperless.pyi` — typed stub, synced from [JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS)
+- `typings/jumperless.pyi` — typed stub, synced from [JumperlOS](https://github.com/Architeuthis-Flux/JumperlOS) (by hand, so it can be a few functions behind `scripts/jumperless.pyi` on main)
 - `typings/builtins.pyi` — standard-library builtins with Jumperless globals layered on top (typo detection still works)
 - `typings/time.pyi` — MicroPython `time` extras (`ticks_ms`, `sleep_ms`, …)
 
@@ -358,6 +416,9 @@ There are three ways to run one. From the REPL, type `files`, open the script, a
 **REPL not responding:**
 - Press Ctrl+Q to force quit on the main menu port (port 1), or Ctrl+C on the 3rd port that JumperIDE uses
 - Unplug / replug your Jumperless (don't worry, almost everything is persistent)
+
+**`@micropython.native` / `@micropython.viper` reboots the board:**
+- On 5.7.11.0 defining one is fine, calling it hard faults (the function pointer is missing its Thumb bit, so the first call is a UsageFault). After it comes back, press `m` on the main menu port and it prints a `[crashlog]` line saying so.
 
 
 
