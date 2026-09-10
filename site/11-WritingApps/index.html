@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -158,13 +162,6 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -239,7 +236,7 @@
 <p>From the terminal you run it from MicroPython with <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s2">&quot;Custom App&quot;</span><span class="p">)</span></code> (the <code class="language-jython highlight"><span class="o">&gt;</span></code> prefix works, so <code class="language-jython highlight"><span class="o">&gt;</span><span class="nf nf-Jumperless">run_app</span><span class="p">(</span><span class="s2">&quot;Custom App&quot;</span><span class="p">)</span></code>). There's no digit shortcut.</p>
 <p>If you want your own single-character shortcut, find an unused one and register it in <code class="language-jython highlight"><span class="n">src</span><span class="o">/</span><span class="n">SingleCharCommands</span><span class="o">.</span><span class="n">cpp</span></code> with <code class="language-jython highlight"><span class="n">registerCommand</span><span class="p">(</span><span class="s1">&#39;&lt;char&gt;&#39;</span><span class="p">,</span> <span class="s2">&quot;short description&quot;</span><span class="p">,</span> <span class="s2">&quot;help text&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span></code>, where the callback calls <code class="language-jython highlight"><span class="n">runApp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">char</span><span class="o">*</span><span class="p">)</span><span class="s2">&quot;Your App Name&quot;</span><span class="p">)</span></code> and returns <code class="language-jython highlight"><span class="n">CMD_DONT_SHOW_MENU</span></code>. Run it by name, not by number.</p>
 <h2 id="to-actually-write-the-app">To actually write the app</h2>
-<p>The code for <code class="language-jython highlight"><span class="n">Custom</span> <span class="n">App</span></code> is <a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/src/Apps.cpp"><code class="language-jython highlight"><span class="n">customApp</span><span class="p">()</span></code> in <code class="language-jython highlight"><span class="n">src</span><span class="o">/</span><span class="n">Apps</span><span class="o">.</span><span class="n">cpp</span></code></a> (line 1358 in 5.7.11.0). It's mostly uncommented, but it shows the calls: <code class="language-jython highlight"><span class="n">addBridgeToState</span></code> / <code class="language-jython highlight"><span class="n">removeBridgeFromState</span></code> plus <code class="language-jython highlight"><span class="n">refreshConnections</span></code>, <code class="language-jython highlight"><span class="n">setTopRail</span></code>, <code class="language-jython highlight"><span class="n">setDacByNumber</span></code>, <code class="language-jython highlight"><span class="n">readAdcVoltage</span></code>, INA0 current and bus voltage, <code class="language-jython highlight"><span class="n">probing</span><span class="o">.</span><span class="n">justReadProbe</span></code> and <code class="language-jython highlight"><span class="n">checkProbeButtonState</span></code>, and <code class="language-jython highlight"><span class="n">b</span><span class="o">.</span><span class="nf nf-JFS">print</span></code> on the LEDs. Fair warning, it paints <code class="language-jython highlight"><span class="n">Fuck</span>    <span class="n">you</span><span class="err">!</span></code> on the breadboard at one point. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing.</p>
+<p>The code for <code class="language-jython highlight"><span class="n">Custom</span> <span class="n">App</span></code> is <a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/src/Apps.cpp"><code class="language-jython highlight"><span class="n">customApp</span><span class="p">()</span></code> in <code class="language-jython highlight"><span class="n">src</span><span class="o">/</span><span class="n">Apps</span><span class="o">.</span><span class="n">cpp</span></code></a> (line 1358 in 5.7.11.0). It's mostly uncommented, but it shows the calls: <code class="language-jython highlight"><span class="n">addBridgeToState</span></code> / <code class="language-jython highlight"><span class="n">removeBridgeFromState</span></code> plus <code class="language-jython highlight"><span class="n">refreshConnections</span></code>, <code class="language-jython highlight"><span class="n">setTopRail</span></code>, <code class="language-jython highlight"><span class="n">setDacByNumber</span></code>, <code class="language-jython highlight"><span class="n">readAdcVoltage</span></code>, INA0 current and bus voltage, <code class="language-jython highlight"><span class="n">probing</span><span class="o">.</span><span class="n">justReadProbe</span></code> and <code class="language-jython highlight"><span class="n">checkProbeButtonState</span></code>, and <code class="language-jython highlight"><span class="n">b</span><span class="o">.</span><span class="nf nf-JFS">print</span></code> on the LEDs. Fair warning, it paints <code class="language-jython highlight"><span class="n">Fuck</span>    <span class="n">you</span><span class="err">!</span></code> on the breadboard at one point. There are tons more, but what's shown there are the higher-level helper functions that should roughly do what they say they're doing. If you want to skip the router entirely, <code class="language-jython highlight"><span class="n">sendXYraw</span><span class="p">(</span><span class="n">chip</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code> sets a single crosspoint on one of the crossbar chips directly (and 0 instead of 1 clears it), it's the same thing as <code class="language-jython highlight"><span class="nf nf-Jumperless">send_raw</span><span class="p">()</span></code> in MicroPython.</p>
 <p>If your app changes connections, call <code class="language-jython highlight"><span class="n">SlotManager</span><span class="p">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">.</span><span class="n">enterTemporarySlot</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span></code> at the start and <code class="language-jython highlight"><span class="n">leaveApp</span><span class="p">()</span></code> on every way out, so the user's slot comes back the way they left it.</p>
               
             </div>

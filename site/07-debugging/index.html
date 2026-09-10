@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul class="current">
@@ -113,6 +117,8 @@
     <li class="toctree-l2"><a class="reference internal" href="#bridge-array">Bridge Array</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#net-list">Net List</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scan">Scan</a>
     </li>
     </ul>
                 </li>
@@ -156,13 +162,6 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -284,18 +283,21 @@
 
 <hr />
 <h2 id="bridge-array">Bridge Array</h2>
-<p>Enter <code class="language-jython highlight"><span class="n">b</span></code>. This is generally the most helpful one for <em>me</em> to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.</p>
+<p>Enter <code class="language-jython highlight"><span class="n">b</span></code>. This is generally the most helpful one for <em>me</em> to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me. (there's an older version of this output in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly">this Crowd Supply update</a>)</p>
 <p>It prints your duplicate stacking settings first, then the bridge array, then the paths, then the chip status. <code class="language-jython highlight"><span class="n">b0</span></code> shows every path instead of just the routed duplicates, and <code class="language-jython highlight"><span class="n">b2</span></code> shows every duplicate.</p>
 <p><img alt="Screenshot 2025-05-30 at 7 04 54 AM" src="https://github.com/user-attachments/assets/05e55021-b1f1-49af-8e7b-230d47522aed" /></p>
 <hr />
 <h2 id="net-list">Net List</h2>
 <p>Enter <code class="language-jython highlight"><span class="n">n</span></code> to show this one. If you have an <code class="language-jython highlight"><span class="n">ADC</span></code>, a <code class="language-jython highlight"><span class="n">gpio</span></code> input, or a <code class="language-jython highlight"><span class="n">gpio</span></code> output routed to a net, it'll stay up and live update when those readings change, or when you move the clickwheel highlight. Any key ends it, and so does a probe button press or a click of the clickwheel. That key doesn't get eaten though, it runs as your next command, so press Enter or space to get out quietly rather than a letter that does something (<code class="language-jython highlight"><span class="n">x</span></code> would clear all your connections).</p>
-<p><img alt="Screenshot 2025-05-30 at 7 10 04 AM" src="https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804" /> </p>
+<p><img alt="Screenshot 2025-05-30 at 7 10 04 AM" src="https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804" /></p>
+<hr />
+<h2 id="scan">Scan</h2>
+<p><code class="language-jython highlight"><span class="n">Apps</span></code> &gt; <code class="language-jython highlight"><span class="n">Scan</span></code> on the click wheel goes through every row and prints the voltage on it, rows with nothing on them come out as <code class="language-jython highlight"><span class="n">floating</span></code> (that's how you tell a floating row from one that's tied to GND, which reads 0V). It keeps looping until you type something or click the wheel.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../05.7-gpio/" class="btn btn-neutral float-left" title="GPIO & BCD Counter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../05.7-gpio/" class="btn btn-neutral float-left" title="GPIO"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../07.5-automation/" class="btn btn-neutral float-right" title="Automation & LLM Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 

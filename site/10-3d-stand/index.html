@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -146,19 +150,14 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#rubber-feet">Rubber Feet</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dimensions">Dimensions</a>
+    </li>
     </ul>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -200,11 +199,17 @@
 <p>Spin the model below to have a look and switch between variants. Grab the <strong>STL</strong> to print right away, or the <strong>STEP</strong> if you'd rather tweak the design (and let me know about any improvements you make and I'll add it here):</p>
 <p><stl-viewer></stl-viewer></p>
 <p><a href="https://www.printables.com/model/1249365-jumperless-stand">Here are the 3D models on Printables,</a> if you prefer that for whatever reason.</p>
-<p><a href="https://www.printables.com/model/12493x65-jumperless-stand"><img alt="3DStandCollage" src="https://github.com/user-attachments/assets/37556876-82ce-4ba4-88f6-f9eaf46da09f" /></a></p>
-<p>These all should print fine without supports, the angles of the probe slot were designed so there aren't any flat overhangs, but you do you.</p>
+<p><a href="https://www.printables.com/model/1249365-jumperless-stand"><img alt="3DStandCollage" src="https://github.com/user-attachments/assets/37556876-82ce-4ba4-88f6-f9eaf46da09f" /></a></p>
+<p>These all should print fine without supports, the angles of the probe slot were designed so there aren't any flat overhangs, but you do you. (these work for the OG Jumperless too, I added a notch to accommodate the slightly wider OG probe.)</p>
+<p>There's also a laser cut acrylic one. Turns out designing acrylic stuff that a human can assemble and stays together is hard and also I suck at it. This will fit together, but the order of operations is super weird and kinda needs to have some hot glue shoved into all the slotted parts to feel solid. But if you have a laser and want to try it, the files are <a href="https://github.com/Architeuthis-Flux/JumperlessV5/tree/main/Jumperless23V50/Stands/Acrylic">on GitHub</a>. Both stands are in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/time-to-get-excited">this Crowd Supply update</a>.</p>
 <h2 id="rubber-feet">Rubber Feet</h2>
 <p>These <a href="https://www.amazon.com/AmazonBasics-300-Piece-Adhesive-Rubber-Bumpers/dp/B087MG3G76">stick-on rubber feet</a> also make it a lot more solid on your desk (and having the different sizes lets you shim the angle by putting different ones on the front and back.) </p>
-<p>If you were wondering why there's an little square of sticky feet in your box under the FPC board, this is why.</p>
+<p>If you were wondering why there's an little square of sticky feet in your box under the FPC board, this is why. (the ones on the bottom of the Jumperless itself are 8x2.5mm, in case you want extras around for when you feel like doing any soldering on it and take them off.)</p>
+<h2 id="dimensions">Dimensions</h2>
+<p>If you want to take a swing at designing your own stand or something, here are the dimensions (in mm):</p>
+<p><img alt="Jumperless V5 and probe dimensions in mm" src="../assets/JumperlessV5dimensions.png" /></p>
+<p>Or let your computer handle the measuring and just use <a href="https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/Jumperless23V50/3Dmodels/JumperlessAndProbe.3mf">the 3D model</a>. The shell is <a href="https://github.com/Architeuthis-Flux/JumperlessV5/tree/main/Jumperless23V50/Board%20Shell">in the same repo</a> if you want to change it.</p>
+<p>I put holes on both sides of the breadboard shell to accept Legos and technic axles, in case you want to make a stand or something with that (both sides are holes, there's nothing sticking out on the other side). The other 3 holes on the sides are for cooling, the idea is to use the spring clips as cooling fins and let air flow in from the side and out through the breadboard holes. Those are both from <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/good-news-everyone-things-are-happening">this Crowd Supply update</a>.</p>
               
             </div>
           </div><footer>

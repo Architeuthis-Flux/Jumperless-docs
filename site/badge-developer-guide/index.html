@@ -10,7 +10,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.jumperless.org/badge-developer-guide/">
-    <meta property="og:title" content="Developer Guide - Jumperless Docs">
+    <meta property="og:title" content="Temporal Badge — MicroPython Developer Guide - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
     <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
@@ -19,7 +19,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.jumperless.org/badge-developer-guide/">
-    <meta name="twitter:title" content="Developer Guide - Jumperless Docs">
+    <meta name="twitter:title" content="Temporal Badge — MicroPython Developer Guide - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
     <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
@@ -41,7 +41,7 @@
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">
 
-    <title>Developer Guide - Jumperless Docs</title>
+    <title>Temporal Badge — MicroPython Developer Guide - Jumperless Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -149,165 +153,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Developer Guide</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-what-is-this-badge">1. What Is This Badge?</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#hardware-at-a-glance">Hardware at a Glance</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#physical-layout">Physical Layout</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#orientation-and-nametag-mode">Orientation and Nametag Mode</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-getting-started-with-jumperide">2. Getting Started with JumperIDE</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#file-management">File Management</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-your-first-app">3. Your First App</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#hello-world">Hello World</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#adding-input">Adding Input</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#using-the-native-ui-chrome">Using the Native UI Chrome</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-app-structure">4. App Structure</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#single-file-apps">Single-File Apps</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#multi-file-apps">Multi-File Apps</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#showing-up-on-the-main-menu">Showing Up on the Main Menu</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#icon-file-iconpy">Icon File (icon.py)</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#hot-refresh">Hot-Refresh</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#limits">Limits</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#tile-order">Tile Order</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#user-reorder">User Reorder</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#persistent-matrix-apps">Persistent Matrix Apps</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#saving-data">Saving Data</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#5-micropython-cheat-sheet">5. MicroPython Cheat Sheet</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#available-modules">Available Modules</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#key-differences-from-cpython">Key Differences from CPython</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#6-hardware-guide">6. Hardware Guide</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#oled-display-12864">OLED Display (128×64)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led-matrix-88">LED Matrix (8×8)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#buttons">Buttons</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#joystick">Joystick</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#imu">IMU (Accelerometer)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#haptics">Haptics</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir-sendreceive">IR Send/Receive</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir-playground-modes-consumer-nec-raw-symbols">IR Playground Modes (consumer NEC + raw symbols)</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#7-advanced-topics">7. Advanced Topics</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse-overlay">Mouse Overlay</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#flipnametag-detection">Flip/Nametag Detection</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#native-ui-chrome">Native UI Chrome</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#serial-screenshots-oled-led">Serial screenshots (OLED + LED)</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#8-badge-to-badge-communication">8. Badge-to-Badge Communication</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#simple-ping-pong">Simple Ping-Pong</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#richer-data-with-multi-word-frames">Richer Data with Multi-Word Frames</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tips-for-ir-communication">Tips for IR Communication</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#9-firmware-updates-community-apps">9. Firmware Updates &amp; Community Apps</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#where-state-lives-mental-model">Where state lives (mental model)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#what-the-user-sees">What the user sees</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#update-cadence">Update cadence</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#installing-a-firmware-update">Installing a firmware update</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#community-apps">Community Apps</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#pushing-files-via-jumperide">Pushing files via JumperIDE</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#re-flashing-the-fatfs-partition">Re-flashing the FATFS partition</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#settingstxt-keys">settings.txt keys</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#community_appsjson-schema-v2">community_apps.json schema (v2)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#expanding-storage-after-a-partition-bump">Expanding storage after a partition bump</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#forking-the-firmware">Forking the firmware</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#security-stance">Security stance</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#10-tips-and-gotchas">10. Tips and Gotchas</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#memory-management">Memory Management</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#display">Display</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led-matrix">LED Matrix</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir">IR</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#input">Input</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#general">General</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#updates-wifi">Updates &amp; WiFi</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#quick-reference-card">Quick Reference Card</a>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -334,8 +179,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Temporal Badge</li>
-      <li class="breadcrumb-item active">Developer Guide</li>
+      <li class="breadcrumb-item active">Temporal Badge — MicroPython Developer Guide</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -1847,10 +1691,6 @@ bring your own keys.</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../10.5-og-jumperless/" class="btn btn-neutral float-left" title="OG Jumperless"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../badge-api-reference/" class="btn btn-neutral float-right" title="API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -1872,10 +1712,6 @@ bring your own keys.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../10.5-og-jumperless/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../badge-api-reference/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

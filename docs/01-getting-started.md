@@ -10,11 +10,11 @@ This page walks you through the first hour with a Jumperless V5. Each section en
 
 ![the box: the probe, the Jumperless, the SBC adapter and the FPC adapter](assets/batchone-2.jpg)
 
-- **The Jumperless.** The breadboard with the RP2350 and 12 crossbar switches underneath it.
-- **The probe.** Plugs into the socket on the right side of the board. It has a `Select` / `Measure` switch and two buttons, `Connect` (front) and `Remove` (rear).
-- **The SBC adapter.** It plugs into the Nano header and turns it into a Raspberry Pi's 40 pin header (both adapters are on the [Adapter Boards](05.3-adapters.md) page).
-- **The FPC adapter and a ribbon cable.** It brings the DACs, ADCs, GPIO and the UART out to pin headers so you can clip a scope or meter to them, plus 2 Qwiic ports and a spot for a Bus Pirate. It's optional, you don't need it for anything on this page.
-- **A sheet of stick-on rubber feet.** These are for the [3D printed stand](10-3d-stand.md), which isn't in the box because it doesn't fit.
+- <span class="red">The Jumperless.</span> The breadboard with the RP2350 and 12 crossbar switches underneath it.
+- <span class="orange">The probe.</span> Plugs into the socket on the right side of the board. It has a `Select` / `Measure` switch and two buttons, `Connect` (front) and `Remove` (rear).
+- <span class="yellow">The SBC adapter.</span> It plugs into the Nano header and turns it into a Raspberry Pi's 40 pin header (both adapters are in the [Adapter Boards](09.8-odds-and-ends.md#adapter-boards) section of Odds and Ends).
+- <span class="green">The FPC adapter and a ribbon cable.</span> It brings the DACs, ADCs, GPIO and the UART out to pin headers so you can clip a scope or meter to them, plus 2 Qwiic ports and a spot for a Bus Pirate. It's optional, you don't need it for anything on this page.
+- <span class="blue">A sheet of stick-on rubber feet.</span> These are for the [3D printed stand](10-3d-stand.md), which isn't in the box because it doesn't fit.
 
 Two things that are *not* in the box but you'll probably want: a [stand](10-3d-stand.md) and an [OLED](04-oled.md). The OLED copies everything the breadboard LEDs say into actual text, and a few interactions are easier with one. On rev 7 boards it plugs straight into the pin headers on the Jumperless, on rev 5 boards (Crowd Supply and Mouser) it goes on the SBC adapter.
 
@@ -24,7 +24,7 @@ Two things that are *not* in the box but you'll probably want: a [stand](10-3d-s
 
 Plug in the USB-C and it will do a startup animation on the LEDs. That's it, it's on.
 
-It also shows up on your computer as four serial ports. The first one is the main terminal, where the menu shows up when you type `m` and where most of the typed commands on this site go. You don't *need* the terminal for anything on this page, but it's useful to have open because everything the board prints on the LEDs gets printed there too. The easiest way to open it is [the App](03-app.md), but any serial terminal works (the baud rate doesn't matter).
+It also shows up on your computer as four serial ports. The first one is the main terminal, where the menu shows up when you type `m` and where most of the typed commands on this site go. You don't *need* the terminal for anything on this page, but it's useful to have open because everything the board prints on the LEDs gets printed there too. The easiest way to open it is [the App](03-app.md), but any serial terminal works.
 
 When it boots it loads the last `slot` you were using, so your circuit is still there after a power cycle.
 

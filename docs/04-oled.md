@@ -25,7 +25,7 @@ That's how rev 5 boards (the Crowd Supply and Mouser ones) do it, and the OLED t
 
     ![an OLED in the header at the VIN end of the Nano header, sticking out past the edge by the USB-C](assets/oledPositions-2.jpg)
 
-    On rev 5 boards it goes in the 4 pin column at the bottom left of the SBC/SMD/OLED board (the [SBC adapter](05.3-adapters.md)), with that in the Nano header:
+    On rev 5 boards it goes in the 4 pin column at the bottom left of the SBC/SMD/OLED board (the [SBC adapter](09.8-odds-and-ends.md#sbc-adapter)), with that in the Nano header:
 
     ![the SBC adapter with the OLED spot marked](assets/oledPositions-3.jpg)
 

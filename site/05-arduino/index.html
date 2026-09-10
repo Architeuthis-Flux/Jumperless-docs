@@ -150,6 +150,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -158,7 +162,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -205,13 +209,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -250,7 +247,7 @@
                 <h1 id="arduino-stuff">Arduino Stuff</h1>
 <h2 id="uart-passthrough">UART Passthrough</h2>
 <p>With an Arduino Nano in the header and the UART lines connected, anything on those lines should be passed through to the second serial port that shows up when you plug in your Jumperless. </p>
-<p>Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly.</p>
+<p>Don't worry about the baud rate, the Jumperless senses what the host computer is set to and changes the speed accordingly. Same for the parity and stop bits, so stuff that isn't 8N1 goes through (UPDI wants 8E2, one of the beta testers found that out flashing an ATtiny412 through it, that whole saga is in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/a-series-of-tubes">this Crowd Supply update</a>).</p>
 <p>The Nano goes in the header socket on the board, and every signal pin on that header is a routable node - <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> through <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code> through <code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">AREF</span></code> and <code class="language-jython highlight"><span class="n">RESET</span></code>. You can connect any of them to a breadboard row or a rail just like anything else. The power pins (<code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code>, <code class="language-jython highlight"><span class="mi">3</span><span class="n">V3</span></code>, <code class="language-jython highlight"><span class="n">VIN</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>) aren't routable. <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code> are the only ones that ever get wired up for you.</p>
 <p><img width="360" alt="Screenshot 2025-05-19 at 11 07 55 AM" src="https://github.com/user-attachments/assets/2b255e34-0d0a-4e86-b577-d59c9561fa42" /></p>
 <h2 id="quick-connection-shortcuts">Quick Connection Shortcuts</h2>
@@ -266,7 +263,7 @@
 <p><strong>Tip:</strong> You can also use <a href="https://wokwi.com">Wokwi</a> with the Jumperless Bridge app for flashing - no need to even have the Arduino IDE open</p>
 <hr />
 <h2 id="commands-from-routable-uart">Commands from Routable UART</h2>
-<p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The command inside the tags gets executed. The tagged text still shows up on the passthrough port along with everything else your Arduino prints, it doesn't get stripped out - but it's never echoed back down the UART to the Arduino.</p>
+<p>You can send commands to the Jumperless from your Arduino (or anything connected to the routable UART) by wrapping them in XML-style tags. The command inside the tags gets executed. The tagged text still shows up on the passthrough port along with everything else your Arduino prints, it doesn't get stripped out - but it's never echoed back down the UART to the Arduino. (there's a demo of netlists going in over the UART in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly">this Crowd Supply update</a>.)</p>
 <h3 id="two-types-of-tags">Two Types of Tags</h3>
 <p>There are two flavors of command tags, depending on what you want to do:</p>
 <h4 id="tags-raw-commands"><code class="language-jython highlight"><span class="o">&lt;</span><span class="n">j</span><span class="o">&gt;</span></code> Tags - Raw Commands</h4>
@@ -504,7 +501,7 @@
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../04-oled/" class="btn btn-neutral float-left" title="OLED Support"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../06-config/" class="btn btn-neutral float-right" title="Config File">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../05.3-adapters/" class="btn btn-neutral float-right" title="Adapter Boards">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -530,7 +527,7 @@
       <span><a href="../04-oled/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../06-config/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../05.3-adapters/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

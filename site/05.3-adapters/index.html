@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/05.3-adapters/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/05.3-adapters/">
+    <meta property="og:title" content="Adapter Boards - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/05.3-adapters/">
+    <meta name="twitter:title" content="Adapter Boards - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/05.3-adapters/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Adapter Boards - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Adapter Boards</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#sbc-adapter">SBC Adapter</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fpc-adapter">FPC Adapter</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Adapter Boards</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="adapter-boards">Adapter Boards</h1>
+<p>There are two little boards in the box with your Jumperless, the SBC adapter and the FPC adapter (on rev 5 boards the OLED plugs into the SBC adapter, that's on the <a href="../04-oled/">OLED page</a>).</p>
+<p><img alt="a Raspberry Pi, the SBC adapter and a Jumperless V5 with an OLED on it" src="../assets/sbcadapters-1_jpg_md-xl.jpg" />
+That's the render from the campaign, the OLED spot moved on the real one.</p>
+<h2 id="sbc-adapter">SBC Adapter</h2>
+<p>This one plugs into the Nano header and maps it to the GPIO pins on any Raspberry Pi, so the Pi's pins show up as <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s you can route like anything else. The Pi's GPIO numbers are printed on it (the BCM ones, not the header positions). Yes, the Raspberry Pi's 40 pin GPIO port has some very silly pin numbering, so I had to kinda follow that.</p>
+<p>The Pi's <code class="language-jython highlight"><span class="n">TXD</span></code> and <code class="language-jython highlight"><span class="n">RXD</span></code> (14 and 15 on the adapter, pins 8 and 10 on the Pi) land on <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D1</span></code>, so <code class="language-jython highlight"><span class="n">A</span></code> connects them to the Jumperless's routable UART and you can have the Pi control the Jumperless over the UART lines for fully remote Jumperless-ing, the tags for that are on the <a href="../05-arduino/#commands-from-routable-uart">Arduino page</a>. Or don't press <code class="language-jython highlight"><span class="n">A</span></code> and route them wherever you want on the breadboard.</p>
+<p>There's a little 2 pad solder jumper on it by the <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code> label in the <code class="language-jython highlight"><span class="n">Tx</span></code>/<code class="language-jython highlight"><span class="n">Rx</span></code> corner (<code class="language-jython highlight"><span class="n">JP3</span></code> in the KiCad files, it comes open) that you can bridge to connect the 5V busses together and power your Jumperless from the Raspberry Pi. This is kinda why I didn't want to mess with USB-C Power Delivery or anything, it's kinda cool to just be able to shove in 5V from wherever, as long as it can provide 500-1000mA.</p>
+<p>The 4 pin column at the bottom left (with the Pi header at the top) is where the OLED goes, it's on <code class="language-jython highlight"><span class="no no-Jumperless">D2</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D3</span></code>, which is the <code class="language-jython highlight"><span class="n">gpio_7_8</span></code> connection on the <a href="../04-oled/">OLED page</a>. The OLED friction-fits onto the board with wiggly offset holes so you can always remove it to read the pin mappings for the Pi.</p>
+<p>I also threw in some universal-ish SMD footprints on the top, between the header rows. Also note that the SMD pads with the blobby extensions aren't connected to anything, I'm really shoving a square peg in an Arduino Nano shaped hole here, so some weirdness was inevitable.</p>
+<p>I talked about these in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/single-board-computer-fans-rejoice">my first update</a>, and there are actual pictures instead of renders in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/good-news-everyone-things-are-happening">this one</a>.</p>
+<h2 id="fpc-adapter">FPC Adapter</h2>
+<p>The ribbon cable goes into the 20 pin FPC connector on the back of the Jumperless and brings the routable GPIO 1-8, the routable UART <code class="language-jython highlight"><span class="n">Tx</span></code> and <code class="language-jython highlight"><span class="n">Rx</span></code>, ADC 0-3, DAC 0 and 1, and 5V and GND out to pin headers on this board so you can clip a scope or meter to them. GPIO (or RP) 6 and 7 (<code class="language-jython highlight"><span class="n">RP6</span></code> and <code class="language-jython highlight"><span class="n">RP7</span></code> on the silkscreen) are on there too, but they only go to the RP2350, they're not on the crossbar (they're the <code class="language-jython highlight"><span class="n">rp6_rp7</span></code> OLED connection on the <a href="../04-oled/">OLED page</a>).</p>
+<p><img alt="the FPC adapter with the solder blob spots marked" src="../assets/BPblobGuide.png" /></p>
+<p>It has 2 Qwiic / STEMMA QT ports. You hook their <code class="language-jython highlight"><span class="n">SDA</span></code> and <code class="language-jython highlight"><span class="n">SCL</span></code> to any of the routable GPIO (or <code class="language-jython highlight"><span class="n">Tx</span></code>/<code class="language-jython highlight"><span class="n">Rx</span></code>/<code class="language-jython highlight"><span class="n">RP6</span></code>/<code class="language-jython highlight"><span class="n">RP7</span></code>) with that weird, wiggly footprint in the middle, one column is <code class="language-jython highlight"><span class="n">SDA</span></code> and the other is <code class="language-jython highlight"><span class="n">SCL</span></code>, put a solder blob on each one where you want it (they don't go anywhere until you do). You can also connect each port to a different pair of GPIO by cutting it somewhere in the middle. They come with 3.3V power (there's a little regulator on the board for it), the three-way solder jumper with <code class="language-jython highlight"><span class="mi">3</span><span class="n">V</span></code> and <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code> next to it (<code class="language-jython highlight"><span class="n">JP1</span></code> in the KiCad files) switches that, cut the <code class="language-jython highlight"><span class="mi">3</span><span class="n">V</span></code> side that comes bridged and blob the <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code> side.</p>
+<p>The column of double pads on the right (in the photo above) fits a <a href="https://buspirate.com/">Bus Pirate</a> cable, its IO pins land on the routable GPIO and its <code class="language-jython highlight"><span class="n">Vout</span></code> on the <code class="language-jython highlight"><span class="n">Ax</span></code> pad. Blob <code class="language-jython highlight"><span class="n">Ax</span></code> to whichever ADC or DAC you want <code class="language-jython highlight"><span class="n">Vout</span></code> on, same deal as the Qwiic lines.</p>
+<p>(note: the GPIO numbers on the silkscreen start at 0, so 0 on the adapter is GPIO 1 on the Jumperless.)</p>
+<p>The Jumperless can be powered from the 5V and GND pins on here instead of USB, same as the Nano header (that's on the <a href="../09.8-odds-and-ends/#safety-info">safety card</a>). The pads along one edge are for daisy chaining a second Jumperless, there's no firmware for that yet.</p>
+<p>This one's in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/good-news-everyone-things-are-happening">that same update</a> too.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../05-arduino/" class="btn btn-neutral float-left" title="Arduino Stuff"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../06-config/" class="btn btn-neutral float-right" title="Config File">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../05-arduino/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../06-config/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>

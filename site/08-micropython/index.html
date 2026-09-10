@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -128,37 +132,29 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#jumperlesspyi">jumperless.pyi</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stubs-by-hand">Stubs by hand</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jupyter-notebooks">Jupyter notebooks</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#jumperide-for-vs-code">JumperIDE for VS Code</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#walkthrough">Walkthrough</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#install">Install</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#features">Features</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#actions-panel">Actions panel</a>
+    <li class="toctree-l3"><a class="reference internal" href="#connect">Connect</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#serial-connection">Serial connection</a>
+    <li class="toctree-l3"><a class="reference internal" href="#files-run-stop">Files, run, stop</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#run-stop">Run / Stop</a>
+    <li class="toctree-l3"><a class="reference internal" href="#serial-terminal">Serial terminal</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#device-file-browser">Device file browser</a>
+    <li class="toctree-l3"><a class="reference internal" href="#oled-bitmaps">OLED bitmaps</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#repl-terminal">REPL terminal</a>
+    <li class="toctree-l3"><a class="reference internal" href="#api-reference">API reference</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#serial-terminal">Serial terminal</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jumpernet">JumperNet</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#autocomplete-hover-docs">Autocomplete &amp; hover docs</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#oled-bitmap-editor">OLED bitmap editor</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#jumpernet-registry">JumperNet registry</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#api-reference-panel">API reference panel</a>
-    </li>
-        </ul>
+    <li class="toctree-l3"><a class="reference internal" href="#settings">Settings</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#zero-import-autocomplete">Zero-import autocomplete</a>
     </li>
@@ -237,13 +233,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -298,19 +287,68 @@
 <p>Holy shit I should have done this years ago</p>
 <p>Seriously, this is <em>such</em> a better experience than using the onboard text editor and REPL, you should play with it right now</p>
 <p>Go to <a href="https://ide.jumperless.org/">https://ide.jumperless.org/</a> and press the connect button.</p>
-<p><img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" /></p>
+<p><img alt="JumperIDE before connecting" src="../assets/verify/jumperide-landing.png" /></p>
 <p>Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect</p>
-<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
+<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
 <p>Then open some examples (this update should overwrite the examples with the new ones) and hit the Run / Stop button</p>
-<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 14 23 PM" src="https://github.com/user-attachments/assets/0190af73-cd5f-49e9-b378-bb6d1c8a7bb4" /></p>
+<p><img alt="gpio_basics.py running in JumperIDE" src="../assets/verify/jumperide-run.png" /></p>
 <p>Press it again to Stop. If you make changes, hit the green Save button next to it (it takes a second and the script should be stopped.)</p>
-<p><img width="1306" height="1249" alt="Screenshot 2025-12-08 at 6 15 54 PM" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" /></p>
+<p><img alt="an edited file waiting to be saved" src="../assets/verify/jumperide-save.png" /></p>
+<p><strong>Serial terminal.</strong> The <code class="language-jython highlight"><span class="n">Serial</span> <span class="n">Terminal</span></code> tab is port 1, the board's main menu, so you get the REPL and the menu side by side. Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> in that tab, choose the 1st Jumperless port this time, and type <code class="language-jython highlight"><span class="n">m</span></code>.</p>
+<p><img alt="the Serial Terminal tab showing the main menu" src="../assets/verify/jumperide-terminal.png" /></p>
+<p><strong>API reference.</strong> The book icon opens the MicroPython API docs on the right, and if you have <code class="language-jython highlight"><span class="n">Go</span> <span class="n">To</span> <span class="n">Clicked</span> <span class="n">Function</span></code> checked, the docs should jump to whatever function you click in your code.</p>
+<p><img alt="the API reference following a click on adc_get" src="../assets/verify/jumperide-api-ref.png" /></p>
+<p><strong>JumperNet Registry.</strong> The Jumperless icon in the sidebar is the JumperNet Registry, scripts people have shared from their own boards. It's one list, everybody sees the same one, and there's no account. Click a script and it opens in a tab, <code class="language-jython highlight"><span class="n">Run</span></code> runs it on your board.</p>
+<p><img alt="the JumperNet Registry list" src="../assets/verify/jumperide-registry.png" /></p>
+<p><img alt="a registry script open in the editor" src="../assets/verify/jumperide-registry-script.png" /></p>
+<p>To share yours, have it open in a tab and click <code class="language-jython highlight"><span class="n">Upload</span> <span class="n">script</span> <span class="n">to</span> <span class="n">registry</span></code> at the top of the list. It asks for a name, your name, and a line about what it does (the code box is already filled in from the tab), and <code class="language-jython highlight"><span class="n">Upload</span></code> puts it in the list for everyone right away, there's no review step. Work in progress scripts are fine, that's what it's for.</p>
+<p><img alt="the upload dialog" src="../assets/verify/jumperide-registry-upload.png" /></p>
+<p>The three little icons on a row are open, edit and history. Anyone can edit anyone's script (it's wiki style, so fix the typos you find, and replace the prefilled <code class="language-jython highlight"><span class="n">Your</span> <span class="nf nf-JFS">name</span></code> with yours or the edit gets filed under the last author), every version stays in the history, and <code class="language-jython highlight"><span class="n">Load</span></code> opens an old one in its own tab without touching the current one.</p>
+<p>To delete a script, edit it and set the name to <code class="language-jython highlight"><span class="n">delete</span></code>. Nothing checks who you are, so only delete your own. OLED images work the same way for uploading and deleting (<code class="language-jython highlight"><span class="n">Upload</span> <span class="n">OLED</span> <span class="n">image</span></code> shows up when a <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> is the open tab, <code class="language-jython highlight"><span class="n">Browse</span> <span class="n">Images</span></code> is the gallery), except only the original author can edit one, and an image's history is the last 50 versions. Every script uploaded gets synced into the <a href="https://github.com/Architeuthis-Flux/JumperIDE/tree/main/cloudflare/script-registry-worker/scripts">JumperIDE repo</a> on its own, so the scripts are all on GitHub too, images live only in the registry.</p>
+<p><img alt="a script's history" src="../assets/verify/jumperide-registry-history.png" /></p>
+<p><strong>OLED bitmaps.</strong> <code class="language-jython highlight"><span class="n">Tools</span></code> &gt; <code class="language-jython highlight"><span class="n">New</span> <span class="n">OLED</span> <span class="n">bitmap</span></code> gives you a 128x32 canvas, click or drag to draw, and with <code class="language-jython highlight"><span class="n">Live</span> <span class="n">to</span> <span class="n">device</span></code> checked it should show up on the board's OLED as you draw (<a href="../04-oled/">more about the OLED here</a>). <code class="language-jython highlight"><span class="n">Download</span> <span class="o">.</span><span class="n">bin</span></code> saves it and <code class="language-jython highlight"><span class="n">Upload</span> <span class="n">to</span> <span class="n">registry</span></code> shares it. <code class="language-jython highlight"><span class="n">Browse</span> <span class="n">Images</span></code> in the registry shows everyone else's.</p>
+<p><img alt="drawing in the OLED bitmap editor" src="../assets/verify/jumperide-oled-editor.png" /></p>
+<p><img alt="the same drawing on the board's OLED" src="../assets/verify/jumperide-oled-live.png" /></p>
+<p><img alt="the shared OLED images in the registry" src="../assets/verify/jumperide-registry-images.png" /></p>
 <h3 id="if-you-write-something-cool-publish-it-to-the-jumpernet-registry-from-jumperide-for-vs-code-jumperless-publish-script-to-registry-and-ill-add-the-good-ones-to-the-default-examples">If you write something cool, publish it to the JumperNet registry from JumperIDE for VS Code (<strong>Jumperless: Publish Script to Registry</strong>) and I'll add the good ones to the default examples.</h3>
-<p>This is using <a href="https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode">MicroPython's built-in Raw REPL</a>, so anything that can interact with that will work here. I've tested it with JumperIDE, both the web one and the VS Code extension, but anything that speaks the raw REPL (like <code class="language-jython highlight"><span class="n">mpremote</span></code>) should work on that 3rd port.</p>
+<p>This is using <a href="https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode">MicroPython's built-in Raw REPL</a>, so anything that can interact with that will work here. I've tested it with JumperIDE, both the web one and the VS Code extension, but anything that speaks the raw REPL (like <code class="language-jython highlight"><span class="n">mpremote</span></code>) works on that 3rd port.</p>
 <p>There's also <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in the web IDE. JumperIDE for VS Code installs these stubs for you.) You can grab them here:</p>
 <h3 id="jumperless_modulepy"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless_module.py">jumperless_module.py</a></h3>
 <h3 id="jumperlesspyi"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi">jumperless.pyi</a></h3>
 <p>They're also already on the board as <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code>, so you can just copy them off it.</p>
+<h3 id="stubs-by-hand">Stubs by hand</h3>
+<p>JumperIDE for VS Code sets this up for you (globally, or per folder with <code class="language-jython highlight"><span class="n">Set</span> <span class="n">Up</span> <span class="n">This</span> <span class="n">Folder</span> <span class="k">for</span> <span class="n">Jumperless</span> <span class="n">Python</span></code>), but if you just want autocomplete in a project of your own it's 3 files, in VS Code or Cursor or whatever else runs Pylance. The <code class="language-jython highlight"><span class="o">.</span><span class="n">pyi</span></code> is the one the editor reads. The <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> is the same API as plain Python, for running on the Jumperless, no types in it.</p>
+<p>Make a <code class="language-jython highlight"><span class="n">typings</span></code> folder in your project and put the <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> from above in it. Pylance looks there for stubs by default, <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> should resolve, every function gets its real signature and docs.</p>
+<p>Next to it, make <code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">__builtins__</span><span class="o">.</span><span class="n">pyi</span></code> with one line in it:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+<p>That tells Pylance the whole API is a builtin, which is what it is on the Jumperless, <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> happens before your script runs so you don't need to write it, in the editor or on the Jumperless.</p>
+<p>Then a <code class="language-jython highlight"><span class="n">pyrightconfig</span><span class="o">.</span><span class="n">json</span></code> in the project root:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">    </span><span class="nt">&quot;stubPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;typings&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">    </span><span class="nt">&quot;reportMissingModuleSource&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="linenos" data-linenos="4 "></span><span class="p">}</span>
+</code></pre></div>
+<p>The first line makes this folder override the global stubs my VS Code extension sets up (those are a few functions behind the one on main), the second one turns off the yellow squiggle you'd get on <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> because there's a stub but no <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> behind it, it's harmless, just annoying.</p>
+<p>(note: <code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">jumperless</span></code> / <code class="language-jython highlight"><span class="n">uv</span> <span class="n">add</span> <span class="n">jumperless</span></code> gets you the Jumperless Wokwi Bridge. Its module is <code class="language-jython highlight"><span class="n">jumperless_pkg</span></code> and it has nothing to do with the board's API, the stubs aren't on PyPI.)</p>
+<h3 id="jupyter-notebooks">Jupyter notebooks</h3>
+<p><a href="https://github.com/Josverl/micropython-magic">micropython-magic</a> runs a notebook cell on the Jumperless while the rest of the notebook runs on your computer, and it works with the stubs above.</p>
+<p><code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">micropython</span><span class="o">-</span><span class="n">magic</span></code> (or <code class="language-jython highlight"><span class="n">uv</span> <span class="n">add</span></code>), then in the first cell:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">micropython_magic</span>
+<span class="linenos" data-linenos="2 "></span><span class="o">%</span><span class="n">mpy</span> <span class="o">--</span><span class="n">select</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port5</span>
+</code></pre></div>
+<p>The port is the 3rd Jumperless one, the same one JumperIDE uses, so disconnect JumperIDE first, mpremote can't open a port something else is holding. On a Mac it's <code class="language-jython highlight"><span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port5</span></code>, on Linux it's <code class="language-jython highlight"><span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">ttyACM</span></code> and a number, on Windows it's a COM number and they're not always in order, it's the one where Enter gets you a <code class="language-jython highlight"><span class="o">&gt;&gt;&gt;</span></code>. <code class="language-jython highlight"><span class="o">--</span><span class="n">verify</span></code> didn't work for me, plain <code class="language-jython highlight"><span class="o">--</span><span class="no no-Hardware">select</span></code> does.</p>
+<p>Then start a cell with <code class="language-jython highlight"><span class="c1"># %%micropython</span></code> and it runs on the Jumperless:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># %%micropython</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="nb">print</span><span class="p">(</span><span class="n">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos" data-linenos="4 "></span><span class="nb">print</span><span class="p">(</span><span class="n">gpio_get</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;hi from a notebook&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="a notebook cell running on the Jumperless" src="../assets/verify/vscode-notebook-run.png" /></p>
+<p>The <code class="language-jython highlight"><span class="c1">#</span></code> is on purpose, Pylance skips any cell that starts with a <code class="language-jython highlight"><span class="o">%%</span></code> magic it doesn't know, so with a bare <code class="language-jython highlight"><span class="o">%%</span><span class="n">micropython</span></code> you get no squiggles or hover or anything. micropython-magic turns <code class="language-jython highlight"><span class="c1"># %%micropython</span></code> back into the real magic when the cell runs, the editor sees plain Python, hovering <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span></code> gives you the signature and docs from the stub.</p>
+<p><img alt="the stub's signature in a cell that runs on the Jumperless" src="../assets/verify/vscode-notebook-hover.png" /></p>
+<p>Run the <code class="language-jython highlight"><span class="o">%</span><span class="n">load_ext</span></code> cell first. Until it's loaded, <code class="language-jython highlight"><span class="c1"># %%micropython</span></code> is just a comment and the cell runs on your computer, where <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span></code> isn't a thing (you get <code class="language-jython highlight"><span class="ne">NameError</span><span class="p">:</span> <span class="nf nf-JFS">name</span> <span class="s1">&#39;adc_get&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span></code>, that's what that means, the Jumperless never saw it).</p>
 <hr />
 <h2 id="jumperide-for-vs-code">JumperIDE for VS Code</h2>
 <p><img alt="" src="../assets/DirtyDeedsJumperlesssm.png" /></p>
@@ -318,49 +356,48 @@
 <a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide"><img alt="Open VSX" src="https://img.shields.io/open-vsx/v/ArchiteuthisFlux/jumperide?label=Open%20VSX" /></a>
 <a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/Architeuthis-Flux/JumperIDE-VSCode?label=Release" /></a>
 <a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/blob/main/LICENSE"><img alt="License: Unlicense" src="https://img.shields.io/badge/license-Unlicense-blue" /></a></p>
-<hr />
-<h4 id="walkthrough">Walkthrough</h4>
+<p>Same idea as the web IDE, but it runs in VS Code (or Cursor, or VSCodium), so you get Pylance, git, and everything else you already have. Everything is in one sidebar, and the board shows up as a terminal.</p>
 <p><img alt="" src="../assets/JumperIDEwalkthrough.gif" /></p>
-<p><strong>Connect</strong> — the board's serial ports are auto-detected by USB ID, with the MicroPython REPL port pre-selected:</p>
-<p><img alt="Connecting to a Jumperless V5" src="../assets/JumperIDEconnect.png" /></p>
-<p><strong>Serial terminal</strong> — pick any port (port1 is the device menu), or hand the port to the standalone Jumperless App:</p>
-<p><img alt="Serial terminal port picker" src="../assets/TerminalConnect.png" /></p>
-<p><strong>REPL + device menu side by side</strong> — the MicroPython REPL and the board's interactive menu, each on its own port:</p>
-<p><img alt="REPL and main serial terminal side by side" src="../assets/REPLandMainSerial.png" /></p>
-<p><strong>OLED bitmap editor</strong> — draw pixels and watch them appear on the board's OLED live:</p>
-<p><img alt="Editing an OLED bitmap with live push to the device" src="../assets/EditingOLED.gif" /></p>
-<p><strong>API reference panel</strong> — the full MicroPython API docs beside your code:</p>
-<p><img alt="API reference panel" src="../assets/APIreferencePanel.png" /></p>
-<hr />
 <h4 id="install">Install</h4>
-<p>Either search <code class="language-jython highlight"><span class="n">JumperIDE</span></code> in the Extensions view (<a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide">Open VSX</a>) or just download the <code class="language-jython highlight"><span class="o">.</span><span class="n">vsix</span></code> from the <a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest">latest release</a> (install command included in the release notes).</p>
-<h4 id="features">Features</h4>
-<h5 id="actions-panel"><strong>Actions panel</strong></h5>
-<p>Everything in one sidebar panel: a connection button that doubles as live status (hover to connect or disconnect), <strong>Run/Stop</strong>, <strong>Save to Jumperless</strong>, <strong>Save Locally</strong> (export a device file to your computer), <strong>OLED Bitmap</strong>, the <strong>Serial Terminal</strong>, and quick access to the <strong>API reference</strong> and <strong>JumperNet publishing</strong>.</p>
-<h5 id="serial-connection"><strong>Serial connection</strong></h5>
-<p>The V5 exposes four USB serial ports; the extension detects them by USB ID and pre-selects the MicroPython REPL port (the 3rd). Set <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">connectOnStartup</span></code> to connect automatically.</p>
-<h5 id="run-stop"><strong>Run / Stop</strong></h5>
-<p><code class="language-jython highlight"><span class="n">Run</span></code> executes the file in the current editor on the board, output streams to the REPL terminal.
-<code class="language-jython highlight"><span class="n">Stop</span></code> interrupts.</p>
+<p>Search <code class="language-jython highlight"><span class="n">JumperIDE</span></code> in the Extensions view, it's on the <a href="https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide">VS Code Marketplace</a> and <a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide">Open VSX</a> (that's the one Cursor and VSCodium search). Or download the <code class="language-jython highlight"><span class="o">.</span><span class="n">vsix</span></code> from the <a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest">latest release</a> and run <code class="language-jython highlight"><span class="n">code</span> <span class="o">--</span><span class="n">install</span><span class="o">-</span><span class="n">extension</span> <span class="n">jumperide</span><span class="o">-</span><span class="mf">1.0.2</span><span class="o">.</span><span class="n">vsix</span></code> from the folder it's in.</p>
+<p>The first time it loads it sets up autocomplete for the whole Jumperless API in every workspace (the stubs go in <code class="language-jython highlight"><span class="o">~/.</span><span class="n">jumperless</span><span class="o">/</span><span class="n">typings</span></code>) and asks you to reload the window. The hover docs need Python and Pylance, <code class="language-jython highlight"><span class="n">Set</span> <span class="n">Up</span> <span class="n">This</span> <span class="n">Folder</span> <span class="k">for</span> <span class="n">Jumperless</span></code> offers to install them if you don't have them.</p>
+<h4 id="connect">Connect</h4>
+<p>Click the Jumperless icon in the activity bar. The <code class="language-jython highlight"><span class="n">Actions</span></code> view is the whole thing: a connection button that shows the state, <code class="language-jython highlight"><span class="n">Run</span></code> and <code class="language-jython highlight"><span class="n">Stop</span></code>, saving, the OLED editor, the terminal, the API reference, and publishing.</p>
+<p><img alt="the Actions view" src="../assets/verify/vscode-actions.png" /></p>
+<p>Click <code class="language-jython highlight"><span class="n">Disconnected</span></code> (or <code class="language-jython highlight"><span class="n">Jumperless</span></code> in the status bar, or <code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="no no-Hardware">Connect</span></code> from the command palette) and pick the starred port, the one whose description ends in <code class="language-jython highlight"><span class="n">MicroPython</span> <span class="n">REPL</span> <span class="err">—</span> <span class="n">recommended</span></code>. On a Mac it reads <code class="language-jython highlight"><span class="n">port5</span></code>. It's the 3rd Jumperless port and it isn't pre-selected, so don't just hit <code class="language-jython highlight"><span class="n">Enter</span></code>, that gets you <code class="language-jython highlight"><span class="n">port1</span></code>, the menu, which can't run scripts, and you end up in terminal-only mode with an empty file tree.</p>
+<p><img alt="the port picker" src="../assets/verify/vscode-connect-picker.png" /></p>
+<p>The status bar should turn pink with the board's name, <code class="language-jython highlight"><span class="n">Device</span> <span class="n">Files</span></code> fills in, and a <code class="language-jython highlight"><span class="n">Jumperless</span> <span class="n">REPL</span></code> terminal opens at the <code class="language-jython highlight"><span class="o">&gt;&gt;&gt;</span></code> prompt.</p>
+<p><img alt="connected" src="../assets/verify/vscode-connected.png" /></p>
+<h4 id="files-run-stop">Files, run, stop</h4>
+<p>Click a file in <code class="language-jython highlight"><span class="n">Device</span> <span class="n">Files</span></code> and it opens as a local working copy, so Pylance sees it and hovering a Jumperless function gives you its docs. <code class="language-jython highlight"><span class="n">Cmd</span><span class="o">+</span><span class="n">S</span></code> / <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">S</span></code> pushes it back to the board. The icons in the view's header are disconnect, refresh, new file, new folder and a new OLED bitmap, <code class="language-jython highlight"><span class="n">Delete</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Device</span></code> is on the right-click menu.</p>
+<p><img alt="a device file open, with the hover docs" src="../assets/verify/vscode-hover.png" /></p>
+<p><code class="language-jython highlight"><span class="n">F5</span></code> (or <code class="language-jython highlight"><span class="n">Run</span> <span class="n">Current</span> <span class="n">File</span></code>) runs whatever is in the editor, as is, it doesn't save first. The output goes to the <code class="language-jython highlight"><span class="n">Jumperless</span> <span class="n">REPL</span></code> terminal. <code class="language-jython highlight"><span class="n">Shift</span><span class="o">+</span><span class="n">F5</span></code> (or <code class="language-jython highlight"><span class="n">Stop</span></code>) sends a <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code>.</p>
+<p><img alt="running gpio_basics.py" src="../assets/verify/vscode-run.png" /></p>
 <p><img alt="Connect Run Stop" src="../assets/ConnectRunStop.gif" /></p>
-<h5 id="device-file-browser"><strong>Device file browser</strong></h5>
-<p>The board's filesystem in the sidebar. Files open as local working copies (so the language server works on them); saving pushes back to the board. Files that didn't come from the board ask for a device path on first save, then remember it. Create, delete, and upload files and folders.</p>
-<h5 id="repl-terminal"><strong>REPL terminal</strong></h5>
-<p>A terminal connected to the board's MicroPython prompt. Handles MicroPython line endings and batches output so fast prints don't stall the UI.</p>
-<h5 id="serial-terminal"><strong>Serial terminal</strong></h5>
-<p>Pick any serial port (port1, the board's menu/CLI, is recommended) for a direct raw-passthrough terminal — the full-color menus and ANSI art render exactly as the board sends them. Or pick <code class="language-jython highlight"><span class="n">Use</span> <span class="n">Jumperless</span> <span class="n">App</span></code> to run the standalone <a href="https://github.com/Architeuthis-Flux/Jumperless-App">Jumperless App</a> instead (auto-installs from PyPI; autodetects the port and handles reconnection).</p>
-<h5 id="autocomplete-hover-docs"><strong>Autocomplete &amp; hover docs</strong></h5>
-<p>Signatures and descriptions for every Jumperless function, sourced from the <a href="https://docs.jumperless.org/09.5-micropythonAPIreference/">API reference</a> and refreshed automatically. Jumperless calls and constants are highlighted in Python files.</p>
-<h5 id="oled-bitmap-editor"><strong>OLED bitmap editor</strong></h5>
-<p>A pixel editor for OLED <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> files. While connected, edits push live to the board's OLED as you draw. <strong>Jumperless: New OLED Bitmap</strong> creates a blank 128×32 canvas on the device or locally.</p>
-<h5 id="jumpernet-registry"><strong>JumperNet registry</strong></h5>
-<p>Browse community scripts and OLED images, open them, save them to the board, or publish your own (<strong>Jumperless: Publish Script to Registry</strong>). Feel free to publish whatever work in progress scripts, you or (anyone else) can update the same script and keep version history.</p>
-<h5 id="api-reference-panel"><strong>API reference panel</strong></h5>
-<p><code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="n">Open</span> <span class="n">API</span> <span class="n">Reference</span></code> opens the <a href="https://docs.jumperless.org/09.5-micropythonAPIreference/">MicroPython API docs</a> beside your code.</p>
+<p><code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span> <span class="n">Jumperless</span></code> pushes the current file to the board (a file that didn't come from the board asks for a device path, prefilled with last time's answer), <code class="language-jython highlight"><span class="n">Save</span> <span class="n">Locally</span></code> saves a copy on your computer.</p>
+<h4 id="serial-terminal">Serial terminal</h4>
+<p><code class="language-jython highlight"><span class="n">Serial</span> <span class="n">Terminal</span></code> (or <code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="n">Open</span> <span class="n">Serial</span> <span class="n">Terminal</span></code>) opens a second terminal on any port. <code class="language-jython highlight"><span class="n">port1</span></code> is the starred one, that's the board's menu, and it types <code class="language-jython highlight"><span class="n">m</span></code> for you so the menu comes up.</p>
+<p><code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> goes through to the board in these terminals instead of to VS Code. Or pick <code class="language-jython highlight"><span class="n">Use</span> <span class="n">Jumperless</span> <span class="n">App</span></code> and it runs the <a href="https://github.com/Architeuthis-Flux/Jumperless-App">standalone app</a> in a terminal instead.</p>
+<p><img alt="the serial terminal port picker" src="../assets/verify/vscode-serial-picker.png" /></p>
+<p><img alt="the board's menu in the serial terminal" src="../assets/verify/vscode-serial-terminal.png" /></p>
+<h4 id="oled-bitmaps">OLED bitmaps</h4>
+<p><code class="language-jython highlight"><span class="n">New</span> <span class="n">OLED</span> <span class="n">Bitmap</span></code> asks whether the file lives on the Jumperless or on this computer (if you're not connected it just saves locally), then opens a 128x32 pixel editor, and any <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> in <code class="language-jython highlight"><span class="n">Device</span> <span class="n">Files</span></code> opens in it too. <code class="language-jython highlight"><span class="n">Black</span></code>, <code class="language-jython highlight"><span class="n">White</span></code> and <code class="language-jython highlight"><span class="n">Toggle</span></code> are the pens, and with <code class="language-jython highlight"><span class="n">Live</span> <span class="n">to</span> <span class="n">device</span></code> checked every stroke should show up on the board's OLED as you draw (it <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code>s a running script to do it). <code class="language-jython highlight"><span class="n">Save</span></code> writes the <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code>, <code class="language-jython highlight"><span class="n">Push</span> <span class="n">to</span> <span class="n">Device</span></code> sends the whole thing once.</p>
+<p><img alt="the OLED bitmap editor" src="../assets/verify/vscode-oled-editor.png" /></p>
+<p><img alt="the same drawing on the board's OLED" src="../assets/verify/vscode-oled-live.png" /></p>
+<h4 id="api-reference">API reference</h4>
+<p><code class="language-jython highlight"><span class="n">API</span> <span class="n">Reference</span></code> opens the <a href="../09.5-micropythonAPIreference/">MicroPython API docs</a> beside your code. The hover docs and autocomplete come from the same place.</p>
+<p><img alt="the API reference beside the code" src="../assets/verify/vscode-api-ref.png" /></p>
+<h4 id="jumpernet">JumperNet</h4>
+<p><code class="language-jython highlight"><span class="n">JumperNet</span> <span class="n">Registry</span></code> and <code class="language-jython highlight"><span class="n">OLED</span> <span class="n">Images</span></code> in the sidebar are the shared registry, the same one the web IDE shows. Click a script and it opens, right-click for <code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span> <span class="n">Device</span></code>.</p>
+<p><code class="language-jython highlight"><span class="n">Publish</span> <span class="n">to</span> <span class="n">JumperNet</span></code> (or <code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="n">Publish</span> <span class="n">Script</span> <span class="n">to</span> <span class="n">Registry</span></code>) uploads the file in the editor, it asks for a name, a description and your name. Editing and history are in the web IDE only.</p>
+<p><img alt="a registry script opened from the sidebar" src="../assets/verify/vscode-registry.png" /></p>
+<p><img alt="publishing a script" src="../assets/verify/vscode-publish.png" /></p>
+<h4 id="settings">Settings</h4>
+<p><code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">preferredPortIndex</span></code> is which Jumperless port gets the star (2, the 3rd one), <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">baud</span></code> is 115200, <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">baseUrl</span></code> is the registry, and <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">connectOnStartup</span></code> opens the port picker when VS Code starts.</p>
 <h4 id="zero-import-autocomplete">Zero-import autocomplete</h4>
 <p>On the board, scripts run with the full API preloaded (<code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> happens before your code). The editor matches that automatically: on first activation the extension installs typed stubs and points your Python analyzer at them, so files opened from the device resolve the whole API with no imports and no setup. (Controlled by <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">autoSetUpGlobally</span></code>, on by default.)</p>
 <ul>
-<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> — typed stub, synced from <a href="https://github.com/Architeuthis-Flux/JumperlOS">JumperlOS</a></li>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> — typed stub, synced from <a href="https://github.com/Architeuthis-Flux/JumperlOS">JumperlOS</a> (by hand, so it can be a few functions behind <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> on main)</li>
 <li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">builtins</span><span class="o">.</span><span class="n">pyi</span></code> — standard-library builtins with Jumperless globals layered on top (typo detection still works)</li>
 <li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">time</span><span class="o">.</span><span class="n">pyi</span></code> — MicroPython <code class="language-jython highlight"><span class="n">time</span></code> extras (<code class="language-jython highlight"><span class="n">ticks_ms</span></code>, <code class="language-jython highlight"><span class="n">sleep_ms</span></code>, …)</li>
 </ul>
@@ -491,6 +528,8 @@
 <p><strong>REPL not responding:</strong>
 - Press Ctrl+Q to force quit on the main menu port (port 1), or Ctrl+C on the 3rd port that JumperIDE uses
 - Unplug / replug your Jumperless (don't worry, almost everything is persistent)</p>
+<p><strong><code class="language-jython highlight"><span class="nd">@micropython</span><span class="o">.</span><span class="n">native</span></code> / <code class="language-jython highlight"><span class="nd">@micropython</span><span class="o">.</span><span class="n">viper</span></code> reboots the board:</strong>
+- On 5.7.11.0 defining one is fine, calling it hard faults (the function pointer is missing its Thumb bit, so the first call is a UsageFault). After it comes back, press <code class="language-jython highlight"><span class="n">m</span></code> on the main menu port and it prints a <code class="language-jython highlight"><span class="p">[</span><span class="n">crashlog</span><span class="p">]</span></code> line saying so.</p>
 <h2 id="formatted-output-and-custom-types">Formatted Output and Custom Types</h2>
 <p>The Jumperless module returns custom types that print nicely but also work in conditionals:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># GPIO functions return custom types that print as readable strings</span>

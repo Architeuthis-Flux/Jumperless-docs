@@ -93,6 +93,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Config File</a>
     <ul class="current">
@@ -120,7 +124,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -166,13 +170,6 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -400,6 +397,7 @@
 </code></pre></div>
 <p>This is just a file on your filesystem called <code class="language-jython highlight"><span class="n">config</span><span class="o">.</span><span class="n">txt</span></code> and you can edit that file directly too. It only gets read at boot, so your edits land on the next reboot - and the firmware rewrites <code class="language-jython highlight"><span class="n">config</span><span class="o">.</span><span class="n">txt</span></code> from its live settings whenever a setting changes, so edit it with the board idle and reboot afterwards. If you want the change right now, use the editor or paste the line back in.</p>
 <p><img alt="config.txt open in a text editor on a computer, with the Jumperless mounted as a drive" src="https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754" /></p>
+<p>The <code class="language-jython highlight"><span class="p">[</span><span class="n">calibration</span><span class="p">]</span></code> numbers come from <code class="language-jython highlight"><span class="n">Calibration</span></code> &gt; <code class="language-jython highlight"><span class="n">DACs</span> <span class="n">Calib</span></code> on the click wheel. It runs by itself on first startup, and you can run it again if the DAC or ADC voltages look off (it sets a bunch of DAC voltages and reads them back with the INA219 to work out the zero and spread for each one).</p>
 <h2 id="config-help">Config Help</h2>
 <p>There's also a <code class="language-jython highlight"><span class="nf nf-Jumperless">help</span></code> you can get to by entering <code class="language-jython highlight"><span class="o">~</span><span class="nf nf-Jumperless">help</span></code></p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="o">~</span><span class="nf nf-Jumperless">help</span>
@@ -497,7 +495,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../05-arduino/" class="btn btn-neutral float-left" title="Arduino Stuff"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../05.3-adapters/" class="btn btn-neutral float-left" title="Adapter Boards"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../05.5-parts/" class="btn btn-neutral float-right" title="Parts">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -521,7 +519,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../05-arduino/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../05.3-adapters/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../05.5-parts/" style="color: #fcfcfc">Next &raquo;</a></span>

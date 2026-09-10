@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -167,13 +171,6 @@
     </ul>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -211,10 +208,15 @@
               
                 <h1 id="og-jumperless">OG Jumperless</h1>
 <p>The original Jumperless (the one with the Nano header across the top and a single LED under each row) runs the same JumperlOS firmware as the V5 now. Everything else in these docs is written for the V5.</p>
-<p><img alt="OG Jumperless" src="https://github.com/user-attachments/assets/046118cf-3725-4387-ba8c-8071d4b8472b" /></p>
+<p><img alt="OG Jumperless" src="../assets/JumperlessCropLights.jpg" /></p>
 <h2 id="getting-the-firmware">Getting the firmware</h2>
 <p>Every JumperlOS release has an OG build next to the V5 one, called <code class="language-jython highlight"><span class="n">firmware_og_backport</span><span class="mf">.1</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">uf2</span></code> (the version starts with a 1 instead of a 5). It's on the <a href="https://github.com/Architeuthis-Flux/JumperlOS/releases">JumperlOS releases page</a>, and it should also show up on the latest release in the <a href="https://github.com/Architeuthis-Flux/Jumperless/releases">old Jumperless repo</a>.</p>
-<p>Hold the USB Boot button (the little one on the opposite side from the USB port) while you plug it in, a drive called <code class="language-jython highlight"><span class="n">RPI</span><span class="o">-</span><span class="n">RP2</span></code> shows up, drag the <code class="language-jython highlight"><span class="o">.</span><span class="n">uf2</span></code> onto it. Open the first serial port in any terminal and type <code class="language-jython highlight"><span class="err">?</span></code> to check the version.</p>
+<p>Hold the <code class="language-jython highlight"><span class="n">USB</span> <span class="n">BOOT</span></code> button (it's on the back, next to the USB port) while you plug it in, a drive called <code class="language-jython highlight"><span class="n">RPI</span><span class="o">-</span><span class="n">RP2</span></code> shows up, drag the <code class="language-jython highlight"><span class="o">.</span><span class="n">uf2</span></code> onto it. Open the first serial port in any terminal and type <code class="language-jython highlight"><span class="err">?</span></code> to check the version.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The probe stuff on this page is newer than <code class="language-jython highlight"><span class="mf">1.7.11.0</span></code>, so until the next release you need a firmware built from the <code class="language-jython highlight"><span class="nf nf-Jumperless">dev</span></code> branch for it.</p>
+</div>
+<p><img alt="the back of the OG Jumperless, with the USB BOOT button, the SPI DAC, the ADC buffers, the INA219s and the crossbar chips labeled" src="../assets/BackBoard.jpg" /></p>
 <h2 id="whats-different">What's different</h2>
 <table>
 <thead>
@@ -228,7 +230,7 @@
 <tr>
 <td>Rails</td>
 <td>4 rails you set from the firmware, -8V to +8V</td>
-<td>a switch under the probe header, 3.3V or 5V, the firmware can't see it</td>
+<td>a switch under the probe header, 3.3V / 5V / ±8V, the firmware can't see it</td>
 </tr>
 <tr>
 <td>Probe</td>
@@ -262,7 +264,7 @@
 </tr>
 <tr>
 <td>MicroPython</td>
-<td>96K heap, PSRAM</td>
+<td>64K heap plus the PSRAM</td>
 <td>24K heap, no PSRAM, so keep scripts small</td>
 </tr>
 </tbody>
@@ -270,7 +272,7 @@
 <p>The <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code> names are the same on both, so <code class="language-jython highlight"><span class="o">+</span> <span class="mi">1</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="o">-</span><span class="n">gnd</span></code> in the terminal, the <a href="../09.5-micropythonAPIreference/">MicroPython API</a>, slots, and the <a href="../06-config/">config file</a> all work the same. Anything about rail voltages, the click wheel, the OLED, or the special function pads just doesn't apply.</p>
 <h2 id="the-probe">The probe</h2>
 <p>The OG probe is a kit you solder up, <a href="https://github.com/Architeuthis-Flux/Jumperless/blob/main/Probe_Guide.md">here's the guide</a>. Plug it into the bottom 2 holes of the 4-hole header at the top left corner, labeled 18 and 19. If pressing the button puts the Jumperless in probe mode but doesn't light the LED or sense rows, the Button and Probe connections are swapped, just turn the connector around.</p>
-<p>Keep the rail switch under that header on 3.3V or 5V whenever the probe is plugged in, you can damage the probe input otherwise.</p>
+<p>Keep the rail switch under that header on 3.3V or 5V whenever the probe is plugged in. On ±8V a rail tap puts 8V straight into the probe input and you can damage it.</p>
 <p>There's one button, so the modes come from how long you hold it:</p>
 <ul>
 <li><strong>short press</strong> = <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> mode</li>
@@ -285,7 +287,7 @@
 </ul>
 <p>(Same color code the old OG firmware used, minus the swirl. One LED cycling the whole rainbow every 3 seconds reads as a blinking light rather than a swirl, so idle drifts through a lap in about 26s instead. It's a bit less saturated than the rainbow too, though not by as much as you'd think, the <code class="language-jython highlight"><span class="n">logo</span></code> LED shines up through the PCB and that filters out a lot of the color.)</p>
 <h2 id="connecting-rows">Connecting rows</h2>
-<p>Short press the button, the terminal says <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span> <span class="n">nodes</span></code>. Tap a row and its LED comes on and stays on while you're <code class="language-jython highlight"><span class="n">holding</span></code> it, then tap another row and they're connected and the whole <code class="language-jython highlight"><span class="n">net</span></code> gets a color.</p>
+<p>Short press the button, the terminal says <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span> <span class="n">nodes</span></code>. Tap a row and its LED comes on while you're <code class="language-jython highlight"><span class="n">holding</span></code> it (if that row is already in a <code class="language-jython highlight"><span class="n">net</span></code> the LED can drop back to the net's color, the <code class="language-jython highlight"><span class="n">logo</span></code> still shows bright pink so you know it's held), then tap another row and they're connected and the whole <code class="language-jython highlight"><span class="n">net</span></code> gets a color.</p>
 <p>While you're holding a row:</p>
 <ul>
 <li><strong>short press</strong> drops it and you can start over (with nothing held, a short press leaves <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> mode)</li>
@@ -294,7 +296,7 @@
 <p>The probe finds the needle by sending a tone through the crossbar into each row in turn, and it needs the crossbar empty to do that, so the board's connections are all lifted for the length of the session and put back when you leave. Your circuit stops while you probe. (The V5 doesn't have this problem, its probe is sensed through pads.)</p>
 <p>One more thing that falls out of that: a row that's tied to a rail through a part (a pull-up resistor to <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code>, an LED to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>) looks like the rail to the needle, not like a row.</p>
 <h2 id="rails">Rails</h2>
-<p>The rail strips on the OG are whatever the switch says (<code class="language-jython highlight"><span class="o">+</span></code> is 3.3V or 5V, <code class="language-jython highlight"><span class="o">-</span></code> is ground), and the firmware has no way to read that switch, so they aren't <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s. What it <em>does</em> have are the internal supply nodes <code class="language-jython highlight"><span class="mi">3</span><span class="n">V3</span></code> and <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code>, and those are what a rail tap connects you to.</p>
+<p>The rail strips on the OG are whatever the switch says (<code class="language-jython highlight"><span class="o">+</span></code> is 3.3V, 5V or +8V and <code class="language-jython highlight"><span class="o">-</span></code> is ground or -8V), and the firmware has no way to read that switch, so they aren't <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s. What it <em>does</em> have are the internal supply nodes <code class="language-jython highlight"><span class="mi">3</span><span class="n">V3</span></code> and <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code>, and those are what a rail tap connects you to.</p>
 <p>So when you tap a <code class="language-jython highlight"><span class="o">+</span></code> rail while probing, it asks which one you want:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>      <span class="mf">3.3</span><span class="n">V</span>   <span class="n">short</span> <span class="n">press</span> <span class="o">=</span> <span class="mi">5</span><span class="n">V</span><span class="p">,</span> <span class="n">long</span> <span class="n">press</span> <span class="o">=</span> <span class="no no-Hardware">select</span>
 </code></pre></div>
@@ -317,13 +319,13 @@
 <p>Long press the button (or long press from <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code> mode), the terminal says <code class="language-jython highlight"><span class="n">clear</span> <span class="n">nodes</span></code>. Tap a row and it gets disconnected from whatever it was bridged to. Same as the V5, it only removes that <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>'s own bridges, not the whole <code class="language-jython highlight"><span class="n">net</span></code>. In <code class="language-jython highlight"><span class="n">clear</span></code> mode a <strong>short press</strong> leaves, a <strong>long press</strong> goes back to <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code>.</p>
 <p>A session times out on its own after 80s of nothing, and typing anything in the terminal ends it too.</p>
 <h2 id="measuring">Measuring</h2>
-<p>To read a voltage (the OG probe has no <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> switch), connect one of the ADCs to the row (<code class="language-jython highlight"><span class="n">ADC</span> <span class="mi">3</span></code> is the ±8V one, the other 3 are 0 to 5V) and read it with <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></code> from MicroPython. Both INA219 current sensors are there too, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></code> is the one in the crossbar's <code class="language-jython highlight"><span class="n">I</span><span class="o">+</span></code> / <code class="language-jython highlight"><span class="n">I</span><span class="o">-</span></code> path.</p>
+<p>To read a voltage (the OG probe has no <code class="language-jython highlight"><span class="no no-Hardware">Measure</span></code> switch), connect one of the ADCs to the row (<code class="language-jython highlight"><span class="n">ADC</span> <span class="mi">3</span></code> is the ±8V one, the other 3 are 0 to 5V) and read it with <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></code> from MicroPython. Both INA219 current sensors are there too, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></code> is the one in the crossbar's <code class="language-jython highlight"><span class="no no-Jumperless">I_P</span></code> / <code class="language-jython highlight"><span class="no no-Jumperless">I_N</span></code> path (connect those two <code class="language-jython highlight"><span class="nf nf-Jumperless">node</span></code>s in series with what you're measuring), <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></code> sits on the DAC output.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../10-3d-stand/" class="btn btn-neutral float-left" title="3D Printable Stand"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../badge-developer-guide/" class="btn btn-neutral float-right" title="Developer Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../99-glossary/" class="btn btn-neutral float-right" title="Glossary of Terms">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -349,7 +351,7 @@
       <span><a href="../10-3d-stand/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../badge-developer-guide/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../99-glossary/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

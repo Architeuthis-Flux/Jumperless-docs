@@ -27,25 +27,25 @@ nav:
   - The App: 03-app.md
   - OLED Support: 04-oled.md
   - Arduino Stuff: 05-arduino.md
-  - Adapter Boards: 05.3-adapters.md
   - Config File: 06-config.md
-  - Parts: 05.5-parts.md
   - GPIO: 05.7-gpio.md
-  - Debug Views: 07-debugging.md
   - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
   - MicroPython: 08-micropython.md
   - Examples: 08.5-examples.md
   - MicroPython API Reference: 09.5-micropythonAPIreference.md
   - JFS (Filesystem): 09.6-jfs.md
-  - Odds and Ends: 09.8-odds-and-ends.md
-  - Writing Apps: 11-WritingApps.md
+
+  - Parts Tester: 05.5-parts.md
+  - Debug Views: 07-debugging.md
+
   - 3D Printable Stand: 10-3d-stand.md
   - OG Jumperless: 10.5-og-jumperless.md
 
   # - Temporal Badge:
   #   - Developer Guide: badge-developer-guide.md
   #   - API Reference: badge-api-reference.md
+  - Odds and Ends: 09.8-odds-and-ends.md
   - Glossary of Terms: 99-glossary.md
   - Shop: https://shop.jumperless.org
   - JumperIDE: https://ide.jumperless.org/

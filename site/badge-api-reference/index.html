@@ -10,7 +10,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.jumperless.org/badge-api-reference/">
-    <meta property="og:title" content="API Reference - Jumperless Docs">
+    <meta property="og:title" content="Temporal Badge MicroPython API Reference - Jumperless Docs">
     <meta property="og:description" content="Learn how to use your Jumperless">
     <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta property="og:image:alt" content="Jumperless Logo">
@@ -19,7 +19,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.jumperless.org/badge-api-reference/">
-    <meta name="twitter:title" content="API Reference - Jumperless Docs">
+    <meta name="twitter:title" content="Temporal Badge MicroPython API Reference - Jumperless Docs">
     <meta name="twitter:description" content="Learn how to use your Jumperless">
     <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
     <meta name="twitter:image:alt" content="Jumperless Logo">
@@ -41,7 +41,7 @@
     <meta name="theme-color" content="#ff4775">
     <meta name="msapplication-TileColor" content="#ff47A5">
 
-    <title>API Reference - Jumperless Docs</title>
+    <title>Temporal Badge MicroPython API Reference - Jumperless Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -149,269 +153,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">API Reference</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#init">Init</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#init_1">init()</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#oled-display">OLED Display</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_print">oled_print(text)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_println">oled_println(text)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_clear">oled_clear([show])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_show">oled_show()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_set_cursor">oled_set_cursor(x, y)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_set_text_size">oled_set_text_size(size)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_get_text_size">oled_get_text_size()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_invert">oled_invert(enable)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_text_width">oled_text_width(text)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_text_height">oled_text_height()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_set_font">oled_set_font(name)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_get_fonts">oled_get_fonts()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_get_current_font">oled_get_current_font()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_set_pixel">oled_set_pixel(x, y, color)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_get_pixel">oled_get_pixel(x, y)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_draw_box">oled_draw_box(x, y, w, h)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_set_draw_color">oled_set_draw_color(color)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_get_framebuffer">oled_get_framebuffer()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_set_framebuffer">oled_set_framebuffer(data)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_get_framebuffer_size">oled_get_framebuffer_size()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#oled_screenshot">oled_screenshot([mode])</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#native-ui-chrome">Native UI Chrome</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ui_header">ui_header(title, [right])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ui_action_bar">ui_action_bar([left_button], [left_label], [right_button], [right_label])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ui_chrome">ui_chrome(title, [right], [left_button], [left_label], [right_button], [right_label])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ui_inline_hint">ui_inline_hint(x, y, hint)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ui_inline_hint_right">ui_inline_hint_right(right_x, y, hint)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ui_measure_hint">ui_measure_hint(hint)</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#buttons-joystick">Buttons &amp; Joystick</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#button-constants">Button Constants</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#button">button(id)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#button_pressed">button_pressed(id)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#button_held_ms">button_held_ms(id)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#joy_x">joy_x()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#joy_y">joy_y()</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#led-matrix-88">LED Matrix (8×8)</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#image-constants">Image Constants</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#animation-constants">Animation Constants</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_brightness">led_brightness(value)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_clear">led_clear()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_fill">led_fill([brightness])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_set_pixel">led_set_pixel(x, y, brightness)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_get_pixel">led_get_pixel(x, y)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_show_image">led_show_image(name)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_set_frame">led_set_frame(rows, [brightness])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_start_animation">led_start_animation(name, [interval_ms])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_stop_animation">led_stop_animation()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_override_begin">led_override_begin()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_override_end">led_override_end()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led_screenshot">led_screenshot([mode], [ansi])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#screenshot">screenshot([mode], [ansi])</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#matrix-app-host">Matrix App Host</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#matrix_app_start">matrix_app_start(callback, [interval_ms], [brightness])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#matrix_app_set_speed">matrix_app_set_speed(interval_ms)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#matrix_app_set_brightness">matrix_app_set_brightness(brightness)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#matrix_app_stop">matrix_app_stop()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#matrix_app_active">matrix_app_active()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#matrix_app_info">matrix_app_info()</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#app-manifest">App Manifest</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#dunders">Dunders</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#iconpy-home-screen-icon">icon.py — Home-Screen Icon</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#matrixpy-persistent-matrix-app">matrix.py — Persistent Matrix App</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#rescan_apps">rescan_apps()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tile-order-__order__">Tile Order (__order__)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#manual-reorder-screen">Manual Reorder Screen</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#imu">IMU (Accelerometer)</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#imu_ready">imu_ready()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#imu_tilt_x">imu_tilt_x()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#imu_tilt_y">imu_tilt_y()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#imu_accel_z">imu_accel_z()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#imu_face_down">imu_face_down()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#imu_motion">imu_motion()</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#haptics">Haptics</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#haptic_pulse">haptic_pulse([strength], [duration_ms], [freq_hz])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#haptic_strength">haptic_strength([value])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#haptic_off">haptic_off()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tone">tone(freq_hz, [duration_ms], [duty])</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#no_tone">no_tone()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tone_playing">tone_playing()</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#ir-sendreceive">IR Send/Receive</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_send">ir_send(addr, cmd)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_start">ir_start()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_stop">ir_stop()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_available">ir_available()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_read">ir_read()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_send_words">ir_send_words(words)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_read_words">ir_read_words()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_flush">ir_flush()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ir_tx_power">ir_tx_power([percent])</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#badge-identity-boops">Badge Identity &amp; Boops</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#my_uuid">my_uuid()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#boops">boops()</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#script-control">Script Control</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#exit">exit()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#dev">dev(*args) (dev builds only)</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#filesystem-access">Filesystem Access</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#mouse-overlay">Mouse Overlay</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_overlay">mouse_overlay(enable)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_set_bitmap">mouse_set_bitmap(data, w, h)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_x">mouse_x()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_y">mouse_y()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_set_pos">mouse_set_pos(x, y)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_clicked">mouse_clicked()</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_set_speed">mouse_set_speed(speed)</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse_set_mode">mouse_set_mode(mode)</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#constants-reference">Constants Reference</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#buttons">Buttons</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led-matrix-images">LED Matrix Images</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#led-matrix-animations">LED Matrix Animations</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mouse-overlay-modes">Mouse Overlay Modes</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                  </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -438,8 +179,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Temporal Badge</li>
-      <li class="breadcrumb-item active">API Reference</li>
+      <li class="breadcrumb-item active">Temporal Badge MicroPython API Reference</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -1833,10 +1573,6 @@ tune relative mode.</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../badge-developer-guide/" class="btn btn-neutral float-left" title="Developer Guide"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../99-glossary/" class="btn btn-neutral float-right" title="Glossary of Terms">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -1858,10 +1594,6 @@ tune relative mode.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../badge-developer-guide/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../99-glossary/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

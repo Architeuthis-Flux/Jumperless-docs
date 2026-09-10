@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -148,13 +152,6 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Glossary of Terms</a>
@@ -229,7 +226,7 @@
 </ul>
 <h2 id="yaml-format">YAML Format</h2>
 <p>Slot files use YAML format with named nodes for readability. <a href="../06-config/#state-file-structure">State File Structure</a> has a full example of one.</p>
-<p><code class="language-jython highlight"><span class="n">dup</span></code> is an optional per-bridge override of how many parallel crosspoint paths get stacked for that one connection, like <code class="language-jython highlight"><span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="no no-Jumperless">NANO_D5</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="n">GP_1</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span></code>. Leave it out and you get the default from the <code class="language-jython highlight"><span class="p">[</span><span class="n">routing</span><span class="p">]</span></code> <code class="language-jython highlight"><span class="n">stack_paths</span></code> key (2), with <code class="language-jython highlight"><span class="n">stack_rails</span></code> (3), <code class="language-jython highlight"><span class="n">stack_gpio</span></code> (0), <code class="language-jython highlight"><span class="n">stack_adcs</span></code> (0) and <code class="language-jython highlight"><span class="n">stack_dacs</span></code> (0) covering those classes. <code class="language-jython highlight"><span class="n">color</span><span class="p">:</span></code> is optional too, and takes a color name, <code class="language-jython highlight"><span class="mi">0</span><span class="n">xRRGGBB</span></code>, or <code class="language-jython highlight"><span class="c1">#RRGGBB</span></code>.</p>
+<p><code class="language-jython highlight"><span class="n">dup</span></code> is an optional per-bridge override of how many parallel crosspoint paths get stacked for that one connection, like <code class="language-jython highlight"><span class="o">-</span> <span class="p">{</span><span class="n">n1</span><span class="p">:</span> <span class="no no-Jumperless">NANO_D5</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="n">GP_1</span><span class="p">,</span> <span class="n">dup</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span></code>. Leave it out and you get the default from the <code class="language-jython highlight"><span class="p">[</span><span class="n">routing</span><span class="p">]</span></code> <code class="language-jython highlight"><span class="n">stack_paths</span></code> key (2), with <code class="language-jython highlight"><span class="n">stack_rails</span></code> (3), <code class="language-jython highlight"><span class="n">stack_gpio</span></code> (0), <code class="language-jython highlight"><span class="n">stack_adcs</span></code> (0) and <code class="language-jython highlight"><span class="n">stack_dacs</span></code> (0) covering those classes (the resistance math behind stacking is in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/a-farewell-to-campaigns">this Crowd Supply update</a>). <code class="language-jython highlight"><span class="n">color</span><span class="p">:</span></code> is optional too, and takes a color name, <code class="language-jython highlight"><span class="mi">0</span><span class="n">xRRGGBB</span></code>, or <code class="language-jython highlight"><span class="c1">#RRGGBB</span></code>.</p>
 <p><strong>Named nodes:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">NANO_D0</span><span class="o">-</span><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">NANO_A0</span><span class="o">-</span><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">GP_1</span><span class="o">-</span><span class="mi">8</span></code> (or <code class="language-jython highlight"><span class="n">RP_GPIO_1</span><span class="o">-</span><span class="mi">8</span></code>), <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code>, etc. (Note these differ from the MicroPython constants - <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code> and <code class="language-jython highlight"><span class="n">DAC0_5V</span></code> won't parse in slot files.)</p>
 <p>You can view and edit these files in the <a href="../08-file-manager/">File Manager</a> or via USB Mass Storage mode (<code class="language-jython highlight"><span class="n">U</span></code> command).</p>
 <h2 id="wokwi-import">Wokwi Import</h2>
@@ -239,7 +236,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../badge-api-reference/" class="btn btn-neutral float-left" title="API Reference"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../10.5-og-jumperless/" class="btn btn-neutral float-left" title="OG Jumperless"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -262,7 +259,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../badge-api-reference/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../10.5-og-jumperless/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

@@ -32,12 +32,11 @@
 
 ## Optional
 
+- [Adapter Boards](https://docs.jumperless.org/05.3-adapters/): Adapter Boards
 - [Parts](https://docs.jumperless.org/05.5-parts/): Parts
-- [GPIO & BCD Counter](https://docs.jumperless.org/05.7-gpio/): GPIO & BCD Counter
+- [GPIO](https://docs.jumperless.org/05.7-gpio/): GPIO
 - [Examples](https://docs.jumperless.org/08.5-examples/): Examples
 - [Odds and Ends](https://docs.jumperless.org/09.8-odds-and-ends/): Miscellaneous features, tips, and edge cases
 - [3D Printable Stand](https://docs.jumperless.org/10-3d-stand/): 3D printable stand models and printing tips
 - [OG Jumperless](https://docs.jumperless.org/10.5-og-jumperless/): OG Jumperless
-- [Developer Guide](https://docs.jumperless.org/badge-developer-guide/): Developer Guide
-- [API Reference](https://docs.jumperless.org/badge-api-reference/): API Reference
 - [Glossary of Terms](https://docs.jumperless.org/99-glossary/): Key terms: slots, nodes, bridges, nets, W command, and more

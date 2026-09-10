@@ -184,6 +184,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -192,7 +196,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -239,13 +243,6 @@
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
-              </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
                 </li>
@@ -288,9 +285,19 @@ https://www.amazon.com/MakerFocus-Display-SSD1306-3-3V-5V-Arduino/dp/B079BN2J8V<
 <p><img alt="batchone-11" src="https://github.com/user-attachments/assets/26cc687d-6ebb-40b7-9b72-7eada7a5258c" />
 Ignore the really cool LEDs.</p>
 <h2 id="installation">Installation</h2>
-<p>They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.
-<img alt="SBCBP-4 copy" src="https://github.com/user-attachments/assets/43232b06-380d-4e18-9aab-924e45790740" /></p>
+<p>They should friction fit into the SBC/SMD/OLED board included with your Jumperless V5.</p>
 <p>That's how rev 5 boards (the Crowd Supply and Mouser ones) do it, and the OLED talks to GPIO 7 and 8 through the crossbar to rows <code class="language-jython highlight"><span class="no no-Jumperless">D2</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">D3</span></code>. Rev 7 boards have dedicated OLED headers on the internal I2C bus instead, so the firmware finds the display by itself at boot and no rows or routable GPIO get used up. If you have one of those, the <code class="language-jython highlight"><span class="n">Connection</span></code>, <code class="language-jython highlight"><span class="n">Lock</span> <span class="n">Connection</span></code> and GPIO stuff below doesn't apply to you.</p>
+<details class="note">
+<summary>Where the OLED goes</summary>
+<p>Rev 7 boards have 2 OLED headers (4 pins each), one at each end of the Nano header between the two rows. Either one works, they're on the same bus.</p>
+<p>On the <code class="language-jython highlight"><span class="no no-Jumperless">D12</span></code> end it lies across the Nano header:</p>
+<p><img alt="an OLED in the header at the D12 end of the Nano header, lying across it" src="../assets/oledPositions.jpg" /></p>
+<p>On the <code class="language-jython highlight"><span class="n">VIN</span></code> end it sticks out past the edge next to the USB-C:</p>
+<p><img alt="an OLED in the header at the VIN end of the Nano header, sticking out past the edge by the USB-C" src="../assets/oledPositions-2.jpg" /></p>
+<p>On rev 5 boards it goes in the 4 pin column at the bottom left of the SBC/SMD/OLED board (the <a href="../05.3-adapters/">SBC adapter</a>), with that in the Nano header:</p>
+<p><img alt="the SBC adapter with the OLED spot marked" src="../assets/oledPositions-3.jpg" /></p>
+<p><img alt="the SBC adapter with an OLED plugged into it" src="../assets/oledPositions-3-on.jpg" /></p>
+</details>
 <p>This should copy basically any text printed on the breadboard, some people have trouble reading text on the breadboard LEDs, which is why I added all this. </p>
 <h2 id="connection">Connection</h2>
 <p>To connect the data lines to the Jumperless' GPIO 7 and 8, just use the menu option <code class="language-jython highlight"><span class="o">.</span></code> (that's a period). Press it again to disconnect and free up GPIO 7 and 8, or use <code class="language-jython highlight"><span class="mf">.1</span></code> and <code class="language-jython highlight"><span class="mf">.0</span></code> to force it on or off. If no display answers, the routing stays put and the firmware keeps checking for one every few seconds.</p>

@@ -52,21 +52,20 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 - **[The App](03-app.md)** - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches
 - **[OLED](04-oled.md)** - Add a better display
 - **[Arduino](05-arduino.md)** - UART passthrough and automatic flashing
-- **[Adapter Boards](05.3-adapters.md)** - The SBC adapter and the FPC adapter that come in the box
 - **[Configuration](06-config.md)** - Persistent settings
-- **[Parts](05.5-parts.md)** - Tell it what chips are in the board and it wires and labels them
 - **[GPIO](05.7-gpio.md)** - Direction, pulls, PWM, and a binary counter from the board
-- **[Debugging](07-debugging.md)** - Crossbar, bridge, and net list views
 - **[Automation & LLM Tools](07.5-automation.md)** - Drive it from scripts, an MCP server, or an agent skill
 - **[File Manager](08-file-manager.md)** - Filesystem access, YAML slot file editing, and text editor
 - **[MicroPython](08-micropython.md)** - Use the onboard MicroPython interpreter
-- **[Examples](08.5-examples.md)** - The scripts and guided projects that come loaded on the board, and what each one shows
+- **[Examples](08.5-examples.md)** - The scripts and guided projects that come loaded on the board
 - **[MicroPython API Reference](09.5-micropythonAPIreference.md)** - All the Jumperless-specific hardware calls
+- **[Parts Tester](05.5-parts.md)** - Tell it what chips are in the board and it wires and labels them
+- **[Debugging](07-debugging.md)** - Crossbar, bridge, and net list views
 - **[Odds and Ends](09.8-odds-and-ends.md)** - Stuff I couldn't think of a good category for
 - **[3D Printable Stand](10-3d-stand.md)** - Print your own stand
 - **[Glossary](99-glossary.md)** - Key terms including slots, nodes, bridges, and the W command
 
-(You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors)
+<!-- (You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors) -->
 
 ---
 

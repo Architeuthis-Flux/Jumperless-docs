@@ -94,6 +94,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
@@ -102,7 +106,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO & BCD Counter</a>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul>
@@ -190,13 +194,6 @@
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
                 </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -352,7 +349,10 @@ It's even printed on the box</p>
 <h2 id="schematic">Schematic</h2>
 <p>Here's the schematic that's printed on the inner flap of the box
 <img alt="" src="https://github.com/user-attachments/assets/1c91a76d-cacf-40f0-a87b-c952787abb6f" /></p>
+<p><img alt="the open box with the schematic printed inside the lid" src="../assets/batchone-5.jpg" /></p>
+<p>(the story of the box is in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/time-to-get-excited">this Crowd Supply update</a>)</p>
 <p>If you want look at the schematic and PCB together and don't feel like downloading the whole thing and opening it in KiCad, <a href="https://kicanvas.org/?github=https://github.com/Architeuthis-Flux/JumperlessV5/blob/main/Jumperless23V50/MainBoard/JumperlessV5r6/JumperlessV5r6.kicad_pro">you can open it in the browser with KiCanvas here</a></p>
+<p>There are a bunch of solder jumpers on the back for hardware options, they're all labeled on the schematic. The Nano header's <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code>, <code class="language-jython highlight"><span class="mi">3</span><span class="n">V3</span></code>, <code class="language-jython highlight"><span class="n">VIN</span></code> and both <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> pads can each be cut off their supply and put on a spare GPIO instead, the two <code class="language-jython highlight"><span class="n">RESET</span></code> pads can be swapped for the current sense pins, and the backpower diodes on the Nano <code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span></code> and <code class="language-jython highlight"><span class="mi">3</span><span class="n">V3</span></code> pads are bypassed by default (<code class="language-jython highlight"><span class="mi">5</span><span class="n">V</span> <span class="n">BP</span></code> and <code class="language-jython highlight"><span class="mi">3</span><span class="n">V</span> <span class="n">BP</span></code>), cut those bridges if you're going to power a Nano from its own USB and don't want it feeding the Jumperless (that also stops the <a href="../05.3-adapters/">SBC adapter</a> powering it from a Pi). Those came out of <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/good-news-everyone-things-are-happening">this Crowd Supply update</a>.</p>
 <h2 id="writing-native-apps">Writing Native apps</h2>
 <p>Writing an app is just writing a function in the main firmware. The whole walkthrough is on the <a href="../11-WritingApps/">Writing Apps</a> page.</p>
 <hr />
