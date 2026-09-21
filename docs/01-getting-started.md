@@ -43,7 +43,7 @@ Keep the switch on the probe set to `Select`. That's the normal probing mode.
 
 `Measure` turns the probe into a voltmeter: the `logo` goes purple, and touching any `row` reads its voltage on the OLED and in the terminal. It uses a temporary ADC connection that never gets saved, so you can poke around without changing your circuit.
 
-**The probe is read by a resistive voltage divider**, so putting your fingers on the pads (or the back sides of the 4 risers that connect the `probe sense` boards to the main board) will give you weird readings. If taps land on the wrong row, run `Calibration` > `Probe Pads` from the click wheel menu and follow the prompts.
+**The probe is read by a resistive voltage divider**, so putting your fingers on the pads (or the back sides of the 4 risers that connect the `probe sense` boards to the main board) will give you weird readings. If taps land on the wrong row, run `Calibration` > `Probe Pads` from the click wheel menu and follow the prompts (the [Calibration](05.8-calibration.md) page walks through it, and everything else in that menu).
 
 ----
 

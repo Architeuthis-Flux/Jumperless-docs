@@ -206,7 +206,7 @@ This is just a file on your filesystem called `config.txt` and you can edit that
 
 ![config.txt open in a text editor on a computer, with the Jumperless mounted as a drive](https://github.com/user-attachments/assets/bb6a9d29-3d85-46e4-99e7-ae023c4be754)
 
-The `[calibration]` numbers come from `Calibration` > `DACs Calib` on the click wheel. It runs by itself on first startup, and you can run it again if the DAC or ADC voltages look off (it sets a bunch of DAC voltages and reads them back with the INA219 to work out the zero and spread for each one).
+The `[calibration]` numbers come from `Calibration` > `DACs Calib` on the click wheel. It runs by itself on first startup, and you can run it again if the DAC or ADC voltages look off (it sets a bunch of DAC voltages and reads them back with the INA219 to work out the zero and spread for each one). The probe's own calibration (`pad_min`, `pad_max*`, the switch thresholds) is in `[probe]` - the [Calibration](05.8-calibration.md) page covers what sets each one.
 
 ## Config Help
 
