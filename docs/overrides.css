@@ -63,3 +63,11 @@ img.btn {
 .rst-content details.tip > p {
   margin-top: 0.5em;
 }
+
+/* Tables whose cells should wrap instead of scrolling sideways (the theme
+   sets white-space: nowrap on every cell). Opt in per table:
+   <div class="wrap-table" markdown="1"> ... </div> */
+.rst-content .wrap-table table td,
+.rst-content .wrap-table table th {
+  white-space: normal;
+}
