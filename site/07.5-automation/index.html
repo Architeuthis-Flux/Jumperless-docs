@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://docs.jumperless.org/07.5-automation/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.jumperless.org/07.5-automation/">
+    <meta property="og:title" content="Automation & LLM Tools - Jumperless Docs">
+    <meta property="og:description" content="Learn how to use your Jumperless">
+    <meta property="og:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta property="og:image:alt" content="Jumperless Logo">
+    <meta property="og:site_name" content="Jumperless Docs">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://docs.jumperless.org/07.5-automation/">
+    <meta name="twitter:title" content="Automation & LLM Tools - Jumperless Docs">
+    <meta name="twitter:description" content="Learn how to use your Jumperless">
+    <meta name="twitter:image" content="https://docs.jumperless.org/assets/ExplodraftWords.png">
+    <meta name="twitter:image:alt" content="Jumperless Logo">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="description" content="Learn how to use your Jumperless">
+    <meta name="keywords" content="jumperless, breadboard, electronics, prototyping, documentation">
+    <meta name="author" content="Kevin Santo Cappuccio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://docs.jumperless.org/07.5-automation/">
+    
+    <!-- LLM-friendly documentation (llms.txt spec) -->
+    <link rel="llms-txt" href="https://docs.jumperless.org/llms.txt" title="LLM documentation index">
+    <link rel="llms-full-txt" href="https://docs.jumperless.org/llms-full.txt" title="Complete documentation for LLMs">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ff4775">
+    <meta name="msapplication-TileColor" content="#ff47A5">
+
+    <title>Automation & LLM Tools - Jumperless Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+        <link href="../overrides.css" rel="stylesheet" />
+     
+    <style>
+      /* Hide prev/next at bottom of content area */
+      .rst-footer-buttons { display: none !important; }
+      /* Hide prev/next nav at bottom of sidebar (rst-versions strip) */
+      .rst-versions { display: none !important; }
+    </style>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../assets/JNameLogo.png" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03-app/">The App</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04-oled/">OLED Support</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05-arduino/">Arduino Stuff</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Automation & LLM Tools</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#usb-port-structure">USB port structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#communication-methods">Communication methods</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-python-one-liners-1st-main-port">1. &gt; Python one-liners (1st / main port)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-micropython-raw-repl-3rd-port">2. MicroPython Raw REPL (3rd port)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-arduino-tags-2nd-port-via-uart">3. Arduino tags (2nd port, via UART)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-single-character-commands-1st-port">4. Single-character commands (1st port)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-usbser3-backchannel-4th-port-read-only-telemetry">5. USBSer3 backchannel (4th port) — read-only telemetry</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#self-describing-help-yaml">Self-describing :help (YAML)</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mcp-server">MCP server</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#agent-skill">Agent Skill</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#node-map">Node Map</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#breadboard-rows-160">Breadboard rows (1–60)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#node-names-and-ids">Node names and IDs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#breadboard-layout-highlevel">Breadboard layout (high‑level)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#dip-ics-straddling-the-center-gap">DIP ICs straddling the center gap</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#how-to-use-this-map">How to use this map</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#json-state-format">JSON State Format</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#top-level-structure">Top-level structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#power-section">power section</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nets-section">nets section</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#gpio-section">gpio section</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#overlays-section">overlays section</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#editing-state-safely">Editing state safely</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-adjusting-top-rail-voltage-via-state">Example: adjusting top rail voltage via state</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-augmenting-overlays">Example: augmenting overlays</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#wokwi-import-from_wokwitrue">Wokwi import (from_wokwi=True)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#robustness-tips-for-agents">Robustness tips for agents</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#micropython-tool-reference-subset">MicroPython tool reference (subset)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#node-addressing-quick-form">Node addressing (quick form)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-mental-model-for-llm-agents">A mental model for LLM agents</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#workflows">Workflows</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#safety-guidelines">Safety guidelines</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#implementation-status">Implementation status</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-file-manager/">File Manager</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08-micropython/">MicroPython</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://shop.jumperless.org">Shop</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://ide.jumperless.org/">JumperIDE</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Jumperless Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Automation & LLM Tools</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="automation-llm-tools">Automation &amp; LLM Tools</h1>
+<p>The Jumperless V5 is built to be driven by software — by your own scripts, by
+desktop apps, and by LLM agents (Cursor, Claude Desktop/Code, etc.). This page
+is the hub for <strong>every</strong> way to control the board from outside the menu.</p>
+<p>The full hardware/API surface is documented in the
+<a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a> — this page is
+about <em>transport and tooling</em>, not the individual calls.</p>
+<hr />
+<!--
+
+### Which tool do I use?
+
+| Your situation | Use this |
+|----------------|----------|
+| You use an **MCP client** (Claude Desktop, Cursor MCP, etc.) | **jumperless-mcp** — build/install from the `mcp/` submodule in [Large-Breadboard-Model](https://github.com/Architeuthis-Flux/Large-Breadboard-Model) |
+| You use a **Cursor/Claude Agent Skill** + host shell scripts | Same repo — `SKILL.md` + `scripts/jumperless.py` ([Agent Skill page](jumperless-agent-skill.md)) |
+| You want **fast, read-only board telemetry** with no Python | **USBSer3 backchannel** on port 7 (`:help`, `:gpio`, `:leds`, …) — built into the firmware |
+| You want a **one-liner of Python** on the main terminal | `>` prefix on port 1 |
+| You want to run **full scripts on the device** | MicroPython **Raw REPL** on port 5 |
+
+All of these ultimately drive the same MicroPython API on the device. The
+backchannel (port 7) is the exception: it is a read-only telemetry channel that
+never enters Python and never mutates state.
+
+<pre class="mermaid"><code>flowchart LR
+  subgraph host [Host / Agent]
+    MCP[jumperless-mcp]
+    SKILL[Agent Skill + jumperless.py]
+    SCRIPT[your scripts]
+  end
+  subgraph dev [Jumperless V5]
+    P1[port 1: menu + &gt; Python]
+    P5[port 5: Raw REPL]
+    P7[port 7: USBSer3 backchannel]
+    API[(MicroPython API)]
+  end
+  MCP - -&gt; P5
+  SKILL - -&gt; P5
+  SCRIPT - -&gt; P1 &amp; P5
+  P1 - -&gt; API
+  P5 - -&gt; API
+  P7 -. read-only .-&gt; API</code></pre>
+
+
+
+---
+
+-->
+<h2 id="usb-port-structure">USB port structure</h2>
+<p>The Jumperless enumerates as four USB CDC serial interfaces. On macOS they are
+named <code class="language-jython highlight"><span class="n">JLV5portN</span></code>; on Linux they are sequential <code class="language-jython highlight"><span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">ttyACMx</span></code>; on Windows they
+are sequential <code class="language-jython highlight"><span class="n">COMx</span></code>.</p>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>macOS suffix</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port1</span></code></td>
+<td>Main terminal, menu, <code class="language-jython highlight"><span class="o">&gt;</span></code> one-liner Python, single-char commands</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port3</span></code></td>
+<td>Arduino UART passthrough</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port5</span></code></td>
+<td>MicroPython Raw REPL — <strong>primary transport for scripts and the Agent Skill</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code class="language-jython highlight"><span class="n">JLV5port7</span></code></td>
+<td>USBSer3 machine backchannel — <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> (YAML), <code class="language-jython highlight"><span class="p">:</span><span class="n">cmds</span></code>, read-only status verbs</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The host helper <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span> <span class="n">detect</span></code> (in the Agent Skill repo)
+auto-finds the Raw REPL port and caches it, so you rarely need to name ports
+by hand.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I will refer to these ports by their index (1st, 2nd, 3rd, 4th). macOS names
+them by USB interface index, and each serial port uses two interfaces (control
+and data), so the suffixes step by two: 1, 3, 5, 7. Linux and Windows number
+them sequentially.</p>
+</div>
+<hr />
+<h2 id="communication-methods">Communication methods</h2>
+<h3 id="1-python-one-liners-1st-main-port">1. <code class="language-jython highlight"><span class="o">&gt;</span></code> Python one-liners (1st / main port)</h3>
+<p>Prefix a single line of Python with <code class="language-jython highlight"><span class="o">&gt;</span></code> on the main terminal. Best for quick
+checks and single commands.</p>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;</span> <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="3 "></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;V = </span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="2-micropython-raw-repl-3rd-port">2. MicroPython Raw REPL (3rd port)</h3>
+<p>The canonical transport for anything beyond a one-liner: full scripts, loops,
+guided flows. This is what the Agent Skill's <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and the MCP server
+both speak under the hood.</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos" data-linenos="4 "></span>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="3-arduino-tags-2nd-port-via-uart">3. Arduino tags (2nd port, via UART)</h3>
+<p>From an Arduino connected to the Jumperless headers:</p>
+<div class="language-cpp highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;&lt;p&gt;connect(1, 5)&lt;/p&gt;&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// run Python</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;&lt;j&gt;n&lt;/j&gt;&quot;</span><span class="p">);</span><span class="w">                </span><span class="c1">// menu command</span>
+</code></pre></div>
+<h3 id="4-single-character-commands-1st-port">4. Single-character commands (1st port)</h3>
+<p>Raw characters sent to port 1 trigger immediate menu actions — fast state
+dumps, board clears, etc. (<code class="language-jython highlight"><span class="n">J</span></code> = JSON state, <code class="language-jython highlight"><span class="n">x</span></code> = clear, <code class="language-jython highlight"><span class="n">n</span></code> = list nets, …).</p>
+<h3 id="5-usbser3-backchannel-4th-port-read-only-telemetry">5. USBSer3 backchannel (4th port) — read-only telemetry</h3>
+<p>A dedicated <em>machine</em> port that never blocks and never changes state. It speaks
+two command forms:</p>
+<ul>
+<li><strong>Single characters</strong> dispatch instantly: <code class="language-jython highlight"><span class="n">A</span></code> full status, <code class="language-jython highlight"><span class="n">V</span></code> ADC+current,
+  <code class="language-jython highlight"><span class="n">G</span></code> GPIO, <code class="language-jython highlight"><span class="n">N</span></code> nets, <code class="language-jython highlight"><span class="n">K</span></code> YAML.</li>
+<li><strong><code class="language-jython highlight"><span class="p">:</span></code> verbs</strong> read a newline-terminated line: <code class="language-jython highlight"><span class="p">:</span><span class="n">gpio</span><span class="p">:</span><span class="n">s</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">leds</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">crossbar</span></code>,
+  <code class="language-jython highlight"><span class="p">:</span><span class="n">adc</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">yaml</span></code>, <code class="language-jython highlight"><span class="p">:</span><span class="n">every</span><span class="p">:</span><span class="mi">1</span><span class="n">ms</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="n">gpio</span><span class="p">:</span><span class="n">s</span></code>, …</li>
+</ul>
+<p>Every command is gated by an access tag; only read-only queries run here, so an
+agent can poll the board freely without risk of mutating it.</p>
+<h4 id="self-describing-help-yaml">Self-describing <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> (YAML)</h4>
+<p>The backchannel describes itself. Send <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> (or a bare <code class="language-jython highlight"><span class="p">:</span></code>) and it emits a
+<strong>YAML</strong> document — readable straight in a serial terminal, and parseable with
+<code class="language-jython highlight"><span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">()</span></code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span>---YAML_HELP_START---
+<span class="linenos" data-linenos=" 2 "></span>ser3_help: 1
+<span class="linenos" data-linenos=" 3 "></span>protocol:
+<span class="linenos" data-linenos=" 4 "></span>  single_char: &quot;Instant dispatch; no line collection. Multi-char modifiers use &#39;:&#39; verbs.&quot;
+<span class="linenos" data-linenos=" 5 "></span>  ...
+<span class="linenos" data-linenos=" 6 "></span>verbs:
+<span class="linenos" data-linenos=" 7 "></span>  - name: &quot;gpio:s&quot;
+<span class="linenos" data-linenos=" 8 "></span>    summary: &quot;48-pin GPIO state snapshot&quot;
+<span class="linenos" data-linenos=" 9 "></span>    args: &quot;[float]&quot;
+<span class="linenos" data-linenos="10 "></span>    output: &quot;s{&lt;48 0/1[/f]&gt;}&quot;
+<span class="linenos" data-linenos="11 "></span>    example: &quot;:gpio:s&quot;
+<span class="linenos" data-linenos="12 "></span>    min_us: 20
+<span class="linenos" data-linenos="13 "></span>  ...
+<span class="linenos" data-linenos="14 "></span>---YAML_HELP_END---
+</code></pre></div>
+<p>Targeted help is available too:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code></td>
+<td>Full YAML help document</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span><span class="p">:</span><span class="o">&lt;</span><span class="n">verb</span><span class="o">&gt;</span></code></td>
+<td>One verb's details (e.g. <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span><span class="p">:</span><span class="n">gpio</span><span class="p">:</span><span class="n">s</span></code>)</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span><span class="p">:</span><span class="o">&lt;</span><span class="n">char</span><span class="o">&gt;</span></code></td>
+<td>A single-char command's long help (e.g. <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span><span class="p">:</span><span class="n">c</span></code>)</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span><span class="p">:</span><span class="n">json</span></code></td>
+<td>The same content in JSON</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="p">:</span><span class="n">cmds</span></code> / <code class="language-jython highlight"><span class="p">:</span><span class="n">cmds_all</span></code></td>
+<td>Machine command list (JSON) — <code class="language-jython highlight"><span class="p">:</span><span class="n">cmds_all</span></code> includes blocked commands and their access tags</td>
+</tr>
+</tbody>
+</table>
+<p>A host harness for the backchannel ships with the firmware repo at
+<code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">bench_backchannel</span><span class="o">.</span><span class="n">py</span></code> (drives <code class="language-jython highlight"><span class="p">:</span><span class="n">bench</span></code>, times verbs).</p>
+<hr />
+<h2 id="mcp-server">MCP server</h2>
+<p><a href="https://github.com/LesbianVelociraptor/jumperless-mcp"><strong>Jumperless-mcp</strong> by LesbianVelociraptor</a></p>
+<p>For MCP-native clients (Claude Desktop, Cursor MCP, …), the Jumperless exposes
+a Model Context Protocol server: a Rust MCP front-end plus a resident Python
+library on the device. It presents the board's capabilities as typed tools
+(connections, power, measurement, GPIO/PWM, OLED, overlays, state, …).</p>
+<p>It lives as the <strong><code class="language-jython highlight"><span class="n">mcp</span><span class="o">/</span></code> git submodule</strong> inside the canonical automation repo,
+so one checkout gives you both the Agent Skill and the MCP server:</p>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git
+<span class="linenos" data-linenos="2 "></span><span class="nb">cd</span><span class="w"> </span>Large-Breadboard-Model/mcp
+<span class="linenos" data-linenos="3 "></span>cargo<span class="w"> </span>install<span class="w"> </span>--path<span class="w"> </span>.<span class="w">        </span><span class="c1"># or use a release binary</span>
+</code></pre></div>
+<p>Point your MCP client at the built binary:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">    </span><span class="nt">&quot;jumperless&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="4 "></span><span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/Large-Breadboard-Model/mcp/target/release/jumperless-mcp&quot;</span>
+<span class="linenos" data-linenos="5 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="6 "></span><span class="w">  </span><span class="p">}</span>
+<span class="linenos" data-linenos="7 "></span><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Exclusive port:</strong> the MCP server holds the USB serial port while running.
+Don't run <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> (the Agent Skill transport) against the same board
+at the same time.</p>
+</blockquote>
+<hr />
+<h2 id="agent-skill">Agent Skill</h2>
+<p>If your agent supports the <a href="https://agentskills.io/">Agent Skills</a> standard
+(Cursor, Claude Code), install the Jumperless V5 skill. It teaches the agent the
+device's capabilities and drives it through <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> over the Raw
+REPL, with progressive-disclosure reference docs loaded only as needed.</p>
+<ul>
+<li><strong>On this site:</strong> <a href="../jumperless-agent-skill/">Jumperless V5 Agent Skill</a></li>
+<li><strong>Canonical source:</strong> <a href="https://github.com/Architeuthis-Flux/Large-Breadboard-Model">Architeuthis-Flux/Large-Breadboard-Model</a></li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cursor/skills<span class="w">          </span><span class="c1"># or ~/.claude/skills</span>
+<span class="linenos" data-linenos="2 "></span><span class="nb">cd</span><span class="w"> </span>~/.cursor/skills
+<span class="linenos" data-linenos="3 "></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span><span class="se">\</span>
+<span class="linenos" data-linenos="4 "></span><span class="w">  </span>https://github.com/Architeuthis-Flux/Large-Breadboard-Model.git<span class="w"> </span>jumperless-v5
+</code></pre></div>
+<hr />
+<h2 id="node-map">Node Map</h2>
+<p>Use this to translate between human‑readable names (like <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code> or <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>) and the internal node numbers.</p>
+<p>All constants are available in the MicroPython REPL; you normally do <strong>not</strong> need the numbers directly, but the mapping is useful for mental models and debugging.</p>
+<h3 id="breadboard-rows-160">Breadboard rows (1–60)</h3>
+<p>Rows 1–60 represent the breadboard rows along the main area:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="mi">1</span></code>–<code class="language-jython highlight"><span class="mi">30</span></code> — upper half</li>
+<li><code class="language-jython highlight"><span class="mi">31</span></code>–<code class="language-jython highlight"><span class="mi">60</span></code> — lower half</li>
+</ul>
+<p>Each row corresponds to a vertical strip of 5 holes on the physical board.</p>
+<p>Example:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># connect top row 1 to top row 10</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">connect</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">GND</span><span class="p">)</span> <span class="c1"># connect lower half row 35 to ground</span>
+</code></pre></div>
+<hr />
+<h3 id="node-names-and-ids">Node names and IDs</h3>
+<p>Every node name, alias and ID lives in
+<a href="../09.5-micropythonAPIreference/#node-names-and-constants">Node Names and Constants</a>
+in the MicroPython API Reference.</p>
+<p><code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_MINUS</span></code> are the two ends of a <strong>2 Ω shunt resistor</strong> and are internally shorted through that shunt; always use them in series with the circuit being measured.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Avoid using <strong>DAC 0</strong> and <strong>ROUTABLE_BUFFER_IN</strong> because they're used for probe switch sensing</p>
+</div>
+<hr />
+<h3 id="breadboard-layout-highlevel">Breadboard layout (high‑level)</h3>
+<p>The board follows a standard half‑size breadboard geometry:</p>
+<ul>
+<li>
+<p>Nano header at the top:</p>
+<ul>
+<li>Top row: <code class="language-jython highlight"><span class="no no-Jumperless">D12</span> <span class="no no-Jumperless">D11</span> <span class="no no-Jumperless">D10</span> <span class="no no-Jumperless">D9</span> <span class="no no-Jumperless">D8</span> <span class="no no-Jumperless">D7</span> <span class="no no-Jumperless">D6</span> <span class="no no-Jumperless">D5</span> <span class="no no-Jumperless">D4</span> <span class="no no-Jumperless">D3</span> <span class="no no-Jumperless">D2</span> <span class="no no-Jumperless">GND</span> <span class="n">RST1</span> <span class="no no-Jumperless">D0</span> <span class="no no-Jumperless">D1</span></code></li>
+<li>Second row: <code class="language-jython highlight"><span class="no no-Jumperless">D13</span> <span class="mi">3</span><span class="n">V3</span> <span class="n">REF</span> <span class="no no-Jumperless">A0</span> <span class="no no-Jumperless">A1</span> <span class="no no-Jumperless">A2</span> <span class="no no-Jumperless">A3</span> <span class="no no-Jumperless">A4</span> <span class="no no-Jumperless">A5</span> <span class="no no-Jumperless">A6</span> <span class="no no-Jumperless">A7</span> <span class="mi">5</span><span class="n">V</span> <span class="n">RST0</span> <span class="no no-Jumperless">GND</span> <span class="n">VIN</span></code></li>
+</ul>
+</li>
+<li>
+<p>Top power rail:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code></li>
+</ul>
+</li>
+<li>
+<p>Breadboard rows:</p>
+<ul>
+<li>Rows <code class="language-jython highlight"><span class="mi">1</span></code>–<code class="language-jython highlight"><span class="mi">30</span></code> — upper half, between the top rails and the center gap</li>
+<li>Rows <code class="language-jython highlight"><span class="mi">31</span></code>–<code class="language-jython highlight"><span class="mi">60</span></code> — lower half, between the center gap and the bottom rails</li>
+</ul>
+</li>
+<li>
+<p>Bottom power rail:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code></li>
+<li><code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code></li>
+</ul>
+</li>
+</ul>
+<p>An ASCII diagram (from the docs) approximates the layout; the agent should treat rows and rails as in any typical solderless breadboard, with the addition that every hole has an individually controllable RGB LED.</p>
+<h4 id="dip-ics-straddling-the-center-gap">DIP ICs straddling the center gap</h4>
+<p>A DIP chip (555, op-amp, logic, …) sits across the center gap, with each side in
+a different breadboard half. The two halves are independent rows, so the two
+sides of the chip map to numerically distant nodes. For a chip whose first pin
+sits at upper-half row <code class="language-jython highlight"><span class="n">N</span></code>, the upper-side pins run <code class="language-jython highlight"><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="err">…</span></code> and the
+lower-side pins run from the row directly across the gap (<code class="language-jython highlight"><span class="n">N</span><span class="o">+</span><span class="mi">30</span></code>).</p>
+<p>Worked example — an 8-pin DIP (e.g. a 555) with pin 1 at row 1:</p>
+<table>
+<thead>
+<tr>
+<th>Pin</th>
+<th>Node</th>
+<th>Pin</th>
+<th>Node</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code class="language-jython highlight"><span class="mi">1</span></code></td>
+<td>8</td>
+<td><code class="language-jython highlight"><span class="mi">31</span></code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code class="language-jython highlight"><span class="mi">2</span></code></td>
+<td>7</td>
+<td><code class="language-jython highlight"><span class="mi">32</span></code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code class="language-jython highlight"><span class="mi">3</span></code></td>
+<td>6</td>
+<td><code class="language-jython highlight"><span class="mi">33</span></code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code class="language-jython highlight"><span class="mi">4</span></code></td>
+<td>5</td>
+<td><code class="language-jython highlight"><span class="mi">34</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Pins 1–4 are on the upper side (rows 1–4); pins 5–8 are across the gap on the
+lower side (rows 34→31, counting back toward pin 1). Adjust the base row to wherever
+the chip is actually placed; verify with the probe or a measurement when unsure.</p>
+<hr />
+<h4 id="how-to-use-this-map">How to use this map</h4>
+<ul>
+<li>Prefer named constants like <code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code> when generating code.</li>
+<li>Use the numeric IDs only when inspecting low‑level debugging output or when matching numeric IDs in <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">get_net_info</span><span class="p">()</span></code> results.</li>
+<li>When the user describes physical positions (“top rail”, “bottom left rail”, “row 25”), translate them into these node names/IDs before constructing <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="o">...</span><span class="p">)</span></code> commands.</li>
+</ul>
+<h2 id="json-state-format">JSON State Format</h2>
+<p>The function <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> returns a <strong>JSON string</strong> describing the entire board state: power rails, nets, GPIOs, and overlays. <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span></code> applies such a state. Two optional flags follow it, and they have to be positional — <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_str</span><span class="p">,</span> <span class="n">clear_first</span><span class="p">,</span> <span class="n">from_wokwi</span><span class="p">)</span></code>, where <code class="language-jython highlight"><span class="n">clear_first</span></code> defaults to true and <code class="language-jython highlight"><span class="n">from_wokwi</span></code> to false. Keyword arguments raise a <code class="language-jython highlight"><span class="ne">TypeError</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The entire immediate state of the board is defined in this JSON and can be
+shared to another Jumperless, saved as a backup, included in tutorials, etc.
+Slots themselves are stored as YAML, which is what <code class="language-jython highlight"><span class="n">K</span></code> and <code class="language-jython highlight"><span class="p">:</span><span class="n">yaml</span></code> dump.</p>
+</div>
+<p>This file explains the structure so agents can safely inspect, modify, and re‑apply state.</p>
+<hr />
+<h3 id="top-level-structure">Top-level structure</h3>
+<p>A typical <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> JSON (pretty‑printed) looks like:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;power&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="w">    </span><span class="nt">&quot;top_rail&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.8</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">    </span><span class="nt">&quot;bottom_rail&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.8</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">    </span><span class="nt">&quot;dac0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.25</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">    </span><span class="nt">&quot;dac1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">  </span><span class="p">},</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">  </span><span class="nt">&quot;nets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">      </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GND&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="12 "></span><span class="w">      </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;GND&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;21&quot;</span><span class="p">],</span>
+<span class="linenos" data-linenos="13 "></span><span class="w">      </span><span class="nt">&quot;special&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;none&quot;</span>
+<span class="linenos" data-linenos="14 "></span><span class="w">    </span><span class="p">},</span>
+<span class="linenos" data-linenos="15 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="16 "></span><span class="w">      </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="linenos" data-linenos="17 "></span><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Top Rail&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="18 "></span><span class="w">      </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;TOP_R&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;23&quot;</span><span class="p">],</span>
+<span class="linenos" data-linenos="19 "></span><span class="w">      </span><span class="nt">&quot;special&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RAIL&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="20 "></span><span class="w">      </span><span class="nt">&quot;voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.8</span>
+<span class="linenos" data-linenos="21 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="22 "></span><span class="w">    </span><span class="c1">// ...</span>
+<span class="linenos" data-linenos="23 "></span><span class="w">  </span><span class="p">],</span>
+<span class="linenos" data-linenos="24 "></span><span class="w">  </span><span class="nt">&quot;gpio&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos="25 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="26 "></span><span class="w">      </span><span class="nt">&quot;pin&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="27 "></span><span class="w">      </span><span class="nt">&quot;net&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="linenos" data-linenos="28 "></span><span class="w">      </span><span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SIO&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="29 "></span><span class="w">      </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INPUT&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="30 "></span><span class="w">      </span><span class="nt">&quot;pull&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;down&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="31 "></span><span class="w">      </span><span class="nt">&quot;reading&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="32 "></span><span class="w">      </span><span class="nt">&quot;floating_read&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos" data-linenos="33 "></span><span class="w">    </span><span class="p">},</span>
+<span class="linenos" data-linenos="34 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="35 "></span><span class="w">      </span><span class="nt">&quot;pin&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TX&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="36 "></span><span class="w">      </span><span class="nt">&quot;net&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="linenos" data-linenos="37 "></span><span class="w">      </span><span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UART&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="38 "></span><span class="w">      </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OUTPUT&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="39 "></span><span class="w">      </span><span class="nt">&quot;pull&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;down&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="40 "></span><span class="w">      </span><span class="nt">&quot;reading&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="41 "></span><span class="w">      </span><span class="nt">&quot;floating_read&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="linenos" data-linenos="42 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="43 "></span><span class="w">  </span><span class="p">],</span>
+<span class="linenos" data-linenos="44 "></span><span class="w">  </span><span class="nt">&quot;overlays&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos="45 "></span><span class="w">    </span><span class="p">{</span>
+<span class="linenos" data-linenos="46 "></span><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;border&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="47 "></span><span class="w">      </span><span class="nt">&quot;row&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="48 "></span><span class="w">      </span><span class="nt">&quot;col&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="49 "></span><span class="w">      </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="linenos" data-linenos="50 "></span><span class="w">      </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos" data-linenos="51 "></span><span class="w">      </span><span class="nt">&quot;colors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;003333&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;003333&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">]</span>
+<span class="linenos" data-linenos="52 "></span><span class="w">    </span><span class="p">}</span>
+<span class="linenos" data-linenos="53 "></span><span class="w">  </span><span class="p">]</span>
+<span class="linenos" data-linenos="54 "></span><span class="p">}</span>
+</code></pre></div>
+<p>There may be additional keys in future firmware versions; agents should <strong>not</strong> assume the set of keys is fixed and should preserve unknown keys when round‑tripping.</p>
+<hr />
+<h3 id="power-section"><code class="language-jython highlight"><span class="n">power</span></code> section</h3>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="nt">&quot;power&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="nt">&quot;top_rail&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.8</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">  </span><span class="nt">&quot;bottom_rail&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.8</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span><span class="w">  </span><span class="nt">&quot;dac0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.25</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span><span class="w">  </span><span class="nt">&quot;dac1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="linenos" data-linenos="6 "></span><span class="p">}</span>
+</code></pre></div>
+<p>Fields:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">top_rail</span></code> — voltage (float) configured for <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code></li>
+<li><code class="language-jython highlight"><span class="n">bottom_rail</span></code> — voltage configured for <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code></li>
+<li><code class="language-jython highlight"><span class="n">dac0</span></code>, <code class="language-jython highlight"><span class="n">dac1</span></code> — DAC channel setpoints</li>
+</ul>
+<p>When using <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span></code>, changing these values drives the corresponding channels and is saved into the current slot. Any value outside -8 V to 8 V is rejected.</p>
+<hr />
+<h3 id="nets-section"><code class="language-jython highlight"><span class="n">nets</span></code> section</h3>
+<p>Each item describes a net (set of nodes that are electrically connected inside the crossbar).</p>
+<p>Example:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DAC 0&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span><span class="w">  </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;DAC_0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BUF_IN&quot;</span><span class="p">],</span>
+<span class="linenos" data-linenos="5 "></span><span class="w">  </span><span class="nt">&quot;special&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DAC&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="6 "></span><span class="w">  </span><span class="nt">&quot;voltage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.25</span>
+<span class="linenos" data-linenos="7 "></span><span class="p">}</span>
+</code></pre></div>
+<p>Fields:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">index</span></code> — numeric net index</li>
+<li><code class="language-jython highlight"><span class="nf nf-JFS">name</span></code> — human‑readable net name (may be auto‑generated or user‑defined)</li>
+<li><code class="language-jython highlight"><span class="n">nodes</span></code> — array of node names (strings), such as <code class="language-jython highlight"><span class="s2">&quot;GND&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;TOP_R&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;21&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;D13&quot;</span></code>, etc.</li>
+<li>These names correspond to the mapping in <a href="../09.5-micropythonAPIreference/#node-names-and-constants">Node Names and Constants</a>.</li>
+<li><code class="language-jython highlight"><span class="n">special</span></code> — annotation for special nets; the values are <code class="language-jython highlight"><span class="s2">&quot;none&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;RAIL&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;DAC&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;ADC&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;GPIO&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;UART_TX&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;UART_RX&quot;</span></code> and <code class="language-jython highlight"><span class="s2">&quot;FAKE_GPIO_IN&quot;</span></code></li>
+<li><code class="language-jython highlight"><span class="n">voltage</span></code> — present on <code class="language-jython highlight"><span class="n">ADC</span></code>, <code class="language-jython highlight"><span class="n">DAC</span></code>, <code class="language-jython highlight"><span class="n">RAIL</span></code> and <code class="language-jython highlight"><span class="n">FAKE_GPIO_IN</span></code> nets</li>
+<li><code class="language-jython highlight"><span class="n">logic</span></code> — present on <code class="language-jython highlight"><span class="n">GPIO</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code> and <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code> nets; the logic level (0 or 1)</li>
+</ul>
+<p><strong>Important:</strong> <code class="language-jython highlight"><span class="n">nets</span></code> describes <strong>logical groupings</strong> of nodes. It is <strong>not</strong> a direct list of bridges; bridges are derived from the crossbar configuration internally.</p>
+<hr />
+<h3 id="gpio-section"><code class="language-jython highlight"><span class="n">gpio</span></code> section</h3>
+<p>Each entry describes one logical GPIO:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="nt">&quot;pin&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">  </span><span class="nt">&quot;net&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span><span class="w">  </span><span class="nt">&quot;function&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SIO&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span><span class="w">  </span><span class="nt">&quot;direction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INPUT&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="6 "></span><span class="w">  </span><span class="nt">&quot;pull&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;down&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="7 "></span><span class="w">  </span><span class="nt">&quot;reading&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="8 "></span><span class="w">  </span><span class="nt">&quot;floating_read&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos" data-linenos="9 "></span><span class="p">}</span>
+</code></pre></div>
+<p>Fields:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">pin</span></code> — either:</li>
+<li>An integer <code class="language-jython highlight"><span class="mi">1</span></code>–<code class="language-jython highlight"><span class="mi">8</span></code> for <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code></li>
+<li><code class="language-jython highlight"><span class="s2">&quot;TX&quot;</span></code> or <code class="language-jython highlight"><span class="s2">&quot;RX&quot;</span></code> for the UART pins</li>
+<li><code class="language-jython highlight"><span class="n">net</span></code> — net index this pin is connected to (or <code class="language-jython highlight"><span class="n">null</span></code> if unconnected)</li>
+<li><code class="language-jython highlight"><span class="n">function</span></code> — textual description of function:</li>
+<li><code class="language-jython highlight"><span class="s2">&quot;SIO&quot;</span></code> — standard GPIO</li>
+<li><code class="language-jython highlight"><span class="s2">&quot;UART&quot;</span></code> — UART TX/RX</li>
+<li>Other firmware‑defined roles</li>
+<li><code class="language-jython highlight"><span class="n">direction</span></code> — <code class="language-jython highlight"><span class="s2">&quot;INPUT&quot;</span></code> or <code class="language-jython highlight"><span class="s2">&quot;OUTPUT&quot;</span></code></li>
+<li><code class="language-jython highlight"><span class="n">pull</span></code> — <code class="language-jython highlight"><span class="s2">&quot;up&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;down&quot;</span></code>, or <code class="language-jython highlight"><span class="s2">&quot;none&quot;</span></code></li>
+<li><code class="language-jython highlight"><span class="n">reading</span></code> — textual summary of the last known logic state (<code class="language-jython highlight"><span class="s2">&quot;high&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;low&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;unknown&quot;</span></code>, etc.)</li>
+<li><code class="language-jython highlight"><span class="n">floating_read</span></code> — boolean (0/1) indicating whether floating detection is enabled</li>
+</ul>
+<p>Agents can <strong>inspect</strong> this section to understand logical GPIO usage, but should generally <strong>change GPIO configuration via the MicroPython APIs</strong> (<code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_dir</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_pull</span></code>, etc.) rather than editing this JSON directly.</p>
+<hr />
+<h3 id="overlays-section"><code class="language-jython highlight"><span class="n">overlays</span></code> section</h3>
+<p>Overlays describe additional graphics drawn on the breadboard RGB LEDs. They are rendered <strong>on top of</strong> the firmware’s net coloring.</p>
+<p>Example:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;border&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="w">  </span><span class="nt">&quot;row&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="w">  </span><span class="nt">&quot;col&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="w">  </span><span class="nt">&quot;width&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="w">  </span><span class="nt">&quot;height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="w">  </span><span class="nt">&quot;colors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="w">    </span><span class="s2">&quot;003333&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;003333&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="w">    </span><span class="s2">&quot;003333&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;000000&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span><span class="w">    </span><span class="s2">&quot;... more hex color strings ...&quot;</span>
+<span class="linenos" data-linenos="11 "></span><span class="w">  </span><span class="p">]</span>
+<span class="linenos" data-linenos="12 "></span><span class="p">}</span>
+</code></pre></div>
+<p>Fields:</p>
+<ul>
+<li><code class="language-jython highlight"><span class="nf nf-JFS">name</span></code> — overlay name (string)</li>
+<li><code class="language-jython highlight"><span class="n">row</span></code> — top row (1–10)</li>
+<li><code class="language-jython highlight"><span class="n">col</span></code> — left column (1–30)</li>
+<li><code class="language-jython highlight"><span class="n">width</span></code> — width in columns</li>
+<li><code class="language-jython highlight"><span class="n">height</span></code> — height in rows</li>
+<li><code class="language-jython highlight"><span class="n">colors</span></code> — flat array of <strong>hex color strings without <code class="language-jython highlight"><span class="mi">0</span><span class="n">x</span></code> prefix</strong>, e.g. <code class="language-jython highlight"><span class="s2">&quot;003333&quot;</span></code>, <code class="language-jython highlight"><span class="s2">&quot;FF2020&quot;</span></code></li>
+<li>Length = <code class="language-jython highlight"><span class="n">width</span> <span class="o">*</span> <span class="n">height</span></code></li>
+<li>Order is row‑major: top row left→right, then next row down, etc.</li>
+<li><code class="language-jython highlight"><span class="s2">&quot;000000&quot;</span></code> means “transparent” — do not override underlying LED color</li>
+</ul>
+<p>Brightness recommendation:</p>
+<ul>
+<li>Avoid full‑scale white <code class="language-jython highlight"><span class="n">FFFFFF</span></code>.</li>
+<li>Prefer saturated colors with reduced magnitude (~25%): e.g. <code class="language-jython highlight"><span class="mi">2020</span><span class="n">FF</span></code>, <code class="language-jython highlight"><span class="mi">20</span><span class="n">FF20</span></code>, <code class="language-jython highlight"><span class="n">FF2020</span></code>, <code class="language-jython highlight"><span class="mi">404040</span></code>.</li>
+</ul>
+<p>When editing overlays via JSON:</p>
+<ul>
+<li>Always maintain the correct <code class="language-jython highlight"><span class="n">width</span> <span class="o">*</span> <span class="n">height</span></code> number of color entries.</li>
+<li>Preserve unknown fields if present.</li>
+<li>Ensure that <code class="language-jython highlight"><span class="n">row</span></code>, <code class="language-jython highlight"><span class="n">col</span></code>, <code class="language-jython highlight"><span class="n">width</span></code>, and <code class="language-jython highlight"><span class="n">height</span></code> keep the overlay within the canvas, which is 10 rows by 30 columns: row 1 is the top outer edge, rows 5 and 6 straddle the center gap, and row 10 is the bottom outer edge.</li>
+</ul>
+<p>Often it is easier to use the MicroPython overlay APIs (<code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear</span></code>, etc.) directly instead of editing <code class="language-jython highlight"><span class="n">overlays</span></code> in the state JSON manually. The JSON is still useful for inspection and for bulk export/import of complex scenes.</p>
+<hr />
+<h3 id="editing-state-safely">Editing state safely</h3>
+<p>General guidelines:</p>
+<ol>
+<li><strong>Fetch once, apply locally.</strong></li>
+<li>Call <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> and parse the JSON in the host environment.</li>
+<li>
+<p>Keep this as your “baseline” snapshot.</p>
+</li>
+<li>
+<p><strong>Work on a copy.</strong></p>
+</li>
+<li>Clone the baseline object before modifying it.</li>
+<li>
+<p>Preserve unknown fields.</p>
+</li>
+<li>
+<p><strong>Modify only what you care about.</strong></p>
+</li>
+<li>For power: update <code class="language-jython highlight"><span class="n">power</span><span class="o">.</span><span class="n">top_rail</span></code>, <code class="language-jython highlight"><span class="n">power</span><span class="o">.</span><span class="n">dac0</span></code>, etc.</li>
+<li>For overlays: add or replace specific entries in <code class="language-jython highlight"><span class="n">overlays</span></code>.</li>
+<li>
+<p>Avoid rewriting <code class="language-jython highlight"><span class="n">nets</span></code> unless you fully understand the implications; it is often better to use <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>/<code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code> APIs to modify connectivity.</p>
+</li>
+<li>
+<p><strong>Re‑serialize and apply.</strong></p>
+</li>
+<li>Use a standard JSON encoder.</li>
+<li>Call <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json_string</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></code> when applying a complete, authoritative state.</li>
+<li>
+<p>If you are only adding overlays or adjusting power, send a JSON with just those sections. <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span></code> accepts any subset of <code class="language-jython highlight"><span class="n">power</span></code>, <code class="language-jython highlight"><span class="n">nets</span></code>, <code class="language-jython highlight"><span class="n">gpio</span></code> and <code class="language-jython highlight"><span class="n">overlays</span></code> and only applies the sections that are there. <code class="language-jython highlight"><span class="n">clear_first</span></code> matters only when a <code class="language-jython highlight"><span class="n">nets</span></code> section is present — that is when it clears every existing connection first.</p>
+</li>
+<li>
+<p><strong>Rollback on problems.</strong></p>
+</li>
+<li>If <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span></code> leads to unexpected behavior, re‑apply the saved baseline snapshot.</li>
+</ol>
+<hr />
+<h3 id="example-adjusting-top-rail-voltage-via-state">Example: adjusting top rail voltage via state</h3>
+<p>Instead of:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">dac_set</span><span class="p">(</span><span class="n">TOP_RAIL</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+</code></pre></div>
+<p>You can do:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="linenos" data-linenos="2 "></span><span class="n">state</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">get_state</span><span class="p">())</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;power&quot;</span><span class="p">][</span><span class="s2">&quot;top_rail&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="linenos" data-linenos="4 "></span><span class="n">set_state</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+</code></pre></div>
+<p>This approach is useful when batching multiple changes (e.g. updating both rail voltages and overlays) in a single atomic operation.</p>
+<hr />
+<h3 id="example-augmenting-overlays">Example: augmenting overlays</h3>
+<p>Suppose <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> returns a state with existing overlays, and you want to add a new “place‑here” marker at row 3, column 10:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="linenos" data-linenos=" 2 "></span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">state</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">get_state</span><span class="p">())</span>
+<span class="linenos" data-linenos=" 4 "></span>
+<span class="linenos" data-linenos=" 5 "></span><span class="c1"># Create a 1×1 overlay with a bright but not full‑scale green</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">place_here</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos" data-linenos=" 7 "></span>    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;place_here_row3_col10&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 8 "></span>    <span class="s2">&quot;row&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="linenos" data-linenos=" 9 "></span>    <span class="s2">&quot;col&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="linenos" data-linenos="10 "></span>    <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="11 "></span>    <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="linenos" data-linenos="12 "></span>    <span class="s2">&quot;colors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;20FF20&quot;</span><span class="p">]</span>
+<span class="linenos" data-linenos="13 "></span><span class="p">}</span>
+<span class="linenos" data-linenos="14 "></span>
+<span class="linenos" data-linenos="15 "></span><span class="n">state</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;overlays&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="linenos" data-linenos="16 "></span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;overlays&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos" data-linenos="17 "></span>    <span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;overlays&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">place_here</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="linenos" data-linenos="18 "></span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">place_here</span><span class="p">]</span>
+<span class="linenos" data-linenos="19 "></span>
+<span class="linenos" data-linenos="20 "></span><span class="n">set_state</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+</code></pre></div>
+<p>This pattern:</p>
+<ul>
+<li>Preserves existing overlays.</li>
+<li>Replaces any prior overlay with the same name.</li>
+<li>Leaves other state fields untouched.</li>
+</ul>
+<hr />
+<h3 id="wokwi-import-from_wokwitrue">Wokwi import (<code class="language-jython highlight"><span class="n">from_wokwi</span><span class="o">=</span><span class="kc">True</span></code>)</h3>
+<p>When <code class="language-jython highlight"><span class="n">from_wokwi</span><span class="o">=</span><span class="kc">True</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code> expects <code class="language-jython highlight"><span class="n">json_str</span></code> to be a Wokwi <code class="language-jython highlight"><span class="n">diagram</span><span class="o">.</span><span class="n">json</span></code> rather than a Jumperless state JSON. The firmware converts the Wokwi representation into bridges, nets, and colors.</p>
+<p>Agents can:</p>
+<ul>
+<li>Ask the user to paste a Wokwi JSON.</li>
+<li>Pass it directly to <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">wokwi_json</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></code>.</li>
+</ul>
+<p>After that, a subsequent <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> will return the standard Jumperless state JSON.</p>
+<hr />
+<h3 id="robustness-tips-for-agents">Robustness tips for agents</h3>
+<ul>
+<li>Treat <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> as <strong>authoritative</strong> for the current internal configuration, but always cross‑check against the user’s description of external wiring and components.</li>
+<li>Always preserve unknown keys when editing state; future firmware versions may add fields.</li>
+<li>Prefer using high‑level MicroPython APIs (<code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span></code>, etc.) for incremental changes, and use state JSON editing for <strong>bulk</strong> or <strong>offline</strong> transformations (import/export, heavy refactoring, or pre‑computed overlays).</li>
+</ul>
+<h3 id="micropython-tool-reference-subset">MicroPython tool reference (subset)</h3>
+<p>The complete, authoritative list is the
+<a href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>. The most common
+calls for automation:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Key tools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connections</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">fast_connect</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td>Slots</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_save</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">switch_slot</span><span class="p">(</span><span class="n">slot</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">CURRENT_SLOT</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td>State</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">(</span><span class="n">json</span><span class="p">)</span></code></td>
+</tr>
+<tr>
+<td>Voltage</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">dac_get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span></code></td>
+</tr>
+<tr>
+<td>Measurement</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_current</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_voltage</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">ina_get_power</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></code></td>
+</tr>
+<tr>
+<td>GPIO / PWM</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_dir</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">gpio_set_pull</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">pwm_stop</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td>WaveGen</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">wavegen_set_wave</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wavegen_set_freq</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wavegen_set_amplitude</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">wavegen_start</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td>UI</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">oled_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_button</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">clickwheel_get_button</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td>LED overlays</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_set_pixel</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">overlay_clear_all</span><span class="p">()</span></code></td>
+</tr>
+<tr>
+<td>Net inspection</td>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_net_info</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">get_num_nets</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">print_nets</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">print_bridges</span><span class="p">()</span></code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="node-addressing-quick-form">Node addressing (quick form)</h4>
+<ul>
+<li><strong>Breadboard rows:</strong> <code class="language-jython highlight"><span class="mi">1</span></code>–<code class="language-jython highlight"><span class="mi">60</span></code></li>
+<li><strong>Rails / supplies:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">BOTTOM_RAIL</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC0</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">DAC1</span></code></li>
+<li><strong>Arduino:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">D0</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">D13</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">A0</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">A7</span></code>, <code class="language-jython highlight"><span class="n">AREF</span></code>, <code class="language-jython highlight"><span class="n">RESET</span></code></li>
+<li><strong>GPIO:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">GPIO_1</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">GPIO_8</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_TX</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">UART_RX</span></code></li>
+<li><strong>Measurement:</strong> <code class="language-jython highlight"><span class="no no-Jumperless">ADC0</span></code>–<code class="language-jython highlight"><span class="no no-Jumperless">ADC3</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_PLUS</span></code>, <code class="language-jython highlight"><span class="no no-Jumperless">ISENSE_MINUS</span></code></li>
+</ul>
+<hr />
+<h3 id="a-mental-model-for-llm-agents">A mental model for LLM agents</h3>
+<p>The Jumperless prevents internal shorts, but <strong>cannot see external wires or
+components</strong> physically on the breadboard. An agent should maintain a model of
+what it believes is on the board and raise confidence through measurement and
+user confirmation.</p>
+<p>A lightweight per-component record works well:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;comp_001&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;resistor&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="4 "></span><span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="linenos" data-linenos="5 "></span><span class="w">  </span><span class="nt">&quot;pins&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">],</span>
+<span class="linenos" data-linenos="6 "></span><span class="w">  </span><span class="nt">&quot;confidence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">,</span>
+<span class="linenos" data-linenos="7 "></span><span class="w">  </span><span class="nt">&quot;detection_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;measured&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="8 "></span><span class="w">  </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Measured 987Ω between rows 5-10&quot;</span>
+<span class="linenos" data-linenos="9 "></span><span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Confidence</th>
+<th>Source</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td><code class="language-jython highlight"><span class="n">measured</span></code></td>
+<td>Electrically verified</td>
+</tr>
+<tr>
+<td>0.9</td>
+<td><code class="language-jython highlight"><span class="n">user_confirmed</span></code></td>
+<td>User explicitly confirmed</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td><code class="language-jython highlight"><span class="n">user_stated</span></code></td>
+<td>User mentioned it casually</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td><code class="language-jython highlight"><span class="n">inferred</span></code></td>
+<td>Guessed from context</td>
+</tr>
+<tr>
+<td>0.3</td>
+<td><code class="language-jython highlight"><span class="n">assumed</span></code></td>
+<td>Default assumption</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="workflows">Workflows</h3>
+<p><strong>Safe power-up.</strong> Before energizing an unknown board, ask what's on it, build a
+low-confidence model, then verify key rows with an ADC before connecting power —
+a hidden user wire between two rows can turn <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code> + <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code> into a dead
+short.</p>
+<p><strong>Identify with the probe.</strong> Use <code class="language-jython highlight"><span class="nf nf-Jumperless">probe_read_blocking</span><span class="p">()</span></code> to let the user point
+at a node, then route an ADC to it and measure.</p>
+<p><strong>Characterize as a black box.</strong> Drive a node with the WaveGen / DAC and sweep
+while reading an ADC.</p>
+<p><strong>Batch edits via state.</strong> Fetch <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code>, mutate the JSON in Python, and
+re-apply with <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code> — one atomic round-trip instead of many calls.</p>
+<p><strong>Undo.</strong> The firmware keeps a history ring, so you don't need to burn a slot
+before destructive ops like <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code>. Call <code class="language-jython highlight"><span class="n">undo</span><span class="p">()</span></code> and <code class="language-jython highlight"><span class="n">redo</span><span class="p">()</span></code> from
+MicroPython (<code class="language-jython highlight"><span class="o">^</span></code> and <code class="language-jython highlight"><span class="o">&amp;</span></code> in the terminal), or keep a <code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> snapshot to
+re‑apply.</p>
+<hr />
+<h3 id="safety-guidelines">Safety guidelines</h3>
+<ol>
+<li><strong>Voltage range.</strong> ADC0–ADC3 are buffered for ±8V; the board is ±9V
+   tolerant overall.</li>
+<li><strong>Short protection.</strong> The firmware refuses dangerous internal connections
+   (e.g. <code class="language-jython highlight"><span class="no no-Jumperless">TOP_RAIL</span></code> directly to <code class="language-jython highlight"><span class="no no-Jumperless">GND</span></code>), but cannot see external wiring.</li>
+<li><strong>Confirm power.</strong> The board is USB-powered (no barrel jack); ask if unsure.</li>
+<li><strong>Crossbar resistance.</strong> ~ 20–40Ω per default <code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code> path (~ 80Ω with a
+   single path). Measure voltage <em>at the destination</em> to compensate for drop.</li>
+<li><strong>Settling time.</strong> Allow a few ms after routing/DAC changes (50–100 ms after
+   <code class="language-jython highlight"><span class="nf nf-Jumperless">nodes_clear</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code>) before measuring.</li>
+</ol>
+<hr />
+<h3 id="implementation-status">Implementation status</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">connect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">disconnect</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">is_connected</span><span class="p">()</span></code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">dac_set</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">ina_</span><span class="o">*</span><span class="p">()</span></code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">gpio_</span><span class="o">*</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="nf nf-Jumperless">pwm</span><span class="p">()</span></code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">oled_print</span><span class="p">()</span></code>, <code class="language-jython highlight"><span class="n">probe_</span><span class="o">*</span><span class="p">()</span></code></td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>WaveGen tools</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>Slot management</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="nf nf-Jumperless">get_state</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="nf nf-Jumperless">set_state</span><span class="p">()</span></code> snapshot</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">adc_get_stats</span><span class="p">()</span></code> (averaged sampling)</td>
+<td>Available via the MCP server</td>
+</tr>
+<tr>
+<td><code class="language-jython highlight"><span class="n">undo</span><span class="p">()</span></code> / <code class="language-jython highlight"><span class="n">redo</span><span class="p">()</span></code> history</td>
+<td>Implemented</td>
+</tr>
+<tr>
+<td>USBSer3 <code class="language-jython highlight"><span class="p">:</span><span class="nf nf-Jumperless">help</span></code> self-describing backchannel</td>
+<td>Implemented (firmware)</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../07-debugging/" class="btn btn-neutral float-left" title="Debug Views"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../08-file-manager/" class="btn btn-neutral float-right" title="File Manager">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../07-debugging/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../08-file-manager/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <!-- Load everything except highlight.js -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
+        <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+    <!-- Android mobile: ensure hamburger opens nav when touch doesn't synthesize click -->
+    <script>
+        (function() {
+            function toggleNav() {
+                var shift = document.querySelectorAll("[data-toggle='wy-nav-shift']");
+                var versions = document.querySelectorAll("[data-toggle='rst-versions']");
+                for (var i = 0; i < shift.length; i++) shift[i].classList.toggle("shift");
+                for (var j = 0; j < versions.length; j++) versions[j].classList.toggle("shift");
+            }
+            function handleNavTap(e) {
+                var t = e.changedTouches && e.changedTouches[0];
+                if (t && e.currentTarget === e.target.closest("nav.wy-nav-top")) {
+                    var x = t.clientX;
+                    var rect = e.currentTarget.getBoundingClientRect();
+                    if (x < rect.left + 70) {
+                        toggleNav();
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+            document.addEventListener("DOMContentLoaded", function() {
+                var icon = document.querySelector("nav.wy-nav-top i[data-toggle='wy-nav-top']");
+                var nav = document.querySelector("nav.wy-nav-top");
+                if (!icon && !nav) return;
+                function onTouchEnd(e) {
+                    toggleNav();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (icon) {
+                    icon.addEventListener("touchend", onTouchEnd, { passive: false });
+                }
+                if (nav) {
+                    nav.addEventListener("touchend", handleNavTap, { passive: false });
+                }
+                // Replace JumperIDE sidebar link text with logo image
+                var ideLink = document.querySelector(".wy-menu a[href*='ide.jumperless.org']");
+                if (ideLink) {
+                    var base = (typeof base_url === "string" && base_url) ? base_url.replace(/\/?$/, "") + "/" : "";
+                    var img = document.createElement("img");
+                    img.src = base + "assets/ColorBubbleLogoIDE@0.25x.png";
+                    img.alt = "JumperIDE";
+                    img.className = "sidebar-ide-logo";
+                    img.style.maxWidth = "70%";
+                    img.style.maxHeight = "40px";
+                    img.style.width = "auto";
+                    img.style.height = "auto";
+                    img.style.objectFit = "contain";
+                    img.style.display = "block";
+                    ideLink.textContent = "";
+                    ideLink.appendChild(img);
+                }
+            });
+        })();
+    </script>
+    <!-- JumperIDE: scroll to anchor or search page when embedded in iframe (postMessage from ide.jumperless.org) -->
+    <script>
+        (function() {
+            var ALLOWED_ORIGINS = ["https://ide.jumperless.org", "http://localhost:5173", "http://127.0.0.1:5173"];
+            function scrollToAnchor(anchor) {
+                if (!anchor || typeof anchor !== "string") return;
+                var el = document.getElementById(anchor);
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    try { window.history.replaceState(null, "", "#" + anchor); } catch (e) {}
+                }
+            }
+            function scrollToSearchText(searchText) {
+                if (!searchText || typeof searchText !== "string") return;
+                var needle = searchText.toLowerCase().trim().replace(/-/g, "_");
+                if (!needle) return;
+                function score(el) {
+                    var text = (el.textContent || "").trim();
+                    var t = text.toLowerCase().replace(/-/g, "_");
+                    if (!t || t.indexOf(needle) === -1) return -1;
+                    if (t === needle) return 100;
+                    if (t.startsWith(needle + "(") || t.startsWith(needle + " ")) return 90;
+                    if (t.startsWith(needle)) return 80;
+                    var re = new RegExp("(^|[^a-z0-9_])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z0-9_]|$)", "i");
+                    if (re.test(text)) return 50;
+                    return 10;
+                }
+                var candidates = document.querySelectorAll("h1, h2, h3, h4, h5, h6, dt, .sig, .descname, code");
+                var best = null;
+                var bestScore = -1;
+                for (var i = 0; i < candidates.length; i++) {
+                    var el = candidates[i];
+                    var s = score(el);
+                    if (s > bestScore) {
+                        bestScore = s;
+                        best = el;
+                    }
+                }
+                if (best) {
+                    best.scrollIntoView({ behavior: "smooth", block: "start" });
+                    return;
+                }
+                var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+                var node;
+                while ((node = walker.nextNode())) {
+                    if (node.textContent.toLowerCase().indexOf(needle) !== -1) {
+                        var block = node.parentElement;
+                        while (block && block !== document.body && !/^(h[1-6]|section|article|div|p|dt|li|td)$/i.test(block.tagName)) block = block.parentElement;
+                        if (block && block !== document.body) {
+                            block.scrollIntoView({ behavior: "smooth", block: "start" });
+                            return;
+                        }
+                    }
+                }
+            }
+            window.addEventListener("message", function(e) {
+                if (ALLOWED_ORIGINS.indexOf(e.origin) === -1) return;
+                if (!e.data || e.data.type !== "jumperide-scroll-to") return;
+                if (e.data.anchor) {
+                    scrollToAnchor(e.data.anchor);
+                } else if (e.data.searchText) {
+                    scrollToSearchText(e.data.searchText);
+                }
+            });
+            document.addEventListener("DOMContentLoaded", function() {
+                var hash = (window.location.hash || "").replace(/^#/, "");
+                if (hash) scrollToAnchor(hash);
+            });
+        })();
+    </script>
+
+
+</body>
+</html>

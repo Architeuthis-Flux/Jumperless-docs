@@ -211,7 +211,7 @@ What should happen: the piezo beeps once per second.
 
 ## What to Read Next
 
-- [Basic Controls](01-basic-controls.md) explains how to make and remove connections with the probe and clickwheel.
+- [Getting Started](01-getting-started.md) explains how to make and remove connections with the probe and clickwheel.
 - [MicroPython](08-micropython.md) explains how to run scripts on the board.
 - [MicroPython API Reference](09.5-micropythonAPIreference.md) lists every hardware function used above.
 - [Odds and Ends](09.8-odds-and-ends.md) has the hardware overview and safety notes.

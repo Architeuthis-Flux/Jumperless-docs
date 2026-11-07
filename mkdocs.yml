@@ -13,26 +13,41 @@ exclude_docs: |
   .DS_Store
   _*
 
+# Built, but not listed in the left nav
+not_in_nav: |
+  findme.md
+  01-basic-controls.md
+  jumperless-agent-skill.md
+
 # Navigation structure - explicitly define what appears in the sidebar
 nav:
   - Home: index.md
-  - Basic Controls: 01-basic-controls.md
+  - Getting Started: 01-getting-started.md
   - Simple First Projects: 02-simple-projects.md
+
   - The App: 03-app.md
   - OLED Support: 04-oled.md
   - Arduino Stuff: 05-arduino.md
   - Config File: 06-config.md
-  - Debug Views: 07-debugging.md
+  - GPIO: 05.7-gpio.md
   - Automation & LLM Tools: 07.5-automation.md
   - File Manager: 08-file-manager.md
   - MicroPython: 08-micropython.md
+  - Examples: 08.5-examples.md
   - MicroPython API Reference: 09.5-micropythonAPIreference.md
-  - Odds and Ends: 09.8-odds-and-ends.md
-  - 3D Printable Stand: 10-3d-stand.md
+  - JFS (Filesystem): 09.6-jfs.md
 
-  - Temporal Badge:
-    - Developer Guide: badge-developer-guide.md
-    - API Reference: badge-api-reference.md
+  - Parts Tester: 05.5-parts.md
+  - Calibration: 05.8-calibration.md
+  - Debug Views: 07-debugging.md
+
+  - 3D Printable Stand: 10-3d-stand.md
+  - OG Jumperless: 10.5-og-jumperless.md
+
+  # - Temporal Badge:
+  #   - Developer Guide: badge-developer-guide.md
+  #   - API Reference: badge-api-reference.md
+  - Odds and Ends: 09.8-odds-and-ends.md
   - Glossary of Terms: 99-glossary.md
   - Shop: https://shop.jumperless.org
   - JumperIDE: https://ide.jumperless.org/
@@ -61,9 +76,14 @@ extra_css: [extra.css, overrides.css]
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js
   - mermaid-init.js
+  - embed/find-me-dock.js
+  - embed/stl-viewer.js
 
 # Markdown extensions for custom syntax highlighting
 markdown_extensions:
+  - admonition
+  - md_in_html
+  - pymdownx.details
   # Heading IDs = text before '(' only (e.g. gpio_set, connect) so JumperIDE and links can target #gpio_set
   - markdown.extensions.toc:
       slugify: !!python/name:slugify_headings.slugify_name_only
@@ -90,9 +110,11 @@ hooks:
   - docs/hooks.py
   - docs/generate_llms_txt.py
   - docs/generate_scripts_index.py
+  - docs/generate_3d_models_index.py
 
 extra:
   meta:
     - name: color-scheme
       content: dark
     - name: darkreader-lock
+

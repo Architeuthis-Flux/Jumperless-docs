@@ -7757,28 +7757,50 @@ span[id*=MathJax-Span] {
     --rainbow-lightness: 65%;
     --submenu-lightness: 69%;
     --submenu-text-color: #000000;
-    
-    /* Main navigation hue steps (360deg / 13 items ≈ 27.7deg per item) */
-    --nav-hue-step: 27.7deg;
+
+    /* One trip around the hue wheel across the whole top-level nav.
+       --nav-count is how many colored entries mkdocs.yml's nav has
+       (the JumperIDE image link doesn't count). Rules below exist for
+       up to 32 entries, so adding a page only means bumping this number;
+       forget to and the extras wrap back to red instead of falling
+       through to the plain link color. */
+    --nav-count: 21;
+    --nav-start-hue: 350deg;   /* Home is red */
+    --nav-hue-step: calc(360deg / var(--nav-count));
     --submenu-hue-step: 12deg; /* Smaller steps for submenu progression */
-    
-    /* Base hues for each main navigation item with explicit wrapping */
-    --nav-1-hue: 350deg;     /* Red */
-    --nav-2-hue: 17.7deg;   /* Orange */
-    --nav-3-hue: 45.4deg;   /* Yellow */
-    --nav-4-hue: 73.1deg;   /* Yellow-Green */
-    --nav-5-hue: 105.8deg;   /* Green */
-    --nav-6-hue: 148.5deg;   /* Green-Cyan */
-    --nav-7-hue: 166.2deg;   /* Cyan */
-    --nav-8-hue: 193.9deg;   /* Cyan-Blue */
-    --nav-9-hue: 221.6deg;   /* Blue */
-    --nav-10-hue: 269.3deg;  /* Blue-Purple */
-    --nav-11-hue: 282deg; /* Magenta */
-    --nav-12-hue: 308.7deg; /* Magenta-Red */
-    --nav-13-hue: 324.4deg; /* Light Red */
-    --nav-14-hue: 343deg; /* Back to Red (wraps around) */
-    --nav-15-hue: 357.7deg; /* Orange again */
-    --nav-16-hue: 12deg; /* Warm Orange */
+
+    --nav-1-hue: calc(var(--nav-start-hue) + 0 * var(--nav-hue-step));
+    --nav-2-hue: calc(var(--nav-start-hue) + 1 * var(--nav-hue-step));
+    --nav-3-hue: calc(var(--nav-start-hue) + 2 * var(--nav-hue-step));
+    --nav-4-hue: calc(var(--nav-start-hue) + 3 * var(--nav-hue-step));
+    --nav-5-hue: calc(var(--nav-start-hue) + 4 * var(--nav-hue-step));
+    --nav-6-hue: calc(var(--nav-start-hue) + 5 * var(--nav-hue-step));
+    --nav-7-hue: calc(var(--nav-start-hue) + 6 * var(--nav-hue-step));
+    --nav-8-hue: calc(var(--nav-start-hue) + 7 * var(--nav-hue-step));
+    --nav-9-hue: calc(var(--nav-start-hue) + 8 * var(--nav-hue-step));
+    --nav-10-hue: calc(var(--nav-start-hue) + 9 * var(--nav-hue-step));
+    --nav-11-hue: calc(var(--nav-start-hue) + 10 * var(--nav-hue-step));
+    --nav-12-hue: calc(var(--nav-start-hue) + 11 * var(--nav-hue-step));
+    --nav-13-hue: calc(var(--nav-start-hue) + 12 * var(--nav-hue-step));
+    --nav-14-hue: calc(var(--nav-start-hue) + 13 * var(--nav-hue-step));
+    --nav-15-hue: calc(var(--nav-start-hue) + 14 * var(--nav-hue-step));
+    --nav-16-hue: calc(var(--nav-start-hue) + 15 * var(--nav-hue-step));
+    --nav-17-hue: calc(var(--nav-start-hue) + 16 * var(--nav-hue-step));
+    --nav-18-hue: calc(var(--nav-start-hue) + 17 * var(--nav-hue-step));
+    --nav-19-hue: calc(var(--nav-start-hue) + 18 * var(--nav-hue-step));
+    --nav-20-hue: calc(var(--nav-start-hue) + 19 * var(--nav-hue-step));
+    --nav-21-hue: calc(var(--nav-start-hue) + 20 * var(--nav-hue-step));
+    --nav-22-hue: calc(var(--nav-start-hue) + 21 * var(--nav-hue-step));
+    --nav-23-hue: calc(var(--nav-start-hue) + 22 * var(--nav-hue-step));
+    --nav-24-hue: calc(var(--nav-start-hue) + 23 * var(--nav-hue-step));
+    --nav-25-hue: calc(var(--nav-start-hue) + 24 * var(--nav-hue-step));
+    --nav-26-hue: calc(var(--nav-start-hue) + 25 * var(--nav-hue-step));
+    --nav-27-hue: calc(var(--nav-start-hue) + 26 * var(--nav-hue-step));
+    --nav-28-hue: calc(var(--nav-start-hue) + 27 * var(--nav-hue-step));
+    --nav-29-hue: calc(var(--nav-start-hue) + 28 * var(--nav-hue-step));
+    --nav-30-hue: calc(var(--nav-start-hue) + 29 * var(--nav-hue-step));
+    --nav-31-hue: calc(var(--nav-start-hue) + 30 * var(--nav-hue-step));
+    --nav-32-hue: calc(var(--nav-start-hue) + 31 * var(--nav-hue-step));
 }
 
 /* Main navigation items with text colors */
@@ -7846,7 +7868,71 @@ span[id*=MathJax-Span] {
     color: hsl(var(--nav-16-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
 }
 
-/* Background colors for current/active main navigation items */
+.wy-nav-side .wy-menu-vertical ul:nth-child(17) li.toctree-l1 > a {
+    color: hsl(var(--nav-17-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(18) li.toctree-l1 > a {
+    color: hsl(var(--nav-18-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(19) li.toctree-l1 > a {
+    color: hsl(var(--nav-19-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(20) li.toctree-l1 > a {
+    color: hsl(var(--nav-20-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(21) li.toctree-l1 > a {
+    color: hsl(var(--nav-21-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(22) li.toctree-l1 > a {
+    color: hsl(var(--nav-22-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(23) li.toctree-l1 > a {
+    color: hsl(var(--nav-23-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(24) li.toctree-l1 > a {
+    color: hsl(var(--nav-24-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(25) li.toctree-l1 > a {
+    color: hsl(var(--nav-25-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(26) li.toctree-l1 > a {
+    color: hsl(var(--nav-26-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(27) li.toctree-l1 > a {
+    color: hsl(var(--nav-27-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(28) li.toctree-l1 > a {
+    color: hsl(var(--nav-28-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(29) li.toctree-l1 > a {
+    color: hsl(var(--nav-29-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(30) li.toctree-l1 > a {
+    color: hsl(var(--nav-30-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(31) li.toctree-l1 > a {
+    color: hsl(var(--nav-31-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(32) li.toctree-l1 > a {
+    color: hsl(var(--nav-32-hue), var(--rainbow-saturation), var(--rainbow-lightness)) !important;
+}
+
+/* Current main navigation item: filled with its own hue */
 .wy-nav-side .wy-menu-vertical ul:nth-child(1) li.toctree-l1.current > a {
     background-color: hsl(var(--nav-1-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
     color: var(--submenu-text-color) !important;
@@ -7927,6 +8013,86 @@ span[id*=MathJax-Span] {
     color: var(--submenu-text-color) !important;
 }
 
+.wy-nav-side .wy-menu-vertical ul:nth-child(17) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-17-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(18) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-18-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(19) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-19-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(20) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-20-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(21) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-21-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(22) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-22-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(23) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-23-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(24) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-24-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(25) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-25-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(26) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-26-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(27) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-27-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(28) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-28-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(29) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-29-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(30) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-30-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(31) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-31-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(32) li.toctree-l1.current > a {
+    background-color: hsl(var(--nav-32-hue), var(--rainbow-saturation), var(--submenu-lightness)) !important;
+    color: var(--submenu-text-color) !important;
+}
+
 /* Comprehensive submenu coloring system using HSL variables */
 /* Set parent hue variables for all main navigation items */
 .wy-nav-side .wy-menu-vertical ul:nth-child(1) li.toctree-l1.current {
@@ -7955,6 +8121,10 @@ span[id*=MathJax-Span] {
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(7) li.toctree-l1.current {
     --parent-hue: var(--nav-7-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(8) li.toctree-l1.current {
+    --parent-hue: var(--nav-8-hue);
 }
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(9) li.toctree-l1.current {
@@ -7987,6 +8157,70 @@ span[id*=MathJax-Span] {
 
 .wy-nav-side .wy-menu-vertical ul:nth-child(16) li.toctree-l1.current {
     --parent-hue: var(--nav-16-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(17) li.toctree-l1.current {
+    --parent-hue: var(--nav-17-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(18) li.toctree-l1.current {
+    --parent-hue: var(--nav-18-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(19) li.toctree-l1.current {
+    --parent-hue: var(--nav-19-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(20) li.toctree-l1.current {
+    --parent-hue: var(--nav-20-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(21) li.toctree-l1.current {
+    --parent-hue: var(--nav-21-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(22) li.toctree-l1.current {
+    --parent-hue: var(--nav-22-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(23) li.toctree-l1.current {
+    --parent-hue: var(--nav-23-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(24) li.toctree-l1.current {
+    --parent-hue: var(--nav-24-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(25) li.toctree-l1.current {
+    --parent-hue: var(--nav-25-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(26) li.toctree-l1.current {
+    --parent-hue: var(--nav-26-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(27) li.toctree-l1.current {
+    --parent-hue: var(--nav-27-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(28) li.toctree-l1.current {
+    --parent-hue: var(--nav-28-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(29) li.toctree-l1.current {
+    --parent-hue: var(--nav-29-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(30) li.toctree-l1.current {
+    --parent-hue: var(--nav-30-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(31) li.toctree-l1.current {
+    --parent-hue: var(--nav-31-hue);
+}
+
+.wy-nav-side .wy-menu-vertical ul:nth-child(32) li.toctree-l1.current {
+    --parent-hue: var(--nav-32-hue);
 }
 
 /* Level 2 submenu items (toctree-l2) - progressive coloring with hue wrapping */

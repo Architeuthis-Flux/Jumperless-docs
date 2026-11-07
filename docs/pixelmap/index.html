@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Pixel Map</title>
+<style>
+  /* Touch-friendly copy of app.bhencke.com/pixelmap.html with an on-screen Undo button. */
+  :root {
+    --bg: #f4f5f7;
+    --fg: #1c1e22;
+    --muted: #5b6068;
+    --line: #c9ccd2;
+    --field: #ffffff;
+    --panel: #7a7d83;
+    --accent: #0f6e8c;
+    --accent-fg: #ffffff;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15171a; --fg: #e6e7ea; --muted: #a0a4ab; --line: #3a3d43;
+      --field: #1e2024; --panel: #3a3d43; --accent: #4cb8d6; --accent-fg: #0b1a20;
+      color-scheme: dark;
+    }
+  }
+
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--fg); font: 15px/1.45 var(--font);
+    padding-inline: 16px; padding-block: 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .toolbar {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    margin-inline: -16px; padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+  }
+  .toolbar label { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+  button, select {
+    font: inherit; min-height: 44px; padding: 0 16px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--field); color: var(--fg);
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  }
+  button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #undo {
+    flex: 1 1 200px; min-height: 52px; font-size: 18px; font-weight: 600;
+    background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
+  }
+  #undo:disabled { opacity: .45; }
+  #undo span { font-variant-numeric: tabular-nums; }
+
+  .info { display: flex; flex-wrap: wrap; gap: 16px; margin-block: 14px; }
+  .info > * { min-width: 0; }
+  .info p { flex: 2 1 260px; margin: 0; color: var(--muted); }
+  textarea {
+    flex: 1 1 220px; font: 11px/1.4 var(--mono); padding: 8px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--field); color: var(--fg); resize: vertical;
+  }
+  @media (pointer: coarse) { textarea { font-size: 16px; } } /* stops Safari zooming the page on focus */
+
+  .canvasContainer { background: var(--panel); padding: 5px; border-radius: 4px; }
+  canvas { display: block; width: 100%; height: auto; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  #fileInput { display: none; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button type="button" id="undo">Undo last point <span id="count"></span></button>
+  <button type="button" id="fileUploadTrigger">Select image</button>
+  <input id="fileInput" type="file" accept="image/*">
+  <label for="fontsize">Font size
+    <select id="fontsize">
+      <option>7</option><option>10</option><option selected>12</option><option>18</option><option>24</option>
+      <option>36</option><option>48</option><option>72</option><option>144</option>
+    </select>
+  </label>
+</div>
+
+<div class="info">
+  <p>Select a photo, then tap to mark a coordinate on the image. The pixel index is drawn over each point.
+    Tap <b>Undo last point</b> (or press z on a keyboard) to remove the most recent one.
+    Coordinates are in pixels of the source image. You can also edit or paste into the list to adjust points or load an existing map.
+    Based on <a href="http://app.bhencke.com/pixelmap.html">Ben Hencke's pixel map tool</a>.</p>
+  <textarea id="output" rows="5" aria-label="Coordinate list">[]</textarea>
+</div>
+
+<div class="canvasContainer">
+  <canvas id="canvas" width="1000" height="1000"></canvas>
+</div>
+
+<script>
+var $ = function() { return document.getElementById.apply(document, arguments) };
+
+var canvas = $("canvas");
+var ctx = canvas.getContext("2d");
+var output = $("output");
+var dpr = window.devicePixelRatio || 1;
+var imgScaleFactor = 1;
+var img;
+
+function getCursorPosition(canvas, event) {
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const si = 1 / imgScaleFactor;
+  return [Math.floor(x / canvas.clientWidth * canvas.width * si), Math.floor(y / canvas.clientHeight * canvas.height * si)];
+}
+
+function getOutput() { return JSON.parse(output.value || "[]"); }
+
+function setOutput(arr) {
+  var v = JSON.stringify(arr);
+  output.value = v.replace(/\[\[/, "[\n[").replace(/\],\[/g, "],\n[").replace(/\]\]/, "]\n]");
+}
+
+function updateCount() {
+  var n = 0;
+  try { n = getOutput().length; } catch (e) {}
+  $("count").textContent = n ? "(" + n + ")" : "";
+  $("undo").disabled = n === 0;
+}
+
+function undo() {
+  try {
+    var parsed = getOutput();
+    parsed.pop();
+    setOutput(parsed);
+    redraw();
+  } catch (err) { console.log(err); }
+}
+
+canvas.addEventListener("click", function(event) {
+  var p = getCursorPosition(canvas, event);
+  try {
+    var parsed = getOutput();
+    parsed.push(p);
+    setOutput(parsed);
+    redraw();
+  } catch (err) {
+    console.log(err);
+    output.value += "\n" + JSON.stringify(p);
+  }
+});
+
+$("undo").addEventListener("click", undo);
+window.addEventListener("keypress", function(event) {
+  if (event.target === output) return;
+  if (event.keyCode == 90 || event.keyCode == 122) undo();
+}, false);
+
+var fontsize = 12 * dpr;
+$("fontsize").addEventListener("input", function(event) {
+  fontsize = parseInt(event.target.value) * dpr;
+  redraw();
+});
+
+function redraw() {
+  ctx.globalCompositeOperation = "source-over";
+  if (img) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  else ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  try {
+    var parsed = getOutput();
+    ctx.font = fontsize + "pt serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "white";
+    ctx.lineWidth = fontsize / 36;
+    ctx.strokeStyle = "black";
+    parsed.forEach(function(v, i) {
+      let x = v[0] * imgScaleFactor + imgScaleFactor / 2, y = v[1] * imgScaleFactor + imgScaleFactor / 2;
+      let txt = String(i);
+      ctx.globalCompositeOperation = "difference";
+      ctx.fillText(txt, x, y);
+      if (fontsize >= 18) {
+        ctx.globalCompositeOperation = "source-over";
+        ctx.strokeText(txt, x, y);
+      }
+    });
+  } catch (err) { console.log(err); }
+  updateCount();
+}
+
+output.addEventListener("input", redraw);
+output.addEventListener("change", redraw);
+
+$("fileUploadTrigger").addEventListener("click", function() { $("fileInput").click(); });
+
+$("fileInput").addEventListener("change", function(event) {
+  var file = event.target.files[0];
+  if (!file || !/image/.test(file.type)) return;
+  var source = (window.URL || window.webkitURL).createObjectURL(file);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  img = new Image();
+  img.onload = function() {
+    canvas.width = window.innerWidth * dpr;
+    imgScaleFactor = canvas.width / img.width;
+    canvas.height = img.height / img.width * canvas.width;
+    ctx.imageSmoothingEnabled = img.width > 255 || img.height > 255;
+    redraw();
+    event.target.value = "";
+  };
+  img.src = source;
+});
+
+updateCount();
+</script>
+</body>
+</html>

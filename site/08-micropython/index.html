@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -94,11 +94,27 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../07-debugging/">Debug Views</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
                 </li>
               </ul>
               <ul>
@@ -110,15 +126,41 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#now-you-can-live-code-with-jumperide">Now you can live code with JumperIDE!</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#if-you-write-something-cool-send-it-to-me-and-ill-add-it-to-the-default-examples-ill-put-a-page-on-this-site-soon-where-you-can-share-them">If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#if-you-write-something-cool-publish-it-to-the-jumpernet-registry-from-jumperide-for-vs-code-jumperless-publish-script-to-registry-and-ill-add-the-good-ones-to-the-default-examples">If you write something cool, publish it to the JumperNet registry from JumperIDE for VS Code (Jumperless: Publish Script to Registry) and I'll add the good ones to the default examples.</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#jumperlesspy">jumperless.py</a>
+    <li class="toctree-l3"><a class="reference internal" href="#jumperless_modulepy">jumperless_module.py</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#jumperlesspyi">jumperless.pyi</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stubs-by-hand">Stubs by hand</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jupyter-notebooks">Jupyter notebooks</a>
+    </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#quick-start-to-do-it-from-the-built-in-repl">Quick Start (to do it from the built-in REPL)</a>
+    <li class="toctree-l2"><a class="reference internal" href="#jumperide-for-vs-code">JumperIDE for VS Code</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#install">Install</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#connect">Connect</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#files-run-stop">Files, run, stop</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#serial-terminal">Serial terminal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#oled-bitmaps">OLED bitmaps</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#api-reference">API reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#jumpernet">JumperNet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#settings">Settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#zero-import-autocomplete">Zero-import autocomplete</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-start-built-in-repl">Quick Start (Built-in REPL)</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#repl-navigation">REPL Navigation</a>
     </li>
@@ -128,7 +170,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#loading-and-running-scripts">Loading and Running Scripts</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#method-1-recommended-viper-ide">Method 1 (Recommended): Viper IDE</a>
+    <li class="toctree-l3"><a class="reference internal" href="#method-1-recommended-jumperide">Method 1 (Recommended): JumperIDE</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#method-2-file-manager">Method 2: File Manager</a>
     </li>
@@ -156,9 +198,15 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#built-in-examples">Built-in Examples</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#formatted-output-and-custom-types">Formatted Output and Custom Types</a>
     </li>
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
                 </li>
               </ul>
               <ul>
@@ -166,19 +214,24 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.8-odds-and-ends/">Odds and Ends</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -234,20 +287,123 @@
 <p>Holy shit I should have done this years ago</p>
 <p>Seriously, this is <em>such</em> a better experience than using the onboard text editor and REPL, you should play with it right now</p>
 <p>Go to <a href="https://ide.jumperless.org/">https://ide.jumperless.org/</a> and press the connect button.</p>
-<p><img width="1303" height="1246" alt="Screenshot 2025-12-08 at 6 13 21 PM" src="https://github.com/user-attachments/assets/47edf213-8e91-4904-beb4-3a93d71538db" /></p>
+<p><img alt="JumperIDE before connecting" src="../assets/verify/jumperide-landing.png" /></p>
 <p>Choose the 3rd Jumperless port in that list (Windows may not put them in order, so if nothing happens, try the other ones) and click Connect</p>
-<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
+<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 13 46 PM" src="https://github.com/user-attachments/assets/a9ea53fa-86fd-46b0-839d-eeaa32606454" /></p>
 <p>Then open some examples (this update should overwrite the examples with the new ones) and hit the Run / Stop button</p>
-<p><img width="1304" height="1250" alt="Screenshot 2025-12-08 at 6 14 23 PM" src="https://github.com/user-attachments/assets/0190af73-cd5f-49e9-b378-bb6d1c8a7bb4" /></p>
+<p><img alt="gpio_basics.py running in JumperIDE" src="../assets/verify/jumperide-run.png" /></p>
 <p>Press it again to Stop. If you make changes, hit the green Save button next to it (it takes a second and the script should be stopped.)</p>
-<p><img width="1306" height="1249" alt="Screenshot 2025-12-08 at 6 15 54 PM" src="https://github.com/user-attachments/assets/29413b36-1de1-478e-8d67-70cb4146fd60" /></p>
-<h3 id="if-you-write-something-cool-send-it-to-me-and-ill-add-it-to-the-default-examples-ill-put-a-page-on-this-site-soon-where-you-can-share-them">If you write something cool, send it to me and I'll add it to the default examples (I'll put a page on this site soon where you can share them.)</h3>
-<p>This is using <a href="https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode">MicroPython's built-in Raw REPL</a>, so anything that can interact with that will work here. I've only tested with Viper IDE but I'm pretty sure just about anything else would work.</p>
-<p>There's also <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in ViperIDE.) You can grab them here:</p>
-<h3 id="jumperlesspy"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.py">jumperless.py</a></h3>
+<p><img alt="an edited file waiting to be saved" src="../assets/verify/jumperide-save.png" /></p>
+<p><strong>Serial terminal.</strong> The <code class="language-jython highlight"><span class="n">Serial</span> <span class="n">Terminal</span></code> tab is port 1, the board's main menu, so you get the REPL and the menu side by side. Click <code class="language-jython highlight"><span class="no no-Hardware">Connect</span></code> in that tab, choose the 1st Jumperless port this time, and type <code class="language-jython highlight"><span class="n">m</span></code>.</p>
+<p><img alt="the Serial Terminal tab showing the main menu" src="../assets/verify/jumperide-terminal.png" /></p>
+<p><strong>API reference.</strong> The book icon opens the MicroPython API docs on the right, and if you have <code class="language-jython highlight"><span class="n">Go</span> <span class="n">To</span> <span class="n">Clicked</span> <span class="n">Function</span></code> checked, the docs should jump to whatever function you click in your code.</p>
+<p><img alt="the API reference following a click on adc_get" src="../assets/verify/jumperide-api-ref.png" /></p>
+<p><strong>JumperNet Registry.</strong> The Jumperless icon in the sidebar is the JumperNet Registry, scripts people have shared from their own boards. It's one list, everybody sees the same one, and there's no account. Click a script and it opens in a tab, <code class="language-jython highlight"><span class="n">Run</span></code> runs it on your board.</p>
+<p><img alt="the JumperNet Registry list" src="../assets/verify/jumperide-registry.png" /></p>
+<p><img alt="a registry script open in the editor" src="../assets/verify/jumperide-registry-script.png" /></p>
+<p>To share yours, have it open in a tab and click <code class="language-jython highlight"><span class="n">Upload</span> <span class="n">script</span> <span class="n">to</span> <span class="n">registry</span></code> at the top of the list. It asks for a name, your name, and a line about what it does (the code box is already filled in from the tab), and <code class="language-jython highlight"><span class="n">Upload</span></code> puts it in the list for everyone right away, there's no review step. Work in progress scripts are fine, that's what it's for.</p>
+<p><img alt="the upload dialog" src="../assets/verify/jumperide-registry-upload.png" /></p>
+<p>The three little icons on a row are open, edit and history. Anyone can edit anyone's script (it's wiki style, so fix the typos you find, and replace the prefilled <code class="language-jython highlight"><span class="n">Your</span> <span class="nf nf-JFS">name</span></code> with yours or the edit gets filed under the last author), every version stays in the history, and <code class="language-jython highlight"><span class="n">Load</span></code> opens an old one in its own tab without touching the current one.</p>
+<p>To delete a script, edit it and set the name to <code class="language-jython highlight"><span class="n">delete</span></code>. Nothing checks who you are, so only delete your own. OLED images work the same way for uploading and deleting (<code class="language-jython highlight"><span class="n">Upload</span> <span class="n">OLED</span> <span class="n">image</span></code> shows up when a <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> is the open tab, <code class="language-jython highlight"><span class="n">Browse</span> <span class="n">Images</span></code> is the gallery), except only the original author can edit one, and an image's history is the last 50 versions. Every script uploaded gets synced into the <a href="https://github.com/Architeuthis-Flux/JumperIDE/tree/main/cloudflare/script-registry-worker/scripts">JumperIDE repo</a> on its own, so the scripts are all on GitHub too, images live only in the registry.</p>
+<p><img alt="a script's history" src="../assets/verify/jumperide-registry-history.png" /></p>
+<p><strong>OLED bitmaps.</strong> <code class="language-jython highlight"><span class="n">Tools</span></code> &gt; <code class="language-jython highlight"><span class="n">New</span> <span class="n">OLED</span> <span class="n">bitmap</span></code> gives you a 128x32 canvas, click or drag to draw, and with <code class="language-jython highlight"><span class="n">Live</span> <span class="n">to</span> <span class="n">device</span></code> checked it should show up on the board's OLED as you draw (<a href="../04-oled/">more about the OLED here</a>). <code class="language-jython highlight"><span class="n">Download</span> <span class="o">.</span><span class="n">bin</span></code> saves it and <code class="language-jython highlight"><span class="n">Upload</span> <span class="n">to</span> <span class="n">registry</span></code> shares it. <code class="language-jython highlight"><span class="n">Browse</span> <span class="n">Images</span></code> in the registry shows everyone else's.</p>
+<p><img alt="drawing in the OLED bitmap editor" src="../assets/verify/jumperide-oled-editor.png" /></p>
+<p><img alt="the same drawing on the board's OLED" src="../assets/verify/jumperide-oled-live.png" /></p>
+<p><img alt="the shared OLED images in the registry" src="../assets/verify/jumperide-registry-images.png" /></p>
+<h3 id="if-you-write-something-cool-publish-it-to-the-jumpernet-registry-from-jumperide-for-vs-code-jumperless-publish-script-to-registry-and-ill-add-the-good-ones-to-the-default-examples">If you write something cool, publish it to the JumperNet registry from JumperIDE for VS Code (<strong>Jumperless: Publish Script to Registry</strong>) and I'll add the good ones to the default examples.</h3>
+<p>This is using <a href="https://docs.micropython.org/en/latest/reference/repl.html#raw-mode-and-raw-paste-mode">MicroPython's built-in Raw REPL</a>, so anything that can interact with that will work here. I've tested it with JumperIDE, both the web one and the VS Code extension, but anything that speaks the raw REPL (like <code class="language-jython highlight"><span class="n">mpremote</span></code>) works on that 3rd port.</p>
+<p>There's also <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> module with stubs for all the built-in functions so syntax highlighting and autocomplete  will work in your favorite code editor (sorry, autocomplete for jumperless functions doesn't work in the web IDE. JumperIDE for VS Code installs these stubs for you.) You can grab them here:</p>
+<h3 id="jumperless_modulepy"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless_module.py">jumperless_module.py</a></h3>
 <h3 id="jumperlesspyi"><a href="https://github.com/Architeuthis-Flux/JumperlOS/blob/main/scripts/jumperless.pyi">jumperless.pyi</a></h3>
+<p>They're also already on the board as <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">py</span></code> and <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code>, so you can just copy them off it.</p>
+<h3 id="stubs-by-hand">Stubs by hand</h3>
+<p>JumperIDE for VS Code sets this up for you (globally, or per folder with <code class="language-jython highlight"><span class="n">Set</span> <span class="n">Up</span> <span class="n">This</span> <span class="n">Folder</span> <span class="k">for</span> <span class="n">Jumperless</span> <span class="n">Python</span></code>), but if you just want autocomplete in a project of your own it's 3 files, in VS Code or Cursor or whatever else runs Pylance. The <code class="language-jython highlight"><span class="o">.</span><span class="n">pyi</span></code> is the one the editor reads. The <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> is the same API as plain Python, for running on the Jumperless, no types in it.</p>
+<p>Make a <code class="language-jython highlight"><span class="n">typings</span></code> folder in your project and put the <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> from above in it. Pylance looks there for stubs by default, <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> should resolve, every function gets its real signature and docs.</p>
+<p>Next to it, make <code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">__builtins__</span><span class="o">.</span><span class="n">pyi</span></code> with one line in it:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+<p>That tells Pylance the whole API is a builtin, which is what it is on the Jumperless, <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> happens before your script runs so you don't need to write it, in the editor or on the Jumperless.</p>
+<p>Then a <code class="language-jython highlight"><span class="n">pyrightconfig</span><span class="o">.</span><span class="n">json</span></code> in the project root:</p>
+<div class="language-json highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="p">{</span>
+<span class="linenos" data-linenos="2 "></span><span class="w">    </span><span class="nt">&quot;stubPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;typings&quot;</span><span class="p">,</span>
+<span class="linenos" data-linenos="3 "></span><span class="w">    </span><span class="nt">&quot;reportMissingModuleSource&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="linenos" data-linenos="4 "></span><span class="p">}</span>
+</code></pre></div>
+<p>The first line makes this folder override the global stubs my VS Code extension sets up (those are a few functions behind the one on main), the second one turns off the yellow squiggle you'd get on <code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> because there's a stub but no <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> behind it, it's harmless, just annoying.</p>
+<p>(note: <code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">jumperless</span></code> / <code class="language-jython highlight"><span class="n">uv</span> <span class="n">add</span> <span class="n">jumperless</span></code> gets you the Jumperless Wokwi Bridge. Its module is <code class="language-jython highlight"><span class="n">jumperless_pkg</span></code> and it has nothing to do with the board's API, the stubs aren't on PyPI.)</p>
+<h3 id="jupyter-notebooks">Jupyter notebooks</h3>
+<p><a href="https://github.com/Josverl/micropython-magic">micropython-magic</a> runs a notebook cell on the Jumperless while the rest of the notebook runs on your computer, and it works with the stubs above.</p>
+<p><code class="language-jython highlight"><span class="n">pip</span> <span class="n">install</span> <span class="n">micropython</span><span class="o">-</span><span class="n">magic</span></code> (or <code class="language-jython highlight"><span class="n">uv</span> <span class="n">add</span></code>), then in the first cell:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">%</span><span class="n">load_ext</span> <span class="n">micropython_magic</span>
+<span class="linenos" data-linenos="2 "></span><span class="o">%</span><span class="n">mpy</span> <span class="o">--</span><span class="n">select</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port5</span>
+</code></pre></div>
+<p>The port is the 3rd Jumperless one, the same one JumperIDE uses, so disconnect JumperIDE first, mpremote can't open a port something else is holding. On a Mac it's <code class="language-jython highlight"><span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">cu</span><span class="o">.</span><span class="n">usbmodemJLV5port5</span></code>, on Linux it's <code class="language-jython highlight"><span class="o">/</span><span class="nf nf-Jumperless">dev</span><span class="o">/</span><span class="n">ttyACM</span></code> and a number, on Windows it's a COM number and they're not always in order, it's the one where Enter gets you a <code class="language-jython highlight"><span class="o">&gt;&gt;&gt;</span></code>. <code class="language-jython highlight"><span class="o">--</span><span class="n">verify</span></code> didn't work for me, plain <code class="language-jython highlight"><span class="o">--</span><span class="no no-Hardware">select</span></code> does.</p>
+<p>Then start a cell with <code class="language-jython highlight"><span class="c1"># %%micropython</span></code> and it runs on the Jumperless:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># %%micropython</span>
+<span class="linenos" data-linenos="2 "></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="linenos" data-linenos="3 "></span>    <span class="nb">print</span><span class="p">(</span><span class="n">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="linenos" data-linenos="4 "></span><span class="nb">print</span><span class="p">(</span><span class="n">gpio_get</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="linenos" data-linenos="5 "></span><span class="n">oled_print</span><span class="p">(</span><span class="s2">&quot;hi from a notebook&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="a notebook cell running on the Jumperless" src="../assets/verify/vscode-notebook-run.png" /></p>
+<p>The <code class="language-jython highlight"><span class="c1">#</span></code> is on purpose, Pylance skips any cell that starts with a <code class="language-jython highlight"><span class="o">%%</span></code> magic it doesn't know, so with a bare <code class="language-jython highlight"><span class="o">%%</span><span class="n">micropython</span></code> you get no squiggles or hover or anything. micropython-magic turns <code class="language-jython highlight"><span class="c1"># %%micropython</span></code> back into the real magic when the cell runs, the editor sees plain Python, hovering <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span></code> gives you the signature and docs from the stub.</p>
+<p><img alt="the stub's signature in a cell that runs on the Jumperless" src="../assets/verify/vscode-notebook-hover.png" /></p>
+<p>Run the <code class="language-jython highlight"><span class="o">%</span><span class="n">load_ext</span></code> cell first. Until it's loaded, <code class="language-jython highlight"><span class="c1"># %%micropython</span></code> is just a comment and the cell runs on your computer, where <code class="language-jython highlight"><span class="nf nf-Jumperless">adc_get</span></code> isn't a thing (you get <code class="language-jython highlight"><span class="ne">NameError</span><span class="p">:</span> <span class="nf nf-JFS">name</span> <span class="s1">&#39;adc_get&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span></code>, that's what that means, the Jumperless never saw it).</p>
 <hr />
-<h2 id="quick-start-to-do-it-from-the-built-in-repl">Quick Start (to do it from the built-in REPL)</h2>
+<h2 id="jumperide-for-vs-code">JumperIDE for VS Code</h2>
+<p><img alt="" src="../assets/DirtyDeedsJumperlesssm.png" /></p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide"><img alt="VSCode Marketplace" src="https://img.shields.io/badge/VSCode%20Marketplace-JumperIDE-blue?logo=visual-studio-code" /></a>
+<a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide"><img alt="Open VSX" src="https://img.shields.io/open-vsx/v/ArchiteuthisFlux/jumperide?label=Open%20VSX" /></a>
+<a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/Architeuthis-Flux/JumperIDE-VSCode?label=Release" /></a>
+<a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/blob/main/LICENSE"><img alt="License: Unlicense" src="https://img.shields.io/badge/license-Unlicense-blue" /></a></p>
+<p>Same idea as the web IDE, but it runs in VS Code (or Cursor, or VSCodium), so you get Pylance, git, and everything else you already have. Everything is in one sidebar, and the board shows up as a terminal.</p>
+<p><img alt="" src="../assets/JumperIDEwalkthrough.gif" /></p>
+<h4 id="install">Install</h4>
+<p>Search <code class="language-jython highlight"><span class="n">JumperIDE</span></code> in the Extensions view, it's on the <a href="https://marketplace.visualstudio.com/items?itemName=ArchiteuthisFlux.jumperide">VS Code Marketplace</a> and <a href="https://open-vsx.org/extension/ArchiteuthisFlux/jumperide">Open VSX</a> (that's the one Cursor and VSCodium search). Or download the <code class="language-jython highlight"><span class="o">.</span><span class="n">vsix</span></code> from the <a href="https://github.com/Architeuthis-Flux/JumperIDE-VSCode/releases/latest">latest release</a> and run <code class="language-jython highlight"><span class="n">code</span> <span class="o">--</span><span class="n">install</span><span class="o">-</span><span class="n">extension</span> <span class="n">jumperide</span><span class="o">-</span><span class="mf">1.0.2</span><span class="o">.</span><span class="n">vsix</span></code> from the folder it's in.</p>
+<p>The first time it loads it sets up autocomplete for the whole Jumperless API in every workspace (the stubs go in <code class="language-jython highlight"><span class="o">~/.</span><span class="n">jumperless</span><span class="o">/</span><span class="n">typings</span></code>) and asks you to reload the window. The hover docs need Python and Pylance, <code class="language-jython highlight"><span class="n">Set</span> <span class="n">Up</span> <span class="n">This</span> <span class="n">Folder</span> <span class="k">for</span> <span class="n">Jumperless</span></code> offers to install them if you don't have them.</p>
+<h4 id="connect">Connect</h4>
+<p>Click the Jumperless icon in the activity bar. The <code class="language-jython highlight"><span class="n">Actions</span></code> view is the whole thing: a connection button that shows the state, <code class="language-jython highlight"><span class="n">Run</span></code> and <code class="language-jython highlight"><span class="n">Stop</span></code>, saving, the OLED editor, the terminal, the API reference, and publishing.</p>
+<p><img alt="the Actions view" src="../assets/verify/vscode-actions.png" /></p>
+<p>Click <code class="language-jython highlight"><span class="n">Disconnected</span></code> (or <code class="language-jython highlight"><span class="n">Jumperless</span></code> in the status bar, or <code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="no no-Hardware">Connect</span></code> from the command palette) and pick the starred port, the one whose description ends in <code class="language-jython highlight"><span class="n">MicroPython</span> <span class="n">REPL</span> <span class="err">—</span> <span class="n">recommended</span></code>. On a Mac it reads <code class="language-jython highlight"><span class="n">port5</span></code>. It's the 3rd Jumperless port and it isn't pre-selected, so don't just hit <code class="language-jython highlight"><span class="n">Enter</span></code>, that gets you <code class="language-jython highlight"><span class="n">port1</span></code>, the menu, which can't run scripts, and you end up in terminal-only mode with an empty file tree.</p>
+<p><img alt="the port picker" src="../assets/verify/vscode-connect-picker.png" /></p>
+<p>The status bar should turn pink with the board's name, <code class="language-jython highlight"><span class="n">Device</span> <span class="n">Files</span></code> fills in, and a <code class="language-jython highlight"><span class="n">Jumperless</span> <span class="n">REPL</span></code> terminal opens at the <code class="language-jython highlight"><span class="o">&gt;&gt;&gt;</span></code> prompt.</p>
+<p><img alt="connected" src="../assets/verify/vscode-connected.png" /></p>
+<h4 id="files-run-stop">Files, run, stop</h4>
+<p>Click a file in <code class="language-jython highlight"><span class="n">Device</span> <span class="n">Files</span></code> and it opens as a local working copy, so Pylance sees it and hovering a Jumperless function gives you its docs. <code class="language-jython highlight"><span class="n">Cmd</span><span class="o">+</span><span class="n">S</span></code> / <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">S</span></code> pushes it back to the board. The icons in the view's header are disconnect, refresh, new file, new folder and a new OLED bitmap, <code class="language-jython highlight"><span class="n">Delete</span> <span class="kn">from</span><span class="w"> </span><span class="nn">Device</span></code> is on the right-click menu.</p>
+<p><img alt="a device file open, with the hover docs" src="../assets/verify/vscode-hover.png" /></p>
+<p><code class="language-jython highlight"><span class="n">F5</span></code> (or <code class="language-jython highlight"><span class="n">Run</span> <span class="n">Current</span> <span class="n">File</span></code>) runs whatever is in the editor, as is, it doesn't save first. The output goes to the <code class="language-jython highlight"><span class="n">Jumperless</span> <span class="n">REPL</span></code> terminal. <code class="language-jython highlight"><span class="n">Shift</span><span class="o">+</span><span class="n">F5</span></code> (or <code class="language-jython highlight"><span class="n">Stop</span></code>) sends a <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code>.</p>
+<p><img alt="running gpio_basics.py" src="../assets/verify/vscode-run.png" /></p>
+<p><img alt="Connect Run Stop" src="../assets/ConnectRunStop.gif" /></p>
+<p><code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span> <span class="n">Jumperless</span></code> pushes the current file to the board (a file that didn't come from the board asks for a device path, prefilled with last time's answer), <code class="language-jython highlight"><span class="n">Save</span> <span class="n">Locally</span></code> saves a copy on your computer.</p>
+<h4 id="serial-terminal">Serial terminal</h4>
+<p><code class="language-jython highlight"><span class="n">Serial</span> <span class="n">Terminal</span></code> (or <code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="n">Open</span> <span class="n">Serial</span> <span class="n">Terminal</span></code>) opens a second terminal on any port. <code class="language-jython highlight"><span class="n">port1</span></code> is the starred one, that's the board's menu, and it types <code class="language-jython highlight"><span class="n">m</span></code> for you so the menu comes up.</p>
+<p><code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span></code> goes through to the board in these terminals instead of to VS Code. Or pick <code class="language-jython highlight"><span class="n">Use</span> <span class="n">Jumperless</span> <span class="n">App</span></code> and it runs the <a href="https://github.com/Architeuthis-Flux/Jumperless-App">standalone app</a> in a terminal instead.</p>
+<p><img alt="the serial terminal port picker" src="../assets/verify/vscode-serial-picker.png" /></p>
+<p><img alt="the board's menu in the serial terminal" src="../assets/verify/vscode-serial-terminal.png" /></p>
+<h4 id="oled-bitmaps">OLED bitmaps</h4>
+<p><code class="language-jython highlight"><span class="n">New</span> <span class="n">OLED</span> <span class="n">Bitmap</span></code> asks whether the file lives on the Jumperless or on this computer (if you're not connected it just saves locally), then opens a 128x32 pixel editor, and any <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code> in <code class="language-jython highlight"><span class="n">Device</span> <span class="n">Files</span></code> opens in it too. <code class="language-jython highlight"><span class="n">Black</span></code>, <code class="language-jython highlight"><span class="n">White</span></code> and <code class="language-jython highlight"><span class="n">Toggle</span></code> are the pens, and with <code class="language-jython highlight"><span class="n">Live</span> <span class="n">to</span> <span class="n">device</span></code> checked every stroke should show up on the board's OLED as you draw (it <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">C</span></code>s a running script to do it). <code class="language-jython highlight"><span class="n">Save</span></code> writes the <code class="language-jython highlight"><span class="o">.</span><span class="n">bin</span></code>, <code class="language-jython highlight"><span class="n">Push</span> <span class="n">to</span> <span class="n">Device</span></code> sends the whole thing once.</p>
+<p><img alt="the OLED bitmap editor" src="../assets/verify/vscode-oled-editor.png" /></p>
+<p><img alt="the same drawing on the board's OLED" src="../assets/verify/vscode-oled-live.png" /></p>
+<h4 id="api-reference">API reference</h4>
+<p><code class="language-jython highlight"><span class="n">API</span> <span class="n">Reference</span></code> opens the <a href="../09.5-micropythonAPIreference/">MicroPython API docs</a> beside your code. The hover docs and autocomplete come from the same place.</p>
+<p><img alt="the API reference beside the code" src="../assets/verify/vscode-api-ref.png" /></p>
+<h4 id="jumpernet">JumperNet</h4>
+<p><code class="language-jython highlight"><span class="n">JumperNet</span> <span class="n">Registry</span></code> and <code class="language-jython highlight"><span class="n">OLED</span> <span class="n">Images</span></code> in the sidebar are the shared registry, the same one the web IDE shows. Click a script and it opens, right-click for <code class="language-jython highlight"><span class="n">Save</span> <span class="n">to</span> <span class="n">Device</span></code>.</p>
+<p><code class="language-jython highlight"><span class="n">Publish</span> <span class="n">to</span> <span class="n">JumperNet</span></code> (or <code class="language-jython highlight"><span class="n">Jumperless</span><span class="p">:</span> <span class="n">Publish</span> <span class="n">Script</span> <span class="n">to</span> <span class="n">Registry</span></code>) uploads the file in the editor, it asks for a name, a description and your name. Editing and history are in the web IDE only.</p>
+<p><img alt="a registry script opened from the sidebar" src="../assets/verify/vscode-registry.png" /></p>
+<p><img alt="publishing a script" src="../assets/verify/vscode-publish.png" /></p>
+<h4 id="settings">Settings</h4>
+<p><code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">preferredPortIndex</span></code> is which Jumperless port gets the star (2, the 3rd one), <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">serial</span><span class="o">.</span><span class="n">baud</span></code> is 115200, <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">baseUrl</span></code> is the registry, and <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">connectOnStartup</span></code> opens the port picker when VS Code starts.</p>
+<h4 id="zero-import-autocomplete">Zero-import autocomplete</h4>
+<p>On the board, scripts run with the full API preloaded (<code class="language-jython highlight"><span class="kn">from</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span></code> happens before your code). The editor matches that automatically: on first activation the extension installs typed stubs and points your Python analyzer at them, so files opened from the device resolve the whole API with no imports and no setup. (Controlled by <code class="language-jython highlight"><span class="n">jumperless</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">autoSetUpGlobally</span></code>, on by default.)</p>
+<ul>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> — typed stub, synced from <a href="https://github.com/Architeuthis-Flux/JumperlOS">JumperlOS</a> (by hand, so it can be a few functions behind <code class="language-jython highlight"><span class="n">scripts</span><span class="o">/</span><span class="n">jumperless</span><span class="o">.</span><span class="n">pyi</span></code> on main)</li>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">builtins</span><span class="o">.</span><span class="n">pyi</span></code> — standard-library builtins with Jumperless globals layered on top (typo detection still works)</li>
+<li><code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span><span class="n">time</span><span class="o">.</span><span class="n">pyi</span></code> — MicroPython <code class="language-jython highlight"><span class="n">time</span></code> extras (<code class="language-jython highlight"><span class="n">ticks_ms</span></code>, <code class="language-jython highlight"><span class="n">sleep_ms</span></code>, …)</li>
+</ul>
+<p>To get the same thing in one of your own project folders (checked into that repo instead of user settings), run <strong>Jumperless: Set Up This Folder for Jumperless Python</strong> — it writes the <code class="language-jython highlight"><span class="n">typings</span><span class="o">/</span></code> folder and a <code class="language-jython highlight"><span class="n">pyrightconfig</span><span class="o">.</span><span class="n">json</span></code> into the workspace.</p>
+<hr />
+<h2 id="quick-start-built-in-repl">Quick Start (Built-in REPL)</h2>
 <!-- ### Starting MicroPython REPL -->
 <p>From the main Jumperless menu, press <code class="language-jython highlight"><span class="n">p</span></code> to enter the MicroPython REPL:</p>
 <p><img alt="Screenshot 2025-07-04 at 7 03 24 PM" src="https://github.com/user-attachments/assets/e7ce0688-5ddf-48da-8560-4a8f6b747c4f" /></p>
@@ -255,7 +411,7 @@
 <p>Up / Down arrow keys on a blank prompt will scroll through history, any other key will break out of history mode and enter multiline editing. So you can use arrow keys to navigate and edit the script. </p>
 <p>In history mode, the <code class="language-jython highlight"><span class="o">&gt;&gt;&gt;</span></code> prompts will be pink, when you're editing, they'll be blue.</p>
 <h2 id="hardware-control-functions">Hardware Control Functions</h2>
-<p>All Jumperless hardware functions are automatically imported into the global namespace - no prefix is actually necessary, but it's probably good to use <code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span></code> when using Viper IDE or something so it doesn't complain about not undefined names.</p>
+<p>All Jumperless hardware functions are automatically imported into the global namespace - no prefix is actually necessary. JumperIDE for VS Code already resolves them with its stubs, but in an editor without those it's probably good to use <code class="language-jython highlight"><span class="kn">import</span><span class="w"> </span><span class="nn">jumperless</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">j</span></code> so it doesn't complain about undefined names.</p>
 <hr />
 <h2 id="basic-script-structure">Basic Script Structure</h2>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="sd">&quot;&quot;&quot;</span>
@@ -289,40 +445,45 @@
 <span class="linenos" data-linenos="29 "></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Script complete!&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="loading-and-running-scripts">Loading and Running Scripts</h2>
-<h3 id="method-1-recommended-viper-ide">Method 1 (Recommended): <a href="https://viper-ide.blackhart.dev/">Viper IDE</a></h3>
-<p>See <a href="#now-you-can-live-code-with-viper-ide">above</a> for instructions. It's at the top of the page for a reason, it's awesome.</p>
+<h3 id="method-1-recommended-jumperide">Method 1 (Recommended): <a href="https://ide.jumperless.org/">JumperIDE</a></h3>
+<p>See <a href="#now-you-can-live-code-with-jumperide">above</a> for instructions. It's at the top of the page for a reason, it's awesome.</p>
 <h3 id="method-2-file-manager">Method 2: File Manager</h3>
 <p>From the REPL (enter <code class="language-jython highlight"><span class="n">p</span></code> in the main menu), then type <code class="language-jython highlight"><span class="n">files</span></code> to open the file manager:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="n">files</span>
 </code></pre></div>
 <p>Navigate to your script and press Enter to load it for editing, then press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to load it into the REPL for execution.</p>
-<p><strong>Note:</strong> The standard Python <code class="language-jython highlight"><span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span></code> method is not supported in the Jumperless MicroPython environment. Always use the file manager and <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to run scripts.</p>
+<p><strong>Note:</strong> The standard Python <code class="language-jython highlight"><span class="n">exec</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="nf nf-JFS">read</span><span class="p">())</span></code> also works - the filesystem is mounted as a MicroPython VFS, so the built-in <code class="language-jython highlight"><span class="nb">open</span><span class="p">()</span></code> and the <code class="language-jython highlight"><span class="nf nf-Jumperless">os</span></code> module operate on the same files as <code class="language-jython highlight"><span class="nf nf-Jumperless">jfs</span></code>.</p>
 <h3 id="method-3-repl-commands">Method 3: REPL Commands</h3>
 <p>From the MicroPython REPL, you can use the following commands to manage scripts:</p>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Load script into editor for modification</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">load</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span>
-<span class="linenos" data-linenos="3 "></span>
-<span class="linenos" data-linenos="4 "></span><span class="c1"># Save current session as script</span>
-<span class="linenos" data-linenos="5 "></span><span class="n">save</span> <span class="n">my_new_script</span><span class="o">.</span><span class="n">py</span>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="c1"># Put a saved script on the REPL input line to edit or run</span>
+<span class="linenos" data-linenos="2 "></span><span class="c1"># (bare `load` lists the saved scripts with numbers)</span>
+<span class="linenos" data-linenos="3 "></span><span class="n">load</span> <span class="n">my_script</span><span class="o">.</span><span class="n">py</span>
+<span class="linenos" data-linenos="4 "></span>
+<span class="linenos" data-linenos="5 "></span><span class="c1"># Save the last executed script (auto-named if you leave the name off)</span>
+<span class="linenos" data-linenos="6 "></span><span class="n">save</span> <span class="n">my_new_script</span><span class="o">.</span><span class="n">py</span>
 </code></pre></div>
 <h3 id="method-4-direct-execution">Method 4: Direct Execution</h3>
-<p>From the main Jumperless menu, you can execute single commands:</p>
+<p>From the main Jumperless menu, you can execute single commands. The <code class="language-jython highlight"><span class="o">&gt;</span></code> is the command, type it with the line, and use <code class="language-jython highlight"><span class="nb">print</span><span class="p">()</span></code> to see a value:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;</span> <span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="linenos" data-linenos="2 "></span><span class="o">&gt;</span> <span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos" data-linenos="2 "></span><span class="o">&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="nf nf-Jumperless">adc_get</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 <span class="linenos" data-linenos="3 "></span><span class="o">&gt;</span> <span class="nf nf-Jumperless">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="repl">REPL (Interactive Mode)</h2>
 <h3 id="starting-repl">Starting REPL</h3>
 <p>From main menu: Press <code class="language-jython highlight"><span class="n">p</span></code></p>
 <h3 id="repl-commands">REPL Commands</h3>
-<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="n">CTRL</span> <span class="o">+</span> <span class="n">q</span>           <span class="o">-</span> <span class="n">Exit</span> <span class="n">REPL</span>
-<span class="linenos" data-linenos="2 "></span><span class="n">history</span>            <span class="o">-</span> <span class="n">Show</span> <span class="n">command</span> <span class="n">history</span> <span class="ow">and</span> <span class="n">saved</span> <span class="n">scripts</span>
-<span class="linenos" data-linenos="3 "></span><span class="n">save</span> <span class="p">[</span><span class="nf nf-JFS">name</span><span class="p">]</span>        <span class="o">-</span> <span class="n">Save</span> <span class="n">last</span> <span class="n">executed</span> <span class="n">script</span>
-<span class="linenos" data-linenos="4 "></span><span class="n">load</span> <span class="o">&lt;</span><span class="nf nf-JFS">name</span><span class="o">&gt;</span>        <span class="o">-</span> <span class="n">Load</span> <span class="n">script</span> <span class="n">by</span> <span class="nf nf-JFS">name</span> <span class="ow">or</span> <span class="n">number</span>
-<span class="linenos" data-linenos="5 "></span><span class="n">files</span>              <span class="o">-</span> <span class="n">Open</span> <span class="n">file</span> <span class="n">manager</span>
-<span class="linenos" data-linenos="6 "></span><span class="n">new</span>                <span class="o">-</span> <span class="n">Create</span> <span class="n">new</span> <span class="n">script</span> <span class="k">with</span> <span class="n">eKilo</span> <span class="n">editor</span>
-<span class="linenos" data-linenos="7 "></span><span class="n">helpl</span>              <span class="o">-</span> <span class="n">Show</span> <span class="n">REPL</span> <span class="nf nf-Jumperless">help</span>
-<span class="linenos" data-linenos="8 "></span><span class="nf nf-Jumperless">help</span><span class="p">()</span>             <span class="o">-</span> <span class="n">Show</span> <span class="n">hardware</span> <span class="n">commands</span>
+<div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="n">CTRL</span> <span class="o">+</span> <span class="n">q</span>           <span class="o">-</span> <span class="n">Exit</span> <span class="n">REPL</span>
+<span class="linenos" data-linenos=" 2 "></span><span class="n">quit</span>               <span class="o">-</span> <span class="n">Exit</span> <span class="n">REPL</span>
+<span class="linenos" data-linenos=" 3 "></span><span class="n">history</span>            <span class="o">-</span> <span class="n">Show</span> <span class="n">command</span> <span class="n">history</span> <span class="ow">and</span> <span class="n">saved</span> <span class="n">scripts</span>
+<span class="linenos" data-linenos=" 4 "></span><span class="n">save</span> <span class="p">[</span><span class="nf nf-JFS">name</span><span class="p">]</span>        <span class="o">-</span> <span class="n">Save</span> <span class="n">last</span> <span class="n">executed</span> <span class="n">script</span>
+<span class="linenos" data-linenos=" 5 "></span><span class="n">load</span> <span class="o">&lt;</span><span class="nf nf-JFS">name</span><span class="o">&gt;</span>        <span class="o">-</span> <span class="n">Load</span> <span class="n">script</span> <span class="n">by</span> <span class="nf nf-JFS">name</span> <span class="ow">or</span> <span class="n">number</span>
+<span class="linenos" data-linenos=" 6 "></span><span class="n">files</span>              <span class="o">-</span> <span class="n">Open</span> <span class="n">file</span> <span class="n">manager</span>
+<span class="linenos" data-linenos=" 7 "></span><span class="n">new</span>                <span class="o">-</span> <span class="n">Create</span> <span class="n">new</span> <span class="n">script</span> <span class="k">with</span> <span class="n">eKilo</span> <span class="n">editor</span>
+<span class="linenos" data-linenos=" 8 "></span><span class="n">edit</span>               <span class="o">-</span> <span class="n">Open</span> <span class="n">the</span> <span class="n">last</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">eKilo</span> <span class="n">editor</span>
+<span class="linenos" data-linenos=" 9 "></span><span class="n">multiline</span> <span class="n">on</span><span class="o">|</span><span class="n">off</span><span class="o">|</span><span class="n">auto</span> <span class="o">-</span> <span class="n">Force</span> <span class="n">multiline</span> <span class="n">mode</span> <span class="n">on</span> <span class="ow">or</span> <span class="n">off</span><span class="p">,</span> <span class="ow">or</span> <span class="n">go</span> <span class="n">back</span> <span class="n">to</span> <span class="n">automatic</span> <span class="p">(</span><span class="ow">not</span> <span class="ow">in</span> <span class="err">`</span><span class="n">helpl</span><span class="err">`</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="n">works</span><span class="p">)</span>
+<span class="linenos" data-linenos="10 "></span><span class="n">context</span>            <span class="o">-</span> <span class="n">Toggle</span> <span class="n">connection</span> <span class="n">context</span>
+<span class="linenos" data-linenos="11 "></span><span class="n">helpl</span>              <span class="o">-</span> <span class="n">Show</span> <span class="n">REPL</span> <span class="nf nf-Jumperless">help</span>
+<span class="linenos" data-linenos="12 "></span><span class="nf nf-Jumperless">help</span><span class="p">()</span>             <span class="o">-</span> <span class="n">Show</span> <span class="n">hardware</span> <span class="n">commands</span>
 </code></pre></div>
 <h3 id="navigation">Navigation</h3>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="err">↑</span><span class="o">/</span><span class="err">↓</span> <span class="n">arrows</span>         <span class="o">-</span> <span class="n">Browse</span> <span class="n">command</span> <span class="n">history</span>
@@ -332,7 +493,7 @@
 <span class="linenos" data-linenos="5 "></span><span class="n">Ctrl</span><span class="o">+</span><span class="n">Q</span>             <span class="o">-</span> <span class="n">Force</span> <span class="n">quit</span> <span class="n">REPL</span> <span class="ow">or</span> <span class="n">interrupt</span> <span class="n">running</span> <span class="n">script</span>
 </code></pre></div>
 <h3 id="multiline-auto-indent-mode">Multiline Auto-Indent Mode</h3>
-<p>The REPL automatically detects when you need multiple lines after a <code class="language-jython highlight"><span class="p">:</span></code></p>
+<p>The REPL automatically detects when you need multiple lines after a <code class="language-jython highlight"><span class="p">:</span></code>, and it indents for you, so type the lines without the leading spaces.</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos="1 "></span><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span><span class="w"> </span><span class="nf">blink_led</span><span class="p">():</span>
 <span class="linenos" data-linenos="2 "></span><span class="o">...</span>     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
 <span class="linenos" data-linenos="3 "></span><span class="o">...</span>         <span class="nf nf-Jumperless">gpio_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -342,7 +503,7 @@
 <span class="linenos" data-linenos="7 "></span><span class="o">...</span> 
 <span class="linenos" data-linenos="8 "></span><span class="o">&gt;&gt;&gt;</span> <span class="n">blink_led</span><span class="p">()</span>
 </code></pre></div>
-<p>If you want to use <em>real</em> multiline mode, use the Kilo file editor. </p>
+<p>If you want <em>real</em> multiline mode, type <code class="language-jython highlight"><span class="n">multiline</span> <span class="n">on</span></code> and then <code class="language-jython highlight"><span class="n">run</span></code> to execute what you typed. <code class="language-jython highlight"><span class="n">new</span></code> and <code class="language-jython highlight"><span class="n">edit</span></code> open the eKilo editor straight from the REPL. </p>
 <h3 id="command-history">Command History</h3>
 <ul>
 <li>Use ↑/↓ arrows to browse previous commands</li>
@@ -353,38 +514,22 @@
 <p>The MicroPython REPL now supports <strong>connection contexts</strong> that determine how connections persist:</p>
 <ul>
 <li><strong><code class="language-jython highlight"><span class="k">global</span></code> context</strong>: Changes persist to global state - connections remain after exiting Python</li>
-<li><strong><code class="language-jython highlight"><span class="n">python</span></code> context</strong>: Connections are restored to how they were when exiting REPL (saved to <code class="language-jython highlight"><span class="n">slots</span><span class="o">/</span><span class="n">slotPython</span><span class="o">.</span><span class="n">yaml</span></code>)</li>
+<li><strong><code class="language-jython highlight"><span class="n">python</span></code> context</strong>: Connections you make in the session are undone when you exit, and the state from when you entered comes back</li>
 </ul>
 <p><strong>To toggle contexts:</strong> Type <code class="language-jython highlight"><span class="n">context</span></code> in the REPL</p>
 <p><strong>How it works:</strong>
 - In <code class="language-jython highlight"><span class="k">global</span></code> mode: Any connections you make become permanent, just like using the normal command interface
 - In <code class="language-jython highlight"><span class="n">python</span></code> mode: The connection state when you entered the REPL is saved, and restored when you exit
-- The current context is displayed in the REPL prompt</p>
+- The current context is shown in the REPL banner when you enter, and by <code class="language-jython highlight"><span class="n">helpl</span></code>. Typing <code class="language-jython highlight"><span class="n">context</span></code> prints it too. The default is <code class="language-jython highlight"><span class="k">global</span></code></p>
 <h2 id="built-in-examples">Built-in Examples</h2>
-<p>The system includes several example scripts. To run an example:</p>
-<ol>
-<li>Type <code class="language-jython highlight"><span class="n">files</span></code> in the REPL.</li>
-<li>Navigate to the <code class="language-jython highlight"><span class="n">examples</span><span class="o">/</span></code> directory.</li>
-<li>Select the desired script and press Enter to edit/view it.</li>
-<li>Press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code> to load it into the REPL for execution.</li>
-</ol>
-<p>Example scripts include:</p>
-<ul>
-<li><code class="language-jython highlight"><span class="n">dac_basics</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">gpio_basics</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">node_connections</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">led_brightness_control</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">stylophone</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">uart_basics</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">uart_loopback</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">interaction_demo</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">test_neopixel</span><span class="o">.</span><span class="n">py</span></code></li>
-<li><code class="language-jython highlight"><span class="n">fake_gpio</span><span class="o">.</span><span class="n">py</span></code></li>
-</ul>
+<p>The board comes with a pile of example scripts in <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span></code>. Every one of them is described on the <a href="../08.5-examples/">Examples</a> page.</p>
+<p>There are three ways to run one. From the REPL, type <code class="language-jython highlight"><span class="n">files</span></code>, open the script, and press <code class="language-jython highlight"><span class="n">Ctrl</span><span class="o">+</span><span class="n">P</span></code>. From the main menu, <code class="language-jython highlight"><span class="o">/</span></code> opens the file manager and <code class="language-jython highlight"><span class="o">/</span><span class="n">python_scripts</span><span class="o">/</span><span class="n">examples</span><span class="o">/</span><span class="n">adc_basics</span><span class="o">.</span><span class="n">py</span></code> runs a script directly. From the clickwheel, <code class="language-jython highlight"><span class="n">Files</span></code> lists the filesystem and clicking a <code class="language-jython highlight"><span class="o">.</span><span class="n">py</span></code> file runs it.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
 <p><strong>REPL not responding:</strong>
-- Press Ctrl+Q to force quit
+- Press Ctrl+Q to force quit on the main menu port (port 1), or Ctrl+C on the 3rd port that JumperIDE uses
 - Unplug / replug your Jumperless (don't worry, almost everything is persistent)</p>
+<p><strong><code class="language-jython highlight"><span class="nd">@micropython</span><span class="o">.</span><span class="n">native</span></code> / <code class="language-jython highlight"><span class="nd">@micropython</span><span class="o">.</span><span class="n">viper</span></code> reboots the board:</strong>
+- On 5.7.11.0 defining one is fine, calling it hard faults (the function pointer is missing its Thumb bit, so the first call is a UsageFault). After it comes back, press <code class="language-jython highlight"><span class="n">m</span></code> on the main menu port and it prints a <code class="language-jython highlight"><span class="p">[</span><span class="n">crashlog</span><span class="p">]</span></code> line saying so.</p>
 <h2 id="formatted-output-and-custom-types">Formatted Output and Custom Types</h2>
 <p>The Jumperless module returns custom types that print nicely but also work in conditionals:</p>
 <div class="language-jython highlight"><pre><span></span><code><span class="linenos" data-linenos=" 1 "></span><span class="c1"># GPIO functions return custom types that print as readable strings</span>
@@ -417,7 +562,7 @@
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../08-file-manager/" class="btn btn-neutral float-left" title="File Manager"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../09.5-micropythonAPIreference/" class="btn btn-neutral float-right" title="MicroPython API Reference">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../08.5-examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -443,7 +588,7 @@
       <span><a href="../08-file-manager/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../09.5-micropythonAPIreference/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../08.5-examples/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -452,6 +597,10 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

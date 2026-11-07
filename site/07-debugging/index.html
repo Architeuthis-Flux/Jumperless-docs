@@ -78,7 +78,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01-basic-controls/">Basic Controls</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01-getting-started/">Getting Started</a>
                 </li>
               </ul>
               <ul>
@@ -94,7 +94,19 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.3-adapters/">Adapter Boards</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../06-config/">Config File</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.5-parts/">Parts</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../05.7-gpio/">GPIO</a>
                 </li>
               </ul>
               <ul class="current">
@@ -106,7 +118,13 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#net-list">Net List</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#scan">Scan</a>
+    </li>
     </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../07.5-automation/">Automation & LLM Tools</a>
                 </li>
               </ul>
               <ul>
@@ -118,7 +136,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../08.5-examples/">Examples</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../09.5-micropythonAPIreference/">MicroPython API Reference</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../09.6-jfs/">JFS (Filesystem)</a>
                 </li>
               </ul>
               <ul>
@@ -126,15 +152,16 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../11-WritingApps/">Writing Apps</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../10-3d-stand/">3D Printable Stand</a>
                 </li>
               </ul>
-              <p class="caption"><span class="caption-text">Temporal Badge</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-developer-guide/">Developer Guide</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../badge-api-reference/">API Reference</a>
-                  </li>
+                <li class="toctree-l1"><a class="reference internal" href="../10.5-og-jumperless/">OG Jumperless</a>
+                </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../99-glossary/">Glossary of Terms</a>
@@ -173,8 +200,9 @@
               
                 <h1 id="debug-views">Debug Views</h1>
 <p>Look <em>Inside</em> your Jumperless</p>
+<p>You type all of these at the terminal prompt. <code class="language-jython highlight"><span class="n">n</span></code> is on the menu you always see, <code class="language-jython highlight"><span class="n">b</span></code> and <code class="language-jython highlight"><span class="n">c</span></code> show up once you press <code class="language-jython highlight"><span class="n">e</span></code>, and <code class="language-jython highlight"><span class="n">C</span></code> isn't listed anywhere but it still works.</p>
 <h2 id="crossbar-array">Crossbar Array</h2>
-<p>There's a new way to see what the 12 analog crossbar switches are up to, just enter <code class="language-jython highlight"><span class="n">C</span></code> in the menu</p>
+<p>To see what the 12 analog crossbar switches are up to, just enter <code class="language-jython highlight"><span class="n">C</span></code></p>
 <p><img alt="Crossbar View" src="../assets/CrossbarView.png" /></p>
 <!-- ```jython
  Analog Crossbar Array
@@ -247,7 +275,7 @@
 
 <p>Lowercase <code class="language-jython highlight"><span class="n">c</span></code> will show a compact version</p>
 <p><img alt="Crossbar Compact" src="../assets/CrossbarCompact.png" /></p>
-<p>You can also set it to live updating mode with <code class="language-jython highlight"><span class="n">c</span><span class="err">!</span></code> </p>
+<p>You can also set it to live updating mode with <code class="language-jython highlight"><span class="n">c</span><span class="err">!</span></code>. A second <code class="language-jython highlight"><span class="n">c</span><span class="err">!</span></code> turns it back off, or use <code class="language-jython highlight"><span class="n">c0</span></code> and <code class="language-jython highlight"><span class="n">c1</span></code> to force it off and on. Turning it on clears the screen and pins the crossbar to the top of the terminal, and everything else scrolls underneath it. The live view only draws on the main serial port.</p>
 <video autoplay loop muted playsinline controls width="100%">
   <source src="https://github.com/user-attachments/assets/3eba601b-30f8-4d68-b6ca-6a61eeae47a9" type="video/mp4">
   Your browser does not support the video tag.
@@ -255,18 +283,22 @@
 
 <hr />
 <h2 id="bridge-array">Bridge Array</h2>
-<p>Enter <code class="language-jython highlight"><span class="n">b</span></code> in the menu. This is generally the most helpful one for <em>me</em> to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me.</p>
+<p>Enter <code class="language-jython highlight"><span class="n">b</span></code>. This is generally the most helpful one for <em>me</em> to troubleshoot what's going on if your issue has anything to do with routing or connections. It probably looks like nonsense to you but I've been in it so long it makes perfect sense to me. (there's an older version of this output in <a href="https://www.crowdsupply.com/architeuthis-flux/jumperless-v5/updates/jumperless-probelessly">this Crowd Supply update</a>)</p>
+<p>It prints your duplicate stacking settings first, then the bridge array, then the paths, then the chip status. <code class="language-jython highlight"><span class="n">b0</span></code> shows every path instead of just the routed duplicates, and <code class="language-jython highlight"><span class="n">b2</span></code> shows every duplicate.</p>
 <p><img alt="Screenshot 2025-05-30 at 7 04 54 AM" src="https://github.com/user-attachments/assets/05e55021-b1f1-49af-8e7b-230d47522aed" /></p>
 <hr />
 <h2 id="net-list">Net List</h2>
-<p>Enter <code class="language-jython highlight"><span class="n">n</span></code> in the menu to show this one. If you have anything that's doing any measurement (<code class="language-jython highlight"><span class="n">gpio</span></code> input or <code class="language-jython highlight"><span class="n">ADC</span></code>s), it'll stay up and live update if any of them change. (And just like basically any menu not asking for input, entering anything will bring you back to the main menu.)</p>
-<p><img alt="Screenshot 2025-05-30 at 7 10 04 AM" src="https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804" /> </p>
+<p>Enter <code class="language-jython highlight"><span class="n">n</span></code> to show this one. If you have an <code class="language-jython highlight"><span class="n">ADC</span></code>, a <code class="language-jython highlight"><span class="n">gpio</span></code> input, or a <code class="language-jython highlight"><span class="n">gpio</span></code> output routed to a net, it'll stay up and live update when those readings change, or when you move the clickwheel highlight. Any key ends it, and so does a probe button press or a click of the clickwheel. That key doesn't get eaten though, it runs as your next command, so press Enter or space to get out quietly rather than a letter that does something (<code class="language-jython highlight"><span class="n">x</span></code> would clear all your connections).</p>
+<p><img alt="Screenshot 2025-05-30 at 7 10 04 AM" src="https://github.com/user-attachments/assets/559587de-cd04-47f5-9118-7d9f91f33804" /></p>
+<hr />
+<h2 id="scan">Scan</h2>
+<p><code class="language-jython highlight"><span class="n">Apps</span></code> &gt; <code class="language-jython highlight"><span class="n">Scan</span></code> on the click wheel goes through every row and prints the voltage on it, rows with nothing on them come out as <code class="language-jython highlight"><span class="n">floating</span></code> (that's how you tell a floating row from one that's tied to GND, which reads 0V). It keeps looping until you type something or click the wheel.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../06-config/" class="btn btn-neutral float-left" title="Config File"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../08-file-manager/" class="btn btn-neutral float-right" title="File Manager">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../05.7-gpio/" class="btn btn-neutral float-left" title="GPIO"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../07.5-automation/" class="btn btn-neutral float-right" title="Automation & LLM Tools">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -289,10 +321,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../06-config/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../05.7-gpio/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../08-file-manager/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../07.5-automation/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -301,6 +333,10 @@
     <script>var base_url = "..";</script>
     <script src="../js/theme_extra.js"></script>
     <script src="../js/theme.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script src="../mermaid-init.js"></script>
+        <script src="../embed/find-me-dock.js"></script>
+        <script src="../embed/stl-viewer.js"></script>
         <script src="../search/main.js"></script>
     <script>
         jQuery(function () {

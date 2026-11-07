@@ -8,9 +8,9 @@
 
 ## <p class="big-pink">What is it?</p>
 
-Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, a function generator, and a logic analyzer) all crammed inside a breadboard.
+Jumperless V5 lets you prototype like a nerdy wizard who can see electricity and conjure jumpers with a magic wand. It’s an Integrated Development Environment (IDE) for hardware, with an analog-by-nature RP2350B dev board, a drawer full of wires, and a workbench full of test equipment (including a power supply, a multimeter, an oscilloscope, and a function generator) all crammed inside a breadboard.
 
-You can connect any point to any other using software-defined jumpers, so the four individually programmable ±8 V power supplies; ten GPIO; and seven management channels for voltage, current, and resistance can all be connected anywhere on the breadboard or the Arduino Nano header. RGB LEDs under each hole turn the breadboard itself into a display that provides real-time information about whatever’s happening in your circuit.
+You can connect any point to any other using software-defined jumpers, so the four individually programmable ±8 V power supplies; ten GPIO; and seven measurement channels for voltage, current, and resistance can all be connected anywhere on the breadboard or the Arduino Nano header. RGB LEDs under each hole turn the breadboard itself into a display that provides real-time information about whatever’s happening in your circuit.
 
 It's not just about being too lazy to plug in some jumpers. With software controlled wiring, the circuit *itself* is now [***scriptable***](08-micropython.md), which opens up a world of infinite crazy new things you could never do on a regular breadboard. Have a script try out every combination of parts until it does what you want (*à la* [evolvable hardware](https://evolvablehardware.org/)), automatically switch around audio effects on the fly, characterize some unknown chip with the part numbers sanded off, or don't bother with any of that and just [play Doom on it](https://www.youtube.com/watch?v=xWYWruUO0F4).
 
@@ -27,7 +27,7 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 ## <p class="mint">If you don't already have one</p>
 
  
-### [<p class="big-blue">Get the new Jumperless V5 rev 7</p>](https://shop.jumperless.org/products/jumperless-v5-rev-7)</p>
+### [<p class="big-blue">Get the new Jumperless V5 rev 7</p>](https://shop.jumperless.org/products/jumperless-v5-rev-7)
 
 <p class="tight">Or if you want to save some money and get a refurbished one,</p>
 
@@ -48,52 +48,33 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 
 ## <p class="orange">Documentation Sections</p>
 
-- **[Basic Controls](01-basic-controls.md)** - Learn how to use the probe, click wheel, and slot system
+- **[Getting Started](01-getting-started.md)** - What's in the box, the probe, the click wheel, power, measuring, and slots, with follow-along steps
 - **[Simple First Projects](02-simple-projects.md)** - Blink an LED and build a few tiny first circuits
 - **[The App](03-app.md)** - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches
 - **[OLED](04-oled.md)** - Add a better display
 - **[Arduino](05-arduino.md)** - UART passthrough and automatic flashing
 - **[Configuration](06-config.md)** - Persistent settings
-- **[Debugging](07-debugging.md)** - Crossbar, bridge, and net list views
+- **[GPIO](05.7-gpio.md)** - Direction, pulls, PWM, and a binary counter from the board
+- **[Automation & LLM Tools](07.5-automation.md)** - Drive it from scripts, an MCP server, or an agent skill
 - **[File Manager](08-file-manager.md)** - Filesystem access, YAML slot file editing, and text editor
 - **[MicroPython](08-micropython.md)** - Use the onboard MicroPython interpreter
+- **[Examples](08.5-examples.md)** - The scripts and guided projects that come loaded on the board
 - **[MicroPython API Reference](09.5-micropythonAPIreference.md)** - All the Jumperless-specific hardware calls
+- **[Parts Tester](05.5-parts.md)** - Tell it what chips are in the board and it wires and labels them
+- **[Debugging](07-debugging.md)** - Crossbar, bridge, and net list views
 - **[Odds and Ends](09.8-odds-and-ends.md)** - Stuff I couldn't think of a good category for
 - **[3D Printable Stand](10-3d-stand.md)** - Print your own stand
 - **[Glossary](99-glossary.md)** - Key terms including slots, nodes, bridges, and the W command
 
-(You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors)
+<!-- (You should turn off [Dark Reader](https://darkreader.org/) for this site if you have it, it messes up the sidebar colors) -->
 
 ---
 
 ## <p class="yellow">Find Me On The Internet</p>
 
-Join the [Discord](https://discord.gg/bvacV7r3FP) for pretty much instant answers to your questions
-
-<div class="social-icons">
-  <a href="https://github.com/Architeuthis-Flux">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/github.svg" class="social-icon" alt="GitHub">
-  </a>
-  <a href="https://bsky.app/profile/architeuthisflux.bsky.social">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/bluesky.svg" class="social-icon" alt="Bluesky">
-  </a>
-    <a href="https://x.com/arabidsquid">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/twitter.svg" class="social-icon" alt="Twitter">
-  </a>
-    <a href="https://leds.social/@ArchiteuthisFlux">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/mastodon.svg" class="social-icon" alt="Mastodon">
-  </a>
-  <a href="https://discord.gg/bvacV7r3FP">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/discord.svg" class="social-icon" alt="Discord">
-  </a>
-
-
-  <a href="https://www.youtube.com/@arabidsquid">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/youtube.svg" class="social-icon" alt="YouTube">
-  </a>
-
+<div>
+<find-me-dock background="/assets/BusinessCard2022Backpsd.png"></find-me-dock>
 </div>
-
 
 ---
 
@@ -154,3 +135,4 @@ Most of the stuff here is relevant as a subset of what Jumperless V5 does.
 **For AI/LLM tools:** This documentation is available as [llms.txt](/llms.txt) (index) and [llms-full.txt](/llms-full.txt) (complete text) for easy ingestion.
 
 ---
+
