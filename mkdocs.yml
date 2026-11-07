@@ -23,6 +23,7 @@ not_in_nav: |
 nav:
   - Home: index.md
   - Getting Started: 01-getting-started.md
+  - Simple First Projects: 02-simple-projects.md
 
   - The App: 03-app.md
   - OLED Support: 04-oled.md

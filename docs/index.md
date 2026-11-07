@@ -49,6 +49,7 @@ But more likely, you'll be using it to get circuits from your brain into hardwar
 ## <p class="orange">Documentation Sections</p>
 
 - **[Getting Started](01-getting-started.md)** - What's in the box, the probe, the click wheel, power, measuring, and slots, with follow-along steps
+- **[Simple First Projects](02-simple-projects.md)** - Blink an LED and build a few tiny first circuits
 - **[The App](03-app.md)** - For talking to your Jumperless, importing from Wokwi, and flashing Arduino sketches
 - **[OLED](04-oled.md)** - Add a better display
 - **[Arduino](05-arduino.md)** - UART passthrough and automatic flashing
